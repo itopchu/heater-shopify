@@ -1,0 +1,8 @@
+# Ignore atomic-write temp files the CLI watcher would otherwise try to upload.
+# These are created by editor/IDE + Node write operations during active development.
+*.tmp.*
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
