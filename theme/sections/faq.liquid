@@ -1,0 +1,225 @@
+{%- comment -%}
+  FAQ accordion — reads the `faq_item` metaobject.
+  Merchant edits entries in Admin → Content → Metaobjects → FAQ item.
+  Optional category filter narrows to a single group.
+{%- endcomment -%}
+
+{%- style -%}
+  .faq-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  .faq__header {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto 2.5rem;
+  }
+  .faq__kicker {
+    display: inline-block;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.5rem;
+    opacity: 0.65;
+  }
+  .faq__title { margin: 0 0 0.75rem; }
+  .faq__lede { margin: 0; opacity: 0.78; line-height: 1.55; }
+  .faq__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 48rem;
+  }
+  .faq__item {
+    border-top: 1px solid rgba(var(--color-foreground), 0.12);
+  }
+  .faq__item:last-child {
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
+  }
+  .faq__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    line-height: 1.35;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq__summary::-webkit-details-marker { display: none; }
+  .faq__icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    transition: transform 180ms ease;
+  }
+  details[open] > .faq__summary .faq__icon {
+    transform: rotate(45deg);
+  }
+  .faq__answer {
+    padding: 0 0 1.25rem;
+    line-height: 1.6;
+  }
+  .faq__answer > :first-child { margin-top: 0; }
+  .faq__answer > :last-child { margin-bottom: 0; }
+
+  @media (min-width: 750px) {
+    .faq-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="faq-{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.kicker != blank or section.settings.lede != blank -%}
+      <header class="faq__header">
+        {%- if section.settings.kicker != blank -%}
+          <span class="faq__kicker">{{ section.settings.kicker }}</span>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="faq__title {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.lede != blank -%}
+          <p class="faq__lede">{{ section.settings.lede }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- assign entries = shop.metaobjects.faq_item.values -%}
+    {%- assign filter = section.settings.category_filter | downcase -%}
+    {%- assign rendered = 0 -%}
+    {%- if entries.size > 0 -%}
+      <ul class="faq__list" role="list">
+        {%- for entry in entries -%}
+          {%- if filter != blank -%}
+            {%- assign entry_cat = entry.category | downcase -%}
+            {%- unless entry_cat == filter -%}
+              {%- continue -%}
+            {%- endunless -%}
+          {%- endif -%}
+          {%- if section.settings.limit > 0 and rendered >= section.settings.limit -%}
+            {%- break -%}
+          {%- endif -%}
+          {%- assign rendered = rendered | plus: 1 -%}
+          <li class="faq__item">
+            <details>
+              <summary class="faq__summary">
+                <span>{{ entry.question }}</span>
+                <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </summary>
+              <div class="faq__answer">
+                {{ entry.answer | metafield_tag }}
+              </div>
+            </details>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      {%- if request.design_mode -%}
+        <p style="text-align: center; opacity: 0.6;">
+          No FAQ items yet. Add entries in Admin → Content → Metaobjects → FAQ item.
+        </p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads FAQ item metaobjects. Edit entries in Admin → Content → Metaobjects → FAQ item."
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker (small overline)",
+      "default": "FAQ"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Häufige Fragen."
+    },
+    {
+      "type": "richtext",
+      "id": "lede",
+      "label": "Intro paragraph"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    {
+      "type": "text",
+      "id": "category_filter",
+      "label": "Category filter",
+      "info": "Optional. Only show FAQ items whose 'category' field matches (case-insensitive)."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "default": 0,
+      "label": "Max items to show",
+      "info": "0 = show all"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ"
+    }
+  ]
+}
+{% endschema %}

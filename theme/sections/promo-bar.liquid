@@ -1,0 +1,232 @@
+{%- comment -%}
+  Sticky promo bar with optional countdown.
+  Dedicated section — keep Dawn's announcement-bar.liquid untouched for
+  generic announcements / localization strip use.
+  Settings entirely editable in Theme Editor.
+{%- endcomment -%}
+
+{%- style -%}
+  .promo-bar-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    text-align: center;
+    {% if section.settings.sticky %}
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    {% endif %}
+  }
+  .promo-bar__text {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .promo-bar__link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+  }
+  .promo-bar__countdown {
+    display: inline-flex;
+    gap: 0.25rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .promo-bar__countdown-unit {
+    display: inline-flex;
+    gap: 2px;
+    align-items: baseline;
+  }
+  .promo-bar__countdown-label {
+    font-size: 0.6875rem;
+    opacity: 0.75;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .promo-bar__close {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 0;
+    opacity: 0.75;
+  }
+  .promo-bar__close:hover { opacity: 1; }
+  .promo-bar[hidden] { display: none; }
+
+  @media (min-width: 750px) {
+    .promo-bar-{{ section.id }} {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  class="promo-bar promo-bar-{{ section.id }} color-{{ section.settings.color_scheme }} gradient"
+  data-promo-bar-id="{{ section.id }}"
+  {% if section.settings.dismissible %}data-dismissible="true"{% endif %}
+  role="region"
+  aria-label="Promotion"
+>
+  <p class="promo-bar__text">
+    {%- if section.settings.text != blank -%}
+      {%- if section.settings.link != blank -%}
+        <a href="{{ section.settings.link }}" class="promo-bar__link">{{ section.settings.text }}</a>
+      {%- else -%}
+        <span>{{ section.settings.text }}</span>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if section.settings.countdown_target != blank -%}
+      <span
+        class="promo-bar__countdown"
+        data-countdown
+        data-target="{{ section.settings.countdown_target }}"
+        aria-live="polite"
+      >
+        <span class="promo-bar__countdown-unit"><span data-days>--</span><span class="promo-bar__countdown-label">T</span></span>
+        <span class="promo-bar__countdown-unit"><span data-hours>--</span><span class="promo-bar__countdown-label">Std</span></span>
+        <span class="promo-bar__countdown-unit"><span data-minutes>--</span><span class="promo-bar__countdown-label">Min</span></span>
+        <span class="promo-bar__countdown-unit"><span data-seconds>--</span><span class="promo-bar__countdown-label">Sek</span></span>
+      </span>
+    {%- endif -%}
+  </p>
+
+  {%- if section.settings.dismissible -%}
+    <button type="button" class="promo-bar__close" aria-label="Banner schließen">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  {%- endif -%}
+</div>
+
+<script>
+  (function () {
+    var bar = document.querySelector('.promo-bar-{{ section.id }}');
+    if (!bar) return;
+    var sectionId = bar.getAttribute('data-promo-bar-id');
+    var storageKey = 'promo-bar-dismissed:' + sectionId;
+
+    if (bar.getAttribute('data-dismissible') === 'true') {
+      try {
+        if (localStorage.getItem(storageKey) === '1') {
+          bar.hidden = true;
+          return;
+        }
+      } catch (e) {}
+      var closeBtn = bar.querySelector('.promo-bar__close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          bar.hidden = true;
+          try { localStorage.setItem(storageKey, '1'); } catch (e) {}
+        });
+      }
+    }
+
+    var countdown = bar.querySelector('[data-countdown]');
+    if (!countdown) return;
+    var targetStr = countdown.getAttribute('data-target');
+    if (!targetStr) return;
+    var target = new Date(targetStr).getTime();
+    if (isNaN(target)) return;
+
+    var daysEl = countdown.querySelector('[data-days]');
+    var hoursEl = countdown.querySelector('[data-hours]');
+    var minutesEl = countdown.querySelector('[data-minutes]');
+    var secondsEl = countdown.querySelector('[data-seconds]');
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function tick() {
+      var now = Date.now();
+      var delta = target - now;
+      if (delta <= 0) {
+        if (daysEl) daysEl.textContent = '00';
+        if (hoursEl) hoursEl.textContent = '00';
+        if (minutesEl) minutesEl.textContent = '00';
+        if (secondsEl) secondsEl.textContent = '00';
+        return;
+      }
+      var d = Math.floor(delta / 86400000);
+      var h = Math.floor((delta % 86400000) / 3600000);
+      var m = Math.floor((delta % 3600000) / 60000);
+      var s = Math.floor((delta % 60000) / 1000);
+      if (daysEl) daysEl.textContent = pad(d);
+      if (hoursEl) hoursEl.textContent = pad(h);
+      if (minutesEl) minutesEl.textContent = pad(m);
+      if (secondsEl) secondsEl.textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Promo bar",
+  "tag": "section",
+  "class": "section-promo-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Promo text",
+      "default": "7% Rabatt für Neukunden mit Code WILLKOMMEN"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "countdown_target",
+      "label": "Countdown target (ISO datetime)",
+      "info": "Format YYYY-MM-DDTHH:MM:SS+02:00 in Europe/Berlin time. Leave blank to hide countdown."
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Stick to top of page",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dismissible",
+      "label": "Allow dismiss (persists in browser)",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo bar"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}
