@@ -1,0 +1,210 @@
+#!/usr/bin/env node
+/*
+ * seed-sample-data.mjs
+ *
+ * Date:    2026-04-23
+ * Purpose: Seed sample metaobject entries (trust_badge, testimonial,
+ *          usp_item, faq_item, spec_section) on the dev store so theme
+ *          sections render something visible during development.
+ *
+ * IDEMPOTENT: uses metaobjectUpsert with stable handles. Re-runs are safe
+ * and will NOT create duplicates. Merchant edits to an existing handle
+ * are preserved — this script only upserts fields we explicitly list.
+ *
+ * Env (loaded from .env.local at repo root):
+ *   SHOPIFY_DEV_STORE
+ *   SHOPIFY_DEV_ADMIN_TOKEN
+ *
+ * Run:
+ *   node agent/scripts/seed-sample-data.mjs
+ *
+ * Docs:
+ *   https://shopify.dev/docs/api/admin-graphql/2026-04/mutations/metaobjectUpsert
+ */
+
+import { readFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const API_VERSION = '2026-04';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const REPO_ROOT = resolve(__dirname, '..', '..');
+const ENV_PATH = resolve(REPO_ROOT, '.env.local');
+
+function loadEnvLocal(path) {
+  let raw;
+  try { raw = readFileSync(path, 'utf8'); } catch (err) { if (err.code === 'ENOENT') return; throw err; }
+  for (const line of raw.split(/\r?\n/)) {
+    const t = line.trim();
+    if (!t || t.startsWith('#')) continue;
+    const eq = t.indexOf('=');
+    if (eq === -1) continue;
+    const k = t.slice(0, eq).trim();
+    let v = t.slice(eq + 1).trim();
+    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) v = v.slice(1, -1);
+    if (!(k in process.env)) process.env[k] = v;
+  }
+}
+loadEnvLocal(ENV_PATH);
+
+const STORE = process.env.SHOPIFY_DEV_STORE;
+const TOKEN = process.env.SHOPIFY_DEV_ADMIN_TOKEN;
+if (!STORE || !TOKEN) {
+  console.error('Missing SHOPIFY_DEV_STORE or SHOPIFY_DEV_ADMIN_TOKEN');
+  process.exit(1);
+}
+const ENDPOINT = `https://${STORE}/admin/api/${API_VERSION}/graphql.json`;
+
+async function gql(query, variables = {}) {
+  const res = await fetch(ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Shopify-Access-Token': TOKEN },
+    body: JSON.stringify({ query, variables }),
+  });
+  const json = await res.json();
+  if (!res.ok || json.errors) {
+    throw new Error(`GraphQL error ${res.status}: ${JSON.stringify(json.errors || json)}`);
+  }
+  return json.data;
+}
+
+const UPSERT = `
+  mutation upsert($handle: MetaobjectHandleInput!, $metaobject: MetaobjectUpsertInput!) {
+    metaobjectUpsert(handle: $handle, metaobject: $metaobject) {
+      metaobject { id handle type }
+      userErrors { field message code }
+    }
+  }
+`;
+
+async function upsertEntry(type, handle, fields) {
+  const vars = {
+    handle: { type, handle },
+    metaobject: {
+      fields: Object.entries(fields).map(([key, value]) => ({ key, value: String(value) })),
+    },
+  };
+  const data = await gql(UPSERT, vars);
+  const { metaobject, userErrors } = data.metaobjectUpsert;
+  if (userErrors.length) {
+    throw new Error(`${type}/${handle}: ${JSON.stringify(userErrors)}`);
+  }
+  console.log(`[upsert] ${type}:${handle} → ${metaobject.id}`);
+}
+
+// ---------------------------------------------------------------------------
+// Seed payloads — content in German, the primary market language.
+// ---------------------------------------------------------------------------
+
+const TRUST_BADGES = [
+  { handle: 'tb-garantie', label: '10 Jahre Garantie', body: 'Auf jedes Produkt' },
+  { handle: 'tb-versand',  label: 'Kostenloser Versand', body: 'Innerhalb DE' },
+  { handle: 'tb-tuev',     label: 'TÜV geprüft', body: 'Nach DIN EN 442' },
+  { handle: 'tb-service',  label: 'Deutscher Service', body: 'Mo–Fr erreichbar' },
+];
+
+const USP_ITEMS = [
+  { handle: 'usp-beratung', label: 'Expertenberatung', body: 'Kompetente Fachberatung per Telefon & E-Mail' },
+  { handle: 'usp-zahlung',  label: 'Sichere Zahlung',   body: 'Klarna, PayPal, Kreditkarte' },
+  { handle: 'usp-lieferung', label: 'Schnelle Lieferung', body: 'In 2–4 Werktagen bei dir' },
+  { handle: 'usp-qualitaet', label: 'Deutsche Qualität', body: 'Geprüft & zertifiziert' },
+];
+
+const TESTIMONIALS = [
+  { handle: 't-martina', name: 'Martina K.', role: 'Kundin seit 2 Jahren',
+    quote: 'Top Qualität und Leistung. Der Heizkörper sieht genauso aus wie auf den Fotos und heizt hervorragend.',
+    rating: 5, source: 'Google' },
+  { handle: 't-thomas', name: 'Thomas B.', role: 'Hamburg',
+    quote: 'Schnelle Lieferung und tadellose Verpackung. Die Montage war mit der Anleitung kein Problem.',
+    rating: 5, source: 'Judge.me' },
+  { handle: 't-claudia', name: 'Claudia S.', role: 'Bad-Renovierung',
+    quote: 'Perfekte Beratung im Vorfeld, alle meine Fragen wurden geduldig beantwortet. Sehr empfehlenswert.',
+    rating: 5, source: 'Trusted Shops' },
+  { handle: 't-jan', name: 'Jan H.', role: 'Einfamilienhaus',
+    quote: 'Genau wie beschrieben. Die Qualität ist für den Preis wirklich überzeugend.',
+    rating: 4, source: 'Google' },
+];
+
+// Shopify rich_text JSON helper: one paragraph from plain text.
+function rtParagraph(text) {
+  return JSON.stringify({
+    type: 'root',
+    children: [
+      { type: 'paragraph', children: [{ type: 'text', value: text }] },
+    ],
+  });
+}
+
+const FAQ_ITEMS = [
+  { handle: 'faq-lieferung', category: 'allgemein',
+    question: 'Wie lange dauert die Lieferung?',
+    answer: rtParagraph('Innerhalb Deutschlands liefern wir in 2–4 Werktagen. Nach Zahlungseingang erhalten Sie eine Versandbestätigung mit Tracking-Link.') },
+  { handle: 'faq-garantie', category: 'garantie',
+    question: 'Gibt es eine Garantie auf die Heizkörper?',
+    answer: rtParagraph('Ja, wir gewähren auf jedes Produkt 10 Jahre Garantie. Details finden Sie in unseren AGB.') },
+  { handle: 'faq-zahlung', category: 'zahlung',
+    question: 'Welche Zahlungsarten bieten Sie an?',
+    answer: rtParagraph('Klarna (Rechnung / Ratenkauf), PayPal, Kreditkarte (Visa, Mastercard, Amex), Apple Pay und Google Pay.') },
+  { handle: 'faq-montage', category: 'montage',
+    question: 'Ist die Montage schwierig?',
+    answer: rtParagraph('Die meisten unserer Heizkörper lassen sich in 30–60 Minuten montieren. Eine bebilderte Anleitung liegt jedem Produkt bei.') },
+  { handle: 'faq-ruecksendung', category: 'allgemein',
+    question: 'Kann ich die Ware zurückgeben?',
+    answer: rtParagraph('Ja, Sie haben ein gesetzliches Widerrufsrecht von 14 Tagen ab Erhalt der Ware. Die Rücksendung ist für Sie kostenfrei.') },
+];
+
+const SPEC_SECTIONS = [
+  { handle: 'spec-warum', title: 'Warum Havn wählen?',
+    bullets: JSON.stringify(['Modernes Design', 'Einfache Installation', 'Hohe Heizleistung', '10 Jahre Garantie']),
+    body: JSON.stringify({ type: 'root', children: [{ type: 'paragraph', children: [{ type: 'text', value: 'Heizkörper, die Design und Funktion vereinen — für jedes Zuhause.' }] }] }) },
+  { handle: 'spec-lieferumfang', title: 'Lieferumfang',
+    bullets: JSON.stringify(['Heizkörper', 'Befestigungsmaterial', 'Wand-/Deckenhalter', 'Montageanleitung']) },
+  { handle: 'spec-technik', title: 'Technische Daten',
+    bullets: JSON.stringify(['Material: SPCC Stahl', 'Oberfläche: Pulverbeschichtet', 'Anschluss: G 1/2"', 'Konform: DIN EN 442, TÜV geprüft']) },
+];
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+
+async function main() {
+  console.log(`→ Seeding sample data on ${STORE} (Admin API ${API_VERSION})`);
+
+  // NOTE: trust_badge + usp_item have `icon` as required in their current
+  // definition. Seeding them needs uploaded files — skipped here. Either
+  // (a) add entries via Admin with real icons, or
+  // (b) run a schema migration to relax the `required: true` on icon fields.
+  console.log('(skipping trust_badge + usp_item — icon field is required; add via Admin)');
+
+  for (const e of TESTIMONIALS) {
+    await upsertEntry('testimonial', e.handle, {
+      name: e.name,
+      role: e.role,
+      quote: e.quote,
+      rating: String(e.rating),
+      source: e.source,
+    });
+  }
+  for (const e of FAQ_ITEMS) {
+    await upsertEntry('faq_item', e.handle, {
+      question: e.question,
+      answer: e.answer,
+      category: e.category,
+    });
+  }
+  for (const e of SPEC_SECTIONS) {
+    const fields = { title: e.title };
+    if (e.bullets) fields.bullets = e.bullets;
+    if (e.body) fields.body = e.body;
+    await upsertEntry('spec_section', e.handle, fields);
+  }
+
+  const total = TESTIMONIALS.length + FAQ_ITEMS.length + SPEC_SECTIONS.length;
+  console.log(`\nDone. Upserted ${total} metaobject entries.`);
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
