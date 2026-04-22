@@ -1,0 +1,213 @@
+{%- comment -%}
+  Trust badge strip — reads the `trust_badge` metaobject.
+  Merchant edits entries in Admin → Content → Metaobjects → Trust badge.
+  All section-level copy (title, kicker) is editable in Theme Editor.
+{%- endcomment -%}
+
+{%- style -%}
+  .trust-badges-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  .trust-badges__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .trust-badges__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 1rem 0.5rem;
+  }
+  .trust-badges__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .trust-badges__icon img,
+  .trust-badges__icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .trust-badges__label {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .trust-badges__body {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 0.78;
+    margin: 0;
+    max-width: 28ch;
+  }
+  .trust-badges__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .trust-badges__kicker {
+    display: inline-block;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.5rem;
+    opacity: 0.65;
+  }
+  .trust-badges__title {
+    margin: 0;
+  }
+
+  @media (min-width: 750px) {
+    .trust-badges-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .trust-badges__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 2rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="trust-badges-{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.kicker != blank -%}
+      <header class="trust-badges__header">
+        {%- if section.settings.kicker != blank -%}
+          <span class="trust-badges__kicker">{{ section.settings.kicker }}</span>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="trust-badges__title {{ section.settings.heading_size }}">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- assign badges = shop.metaobjects.trust_badge.values -%}
+    {%- if badges.size > 0 -%}
+      <ul class="trust-badges__grid" role="list">
+        {%- for badge in badges -%}
+          {%- if section.settings.limit > 0 and forloop.index > section.settings.limit -%}
+            {%- break -%}
+          {%- endif -%}
+          <li class="trust-badges__item">
+            {%- if badge.icon != blank -%}
+              <div class="trust-badges__icon" aria-hidden="true">
+                {%- if badge.icon.image -%}
+                  {{ badge.icon | image_url: width: 96 | image_tag: loading: 'lazy', alt: '', width: 48, height: 48 }}
+                {%- else -%}
+                  <img src="{{ badge.icon | file_url }}" alt="" loading="lazy" width="48" height="48">
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            {%- if badge.label != blank -%}
+              <p class="trust-badges__label">{{ badge.label }}</p>
+            {%- endif -%}
+            {%- if badge.body != blank -%}
+              <p class="trust-badges__body">{{ badge.body }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      {%- if request.design_mode -%}
+        <p style="text-align: center; opacity: 0.6;">
+          No trust badges yet. Add entries in Admin → Content → Metaobjects → Trust badge.
+        </p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust badges",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads Trust badge metaobjects. Edit entries in Admin → Content → Metaobjects → Trust badge."
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker (small overline)",
+      "default": "Vertrauen & Qualität"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Darum <em>Havn</em>."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 0,
+      "label": "Max items to show",
+      "info": "0 = show all"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust badges"
+    }
+  ]
+}
+{% endschema %}
