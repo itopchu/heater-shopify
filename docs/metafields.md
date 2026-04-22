@@ -4,6 +4,8 @@ Canonical source of truth for custom data. Every entry here must have a correspo
 
 Status key: `planned` · `defined` · `in-theme`
 
+All definitions below are currently **`defined`** on the `heater-dev` store (created via `agent/scripts/create-metaobjects.mjs` on 2026-04-23). Run that script after any schema edit — it's idempotent.
+
 ## Metaobjects
 
 ### `testimonial` — planned
