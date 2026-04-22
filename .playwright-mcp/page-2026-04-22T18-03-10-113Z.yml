@@ -1,0 +1,202 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]: AKTION
+        - generic [ref=e8]: 7 % für Neukunden
+      - img [ref=e10]:
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - heading "02" [level=4] [ref=e14]
+            - generic [ref=e15]: Tage
+          - generic [ref=e16]: ":"
+          - generic [ref=e17]:
+            - heading "23" [level=4] [ref=e18]
+            - generic [ref=e19]: Stunden
+          - generic [ref=e20]: ":"
+          - generic [ref=e21]:
+            - heading "59" [level=4] [ref=e22]
+            - generic [ref=e23]: Minuten
+          - generic [ref=e24]: ":"
+          - generic [ref=e25]:
+            - heading "52" [level=4] [ref=e26]
+            - generic [ref=e27]: Sekunden
+      - button "NEU7" [ref=e28] [cursor=pointer]:
+        - text: NEU7
+        - img [ref=e30]
+    - button "Close timer bar" [ref=e34] [cursor=pointer]:
+      - img [ref=e35]
+  - banner [ref=e41]:
+    - generic [ref=e44]:
+      - link "XXL-HEIZUNG" [ref=e47] [cursor=pointer]:
+        - /url: /
+        - img "XXL-HEIZUNG" [ref=e49]
+      - generic [ref=e50]:
+        - button "Suchen" [ref=e52] [cursor=pointer]:
+          - img [ref=e54]
+        - link "Konto" [ref=e56] [cursor=pointer]:
+          - /url: /account
+          - img [ref=e58]
+        - button "0" [ref=e60] [cursor=pointer]:
+          - img [ref=e62]
+    - list [ref=e67]:
+      - listitem [ref=e68]:
+        - link "Heizkörper" [ref=e69] [cursor=pointer]:
+          - /url: /
+          - text: Heizkörper
+          - img [ref=e71]
+      - listitem [ref=e73]:
+        - link "Bad" [ref=e74] [cursor=pointer]:
+          - /url: /collections/bad
+          - text: Bad
+          - img [ref=e76]
+      - listitem [ref=e78]:
+        - link "Fußbodenheizung" [ref=e79] [cursor=pointer]:
+          - /url: /collections/fussbodenheizung
+          - text: Fußbodenheizung
+          - img [ref=e81]
+      - listitem [ref=e83]:
+        - link "Zubehör" [ref=e84] [cursor=pointer]:
+          - /url: /collections/zubehor
+      - listitem [ref=e85]:
+        - link "Heizlastrechner" [ref=e86] [cursor=pointer]:
+          - /url: /pages/xxl-heizung-heizlastrechner
+      - listitem [ref=e87]:
+        - link "Über Uns" [ref=e88] [cursor=pointer]:
+          - /url: /pages/uber-uns
+      - listitem [ref=e89]:
+        - link "Ratgeber" [ref=e90] [cursor=pointer]:
+          - /url: /blogs/news
+  - main [ref=e91]:
+    - generic [ref=e92]:
+      - generic [ref=e93]:
+        - heading "Über Uns" [level=1] [ref=e95]
+        - navigation "breadcrumbs" [ref=e96]:
+          - generic [ref=e98]:
+            - link "Heim" [ref=e99] [cursor=pointer]:
+              - /url: /
+            - img [ref=e101]
+            - generic: Über Uns
+      - generic [ref=e104]:
+        - paragraph [ref=e105]: Bevor wir zu XXL Heizung geformt wurden, haben wir uns in die Materie der Heizkörper eingelesen und uns weiterentwickelt. Wie kann man Heizkörper vertreiben, ohne selber den Unterschied zwischen einem qualitativ minderwertigem und einem qualitativ hochwertigen Heizkörper zu erkennen? Um das alles haben wir uns jahrelang bemüht und nun sind wir in der Position, sagen zu können, dass unsere Produkte die höchsten Standards bieten und wir ein rund um Service von der Bestellung zum Versand anbieten können.
+        - paragraph [ref=e106]: Wir als Team von XXL Heizung möchten uns nun schon seit vielen Jahren noch spezieller auf Heizkörper fokussieren und ein immer größer werdendes Produktportfolio anbieten. Dabei haben wir klein angefangen und uns stetig weiterentwickelt. Wir bieten nun neben ausgewählten premium Heizkörpern auch ein Sortiment rund um das Thema Bad an.
+        - paragraph [ref=e107]: Schenken Sie uns ihr Vertrauen und lassen Sie eine neue ELEGANZ durch Ihr Bad strahlen. Erkennen Sie ein neues Potenzial Ihres Bades und bereichern Sie sich mit einem echten Augenfänger. ELEGANZ wird bei uns großgeschrieben!
+  - generic [ref=e109]:
+    - generic [ref=e112]:
+      - generic [ref=e114]:
+        - heading "Kontakt" [level=3] [ref=e115] [cursor=pointer]
+        - paragraph [ref=e119]:
+          - strong [ref=e120]: "Kundenservice:"
+          - text: 02336 8196674
+          - strong [ref=e121]: "E-Mail:"
+          - text: kontakt@xxl-heizung.de
+          - strong [ref=e122]: "Lager & Retour:"
+          - generic [ref=e123]:
+            - text: 58332 Schwelm
+            - text: NRW Deutschland
+      - generic [ref=e125]:
+        - heading "Hauptmenü" [level=3] [ref=e126] [cursor=pointer]
+        - list [ref=e127]:
+          - listitem [ref=e128] [cursor=pointer]:
+            - link "Heizkörper" [ref=e129]:
+              - /url: /
+          - listitem [ref=e130] [cursor=pointer]:
+            - link "Bad" [ref=e131]:
+              - /url: /collections/bad
+          - listitem [ref=e132] [cursor=pointer]:
+            - link "Fußbodenheizung" [ref=e133]:
+              - /url: /collections/fussbodenheizung
+          - listitem [ref=e134] [cursor=pointer]:
+            - link "Zubehör" [ref=e135]:
+              - /url: /collections/zubehor
+          - listitem [ref=e136] [cursor=pointer]:
+            - link "Heizlastrechner" [ref=e137]:
+              - /url: /pages/xxl-heizung-heizlastrechner
+          - listitem [ref=e138] [cursor=pointer]:
+            - link "Über Uns" [ref=e139]:
+              - /url: /pages/uber-uns
+          - listitem [ref=e140] [cursor=pointer]:
+            - link "Ratgeber" [ref=e141]:
+              - /url: /blogs/news
+      - generic [ref=e143]:
+        - heading "KUNDENINFORMATIONEN" [level=3] [ref=e144] [cursor=pointer]
+        - list [ref=e145]:
+          - listitem [ref=e146] [cursor=pointer]:
+            - link "Selbstabholung in Schwelm" [ref=e147]:
+              - /url: /pages/selbstabholung-lager-schwelm
+          - listitem [ref=e148] [cursor=pointer]:
+            - link "Kontakt + Reklamation" [ref=e149]:
+              - /url: /pages/contact
+          - listitem [ref=e150] [cursor=pointer]:
+            - link "Impressum" [ref=e151]:
+              - /url: /policies/legal-notice
+          - listitem [ref=e152] [cursor=pointer]:
+            - link "Datenschutzerklärung" [ref=e153]:
+              - /url: /policies/privacy-policy
+          - listitem [ref=e154] [cursor=pointer]:
+            - link "Widerrufsrecht" [ref=e155]:
+              - /url: /policies/refund-policy
+          - listitem [ref=e156] [cursor=pointer]:
+            - link "AGB" [ref=e157]:
+              - /url: /policies/terms-of-service
+      - generic [ref=e159]:
+        - heading "Verpassen Sie keine Neuigkeiten mehr!" [level=3] [ref=e160] [cursor=pointer]
+        - generic [ref=e161]:
+          - paragraph [ref=e162]: Melden Sie sich jetzt für unseren Newsletter an, um exklusive Angebote, die neuesten Produktupdates und spannende Neuigkeiten direkt in Ihr Postfach zu erhalten!
+          - generic [ref=e165]:
+            - textbox "Ihre E-Mail" [ref=e167]
+            - button "Jetzt Anmelden" [ref=e168] [cursor=pointer]
+    - generic [ref=e171]:
+      - generic [ref=e172]: © XXL HEIZUNG 2024
+      - generic [ref=e173]:
+        - generic [ref=e174]:
+          - link "Facebook" [ref=e175] [cursor=pointer]:
+            - /url: https://www.facebook.com/xxlheizung?locale=de_DE
+            - img [ref=e176]
+          - link "Instagram" [ref=e178] [cursor=pointer]:
+            - /url: https://www.instagram.com/xxl_heizung?igsh=MXQ2YWl5bWhzNjhyeA==
+            - img [ref=e179]
+          - link "Youtube" [ref=e181] [cursor=pointer]:
+            - /url: https://youtube.com/@xxlheizung-o9t?si=Ny64dvO4-57woCsm
+            - img [ref=e182]
+          - link "Tiktok" [ref=e184] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@xxlheizung?_r=1&_t=ZG-95CmGCpV5t3
+            - img [ref=e185]
+        - list [ref=e188]:
+          - listitem [ref=e189]:
+            - img "American Express" [ref=e190]
+          - listitem [ref=e199]:
+            - img "Apple Pay" [ref=e200]
+          - listitem [ref=e211]:
+            - img "Google Pay" [ref=e212]
+          - listitem [ref=e220]:
+            - img "Maestro" [ref=e221]
+          - listitem [ref=e227]:
+            - img "Mastercard" [ref=e228]
+          - listitem [ref=e234]:
+            - img "PayPal" [ref=e235]
+          - listitem [ref=e241]:
+            - img "Visa" [ref=e242]
+  - generic "Shopify Onlineshop-Chat" [ref=e246]:
+    - button "Chat 1" [ref=e248] [cursor=pointer]:
+      - img [ref=e249]
+      - generic [ref=e251]: Chat
+      - generic [ref=e252]: "1"
+  - complementary [active]:
+    - dialog "Privacy Settings" [ref=e254]:
+      - generic [ref=e256]:
+        - button "Select language" [ref=e258] [cursor=pointer]
+        - img "Logo eRecht24" [ref=e259]
+        - generic [ref=e260]:
+          - heading "Privacy Settings" [level=2] [ref=e261]
+          - generic: This site uses consent-requiring cookies and third-party technologies to integrate certain features. When you click the "Accept All" button, these features are enabled (consent). After consent is given, we and the involved third-party companies process your personal data for various purposes. Detailed information on purpose, legal basis and third party companies can be found under the button "More Information" and in our privacy policy. You can revoke your consent at any time.
+      - generic [ref=e262]:
+        - generic [ref=e264]:
+          - button "More Information" [ref=e265] [cursor=pointer]
+          - button "Deny" [ref=e266] [cursor=pointer]
+          - button "Accept All" [ref=e267] [cursor=pointer]
+        - generic [ref=e268]:
+          - link "Powered by Usercentrics Consent Management" [ref=e269] [cursor=pointer]:
+            - /url: https://usercentrics.com/consent-management-platform-powered-by-usercentrics/?utm_source=banner_uc&utm_medium=referral&utm_content=v3
+          - link "& eRecht24" [ref=e270] [cursor=pointer]:
+            - /url: https://www.e-recht24.de/uc/

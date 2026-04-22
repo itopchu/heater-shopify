@@ -1,0 +1,417 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]: AKTION
+        - generic [ref=e8]: 7 % für Neukunden
+      - img [ref=e10]:
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - heading "02" [level=4] [ref=e14]
+            - generic [ref=e15]: Tage
+          - generic [ref=e16]: ":"
+          - generic [ref=e17]:
+            - heading "23" [level=4] [ref=e18]
+            - generic [ref=e19]: Stunden
+          - generic [ref=e20]: ":"
+          - generic [ref=e21]:
+            - heading "59" [level=4] [ref=e22]
+            - generic [ref=e23]: Minuten
+          - generic [ref=e24]: ":"
+          - generic [ref=e25]:
+            - heading "53" [level=4] [ref=e26]
+            - generic [ref=e27]: Sekunden
+      - button "NEU7" [ref=e28] [cursor=pointer]:
+        - text: NEU7
+        - img [ref=e30]
+    - button "Close timer bar" [ref=e34] [cursor=pointer]:
+      - img [ref=e35]
+  - banner [ref=e41]:
+    - generic [ref=e44]:
+      - link "XXL-HEIZUNG" [ref=e47] [cursor=pointer]:
+        - /url: /
+        - img "XXL-HEIZUNG" [ref=e49]
+      - generic [ref=e50]:
+        - button "Suchen" [ref=e52] [cursor=pointer]:
+          - img [ref=e54]
+        - link "Konto" [ref=e56] [cursor=pointer]:
+          - /url: /account
+          - img [ref=e58]
+        - button "0" [ref=e60] [cursor=pointer]:
+          - img [ref=e62]
+    - list [ref=e67]:
+      - listitem [ref=e68]:
+        - link "Heizkörper" [ref=e69] [cursor=pointer]:
+          - /url: /
+          - text: Heizkörper
+          - img [ref=e71]
+      - listitem [ref=e73]:
+        - link "Bad" [ref=e74] [cursor=pointer]:
+          - /url: /collections/bad
+          - text: Bad
+          - img [ref=e76]
+      - listitem [ref=e78]:
+        - link "Fußbodenheizung" [ref=e79] [cursor=pointer]:
+          - /url: /collections/fussbodenheizung
+          - text: Fußbodenheizung
+          - img [ref=e81]
+      - listitem [ref=e83]:
+        - link "Zubehör" [ref=e84] [cursor=pointer]:
+          - /url: /collections/zubehor
+      - listitem [ref=e85]:
+        - link "Heizlastrechner" [ref=e86] [cursor=pointer]:
+          - /url: /pages/xxl-heizung-heizlastrechner
+      - listitem [ref=e87]:
+        - link "Über Uns" [ref=e88] [cursor=pointer]:
+          - /url: /pages/uber-uns
+      - listitem [ref=e89]:
+        - link "Ratgeber" [ref=e90] [cursor=pointer]:
+          - /url: /blogs/news
+  - main [ref=e91]:
+    - generic [ref=e97]:
+      - navigation "breadcrumbs" [ref=e98]:
+        - generic [ref=e100]:
+          - link "Heim" [ref=e101] [cursor=pointer]:
+            - /url: /
+          - img [ref=e103]
+          - generic: Badheizkörper
+      - heading "Badheizkörper" [level=1] [ref=e105]
+    - generic [ref=e111]:
+      - generic [ref=e113]:
+        - link "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Weiß" [ref=e115] [cursor=pointer]:
+          - /url: /products/badheizkorper-mittelanschluss-alpha-weiss-handtuchwarmer
+          - img "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Weiß" [ref=e120]
+        - generic [ref=e122]:
+          - heading "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Weiß" [level=3] [ref=e123]:
+            - link "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Weiß" [ref=e124] [cursor=pointer]:
+              - /url: /products/badheizkorper-mittelanschluss-alpha-weiss-handtuchwarmer
+          - generic [ref=e127]:
+            - generic [ref=e128]: Verkaufspreis
+            - generic [ref=e129]: 89,00 €
+            - generic [ref=e130]: Regulärer Preis
+            - generic [ref=e131]: 139,00 €
+      - generic [ref=e133]:
+        - link "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Anthrazit" [ref=e135] [cursor=pointer]:
+          - /url: /products/badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer
+          - img "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Anthrazit" [ref=e140]
+        - generic [ref=e142]:
+          - heading "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Anthrazit" [level=3] [ref=e143]:
+            - link "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Anthrazit" [ref=e144] [cursor=pointer]:
+              - /url: /products/badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer
+          - generic [ref=e147]:
+            - generic [ref=e148]: Regulärer Preis
+            - text: 69,00 €
+      - generic [ref=e150]:
+        - link "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Weiß" [ref=e152] [cursor=pointer]:
+          - /url: /products/handtuchheizkorper-kira-weiss-mittel-seitenanschluss
+          - img "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Weiß" [ref=e157]
+        - generic [ref=e159]:
+          - heading "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Weiß" [level=3] [ref=e160]:
+            - link "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Weiß" [ref=e161] [cursor=pointer]:
+              - /url: /products/handtuchheizkorper-kira-weiss-mittel-seitenanschluss
+          - generic [ref=e164]:
+            - generic [ref=e165]: Regulärer Preis
+            - text: 309,00 €
+      - generic [ref=e167]:
+        - link "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Anthrazit" [ref=e169] [cursor=pointer]:
+          - /url: /products/handtuchheizkorper-kira-anthrazit-mittel-seitenanschluss
+          - img "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Anthrazit" [ref=e174]
+        - generic [ref=e176]:
+          - heading "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Anthrazit" [level=3] [ref=e177]:
+            - link "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Anthrazit" [ref=e178] [cursor=pointer]:
+              - /url: /products/handtuchheizkorper-kira-anthrazit-mittel-seitenanschluss
+          - generic [ref=e181]:
+            - generic [ref=e182]: Regulärer Preis
+            - text: 309,00 €
+      - generic [ref=e184]:
+        - link "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Schwarz" [ref=e186] [cursor=pointer]:
+          - /url: /products/handtuchheizkorper-kira-schwarz-mittel-seitenanschluss
+          - img "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Schwarz" [ref=e191]
+        - generic [ref=e193]:
+          - heading "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Schwarz" [level=3] [ref=e194]:
+            - link "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Schwarz" [ref=e195] [cursor=pointer]:
+              - /url: /products/handtuchheizkorper-kira-schwarz-mittel-seitenanschluss
+          - generic [ref=e198]:
+            - generic [ref=e199]: Regulärer Preis
+            - text: 309,00 €
+      - generic [ref=e201]:
+        - link "Badheizkörper Handtuchwärmer Handtuchtrockner Mittelanschluss TWISTER Weiß" [ref=e203] [cursor=pointer]:
+          - /url: /products/badheizkorper-mittelanschluss-weiss-mira-kopie
+          - img "Badheizkörper Handtuchwärmer Handtuchtrockner Mittelanschluss TWISTER Weiß" [ref=e208]
+        - generic [ref=e210]:
+          - heading "Badheizkörper Handtuchwärmer Handtuchtrockner Mittelanschluss TWISTER Weiß" [level=3] [ref=e211]:
+            - link "Badheizkörper Handtuchwärmer Handtuchtrockner Mittelanschluss TWISTER Weiß" [ref=e212] [cursor=pointer]:
+              - /url: /products/badheizkorper-mittelanschluss-weiss-mira-kopie
+          - generic [ref=e215]:
+            - generic [ref=e216]: Verkaufspreis
+            - generic [ref=e217]: 259,00 €
+            - generic [ref=e218]: Regulärer Preis
+            - generic [ref=e219]: 309,00 €
+      - generic [ref=e221]:
+        - link "Badheizkörper Design Handtuchwärmer Handtuchtrockner Heizkörper Mittelanschluss TWISTER Anthrazit" [ref=e223] [cursor=pointer]:
+          - /url: /products/badheizkorper-mittelanschluss-schwarz-mira
+          - img "Badheizkörper Design Handtuchwärmer Handtuchtrockner Heizkörper Mittelanschluss TWISTER Anthrazit" [ref=e228]
+        - generic [ref=e230]:
+          - heading "Badheizkörper Design Handtuchwärmer Handtuchtrockner Heizkörper Mittelanschluss TWISTER Anthrazit" [level=3] [ref=e231]:
+            - link "Badheizkörper Design Handtuchwärmer Handtuchtrockner Heizkörper Mittelanschluss TWISTER Anthrazit" [ref=e232] [cursor=pointer]:
+              - /url: /products/badheizkorper-mittelanschluss-schwarz-mira
+          - generic [ref=e235]:
+            - generic [ref=e236]: Verkaufspreis
+            - generic [ref=e237]: 259,00 €
+            - generic [ref=e238]: Regulärer Preis
+            - generic [ref=e239]: 309,00 €
+      - generic [ref=e241]:
+        - link "Badheizkörper Design Handtuchwärmer Handtuchtrockner Heizkörper Mittelanschluss TWISTER Schwarz" [ref=e243] [cursor=pointer]:
+          - /url: /products/badheizkorper-mittelanschluss-anthrazit-mira
+          - img "Badheizkörper Design Handtuchwärmer Handtuchtrockner Heizkörper Mittelanschluss TWISTER Schwarz" [ref=e248]
+        - generic [ref=e250]:
+          - heading "Badheizkörper Design Handtuchwärmer Handtuchtrockner Heizkörper Mittelanschluss TWISTER Schwarz" [level=3] [ref=e251]:
+            - link "Badheizkörper Design Handtuchwärmer Handtuchtrockner Heizkörper Mittelanschluss TWISTER Schwarz" [ref=e252] [cursor=pointer]:
+              - /url: /products/badheizkorper-mittelanschluss-anthrazit-mira
+          - generic [ref=e255]:
+            - generic [ref=e256]: Regulärer Preis
+            - text: 259,00 €
+      - generic [ref=e258]:
+        - link "Badheizkörper & Handtuchheizkörper Weiß ELANOR - seitlich offen" [ref=e260] [cursor=pointer]:
+          - /url: /products/badheizkorper-elmar-weiss-seitlich-offen-rechts-oder-links
+          - img "Badheizkörper & Handtuchheizkörper Weiß ELANOR - seitlich offen" [ref=e265]
+        - generic [ref=e267]:
+          - heading "Badheizkörper & Handtuchheizkörper Weiß ELANOR - seitlich offen" [level=3] [ref=e268]:
+            - link "Badheizkörper & Handtuchheizkörper Weiß ELANOR - seitlich offen" [ref=e269] [cursor=pointer]:
+              - /url: /products/badheizkorper-elmar-weiss-seitlich-offen-rechts-oder-links
+          - generic [ref=e272]:
+            - generic [ref=e273]: Verkaufspreis
+            - generic [ref=e274]: 209,00 €
+            - generic [ref=e275]: Regulärer Preis
+            - generic [ref=e276]: 259,00 €
+      - generic [ref=e278]:
+        - link "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen" [ref=e280] [cursor=pointer]:
+          - /url: /products/badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links
+          - img "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen" [ref=e285]
+        - generic [ref=e287]:
+          - heading "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen" [level=3] [ref=e288]:
+            - link "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen" [ref=e289] [cursor=pointer]:
+              - /url: /products/badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links
+          - generic [ref=e292]:
+            - generic [ref=e293]: Verkaufspreis
+            - generic [ref=e294]: 219,00 €
+            - generic [ref=e295]: Regulärer Preis
+            - generic [ref=e296]: 359,00 €
+      - generic [ref=e298]:
+        - link "Badheizkörper & Handtuchheizkörper Schwarz ELANOR - seitlich offen" [ref=e300] [cursor=pointer]:
+          - /url: /products/badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer
+          - img "Badheizkörper & Handtuchheizkörper Schwarz ELANOR - seitlich offen" [ref=e305]
+        - generic [ref=e307]:
+          - heading "Badheizkörper & Handtuchheizkörper Schwarz ELANOR - seitlich offen" [level=3] [ref=e308]:
+            - link "Badheizkörper & Handtuchheizkörper Schwarz ELANOR - seitlich offen" [ref=e309] [cursor=pointer]:
+              - /url: /products/badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer
+          - generic [ref=e312]:
+            - generic [ref=e313]: Verkaufspreis
+            - generic [ref=e314]: 219,00 €
+            - generic [ref=e315]: Regulärer Preis
+            - generic [ref=e316]: 309,00 €
+      - generic [ref=e318]:
+        - link "Badheizkörper & Handtuchheizkörper Weiß PULLMAN" [ref=e320] [cursor=pointer]:
+          - /url: /products/badheizkorper-platon-weiss-mittel-und-seitenanschluss-1
+          - img "Badheizkörper & Handtuchheizkörper Weiß PULLMAN" [ref=e325]
+        - generic [ref=e327]:
+          - heading "Badheizkörper & Handtuchheizkörper Weiß PULLMAN" [level=3] [ref=e328]:
+            - link "Badheizkörper & Handtuchheizkörper Weiß PULLMAN" [ref=e329] [cursor=pointer]:
+              - /url: /products/badheizkorper-platon-weiss-mittel-und-seitenanschluss-1
+          - generic [ref=e332]:
+            - generic [ref=e333]: Regulärer Preis
+            - text: 219,90 €
+      - generic [ref=e335]:
+        - link "Badheizkörper & Handtuchheizkörper Schwarz PULLMAN" [ref=e337] [cursor=pointer]:
+          - /url: /products/badheizkorper-platon-schwarz-mittel-und-seitenanschluss
+          - img "Badheizkörper & Handtuchheizkörper Schwarz PULLMAN" [ref=e342]
+        - generic [ref=e344]:
+          - heading "Badheizkörper & Handtuchheizkörper Schwarz PULLMAN" [level=3] [ref=e345]:
+            - link "Badheizkörper & Handtuchheizkörper Schwarz PULLMAN" [ref=e346] [cursor=pointer]:
+              - /url: /products/badheizkorper-platon-schwarz-mittel-und-seitenanschluss
+          - generic [ref=e349]:
+            - generic [ref=e350]: Regulärer Preis
+            - text: 249,90 €
+      - generic [ref=e352]:
+        - link "Badheizkörper & Handtuchheizkörper Mittelanschluss Anthrazit PULLMAN" [ref=e354] [cursor=pointer]:
+          - /url: /products/badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer
+          - img "Badheizkörper & Handtuchheizkörper Mittelanschluss Anthrazit PULLMAN" [ref=e359]
+        - generic [ref=e361]:
+          - heading "Badheizkörper & Handtuchheizkörper Mittelanschluss Anthrazit PULLMAN" [level=3] [ref=e362]:
+            - link "Badheizkörper & Handtuchheizkörper Mittelanschluss Anthrazit PULLMAN" [ref=e363] [cursor=pointer]:
+              - /url: /products/badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer
+          - generic [ref=e366]:
+            - generic [ref=e367]: Regulärer Preis
+            - text: 220,90 €
+      - generic [ref=e369]:
+        - link "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Weiß ASTORIA" [ref=e371] [cursor=pointer]:
+          - /url: /products/badheizkorper-alpha-weiss-handtuchtrockner
+          - img "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Weiß ASTORIA" [ref=e376]
+        - generic [ref=e378]:
+          - heading "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Weiß ASTORIA" [level=3] [ref=e379]:
+            - link "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Weiß ASTORIA" [ref=e380] [cursor=pointer]:
+              - /url: /products/badheizkorper-alpha-weiss-handtuchtrockner
+          - generic [ref=e383]:
+            - generic [ref=e384]: Regulärer Preis
+            - text: 169,90 €
+      - generic [ref=e386]:
+        - link "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Anthrazit ASTORIA" [ref=e388] [cursor=pointer]:
+          - /url: /products/austauschheizkorper-badheizkorper-anthrazit-alpha
+          - img "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Anthrazit ASTORIA" [ref=e393]
+        - generic [ref=e395]:
+          - heading "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Anthrazit ASTORIA" [level=3] [ref=e396]:
+            - link "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Anthrazit ASTORIA" [ref=e397] [cursor=pointer]:
+              - /url: /products/austauschheizkorper-badheizkorper-anthrazit-alpha
+          - generic [ref=e400]:
+            - generic [ref=e401]: Regulärer Preis
+            - text: 169,90 €
+      - generic [ref=e403]:
+        - link "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Schwarz ASTORIA" [ref=e405] [cursor=pointer]:
+          - /url: /products/badheizkorper-mittelanschluss-alpha-schwarz-handtuchwarmer
+          - img "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Schwarz ASTORIA" [ref=e410]
+        - generic [ref=e412]:
+          - heading "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Schwarz ASTORIA" [level=3] [ref=e413]:
+            - link "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Schwarz ASTORIA" [ref=e414] [cursor=pointer]:
+              - /url: /products/badheizkorper-mittelanschluss-alpha-schwarz-handtuchwarmer
+          - generic [ref=e417]:
+            - generic [ref=e418]: Regulärer Preis
+            - text: 169,90 €
+      - generic [ref=e420]:
+        - link "Handtuchheizkörper Seitenanschluss ASTORIA Weiß" [ref=e422] [cursor=pointer]:
+          - /url: /products/handtuchheizkorper-seitenanschluss-alpha-weiss
+          - img "Handtuchheizkörper Seitenanschluss ASTORIA Weiß" [ref=e427]
+        - generic [ref=e429]:
+          - heading "Handtuchheizkörper Seitenanschluss ASTORIA Weiß" [level=3] [ref=e430]:
+            - link "Handtuchheizkörper Seitenanschluss ASTORIA Weiß" [ref=e431] [cursor=pointer]:
+              - /url: /products/handtuchheizkorper-seitenanschluss-alpha-weiss
+          - generic [ref=e434]:
+            - generic [ref=e435]: Regulärer Preis
+            - text: 69,90 €
+    - generic [ref=e441]:
+      - 'heading "Badheizkörper: die perfekte Verbindung zwischen wohltuender Wärme und modernem Design" [level=2] [ref=e442]'
+      - paragraph [ref=e443]: "Eines darf in einem modernen Badezimmer nicht fehlen: der richtige Heizkörper. Suchen Sie einen modernen Badheizkörper, der Ihnen einerseits wohltuende Wärme spendet und andererseits ebenso durch sein modernes Design begeistert, sind Sie bei uns richtig. Wir präsentieren Ihnen eine große Auswahl moderner Badheizkörper, die sich stilvoll in anspruchsvolle Raumkonzepte einfügen. Die bei uns erhältlichen Badheizkörper sind als Handtuchheizkörper konzipiert. Sie können diese also nicht nur zum Beheizen des Badezimmers nutzen. Sie bieten sich ebenso zum Trocknen und Erwärmen Ihrer Handtücher an."
+      - heading "Wie unterscheiden sich Badheizkörper und Handtuchheizkörper voneinander?" [level=3] [ref=e444]
+      - paragraph [ref=e445]: Bei der Suche nach einem Heizkörper für das Badezimmer haben Sie in der Regel die Wahl zwischen einem Standardmodell und dem sogenannten Handtuchheizkörper. Der Handtuchheizkörper gehört zu den Sprossenheizkörpern. Durch die einzelnen Sprossen können Sie hier problemlos Handtücher aufhängen und trocknen. Sie finden bei uns aber auch Badheizkörper ohne Sprossen. Hier können Sie doch deutlich weniger Handtücher ablegen. Die einfachen Badheizkörper werden ebenso an der Wand montiert. Suchen Sie ein Modell, das sich in moderne Badezimmer integrieren lässt, wählen Sie am besten ein flächiges Wandpanel ohne große Bögen. Sie strahlen eine gewisse Ruhe aus. Unterschiede zeigen sich bei beiden Varianten zudem bei den Abmessungen, die stark variieren, sodass Sie wirklich für jede Badezimmergröße das richtige Modell finden.
+      - heading "Behalten Sie die Auswahl der richtigen Technik im Blick" [level=3] [ref=e446]
+      - paragraph [ref=e447]: Die Auswahl der richtigen Größe und eines modernen Designs sind sicherlich wichtig, entscheidend ist aber auch, dass Sie technische Aspekte im Blick behalten. Schauen Sie sich also unbedingt die Betriebsart an. Es gibt Badheizkörper, die ausschließlich mit Strom arbeiten. Sie bieten den Vorteil einer wirklich leichten und schnellen Installation. Wichtig ist hier lediglich, dass sich in der Nähe der Badheizkörper eine Steckdose befindet. Möchten Sie den Badheizkörper mit Ihrer Zentralheizung verknüpfen, müssen Sie zwingend die Anschlüsse kontrollieren, die in Ihrem Badezimmer vorhanden sind. Es gibt auch einige Badheizkörper, die einen Kombibetrieb unterstützen. Sie können also mit Strom und Zentralheizung betrieben werden.
+      - heading "Vertrauen Sie auf unseren hohen Qualitätsanspruch" [level=3] [ref=e448]
+      - paragraph [ref=e449]: Suchen Sie einen geeigneten Badheizkörper für Ihr Zuhause, sind Sie bei uns richtig. Wir versorgen Sie mit einem modernen Handtuchheizkörper zum fairen Preis und bringen Ihnen diesen direkt nach Hause!
+  - generic [ref=e451]:
+    - generic [ref=e454]:
+      - generic [ref=e456]:
+        - heading "Kontakt" [level=3] [ref=e457] [cursor=pointer]
+        - paragraph [ref=e461]:
+          - strong [ref=e462]: "Kundenservice:"
+          - text: 02336 8196674
+          - strong [ref=e463]: "E-Mail:"
+          - text: kontakt@xxl-heizung.de
+          - strong [ref=e464]: "Lager & Retour:"
+          - generic [ref=e465]:
+            - text: 58332 Schwelm
+            - text: NRW Deutschland
+      - generic [ref=e467]:
+        - heading "Hauptmenü" [level=3] [ref=e468] [cursor=pointer]
+        - list [ref=e469]:
+          - listitem [ref=e470] [cursor=pointer]:
+            - link "Heizkörper" [ref=e471]:
+              - /url: /
+          - listitem [ref=e472] [cursor=pointer]:
+            - link "Bad" [ref=e473]:
+              - /url: /collections/bad
+          - listitem [ref=e474] [cursor=pointer]:
+            - link "Fußbodenheizung" [ref=e475]:
+              - /url: /collections/fussbodenheizung
+          - listitem [ref=e476] [cursor=pointer]:
+            - link "Zubehör" [ref=e477]:
+              - /url: /collections/zubehor
+          - listitem [ref=e478] [cursor=pointer]:
+            - link "Heizlastrechner" [ref=e479]:
+              - /url: /pages/xxl-heizung-heizlastrechner
+          - listitem [ref=e480] [cursor=pointer]:
+            - link "Über Uns" [ref=e481]:
+              - /url: /pages/uber-uns
+          - listitem [ref=e482] [cursor=pointer]:
+            - link "Ratgeber" [ref=e483]:
+              - /url: /blogs/news
+      - generic [ref=e485]:
+        - heading "KUNDENINFORMATIONEN" [level=3] [ref=e486] [cursor=pointer]
+        - list [ref=e487]:
+          - listitem [ref=e488] [cursor=pointer]:
+            - link "Selbstabholung in Schwelm" [ref=e489]:
+              - /url: /pages/selbstabholung-lager-schwelm
+          - listitem [ref=e490] [cursor=pointer]:
+            - link "Kontakt + Reklamation" [ref=e491]:
+              - /url: /pages/contact
+          - listitem [ref=e492] [cursor=pointer]:
+            - link "Impressum" [ref=e493]:
+              - /url: /policies/legal-notice
+          - listitem [ref=e494] [cursor=pointer]:
+            - link "Datenschutzerklärung" [ref=e495]:
+              - /url: /policies/privacy-policy
+          - listitem [ref=e496] [cursor=pointer]:
+            - link "Widerrufsrecht" [ref=e497]:
+              - /url: /policies/refund-policy
+          - listitem [ref=e498] [cursor=pointer]:
+            - link "AGB" [ref=e499]:
+              - /url: /policies/terms-of-service
+      - generic [ref=e501]:
+        - heading "Verpassen Sie keine Neuigkeiten mehr!" [level=3] [ref=e502] [cursor=pointer]
+        - generic [ref=e503]:
+          - paragraph [ref=e504]: Melden Sie sich jetzt für unseren Newsletter an, um exklusive Angebote, die neuesten Produktupdates und spannende Neuigkeiten direkt in Ihr Postfach zu erhalten!
+          - generic [ref=e507]:
+            - textbox "Ihre E-Mail" [ref=e509]
+            - button "Jetzt Anmelden" [ref=e510] [cursor=pointer]
+    - generic [ref=e513]:
+      - generic [ref=e514]: © XXL HEIZUNG 2024
+      - generic [ref=e515]:
+        - generic [ref=e516]:
+          - link "Facebook" [ref=e517] [cursor=pointer]:
+            - /url: https://www.facebook.com/xxlheizung?locale=de_DE
+            - img [ref=e518]
+          - link "Instagram" [ref=e520] [cursor=pointer]:
+            - /url: https://www.instagram.com/xxl_heizung?igsh=MXQ2YWl5bWhzNjhyeA==
+            - img [ref=e521]
+          - link "Youtube" [ref=e523] [cursor=pointer]:
+            - /url: https://youtube.com/@xxlheizung-o9t?si=Ny64dvO4-57woCsm
+            - img [ref=e524]
+          - link "Tiktok" [ref=e526] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@xxlheizung?_r=1&_t=ZG-95CmGCpV5t3
+            - img [ref=e527]
+        - list [ref=e530]:
+          - listitem [ref=e531]:
+            - img "American Express" [ref=e532]
+          - listitem [ref=e541]:
+            - img "Apple Pay" [ref=e542]
+          - listitem [ref=e553]:
+            - img "Google Pay" [ref=e554]
+          - listitem [ref=e562]:
+            - img "Maestro" [ref=e563]
+          - listitem [ref=e569]:
+            - img "Mastercard" [ref=e570]
+          - listitem [ref=e576]:
+            - img "PayPal" [ref=e577]
+          - listitem [ref=e583]:
+            - img "Visa" [ref=e584]
+  - generic "Shopify Onlineshop-Chat" [ref=e588]:
+    - button "Chat 1" [ref=e590] [cursor=pointer]:
+      - img [ref=e591]
+      - generic [ref=e593]: Chat
+      - generic [ref=e594]: "1"
+  - complementary [active]:
+    - dialog "Privacy Settings" [ref=e596]:
+      - generic [ref=e598]:
+        - button "Select language" [ref=e600] [cursor=pointer]
+        - img "Logo eRecht24" [ref=e601]
+        - generic [ref=e602]:
+          - heading "Privacy Settings" [level=2] [ref=e603]
+          - generic: This site uses consent-requiring cookies and third-party technologies to integrate certain features. When you click the "Accept All" button, these features are enabled (consent). After consent is given, we and the involved third-party companies process your personal data for various purposes. Detailed information on purpose, legal basis and third party companies can be found under the button "More Information" and in our privacy policy. You can revoke your consent at any time.
+      - generic [ref=e604]:
+        - generic [ref=e606]:
+          - button "More Information" [ref=e607] [cursor=pointer]
+          - button "Deny" [ref=e608] [cursor=pointer]
+          - button "Accept All" [ref=e609] [cursor=pointer]
+        - generic [ref=e610]:
+          - link "Powered by Usercentrics Consent Management" [ref=e611] [cursor=pointer]:
+            - /url: https://usercentrics.com/consent-management-platform-powered-by-usercentrics/?utm_source=banner_uc&utm_medium=referral&utm_content=v3
+          - link "& eRecht24" [ref=e612] [cursor=pointer]:
+            - /url: https://www.e-recht24.de/uc/

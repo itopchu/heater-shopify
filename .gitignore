@@ -1,0 +1,35 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Secrets
+.env
+.env.local
+.env.*.local
+*.local
+
+# Shopify CLI
+.shopify/
+.shopifyignore.bak
+
+# Build / logs
+dist/
+build/
+*.log
+agent/logs/
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Customer data (never commit)
+data/**/*customers*.csv
+data/**/*orders*.csv
