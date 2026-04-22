@@ -30,6 +30,9 @@ agent/logs/
 Thumbs.db
 desktop.ini
 
+# MCP tool artifacts (Playwright, etc.)
+.playwright-mcp/
+
 # Customer data (never commit)
 data/**/*customers*.csv
 data/**/*orders*.csv
