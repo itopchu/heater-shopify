@@ -1,0 +1,180 @@
+{%- comment -%}
+  PDP spec accordions — reads product.metafields.custom.spec_sections
+  (a list of spec_section metaobjects).
+  Merchant attaches spec_section entries per product in Admin → Products → Metafields.
+{%- endcomment -%}
+
+{%- style -%}
+  .pspec-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  .pspec__header { margin: 0 0 1.5rem; text-align: {{ section.settings.text_alignment }}; }
+  .pspec__title { margin: 0; }
+  .pspec__list { list-style: none; padding: 0; margin: 0; max-width: 52rem; {% if section.settings.text_alignment == 'center' %} margin-inline: auto; {% endif %} }
+  .pspec__item { border-top: 1px solid rgba(var(--color-foreground), 0.12); }
+  .pspec__item:last-child { border-bottom: 1px solid rgba(var(--color-foreground), 0.12); }
+  .pspec__summary {
+    display: flex; align-items: center; gap: 1rem; padding: 1.25rem 0;
+    font-weight: 600; font-size: 1.0625rem; cursor: pointer; list-style: none;
+  }
+  .pspec__summary::-webkit-details-marker { display: none; }
+  .pspec__icon-lead { width: 28px; height: 28px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; }
+  .pspec__icon-lead img, .pspec__icon-lead svg { width: 100%; height: 100%; object-fit: contain; }
+  .pspec__title-text { flex: 1; }
+  .pspec__toggle { width: 18px; height: 18px; flex-shrink: 0; transition: transform 180ms ease; }
+  details[open] > .pspec__summary .pspec__toggle { transform: rotate(45deg); }
+  .pspec__body { padding: 0 0 1.25rem; line-height: 1.6; }
+  .pspec__body > :first-child { margin-top: 0; }
+  .pspec__body > :last-child { margin-bottom: 0; }
+  .pspec__bullets { list-style: disc; padding-left: 1.25rem; margin: 0.5rem 0; }
+  .pspec__bullets li { margin: 0.25rem 0; }
+
+  @media (min-width: 750px) {
+    .pspec-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="pspec-{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <header class="pspec__header">
+        <h2 class="pspec__title {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+      </header>
+    {%- endif -%}
+
+    {%- assign specs = product.metafields.custom.spec_sections.value -%}
+    {%- if specs and specs.size > 0 -%}
+      <ul class="pspec__list" role="list">
+        {%- for spec in specs -%}
+          <li class="pspec__item">
+            <details {% if forloop.first and section.settings.first_open %}open{% endif %}>
+              <summary class="pspec__summary">
+                {%- if spec.icon != blank -%}
+                  <span class="pspec__icon-lead" aria-hidden="true">
+                    {%- if spec.icon.image -%}
+                      {{ spec.icon | image_url: width: 56 | image_tag: loading: 'lazy', alt: '', width: 28, height: 28 }}
+                    {%- else -%}
+                      <img src="{{ spec.icon | file_url }}" alt="" loading="lazy" width="28" height="28">
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+                <span class="pspec__title-text">{{ spec.title }}</span>
+                <svg class="pspec__toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </summary>
+              <div class="pspec__body">
+                {%- if spec.body != blank -%}
+                  {{ spec.body | metafield_tag }}
+                {%- endif -%}
+                {%- if spec.bullets != blank and spec.bullets.value.size > 0 -%}
+                  <ul class="pspec__bullets">
+                    {%- for bullet in spec.bullets.value -%}
+                      <li>{{ bullet }}</li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </div>
+            </details>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      {%- if request.design_mode -%}
+        <p style="text-align: center; opacity: 0.6;">
+          No spec sections on this product. Attach spec_section metaobjects via Admin → Products → [this product] → Metafields → Spec sections.
+        </p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product: spec accordions",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads product.custom.spec_sections — attach spec_section metaobjects per product in Admin."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Section heading",
+      "default": "Technische Details."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h3", "label": "Small" },
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left",
+      "label": "Header alignment"
+    },
+    {
+      "type": "checkbox",
+      "id": "first_open",
+      "label": "Open first accordion by default",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product: spec accordions"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

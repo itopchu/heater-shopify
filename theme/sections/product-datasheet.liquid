@@ -1,0 +1,150 @@
+{%- comment -%}
+  PDP datasheet download — reads product.metafields.custom.datasheet_pdf.
+  Renders nothing if no file attached (stays hidden for products without a datasheet).
+{%- endcomment -%}
+
+{%- assign pdf = product.metafields.custom.datasheet_pdf.value -%}
+
+{%- if pdf != blank or request.design_mode -%}
+  {%- style -%}
+    .pdatasheet-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+    .pdatasheet__card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(var(--color-foreground), 0.12);
+      background: rgb(var(--color-background));
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+    .pdatasheet__icon {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(var(--color-foreground), 0.06);
+      border-radius: 8px;
+    }
+    .pdatasheet__meta { flex: 1; display: flex; flex-direction: column; gap: 0.125rem; }
+    .pdatasheet__label { font-weight: 600; font-size: 0.9375rem; margin: 0; }
+    .pdatasheet__hint { font-size: 0.8125rem; opacity: 0.7; margin: 0; }
+    .pdatasheet__link {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      padding: 0.625rem 1rem;
+      border-radius: 8px;
+      background: rgb(var(--color-button));
+      color: rgb(var(--color-button-text));
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .pdatasheet__link:hover { opacity: 0.9; }
+
+    @media (min-width: 750px) {
+      .pdatasheet-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="pdatasheet-{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width">
+      {%- if pdf != blank -%}
+        <div class="pdatasheet__card">
+          <div class="pdatasheet__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div class="pdatasheet__meta">
+            <p class="pdatasheet__label">{{ section.settings.label }}</p>
+            <p class="pdatasheet__hint">PDF · {{ pdf.size | divided_by: 1024 | round }} KB</p>
+          </div>
+          <a
+            class="pdatasheet__link"
+            href="{{ pdf | file_url }}"
+            download="{{ pdf.preview_image.alt | default: product.title }}"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ section.settings.cta }}
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </a>
+        </div>
+      {%- elsif request.design_mode -%}
+        <p style="text-align: center; opacity: 0.6;">
+          No datasheet attached. Upload a PDF via Admin → Products → [this product] → Metafields → Datasheet PDF.
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product: datasheet",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Technisches Datenblatt"
+    },
+    {
+      "type": "text",
+      "id": "cta",
+      "label": "CTA text",
+      "default": "Download"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product: datasheet"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}
