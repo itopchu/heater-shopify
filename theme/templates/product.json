@@ -190,6 +190,47 @@
         "padding_bottom": 36
       }
     },
+    "product-trust-strip": {
+      "type": "product-trust-strip",
+      "settings": {
+        "limit": 4,
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "product-spec-accordions": {
+      "type": "product-spec-accordions",
+      "settings": {
+        "title": "Technische Details.",
+        "heading_size": "h2",
+        "text_alignment": "left",
+        "first_open": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "product-datasheet": {
+      "type": "product-datasheet",
+      "settings": {
+        "label": "Technisches Datenblatt",
+        "cta": "Download",
+        "color_scheme": "scheme-2",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "product-bundle-upsell": {
+      "type": "product-bundle-upsell",
+      "settings": {
+        "kicker": "Spare im Set",
+        "cta": "Ansehen",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 32
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -209,8 +250,10 @@
   },
   "order": [
     "main",
-    "image-with-text",
-    "multicolumn",
+    "product-trust-strip",
+    "product-spec-accordions",
+    "product-datasheet",
+    "product-bundle-upsell",
     "related-products"
   ]
 }
