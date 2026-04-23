@@ -342,6 +342,9 @@
     "page": {
       "title": "Seitentitel"
     },
+    "announcement_top_bar": {
+      "label": "Obere Ankündigungsleiste"
+    },
     "announcements": {
       "previous_announcement": "Vorherige Ankündigung",
       "next_announcement": "Nächste Ankündigung",

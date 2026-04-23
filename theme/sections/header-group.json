@@ -2,6 +2,50 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "announcement-top-bar": {
+      "type": "announcement-top-bar",
+      "blocks": {
+        "usp-advice": {
+          "type": "usp",
+          "settings": {
+            "text": "Expert advice — reply within 2 hours",
+            "icon": "chat"
+          }
+        },
+        "usp-warranty": {
+          "type": "usp",
+          "settings": {
+            "text": "10-year warranty",
+            "icon": "shield"
+          }
+        },
+        "usp-delivery": {
+          "type": "usp",
+          "settings": {
+            "text": "Fast EU delivery",
+            "icon": "truck"
+          }
+        },
+        "usp-checkout": {
+          "type": "usp",
+          "settings": {
+            "text": "Secure checkout · Klarna · PayPal",
+            "icon": "check"
+          }
+        }
+      },
+      "block_order": [
+        "usp-advice",
+        "usp-warranty",
+        "usp-delivery",
+        "usp-checkout"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "padding_vertical": 10,
+        "hide_on_mobile_after": 2
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -21,6 +65,7 @@
     }
   },
   "order": [
+    "announcement-top-bar",
     "header"
   ]
 }

@@ -1,0 +1,177 @@
+{%- style -%}
+  .announcement-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ section.settings.padding_vertical }}px 1rem;
+    font-size: 0.8125rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+  .announcement-top-bar__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem 1.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: var(--page-width, 1300px);
+  }
+  .announcement-top-bar__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+  .announcement-top-bar__item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .announcement-top-bar__item--link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 150ms ease;
+  }
+  .announcement-top-bar__item--link:hover { opacity: 0.72; }
+  @media (max-width: 749px) {
+    .announcement-top-bar__list { gap: 0.5rem 1rem; }
+    .announcement-top-bar__item { font-size: 0.75rem; }
+    {%- if section.settings.hide_on_mobile_after > 0 -%}
+      .announcement-top-bar__item:nth-child(n+{{ section.settings.hide_on_mobile_after | plus: 1 }}) {
+        display: none;
+      }
+    {%- endif -%}
+  }
+{%- endstyle -%}
+
+<div class="announcement-top-bar color-{{ section.settings.color_scheme }} gradient" role="region" aria-label="{{ 'sections.announcement_top_bar.label' | t }}">
+  <ul class="announcement-top-bar__list">
+    {%- for block in section.blocks -%}
+      {%- assign tag = 'span' -%}
+      {%- if block.settings.link != blank -%}
+        {%- assign tag = 'a' -%}
+      {%- endif -%}
+      <li>
+        <{{ tag }}
+          class="announcement-top-bar__item{% if block.settings.link != blank %} announcement-top-bar__item--link{% endif %}"
+          {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+          {{ block.shopify_attributes }}
+        >
+          {%- case block.settings.icon -%}
+            {%- when 'check' -%}
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 10.5 8 14.5 16 5.5"/></svg>
+            {%- when 'shield' -%}
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5 3.5 5v5c0 3.5 2.6 6.2 6.5 7.5 3.9-1.3 6.5-4 6.5-7.5V5z"/><polyline points="7.5 10 9.5 12 13 8.5"/></svg>
+            {%- when 'truck' -%}
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="5" width="10" height="8"/><path d="M11.5 8h4l3 3v2h-7z"/><circle cx="5" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/></svg>
+            {%- when 'chat' -%}
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14v10H8l-4 3v-3H3z"/><line x1="6.5" y1="9" x2="13.5" y2="9"/></svg>
+            {%- when 'star' -%}
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor"><polygon points="10 2 12.5 7.5 18.5 8.2 14 12.3 15.4 18.2 10 15 4.6 18.2 6 12.3 1.5 8.2 7.5 7.5"/></svg>
+            {%- when 'phone' -%}
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h3l1.5 4-2 1.5a10 10 0 0 0 5 5L13 11.5 17 13v3a2 2 0 0 1-2 2A13 13 0 0 1 2 5a2 2 0 0 1 2-2z"/></svg>
+            {%- when 'none' -%}
+          {%- endcase -%}
+          <span>{{ block.settings.text }}</span>
+        </{{ tag }}>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Top announcement bar",
+  "tag": "aside",
+  "class": "announcement-top-bar-wrapper",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Sits above the header on every page. Add USPs like expert advice, warranty, fast delivery."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "hide_on_mobile_after",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "label": "Hide items after # on mobile",
+      "info": "0 = show all on mobile",
+      "default": 2
+    }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "USP item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Expert advice"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "check", "label": "Checkmark" },
+            { "value": "shield", "label": "Shield (warranty)" },
+            { "value": "truck", "label": "Truck (delivery)" },
+            { "value": "chat", "label": "Chat (advice)" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "star", "label": "Star (quality)" },
+            { "value": "none", "label": "No icon" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Optional link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Top announcement bar",
+      "blocks": [
+        { "type": "usp", "settings": { "text": "Expert advice — reply within 2 hours", "icon": "chat" } },
+        { "type": "usp", "settings": { "text": "10-year warranty", "icon": "shield" } },
+        { "type": "usp", "settings": { "text": "Fast EU delivery", "icon": "truck" } },
+        { "type": "usp", "settings": { "text": "Secure checkout · Klarna · PayPal", "icon": "check" } }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "usp", "settings": { "text": "Expert advice — reply within 2 hours", "icon": "chat" } },
+      { "type": "usp", "settings": { "text": "10-year warranty", "icon": "shield" } },
+      { "type": "usp", "settings": { "text": "Fast EU delivery", "icon": "truck" } },
+      { "type": "usp", "settings": { "text": "Secure checkout · Klarna · PayPal", "icon": "check" } }
+    ]
+  }
+}
+{% endschema %}

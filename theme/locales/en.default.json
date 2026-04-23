@@ -267,6 +267,9 @@
     }
   },
   "sections": {
+    "announcement_top_bar": {
+      "label": "Top announcement bar"
+    },
     "announcements": {
       "previous_announcement": "Previous announcement",
       "next_announcement": "Next announcement",

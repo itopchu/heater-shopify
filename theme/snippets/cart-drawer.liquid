@@ -46,7 +46,7 @@
                 {{ 'general.continue_shopping' | t }}
               </a>
 
-              {%- if shop.customer_accounts_enabled and customer == null -%}
+              {%- if shop.customer_accounts_enabled and settings.enable_customer_login and customer == null -%}
                 <p class="cart__login-title h3">{{ 'sections.cart.login.title' | t }}</p>
                 <p class="cart__login-paragraph">
                   {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}

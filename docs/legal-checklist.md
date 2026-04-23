@@ -2,6 +2,20 @@
 
 Tick items during Phase 6. Every item must be verified on the live DE storefront before Phase 10 (launch).
 
+## Parallel workstream — German business registration
+
+Required before Phase 6 (legal + trust + consent). Does **not** block Phases 2–5.
+
+- [ ] Register business with local Gewerbeamt (Einzelunternehmen is simplest; GmbH/UG if liability limitation is needed)
+- [ ] File Fragebogen zur steuerlichen Erfassung with Finanzamt → receive **Steuernummer**
+- [ ] Apply for **USt-IdNr** at Bundeszentralamt für Steuern (required unless staying under Kleinunternehmer threshold, which most e-commerce exceeds)
+- [ ] Open German business bank account (required for Shopify Payments activation)
+- [ ] In Shopify: switch the `heater-dev` store's business entity from USA to the new DE entity (Organization → Legal entities → Add business entity; fall back to contacting Shopify support if UI is not surfaced)
+- [ ] (Optional) Register for EU OSS — only needed if cross-border EU sales to countries other than DE exceed €10k/year
+
+Until the DE entity is attached, the dev store stays on the auto-created USA entity — fine for theme/catalog development, blocking only for Phase 6 tax + payment configuration.
+
+
 ## Mandatory pages (reachable ≤ 1 click from every page footer)
 
 - [ ] **Impressum** (Shopify Page) — §5 TMG data: full legal name, street address, country, phone, email, Registergericht + HRB/HRA number, USt-IdNr, Geschäftsführer(in), Verantwortlich nach §18 MStV

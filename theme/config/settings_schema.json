@@ -1451,5 +1451,64 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Customer account",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Hides the account icon in the header. The /account route still works."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_customer_login",
+        "label": "Show account icon in header",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "WhatsApp chat bubble",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Floating WhatsApp button bottom-right on every page. Message you send from customer's device lands on your phone via WhatsApp."
+      },
+      {
+        "type": "checkbox",
+        "id": "whatsapp_enabled",
+        "label": "Enable WhatsApp bubble",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_phone",
+        "label": "Phone number (international format, digits only)",
+        "info": "Example: 491701234567 (no + or spaces)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_label",
+        "label": "Tooltip label",
+        "default": "Chat with us"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_prefill",
+        "label": "Prefill message",
+        "default": "Hi! I have a question about your heaters."
+      },
+      {
+        "type": "select",
+        "id": "whatsapp_position",
+        "label": "Position",
+        "options": [
+          { "value": "right", "label": "Bottom right" },
+          { "value": "left", "label": "Bottom left" }
+        ],
+        "default": "right"
+      }
+    ]
   }
 ]

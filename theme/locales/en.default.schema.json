@@ -2267,6 +2267,10 @@
         "icon_with_text": {
           "name": "Icon with text",
           "settings": {
+            "content": {
+              "label": "Content",
+              "info": "Configure icon-with-text pairings"
+            },
             "layout": {
               "label": "Layout",
               "options__1": {

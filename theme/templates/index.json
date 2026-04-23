@@ -6,26 +6,26 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Wärme, die sich nach Zuhause anfühlt.",
+            "heading": "Warmth that feels like home.",
             "heading_size": "h0"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "Design-Heizkörper für jedes Zuhause — TÜV geprüft, 10 Jahre Garantie, kostenloser Versand in Deutschland.",
+            "text": "Design radiators for every room — TÜV-tested, 10-year warranty, free EU delivery.",
             "text_style": "body"
           }
         },
         "button": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Heizkörper entdecken",
-            "button_link_1": "shopify:\/\/collections\/all",
+            "button_label_1": "Shop radiators",
+            "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_label_2": "Get expert advice",
+            "button_link_2": "/pages/contact",
+            "button_style_secondary_2": true
           }
         }
       },
@@ -64,7 +64,7 @@
       },
       "block_order": ["c1", "c2", "c3", "c4", "c5"],
       "settings": {
-        "title": "Unser Sortiment.",
+        "title": "Find your radiator.",
         "heading_size": "h1",
         "image_ratio": "portrait",
         "columns_desktop": 4,
@@ -78,8 +78,8 @@
     "testimonials": {
       "type": "testimonials",
       "settings": {
-        "kicker": "Stimmen unserer Kunden",
-        "title": "Was Kunden über uns sagen.",
+        "kicker": "Customer stories",
+        "title": "What our customers say.",
         "heading_size": "h2",
         "limit": 0,
         "color_scheme": "scheme-2",
@@ -90,8 +90,8 @@
     "trust-badges": {
       "type": "trust-badges",
       "settings": {
-        "kicker": "Vertrauen & Qualität",
-        "title": "Darum Havn.",
+        "kicker": "Built for your home",
+        "title": "Why Havn.",
         "heading_size": "h2",
         "limit": 4,
         "color_scheme": "scheme-1",
@@ -103,7 +103,7 @@
       "type": "faq",
       "settings": {
         "kicker": "FAQ",
-        "title": "Häufige Fragen.",
+        "title": "Questions, answered.",
         "heading_size": "h2",
         "category_filter": "",
         "limit": 0,

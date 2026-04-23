@@ -234,7 +234,7 @@
       </div>
       {% render 'header-search', input_id: 'Search-In-Modal' %}
 
-      {%- if shop.customer_accounts_enabled -%}
+      {%- if shop.customer_accounts_enabled and settings.enable_customer_login -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
           class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
