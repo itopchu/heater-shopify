@@ -1484,8 +1484,7 @@
         "type": "text",
         "id": "whatsapp_phone",
         "label": "Phone number (international format, digits only)",
-        "info": "Example: 491701234567 (no + or spaces)",
-        "default": ""
+        "info": "Example: 491701234567 (no + or spaces)"
       },
       {
         "type": "text",
