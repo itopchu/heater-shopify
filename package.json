@@ -1,0 +1,25 @@
+{
+  "name": "heater-shopify-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude Agent SDK harness for the heater-shopify dev/prod store.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "agent": "tsx agent/src/index.ts",
+    "agent:test": "tsx agent/src/test/scope-leak.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.1.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
