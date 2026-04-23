@@ -1,0 +1,166 @@
+{%- comment -%}
+  GDPR / ePrivacy consent banner. Uses Shopify Customer Privacy API.
+  Docs: https://shopify.dev/docs/api/customer-privacy
+  Fires no analytics/marketing cookies until user accepts or rejects.
+{%- endcomment -%}
+
+<style>
+  .consent-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    padding: 1rem 1.25rem 1.25rem;
+    background: rgba(20, 17, 14, 0.96);
+    color: #FAF7F2;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.25);
+    transform: translateY(110%);
+    transition: transform 260ms ease;
+  }
+  .consent-banner.is-visible { transform: translateY(0); }
+  .consent-banner__inner {
+    max-width: var(--page-width, 1300px);
+    margin: 0 auto;
+    display: grid;
+    gap: 0.875rem 1.5rem;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+  .consent-banner__text {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+  .consent-banner__text a {
+    color: inherit;
+    text-decoration: underline;
+  }
+  .consent-banner__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-start;
+  }
+  .consent-banner__btn {
+    appearance: none;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    padding: 0.625rem 1rem;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+  .consent-banner__btn:hover,
+  .consent-banner__btn:focus-visible {
+    background: #FAF7F2;
+    color: #14110E;
+  }
+  .consent-banner__btn--primary {
+    background: #D94A1F;
+    border-color: #D94A1F;
+    color: #FFFFFF;
+  }
+  .consent-banner__btn--primary:hover,
+  .consent-banner__btn--primary:focus-visible {
+    background: #FFFFFF;
+    color: #D94A1F;
+    border-color: #FFFFFF;
+  }
+  @media (min-width: 750px) {
+    .consent-banner__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .consent-banner { transition: none; }
+  }
+</style>
+
+<div class="consent-banner" id="ConsentBanner" role="dialog" aria-labelledby="ConsentBannerTitle" aria-describedby="ConsentBannerText" hidden>
+  <div class="consent-banner__inner">
+    <p class="consent-banner__text" id="ConsentBannerText">
+      <strong id="ConsentBannerTitle">{{ 'consent.title' | t }}</strong><br>
+      {{ 'consent.body_html' | t: privacy_url: '/policies/privacy-policy' }}
+    </p>
+    <div class="consent-banner__buttons">
+      <button class="consent-banner__btn" data-consent="reject" type="button">
+        {{ 'consent.reject' | t }}
+      </button>
+      <button class="consent-banner__btn consent-banner__btn--primary" data-consent="accept" type="button">
+        {{ 'consent.accept' | t }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var banner = document.getElementById('ConsentBanner');
+    if (!banner) return;
+
+    function applyConsent(accept) {
+      var api = window.Shopify && window.Shopify.customerPrivacy;
+      if (api && typeof api.setTrackingConsent === 'function') {
+        api.setTrackingConsent(
+          {
+            analytics: accept,
+            marketing: accept,
+            preferences: accept,
+            sale_of_data: false,
+          },
+          function () {}
+        );
+      }
+      try {
+        localStorage.setItem('havn:consent', accept ? 'accepted' : 'rejected');
+      } catch (e) {}
+      banner.classList.remove('is-visible');
+      banner.hidden = true;
+    }
+
+    function isEU() {
+      try {
+        var country = (window.Shopify && window.Shopify.country) || '';
+        if (!country) return true;
+        var euCountries = [
+          'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE',
+          'IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE',
+          'GB','NO','IS','LI','CH'
+        ];
+        return euCountries.indexOf(String(country).toUpperCase()) !== -1;
+      } catch (e) { return true; }
+    }
+
+    function shouldShow() {
+      if (!isEU()) return false;
+      var api = window.Shopify && window.Shopify.customerPrivacy;
+      if (api && typeof api.shouldShowBanner === 'function') {
+        try { return api.shouldShowBanner(); } catch (e) {}
+      }
+      try { return localStorage.getItem('havn:consent') === null; } catch (e) { return true; }
+    }
+
+    function show() {
+      banner.hidden = false;
+      requestAnimationFrame(function () { banner.classList.add('is-visible'); });
+    }
+
+    if (shouldShow()) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', show);
+      } else {
+        show();
+      }
+    }
+
+    banner.addEventListener('click', function (e) {
+      var target = e.target && e.target.closest && e.target.closest('[data-consent]');
+      if (!target) return;
+      applyConsent(target.getAttribute('data-consent') === 'accept');
+    });
+  })();
+</script>

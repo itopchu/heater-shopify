@@ -266,7 +266,16 @@
       "subtext": "404"
     }
   },
+  "consent": {
+    "title": "Ihre Privatsphäre zählt",
+    "body_html": "Wir verwenden Cookies, damit die Seite funktioniert, Ihr Warenkorb erhalten bleibt und wir die Nutzung messen können. Analyse- und Marketing-Cookies bleiben aus, bis Sie zustimmen. Siehe unsere <a href=\"{{ privacy_url }}\">Datenschutzerklärung</a>.",
+    "accept": "Alle akzeptieren",
+    "reject": "Nur notwendige"
+  },
   "sections": {
+    "announcement_top_bar": {
+      "label": "Obere Ankündigungsleiste"
+    },
     "header": {
       "announcement": "Ankündigung",
       "menu": "Menü",
@@ -341,9 +350,6 @@
     },
     "page": {
       "title": "Seitentitel"
-    },
-    "announcement_top_bar": {
-      "label": "Obere Ankündigungsleiste"
     },
     "announcements": {
       "previous_announcement": "Vorherige Ankündigung",

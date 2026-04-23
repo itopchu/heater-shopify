@@ -266,6 +266,12 @@
       "subtext": "404"
     }
   },
+  "consent": {
+    "title": "We value your privacy",
+    "body_html": "We use cookies to make the site work, remember your cart, and measure how people use our store. Analytics and marketing cookies stay off until you accept. See our <a href=\"{{ privacy_url }}\">privacy policy</a>.",
+    "accept": "Accept all",
+    "reject": "Only essentials"
+  },
   "sections": {
     "announcement_top_bar": {
       "label": "Top announcement bar"

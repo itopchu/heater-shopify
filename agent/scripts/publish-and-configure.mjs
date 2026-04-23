@@ -195,6 +195,26 @@ async function main() {
   await enableLocale('de');
 
   await snapshot();
+  await warnIfStorefrontPasswordProtected();
+}
+
+// --- 6. Diagnose onlineStoreUrl null (password-protected dev store) -------
+
+async function warnIfStorefrontPasswordProtected() {
+  try {
+    const data = await gql(`{ products(first: 1) { edges { node { status onlineStoreUrl } } } }`);
+    const first = data.products.edges[0]?.node;
+    if (!first) return;
+    if (first.status === 'ACTIVE' && first.onlineStoreUrl === null) {
+      console.warn('');
+      console.warn('⚠ Products are ACTIVE and published, but onlineStoreUrl is null.');
+      console.warn('  Shopify only populates onlineStoreUrl once the storefront is publicly reachable.');
+      console.warn('  The dev store is almost certainly password-protected — Admin → Online Store → Preferences → Password protection.');
+      console.warn('  Remove the password (or add the visitor to the preview allowlist) to unblock Online Store URLs.');
+    }
+  } catch (err) {
+    console.warn(`⚠ Could not verify storefront accessibility: ${err.message}`);
+  }
 }
 
 main().catch((err) => { console.error(err); process.exit(1); });

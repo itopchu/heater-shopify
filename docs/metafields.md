@@ -8,7 +8,7 @@ All definitions below are currently **`defined`** on the `heater-dev` store (cre
 
 ## Metaobjects
 
-### `testimonial` — planned
+### `testimonial` — defined
 Reusable customer quote.
 
 | Field | Type | Required | Notes |
@@ -21,7 +21,7 @@ Reusable customer quote.
 | source | single_line_text | no | e.g., "Judge.me", "Google" |
 | locale_hint | single_line_text | no | `de` or `en` — optional filter |
 
-### `trust_badge` — planned
+### `trust_badge` — defined
 Homepage / PDP trust strip items (10 Jahre Garantie, TÜV, Schnelle Lieferung, etc.).
 
 | Field | Type | Required | Notes |
@@ -31,7 +31,7 @@ Homepage / PDP trust strip items (10 Jahre Garantie, TÜV, Schnelle Lieferung, e
 | icon | file_reference (image/svg) | yes | 48×48 |
 | link | url | no | optional landing |
 
-### `spec_section` — planned
+### `spec_section` — defined
 PDP accordion block. Products reference a list of these via a product metafield.
 
 | Field | Type | Required | Notes |
@@ -42,7 +42,7 @@ PDP accordion block. Products reference a list of these via a product metafield.
 | icon | file_reference (image/svg) | no | optional |
 | order | number_integer | no | sort hint |
 
-### `faq_item` — planned
+### `faq_item` — defined
 Reusable FAQ row.
 
 | Field | Type | Required | Notes |
@@ -51,7 +51,7 @@ Reusable FAQ row.
 | answer | rich_text | yes | |
 | category | single_line_text | no | for grouping |
 
-### `usp_item` — planned (or use section blocks instead — decide in Phase 3)
+### `usp_item` — defined (used by sections/usp-strip.liquid; new sections/announcement-top-bar.liquid uses block-level USPs instead)
 Global USP strip item.
 
 ## Product metafields (namespace: `custom`)
