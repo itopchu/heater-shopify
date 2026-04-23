@@ -87,6 +87,49 @@ const DE_TRANSLATIONS = {
   'Chat with us': 'Kontakt aufnehmen',
   'Hi! I have a question about your heaters.':
     'Hallo! Ich habe eine Frage zu Ihren Heizkörpern.',
+  // Hero heading + CTAs (English defaults → German)
+  'Warmth that feels like home.': 'Wärme, die sich nach Zuhause anfühlt.',
+  'Design radiators for every room — TÜV-tested, 10-year warranty, free EU delivery.':
+    'Design-Heizkörper für jeden Raum — TÜV-geprüft, 10 Jahre Garantie, kostenloser EU-Versand.',
+  'Shop radiators': 'Heizkörper entdecken',
+  'Get expert advice': 'Fachberatung anfragen',
+  // PDP section labels (just added)
+  'Specs & details.': 'Technische Details.',
+  'Technical datasheet': 'Technisches Datenblatt',
+  Download: 'Download',
+  'Save with the set': 'Spare im Set',
+  View: 'Ansehen',
+  'You may also like': 'Das könnte dir auch gefallen',
+  // Category grid
+  'Find your radiator.': 'Finde deinen Heizkörper.',
+  // Testimonials
+  'Customer stories': 'Stimmen unserer Kunden',
+  'What our customers say.': 'Was unsere Kunden sagen.',
+  // Trust badges
+  'Built for your home': 'Für dein Zuhause gebaut',
+  'Why <em>Havn</em>.': 'Darum <em>Havn</em>.',
+  // FAQ
+  'Questions, answered.': 'Antworten auf häufige Fragen.',
+  // Promo bar
+  '7% off your first order with code WILLKOMMEN': '7 % Rabatt auf deine erste Bestellung mit Code WILLKOMMEN',
+  // Footer / newsletter (common theme strings)
+  'Subscribe to our emails': 'Newsletter abonnieren',
+  'Quick links': 'Schnelllinks',
+  'Follow us': 'Folge uns',
+  // Generic theme strings Horizon-era leftovers
+  'Opening soon': 'Eröffnen demnächst',
+  Submit: 'Absenden',
+  Share: 'Teilen',
+  'Continue shopping': 'Weiter einkaufen',
+  'Featured collection': 'Empfohlene Kollektion',
+  'Shop all': 'Alle ansehen',
+  'View all': 'Alle anzeigen',
+  Collections: 'Kollektionen',
+  // Materials / shipping / dimensions / care (Horizon descriptor defaults)
+  Materials: 'Materialien',
+  'Shipping & Returns': 'Versand & Rückgabe',
+  Dimensions: 'Abmessungen',
+  'Care Instructions': 'Pflegehinweise',
 };
 
 async function findMainTheme() {

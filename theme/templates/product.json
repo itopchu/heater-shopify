@@ -124,7 +124,7 @@
     "product-spec-accordions": {
       "type": "product-spec-accordions",
       "settings": {
-        "title": "Technische Details.",
+        "title": "Specs & details.",
         "heading_size": "h2",
         "text_alignment": "left",
         "first_open": false,
@@ -136,7 +136,7 @@
     "product-datasheet": {
       "type": "product-datasheet",
       "settings": {
-        "label": "Technisches Datenblatt",
+        "label": "Technical datasheet",
         "cta": "Download",
         "color_scheme": "scheme-2",
         "padding_top": 24,
@@ -146,8 +146,8 @@
     "product-bundle-upsell": {
       "type": "product-bundle-upsell",
       "settings": {
-        "kicker": "Spare im Set",
-        "cta": "Ansehen",
+        "kicker": "Save with the set",
+        "cta": "View",
         "color_scheme": "scheme-1",
         "padding_top": 16,
         "padding_bottom": 32
