@@ -1,0 +1,65 @@
+# Dependabot configuration for heater-shopify.
+#
+# Two ecosystems are watched:
+#   - npm:           backing the Claude Agent SDK harness + catalog-sync pipeline
+#   - github-actions: third-party + first-party Actions used in CI workflows
+#
+# Strategy:
+#   - Weekly cadence (Monday 06:00 UTC) keeps PR volume tractable.
+#   - Patch + minor updates are grouped so we get one rollup PR per week per
+#     ecosystem, instead of one PR per dep.
+#   - Major updates create separate PRs (review case-by-case for breaking changes).
+#   - Dependabot does NOT auto-merge; CI must pass + a human reviewer required.
+#   - PR limit caps backlog if neglected.
+
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - npm
+    commit-message:
+      prefix: deps
+      include: scope
+    groups:
+      npm-patch-and-minor:
+        applies-to: version-updates
+        update-types:
+          - patch
+          - minor
+    ignore:
+      # Major bumps for the Google Gemini SDK have historically broken our
+      # image-regen pipeline (see commit bb3959b backlog note about
+      # @google/genai 0.10.0 -> 1.50.1). Hold majors for manual review.
+      - dependency-name: "@google/genai"
+        update-types:
+          - version-update:semver-major
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: ci
+      include: scope
+    groups:
+      actions-patch-and-minor:
+        applies-to: version-updates
+        update-types:
+          - patch
+          - minor
