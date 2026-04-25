@@ -54,7 +54,11 @@ ${deText}`;
     options: {
       systemPrompt,
       maxTurns: 1,
-      permissionMode: 'bypassPermissions' as const,
+      // No tools are wired for translation — keep the SDK in default
+      // permission mode and explicitly deny tool grants. `bypassPermissions`
+      // would be a footgun if a future maintainer wired tools in.
+      permissionMode: 'default' as const,
+      allowedTools: [],
     },
   });
 

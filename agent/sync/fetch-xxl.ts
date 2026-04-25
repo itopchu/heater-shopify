@@ -14,6 +14,8 @@ import type { XxlCollection, XxlProduct } from './types.js';
 
 const PAGE_LIMIT = 250;
 const RATE_LIMIT_MS = 250;
+const FETCH_TIMEOUT_MS = 30_000;
+const MAX_RESPONSE_BYTES = 50 * 1024 * 1024; // 50 MB
 
 async function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
@@ -22,10 +24,31 @@ async function sleep(ms: number): Promise<void> {
 async function fetchJson<T>(url: string): Promise<T> {
   const res = await fetch(url, {
     headers: { Accept: 'application/json', 'User-Agent': 'gberg-sync/0.1 (+https://gberg-heizung.de)' },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
   if (!res.ok) {
     throw new Error(`GET ${url} → HTTP ${res.status} ${res.statusText}`);
   }
+
+  // Defensive: cap response size to prevent DoS via an upstream returning a huge payload.
+  const contentLength = res.headers.get('content-length');
+  if (contentLength) {
+    const declared = Number.parseInt(contentLength, 10);
+    if (Number.isFinite(declared) && declared > MAX_RESPONSE_BYTES) {
+      throw new Error(
+        `GET ${url} → Response too large: content-length ${declared} exceeds ${MAX_RESPONSE_BYTES} bytes`,
+      );
+    }
+  }
+
+  // Defensive: ensure upstream actually served JSON. xxl could redirect to an HTML error page.
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.toLowerCase().includes('application/json')) {
+    throw new Error(
+      `GET ${url} → Unexpected content-type "${contentType}" (expected application/json)`,
+    );
+  }
+
   return res.json() as Promise<T>;
 }
 

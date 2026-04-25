@@ -43,6 +43,10 @@ on:
         type: choice
         options: ["true", "false"]
 
+# Cap GITHUB_TOKEN at minimum at workflow scope (M10).
+permissions:
+  contents: read
+
 concurrency:
   group: lighthouse
   cancel-in-progress: false
@@ -137,7 +141,9 @@ jobs:
       - name: Run Lighthouse CI
         id: lhci
         continue-on-error: true
-        uses: treosh/lighthouse-ci-action@v11
+        # SHA-pinned (H8) — tag-pinned third-party actions are mutable and a
+        # known supply-chain vector. Re-pin on intentional version bumps.
+        uses: treosh/lighthouse-ci-action@72f881228236981b625ed765b928efb1786a1f55 # v11
         with:
           configPath: ./lighthouserc.json
           uploadArtifacts: true

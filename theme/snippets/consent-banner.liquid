@@ -38,6 +38,12 @@
     color: inherit;
     text-decoration: underline;
   }
+  .consent-banner__cookie-list {
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    opacity: 0.9;
+  }
   .consent-banner__buttons {
     display: flex;
     flex-wrap: wrap;
@@ -126,6 +132,12 @@
         <strong id="ConsentBannerTitle">{{ 'consent.title' | t }}</strong><br>
         {{ 'consent.body_html' | t: privacy_url: '/pages/datenschutz' }}
       </p>
+      <p class="consent-banner__text consent-banner__cookie-list">
+        <strong>{{ 'consent.cookie_list_intro' | t }}</strong><br>
+        {{ 'consent.cookie_necessary_list_html' | t }}<br>
+        {{ 'consent.cookie_analytics_list_html' | t }}<br>
+        {{ 'consent.cookie_marketing_list_html' | t }}
+      </p>
       <div class="consent-banner__prefs" id="ConsentBannerPrefs" aria-hidden="true">
         <ul class="consent-banner__categories">
           <li class="consent-banner__category">
@@ -179,6 +191,26 @@
     var analyticsBox = banner.querySelector('[data-consent-cat="analytics"]');
     var marketingBox = banner.querySelector('[data-consent-cat="marketing"]');
 
+    var STORAGE_KEY = 'gberg:consent';
+    // 6 months — conservative DSK guidance for re-asking consent.
+    var MAX_AGE_MS = 180 * 24 * 60 * 60 * 1000;
+
+    function readSavedConsent() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        var parsed = JSON.parse(raw);
+        if (!parsed || typeof parsed !== 'object') return null;
+        var savedAt = typeof parsed.savedAt === 'number' ? parsed.savedAt : (typeof parsed.ts === 'number' ? parsed.ts : 0);
+        if (!savedAt || (Date.now() - savedAt) > MAX_AGE_MS) {
+          // Expired — treat as un-consented.
+          try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+          return null;
+        }
+        return parsed;
+      } catch (e) { return null; }
+    }
+
     function setConsent(state) {
       var api = window.Shopify && window.Shopify.customerPrivacy;
       if (api && typeof api.setTrackingConsent === 'function') {
@@ -186,17 +218,18 @@
           {
             analytics: !!state.analytics,
             marketing: !!state.marketing,
-            preferences: !!state.marketing,
+            preferences: !!state.analytics,
             sale_of_data: false,
           },
           function () {}
         );
       }
       try {
-        localStorage.setItem('gberg:consent', JSON.stringify({
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
           analytics: !!state.analytics,
           marketing: !!state.marketing,
-          ts: Date.now()
+          preferences: !!state.analytics,
+          savedAt: Date.now()
         }));
       } catch (e) {}
       banner.classList.remove('is-visible');
@@ -226,16 +259,31 @@
 
     function shouldShow() {
       if (!isEU()) return false;
+      // Local expiry takes precedence — if our stored consent is older than 6 months,
+      // re-prompt regardless of what the Customer Privacy API thinks.
+      if (readSavedConsent() === null) return true;
       var api = window.Shopify && window.Shopify.customerPrivacy;
       if (api && typeof api.shouldShowBanner === 'function') {
         try { return api.shouldShowBanner(); } catch (e) {}
       }
-      try { return localStorage.getItem('gberg:consent') === null; } catch (e) { return true; }
+      return false;
     }
 
     function show() {
+      // Pre-check toggles from previously-saved state, if any (used by reopener).
+      var saved = readSavedConsent();
+      if (saved) {
+        if (analyticsBox) analyticsBox.checked = !!saved.analytics;
+        if (marketingBox) marketingBox.checked = !!saved.marketing;
+      }
       banner.hidden = false;
       requestAnimationFrame(function () { banner.classList.add('is-visible'); });
+    }
+
+    function reopen() {
+      // Always open the preferences panel so the user can change individual categories.
+      show();
+      openPrefs();
     }
 
     if (shouldShow()) {
@@ -262,6 +310,16 @@
           marketing: !!(marketingBox && marketingBox.checked)
         });
       }
+    });
+
+    // GDPR Art. 7(3): withdrawal must be as easy as giving consent.
+    // Any element with [data-consent-reopen] (e.g. the footer "Cookie settings" link)
+    // re-opens the banner with previously-saved category states pre-checked.
+    document.addEventListener('click', function (e) {
+      var trigger = e.target && e.target.closest && e.target.closest('[data-consent-reopen]');
+      if (!trigger) return;
+      e.preventDefault();
+      reopen();
     });
   })();
 </script>

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
-import { checkToolCall } from '../../hooks/pre-tool.js';
+import { checkToolCall, looksLikeGraphQLMutation } from '../../hooks/pre-tool.js';
 import { loadConfig } from '../../sync/env.js';
+import { requireDevSafety, resolveStore } from '../store-config.js';
 import type { StoreConfig } from '../store-config.js';
 
 const devStore: StoreConfig = {
@@ -178,6 +179,158 @@ await expect('ALLOW_LARGE_IMAGE_RUN=1 bypasses the budget guard', async () => {
   } finally {
     if (savedAllow === undefined) delete process.env.ALLOW_LARGE_IMAGE_RUN;
     else process.env.ALLOW_LARGE_IMAGE_RUN = savedAllow;
+  }
+});
+
+// ---------------------------------------------------------------------------
+// R3 — store-config + pre-tool hardening (audit findings H3a/H3b/H3c)
+// ---------------------------------------------------------------------------
+
+await expect('prod store BLOCKS capital-M Mutation document', async () => {
+  const res = await checkToolCall(
+    {
+      name: 'shopify.graphql',
+      input: { query: 'Mutation productCreate($p: ProductInput!) { productCreate(product: $p) { product { id } } }' },
+    },
+    prodStore,
+    { promptUser: false },
+  );
+  assert.equal(res.allow, false);
+});
+
+await expect('prod store BLOCKS ALL-CAPS MUTATION document', async () => {
+  const res = await checkToolCall(
+    {
+      name: 'shopify.graphql',
+      input: { query: 'MUTATION foo { productCreate(product: {}) { product { id } } }' },
+    },
+    prodStore,
+    { promptUser: false },
+  );
+  assert.equal(res.allow, false);
+});
+
+await expect('prod store BLOCKS mid-string mutation in multi-doc payload', async () => {
+  // A query followed by a mutation in the same document string — the old keyword
+  // check would fire on "Create" anyway, but we want the dedicated detector to fire too.
+  const res = await checkToolCall(
+    {
+      name: 'shopify.graphql',
+      input: {
+        query: 'query a { shop { name } }\n\nmutation b { productDelete(input: {id:"gid"}) { deletedProductId } }',
+      },
+    },
+    prodStore,
+    { promptUser: false },
+  );
+  assert.equal(res.allow, false);
+});
+
+await expect('prod store ALLOWS benign query with the word "mutation" in a # comment', async () => {
+  const res = await checkToolCall(
+    {
+      name: 'shopify.graphql',
+      // Pure read query; the word "mutation" appears only in a comment and a description.
+      input: { query: '# this query intentionally avoids any mutation\n{ shop { name } }' },
+    },
+    prodStore,
+    { promptUser: false },
+  );
+  assert.equal(res.allow, true);
+});
+
+await expect('prod store ALLOWS benign query with "mutation" inside a """block""" string', async () => {
+  const res = await checkToolCall(
+    {
+      name: 'shopify.graphql',
+      input: {
+        query: '{ shop { name } }\n"""\nthis schema description mentions mutation but is not one\n"""',
+      },
+    },
+    prodStore,
+    { promptUser: false },
+  );
+  assert.equal(res.allow, true);
+});
+
+await expect('looksLikeGraphQLMutation: leading-whitespace mutation trips', async () => {
+  assert.equal(looksLikeGraphQLMutation('   \n   mutation foo { x }'), true);
+});
+
+await expect('looksLikeGraphQLMutation: false on plain read query', async () => {
+  assert.equal(looksLikeGraphQLMutation('{ shop { name } }'), false);
+});
+
+await expect('requireDevSafety: dev key with prod-looking handle THROWS', async () => {
+  let threw = false;
+  try {
+    requireDevSafety('dev', 'gberg-prod.myshopify.com');
+  } catch (err) {
+    threw = true;
+    assert.match((err as Error).message, /does not match the dev allowlist/);
+  }
+  assert.equal(threw, true);
+});
+
+await expect('requireDevSafety: prod key with dev-looking handle THROWS', async () => {
+  let threw = false;
+  try {
+    requireDevSafety('prod', 'heater-dev.myshopify.com');
+  } catch (err) {
+    threw = true;
+    assert.match((err as Error).message, /looks like a dev domain/);
+  }
+  assert.equal(threw, true);
+});
+
+await expect('requireDevSafety: dev key with allowlisted dev handle PASSES', async () => {
+  // Should not throw.
+  requireDevSafety('dev', 'heater-dev.myshopify.com');
+});
+
+await expect('requireDevSafety: prod key with proper prod handle PASSES', async () => {
+  requireDevSafety('prod', 'gberg-heizung.myshopify.com');
+});
+
+await expect('resolveStore: AGENT_DEFAULT_STORE=prod via env-only is REJECTED', async () => {
+  const savedDefault = process.env.AGENT_DEFAULT_STORE;
+  const savedProdStore = process.env.SHOPIFY_PROD_STORE;
+  const savedProdToken = process.env.SHOPIFY_PROD_ADMIN_TOKEN;
+  process.env.AGENT_DEFAULT_STORE = 'prod';
+  process.env.SHOPIFY_PROD_STORE = 'gberg-heizung.myshopify.com';
+  process.env.SHOPIFY_PROD_ADMIN_TOKEN = 'prod-token';
+  let threw = false;
+  try {
+    // No CLI flag → source defaults to 'default' → must reject prod-via-env.
+    resolveStore(undefined);
+  } catch (err) {
+    threw = true;
+    assert.match((err as Error).message, /AGENT_DEFAULT_STORE=prod is not allowed/);
+  } finally {
+    if (savedDefault === undefined) delete process.env.AGENT_DEFAULT_STORE;
+    else process.env.AGENT_DEFAULT_STORE = savedDefault;
+    if (savedProdStore === undefined) delete process.env.SHOPIFY_PROD_STORE;
+    else process.env.SHOPIFY_PROD_STORE = savedProdStore;
+    if (savedProdToken === undefined) delete process.env.SHOPIFY_PROD_ADMIN_TOKEN;
+    else process.env.SHOPIFY_PROD_ADMIN_TOKEN = savedProdToken;
+  }
+  assert.equal(threw, true);
+});
+
+await expect('resolveStore: explicit --store prod (source=cli) is ACCEPTED', async () => {
+  const savedProdStore = process.env.SHOPIFY_PROD_STORE;
+  const savedProdToken = process.env.SHOPIFY_PROD_ADMIN_TOKEN;
+  process.env.SHOPIFY_PROD_STORE = 'gberg-heizung.myshopify.com';
+  process.env.SHOPIFY_PROD_ADMIN_TOKEN = 'prod-token';
+  try {
+    const cfg = resolveStore('prod', { source: 'cli' });
+    assert.equal(cfg.key, 'prod');
+    assert.equal(cfg.handle, 'gberg-heizung.myshopify.com');
+  } finally {
+    if (savedProdStore === undefined) delete process.env.SHOPIFY_PROD_STORE;
+    else process.env.SHOPIFY_PROD_STORE = savedProdStore;
+    if (savedProdToken === undefined) delete process.env.SHOPIFY_PROD_ADMIN_TOKEN;
+    else process.env.SHOPIFY_PROD_ADMIN_TOKEN = savedProdToken;
   }
 });
 

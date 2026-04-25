@@ -1,3 +1,26 @@
+# ---------------------------------------------------------------------------
+# sync-catalog — xxl-heizung → G-Berg catalog mirror.
+#
+# SECURITY NOTES (R2 hardening, 2026-04-25):
+#
+# - All `workflow_dispatch` inputs are passed via the step `env:` block as
+#   $INPUT_* and validated by regex before use. Never interpolate
+#   `${{ github.event.inputs.* }}` directly into a `run:` shell — that path
+#   is a confirmed shell-injection vector (anyone with `actions:write`
+#   could exfiltrate the four secrets below).
+#
+# - ANTHROPIC_API_KEY is required in CI: `agent/sync/translate.ts` uses the
+#   Claude Agent SDK `query()`, which falls back to ANTHROPIC_API_KEY when
+#   no `claude /login` session exists. CI has no Claude Max CLI auth, so
+#   the key is necessary here even though the local agent uses Claude Max.
+#   TODO(human): confirm budget cap on the Anthropic key (per-month spend
+#   alert) before flipping scheduled runs from --dry-run to live writes.
+#
+# - Secrets are scoped to the `Run sync` step only; `npm ci` runs in its
+#   own step with NO secrets in env and `--ignore-scripts` to neutralise
+#   malicious lifecycle scripts in transitive deps.
+# ---------------------------------------------------------------------------
+
 name: sync-catalog
 
 on:
@@ -24,6 +47,10 @@ on:
         default: ""
         type: string
 
+# Cap GITHUB_TOKEN at minimum at workflow scope; per-job perms can escalate.
+permissions:
+  contents: read
+
 concurrency:
   group: sync-catalog
   cancel-in-progress: false
@@ -35,16 +62,6 @@ jobs:
     timeout-minutes: 60
     permissions:
       contents: read
-    env:
-      SHOPIFY_DEV_STORE: ${{ secrets.SHOPIFY_DEV_STORE }}
-      SHOPIFY_DEV_ADMIN_TOKEN: ${{ secrets.SHOPIFY_DEV_ADMIN_TOKEN }}
-      SHOPIFY_API_VERSION: "2026-04"
-      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-      GEMINI_IMAGE_MODEL: ${{ vars.GEMINI_IMAGE_MODEL || 'gemini-2.5-flash-image' }}
-      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      IMAGE_GEN_CAP: "50"
-      XXL_SOURCE_BASE_URL: "https://xxl-heizung.de"
-      AGENT_DEFAULT_STORE: "dev"
     steps:
       - uses: actions/checkout@v4
 
@@ -53,8 +70,11 @@ jobs:
           node-version: "20"
           cache: "npm"
 
+      # Install deps with NO secrets in env and --ignore-scripts (M11).
+      # Lifecycle scripts of malicious transitive deps cannot exfiltrate
+      # secrets here because none are exposed to this step.
       - name: Install deps
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Restore sync cache
         uses: actions/cache@v4
@@ -66,24 +86,59 @@ jobs:
 
       - name: Run sync
         id: sync
+        env:
+          # Secrets — scoped to this step only (M11).
+          SHOPIFY_DEV_STORE: ${{ secrets.SHOPIFY_DEV_STORE }}
+          SHOPIFY_DEV_ADMIN_TOKEN: ${{ secrets.SHOPIFY_DEV_ADMIN_TOKEN }}
+          SHOPIFY_API_VERSION: "2026-04"
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_IMAGE_MODEL: ${{ vars.GEMINI_IMAGE_MODEL || 'gemini-2.5-flash-image' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          IMAGE_GEN_CAP: "50"
+          XXL_SOURCE_BASE_URL: "https://xxl-heizung.de"
+          AGENT_DEFAULT_STORE: "dev"
+          # User inputs — passed via env (H2). Never interpolate into shell.
+          INPUT_EVENT_NAME: ${{ github.event_name }}
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+          INPUT_LIMIT: ${{ github.event.inputs.limit }}
+          INPUT_ONLY_COLLECTION: ${{ github.event.inputs.only_collection }}
         run: |
           set -euo pipefail
-          ARGS="--store dev"
-          if [ "${{ github.event_name }}" = "schedule" ]; then
-            ARGS="$ARGS --dry-run"   # scheduled runs are always dry until we flip
+
+          # Validate every input before it touches the shell.
+          # INPUT_DRY_RUN is constrained by `choice` schema, but re-check anyway.
+          if [ -n "${INPUT_DRY_RUN:-}" ] && [ "$INPUT_DRY_RUN" != "true" ] && [ "$INPUT_DRY_RUN" != "false" ]; then
+            echo "::error::INPUT_DRY_RUN must be 'true' or 'false', got: $INPUT_DRY_RUN"
+            exit 1
+          fi
+          # INPUT_LIMIT must be digits only (or empty).
+          if [ -n "${INPUT_LIMIT:-}" ] && ! [[ "$INPUT_LIMIT" =~ ^[0-9]+$ ]]; then
+            echo "::error::INPUT_LIMIT must match ^[0-9]+\$, got: $INPUT_LIMIT"
+            exit 1
+          fi
+          # INPUT_ONLY_COLLECTION must be a Shopify handle (or empty).
+          if [ -n "${INPUT_ONLY_COLLECTION:-}" ] && ! [[ "$INPUT_ONLY_COLLECTION" =~ ^[a-z0-9-]+$ ]]; then
+            echo "::error::INPUT_ONLY_COLLECTION must match ^[a-z0-9-]+\$, got: $INPUT_ONLY_COLLECTION"
+            exit 1
+          fi
+
+          # Build args as an array — never string concat with user input.
+          ARGS=(--store dev)
+          if [ "$INPUT_EVENT_NAME" = "schedule" ]; then
+            ARGS+=(--dry-run)   # scheduled runs are always dry until we flip
           else
-            if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-              ARGS="$ARGS --dry-run"
+            if [ "${INPUT_DRY_RUN:-}" = "true" ]; then
+              ARGS+=(--dry-run)
             fi
-            if [ -n "${{ github.event.inputs.limit }}" ]; then
-              ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"
+            if [ -n "${INPUT_LIMIT:-}" ]; then
+              ARGS+=(--limit "$INPUT_LIMIT")
             fi
-            if [ -n "${{ github.event.inputs.only_collection }}" ]; then
-              ARGS="$ARGS --only-collection ${{ github.event.inputs.only_collection }}"
+            if [ -n "${INPUT_ONLY_COLLECTION:-}" ]; then
+              ARGS+=(--only-collection "$INPUT_ONLY_COLLECTION")
             fi
           fi
-          echo "Running: npm run sync -- $ARGS"
-          npm run sync -- $ARGS
+          echo "Running: npm run sync -- ${ARGS[*]}"
+          npm run sync -- "${ARGS[@]}"
 
       - name: Upload sync report
         if: always()

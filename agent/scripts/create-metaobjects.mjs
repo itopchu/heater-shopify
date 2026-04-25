@@ -136,6 +136,10 @@ const Q_METAFIELD_DEFINITIONS = /* GraphQL */ `
           type {
             name
           }
+          access {
+            storefront
+            admin
+          }
         }
       }
     }
@@ -169,6 +173,29 @@ const M_METAFIELD_DEFINITION_CREATE = /* GraphQL */ `
         namespace
         key
         name
+      }
+      userErrors {
+        field
+        message
+        code
+      }
+    }
+  }
+`;
+
+// https://shopify.dev/docs/api/admin-graphql/2026-04/mutations/metafieldDefinitionUpdate
+// Only used to drift-correct `access` on already-created definitions.
+const M_METAFIELD_DEFINITION_UPDATE = /* GraphQL */ `
+  mutation MetafieldDefinitionUpdate($definition: MetafieldDefinitionUpdateInput!) {
+    metafieldDefinitionUpdate(definition: $definition) {
+      updatedDefinition {
+        id
+        namespace
+        key
+        access {
+          storefront
+          admin
+        }
       }
       userErrors {
         field
@@ -470,6 +497,11 @@ function buildProductMetafieldDefs(gidByType) {
     },
     // Sync keys (namespace: sync) — populated by agent/sync/ pipeline.
     // Left unpinned; diagnostic only, not for merchant editing.
+    //
+    // SECURITY: storefront access is forced to NONE on every sync.* definition.
+    // These fields name our upstream supplier (xxl-heizung). If they were
+    // PUBLIC_READ, a competitor scraping `/products/<handle>.json` could
+    // trivially prove the reseller relationship. Admin-only.
     {
       namespace: 'sync',
       key: 'xxl_source_id',
@@ -478,6 +510,7 @@ function buildProductMetafieldDefs(gidByType) {
       type: 'number_integer',
       ownerType: 'PRODUCT',
       pin: false,
+      access: { storefront: 'NONE' },
     },
     {
       namespace: 'sync',
@@ -487,6 +520,7 @@ function buildProductMetafieldDefs(gidByType) {
       type: 'single_line_text_field',
       ownerType: 'PRODUCT',
       pin: false,
+      access: { storefront: 'NONE' },
     },
     {
       namespace: 'sync',
@@ -496,6 +530,7 @@ function buildProductMetafieldDefs(gidByType) {
       type: 'date_time',
       ownerType: 'PRODUCT',
       pin: false,
+      access: { storefront: 'NONE' },
     },
   ];
 }
@@ -545,11 +580,14 @@ async function findMetaobjectDefinitionId(type) {
 }
 
 /**
- * Look up a metafield definition by ownerType + namespace + key. Returns GID or null.
+ * Look up a metafield definition by ownerType + namespace + key. Returns
+ * `{ id, access }` for existing definitions or null when missing.
  */
-async function findMetafieldDefinitionId({ ownerType, namespace, key }) {
+async function findMetafieldDefinition({ ownerType, namespace, key }) {
   const data = await gql(Q_METAFIELD_DEFINITIONS, { ownerType, namespace, key });
-  return data.metafieldDefinitions.edges[0]?.node?.id ?? null;
+  const node = data.metafieldDefinitions.edges[0]?.node;
+  if (!node) return null;
+  return { id: node.id, access: node.access ?? null };
 }
 
 /**
@@ -601,20 +639,61 @@ async function ensureMetaobjectDefinition(def) {
 }
 
 /**
- * Create a metafield definition if it doesn't already exist.
- * Returns { id, status: 'created' | 'skipped' }.
+ * Default access for product/collection metafields surfaced in Liquid.
+ * Per-def `access` overrides this (e.g. sync.* fields that must NOT leak
+ * the upstream supplier on the storefront API).
+ */
+const DEFAULT_METAFIELD_ACCESS = { storefront: 'PUBLIC_READ' };
+
+/** True if two access objects describe the same effective grants. */
+function accessMatches(have, want) {
+  if (!have || !want) return false;
+  const wantStore = want.storefront ?? 'PUBLIC_READ';
+  const wantAdmin = want.admin ?? null;
+  if (have.storefront !== wantStore) return false;
+  if (wantAdmin !== null && have.admin !== wantAdmin) return false;
+  return true;
+}
+
+/**
+ * Create a metafield definition if missing; if it exists but its `access`
+ * has drifted from the desired value, update it via metafieldDefinitionUpdate.
+ * Returns { id, status: 'created' | 'updated' | 'skipped' }.
  */
 async function ensureMetafieldDefinition(def) {
-  const existing = await findMetafieldDefinitionId({
+  const desiredAccess = def.access ?? DEFAULT_METAFIELD_ACCESS;
+  const label = `${def.ownerType.toLowerCase()}.${def.namespace}.${def.key}`;
+  const existing = await findMetafieldDefinition({
     ownerType: def.ownerType,
     namespace: def.namespace,
     key: def.key,
   });
+
   if (existing) {
+    if (accessMatches(existing.access, desiredAccess)) {
+      console.log(`[skip] metafield:${label} already exists → ${existing.id}`);
+      return { id: existing.id, status: 'skipped' };
+    }
+
+    // Drift-correct access. The Update input takes ownerType + namespace + key
+    // (no `id`), and only mutable fields can be passed.
+    const updateInput = {
+      namespace: def.namespace,
+      key: def.key,
+      ownerType: def.ownerType,
+      access: desiredAccess,
+    };
+    const data = await gql(M_METAFIELD_DEFINITION_UPDATE, { definition: updateInput });
+    const { updatedDefinition, userErrors } = data.metafieldDefinitionUpdate;
+    if (userErrors.length) {
+      throw new Error(
+        `metafieldDefinitionUpdate(${label}) userErrors: ` + JSON.stringify(userErrors),
+      );
+    }
     console.log(
-      `[skip] metafield:${def.ownerType.toLowerCase()}.${def.namespace}.${def.key} already exists → ${existing}`,
+      `[update] metafield:${label} access ${JSON.stringify(existing.access)} → ${JSON.stringify(updatedDefinition.access)}`,
     );
-    return { id: existing, status: 'skipped' };
+    return { id: updatedDefinition.id, status: 'updated' };
   }
 
   const input = {
@@ -626,22 +705,18 @@ async function ensureMetafieldDefinition(def) {
     ownerType: def.ownerType,
     pin: def.pin ?? true,
     ...(def.validations ? { validations: def.validations } : {}),
-    // Expose to storefront API by default so the theme can render the values.
     // https://shopify.dev/docs/api/admin-graphql/2026-04/input-objects/MetafieldAccessInput
-    access: { storefront: 'PUBLIC_READ' },
+    access: desiredAccess,
   };
 
   const data = await gql(M_METAFIELD_DEFINITION_CREATE, { definition: input });
   const { createdDefinition, userErrors } = data.metafieldDefinitionCreate;
   if (userErrors.length) {
     throw new Error(
-      `metafieldDefinitionCreate(${def.ownerType}.${def.namespace}.${def.key}) userErrors: ` +
-        JSON.stringify(userErrors),
+      `metafieldDefinitionCreate(${label}) userErrors: ` + JSON.stringify(userErrors),
     );
   }
-  console.log(
-    `[create] metafield:${def.ownerType.toLowerCase()}.${def.namespace}.${def.key} → ${createdDefinition.id}`,
-  );
+  console.log(`[create] metafield:${label} → ${createdDefinition.id}`);
   return { id: createdDefinition.id, status: 'created' };
 }
 
@@ -655,29 +730,35 @@ async function main() {
   );
 
   let created = 0;
+  let updated = 0;
   let skipped = 0;
+  const tally = (status) => {
+    if (status === 'created') created++;
+    else if (status === 'updated') updated++;
+    else skipped++;
+  };
 
   // Pass 1: metaobject definitions. Capture GIDs so metafields can reference them.
   const gidByType = new Map();
   for (const def of METAOBJECT_DEFS) {
     const { id, status } = await ensureMetaobjectDefinition(def);
     gidByType.set(def.type, id);
-    status === 'created' ? created++ : skipped++;
+    tally(status);
   }
 
   // Pass 2: product metafield definitions (some reference metaobject GIDs).
   for (const def of buildProductMetafieldDefs(gidByType)) {
     const { status } = await ensureMetafieldDefinition(def);
-    status === 'created' ? created++ : skipped++;
+    tally(status);
   }
 
   // Pass 3: collection metafield definitions.
   for (const def of COLLECTION_METAFIELD_DEFS) {
     const { status } = await ensureMetafieldDefinition(def);
-    status === 'created' ? created++ : skipped++;
+    tally(status);
   }
 
-  console.log(`\nDone. created: ${created}, skipped: ${skipped}`);
+  console.log(`\nDone. created: ${created}, updated: ${updated}, skipped: ${skipped}`);
 }
 
 main().catch((err) => {

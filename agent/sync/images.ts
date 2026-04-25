@@ -30,6 +30,31 @@ import type { NormalizedProduct } from './types.js';
 const CACHE_DIR = resolve(process.cwd(), '.sync-cache', 'images');
 const MANIFEST_PATH = resolve(CACHE_DIR, 'manifest.json');
 
+/** Max decoded image size accepted from either xxl source or Gemini response. */
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024; // 10 MB
+
+/**
+ * Sanitize a free-text field that flows into the Gemini prompt. Strips
+ * control characters, caps length, and rejects strings that look like
+ * prompt-injection ("ignore previous", "new instructions", etc.) — those
+ * cause the caller to skip image generation entirely (returning null).
+ *
+ * Without this, an attacker who controls an xxl product title could
+ * potentially override the FORBIDDEN clause in buildPrompt() and trick
+ * Gemini into rendering content that exposes us to liability (e.g.
+ * §86a StGB symbols in a German market).
+ */
+const PROMPT_INJECTION_RE = /ignore|disregard|new instructions|forget previous|system prompt/i;
+
+function sanitizePromptInput(s: string): string | null {
+  if (typeof s !== 'string') return '';
+  // Strip C0 + C1 control chars (keep printable + common whitespace).
+  let cleaned = s.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]/g, '');
+  cleaned = cleaned.slice(0, 200);
+  if (PROMPT_INJECTION_RE.test(cleaned)) return null;
+  return cleaned;
+}
+
 interface Manifest {
   [sourceUrl: string]: { fileGid: string; imageUrl?: string; generatedAt: string; model: string };
 }
@@ -102,6 +127,25 @@ function sceneDescription(kind: SceneKind): string {
   }
 }
 
+/**
+ * Apply sanitizePromptInput() across every untrusted free-text field on a
+ * PromptInputs. Returns null if any field looks like prompt injection — the
+ * caller MUST skip image generation in that case.
+ */
+function sanitizePromptInputs(p: PromptInputs): PromptInputs | null {
+  const titleEn = sanitizePromptInput(p.titleEn);
+  const titleDe = sanitizePromptInput(p.titleDe);
+  const productType = sanitizePromptInput(p.productType);
+  if (titleEn === null || titleDe === null || productType === null) return null;
+  const tags: string[] = [];
+  for (const t of p.tags || []) {
+    const cleaned = sanitizePromptInput(t);
+    if (cleaned === null) return null;
+    if (cleaned) tags.push(cleaned);
+  }
+  return { ...p, titleEn, titleDe, productType, tags };
+}
+
 function buildPrompt(p: PromptInputs): string {
   const scene = classifyScene(p);
   const productLabel = (p.titleEn || p.titleDe || p.productType || 'radiator').trim();
@@ -142,8 +186,14 @@ async function downloadImage(url: string): Promise<{ bytes: Buffer; mimeType: st
   const res = await fetch(url);
   if (!res.ok) throw new Error(`source image GET ${url} → ${res.status}`);
   const arr = await res.arrayBuffer();
+  const bytes = Buffer.from(arr);
+  if (bytes.length > MAX_IMAGE_BYTES) {
+    throw new Error(
+      `source image GET ${url} → ${bytes.length} bytes exceeds cap ${MAX_IMAGE_BYTES}`,
+    );
+  }
   const mimeType = res.headers.get('content-type') || 'image/jpeg';
-  return { bytes: Buffer.from(arr), mimeType };
+  return { bytes, mimeType };
 }
 
 async function shopifyGraphql<T>(cfg: SyncConfig, query: string, variables: Record<string, unknown>): Promise<T> {
@@ -262,8 +312,14 @@ function extractImageFromResponse(response: unknown): { bytes: Buffer; mimeType:
   const parts = resp.candidates?.[0]?.content?.parts || [];
   for (const p of parts) {
     if (p.inlineData?.data) {
+      const bytes = Buffer.from(p.inlineData.data, 'base64');
+      if (bytes.length > MAX_IMAGE_BYTES) {
+        throw new Error(
+          `Gemini image response ${bytes.length} bytes exceeds cap ${MAX_IMAGE_BYTES}`,
+        );
+      }
       return {
-        bytes: Buffer.from(p.inlineData.data, 'base64'),
+        bytes,
         mimeType: p.inlineData.mimeType || 'image/png',
       };
     }
@@ -330,7 +386,7 @@ export async function regenerateImagesForProduct(
 
   const genai = new GoogleGenAI({ apiKey: cfg.googleApiKey });
   const specs = specsFromMetafields(product);
-  const prompt = buildPrompt({
+  const rawInputs: PromptInputs = {
     productType: product.productType,
     titleEn: product.titleEn,
     titleDe: product.titleDe,
@@ -338,7 +394,15 @@ export async function regenerateImagesForProduct(
     widthCm: specs.widthCm,
     heightCm: specs.heightCm,
     color: specs.color,
-  });
+  };
+  const sanitized = sanitizePromptInputs(rawInputs);
+  if (!sanitized) {
+    console.warn(
+      `[images] skip ${product.handle}: prompt-injection pattern detected in title/tags/productType — refusing to call Gemini`,
+    );
+    return out;
+  }
+  const prompt = buildPrompt(sanitized);
 
   for (let i = 0; i < product.sourceImageUrls.length; i++) {
     const srcUrl = product.sourceImageUrls[i]!;

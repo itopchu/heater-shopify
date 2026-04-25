@@ -116,7 +116,12 @@
     "our_mission": "Unsere Mission",
     "our_mission_body": "",
     "legal_heading": "Rechtliches",
-    "newsletter_heading": "Newsletter abonnieren"
+    "newsletter_heading": "Newsletter abonnieren",
+    "cookie_settings": "Cookie-Einstellungen"
+  },
+  "forms": {
+    "contact_privacy_notice_html": "Mit dem Absenden willigen Sie ein, dass Ihre Daten zur Bearbeitung Ihrer Anfrage verarbeitet werden. Mehr in der <a href=\"/pages/datenschutz\">Datenschutzerklärung</a>.",
+    "newsletter_privacy_notice_html": "Mit der Anmeldung erhalten Sie Marketing-E-Mails und können sich jederzeit abmelden. Mehr in der <a href=\"/pages/datenschutz\">Datenschutzerklärung</a>."
   },
   "products": {
     "placeholder": {
@@ -296,7 +301,11 @@
     "category_analytics_label": "Analyse",
     "category_analytics_desc": "Helfen uns zu verstehen, wie Besucher den Shop nutzen, damit wir ihn verbessern können.",
     "category_marketing_label": "Marketing",
-    "category_marketing_desc": "Werden verwendet, um relevante Anzeigen einzublenden und Marketing-Kampagnen zu messen."
+    "category_marketing_desc": "Werden verwendet, um relevante Anzeigen einzublenden und Marketing-Kampagnen zu messen.",
+    "cookie_list_intro": "Auf dieser Website verwenden wir folgende Cookies:",
+    "cookie_necessary_list_html": "<strong>Notwendig (immer aktiv):</strong> Session, Warenkorb, CSRF — nicht abwählbar, laufen mit Sitzungsende ab.",
+    "cookie_analytics_list_html": "<strong>Analyse:</strong> Shopify-Besucherstatistiken — <code>_shopify_y</code>, <code>_y</code> — bis zu 1 Jahr.",
+    "cookie_marketing_list_html": "<strong>Marketing:</strong> Shopify Audiences und Shop-Pay-Warenkorb-Synchronisation — <code>_shopify_sa_*</code>, <code>_shop_app_essential</code> (gesetzt vom shop.app/pay/hop-Iframe) — bis zu 1 Jahr."
   },
   "sections": {
     "payment_methods": {

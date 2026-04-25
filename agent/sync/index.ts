@@ -35,6 +35,7 @@ import { regenerateImagesForProduct, type ImageResult, type ImageRunStats } from
 import { loadStoreProducts, computeDiff } from './diff.js';
 import { applyEntry } from './write.js';
 import { mapXxlCollectionHandle } from './collection-map.js';
+import { sanitizeBodyHtml, sanitizeShortText } from './sanitize-body.js';
 import type { SyncReport } from './types.js';
 
 interface CliFlags {
@@ -99,14 +100,43 @@ function loadLocalCatalog(catalogPath: string): {
   const catalog = JSON.parse(raw) as {
     products: Array<import('./types.js').NormalizedProduct>;
   };
-  // Strip the "(EN translation pending)" sentinels so write.ts falls back to
-  // titleDe/bodyHtmlDe rather than writing the placeholder string into Shopify.
-  // translate.ts can then fill in real EN later via a follow-up sync.
-  const normalized = catalog.products.map((p) => ({
-    ...p,
-    titleEn: p.titleEn === '(EN translation pending)' ? '' : p.titleEn,
-    bodyHtmlEn: p.bodyHtmlEn === '(EN translation pending)' ? '' : p.bodyHtmlEn,
-  }));
+  // SECURITY: the local catalog file is checked into the repo but its
+  // bodyHtml{De,En} fields originate from the LLM translator (which echoed
+  // upstream xxl HTML). Sanitize on load so we never trust disk contents
+  // either — the same allowlist that protects the live path applies here.
+  // Also strip "(EN translation pending)" sentinels so write.ts falls back
+  // to DE rather than writing the placeholder into Shopify.
+  const normalized = catalog.products.map((p) => {
+    const titleEn = p.titleEn === '(EN translation pending)' ? '' : sanitizeShortText(p.titleEn);
+    const titleDe = sanitizeShortText(p.titleDe);
+    const bodyHtmlEn = p.bodyHtmlEn === '(EN translation pending)' ? '' : sanitizeBodyHtml(p.bodyHtmlEn);
+    const bodyHtmlDe = sanitizeBodyHtml(p.bodyHtmlDe);
+    const customMetafields = (p.customMetafields || []).map((m) => {
+      // Only string-valued text metafields can carry HTML; JSON-encoded
+      // values (specs, dimensions) are written by normalize() which already
+      // sanitized their inputs. Re-sanitizing JSON would corrupt it, so
+      // we only touch the plain text_field types.
+      if (m.type === 'single_line_text_field' || m.type === 'multi_line_text_field') {
+        return { ...m, value: sanitizeShortText(m.value) };
+      }
+      return m;
+    });
+    const faqs = (p.faqs || [])
+      .map((f) => ({
+        question: sanitizeShortText(f.question),
+        answer: sanitizeBodyHtml(f.answer),
+      }))
+      .filter((f) => f.question && f.answer);
+    return {
+      ...p,
+      titleEn,
+      titleDe: titleDe || p.titleDe,
+      bodyHtmlEn,
+      bodyHtmlDe,
+      customMetafields,
+      faqs,
+    };
+  });
   return { normalized, totalProducts: normalized.length };
 }
 
@@ -240,8 +270,10 @@ async function main(): Promise<void> {
       // Translate DE → EN.
       try {
         const t = await translateProduct(entry.payload);
-        entry.payload.titleEn = t.titleEn;
-        entry.payload.bodyHtmlEn = t.bodyHtmlEn;
+        // SECURITY: the LLM may echo attacker-controlled HTML from the DE body
+        // into the EN body. Sanitize before it reaches descriptionHtml writes.
+        entry.payload.titleEn = sanitizeShortText(t.titleEn);
+        entry.payload.bodyHtmlEn = sanitizeBodyHtml(t.bodyHtmlEn);
       } catch (err) {
         errors.push({ handle, phase: 'translate', message: (err as Error).message });
       }

@@ -20,10 +20,12 @@
     "@google/genai": "^0.10.0",
     "adm-zip": "^0.5.17",
     "dotenv": "^16.4.5",
+    "sanitize-html": "^2.17.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^22.7.0",
+    "@types/sanitize-html": "^2.16.1",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   }

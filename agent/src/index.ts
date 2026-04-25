@@ -6,6 +6,7 @@ import { buildGBergMcpServer, GBERG_TOOL_NAMES } from './tools/mcp-tools.js';
 
 const rawArgv = process.argv.slice(2);
 const storeKey = parseStoreFlag(rawArgv);
+const storeKeySource = storeKey === undefined ? 'default' : 'cli';
 const restArgs = stripStoreFlag(rawArgv);
 
 const task = restArgs.join(' ').trim();
@@ -21,7 +22,7 @@ if (!task) {
   process.exit(1);
 }
 
-const store = resolveStore(storeKey);
+const store = resolveStore(storeKey, { source: storeKeySource });
 
 console.log(`[agent] store=${store.key} handle=${store.handle} api=${store.apiVersion}`);
 console.log(`[agent] task: ${task}`);

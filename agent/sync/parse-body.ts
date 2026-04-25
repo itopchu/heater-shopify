@@ -39,6 +39,24 @@ function findAll(html: string, openTag: string, closeTag: string): string[] {
   return out;
 }
 
+/**
+ * Cap incoming body_html to MAX_BODY_BYTES before regex parsing. Several
+ * heading→<ul> patterns in this file can degrade to ~O(n²) on adversarial
+ * input (catastrophic backtracking via the `[\s\S]{0,3000}?` lazy windows).
+ * 200 KB is ~10× the largest legitimate xxl body we have observed and well
+ * under any plausible attack threshold.
+ */
+const MAX_BODY_BYTES = 200_000;
+
+function safeBody(html: string): string {
+  if (typeof html !== 'string') return '';
+  if (html.length <= MAX_BODY_BYTES) return html;
+  console.warn(
+    `[parse-body] truncating body_html ${html.length} → ${MAX_BODY_BYTES} bytes (ReDoS guard)`,
+  );
+  return html.slice(0, MAX_BODY_BYTES);
+}
+
 // ---------------------------------------------------------------------------
 // 1. Spec table
 // ---------------------------------------------------------------------------
@@ -74,6 +92,7 @@ function normalizeKey(s: string): string {
 
 export function parseSpecTable(html: string): ParsedSpecs | null {
   if (!html) return null;
+  html = safeBody(html);
   const tables = findAll(html, 'table', 'table');
   if (tables.length === 0) return null;
 
@@ -119,6 +138,7 @@ export interface ParsedFaq {
 
 export function parseFaqs(html: string): ParsedFaq[] {
   if (!html) return [];
+  html = safeBody(html);
   const out: ParsedFaq[] = [];
   for (const dl of findAll(html, 'dl', 'dl')) {
     const re = /<dt\b[^>]*>([\s\S]*?)<\/dt>\s*<dd\b[^>]*>([\s\S]*?)<\/dd>/gi;
@@ -171,6 +191,7 @@ function splitInlineList(s: string): string[] {
 
 export function parseDeliveryContents(html: string): string[] {
   if (!html) return [];
+  html = safeBody(html);
 
   // Strategy 1 — heading (<h1>..<h6>) followed by a <ul>.
   // Allow up to ~3000 chars of intervening markup (xxl wraps in deeply nested

@@ -20,6 +20,7 @@ import {
   parseVariantDimensions,
 } from './parse-body.js';
 import { specDefaultsFor, deriveWidthCmFallback, type SpecRow } from './spec-defaults.js';
+import { sanitizeBodyHtml, sanitizeShortText } from './sanitize-body.js';
 
 export interface NormalizeOptions {
   /** Existing handles in our store — used to detect collisions. */
@@ -56,6 +57,9 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
   });
 
   // Sprint 4: parse structured PDP content from body_html + variants.
+  // Note: `body` (raw) is used by parsers that need HTML structure (parseSpecTable,
+  // parseDeliveryContents, parseFaqs, etc.). The sanitized form is what we ship
+  // to Shopify as descriptionHtml — see `bodyHtmlDe` assignment below.
   const body = xxl.body_html || '';
   const options = (xxl.options || []).map((o) => ({ name: o.name, position: o.position, values: o.values }));
   const customMetafields: ProductMetafield[] = [];
@@ -68,14 +72,22 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
   const specRows: SpecRow[] = [...specDefaultsFor(xxl.product_type || '', xxl.tags || [], xxl.handle || '')];
   const parsedSpecs = parseSpecTable(body);
   if (parsedSpecs) {
-    if (parsedSpecs.color)               specRows.push({ label_en: 'Color',        label_de: 'Farbe',     value_en: parsedSpecs.color,              value_de: parsedSpecs.color });
-    if (parsedSpecs.thread_size)         specRows.push({ label_en: 'Thread',       label_de: 'Gewinde',   value_en: parsedSpecs.thread_size,        value_de: parsedSpecs.thread_size });
-    if (parsedSpecs.connection_options)  specRows.push({ label_en: 'Connection',   label_de: 'Anschluss', value_en: parsedSpecs.connection_options, value_de: parsedSpecs.connection_options });
+    // Every parsed spec value originates in upstream HTML — strip any tags
+    // before we render these on the PDP (specs render as plain text rows).
+    const sColor = sanitizeShortText(parsedSpecs.color);
+    const sThread = sanitizeShortText(parsedSpecs.thread_size);
+    const sConn = sanitizeShortText(parsedSpecs.connection_options);
+    if (sColor)  specRows.push({ label_en: 'Color',      label_de: 'Farbe',     value_en: sColor, value_de: sColor });
+    if (sThread) specRows.push({ label_en: 'Thread',     label_de: 'Gewinde',   value_en: sThread, value_de: sThread });
+    if (sConn)   specRows.push({ label_en: 'Connection', label_de: 'Anschluss', value_en: sConn,  value_de: sConn });
     for (const c of parsedSpecs.certifications || []) {
-      specRows.push({ label_en: 'Certification', label_de: 'Zertifizierung', value_en: c, value_de: c });
+      const sc = sanitizeShortText(c);
+      if (sc) specRows.push({ label_en: 'Certification', label_de: 'Zertifizierung', value_en: sc, value_de: sc });
     }
     for (const [k, v] of Object.entries(parsedSpecs.extra)) {
-      specRows.push({ label_en: k, label_de: k, value_en: v, value_de: v });
+      const sk = sanitizeShortText(k);
+      const sv = sanitizeShortText(v);
+      if (sk && sv) specRows.push({ label_en: sk, label_de: sk, value_en: sv, value_de: sv });
     }
   }
   customMetafields.push({ namespace: 'custom', key: 'specs', type: 'json', value: JSON.stringify(specRows) });
@@ -102,8 +114,11 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
   }
 
   // Hoist single-attribute scalars that the existing PDP filters / facets read directly.
-  if (parsedSpecs?.color) customMetafields.push({ namespace: 'custom', key: 'ral_color', type: 'single_line_text_field', value: parsedSpecs.color });
-  if (parsedSpecs?.connection_options) customMetafields.push({ namespace: 'custom', key: 'connection_type', type: 'single_line_text_field', value: parsedSpecs.connection_options });
+  // Both are rendered as plain text — strip tags via sanitizeShortText.
+  const ralColor = sanitizeShortText(parsedSpecs?.color);
+  const connType = sanitizeShortText(parsedSpecs?.connection_options);
+  if (ralColor) customMetafields.push({ namespace: 'custom', key: 'ral_color', type: 'single_line_text_field', value: ralColor });
+  if (connType) customMetafields.push({ namespace: 'custom', key: 'connection_type', type: 'single_line_text_field', value: connType });
   // First parsed dimension's width/height/wattage become the filterable scalars.
   const firstDim = dimensions[0];
   // Sprint 3 width fallback: when the structured variant parser found no width
@@ -115,7 +130,15 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
   if (firstDim?.height_cm != null) customMetafields.push({ namespace: 'custom', key: 'height_cm', type: 'number_decimal', value: String(firstDim.height_cm) });
   if (firstDim?.watts != null) customMetafields.push({ namespace: 'custom', key: 'wattage', type: 'number_integer', value: String(Math.round(firstDim.watts)) });
 
-  const faqs = parseFaqs(body);
+  // FAQs: question = plain text only (rendered as <summary>), answer may
+  // legitimately have lists/links so we run it through the body-allowlist.
+  // Drop entries whose question or answer sanitize to empty.
+  const faqs = parseFaqs(body)
+    .map((f) => ({
+      question: sanitizeShortText(f.question),
+      answer: sanitizeBodyHtml(f.answer),
+    }))
+    .filter((f) => f.question && f.answer);
 
   return {
     xxlId: xxl.id,
@@ -123,7 +146,10 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
     handle,
     titleDe: xxl.title,
     titleEn: '',
-    bodyHtmlDe: body,
+    // SECURITY: descriptionHtml is rendered raw on the PDP via {{ product.description }}.
+    // Sanitize the upstream DE body before it ever leaves normalize().
+    bodyHtmlDe: sanitizeBodyHtml(body),
+    // bodyHtmlEn is filled by translate.ts later, then re-sanitized at write time.
     bodyHtmlEn: '',
     vendor: 'G-Berg',
     productType: xxl.product_type || '',
