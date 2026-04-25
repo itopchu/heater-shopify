@@ -35,7 +35,6 @@ function readCache(key: string): string | null {
 
 function writeCache(key: string, value: string): void {
   ensureCacheDir();
-  writeFileSync(resolve(CACHE_DIR, `${cacheKey(value.slice(0, 1))}`), '', { flag: 'a' });
   writeFileSync(resolve(CACHE_DIR, `${key}.txt`), value);
 }
 

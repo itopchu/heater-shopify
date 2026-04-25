@@ -88,3 +88,13 @@ Template for each entry:
 **Replaces:** n8n Cloud, self-hosted cron, Shopify Flow
 **Reason:** Sync pipeline must run external to the user's machine. GitHub Actions is free for this repo's usage pattern (weekly + manual runs), exposes a "Run workflow" button with typed inputs (dry-run, limit, collection filter), uploads reports as artifacts, and stores all history in-repo. No separate host, no separate billing. Shopify Flow cannot scrape external sites; n8n would add a second runtime without clear benefit given the sync logic already lives in TypeScript.
 **Revisit when:** Sync needs real-time triggers (webhooks from xxl-heizung — unavailable) or concurrency/state beyond one-run-at-a-time.
+
+## Lighthouse Best-Practices score 77 — ACCEPTED (Shop Pay trade-off)
+
+**Decision:** Accept BP=77 across all pages; do not chase higher.
+**Date:** 2026-04-25
+**Replaces:** Pursuing 95+ on best-practices.
+**Reason:** Investigation (Apr 25, 2026) confirmed BP=77 is a hard ceiling caused by Shopify's Shop Pay cart-sync iframe (`shop.app/pay/hop`), loaded on every page by `cdn/shopifycloud/shop-js/loader.init-shop-cart-sync.en.esm.js`. The iframe sets `_shop_app_essential` cookie that Chrome flags as both `third-party-cookies` (weight 5) and `inspector-issues` (weight 1) — costs exactly 6/26 = ~23% → 0.769 → 77. Theme cleanup would lift BP from 77 → 77 (zero impact). Score math verified against Lighthouse JSON. Only paths above 77: (a) disable Shop Pay → lose accelerated-checkout conversion driver (documented industry win), or (b) wait for Chrome's third-party-cookie phase-out + Shopify's CHIPS migration.
+**Trade-off accepted:** -6 BP points in exchange for Shop Pay accelerated checkout. Industry-wide pattern — every Shopify store with Shop Pay enabled shows this exact deduction.
+**CI gate impact:** [.github/workflows/lighthouse.yml](../.github/workflows/lighthouse.yml) sets BP to `warn`-only at threshold 0.90 — surfaces in reports but does not block CI. Perf/a11y/SEO remain blocking gates.
+**Revisit when:** Chrome ships Storage Access API for Shop Pay's iframe, or Shopify migrates `shop.app` cookies to CHIPS (`Partitioned` attribute), or Shop Pay is disabled for unrelated reasons.
