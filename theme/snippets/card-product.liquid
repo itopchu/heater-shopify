@@ -78,6 +78,7 @@
                 {% unless lazy_load == false %}
                   loading="lazy"
                 {% endunless %}
+                {% if lcp_image %}fetchpriority="high"{% endif %}
                 width="{{ card_product.featured_media.width }}"
                 height="{{ card_product.featured_media.height }}"
               >

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="{{ settings.colors_accent_1 | default: '#C8102E' }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -22,9 +22,23 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- liquid
+      assign meta_description = page_description
+      if meta_description == blank
+        if request.page_type == 'product' and product.description != blank
+          assign meta_description = product.description | strip_html | truncatewords: 30
+        elsif request.page_type == 'collection' and collection.description != blank
+          assign meta_description = collection.description | strip_html | truncatewords: 30
+        elsif request.page_type == 'article' and article.excerpt_or_content != blank
+          assign meta_description = article.excerpt_or_content | strip_html | truncatewords: 30
+        elsif shop.description != blank
+          assign meta_description = shop.description
+        else
+          assign meta_description = shop.name | append: ' — Premium heaters and radiators with European delivery, expert advice and trusted German quality.'
+        endif
+      endif
+    -%}
+    <meta name="description" content="{{ meta_description | escape }}">
 
     {% render 'meta-tags' %}
 

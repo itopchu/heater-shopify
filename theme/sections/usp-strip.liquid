@@ -38,15 +38,17 @@
   }
   .usp-strip__text { display: flex; flex-direction: column; gap: 0.125rem; }
   .usp-strip__label {
-    font-weight: 600;
-    font-size: 0.9375rem;
+    font-weight: 700;
+    font-size: 1rem;
     line-height: 1.3;
     margin: 0;
+    /* Full foreground (no opacity) — keep contrast >= 4.5:1 across all color schemes. */
   }
   .usp-strip__body {
     font-size: 0.8125rem;
     line-height: 1.5;
-    opacity: 0.72;
+    /* Removed opacity: 0.72 — Lighthouse a11y flagged contrast at 3.75:1 (need 4.5:1).
+       Use full foreground color from the section's color scheme. */
     margin: 0;
   }
 

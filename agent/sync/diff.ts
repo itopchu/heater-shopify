@@ -22,6 +22,8 @@ interface StoreProduct {
   tags: string[];
   vendor: string;
   imageCount: number;
+  variantCount: number;
+  hasZeroPriceVariant: boolean;
 }
 
 async function shopifyGraphql<T>(cfg: SyncConfig, query: string, variables: Record<string, unknown> = {}): Promise<T> {
@@ -51,6 +53,7 @@ export async function loadStoreProducts(cfg: SyncConfig): Promise<StoreProduct[]
           vendor: string;
           tags: string[];
           images: { nodes: Array<{ id: string }> };
+          variants: { nodes: Array<{ price: string }> };
           metafield: { value: string } | null;
         }>;
       };
@@ -62,6 +65,7 @@ export async function loadStoreProducts(cfg: SyncConfig): Promise<StoreProduct[]
           nodes {
             id handle title status vendor tags
             images(first: 1) { nodes { id } }
+            variants(first: 100) { nodes { price } }
             metafield(namespace: "sync", key: "xxl_source_id") { value }
           }
         }
@@ -70,6 +74,7 @@ export async function loadStoreProducts(cfg: SyncConfig): Promise<StoreProduct[]
     );
     for (const n of data.products.nodes) {
       const xxlSourceId = n.metafield ? Number(n.metafield.value) : null;
+      const variantPrices = n.variants.nodes;
       out.push({
         id: n.id,
         handle: n.handle,
@@ -80,6 +85,8 @@ export async function loadStoreProducts(cfg: SyncConfig): Promise<StoreProduct[]
         tags: n.tags,
         vendor: n.vendor,
         imageCount: n.images.nodes.length,
+        variantCount: variantPrices.length,
+        hasZeroPriceVariant: variantPrices.some((v) => Number(v.price) === 0),
       });
     }
     if (!data.products.pageInfo.hasNextPage) break;
@@ -94,6 +101,8 @@ function summarize(payload: NormalizedProduct, store: StoreProduct | null): stri
   if (payload.titleDe !== store.title && payload.titleEn !== store.title) changes.push('title');
   if (payload.vendor !== store.vendor) changes.push('vendor');
   if (payload.sourceImageUrls.length !== store.imageCount) changes.push(`images(${store.imageCount}→${payload.sourceImageUrls.length})`);
+  if (payload.variants.length !== store.variantCount) changes.push(`variants(${store.variantCount}→${payload.variants.length})`);
+  if (store.hasZeroPriceVariant && payload.variants.some((v) => Number(v.price) > 0)) changes.push('zero-price-variant');
   const tagSet = new Set(store.tags);
   for (const t of payload.tags) if (!tagSet.has(t)) changes.push(`+tag:${t}`);
   return `UPDATE ${payload.handle} (xxl=${payload.xxlId}) changes=[${changes.join(',') || 'metafields-only'}]`;
@@ -116,11 +125,17 @@ export function computeDiff(
     if (!existing) {
       entries.push({ action: 'CREATE', ourGid: null, payload: n, summary: summarize(n, null) });
     } else {
-      // Light heuristic: flag as UPDATE unless title + vendor + image count all match.
+      // Light heuristic: flag as UPDATE unless title + vendor + image count + variant
+      // count all match AND no variant has price=0 when xxl has real prices. The
+      // zero-price guard catches products that were created before write.ts seeded
+      // variants and ended up with a single placeholder variant.
+      const xxlHasRealPrices = n.variants.some((v) => Number(v.price) > 0);
       const unchanged =
         (existing.title === n.titleDe || existing.title === n.titleEn) &&
         existing.vendor === n.vendor &&
-        existing.imageCount === n.sourceImageUrls.length;
+        existing.imageCount === n.sourceImageUrls.length &&
+        existing.variantCount === n.variants.length &&
+        !(existing.hasZeroPriceVariant && xxlHasRealPrices);
       if (unchanged) {
         entries.push({ action: 'UNCHANGED', ourGid: existing.id, payload: n, summary: `UNCHANGED ${n.handle}` });
       } else {

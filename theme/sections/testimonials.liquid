@@ -146,7 +146,7 @@
           {%- endif -%}
           <li class="testimonials__card">
             {%- if t.rating != blank -%}
-              <span class="testimonials__rating" aria-label="{{ t.rating }} / 5">
+              <span class="testimonials__rating" role="img" aria-label="{{ t.rating }} / 5">
                 {%- for i in (1..5) -%}
                   {%- if i <= t.rating.value -%}
                     <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.3 5.9.86-4.25 4.15 1 5.86L10 14.9l-5.25 2.77 1-5.86L1.5 7.66l5.9-.86L10 1.5z"/></svg>

@@ -45,3 +45,6 @@ sync-reports/
 lighthouse-reports/
 storefront-root.html
 tmp/
+
+# Claude harness state
+.claude/

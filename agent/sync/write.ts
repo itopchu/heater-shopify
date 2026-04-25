@@ -199,6 +199,156 @@ async function setSyncMetafields(cfg: SyncConfig, productGid: string, p: Normali
   );
 }
 
+/**
+ * Build ProductVariantsBulkInput[] from the normalized variants. Each variant
+ * carries: price, sku, optionValues (mapped against the product's option
+ * names), and inventoryItem flags. Available flag is informational only —
+ * Shopify tracks availability via inventory levels, which we don't manage
+ * here (tracked: false matches the seed-products precedent).
+ */
+function buildBulkVariantInputs(
+  p: NormalizedProduct,
+  mode: 'create' | 'update',
+  existingBySku?: Map<string, string>,
+): Array<Record<string, unknown>> {
+  return p.variants.map((v) => {
+    const opts: Array<{ optionName: string; name: string }> = [];
+    const optionVals: Array<string | undefined> = [v.option1, v.option2, v.option3];
+    for (let i = 0; i < p.options.length; i++) {
+      const val = optionVals[i];
+      if (val != null) opts.push({ optionName: p.options[i]!.name, name: val });
+    }
+    const input: Record<string, unknown> = {
+      price: v.price,
+      optionValues: opts,
+      inventoryItem: { requiresShipping: true, tracked: false, sku: v.sku },
+    };
+    if (mode === 'update' && existingBySku) {
+      const existingId = existingBySku.get(v.sku);
+      if (existingId) input.id = existingId;
+    }
+    return input;
+  });
+}
+
+async function bulkCreateVariants(
+  cfg: SyncConfig,
+  productGid: string,
+  inputs: Array<Record<string, unknown>>,
+  strategy: 'DEFAULT' | 'REMOVE_STANDALONE_VARIANT',
+): Promise<void> {
+  if (inputs.length === 0) return;
+  const data = await graphql<{
+    productVariantsBulkCreate: {
+      productVariants: Array<{ id: string; sku: string | null; price: string }> | null;
+      userErrors: Array<{ field: string[]; message: string; code?: string }>;
+    };
+  }>(
+    cfg,
+    `mutation ($productId: ID!, $variants: [ProductVariantsBulkInput!]!, $strategy: ProductVariantsBulkCreateStrategy!) {
+      productVariantsBulkCreate(productId: $productId, variants: $variants, strategy: $strategy) {
+        productVariants { id sku price }
+        userErrors { field message code }
+      }
+    }`,
+    { productId: productGid, variants: inputs, strategy },
+  );
+  const errs = data.productVariantsBulkCreate.userErrors;
+  if (errs.length) {
+    throw new Error(`productVariantsBulkCreate(${productGid}, ${strategy}): ${JSON.stringify(errs)}`);
+  }
+}
+
+async function bulkUpdateVariants(
+  cfg: SyncConfig,
+  productGid: string,
+  inputs: Array<Record<string, unknown>>,
+): Promise<void> {
+  if (inputs.length === 0) return;
+  const data = await graphql<{
+    productVariantsBulkUpdate: {
+      productVariants: Array<{ id: string; price: string }> | null;
+      userErrors: Array<{ field: string[]; message: string; code?: string }>;
+    };
+  }>(
+    cfg,
+    `mutation ($productId: ID!, $variants: [ProductVariantsBulkInput!]!) {
+      productVariantsBulkUpdate(productId: $productId, variants: $variants) {
+        productVariants { id price }
+        userErrors { field message code }
+      }
+    }`,
+    { productId: productGid, variants: inputs },
+  );
+  const errs = data.productVariantsBulkUpdate.userErrors;
+  if (errs.length) {
+    throw new Error(`productVariantsBulkUpdate(${productGid}): ${JSON.stringify(errs)}`);
+  }
+}
+
+/**
+ * Seed real variants on a freshly created product. productCreate auto-makes
+ * one placeholder variant (€0, no sku) for the first option-value combo; we
+ * replace it via REMOVE_STANDALONE_VARIANT.
+ */
+async function seedVariantsOnCreate(cfg: SyncConfig, productGid: string, p: NormalizedProduct): Promise<void> {
+  if (p.variants.length === 0) return;
+  const inputs = buildBulkVariantInputs(p, 'create');
+  await bulkCreateVariants(cfg, productGid, inputs, 'REMOVE_STANDALONE_VARIANT');
+}
+
+/**
+ * Reconcile variants on an existing product:
+ *   - Recovery case: store has exactly 1 variant with no SKU + price 0 AND we
+ *     have ≥1 incoming variants with non-zero prices → treat as "never seeded",
+ *     bulk-create with REMOVE_STANDALONE_VARIANT (replaces the placeholder).
+ *   - Normal case: match incoming variants to existing by SKU, bulk-update for
+ *     matches, bulk-create for missing. Variants in the store with no incoming
+ *     match are left alone (no auto-deletion to prevent destructive churn).
+ */
+async function reconcileVariantsOnUpdate(cfg: SyncConfig, productGid: string, p: NormalizedProduct): Promise<void> {
+  if (p.variants.length === 0) return;
+  const data = await graphql<{
+    product: {
+      variants: { nodes: Array<{ id: string; sku: string | null; price: string }> };
+    } | null;
+  }>(
+    cfg,
+    `query ($id: ID!) {
+      product(id: $id) {
+        variants(first: 100) { nodes { id sku price } }
+      }
+    }`,
+    { id: productGid },
+  );
+  const existing = data.product?.variants.nodes ?? [];
+  const onlyPlaceholder =
+    existing.length === 1 &&
+    (existing[0]!.sku == null || existing[0]!.sku === '') &&
+    Number(existing[0]!.price) === 0;
+  const haveRealPrices = p.variants.some((v) => Number(v.price) > 0);
+
+  if (onlyPlaceholder && haveRealPrices) {
+    const inputs = buildBulkVariantInputs(p, 'create');
+    await bulkCreateVariants(cfg, productGid, inputs, 'REMOVE_STANDALONE_VARIANT');
+    return;
+  }
+
+  const bySku = new Map<string, string>();
+  for (const v of existing) {
+    if (v.sku) bySku.set(v.sku, v.id);
+  }
+  const updates: Array<Record<string, unknown>> = [];
+  const creates: Array<Record<string, unknown>> = [];
+  const allInputs = buildBulkVariantInputs(p, 'update', bySku);
+  for (const inp of allInputs) {
+    if ('id' in inp) updates.push(inp);
+    else creates.push(inp);
+  }
+  if (updates.length > 0) await bulkUpdateVariants(cfg, productGid, updates);
+  if (creates.length > 0) await bulkCreateVariants(cfg, productGid, creates, 'DEFAULT');
+}
+
 async function attachImages(cfg: SyncConfig, productGid: string, images: ImageResult[]): Promise<void> {
   const media = images
     .filter((i) => i.imageUrl && i.imageUrl !== '(dry-run)')
@@ -350,6 +500,7 @@ export async function applyCreate(
   const gid = data.productCreate.product?.id;
   if (!gid) throw new Error(`productCreate(${payload.handle}): no product id returned`);
 
+  await seedVariantsOnCreate(cfg, gid, payload);
   await setSyncMetafields(cfg, gid, payload);
   await setCustomMetafields(cfg, gid, payload);
   await attachFaqs(cfg, gid, payload);
@@ -388,6 +539,7 @@ export async function applyUpdate(
   if (data.productUpdate.userErrors.length) {
     throw new Error(`productUpdate(${payload.handle}): ${JSON.stringify(data.productUpdate.userErrors)}`);
   }
+  await reconcileVariantsOnUpdate(cfg, ourGid, payload);
   await setSyncMetafields(cfg, ourGid, payload);
   await setCustomMetafields(cfg, ourGid, payload);
   await attachFaqs(cfg, ourGid, payload);

@@ -155,6 +155,10 @@
               {% assign skip_card_product_styles = false %}
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
+                {% assign lcp_image = false %}
+                {%- if forloop.index == 1 -%}
+                  {%- assign lcp_image = true -%}
+                {%- endif -%}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
@@ -173,6 +177,7 @@
                     show_vendor: section.settings.show_vendor,
                     show_rating: section.settings.show_rating,
                     lazy_load: lazy_load,
+                    lcp_image: lcp_image,
                     skip_styles: skip_card_product_styles,
                     quick_add: section.settings.quick_add,
                     section_id: section.id
