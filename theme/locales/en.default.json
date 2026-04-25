@@ -104,7 +104,24 @@
     "product_title": "Example product title",
     "collection_title": "Your collection's name"
   },
+  "announcement_bar": {
+    "usp_advice": "Expert advice — reply within 2 hours",
+    "usp_warranty": "10-year warranty",
+    "usp_delivery": "Fast EU delivery",
+    "usp_checkout": "Secure checkout · Klarna · PayPal"
+  },
+  "footer": {
+    "quick_links": "Quick links",
+    "info": "Info",
+    "our_mission": "Our mission",
+    "our_mission_body": "",
+    "legal_heading": "Legal",
+    "newsletter_heading": "Subscribe to our emails"
+  },
   "products": {
+    "placeholder": {
+      "caption": "Product image coming soon"
+    },
     "product": {
       "add_to_cart": "Add to cart",
       "choose_options": "Choose options",
@@ -164,7 +181,8 @@
         "from_price_html": "From {{ price }}",
         "regular_price": "Regular price",
         "sale_price": "Sale price",
-        "unit_price": "Unit price"
+        "unit_price": "Unit price",
+        "incl_vat_excl_shipping_html": "incl. VAT, excl. <a href=\"{{ link }}\">shipping</a>"
       },
       "share": "Share this product",
       "sold_out": "Sold out",
@@ -270,9 +288,20 @@
     "title": "We value your privacy",
     "body_html": "We use cookies to make the site work, remember your cart, and measure how people use our store. Analytics and marketing cookies stay off until you accept. See our <a href=\"{{ privacy_url }}\">privacy policy</a>.",
     "accept": "Accept all",
-    "reject": "Only essentials"
+    "reject": "Only essentials",
+    "manage": "Manage preferences",
+    "save": "Save preferences",
+    "category_necessary_label": "Necessary (always on)",
+    "category_necessary_desc": "Required for the site to work — login, cart, checkout, security.",
+    "category_analytics_label": "Analytics",
+    "category_analytics_desc": "Help us understand how visitors use the store so we can improve it.",
+    "category_marketing_label": "Marketing",
+    "category_marketing_desc": "Used to show you relevant ads and measure marketing campaigns."
   },
   "sections": {
+    "payment_methods": {
+      "heading": "We accept"
+    },
     "announcement_top_bar": {
       "label": "Top announcement bar"
     },

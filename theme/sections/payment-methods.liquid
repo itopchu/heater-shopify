@@ -1,0 +1,94 @@
+{%- comment -%}
+  payment-methods.liquid
+
+  PDP / footer section that renders a row of accepted payment method icons.
+  Fully merchant-editable via section + block settings — no hardcoded list.
+  Each block represents one payment method with a label, icon, and optional link.
+{%- endcomment -%}
+
+<section class="payment-methods color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding" aria-label="{{ section.settings.title | default: 'Payment methods' | escape }}">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="payment-methods__title h4" {{ section.settings.heading_size | default: 'h4' }}>
+        {{ section.settings.title | escape }}
+      </h2>
+    {%- endif -%}
+
+    <ul class="payment-methods__list list-unstyled" role="list">
+      {%- for block in section.blocks -%}
+        <li class="payment-methods__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="payment-methods__link" aria-label="{{ block.settings.label | escape }}">{%- endif -%}
+          {%- if block.settings.icon -%}
+            <img
+              src="{{ block.settings.icon | image_url: width: 96 }}"
+              alt="{{ block.settings.label | escape }}"
+              loading="lazy"
+              width="48"
+              height="32"
+              class="payment-methods__icon"
+            >
+          {%- else -%}
+            <span class="payment-methods__label">{{ block.settings.label | escape }}</span>
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}</a>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .payment-methods__list { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; margin: 0; padding: 0; }
+  .payment-methods__item { display: inline-flex; }
+  .payment-methods__icon { height: 2rem; width: auto; object-fit: contain; }
+  .payment-methods__title { text-align: center; margin-bottom: 1rem; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+</style>
+
+{% schema %}
+{
+  "name": "Payment methods",
+  "tag": "section",
+  "class": "section section-payment-methods",
+  "disabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "We accept" },
+    { "type": "select", "id": "heading_size", "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" }
+      ],
+      "default": "h4"
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "method",
+      "name": "Method",
+      "limit": 16,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label (for alt text)", "default": "Method" },
+        { "type": "image_picker", "id": "icon", "label": "Icon (SVG or PNG, transparent)" },
+        { "type": "url", "id": "link", "label": "Optional link (e.g. Klarna info page)" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Payment methods",
+      "blocks": [
+        { "type": "method", "settings": { "label": "Visa" } },
+        { "type": "method", "settings": { "label": "Mastercard" } },
+        { "type": "method", "settings": { "label": "American Express" } },
+        { "type": "method", "settings": { "label": "PayPal" } },
+        { "type": "method", "settings": { "label": "Klarna" } },
+        { "type": "method", "settings": { "label": "Apple Pay" } },
+        { "type": "method", "settings": { "label": "Google Pay" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

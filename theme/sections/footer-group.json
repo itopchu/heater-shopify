@@ -2,6 +2,34 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "payment-methods": {
+      "type": "payment-methods",
+      "blocks": {
+        "method-visa": { "type": "method", "settings": { "label": "Visa" } },
+        "method-mastercard": { "type": "method", "settings": { "label": "Mastercard" } },
+        "method-amex": { "type": "method", "settings": { "label": "American Express" } },
+        "method-paypal": { "type": "method", "settings": { "label": "PayPal" } },
+        "method-klarna": { "type": "method", "settings": { "label": "Klarna" } },
+        "method-applepay": { "type": "method", "settings": { "label": "Apple Pay" } },
+        "method-googlepay": { "type": "method", "settings": { "label": "Google Pay" } }
+      },
+      "block_order": [
+        "method-visa",
+        "method-mastercard",
+        "method-amex",
+        "method-paypal",
+        "method-klarna",
+        "method-applepay",
+        "method-googlepay"
+      ],
+      "settings": {
+        "title": "Payment methods",
+        "heading_size": "h4",
+        "color_scheme": "scheme-2",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -20,17 +48,25 @@
           }
         },
         "footer-2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Legal",
+            "menu": "legal-menu"
+          }
+        },
+        "footer-3": {
           "type": "text",
           "settings": {
             "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "subtext": ""
           }
         }
       },
       "block_order": [
         "footer-0",
         "footer-1",
-        "footer-2"
+        "footer-2",
+        "footer-3"
       ],
       "settings": {
         "color_scheme": "scheme-1",
@@ -48,6 +84,7 @@
     }
   },
   "order": [
+    "payment-methods",
     "footer"
   ]
 }

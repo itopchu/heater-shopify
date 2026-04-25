@@ -13,7 +13,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "Design radiators for every room — TÜV-tested, 10-year warranty, free EU delivery.",
+            "text": "Radiators, towel warmers, and underfloor heating built to German standards. 10-year warranty on every unit, free EU delivery.",
             "text_style": "body"
           }
         },
@@ -21,9 +21,9 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Shop radiators",
-            "button_link_1": "shopify://collections/all",
+            "button_link_1": "shopify://collections/wohnraumheizkoerper",
             "button_style_secondary_1": false,
-            "button_label_2": "Get expert advice",
+            "button_label_2": "Expert advice",
             "button_link_2": "/pages/contact",
             "button_style_secondary_2": true
           }
@@ -48,31 +48,127 @@
       "settings": {
         "limit": 4,
         "alignment": "center",
-        "color_scheme": "scheme-2",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "color_scheme": "scheme-4",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "category-grid": {
       "type": "collection-list",
       "blocks": {
-        "c1": { "type": "featured_collection", "settings": { "collection": "badheizkorper" } },
-        "c2": { "type": "featured_collection", "settings": { "collection": "wohnraumheizkorper" } },
-        "c3": { "type": "featured_collection", "settings": { "collection": "handtuchwaermer" } },
-        "c4": { "type": "featured_collection", "settings": { "collection": "austauschheizkorper" } },
-        "c5": { "type": "featured_collection", "settings": { "collection": "zubehoer" } }
+        "c1": { "type": "featured_collection", "settings": { "collection": "badheizkoerper" } },
+        "c2": { "type": "featured_collection", "settings": { "collection": "wohnraumheizkoerper" } },
+        "c3": { "type": "featured_collection", "settings": { "collection": "austauschheizkoerper" } },
+        "c4": { "type": "featured_collection", "settings": { "collection": "badheizkoerper-elektrisch" } },
+        "c5": { "type": "featured_collection", "settings": { "collection": "fussbodenheizungsrohre" } },
+        "c6": { "type": "featured_collection", "settings": { "collection": "zubehoer" } }
       },
-      "block_order": ["c1", "c2", "c3", "c4", "c5"],
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "settings": {
         "title": "Find your radiator.",
         "heading_size": "h1",
-        "image_ratio": "portrait",
-        "columns_desktop": 4,
+        "image_ratio": "square",
+        "columns_desktop": 3,
         "color_scheme": "scheme-1",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 72,
         "padding_bottom": 48
+      }
+    },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Popular radiators",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "wohnraumheizkoerper",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "link",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 48,
+        "padding_bottom": 72
+      }
+    },
+    "trust-badges": {
+      "type": "trust-badges",
+      "settings": {
+        "kicker": "Built for your home",
+        "title": "Why choose G-Berg.",
+        "heading_size": "h2",
+        "limit": 4,
+        "color_scheme": "scheme-5",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "value-props": {
+      "type": "multirow",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "caption": "German engineering",
+            "heading": "Built to German standards, TÜV-tested.",
+            "heading_size": "h2",
+            "text": "<p>Every G-Berg radiator is manufactured to DIN EN 442 and arrives ready for your plumber. Powder-coated steel, corrosion-resistant, and sized for retrofit into existing connections.</p>",
+            "text_style": "body",
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "caption": "10-year warranty",
+            "heading": "Peace of mind, baked in.",
+            "heading_size": "h2",
+            "text": "<p>Material and workmanship covered for a full decade. If anything fails, we handle it — no back-and-forth with the manufacturer.</p>",
+            "text_style": "body",
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "caption": "Europe-wide shipping",
+            "heading": "Free delivery across the EU.",
+            "heading_size": "h2",
+            "text": "<p>Shipping free to Germany, Belgium, Netherlands, Austria, and Spain. 2–4 business days from our Schwelm warehouse. Damage-free guarantee.</p>",
+            "text_style": "body",
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "image_height": "medium",
+        "text_alignment": "left",
+        "image_layout": "alternate-left",
+        "container_color_scheme": "scheme-1",
+        "section_color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "testimonials": {
@@ -87,18 +183,6 @@
         "padding_bottom": 72
       }
     },
-    "trust-badges": {
-      "type": "trust-badges",
-      "settings": {
-        "kicker": "Built for your home",
-        "title": "Why Havn.",
-        "heading_size": "h2",
-        "limit": 4,
-        "color_scheme": "scheme-1",
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
-    },
     "faq": {
       "type": "faq",
       "settings": {
@@ -107,7 +191,36 @@
         "heading_size": "h2",
         "category_filter": "",
         "limit": 0,
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Stay warm with G-Berg.",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Seasonal tips, radiator guides, and early access to new products. No spam — promise.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": ["heading", "paragraph", "email_form"],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "full_width": true,
         "padding_top": 72,
         "padding_bottom": 72
       }
@@ -117,8 +230,11 @@
     "hero",
     "usp-strip",
     "category-grid",
-    "testimonials",
+    "bestsellers",
     "trust-badges",
-    "faq"
+    "value-props",
+    "testimonials",
+    "faq",
+    "newsletter"
   ]
 }

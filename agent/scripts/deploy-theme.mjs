@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * Packages theme/ into a zip, uploads it to Shopify via stagedUploadsCreate,
- * calls themeCreate to spin up an UNPUBLISHED theme ("Havn"), then
+ * calls themeCreate to spin up an UNPUBLISHED theme ("G-Berg"), then
  * (optionally) publishes it with themePublish.
  *
  * This exists because the Shopify CLI cannot create a named unpublished theme
  * non-interactively, and DEVELOPMENT themes cannot be promoted to MAIN.
  *
  * Usage:
- *   node agent/scripts/deploy-theme.mjs            # create unpublished "Havn"
+ *   node agent/scripts/deploy-theme.mjs            # create unpublished "G-Berg"
  *   node agent/scripts/deploy-theme.mjs --publish  # ...and publish immediately
  */
 import { readdirSync, readFileSync, statSync, writeFileSync, unlinkSync } from 'node:fs';
@@ -17,14 +17,15 @@ import { fileURLToPath } from 'node:url';
 import AdmZip from 'adm-zip';
 
 const API_VERSION = '2026-04';
-const THEME_NAME = process.env.HAVN_THEME_NAME || 'Havn';
+const THEME_NAME = process.env.GBERG_THEME_NAME || process.env.HAVN_THEME_NAME || 'G-Berg';
 const DO_PUBLISH = process.argv.includes('--publish');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..', '..');
 const THEME_DIR = resolve(REPO_ROOT, 'theme');
 const ENV_PATH = resolve(REPO_ROOT, '.env.local');
-const ZIP_OUT = resolve(REPO_ROOT, 'agent', 'scripts', '.havn-theme.zip');
+const ZIP_OUT = resolve(REPO_ROOT, 'agent', 'scripts', '.gberg-theme.zip');
+
 
 function loadEnvLocal(path) {
   let raw;
@@ -102,7 +103,7 @@ async function stageZip(zipPath) {
     {
       input: [
         {
-          filename: 'havn-theme.zip',
+          filename: 'gberg-theme.zip',
           mimeType: 'application/zip',
           resource: 'FILE',
           httpMethod: 'POST',
@@ -117,7 +118,7 @@ async function stageZip(zipPath) {
   const form = new FormData();
   for (const p of target.parameters) form.append(p.name, p.value);
   const zipBuffer = readFileSync(zipPath);
-  form.append('file', new Blob([zipBuffer], { type: 'application/zip' }), 'havn-theme.zip');
+  form.append('file', new Blob([zipBuffer], { type: 'application/zip' }), 'gberg-theme.zip');
 
   const upload = await fetch(target.url, { method: 'POST', body: form });
   if (!upload.ok) throw new Error(`Staging upload failed: ${upload.status} ${await upload.text()}`);

@@ -60,7 +60,11 @@ Global USP strip item.
 |---|---|---|
 | `spec_sections` | list.metaobject_reference → `spec_section` | PDP accordions |
 | `datasheet_pdf` | file_reference | PDF download |
-| `bundle_partner` | product_reference | "Spare im Set" upsell |
+| `bundle_partner` | product_reference | Legacy single-pair upsell (prefer `bundle_products`) |
+| `bundle_products` | list.product_reference | "Spare im Set" multi-product upsell |
+| `faqs` | list.metaobject_reference → `faq_item` | PDP FAQ accordion |
+| `delivery_contents` | list.single_line_text | Itemized what's-in-the-box |
+| `delivery_eta` | single_line_text | Human shipping speed, translatable (e.g. "2-4 business days") |
 | `warranty_years` | number_integer | Override default 10 |
 | `grundpreis_value` | number_decimal | Price per unit (Grundpreis) |
 | `grundpreis_unit` | single_line_text | e.g., "m²", "W" |
@@ -69,6 +73,16 @@ Global USP strip item.
 | `width_cm` | number_decimal | Filterable via Search & Discovery |
 | `height_cm` | number_decimal | Filterable |
 | `wattage` | number_integer | Filterable |
+
+## Product sync keys (namespace: `sync`)
+
+Written by the catalog-sync pipeline (`agent/sync/`). Diagnostic, not for merchant editing.
+
+| Key | Type | Purpose |
+|---|---|---|
+| `xxl_source_id` | number_integer | Upstream product ID — primary sync key |
+| `xxl_source_handle` | single_line_text | Upstream handle — traceability |
+| `xxl_last_synced_at` | date_time | ISO timestamp of last successful sync |
 
 ## Collection metafields
 

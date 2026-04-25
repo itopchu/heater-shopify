@@ -104,7 +104,24 @@
     "product_title": "Beispiel für Produkttitel",
     "collection_title": "Name deiner Kollektion"
   },
+  "announcement_bar": {
+    "usp_advice": "Expertenberatung — Antwort innerhalb von 2 Stunden",
+    "usp_warranty": "10 Jahre Garantie",
+    "usp_delivery": "Schnelle EU-Lieferung",
+    "usp_checkout": "Sicherer Checkout · Klarna · PayPal"
+  },
+  "footer": {
+    "quick_links": "Schnellzugriff",
+    "info": "Info",
+    "our_mission": "Unsere Mission",
+    "our_mission_body": "",
+    "legal_heading": "Rechtliches",
+    "newsletter_heading": "Newsletter abonnieren"
+  },
   "products": {
+    "placeholder": {
+      "caption": "Bild folgt"
+    },
     "product": {
       "add_to_cart": "In den Warenkorb legen",
       "description": "Beschreibung",
@@ -127,7 +144,8 @@
         "from_price_html": "Von {{ price }}",
         "regular_price": "Normaler Preis",
         "sale_price": "Verkaufspreis",
-        "unit_price": "Grundpreis"
+        "unit_price": "Grundpreis",
+        "incl_vat_excl_shipping_html": "inkl. MwSt., zzgl. <a href=\"{{ link }}\">Versand</a>"
       },
       "share": "Dieses Produkt teilen",
       "sold_out": "Ausverkauft",
@@ -270,9 +288,20 @@
     "title": "Ihre Privatsphäre zählt",
     "body_html": "Wir verwenden Cookies, damit die Seite funktioniert, Ihr Warenkorb erhalten bleibt und wir die Nutzung messen können. Analyse- und Marketing-Cookies bleiben aus, bis Sie zustimmen. Siehe unsere <a href=\"{{ privacy_url }}\">Datenschutzerklärung</a>.",
     "accept": "Alle akzeptieren",
-    "reject": "Nur notwendige"
+    "reject": "Nur notwendige",
+    "manage": "Einstellungen verwalten",
+    "save": "Einstellungen speichern",
+    "category_necessary_label": "Notwendig (immer aktiv)",
+    "category_necessary_desc": "Erforderlich für den Betrieb der Seite — Anmeldung, Warenkorb, Checkout, Sicherheit.",
+    "category_analytics_label": "Analyse",
+    "category_analytics_desc": "Helfen uns zu verstehen, wie Besucher den Shop nutzen, damit wir ihn verbessern können.",
+    "category_marketing_label": "Marketing",
+    "category_marketing_desc": "Werden verwendet, um relevante Anzeigen einzublenden und Marketing-Kampagnen zu messen."
   },
   "sections": {
+    "payment_methods": {
+      "heading": "Wir akzeptieren"
+    },
     "announcement_top_bar": {
       "label": "Obere Ankündigungsleiste"
     },

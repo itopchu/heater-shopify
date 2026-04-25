@@ -70,7 +70,7 @@ const LEGAL_PAGES = [
     body: `${PLACEHOLDER_WARNING}
 <h2>Angaben gemäß § 5 TMG</h2>
 <p>
-  Havn Heating GmbH i.G.<br>
+  G-Berg GmbH<br>
   Musterstraße 12<br>
   12345 Musterstadt<br>
   Deutschland
@@ -78,7 +78,7 @@ const LEGAL_PAGES = [
 <h3>Kontakt</h3>
 <p>
   Telefon: +49 (0) 000 000 000<br>
-  E-Mail: kontakt@havn.example
+  E-Mail: kontakt@gberg-heizung.de
 </p>
 <h3>Umsatzsteuer-ID</h3>
 <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a UStG: DE000000000</p>
@@ -95,7 +95,7 @@ const LEGAL_PAGES = [
     title: 'Datenschutzerklärung',
     body: `${PLACEHOLDER_WARNING}
 <h2>1. Verantwortlicher</h2>
-<p>Havn Heating GmbH i.G., Musterstraße 12, 12345 Musterstadt, kontakt@havn.example</p>
+<p>G-Berg GmbH, Musterstraße 12, 12345 Musterstadt, kontakt@gberg-heizung.de</p>
 <h2>2. Allgemeine Hinweise zur Datenverarbeitung</h2>
 <p>
   Wir verarbeiten personenbezogene Daten unserer Nutzer grundsätzlich nur, soweit dies
@@ -127,7 +127,7 @@ const LEGAL_PAGES = [
     body: `${PLACEHOLDER_WARNING}
 <h2>§ 1 Geltungsbereich</h2>
 <p>
-  Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Havn Heating
+  Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen G-Berg
   GmbH i.G. und Verbrauchern im Sinne des § 13 BGB, die über diesen Online-Shop
   geschlossen werden.
 </p>
@@ -168,8 +168,8 @@ const LEGAL_PAGES = [
 </p>
 <h2>Ausübung des Widerrufsrechts</h2>
 <p>
-  Um Ihr Widerrufsrecht auszuüben, müssen Sie uns — Havn Heating GmbH i.G.,
-  Musterstraße 12, 12345 Musterstadt, E-Mail: kontakt@havn.example — mittels einer
+  Um Ihr Widerrufsrecht auszuüben, müssen Sie uns — G-Berg GmbH,
+  Musterstraße 12, 12345 Musterstadt, E-Mail: kontakt@gberg-heizung.de — mittels einer
   eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder E-Mail) über
   Ihren Entschluss, diesen Vertrag zu widerrufen, informieren.
 </p>
@@ -189,7 +189,7 @@ const LEGAL_PAGES = [
   und senden Sie es zurück.)
 </p>
 <pre style="white-space:pre-wrap;font-family:inherit;">
-An: Havn Heating GmbH i.G., Musterstraße 12, 12345 Musterstadt, kontakt@havn.example
+An: G-Berg GmbH, Musterstraße 12, 12345 Musterstadt, kontakt@gberg-heizung.de
 
 Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag
 über den Kauf der folgenden Waren (*):

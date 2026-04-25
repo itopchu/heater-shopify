@@ -114,6 +114,9 @@
                     price_class: 'price--large'
                   -%}
                 </div>
+                <div class="product__shipping-note caption">
+                  {{ 'products.product.price.incl_vat_excl_shipping_html' | t: link: '/pages/shipping-delivery' }}
+                </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                     <span>{{ 'products.product.volume_pricing.note' | t }}</span>
@@ -286,6 +289,7 @@
                         step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
                         value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
                         form="{{ product_form_id }}"
+                        aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}"
                       >
                       <button class="quantity__button" name="plus" type="button">
                         <span class="visually-hidden">

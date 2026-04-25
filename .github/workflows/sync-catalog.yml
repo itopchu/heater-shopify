@@ -1,0 +1,103 @@
+name: sync-catalog
+
+on:
+  # Weekly Monday 03:00 UTC.
+  schedule:
+    - cron: "0 3 * * 1"
+  # Manual trigger with tunable knobs.
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (no writes, no image API calls)?"
+        required: true
+        default: "true"
+        type: choice
+        options: ["true", "false"]
+      limit:
+        description: "Max products to process this run (blank = no limit)"
+        required: false
+        default: ""
+        type: string
+      only_collection:
+        description: "Restrict to a single xxl collection handle (blank = all)"
+        required: false
+        default: ""
+        type: string
+
+concurrency:
+  group: sync-catalog
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: xxl → G-Berg
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+    env:
+      SHOPIFY_DEV_STORE: ${{ secrets.SHOPIFY_DEV_STORE }}
+      SHOPIFY_DEV_ADMIN_TOKEN: ${{ secrets.SHOPIFY_DEV_ADMIN_TOKEN }}
+      SHOPIFY_API_VERSION: "2026-04"
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      GEMINI_IMAGE_MODEL: ${{ vars.GEMINI_IMAGE_MODEL || 'gemini-2.5-flash-image' }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      IMAGE_GEN_CAP: "50"
+      XXL_SOURCE_BASE_URL: "https://xxl-heizung.de"
+      AGENT_DEFAULT_STORE: "dev"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Restore sync cache
+        uses: actions/cache@v4
+        with:
+          path: .sync-cache
+          key: sync-cache-${{ github.run_id }}
+          restore-keys: |
+            sync-cache-
+
+      - name: Run sync
+        id: sync
+        run: |
+          set -euo pipefail
+          ARGS="--store dev"
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            ARGS="$ARGS --dry-run"   # scheduled runs are always dry until we flip
+          else
+            if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+              ARGS="$ARGS --dry-run"
+            fi
+            if [ -n "${{ github.event.inputs.limit }}" ]; then
+              ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"
+            fi
+            if [ -n "${{ github.event.inputs.only_collection }}" ]; then
+              ARGS="$ARGS --only-collection ${{ github.event.inputs.only_collection }}"
+            fi
+          fi
+          echo "Running: npm run sync -- $ARGS"
+          npm run sync -- $ARGS
+
+      - name: Upload sync report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sync-report-${{ github.run_id }}
+          path: |
+            sync-reports/
+            .sync-cache/images/manifest.json
+          if-no-files-found: warn
+
+      - name: Save sync cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .sync-cache
+          key: sync-cache-${{ github.run_id }}

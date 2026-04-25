@@ -426,6 +426,77 @@ function buildProductMetafieldDefs(gidByType) {
       pin: true,
       validations: [{ name: 'min', value: '0' }],
     },
+    {
+      namespace: NAMESPACE,
+      key: 'delivery_contents',
+      name: 'Delivery contents',
+      description: 'Itemized list of what ships in the box (radiator, brackets, bleed valve, etc.).',
+      type: 'list.single_line_text_field',
+      ownerType: 'PRODUCT',
+      pin: true,
+    },
+    {
+      namespace: NAMESPACE,
+      key: 'bundle_products',
+      name: 'Bundle products',
+      description: '"Spare im Set" upsell — list of paired products shown on the PDP.',
+      type: 'list.product_reference',
+      ownerType: 'PRODUCT',
+      pin: true,
+    },
+    {
+      namespace: NAMESPACE,
+      key: 'faqs',
+      name: 'Product FAQs',
+      description: 'PDP FAQ accordion — ordered list of faq_item metaobjects.',
+      type: 'list.metaobject_reference',
+      ownerType: 'PRODUCT',
+      pin: true,
+      validations: [
+        {
+          name: 'metaobject_definition_id',
+          value: requireGid(gidByType, 'faq_item'),
+        },
+      ],
+    },
+    {
+      namespace: NAMESPACE,
+      key: 'delivery_eta',
+      name: 'Delivery ETA',
+      description: 'Human-readable shipping speed (e.g. "2-4 business days"). Translatable via Translate & Adapt.',
+      type: 'single_line_text_field',
+      ownerType: 'PRODUCT',
+      pin: true,
+    },
+    // Sync keys (namespace: sync) — populated by agent/sync/ pipeline.
+    // Left unpinned; diagnostic only, not for merchant editing.
+    {
+      namespace: 'sync',
+      key: 'xxl_source_id',
+      name: 'xxl-heizung source product ID',
+      description: 'Upstream Shopify product ID from xxl-heizung.de. Used as sync key.',
+      type: 'number_integer',
+      ownerType: 'PRODUCT',
+      pin: false,
+    },
+    {
+      namespace: 'sync',
+      key: 'xxl_source_handle',
+      name: 'xxl-heizung source handle',
+      description: 'Upstream product handle from xxl-heizung.de. Used for traceability.',
+      type: 'single_line_text_field',
+      ownerType: 'PRODUCT',
+      pin: false,
+    },
+    {
+      namespace: 'sync',
+      key: 'xxl_last_synced_at',
+      name: 'Last synced at',
+      description: 'ISO datetime of the last successful sync from xxl-heizung.',
+      type: 'date_time',
+      ownerType: 'PRODUCT',
+      pin: false,
+    },
   ];
 }
 
@@ -509,6 +580,10 @@ async function ensureMetaobjectDefinition(def) {
     // STOREFRONT-readable definitions for Liquid rendering.
     // https://shopify.dev/docs/api/admin-graphql/2026-04/input-objects/MetaobjectAccessInput
     access: { storefront: 'PUBLIC_READ' },
+    // Enable Translate & Adapt / translationsRegister on all fields. Without
+    // this, DE translations registered via the API are silently stored but
+    // never surface on the DE-locale storefront.
+    capabilities: { translatable: { enabled: true } },
   };
 
   const data = await gql(M_METAOBJECT_DEFINITION_CREATE, { definition: input });

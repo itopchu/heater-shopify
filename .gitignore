@@ -36,3 +36,12 @@ desktop.ini
 # Customer data (never commit)
 data/**/*customers*.csv
 data/**/*orders*.csv
+
+# Catalog sync pipeline artifacts
+.sync-cache/
+sync-reports/
+
+# Audit / perf artifacts
+lighthouse-reports/
+storefront-root.html
+tmp/

@@ -74,7 +74,7 @@ const DE_TRANSLATIONS = {
   'What our customers say.': 'Was unsere Kunden sagen.',
   // Trust badges
   'Built for your home': 'Für dein Zuhause gebaut',
-  'Why Havn.': 'Darum Havn.',
+  'Why choose G-Berg.': 'Warum G-Berg wählen.',
   // FAQ
   'FAQ': 'FAQ',
   'Questions, answered.': 'Antworten auf häufige Fragen.',
@@ -107,7 +107,7 @@ const DE_TRANSLATIONS = {
   'What our customers say.': 'Was unsere Kunden sagen.',
   // Trust badges
   'Built for your home': 'Für dein Zuhause gebaut',
-  'Why <em>Havn</em>.': 'Darum <em>Havn</em>.',
+  'Why choose <em>G-Berg</em>.': 'Warum <em>G-Berg</em> wählen.',
   // FAQ
   'Questions, answered.': 'Antworten auf häufige Fragen.',
   // Promo bar

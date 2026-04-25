@@ -296,6 +296,39 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+
+    {%- comment -%} Schema.org JSON-LD — emits Organization/WebSite on every page, plus template-specific blocks. {%- endcomment -%}
+    {%- render 'structured-data', scope: 'site' -%}
+    {%- if template contains 'product' and product -%}
+      {%- render 'structured-data', scope: 'product', product: product -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" }
+          {%- if collection -%},
+          { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" },
+          { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+          {%- else -%},
+          { "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+          {%- endif -%}
+        ]
+      }
+      </script>
+    {%- elsif template contains 'collection' and collection -%}
+      {%- render 'structured-data', scope: 'collection', collection: collection -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" },
+          { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" }
+        ]
+      }
+      </script>
+    {%- endif -%}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

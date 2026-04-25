@@ -2,6 +2,8 @@
   GDPR / ePrivacy consent banner. Uses Shopify Customer Privacy API.
   Docs: https://shopify.dev/docs/api/customer-privacy
   Fires no analytics/marketing cookies until user accepts or rejects.
+  Includes per-category toggles (Necessary always-on, Analytics, Marketing) +
+  a "Manage preferences" panel and link to the Datenschutz page.
 {%- endcomment -%}
 
 <style>
@@ -60,15 +62,52 @@
     color: #14110E;
   }
   .consent-banner__btn--primary {
-    background: #D94A1F;
-    border-color: #D94A1F;
+    background: #8A0B1F;
+    border-color: #8A0B1F;
     color: #FFFFFF;
   }
   .consent-banner__btn--primary:hover,
   .consent-banner__btn--primary:focus-visible {
     background: #FFFFFF;
-    color: #D94A1F;
+    color: #8A0B1F;
     border-color: #FFFFFF;
+  }
+  .consent-banner__prefs {
+    display: none;
+    margin: 0.75rem 0 0;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid rgba(250, 247, 242, 0.18);
+  }
+  .consent-banner__prefs.is-open { display: block; }
+  .consent-banner__categories {
+    list-style: none;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .consent-banner__category {
+    display: grid;
+    grid-template-columns: 1.25rem 1fr;
+    gap: 0.5rem 0.75rem;
+    align-items: start;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+  .consent-banner__category input[type="checkbox"] {
+    margin-top: 0.2rem;
+    width: 1rem;
+    height: 1rem;
+    accent-color: #8A0B1F;
+  }
+  .consent-banner__category-label {
+    font-weight: 600;
+  }
+  .consent-banner__category-desc {
+    display: block;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 0.125rem;
   }
   @media (min-width: 750px) {
     .consent-banner__inner {
@@ -82,13 +121,46 @@
 
 <div class="consent-banner" id="ConsentBanner" role="dialog" aria-labelledby="ConsentBannerTitle" aria-describedby="ConsentBannerText" hidden>
   <div class="consent-banner__inner">
-    <p class="consent-banner__text" id="ConsentBannerText">
-      <strong id="ConsentBannerTitle">{{ 'consent.title' | t }}</strong><br>
-      {{ 'consent.body_html' | t: privacy_url: '/policies/privacy-policy' }}
-    </p>
+    <div>
+      <p class="consent-banner__text" id="ConsentBannerText">
+        <strong id="ConsentBannerTitle">{{ 'consent.title' | t }}</strong><br>
+        {{ 'consent.body_html' | t: privacy_url: '/pages/datenschutz' }}
+      </p>
+      <div class="consent-banner__prefs" id="ConsentBannerPrefs" aria-hidden="true">
+        <ul class="consent-banner__categories">
+          <li class="consent-banner__category">
+            <input type="checkbox" id="ConsentCatNecessary" data-consent-cat="necessary" checked disabled>
+            <label for="ConsentCatNecessary">
+              <span class="consent-banner__category-label">{{ 'consent.category_necessary_label' | t }}</span>
+              <span class="consent-banner__category-desc">{{ 'consent.category_necessary_desc' | t }}</span>
+            </label>
+          </li>
+          <li class="consent-banner__category">
+            <input type="checkbox" id="ConsentCatAnalytics" data-consent-cat="analytics">
+            <label for="ConsentCatAnalytics">
+              <span class="consent-banner__category-label">{{ 'consent.category_analytics_label' | t }}</span>
+              <span class="consent-banner__category-desc">{{ 'consent.category_analytics_desc' | t }}</span>
+            </label>
+          </li>
+          <li class="consent-banner__category">
+            <input type="checkbox" id="ConsentCatMarketing" data-consent-cat="marketing">
+            <label for="ConsentCatMarketing">
+              <span class="consent-banner__category-label">{{ 'consent.category_marketing_label' | t }}</span>
+              <span class="consent-banner__category-desc">{{ 'consent.category_marketing_desc' | t }}</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="consent-banner__buttons">
       <button class="consent-banner__btn" data-consent="reject" type="button">
         {{ 'consent.reject' | t }}
+      </button>
+      <button class="consent-banner__btn" data-consent="manage" type="button" aria-expanded="false" aria-controls="ConsentBannerPrefs">
+        {{ 'consent.manage' | t }}
+      </button>
+      <button class="consent-banner__btn" data-consent="save" type="button" hidden>
+        {{ 'consent.save' | t }}
       </button>
       <button class="consent-banner__btn consent-banner__btn--primary" data-consent="accept" type="button">
         {{ 'consent.accept' | t }}
@@ -101,25 +173,42 @@
   (function () {
     var banner = document.getElementById('ConsentBanner');
     if (!banner) return;
+    var prefs = document.getElementById('ConsentBannerPrefs');
+    var manageBtn = banner.querySelector('[data-consent="manage"]');
+    var saveBtn = banner.querySelector('[data-consent="save"]');
+    var analyticsBox = banner.querySelector('[data-consent-cat="analytics"]');
+    var marketingBox = banner.querySelector('[data-consent-cat="marketing"]');
 
-    function applyConsent(accept) {
+    function setConsent(state) {
       var api = window.Shopify && window.Shopify.customerPrivacy;
       if (api && typeof api.setTrackingConsent === 'function') {
         api.setTrackingConsent(
           {
-            analytics: accept,
-            marketing: accept,
-            preferences: accept,
+            analytics: !!state.analytics,
+            marketing: !!state.marketing,
+            preferences: !!state.marketing,
             sale_of_data: false,
           },
           function () {}
         );
       }
       try {
-        localStorage.setItem('havn:consent', accept ? 'accepted' : 'rejected');
+        localStorage.setItem('gberg:consent', JSON.stringify({
+          analytics: !!state.analytics,
+          marketing: !!state.marketing,
+          ts: Date.now()
+        }));
       } catch (e) {}
       banner.classList.remove('is-visible');
       banner.hidden = true;
+    }
+
+    function openPrefs() {
+      if (!prefs) return;
+      prefs.classList.add('is-open');
+      prefs.setAttribute('aria-hidden', 'false');
+      if (manageBtn) manageBtn.setAttribute('aria-expanded', 'true');
+      if (saveBtn) saveBtn.hidden = false;
     }
 
     function isEU() {
@@ -141,7 +230,7 @@
       if (api && typeof api.shouldShowBanner === 'function') {
         try { return api.shouldShowBanner(); } catch (e) {}
       }
-      try { return localStorage.getItem('havn:consent') === null; } catch (e) { return true; }
+      try { return localStorage.getItem('gberg:consent') === null; } catch (e) { return true; }
     }
 
     function show() {
@@ -160,7 +249,19 @@
     banner.addEventListener('click', function (e) {
       var target = e.target && e.target.closest && e.target.closest('[data-consent]');
       if (!target) return;
-      applyConsent(target.getAttribute('data-consent') === 'accept');
+      var action = target.getAttribute('data-consent');
+      if (action === 'accept') {
+        setConsent({ analytics: true, marketing: true });
+      } else if (action === 'reject') {
+        setConsent({ analytics: false, marketing: false });
+      } else if (action === 'manage') {
+        openPrefs();
+      } else if (action === 'save') {
+        setConsent({
+          analytics: !!(analyticsBox && analyticsBox.checked),
+          marketing: !!(marketingBox && marketingBox.checked)
+        });
+      }
     });
   })();
 </script>

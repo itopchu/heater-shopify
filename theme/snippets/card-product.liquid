@@ -105,6 +105,12 @@
               {%- endif -%}
             </div>
           </div>
+        {%- else -%}
+          <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
+            <div class="media media--transparent">
+              {%- render 'gberg-product-placeholder', alt_text: card_product.title -%}
+            </div>
+          </div>
         {%- endif -%}
         <div class="card__content">
           <div class="card__information">
@@ -493,6 +499,12 @@
                                 height="{{ card_product.featured_media.height }}"
                               >
                               {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+                            </div>
+                          </div>
+                        {%- else -%}
+                          <div class="quick-add__product-media">
+                            <div class="quick-add__product-container global-media-settings">
+                              {%- render 'gberg-product-placeholder', alt_text: card_product.title -%}
                             </div>
                           </div>
                         {%- endif -%}

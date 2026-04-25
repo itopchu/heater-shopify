@@ -1,0 +1,251 @@
+{
+  "toilet-rich": {
+    "handle": "lavinno-hange-wc-tornado-rimless-weiss-glanzend",
+    "title": "Lavinno Hänge-WC Tornado Rimless weiß glänzend",
+    "product_type": "",
+    "body_html": "<h2>Wand-WC mit Tornado Flush &amp; Softclose, Weiß</h2>\n<p>Das Wand-WC verbindet modernes Design mit cleveren Funktionen für mehr Komfort und Hygiene im Badezimmer. Die kompakte Bauform, die besonders leise und effiziente Wirbelspülung sowie der angenehm schließende Softclose-Sitz machen diese WC-Keramik aus hochwertiger, glänzender Keramik zu einer ausgezeichneten Wahl für kleine und große Bäder. Dank der randlosen Form und verdeckten Befestigung ist die Reinigung besonders einfach.</p>\n<h3>Vorteile</h3>\n<ul>\n<li>Leise, spritzfreie Wirbelspülung (Tornado Flush) für effiziente Reinigung</li>\n<li>Randloses Design für höchste Hygiene und einfache Pflege</li>\n<li>Sitz mit Softclose-Funktion: Schließt sanft und geräuschlos</li>\n<li>TakeOff-Funktion: WC-Sitz einfach zum abnehmen</li>\n<li>Platzsparende Maße: Ideal für kleine Badezimmer</li>\n<li>Verdeckte Befestigung für ein sauberes Gesamtbild</li>\n<li>Sparsame Spülmengen (2,9 / 4,5 l) für Wasserersparnis</li>\n<li>Hochwertige, glänzende Keramik für Langlebigkeit</li>\n<li>5 Jahre Garantie durch den Hersteller </li>\n</ul>\n<h3>Technische Daten</h3>\n<table>\n<tbody>\n<tr>\n<th>Merkmal</th>\n<th>Wert</th>\n</tr>\n<tr>\n<td>Bauart</td>\n<td>Wandhängend</td>\n</tr>\n<tr>\n<td>Spülart</td>\n<td>Wirbelspülung (Tornado Flush)</td>\n</tr>\n<tr>\n<td>Randlos</td>\n<td>Ja</td>\n</tr>\n<tr>\n<td>Spülvolumen</td>\n<td>2,9 / 4,5 Liter (wahlweise)</td>\n</tr>\n<tr>\n<td>Maße</td>\n<td>Breite 36 cm, Höhe 31,5 cm, Tiefe 49 cm</td>\n</tr>\n<tr>\n<td>Gewicht</td>\n<td>ca. 21 kg (verpackt)</td>\n</tr>\n<tr>\n<td>Material</td>\n<td>Keramik, glänzend weiß</td>\n</tr>\n<tr>\n<td>Befestigungsabstand</td>\n<td>18 cm (verdeckt)</td>\n</tr>\n<tr>\n<td>Ablaufart</td>\n<td>Waagerechter Abgang hinten</td>\n</tr>\n<tr>\n<td>Sitz</td>\n<td>Mit Softclose-Funktion</td>\n</tr>\n<tr>\n<td>Montageset</td>\n<td>Unterputz-WC/Bidet-Montage</td>\n</tr>\n<tr>\n<td>Serie</td>\n<td>Fusion</td>\n</tr>\n<tr>\n<td>Hersteller-Garantie</td>\n<td>5 Jahre</td>\n</tr>\n</tbody>\n</table>\n<h3>FAQ</h3>\n<dl>\n<dt><strong>Ist die Reinigung Wand-WC schwierig</strong></dt>\n<dd>Durch das randlose Design und die glänzende Keramik-Oberfläche ist die Reinigung besonders einfach und hygienisch.</dd>\n<dt><strong>Wie funktioniert die Softclose-Funktion</strong></dt>\n<dd>Der WC-Sitz schließt dank Softclose-Mechanismus langsam und leise, ganz ohne lautes Zuknallen oder Gefahr von Beschädigungen.</dd>\n<dt><strong>Passen handelsübliche Unterputzspülkästen</strong></dt>\n<dd>Ja, das WC ist für alle gängigen Unterputzspülkästen mit passendem Befestigungsabstand geeignet.</dd>\n<dt><strong>Wie sparsam ist die Spülung wirklich</strong></dt>\n<dd>Mit 2,9 bzw. 4,5 Litern Spülvolumen können Sie je nach Bedarf Wasser sparen, ohne auf gründliche Reinigung zu verzichten.</dd>\n<dt><strong>Lässt sich das WC in kleinen Bädern montieren</strong></dt>\n<dd>Ja, die kompakten Maße eignen sich ideal auch für kleinere Bäder oder Gästetoiletten.</dd>\n</dl>",
+    "options": [
+      {
+        "id": 18352196813187,
+        "product_id": 15467235639683,
+        "name": "Title",
+        "position": 1,
+        "values": [
+          "Default Title"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Default Title",
+        "option1": "Default Title",
+        "option2": null,
+        "option3": null,
+        "price": "229.90",
+        "sku": "XXL-WC Lav.Tor.-Ohne Bidet"
+      }
+    ]
+  },
+  "radiator-thin": {
+    "handle": "badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links",
+    "title": "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen",
+    "product_type": "",
+    "body_html": "<p>Badheizkörper &amp; Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort &amp; Design in jedem Bad.</p>",
+    "options": [
+      {
+        "id": 10739088392416,
+        "product_id": 8440962285792,
+        "name": "Breite x Höhe in cm",
+        "position": 1,
+        "values": [
+          "50 × 115",
+          "50 × 140",
+          "50 × 164",
+          "60 × 115",
+          "60 × 140",
+          "60 × 164"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "50 × 115",
+        "option1": "50 × 115",
+        "option2": null,
+        "option3": null,
+        "price": "219.00",
+        "sku": "XXL-EL-007"
+      },
+      {
+        "title": "50 × 140",
+        "option1": "50 × 140",
+        "option2": null,
+        "option3": null,
+        "price": "259.00",
+        "sku": "XXL-EL-008"
+      },
+      {
+        "title": "50 × 164",
+        "option1": "50 × 164",
+        "option2": null,
+        "option3": null,
+        "price": "349.00",
+        "sku": "XXL-EL-009"
+      },
+      {
+        "title": "60 × 115",
+        "option1": "60 × 115",
+        "option2": null,
+        "option3": null,
+        "price": "239.00",
+        "sku": "XXL-EL-010"
+      },
+      {
+        "title": "60 × 140",
+        "option1": "60 × 140",
+        "option2": null,
+        "option3": null,
+        "price": "299.90",
+        "sku": "XXL-EL-011"
+      },
+      {
+        "title": "60 × 164",
+        "option1": "60 × 164",
+        "option2": null,
+        "option3": null,
+        "price": "369.00",
+        "sku": "XXL-EL-012"
+      }
+    ]
+  },
+  "radiator-multi": {
+    "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen",
+    "title": "Austausch Badheizkörper & Renovierungsheizkörper Schwarz ELANOR",
+    "product_type": "",
+    "body_html": "<p>Austausch Badheizkörper mit Seitenanschluss und Nabenabstand 900 mm - Energieeffiziente Renovierungsheizkörper als Handtuchheizkörper für Ihr Bad.</p>",
+    "options": [
+      {
+        "id": 17355062215043,
+        "product_id": 15020040814979,
+        "name": "Breite x Höhe in cm",
+        "position": 1,
+        "values": [
+          "50 × 140",
+          "50 × 164",
+          "60 × 140",
+          "60 × 164"
+        ]
+      },
+      {
+        "id": 17361071112579,
+        "product_id": 15020040814979,
+        "name": "Anschluss wählen",
+        "position": 2,
+        "values": [
+          "Rechts",
+          "Links"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "50 × 140 / Rechts",
+        "option1": "50 × 140",
+        "option2": "Rechts",
+        "option3": null,
+        "price": "259.00",
+        "sku": "XXL-ABHELR-9"
+      },
+      {
+        "title": "50 × 140 / Links",
+        "option1": "50 × 140",
+        "option2": "Links",
+        "option3": null,
+        "price": "259.00",
+        "sku": "XXL-ABHELL-1"
+      },
+      {
+        "title": "50 × 164 / Rechts",
+        "option1": "50 × 164",
+        "option2": "Rechts",
+        "option3": null,
+        "price": "349.00",
+        "sku": "XXL-ABHELR-10"
+      },
+      {
+        "title": "50 × 164 / Links",
+        "option1": "50 × 164",
+        "option2": "Links",
+        "option3": null,
+        "price": "259.00",
+        "sku": "XXL-ABHELL-2"
+      },
+      {
+        "title": "60 × 140 / Rechts",
+        "option1": "60 × 140",
+        "option2": "Rechts",
+        "option3": null,
+        "price": "299.00",
+        "sku": "XXL-ABHELR-11"
+      },
+      {
+        "title": "60 × 140 / Links",
+        "option1": "60 × 140",
+        "option2": "Links",
+        "option3": null,
+        "price": "259.00",
+        "sku": "XXL-ABHELL-3"
+      },
+      {
+        "title": "60 × 164 / Rechts",
+        "option1": "60 × 164",
+        "option2": "Rechts",
+        "option3": null,
+        "price": "369.00",
+        "sku": "XXL-ABHELR-12"
+      },
+      {
+        "title": "60 × 164 / Links",
+        "option1": "60 × 164",
+        "option2": "Links",
+        "option3": null,
+        "price": "259.00",
+        "sku": "XXL-ABHELL-4"
+      }
+    ]
+  },
+  "accessory": {
+    "handle": "thermostatventil-set-heizkorper-eck-1-2-chrom",
+    "title": "Thermostatventil Set Heizkörper Eck 1/2 Chrom",
+    "product_type": "",
+    "body_html": "<h2>Thermostatventil Set Heizkörper Eck Rücklauftemperaturbegrenzer 1/2 Chrom</h2>\n<div data-particle_enable=\"false\" data-particle-mobile-disabled=\"false\" class=\"elementor-element elementor-element-d1d4913 e-flex e-con-boxed e-con e-parent elementskit-parallax-multi-container\" data-id=\"d1d4913\" data-element_type=\"container\" data-settings='{\"ekit_has_onepagescroll_dot\":\"yes\"}'>\n<div class=\"e-con-inner\">\n<div data-particle_enable=\"false\" data-particle-mobile-disabled=\"false\" class=\"elementor-element elementor-element-e0a9349 e-con-full e-flex e-con e-child elementskit-parallax-multi-container\" data-id=\"e0a9349\" data-element_type=\"container\" data-settings='{\"background_background\":\"classic\",\"ekit_has_onepagescroll_dot\":\"yes\"}'>\n<div class=\"elementor-element elementor-element-c3e18b3 sc_fly_static elementor-widget elementor-widget-text-editor\" data-id=\"c3e18b3\" data-element_type=\"widget\" data-settings='{\"ekit_we_effect_on\":\"none\"}' data-widget_type=\"text-editor.default\">\n<div class=\"elementor-widget-container\">\n<p><span>Vervollständigen Sie Ihre neue Heizkörperinstallation mit den thermostatischen Winkelventilen von Schäfer. Diese stilvollen und funktionellen Heizkörperventile mit Chrombeschichtung und modernem Design ergänzen eine breite Palette von Heizkörpern und Badheizkörpern. Die Thermostatventile, die für die lange Lebensdauer ausgelegt sind, ermöglichen eine mühelose Temperaturregelung in einzelnen Räumen.</span></p>\n<p><span>Das Thermostatventil reagiert auf die Umgebungstemperatur und passt die Wasserdurchflussmenge an, um eine konstante Temperatur im Zimmer zu halten und Energiekosten zu sparen.</span></p>\n<p><span>Die Ventile bestehen aus Messing. Sie verfügen dabei über einen Standard 1/2″ Anschluss zum Heizkörper und sind somit mit allen unseren Heizkörpern kompatibel.</span></p>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div data-particle_enable=\"false\" data-particle-mobile-disabled=\"false\" class=\"elementor-element elementor-element-737a85e e-con-full e-flex e-con e-parent elementskit-parallax-multi-container\" data-id=\"737a85e\" data-element_type=\"container\" data-settings='{\"ekit_has_onepagescroll_dot\":\"yes\"}'>\n<div data-particle_enable=\"false\" data-particle-mobile-disabled=\"false\" class=\"elementor-element elementor-element-34a65bf e-con-full e-flex e-con e-child elementskit-parallax-multi-container\" data-id=\"34a65bf\" data-element_type=\"container\" data-settings='{\"ekit_has_onepagescroll_dot\":\"yes\"}'>\n<div class=\"elementor-element elementor-element-aa23f89 sc_fly_static elementor-widget elementor-widget-heading\" data-id=\"aa23f89\" data-element_type=\"widget\" data-settings='{\"ekit_we_effect_on\":\"none\"}' data-widget_type=\"heading.default\">\n<div class=\"elementor-widget-container\">\n<h3 class=\"elementor-heading-title elementor-size-default\">Produktmerkmale</h3>\n</div>\n</div>\n<div class=\"elementor-element elementor-element-20ddb83 sc_fly_static elementor-widget elementor-widget-text-editor\" data-id=\"20ddb83\" data-element_type=\"widget\" data-settings='{\"ekit_we_effect_on\":\"none\"}' data-widget_type=\"text-editor.default\">\n<div class=\"elementor-widget-container\">\n<div class=\"vc_row wpb_row vc_inner vc_row-fluid\">\n<div class=\"wpb_column vc_column_container vc_col-sm-12\">\n<div class=\"vc_column-inner\">\n<div class=\"wpb_wrapper\">\n<div class=\"wpb_text_column wpb_content_element\">\n<div class=\"wpb_wrapper\">\n<ul>\n<li>Haltbare Chrombeschichtung</li>\n<li>Solide Messingkonstruktion</li>\n<li>Anschlussgewinde: G 1/2</li>\n<li>Bei Eckform:  Rohre kommen aus der  Wand</li>\n<li>Bei Durchgangsform:  Rohre kommen aus dem  Boden</li>\n<li>Modernes Design</li>\n<li>Gewinkelt</li>\n<li>Anzahl einstellbarer Stufen: 5</li>\n<li>in den Farben: Chrom </li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div data-particle_enable=\"false\" data-particle-mobile-disabled=\"false\" class=\"elementor-element elementor-element-915f5fa e-con-full sc_layouts_hide_on_mobile e-flex e-con e-child elementskit-parallax-multi-container\" data-id=\"915f5fa\" data-element_type=\"container\" data-settings='{\"ekit_has_onepagescroll_dot\":\"yes\"}'>\n<div class=\"elementor-element elementor-element-c550ef5 sc_fly_static elementor-widget elementor-widget-heading\" data-id=\"c550ef5\" data-element_type=\"widget\" data-settings='{\"ekit_we_effect_on\":\"none\"}' data-widget_type=\"heading.default\">\n<div class=\"elementor-widget-container\">\n<h3 class=\"elementor-heading-title elementor-size-default\">Lieferumfang</h3>\n</div>\n</div>\n<div class=\"elementor-element elementor-element-fad2a43 sc_fly_static elementor-widget elementor-widget-text-editor\" data-id=\"fad2a43\" data-element_type=\"widget\" data-settings='{\"ekit_we_effect_on\":\"none\"}' data-widget_type=\"text-editor.default\">\n<div class=\"elementor-widget-container\">\n<div class=\"vc_row wpb_row vc_inner vc_row-fluid\">\n<div class=\"wpb_column vc_column_container vc_col-sm-12\">\n<div class=\"vc_column-inner\">\n<div class=\"wpb_wrapper\">\n<div class=\"wpb_text_column wpb_content_element\">\n<div class=\"wpb_wrapper\">\n<ul>\n<li><span>Thermostatventil</span></li>\n<li><span>Thermostatkopf</span></li>\n<li><span>2 x Adapter 16 x 2,0 Eurok. Alupex</span></li>\n<li><span>2 x Adapter Übergang 1/2“ auf 3/4“ Anschlussmaß: 50 mm</span></li>\n<li>Paarweise geliefert</li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<!---->",
+    "options": [
+      {
+        "id": 10852107485408,
+        "product_id": 8540041478368,
+        "name": "Farbe × Form:",
+        "position": 1,
+        "values": [
+          "Chrom × Eckform"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Chrom × Eckform",
+        "option1": "Chrom × Eckform",
+        "option2": null,
+        "option3": null,
+        "price": "49.90",
+        "sku": "XXL-TV"
+      }
+    ]
+  },
+  "pipe": {
+    "handle": "fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m",
+    "title": "Fußbodenheizungsrohr 16x2 mm 600 m PE-RT 5-Schicht Rohr",
+    "product_type": "",
+    "body_html": "",
+    "options": [
+      {
+        "id": 17913160663427,
+        "product_id": 15467235443075,
+        "name": "Title",
+        "position": 1,
+        "values": [
+          "Default Title"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "Default Title",
+        "option1": "Default Title",
+        "option2": null,
+        "option3": null,
+        "price": "260.00",
+        "sku": "XXL-PE-RT"
+      }
+    ]
+  }
+}

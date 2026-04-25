@@ -2,7 +2,7 @@ import { query } from '@anthropic-ai/claude-agent-sdk';
 import { checkToolCall } from '../hooks/pre-tool.js';
 import { parseStoreFlag, resolveStore, stripStoreFlag } from './store-config.js';
 import { shopifyGraphQL, shopifyRest } from './tools/shopify.js';
-import { buildHavnMcpServer, HAVN_TOOL_NAMES } from './tools/mcp-tools.js';
+import { buildGBergMcpServer, GBERG_TOOL_NAMES } from './tools/mcp-tools.js';
 
 const rawArgv = process.argv.slice(2);
 const storeKey = parseStoreFlag(rawArgv);
@@ -16,7 +16,7 @@ if (!task) {
   console.error('  ping | shop            → print shop + domain + plan');
   console.error('  list products          → print 10 newest products');
   console.error('');
-  console.error('Anything else is routed through Claude with Havn Shopify tools.');
+  console.error('Anything else is routed through Claude with G-Berg Shopify tools.');
   console.error('Example: npm run agent -- --store dev "how many products do I have?"');
   process.exit(1);
 }
@@ -50,13 +50,13 @@ async function runBuiltin(kind: 'ping' | 'list-products'): Promise<void> {
   console.log(JSON.stringify(data, null, 2));
 }
 
-const SYSTEM_PROMPT = `You are the Havn dev-store agent. You manage a Shopify store for a European heater brand (Havn) using the Shopify Admin GraphQL API 2026-04.
+const SYSTEM_PROMPT = `You are the G-Berg dev-store agent. You manage a Shopify store for G-Berg GmbH (gberg-heizung) — authorized regional reseller of xxl-heizung.de — using the Shopify Admin GraphQL API 2026-04.
 
 Active store: ${store.handle} (${store.key}). ${store.key === 'prod' ? 'PRODUCTION — mutations require user confirmation at runtime.' : 'DEV store — mutations flow freely.'}
 
 You have two tools:
-- mcp__havn__shopify_graphql({query, variables?}) — run any GraphQL operation.
-- mcp__havn__shopify_rest({method, path, body?}) — use only when GraphQL does not expose the operation.
+- mcp__gberg__shopify_graphql({query, variables?}) — run any GraphQL operation.
+- mcp__gberg__shopify_rest({method, path, body?}) — use only when GraphQL does not expose the operation.
 
 Conventions:
 - Default to GraphQL. Batch requests when practical.
@@ -64,14 +64,14 @@ Conventions:
 - Work on dev by default; never assume prod context.
 - Report final state as concise JSON or a short summary, not as narration.
 
-Shop context: English-default UI; DE secondary via Translate & Adapt. Products are Havn radiators seeded with handles havn-nord/havn-fjord/havn-skagen/havn-bris/havn-storm. Europe multi-country market (DE/BE/ES/AT/NL) with EUR currency.`;
+Shop context: English-default UI; DE secondary via Translate & Adapt. Europe multi-country market (DE/BE/ES/AT/NL) with EUR currency. The product catalog is populated by an external sync pipeline (agent/sync/) that mirrors xxl-heizung.de via Shopify public JSON, with AI-regenerated product imagery. Products carry metafields product.xxl_source_id and product.xxl_source_handle that link back to the source.`;
 
 async function runLLM(userTask: string): Promise<void> {
-  const mcpServer = buildHavnMcpServer(store);
+  const mcpServer = buildGBergMcpServer(store);
   const options = {
-    mcpServers: { havn: mcpServer },
+    mcpServers: { gberg: mcpServer },
     tools: [] as string[],
-    allowedTools: HAVN_TOOL_NAMES,
+    allowedTools: GBERG_TOOL_NAMES,
     maxTurns: 25,
     systemPrompt: SYSTEM_PROMPT,
     permissionMode: 'bypassPermissions' as const,
