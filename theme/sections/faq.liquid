@@ -92,6 +92,15 @@
     {%- assign entries = shop.metaobjects.faq_item.values -%}
     {%- assign filter = section.settings.category_filter | downcase -%}
     {%- assign rendered = 0 -%}
+    {%- comment -%}
+      Defense-in-depth: if a faq_item is German-source with no EN translation
+      registered, Shopify falls back to the German value on the EN storefront.
+      Skip those server-side when the request locale is EN. The
+      translate-faq-metaobjects.mjs script registers proper EN translations;
+      this guard just hides any future leak before the next sync runs.
+    {%- endcomment -%}
+    {%- assign req_locale = request.locale.iso_code | downcase -%}
+    {%- assign de_starters = 'Ist,Wie,Wir,Wo,Was,Können,Welche,Passen,Lässt,Sind,Müssen,Werden,Wird,Würden,Hat,Haben' | split: ',' -%}
     {%- if entries.size > 0 -%}
       <ul class="faq__list" role="list">
         {%- for entry in entries -%}
@@ -100,6 +109,24 @@
             {%- unless entry_cat == filter -%}
               {%- continue -%}
             {%- endunless -%}
+          {%- endif -%}
+          {%- if req_locale == 'en' -%}
+            {%- assign first_word = entry.question | strip | split: ' ' | first -%}
+            {%- assign is_de_leak = false -%}
+            {%- for starter in de_starters -%}
+              {%- if first_word == starter -%}
+                {%- assign is_de_leak = true -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if is_de_leak -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- comment -%} also catch umlaut/ß leak in question text {%- endcomment -%}
+            {%- assign q_lc = entry.question | downcase -%}
+            {%- if q_lc contains 'ä' or q_lc contains 'ö' or q_lc contains 'ü' or q_lc contains 'ß' -%}
+              {%- continue -%}
+            {%- endif -%}
           {%- endif -%}
           {%- if section.settings.limit > 0 and rendered >= section.settings.limit -%}
             {%- break -%}

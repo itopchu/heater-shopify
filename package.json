@@ -13,6 +13,8 @@
     "sync": "tsx agent/sync/index.ts",
     "sync:dry": "tsx agent/sync/index.ts --dry-run",
     "seed:widerruf": "node agent/scripts/seed-widerrufsbelehrung.mjs",
+    "enable:extra-locales": "node agent/scripts/enable-extra-locales.mjs",
+    "translate:faqs": "node agent/scripts/translate-faq-metaobjects.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
