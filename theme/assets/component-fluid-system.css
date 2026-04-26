@@ -1,0 +1,216 @@
+/* ============================================================
+   G-Berg Fluid Responsive System
+   ------------------------------------------------------------
+   Single override layer on top of Dawn's base.css. Uses clamp(),
+   intrinsic grids, aspect-ratio and container queries so the page
+   breathes proportionally between 360px and 4K viewports.
+
+   Dawn convention: html { font-size: calc(scale * 62.5%) } so
+   1rem = 10px (× heading/body scale). All clamp() values below are
+   tuned to that 10px-root, so 1.5rem = 15px, etc. Do NOT change
+   the root size — Dawn's entire stylesheet assumes it.
+
+   Loaded AFTER base.css so cascade wins. Keep < 5KB gzipped.
+   ============================================================ */
+
+:root {
+  /* ---- Fluid type scale (in 10px-root rem). 15→17px body, 32→72 h0. */
+  --fluid-base: clamp(1.5rem, 1.4rem + 0.5vw, 1.7rem);
+  --fluid-h0:   clamp(3.2rem, 1.6rem + 5vw,   7.2rem);   /* 32 → 72 */
+  --fluid-h1:   clamp(2.8rem, 1.6rem + 3.5vw, 5.2rem);   /* 28 → 52 */
+  --fluid-h2:   clamp(2.4rem, 1.6rem + 2.2vw, 4rem);     /* 24 → 40 */
+  --fluid-h3:   clamp(2rem,   1.5rem + 1.2vw, 2.8rem);   /* 20 → 28 */
+  --fluid-h4:   clamp(1.8rem, 1.5rem + 0.6vw, 2.2rem);   /* 18 → 22 */
+  --fluid-h5:   clamp(1.6rem, 1.4rem + 0.4vw, 1.8rem);   /* 16 → 18 */
+
+  /* ---- Fluid spacing tokens (10px-root rem) */
+  --space-3xs: clamp(0.4rem, 0.3rem + 0.2vw, 0.6rem);
+  --space-2xs: clamp(0.8rem, 0.6rem + 0.4vw, 1.2rem);
+  --space-xs:  clamp(1.2rem, 0.9rem + 0.6vw, 1.6rem);
+  --space-sm:  clamp(1.6rem, 1.2rem + 0.8vw, 2.4rem);
+  --space-md:  clamp(2.4rem, 1.7rem + 1.5vw, 3.6rem);
+  --space-lg:  clamp(3.2rem, 2.2rem + 2.4vw, 5.2rem);
+  --space-xl:  clamp(4rem,   2.7rem + 3.2vw, 6.8rem);
+  --space-2xl: clamp(4.8rem, 3.2rem + 4vw,   8rem);
+
+  /* Section + layout tokens (consumed below) */
+  --section-padding-block: clamp(3.2rem, 5vw, 7.2rem); /* 32 → 72 */
+  --gutter: clamp(1.6rem, 4vw, 3.2rem);                /* 16 → 32 */
+  --gap:    clamp(1.2rem, 2vw, 2.4rem);                /* 12 → 24 */
+
+  /* Card grid minimums per context (10px-root rem). Values use min(X, 100%)
+     so on a viewport narrower than X the card spans full width — but we keep
+     X small enough that two products fit on a 360px mobile screen. */
+  --card-min-product:     min(14rem,   100%); /* 140px → 2-col @ 360px */
+  --card-min-collection:  min(12rem,   100%); /* 120px → 2-col @ 360px */
+  --card-min-testimonial: min(28rem,   100%); /* 280px → 1-col on mobile */
+}
+
+/* Card mins step up at tablet+ so we don't get 7-up walls of tiny cards
+   on desktop. Targets: 2-col @ 360, 3-col @ 768, 4-col @ 1280, 5-col @ 1920. */
+@media (min-width: 750px) {
+  :root {
+    --card-min-product:    min(20rem, 100%); /* 200px */
+    --card-min-collection: min(18rem, 100%); /* 180px */
+  }
+}
+@media (min-width: 990px) {
+  :root {
+    --card-min-product:    min(26rem, 100%); /* 260px → 4-up @ 1280 */
+    --card-min-collection: min(22rem, 100%); /* 220px */
+  }
+}
+@media (min-width: 1600px) {
+  :root {
+    --card-min-product:    min(32rem, 100%); /* 320px → 5-up @ 1920 */
+    --card-min-collection: min(26rem, 100%); /* 260px */
+  }
+}
+
+/* ---- Body base size: scales 15 → 17px instead of fixed 1.5/1.6rem.
+   !important needed because Dawn writes the body font-size in an inline
+   <style> block at top of theme.liquid (higher cascade origin within
+   document but same specificity). */
+body { font-size: var(--fluid-base) !important; line-height: 1.5; }
+
+/* ---- Fluid headings: override Dawn's calc(scale * Xrem) outputs.
+   Multiply by var(--font-heading-scale) so admin "heading scale" still works. */
+.h0  { font-size: calc(var(--fluid-h0) * var(--font-heading-scale, 1)); line-height: 1.1; }
+.h1, h1 { font-size: calc(var(--fluid-h1) * var(--font-heading-scale, 1)); line-height: 1.15; }
+.h2, h2 { font-size: calc(var(--fluid-h2) * var(--font-heading-scale, 1)); line-height: 1.2; }
+.h3, h3 { font-size: calc(var(--fluid-h3) * var(--font-heading-scale, 1)); line-height: 1.25; }
+.h4, h4 { font-size: calc(var(--fluid-h4) * var(--font-heading-scale, 1)); line-height: 1.3; }
+.h5, h5 { font-size: calc(var(--fluid-h5) * var(--font-heading-scale, 1)); line-height: 1.35; }
+
+/* ---- Fluid section padding. Dawn writes inline (in section files):
+        padding-top: <px>px; on .section-{id}-padding.
+   Since inline styles win over external CSS, override with !important. */
+[class*="section-"][class*="-padding"] {
+  padding-top: var(--section-padding-block) !important;
+  padding-bottom: var(--section-padding-block) !important;
+}
+
+/* G-Berg custom faq-{id} also writes inline scoped padding — same treatment */
+[class^="faq-"]:not(.faq__answer):not(.faq__question):not(.faq__list):not(.faq__item):not(.faq__trigger):not(.faq__panel):not(.faq__header):not(.faq__title):not(.faq__lede):not(.faq__kicker) {
+  padding-top: var(--section-padding-block) !important;
+  padding-bottom: var(--section-padding-block) !important;
+}
+
+/* Inline gutter */
+.page-width { padding-inline: var(--gutter); }
+
+/* ---- Intrinsic grids: switch Dawn's flex-grid to CSS Grid auto-fit so
+   columns reflow without breakpoint switches. Reset grid__item widths
+   that Dawn assigns via calc(% - gap) so they don't conflict.
+
+   IMPORTANT: skip when Dawn is in mobile/tablet slider mode
+   (.slider, .slider--mobile, .slider--tablet) — that's a horizontal
+   swipe carousel and CSS Grid would break it. */
+.product-grid:not(.slider):not(.slider--mobile):not(.slider--tablet),
+.collection-list:not(.slider):not(.slider--mobile):not(.slider--tablet),
+.related-products .grid:not(.slider):not(.slider--mobile):not(.slider--tablet),
+.featured-collection .grid:not(.slider):not(.slider--mobile):not(.slider--tablet),
+.collage-wrapper:not(.slider),
+.multicolumn-list:not(.slider):not(.slider--mobile):not(.slider--tablet) {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-product), 1fr));
+}
+
+.collection-list:not(.slider):not(.slider--mobile):not(.slider--tablet) {
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-collection), 1fr));
+}
+
+.testimonials .grid:not(.slider):not(.slider--mobile):not(.slider--tablet),
+.multicolumn .grid:not(.slider):not(.slider--mobile):not(.slider--tablet):has(.testimonial) {
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-testimonial), 1fr));
+}
+
+/* FAQ list is a single-column accordion */
+.faq__list {
+  display: grid;
+  gap: var(--space-2xs);
+  grid-template-columns: 1fr;
+}
+
+/* Reset Dawn's flex-grid widths when CSS Grid has taken over.
+   Without this, .grid__item's calc(25% - gap) fights with our minmax. */
+.product-grid:not(.slider):not(.slider--mobile):not(.slider--tablet) > .grid__item,
+.collection-list:not(.slider):not(.slider--mobile):not(.slider--tablet) > .grid__item,
+.related-products .grid:not(.slider):not(.slider--mobile):not(.slider--tablet) > .grid__item,
+.featured-collection .grid:not(.slider):not(.slider--mobile):not(.slider--tablet) > .grid__item,
+.collage-wrapper:not(.slider) > .grid__item,
+.multicolumn-list:not(.slider):not(.slider--mobile):not(.slider--tablet) > .grid__item {
+  width: auto;
+  max-width: none;
+}
+
+/* ---- Hero / image-banner: cap excessive desktop min-heights only.
+   Dawn's defaults are: small 28rem, medium 34rem, large 39rem on mobile;
+   small 42rem, medium 56rem, large 72rem on desktop. The 72rem desktop
+   large hero is the worst offender on 4K — it becomes a 720px hero with
+   a sea of empty pixels. Cap the desktop side; leave mobile untouched
+   so banner__content always has room for headings + CTAs. */
+@media (min-width: 990px) {
+  .banner--large:not(.banner--adapt)  { min-height: clamp(48rem, 70vh, 56rem); }
+  .banner--medium:not(.banner--adapt) { min-height: clamp(40rem, 60vh, 50rem); }
+}
+
+/* ---- Product card: portrait aspect since radiators are tall.
+   Skip when Dawn already set an explicit aspect via inline style.
+   Only apply on product cards (not collection tiles), so collection
+   tiles keep their square Dawn default. */
+.card-wrapper.product-card-wrapper .card__media:not([style*="aspect-ratio"]),
+.product-grid .card__media:not([style*="aspect-ratio"]),
+.featured-collection .grid .product-card-wrapper .card__media:not([style*="aspect-ratio"]),
+.related-products .card__media:not([style*="aspect-ratio"]) {
+  aspect-ratio: 4 / 5;
+}
+
+/* ---- Container queries: card content scales to its own width, not viewport.
+   Lets a 4-up grid card and a 1-up "you may like" card both look right. */
+@supports (container-type: inline-size) {
+  .card-wrapper { container-type: inline-size; }
+
+  @container (max-width: 18rem) {
+    .card__heading { font-size: var(--fluid-h5); }
+    .card__information { padding-top: var(--space-2xs); }
+  }
+  @container (min-width: 24rem) {
+    .card__heading { font-size: var(--fluid-h4); }
+  }
+}
+
+/* ---- Buttons: cap mobile width so primary CTAs don't fill the screen
+   when there's no content reason to. Excludes drawer/cart actions which
+   genuinely want full width. */
+@media (max-width: 749px) {
+  .button--primary:not(.cart__checkout-button):not(.product-form__submit):not([data-no-fluid-cap]) {
+    max-width: clamp(12rem, 70vw, 24rem);
+  }
+}
+
+/* ---- FAQ (G-Berg custom section) — apply fluid spacing without
+   touching the section's own scoped CSS. */
+.faq__header { margin-bottom: var(--space-md); }
+
+/* ---- Image-with-text: cap min-height on mobile */
+@media (max-width: 749px) {
+  .image-with-text__media-item,
+  .image-with-text__content {
+    min-height: 0;
+  }
+}
+
+/* ---- Preserve focus/accessibility — restate so any specificity wars
+   from grid overrides don't strip Dawn's outline rings. */
+*:focus-visible {
+  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  outline-offset: 0.3rem;
+  box-shadow: 0 0 0 0.1rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+}
+
+/* ---- Reduce motion: keep aspect-ratio overrides but skip new transitions. */
+@media (prefers-reduced-motion: reduce) {
+  .banner { transition: none; }
+}
