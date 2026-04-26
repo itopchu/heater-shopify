@@ -309,7 +309,14 @@
   },
   "sections": {
     "payment_methods": {
-      "heading": "Wir akzeptieren"
+      "heading": "Wir akzeptieren",
+      "title": "Zahlungsmethoden"
+    },
+    "product_spec_accordions": {
+      "title": "Technische Daten."
+    },
+    "related_products": {
+      "heading": "Das könnte Ihnen auch gefallen"
     },
     "announcement_top_bar": {
       "label": "Obere Ankündigungsleiste"

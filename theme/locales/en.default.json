@@ -309,7 +309,14 @@
   },
   "sections": {
     "payment_methods": {
-      "heading": "We accept"
+      "heading": "We accept",
+      "title": "Payment methods"
+    },
+    "product_spec_accordions": {
+      "title": "Specs & details."
+    },
+    "related_products": {
+      "heading": "You may also like"
     },
     "announcement_top_bar": {
       "label": "Top announcement bar"
