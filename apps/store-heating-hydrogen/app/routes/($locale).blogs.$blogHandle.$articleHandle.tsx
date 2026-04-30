@@ -2,9 +2,37 @@ import {useLoaderData} from 'react-router';
 import type {Route} from './+types/blogs.$blogHandle.$articleHandle';
 import {Image} from '@shopify/hydrogen';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
+import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
-export const meta: Route.MetaFunction = ({data}) => {
-  return [{title: `Hydrogen | ${data?.article.title ?? ''} article`}];
+export const meta: Route.MetaFunction = ({
+  data,
+  location,
+}: {
+  data?: {
+    article?: {
+      title?: string;
+      seo?: {description?: string | null} | null;
+      image?: {url?: string} | null;
+    };
+  };
+  location: {pathname: string};
+}) => {
+  const article = data?.article;
+  const articleTitle = article?.title ?? 'Article';
+  const title = `${articleTitle} — ${BRAND_NAME}`;
+  const description = article?.seo?.description ?? '';
+  const ogImage = article?.image?.url ?? undefined;
+  return [
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'article',
+      ogImage,
+    }),
+  ];
 };
 
 export async function loader(args: Route.LoaderArgs) {

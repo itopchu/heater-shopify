@@ -31,6 +31,7 @@ import {
 } from '~/lib/gberg/queries';
 import {formatLocaleFromRoute} from '~/lib/gberg/format';
 import {normalizeLocale} from '~/lib/gberg/i18n';
+import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 import {
   buildBreadcrumb,
   fallbackKeyFacts,
@@ -42,24 +43,56 @@ import {
 } from '~/lib/gberg/heating-derived';
 import type {HeatingProduct} from '@gberg/product-schema';
 
-export const meta: Route.MetaFunction = ({data}) => {
+export const meta: Route.MetaFunction = ({
+  data,
+  location,
+}: {
+  data?: {product?: HeatingProduct} | undefined;
+  location: {pathname: string};
+}) => {
   const product = data?.product;
-  if (!product) return [{title: 'Product'}];
+  if (!product) {
+    // 410 case (or genuine miss) — still emit branded title and a
+    // canonical so AI crawlers see a structured fallback instead of
+    // bare "Product".
+    const fallbackTitle = `Product no longer available — ${BRAND_NAME}`;
+    return [
+      {title: fallbackTitle},
+      ...buildSeoMeta({
+        title: fallbackTitle,
+        description:
+          'This product is no longer available. Browse the full catalogue for similar radiators.',
+        pathname: location.pathname,
+        type: 'website',
+      }),
+    ];
+  }
   const seo = product.common.seo;
+  const baseTitle =
+    seo?.override_title ?? product.seo.title ?? product.title ?? 'Product';
+  // Append brand suffix when the merchant-provided title doesn't already
+  // include it. Brand identity, not editable copy.
+  const title = baseTitle.includes(BRAND_NAME)
+    ? baseTitle
+    : `${baseTitle} — ${BRAND_NAME}`;
+  const description =
+    seo?.override_description ??
+    product.seo.description ??
+    product.common.custom?.short_description ??
+    product.common.custom?.subtitle ??
+    '';
+  const ogImage =
+    galleryImages(product)[0]?.url ?? undefined;
   return [
-    {
-      title:
-        seo?.override_title ?? product.seo.title ?? product.title ?? 'Product',
-    },
-    {
-      name: 'description',
-      content:
-        seo?.override_description ??
-        product.seo.description ??
-        product.common.custom?.short_description ??
-        product.common.custom?.subtitle ??
-        '',
-    },
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'product',
+      ogImage,
+    }),
   ];
 };
 
@@ -70,7 +103,13 @@ export async function loader({context, params}: Route.LoaderArgs) {
 
   const client = createGbergClient(context.storefront);
   const product = await fetchProductByHandle(client, handle, locale);
-  if (!product) throw new Response('Not found', {status: 404});
+  if (!product) {
+    // 410 Gone — explicitly tell crawlers this URL was a real product
+    // that no longer exists, so they de-index it. Plain 404 leaves the
+    // URL eligible for re-crawl indefinitely. The error boundary still
+    // renders a polite "no longer available — browse similar" UI.
+    throw new Response('Product no longer available', {status: 410});
+  }
 
   // Sibling-color cross-link (Track B): pull a single page of products
   // and resolve siblings in-memory. The catalog is 55 products today,

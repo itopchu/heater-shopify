@@ -1,14 +1,37 @@
 import {Link, useLoaderData} from 'react-router';
 import type {Route} from './+types/policies.$handle';
 import {type Shop} from '@shopify/hydrogen/storefront-api-types';
+import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 type SelectedPolicies = keyof Pick<
   Shop,
   'privacyPolicy' | 'shippingPolicy' | 'termsOfService' | 'refundPolicy'
 >;
 
-export const meta: Route.MetaFunction = ({data}) => {
-  return [{title: `Hydrogen | ${data?.policy.title ?? ''}`}];
+export const meta: Route.MetaFunction = ({
+  data,
+  location,
+}: {
+  data?: {policy?: {title?: string}};
+  location: {pathname: string};
+}) => {
+  const policyTitle = data?.policy?.title ?? 'Policy';
+  const title = `${policyTitle} — ${BRAND_NAME}`;
+  // Legal pages have no merchant-supplied SEO description; we leave it
+  // empty rather than invent generic copy that risks duplication across
+  // policies. Phase 2 will surface a per-policy summary if Shopify
+  // exposes one.
+  const description = '';
+  return [
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'website',
+    }),
+  ];
 };
 
 export async function loader({params, context}: Route.LoaderArgs) {

@@ -59,7 +59,7 @@ export function htmlLang(locale: Locale): string {
 }
 
 export interface InContextHint {
-  country: 'NL' | 'DE' | 'FR' | 'BE' | 'LU' | 'ES' | 'IT' | 'PL' | 'DK';
+  country: 'DE' | 'NL' | 'BE' | 'LU' | 'AT' | 'FR' | 'ES' | 'IT' | 'PL' | 'DK';
   language: 'EN' | 'DE' | 'NL' | 'FR' | 'ES' | 'IT' | 'PL' | 'DA';
 }
 
@@ -74,9 +74,37 @@ const LOCALE_TO_LANGUAGE: Record<Locale, InContextHint['language']> = {
   da: 'DA',
 };
 
+/**
+ * Locale → primary country mapping for Storefront API @inContext pricing.
+ *
+ * The storefront serves a single Shopify "Europe" market that covers
+ * DE/NL/BE/LU/AT/FR/ES/IT/PL/DK. The country we send via @inContext drives
+ * VAT rates and currency for every Storefront API query — so a German
+ * shopper visiting `/de/...` MUST hit `country: DE` (19% VAT) and a Dutch
+ * shopper `/nl/...` MUST hit `country: NL` (21% VAT). Previously we
+ * hard-coded `country: NL` for every locale, which silently overcharged
+ * non-Dutch shoppers by 2 percentage points. This map fixes that.
+ *
+ * `en` is our default home market and resolves to DE (largest EU heating
+ * market and the company's home country). For locales that have no
+ * dedicated country split (e.g. fr → could be FR or BE/LU), we pick the
+ * largest single market for that language. A dedicated /be-fr or /be-nl
+ * locale can be added later without changing this default.
+ */
+export const LOCALE_TO_COUNTRY: Record<Locale, InContextHint['country']> = {
+  en: 'DE',
+  de: 'DE',
+  nl: 'NL',
+  fr: 'FR',
+  es: 'ES',
+  it: 'IT',
+  pl: 'PL',
+  da: 'DK',
+};
+
 export function localeToInContext(locale: Locale): InContextHint {
-  // Single Europe market for now (country=NL); language hint flips by locale
-  // so Shopify's Translate & Adapt layer serves translated strings via
-  // @inContext directives in Storefront API queries.
-  return {country: 'NL', language: LOCALE_TO_LANGUAGE[locale] ?? 'EN'};
+  return {
+    country: LOCALE_TO_COUNTRY[locale] ?? 'DE',
+    language: LOCALE_TO_LANGUAGE[locale] ?? 'EN',
+  };
 }

@@ -15,15 +15,25 @@ import {
 } from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
 import {normalizeLocale} from '~/lib/gberg/i18n';
+import {buildSeoMeta} from '~/lib/gberg/seo';
 
-export const meta: Route.MetaFunction = () => {
+export const meta: Route.MetaFunction = ({
+  location,
+}: {
+  location: {pathname: string};
+}) => {
+  const title = 'G-Berg Heizung — Premium European radiators';
+  const description =
+    'Hundreds of CE-certified radiators with full specs, compatibility notes and engineering support. Designed in Germany, made for Europe.';
   return [
-    {title: 'G-Berg Heizung — Premium European radiators'},
-    {
-      name: 'description',
-      content:
-        'Hundreds of CE-certified radiators with full specs, compatibility notes and engineering support. Designed in Germany, made for Europe.',
-    },
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'website',
+    }),
   ];
 };
 
@@ -176,6 +186,9 @@ export default function HomePage() {
                 alt={heroBanner.altText ?? 'G-Berg electric radiator'}
                 aspectRatio="3/4"
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                // Home hero is the LCP candidate — prioritise it.
+                loading="eager"
+                fetchPriority="high"
                 className="absolute inset-0 h-full w-full object-cover"
               />
             ) : (

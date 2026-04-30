@@ -27,8 +27,10 @@ import {Header} from '~/components/gberg/header';
 import {Footer} from '~/components/gberg/footer';
 import {WhatsAppBubble} from '~/components/gberg/whatsapp-bubble';
 import {Aside} from '~/components/Aside';
-import {DEFAULT_LOCALE, normalizeLocale} from '~/lib/gberg/i18n';
+import {DEFAULT_LOCALE, htmlLang, normalizeLocale} from '~/lib/gberg/i18n';
+import {detectLocaleFromPath} from '~/lib/gberg/seo';
 import type {MenuItem} from '@gberg/shopify-client';
+import {useLocation} from 'react-router';
 
 export type RootLoader = typeof loader;
 
@@ -141,9 +143,18 @@ function adaptMenu(raw: unknown): MenuItem[] {
 
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
+  // Resolve the active locale from the URL so <html lang> reflects what
+  // the user is actually reading. Falls back to DEFAULT_LOCALE for the
+  // unprefixed `/` (which the rest of the app treats as the default).
+  // useLocation works inside Layout because RR7 wraps Layout in the
+  // router context; outside a routable tree (e.g. very early errors) it
+  // throws — we guard with a try/catch via a custom hook indirection.
+  const location = useLocation();
+  const detected = detectLocaleFromPath(location.pathname);
+  const lang = htmlLang(detected ?? DEFAULT_LOCALE);
 
   return (
-    <html lang="en" data-brand="heating">
+    <html lang={lang} data-brand="heating">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -152,6 +163,17 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <Links />
       </head>
       <body>
+        {/*
+          Skip-to-content — visually hidden until focused via keyboard.
+          WCAG 2.4.1 (Bypass Blocks). The <main id="main"> wrapper below
+          is the target.
+        */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--color-text)] focus:px-4 focus:py-2 focus:text-[var(--color-surface)] focus:outline focus:outline-2 focus:outline-[var(--color-primary)]"
+        >
+          Skip to content
+        </a>
         {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
@@ -162,14 +184,16 @@ export function Layout({children}: {children?: React.ReactNode}) {
 
 export default function App() {
   const data = useRouteLoaderData<RootLoader>('root');
+  const location = useLocation();
 
   if (!data) {
     return <Outlet />;
   }
 
-  // Locale comes from URL — for the simple EN-only setup we hardcode here.
-  // ($locale) routes still receive the param via their own loader.
-  const locale = DEFAULT_LOCALE;
+  // Locale comes from URL. For unprefixed paths (`/`) we fall back to
+  // DEFAULT_LOCALE; ($locale) routes still receive the param via their
+  // own loader, so this is purely for header/footer link generation.
+  const locale = detectLocaleFromPath(location.pathname) ?? DEFAULT_LOCALE;
   const headerMenu = adaptMenu(data.header);
 
   return (

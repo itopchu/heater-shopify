@@ -5,7 +5,13 @@ import {CartForm} from '@shopify/hydrogen';
 import {CartMain} from '~/components/CartMain';
 
 export const meta: Route.MetaFunction = () => {
-  return [{title: `Hydrogen | Cart`}];
+  // Cart is user-personalized — we deliberately omit canonical/hreflang/OG
+  // (Phase 1 scope note). Title only, with `noindex` to keep it out of
+  // SERP entirely.
+  return [
+    {title: 'Cart — G-Berg Heizung'},
+    {name: 'robots', content: 'noindex, nofollow'},
+  ];
 };
 
 export const headers: HeadersFunction = ({actionHeaders}) => actionHeaders;

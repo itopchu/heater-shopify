@@ -68,6 +68,9 @@ export function Gallery({images, alt, className}: GalleryProps) {
           alt={active.altText ?? alt}
           aspectRatio="3/4"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 50vw"
+          // PDP hero is the LCP candidate on this route — prioritise it.
+          loading="eager"
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-contain"
         />
       </button>

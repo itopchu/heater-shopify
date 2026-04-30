@@ -10,15 +10,25 @@ import {createGbergClient} from '~/lib/storefront.server';
 import {fetchAllProducts} from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
 import {normalizeLocale} from '~/lib/gberg/i18n';
+import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
-export const meta: Route.MetaFunction = () => {
+export const meta: Route.MetaFunction = ({
+  location,
+}: {
+  location: {pathname: string};
+}) => {
+  const title = `Shop all radiators — ${BRAND_NAME}`;
+  const description =
+    'Every G-Berg radiator, towel rail, electric heater and underfloor system in one place.';
   return [
-    {title: 'Shop all radiators'},
-    {
-      name: 'description',
-      content:
-        'Every G-Berg radiator, towel rail, electric heater and underfloor system in one place.',
-    },
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'website',
+    }),
   ];
 };
 

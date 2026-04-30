@@ -9,6 +9,7 @@ import {createGbergClient} from '~/lib/storefront.server';
 import {fetchCollectionByHandle} from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
 import {normalizeLocale} from '~/lib/gberg/i18n';
+import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 /**
  * Track B (April 2026): allow-list of single-product collections. When a
@@ -23,12 +24,35 @@ const SINGLE_PRODUCT_COLLECTIONS = new Set([
   'fussbodenheizungsrohre',
 ]);
 
-export const meta: Route.MetaFunction = ({data}) => {
+export const meta: Route.MetaFunction = ({
+  data,
+  location,
+}: {
+  data?: {
+    collection?: {
+      title?: string;
+      description?: string;
+      seo?: {title?: string | null; description?: string | null} | null;
+    };
+    handle?: string;
+  };
+  location: {pathname: string};
+}) => {
   const col = data?.collection;
-  if (!col) return [{title: data?.handle ?? 'Collection'}];
+  const baseTitle = col?.seo?.title ?? col?.title ?? data?.handle ?? 'Collection';
+  const title = baseTitle.includes(BRAND_NAME)
+    ? baseTitle
+    : `${baseTitle} — ${BRAND_NAME}`;
+  const description = col?.seo?.description ?? col?.description ?? '';
   return [
-    {title: col.seo?.title ?? col.title},
-    {name: 'description', content: col.seo?.description ?? col.description ?? ''},
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'website',
+    }),
   ];
 };
 

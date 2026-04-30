@@ -15,6 +15,7 @@ import {
   type PageFallbackHandle,
 } from '~/lib/gberg/page-fallbacks';
 import {normalizeLocale} from '~/lib/gberg/i18n';
+import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 interface ResolvedPage {
   source: 'shopify' | 'fallback';
@@ -25,12 +26,28 @@ interface ResolvedPage {
   seo?: {title: string | null; description: string | null} | null;
 }
 
-export const meta: Route.MetaFunction = ({data}) => {
+export const meta: Route.MetaFunction = ({
+  data,
+  location,
+}: {
+  data?: {page?: ResolvedPage};
+  location: {pathname: string};
+}) => {
   const page = data?.page;
-  if (!page) return [{title: 'Page'}];
+  const baseTitle = page?.seo?.title ?? page?.title ?? 'Page';
+  const title = baseTitle.includes(BRAND_NAME)
+    ? baseTitle
+    : `${baseTitle} — ${BRAND_NAME}`;
+  const description = page?.seo?.description ?? page?.intro ?? '';
   return [
-    {title: page.seo?.title ?? page.title},
-    {name: 'description', content: page.seo?.description ?? page.intro ?? ''},
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'website',
+    }),
   ];
 };
 

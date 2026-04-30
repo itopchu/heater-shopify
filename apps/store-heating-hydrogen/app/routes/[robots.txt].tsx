@@ -15,11 +15,19 @@ export function loader({request}: Route.LoaderArgs) {
 }
 
 function robotsTxtData({url}: {url?: string}) {
-  const sitemapUrl = url ? `${url}/sitemap.xml` : undefined;
+  // Always advertise the production sitemap, regardless of which host
+  // the request hit (preview workers, custom domains, *.myshopify.dev).
+  // Crawlers should always discover the canonical sitemap.
+  const sitemapUrl = url
+    ? `${url}/sitemap.xml`
+    : 'https://www.gberg-heizung.de/sitemap.xml';
 
   return `
+# Sitemap directive must precede user-agent groups so it applies globally.
+Sitemap: ${sitemapUrl}
+
 User-agent: *
-${generalDisallowRules({sitemapUrl})}
+${generalDisallowRules()}
 
 # Google adsbot ignores robots.txt unless specifically named!
 User-agent: adsbot-google
@@ -34,11 +42,11 @@ Disallow: /
 
 User-agent: AhrefsBot
 Crawl-delay: 10
-${generalDisallowRules({sitemapUrl})}
+${generalDisallowRules()}
 
 User-agent: AhrefsSiteAudit
 Crawl-delay: 10
-${generalDisallowRules({sitemapUrl})}
+${generalDisallowRules()}
 
 User-agent: MJ12bot
 Crawl-Delay: 10
@@ -50,9 +58,11 @@ Crawl-delay: 1
 
 /**
  * This function generates disallow rules that generally follow what Shopify's
- * Online Store has as defaults for their robots.txt
+ * Online Store has as defaults for their robots.txt. The Sitemap directive
+ * is emitted once at the top of robots.txt rather than per user-agent
+ * group — that's where Google and Bing expect it.
  */
-function generalDisallowRules({sitemapUrl}: {sitemapUrl?: string}) {
+function generalDisallowRules() {
   return `Disallow: /cart
 Disallow: /account
 Disallow: /collections/*sort_by*
@@ -73,6 +83,5 @@ Disallow: /*/blogs/*%2b*
 Disallow: /policies/
 Disallow: /search
 Allow: /search/
-Disallow: /search/?*
-${sitemapUrl ? `Sitemap: ${sitemapUrl}` : ''}`;
+Disallow: /search/?*`;
 }

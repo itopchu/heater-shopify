@@ -11,15 +11,25 @@ import {fetchBlog} from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
 import {NewsletterForm} from '~/components/gberg/newsletter-form';
 import {normalizeLocale} from '~/lib/gberg/i18n';
+import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
-export const meta: Route.MetaFunction = () => {
+export const meta: Route.MetaFunction = ({
+  location,
+}: {
+  location: {pathname: string};
+}) => {
+  const title = `News — ${BRAND_NAME}`;
+  const description =
+    'Editorial pieces from G-Berg — sizing notes, product launches and EU heating regulation updates.';
   return [
-    {title: 'News'},
-    {
-      name: 'description',
-      content:
-        'Editorial pieces from G-Berg — sizing notes, product launches and EU heating regulation updates.',
-    },
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'website',
+    }),
   ];
 };
 

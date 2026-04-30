@@ -3,6 +3,27 @@ import type {Route} from './+types/collections._index';
 import {getPaginationVariables, Image} from '@shopify/hydrogen';
 import type {CollectionFragment} from 'storefrontapi.generated';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
+import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
+
+export const meta: Route.MetaFunction = ({
+  location,
+}: {
+  location: {pathname: string};
+}) => {
+  const title = `All collections — ${BRAND_NAME}`;
+  const description =
+    'Browse every G-Berg radiator category — bathroom, living-room, electric, replacement, underfloor and accessories.';
+  return [
+    {title},
+    {name: 'description', content: description},
+    ...buildSeoMeta({
+      title,
+      description,
+      pathname: location.pathname,
+      type: 'website',
+    }),
+  ];
+};
 
 export async function loader(args: Route.LoaderArgs) {
   // Start fetching non-critical data without blocking time to first byte
