@@ -4,12 +4,14 @@
  */
 import {useState} from 'react';
 import {cn} from '@gberg/ui';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface NewsletterFormProps {
   dark?: boolean;
 }
 
 export function NewsletterForm({dark = false}: NewsletterFormProps) {
+  const t = useT();
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
 
@@ -32,14 +34,14 @@ export function NewsletterForm({dark = false}: NewsletterFormProps) {
       }}
     >
       <label htmlFor="newsletter-email" className="sr-only">
-        Email address
+        {t('newsletter.email_label')}
       </label>
       <input
         id="newsletter-email"
         type="email"
         required
         autoComplete="email"
-        placeholder="you@example.com"
+        placeholder={t('newsletter.email_placeholder')}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className={cn(inputBase, inputColors)}
@@ -51,7 +53,7 @@ export function NewsletterForm({dark = false}: NewsletterFormProps) {
           buttonColors,
         )}
       >
-        {done ? 'Thanks!' : 'Subscribe'}
+        {done ? t('newsletter.subscribed_thanks') : t('newsletter.subscribe')}
       </button>
     </form>
   );

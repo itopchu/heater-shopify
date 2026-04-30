@@ -4,13 +4,14 @@
  * `WHATSAPP_PHONE_E164` is digits only, no `+`, no spaces — wa.me requires
  * E.164 in this form.
  */
+import {useT} from '~/lib/gberg/i18n';
+
 const WHATSAPP_PHONE_E164 = '491722706673';
-const WHATSAPP_DEFAULT_MESSAGE =
-  "Hi G-Berg — I'd like help picking the right radiator.";
 
 export function WhatsAppBubble() {
+  const t = useT();
   const href = `https://wa.me/${WHATSAPP_PHONE_E164}?text=${encodeURIComponent(
-    WHATSAPP_DEFAULT_MESSAGE,
+    t('whatsapp.default_message'),
   )}`;
 
   return (
@@ -18,7 +19,7 @@ export function WhatsAppBubble() {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with G-Berg on WhatsApp"
+      aria-label={t('whatsapp.aria_label')}
       className="fixed bottom-5 right-5 z-[60] flex h-14 w-14 items-center justify-center rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.18),0_2px_6px_rgba(0,0,0,0.12)] transition-transform duration-200 ease-out hover:scale-[1.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366] md:bottom-6 md:right-6 md:h-16 md:w-16"
       style={{backgroundColor: '#25D366'}}
     >
