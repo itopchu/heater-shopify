@@ -4,24 +4,29 @@ import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
 import {CartLineItem, type CartLine} from '~/components/CartLineItem';
 import {CartSummary} from './CartSummary';
+import {useT, type TFunction} from '~/lib/gberg/i18n';
 
 // Categories matching the homepage shortcut grid — a customer who lands on
 // an empty cart shouldn't have to backtrack to the home to start shopping.
-const EMPTY_CART_SHORTCUTS = [
-  {handle: 'wohnraumheizkoerper', label: 'Living rooms'},
-  {handle: 'badheizkoerper', label: 'Bathroom'},
-  {handle: 'badheizkoerper-elektrisch', label: 'Electric'},
-  {handle: 'austauschheizkoerper', label: 'Replacement'},
-  {handle: 'fussbodenheizung', label: 'Underfloor'},
-  {handle: 'accessories', label: 'Accessories'},
-];
+function getEmptyCartShortcuts(t: TFunction) {
+  return [
+    {handle: 'wohnraumheizkoerper', label: t('nav.living_rooms')},
+    {handle: 'badheizkoerper', label: t('nav.bathroom')},
+    {handle: 'badheizkoerper-elektrisch', label: t('nav.electric')},
+    {handle: 'austauschheizkoerper', label: t('nav.replacement')},
+    {handle: 'fussbodenheizung', label: t('nav.underfloor')},
+    {handle: 'accessories', label: t('nav.accessories')},
+  ];
+}
 
-const TRUST_BADGES = [
-  {title: 'Free EU delivery', sub: 'On orders over €500'},
-  {title: '30-day returns', sub: 'No questions asked'},
-  {title: '10-year warranty', sub: 'On all radiators'},
-  {title: 'Engineering support', sub: 'CE-certified, EU-made'},
-];
+function getTrustBadges(t: TFunction) {
+  return [
+    {title: t('cart.trust_free_eu_title'), sub: t('cart.trust_free_eu_sub')},
+    {title: t('cart.trust_returns_title'), sub: t('cart.trust_returns_sub')},
+    {title: t('cart.trust_warranty_title'), sub: t('cart.trust_warranty_sub')},
+    {title: t('cart.trust_engineering_title'), sub: t('cart.trust_engineering_sub')},
+  ];
+}
 
 export type CartLayout = 'page' | 'aside';
 
@@ -55,6 +60,8 @@ function getLineItemChildrenMap(lines: CartLine[]): LineItemChildrenMap {
  * It is used by both the /cart route and the cart aside dialog.
  */
 export function CartMain({layout, cart: originalCart}: CartMainProps) {
+  const t = useT();
+  const trustBadges = getTrustBadges(t);
   // The useOptimisticCart hook applies pending actions to the cart
   // so the user immediately sees feedback when they modify the cart.
   const cart = useOptimisticCart(originalCart);
@@ -70,7 +77,7 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
   // EMPTY STATE — page layout gets a full hero treatment; aside drawer stays compact.
   if (!cartHasItems) {
     return (
-      <section className={className} aria-label="Cart">
+      <section className={className} aria-label={t('cart.title')}>
         <CartEmpty layout={layout} />
       </section>
     );
@@ -79,22 +86,24 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
   // POPULATED STATE — page layout uses a two-column grid; aside drawer stays linear.
   if (layout === 'page') {
     return (
-      <section className={className} aria-label="Cart page">
+      <section className={className} aria-label={t('cart.aria_page')}>
         <header className="mb-10 md:mb-12">
           <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
-            Cart
+            {t('cart.title')}
           </p>
           <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.5rem)]">
-            Your cart
+            {t('cart.your_cart')}
           </h1>
           <p className="mt-3 text-[var(--color-text-muted)]">
-            {cart?.totalQuantity ?? 0} {(cart?.totalQuantity ?? 0) === 1 ? 'item' : 'items'} ready to ship.
+            {(cart?.totalQuantity ?? 0) === 1
+              ? t('cart.items_ready_singular', {count: cart?.totalQuantity ?? 0})
+              : t('cart.items_ready_plural', {count: cart?.totalQuantity ?? 0})}
           </p>
         </header>
 
         <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-14">
           <div>
-            <p id="cart-lines" className="sr-only">Line items</p>
+            <p id="cart-lines" className="sr-only">{t('cart.line_items')}</p>
             <ul
               aria-labelledby="cart-lines"
               className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]"
@@ -120,7 +129,7 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
               <CartSummary cart={cart} layout={layout} />
             </div>
             <ul className="mt-6 space-y-2 text-[13px] text-[var(--color-text-muted)]">
-              {TRUST_BADGES.map((b) => (
+              {trustBadges.map((b) => (
                 <li key={b.title} className="flex items-baseline gap-2">
                   <span aria-hidden className="text-[var(--color-primary)]">·</span>
                   <span>
@@ -139,8 +148,8 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
 
   // ASIDE / DRAWER LAYOUT — keep concise.
   return (
-    <section className={className} aria-label="Cart drawer">
-      <p id="cart-lines" className="sr-only">Line items</p>
+    <section className={className} aria-label={t('cart.aria_drawer')}>
+      <p id="cart-lines" className="sr-only">{t('cart.line_items')}</p>
       <ul
         aria-labelledby="cart-lines"
         className="divide-y divide-[var(--color-border)]"
@@ -166,19 +175,22 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
 
 function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
   const {close} = useAside();
+  const t = useT();
+  const shortcuts = getEmptyCartShortcuts(t);
+  const trustBadges = getTrustBadges(t);
 
   // Drawer (aside) variant — keep compact since vertical space is limited.
   if (layout === 'aside') {
     return (
       <div className="px-6 py-10 text-center">
         <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
-          Cart
+          {t('cart.title')}
         </p>
         <h3 className="mt-3 font-[var(--font-display)] text-2xl italic">
-          Your cart is empty
+          {t('cart.your_cart_empty')}
         </h3>
         <p className="mt-2 text-[14px] text-[var(--color-text-muted)]">
-          Pick a category to get started.
+          {t('cart.empty_aside_blurb')}
         </p>
         <Link
           to="/collections"
@@ -186,7 +198,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
           prefetch="viewport"
           className="mt-6 inline-flex items-center gap-2 rounded-sm bg-[var(--color-text)] px-5 py-3 text-[12px] uppercase tracking-[0.14em] font-semibold text-white hover:bg-[var(--color-primary)] transition-colors"
         >
-          Browse all products <span aria-hidden>→</span>
+          {t('cart.browse_all')} <span aria-hidden>→</span>
         </Link>
       </div>
     );
@@ -196,15 +208,13 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
   return (
     <div className="py-4 md:py-6">
       <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
-        Cart
+        {t('cart.title')}
       </p>
       <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.5rem)]">
-        Your cart is empty
+        {t('cart.your_cart_empty')}
       </h1>
       <p className="mt-4 max-w-xl text-[var(--color-text-muted)]">
-        Take a quiet moment to plan the room. Start with a category below or
-        head straight to the full catalog — every piece is CE-certified, EU-made
-        and ships free across Europe over €500.
+        {t('cart.empty_page_blurb')}
       </p>
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -214,7 +224,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
           prefetch="viewport"
           className="inline-flex items-center gap-2 rounded-sm bg-[var(--color-text)] px-6 py-3 text-[12px] uppercase tracking-[0.14em] font-semibold text-white hover:bg-[var(--color-primary)] transition-colors"
         >
-          Browse all products <span aria-hidden>→</span>
+          {t('cart.browse_all')} <span aria-hidden>→</span>
         </Link>
         <Link
           to="/collections/austauschheizkoerper"
@@ -222,16 +232,16 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
           prefetch="viewport"
           className="inline-flex items-center gap-2 rounded-sm border border-[var(--color-border)] px-6 py-3 text-[12px] uppercase tracking-[0.14em] font-semibold text-[var(--color-text)] hover:border-[var(--color-text)] transition-colors"
         >
-          Replacement radiators
+          {t('cart.replacement_radiators')}
         </Link>
       </div>
 
       <div className="mt-12">
         <p className="text-[11px] uppercase tracking-[0.14em] font-semibold text-[var(--color-text-muted)]">
-          Shop by room
+          {t('cart.shop_by_room')}
         </p>
         <ul className="mt-4 grid grid-cols-2 gap-px bg-[var(--color-border)] sm:grid-cols-3">
-          {EMPTY_CART_SHORTCUTS.map((c) => (
+          {shortcuts.map((c) => (
             <li key={c.handle} className="bg-[var(--color-surface)]">
               <Link
                 to={`/collections/${c.handle}`}
@@ -255,7 +265,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
       </div>
 
       <ul className="mt-12 grid gap-3 border-t border-[var(--color-border)] pt-8 text-[13px] text-[var(--color-text-muted)] sm:grid-cols-2 md:grid-cols-4">
-        {TRUST_BADGES.map((b) => (
+        {trustBadges.map((b) => (
           <li key={b.title} className="flex items-baseline gap-2">
             <span aria-hidden className="text-[var(--color-primary)]">·</span>
             <span>

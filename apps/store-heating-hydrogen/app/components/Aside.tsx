@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 import {useId} from 'react';
+import {useT} from '~/lib/gberg/i18n';
 
 type AsideType = 'search' | 'cart' | 'mobile' | 'closed';
 type AsideContextValue = {
@@ -36,6 +37,7 @@ export function Aside({
   const {type: activeType, close} = useAside();
   const expanded = type === activeType;
   const id = useId();
+  const t = useT();
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -64,7 +66,7 @@ export function Aside({
       <aside>
         <header>
           <h3 id={id}>{heading}</h3>
-          <button className="close reset" onClick={close} aria-label="Close">
+          <button className="close reset" onClick={close} aria-label={t('common.close')}>
             &times;
           </button>
         </header>
