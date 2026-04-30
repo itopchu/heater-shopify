@@ -25,6 +25,7 @@ import {
   withSpecRowIcons,
   type StructuredSpecRowInput,
 } from '~/lib/gberg/heating-derived';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface QuickFactsProps {
   product: HeatingProduct;
@@ -43,6 +44,7 @@ const SPEC_ICONS: Partial<Record<StructuredSpecRowInput['kind'], ReactNode>> = {
 };
 
 export function QuickFacts({product, className}: QuickFactsProps) {
+  const t = useT();
   const rows = withSpecRowIcons(buildStructuredSpecRows(product), SPEC_ICONS);
   // Track B (April 2026): 41/55 catalog products have empty `specs{}`. The
   // structured deriver currently falls back to a default warranty row so
@@ -52,7 +54,7 @@ export function QuickFacts({product, className}: QuickFactsProps) {
   return (
     <SpecsTable
       rows={rows}
-      caption="Key specifications"
+      caption={t('pdp.specs_caption')}
       className={className}
     />
   );

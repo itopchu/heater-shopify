@@ -23,6 +23,7 @@ import {useEffect, useState} from 'react';
 import type {Money, ProductOption, ProductVariant} from '@gberg/product-schema';
 import {cn, SelectField} from '@gberg/ui';
 import {formatMoney} from '~/lib/gberg/format';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface VariantSelectorProps {
   options: ProductOption[];
@@ -93,6 +94,7 @@ export function VariantSelector({
   locale,
   onVariantChange,
 }: VariantSelectorProps) {
+  const t = useT();
   const initial =
     variants[0]?.selectedOptions.reduce<Record<string, string>>(
       (acc, so) => ({...acc, [so.name]: so.value}),
@@ -129,8 +131,8 @@ export function VariantSelector({
           // suffix it as-is (e.g. "8 Höhe x Breite available").
           const caption =
             soldOut > 0
-              ? `${available} available, ${soldOut} sold out`
-              : `${available} available`;
+              ? t('pdp.variant_available_with_sold_out', {available, soldOut})
+              : t('pdp.variant_available_only', {available});
           return (
             <div key={opt.id}>
               <p
@@ -159,7 +161,7 @@ export function VariantSelector({
                   // Native <option> can't be styled, so we encode state
                   // textually: " — €87.54" or " — sold out".
                   const suffix = isSoldOut
-                    ? ' — sold out'
+                    ? t('pdp.variant_value_sold_out_suffix')
                     : price
                       ? ` — ${price}`
                       : '';

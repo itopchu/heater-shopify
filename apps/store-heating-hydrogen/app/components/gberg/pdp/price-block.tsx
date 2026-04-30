@@ -11,6 +11,7 @@
  */
 import type {Money} from '@gberg/product-schema';
 import {formatMoney} from '~/lib/gberg/format';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface PriceBlockProps {
   price: Money;
@@ -20,6 +21,7 @@ export interface PriceBlockProps {
 }
 
 export function PriceBlock({price, compareAtPrice, locale, vatNote}: PriceBlockProps) {
+  const t = useT();
   const priceNum = Number(price.amount);
   const compareNum = compareAtPrice ? Number(compareAtPrice.amount) : 0;
   const hasDiscount =
@@ -54,7 +56,7 @@ export function PriceBlock({price, compareAtPrice, locale, vatNote}: PriceBlockP
         ) : null}
       </div>
       <p className="mt-1 text-xs text-[var(--color-text-muted)]">
-        {vatNote ?? 'Incl. VAT, excl. shipping'}
+        {vatNote ?? t('pdp.price_vat_note')}
       </p>
     </div>
   );

@@ -3,6 +3,7 @@
  */
 import type {AiKeyFact} from '@gberg/product-schema';
 import {Eyebrow} from '@gberg/ui';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface AiBlockProps {
   entitySummary?: string;
@@ -17,22 +18,23 @@ export function AiBlock({
   compatibilitySummary,
   customerQuestionSummary,
 }: AiBlockProps) {
+  const t = useT();
   if (!entitySummary && !(keyFacts && keyFacts.length) && !compatibilitySummary) {
     return null;
   }
   return (
     <section
-      aria-label="Product overview"
+      aria-label={t('pdp.product_overview')}
       className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6"
     >
-      <Eyebrow>Product overview</Eyebrow>
+      <Eyebrow>{t('pdp.product_overview')}</Eyebrow>
       {entitySummary ? (
         <p className="mt-3 text-[var(--color-text)] leading-relaxed">{entitySummary}</p>
       ) : null}
 
       {keyFacts && keyFacts.length > 0 ? (
         <div className="mt-5">
-          <p className="text-sm font-semibold text-[var(--color-text-muted)]">Key facts</p>
+          <p className="text-sm font-semibold text-[var(--color-text-muted)]">{t('pdp.key_facts')}</p>
           <ul className="mt-2 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
             {keyFacts.map((f, i) => (
               <li
@@ -51,14 +53,14 @@ export function AiBlock({
 
       {compatibilitySummary ? (
         <div className="mt-5">
-          <p className="text-sm font-semibold text-[var(--color-text-muted)]">Compatibility</p>
+          <p className="text-sm font-semibold text-[var(--color-text-muted)]">{t('pdp.compatibility')}</p>
           <p className="mt-1 text-sm text-[var(--color-text)]">{compatibilitySummary}</p>
         </div>
       ) : null}
 
       {customerQuestionSummary ? (
         <div className="mt-5">
-          <p className="text-sm font-semibold text-[var(--color-text-muted)]">Most asked</p>
+          <p className="text-sm font-semibold text-[var(--color-text-muted)]">{t('pdp.most_asked')}</p>
           <p className="mt-1 text-sm text-[var(--color-text)]">{customerQuestionSummary}</p>
         </div>
       ) : null}

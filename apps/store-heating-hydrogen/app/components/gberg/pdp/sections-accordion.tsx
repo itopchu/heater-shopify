@@ -3,6 +3,7 @@
  */
 import type {ContentSection} from '@gberg/product-schema';
 import {cn} from '@gberg/ui';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface SectionsAccordionProps {
   sections: ContentSection[];
@@ -11,12 +12,13 @@ export interface SectionsAccordionProps {
 }
 
 export function SectionsAccordion({sections, source, className}: SectionsAccordionProps) {
+  const t = useT();
   if (!sections.length) return null;
   return (
     <div className={cn('space-y-3', className)}>
       {source === 'de' ? (
         <p className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-3 py-2 text-xs text-[var(--color-text-muted)]">
-          Translation pending — viewing source content (DE).
+          {t('pdp.translation_pending_de')}
         </p>
       ) : null}
       <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
@@ -27,7 +29,7 @@ export function SectionsAccordion({sections, source, className}: SectionsAccordi
             open={i === 0}
           >
             <summary className="flex cursor-pointer items-center justify-between gap-4 py-4 text-left font-medium text-[var(--color-text)] hover:bg-[var(--color-surface-muted)]">
-              <span className="flex-1">{section.title || `Section ${i + 1}`}</span>
+              <span className="flex-1">{section.title || t('pdp.section_fallback', {n: i + 1})}</span>
               <span
                 aria-hidden
                 className="text-[var(--color-text-muted)] transition group-open:rotate-45"

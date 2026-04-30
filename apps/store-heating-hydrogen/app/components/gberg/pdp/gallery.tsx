@@ -18,6 +18,7 @@ import {useEffect, useState} from 'react';
 import {Image} from '@shopify/hydrogen';
 import type {Image as ImageType} from '@gberg/product-schema';
 import {cn} from '@gberg/ui';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface GalleryProps {
   images: ImageType[];
@@ -28,6 +29,7 @@ export interface GalleryProps {
 const MAX_VISIBLE_THUMBS = 5;
 
 export function Gallery({images, alt, className}: GalleryProps) {
+  const t = useT();
   // Render an empty placeholder when no images — the catalog has 0
   // products with 0 images today, but degrade gracefully.
   if (!images?.length) {
@@ -60,7 +62,7 @@ export function Gallery({images, alt, className}: GalleryProps) {
       <button
         type="button"
         onClick={() => setModalOpen(true)}
-        aria-label="Open full-size gallery"
+        aria-label={t('pdp.gallery_open')}
         className="relative mx-auto block w-full max-w-md overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-surface-muted)] aspect-[3/4] sm:max-w-lg md:max-w-xl lg:mx-0 lg:max-w-none"
       >
         <Image
@@ -106,8 +108,8 @@ export function Gallery({images, alt, className}: GalleryProps) {
                   }}
                   aria-label={
                     showOverflowChip
-                      ? `View ${overflowCount} more images`
-                      : `Show image ${i + 1}`
+                      ? t('pdp.gallery_view_more', {count: overflowCount})
+                      : t('pdp.gallery_show_image', {index: i + 1})
                   }
                   aria-current={isActive ? 'true' : undefined}
                   className={cn(
@@ -126,7 +128,7 @@ export function Gallery({images, alt, className}: GalleryProps) {
                   />
                   {showOverflowChip ? (
                     <span className="absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-semibold text-white">
-                      +{overflowCount} more
+                      {t('pdp.gallery_view_more_label', {count: overflowCount})}
                     </span>
                   ) : null}
                 </button>
@@ -171,6 +173,7 @@ function GalleryModal({
   startIndex,
   onSelect,
 }: GalleryModalProps) {
+  const t = useT();
   const [index, setIndex] = useState(startIndex);
   useEffect(() => {
     setIndex(startIndex);
@@ -196,7 +199,7 @@ function GalleryModal({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Product gallery"
+      aria-label={t('pdp.gallery_aria')}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
       onClick={onClose}
     >
@@ -207,10 +210,10 @@ function GalleryModal({
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close gallery"
+          aria-label={t('pdp.gallery_close')}
           className="absolute right-2 top-2 z-10 rounded-full bg-white/90 px-3 py-1 text-sm font-medium text-[var(--color-text)] shadow-md hover:bg-white"
         >
-          Close
+          {t('common.close')}
         </button>
         <div className="aspect-[3/4] w-full overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-surface-muted)] sm:aspect-square">
           <Image
@@ -234,7 +237,7 @@ function GalleryModal({
                     setIndex(i);
                     onSelect(i);
                   }}
-                  aria-label={`Show image ${i + 1}`}
+                  aria-label={t('pdp.gallery_show_image', {index: i + 1})}
                   className={cn(
                     'absolute inset-0 h-full w-full',
                     i === index

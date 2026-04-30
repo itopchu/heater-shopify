@@ -2,6 +2,7 @@
  * PDP "Documents" block.
  */
 import {Eyebrow} from '@gberg/ui';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface DocumentsProps {
   primaryPdfUrl?: string;
@@ -13,22 +14,23 @@ function isUploadedUrl(url: string | undefined): url is string {
 }
 
 export function Documents({primaryPdfUrl}: DocumentsProps) {
+  const t = useT();
   const live = isUploadedUrl(primaryPdfUrl);
   if (!primaryPdfUrl) {
     return (
-      <section aria-label="Documents">
-        <Eyebrow>Documents</Eyebrow>
-        <h2 className="mt-3 text-2xl font-semibold">Datasheets &amp; manuals</h2>
+      <section aria-label={t('pdp.documents_label')}>
+        <Eyebrow>{t('pdp.documents_label')}</Eyebrow>
+        <h2 className="mt-3 text-2xl font-semibold">{t('pdp.documents_title')}</h2>
         <p className="mt-3 text-sm text-[var(--color-text-muted)]">
-          No documents attached to this product yet.
+          {t('pdp.documents_empty')}
         </p>
       </section>
     );
   }
   return (
-    <section aria-label="Documents">
-      <Eyebrow>Documents</Eyebrow>
-      <h2 className="mt-3 text-2xl font-semibold">Datasheets &amp; manuals</h2>
+    <section aria-label={t('pdp.documents_label')}>
+      <Eyebrow>{t('pdp.documents_label')}</Eyebrow>
+      <h2 className="mt-3 text-2xl font-semibold">{t('pdp.documents_title')}</h2>
       {live ? (
         <ul className="mt-4 space-y-2">
           <li>
@@ -38,8 +40,8 @@ export function Documents({primaryPdfUrl}: DocumentsProps) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-[var(--color-primary)] hover:underline"
             >
-              <span aria-hidden>PDF</span>
-              Download datasheet
+              <span aria-hidden>{t('pdp.documents_pending_label')}</span>
+              {t('pdp.documents_download')}
             </a>
           </li>
         </ul>
@@ -48,8 +50,8 @@ export function Documents({primaryPdfUrl}: DocumentsProps) {
           className="mt-4 inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface-muted)] px-3 py-2 text-sm text-[var(--color-text-muted)]"
           title="Datasheet available — coming online once we upload it to Shopify"
         >
-          <span aria-hidden>PDF</span>
-          Datasheet available — coming online
+          <span aria-hidden>{t('pdp.documents_pending_label')}</span>
+          {t('pdp.documents_pending_text')}
         </p>
       )}
     </section>

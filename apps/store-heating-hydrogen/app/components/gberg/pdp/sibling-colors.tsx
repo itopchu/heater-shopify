@@ -15,6 +15,7 @@ import {Link} from 'react-router';
 import {colorFamilyHex, type SiblingColor} from '~/lib/gberg/heating-derived';
 import {normalizeColorForLocale} from '~/lib/gberg/normalize';
 import {localeHref} from '~/lib/gberg/href';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface SiblingColorsProps {
   siblings: SiblingColor[];
@@ -23,11 +24,12 @@ export interface SiblingColorsProps {
 }
 
 export function SiblingColors({siblings, locale, className}: SiblingColorsProps) {
+  const t = useT();
   if (!siblings.length) return null;
   return (
     <div className={className}>
       <p className="text-xs font-medium uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
-        Also available in
+        {t('pdp.also_available_in')}
       </p>
       <ul className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
         {siblings.map((s, i) => {

@@ -25,6 +25,7 @@ import {VariantSelector} from './variant-selector';
 import {AddToCart} from './add-to-cart';
 import {PriceBlock} from './price-block';
 import {formatMoney} from '~/lib/gberg/format';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface BuyBoxProps {
   product: HeatingProduct;
@@ -95,11 +96,12 @@ function StickyMobileBuy({
   available,
   variantId,
 }: StickyMobileBuyProps) {
+  const t = useT();
   return (
     <div
       className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_-4px_16px_rgba(0,0,0,0.08)] lg:hidden pb-[env(safe-area-inset-bottom)]"
       role="region"
-      aria-label="Buy bar"
+      aria-label={t('pdp.buy_bar_aria')}
     >
       <div className="container-x flex items-center gap-3 py-3">
         <div className="min-w-0 flex-1">
@@ -131,7 +133,7 @@ function StickyMobileBuy({
                 loading={adding}
                 disabled={!available || !variantId}
               >
-                {!available ? 'Sold out' : justAdded ? 'Added' : 'Add to cart'}
+                {!available ? t('pdp.sold_out') : justAdded ? t('pdp.added') : t('pdp.add_to_cart')}
               </Button>
             );
           }}
