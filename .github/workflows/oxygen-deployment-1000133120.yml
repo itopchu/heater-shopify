@@ -36,6 +36,9 @@ jobs:
 
       - name: Build and Publish to Oxygen
         working-directory: apps/store-heating-hydrogen
-        run: npx shopify hydrogen deploy
+        # --force: the CI step copied pnpm-lock.yaml in just above, which
+        # leaves the working tree "dirty" relative to HEAD. The lockfile
+        # itself is identical to the committed root one, so this is safe.
+        run: npx shopify hydrogen deploy --force
         env:
           SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000133120 }}
