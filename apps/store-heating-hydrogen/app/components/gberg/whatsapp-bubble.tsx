@@ -1,11 +1,10 @@
 /**
  * Floating WhatsApp contact bubble — fixed bottom-right.
  *
- * Phone number is a placeholder. Replace `WHATSAPP_PHONE_E164` with the
- * real G-Berg WhatsApp Business number once it's provisioned. The string
- * is digits only, no `+`, no spaces — wa.me requires E.164 in this form.
+ * `WHATSAPP_PHONE_E164` is digits only, no `+`, no spaces — wa.me requires
+ * E.164 in this form.
  */
-const WHATSAPP_PHONE_E164 = '4930123456789';
+const WHATSAPP_PHONE_E164 = '491722706673';
 const WHATSAPP_DEFAULT_MESSAGE =
   "Hi G-Berg — I'd like help picking the right radiator.";
 

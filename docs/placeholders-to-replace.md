@@ -52,7 +52,7 @@ Last updated: 2026-04-24. Bump this after every placeholder change.
 
 ## 🟡 Needed before customer-visible soft launch
 
-### 7. WhatsApp chat bubble — phone number
+### 7. WhatsApp chat bubble — phone number ✅ DONE (491722706673, set 2026-04-30)
 - **Where**: [theme/config/settings_data.json](../theme/config/settings_data.json) key `whatsapp_phone`. Also editable in Admin → Theme Editor → Theme settings → WhatsApp chat bubble.
 - **Current**: `491700000000` (clearly-fake placeholder, German +49 170 mobile format, all trailing zeros).
 - **Replace with**: real customer-facing WhatsApp-business number, digits only, international format (example: `491701234567` for +49 170 123 4567).
