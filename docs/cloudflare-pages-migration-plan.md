@@ -47,20 +47,20 @@ Local build verified: `pnpm build:cf` produces a 480 KB `_worker.js` plus `_rout
 **Environment variables (Production):**
 
 ```
-PUBLIC_STORE_DOMAIN              = pyzype-xf.myshopify.com
-PUBLIC_STOREFRONT_ID             = 1000133120
-PUBLIC_STOREFRONT_API_TOKEN      = 997c874a26d55c148e89fd78e29a38bc
+PUBLIC_STORE_DOMAIN              = <from .env.local — pyzype-xf.myshopify.com>
+PUBLIC_STOREFRONT_ID             = <from .env.local>
+PUBLIC_STOREFRONT_API_TOKEN      = <from .env.local — REGENERATE in Hydrogen settings before pasting>
 PUBLIC_STOREFRONT_API_VERSION    = 2026-04
 PUBLIC_CHECKOUT_DOMAIN           = www.gberg-heizung.de
-PRIVATE_STOREFRONT_API_TOKEN     = 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
-PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID = e657e0b9-94a7-41fb-8e19-ca0011e9d468
-PUBLIC_CUSTOMER_ACCOUNT_API_URL  = https://shopify.com/104202633553
-SHOP_ID                          = 104202633553
-SESSION_SECRET                   = 84be447d87bc316fa8962911114740663bb24dab
+PRIVATE_STOREFRONT_API_TOKEN     = <from .env.local — REGENERATE in Hydrogen settings before pasting>
+PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID = <from .env.local>
+PUBLIC_CUSTOMER_ACCOUNT_API_URL  = <from .env.local — https://shopify.com/{SHOP_ID}>
+SHOP_ID                          = <from .env.local>
+SESSION_SECRET                   = <generate fresh, e.g. `openssl rand -hex 32`>
 NODE_VERSION                     = 20
 ```
 
-`NODE_VERSION=20` is required so CF uses the same Node major as our local toolchain.
+Read the live values from `apps/store-heating-hydrogen/.env` (gitignored) at the time you wire CF Pages — never commit them. `NODE_VERSION=20` is required so CF uses the same Node major as our local toolchain.
 
 ### 3. First deploy
 
