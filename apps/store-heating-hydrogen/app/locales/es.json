@@ -17,7 +17,6 @@
     "error_generic": "Algo salió mal.",
     "unknown_error": "Error desconocido"
   },
-
   "header": {
     "home": "Inicio",
     "cart": "Carrito",
@@ -37,7 +36,6 @@
     "quick_links": "Enlaces rápidos",
     "contact": "Contacto"
   },
-
   "utility_bar": {
     "free_eu_delivery": "Envío UE gratuito",
     "warranty_10y": "10 años de garantía",
@@ -45,12 +43,10 @@
     "secure_checkout": "Pago seguro",
     "need_help_phone": "¿Necesita ayuda? +49 (0)30 12345678"
   },
-
   "language_switcher": {
     "aria_label": "Idioma: {name}. Haga clic para cambiar.",
     "choose_language": "Elegir idioma"
   },
-
   "nav": {
     "shop_all": "Ver todo",
     "living_rooms": "Salones",
@@ -62,7 +58,6 @@
     "engineered_tagline_line1": "Diseñado, certificado,",
     "engineered_tagline_line2": "entregado en toda Europa."
   },
-
   "footer": {
     "stay_in_loop": "Manténgase informado",
     "newsletter_promise": "Novedades y ofertas exclusivas UE.",
@@ -83,7 +78,6 @@
     "copyright": "© {year} G-Berg GmbH",
     "vat_note": "Precios con IVA local incluido, gastos de envío aparte"
   },
-
   "newsletter": {
     "email_label": "Dirección de correo electrónico",
     "email_placeholder": "tu@ejemplo.es",
@@ -91,12 +85,10 @@
     "subscribed_thanks": "¡Gracias!",
     "first_guide_promise": "Un correo cuando se publique la primera guía."
   },
-
   "whatsapp": {
     "aria_label": "Hable con G-Berg por WhatsApp",
     "default_message": "Hola G-Berg — me gustaría que me ayudaran a elegir el radiador adecuado."
   },
-
   "home": {
     "meta_title": "G-Berg Heizung — Radiadores europeos premium",
     "meta_description": "Cientos de radiadores certificados CE con especificaciones completas, notas de compatibilidad y asesoramiento técnico. Designed in Germany, fabricado para Europa.",
@@ -150,7 +142,6 @@
     "why_us_engineering": "Asesoramiento técnico",
     "why_us_warranty": "10 años de garantía"
   },
-
   "pdp": {
     "add_to_cart": "Añadir al carrito",
     "added": "Añadido",
@@ -220,9 +211,11 @@
     "heat_pump_ready": "Compatible con bomba de calor",
     "bestseller_badge": "Más vendido",
     "product_no_longer_available": "Producto ya no disponible",
-    "product_no_longer_available_description": "Este producto ya no está disponible. Explore el catálogo completo para encontrar radiadores similares."
+    "product_no_longer_available_description": "Este producto ya no está disponible. Explore el catálogo completo para encontrar radiadores similares.",
+    "quantity_label": "Cantidad",
+    "quantity_decrease": "Disminuir la cantidad",
+    "quantity_increase": "Aumentar la cantidad"
   },
-
   "plp": {
     "heading_eyebrow": "Calefacción",
     "heading_about_category_eyebrow": "Sobre esta categoría",
@@ -274,7 +267,6 @@
     "sort_title": "Título (A → Z)",
     "empty_grid_default": "Aún no hay productos."
   },
-
   "search": {
     "placeholder": "Buscar radiadores, series, dimensiones…",
     "aria_label": "Buscar",
@@ -295,7 +287,6 @@
     "no_results_for_query": "Ningún producto coincide con «{query}». Pruebe con un nombre de serie (Astoria, Elanor, Konrad), una dimensión (p. ej. 1800x600) o una estancia (baño, salón).",
     "view_all_results": "Ver todos los resultados de «{query}»"
   },
-
   "cart": {
     "title": "Carrito",
     "your_cart": "Su carrito",
@@ -335,7 +326,6 @@
     "trust_engineering_title": "Asesoramiento técnico",
     "trust_engineering_sub": "Certificado CE, fabricado en la UE"
   },
-
   "blogs": {
     "meta_title": "Noticias",
     "meta_description": "Piezas editoriales de G-Berg — notas de dimensionamiento, lanzamientos de productos y actualizaciones de normativa UE de calefacción.",
@@ -361,18 +351,15 @@
     "coming_soon_card_aria": "Próximamente — fichas de marcador",
     "coming_soon_email_promise": "Suscríbase abajo — le avisamos cuando esté en línea."
   },
-
   "pages": {
     "meta_title_default": "Página",
     "eyebrow": "Información",
     "fallback_notice": "Texto provisional. Un comerciante puede publicar la versión final en Shopify Admin → Tienda online → Páginas."
   },
-
   "policies": {
     "title": "Políticas",
     "back_link": "← Volver a Políticas"
   },
-
   "errors": {
     "404_default": "Página no encontrada",
     "cart_link_expired": "El enlace puede haber caducado. Compruebe la URL.",

@@ -17,7 +17,6 @@
     "error_generic": "Something went wrong.",
     "unknown_error": "Unknown error"
   },
-
   "header": {
     "home": "Home",
     "cart": "Cart",
@@ -37,7 +36,6 @@
     "quick_links": "Quick links",
     "contact": "Contact"
   },
-
   "utility_bar": {
     "free_eu_delivery": "Free EU delivery",
     "warranty_10y": "10-year warranty",
@@ -45,12 +43,10 @@
     "secure_checkout": "Secure checkout",
     "need_help_phone": "Need help? +49 (0)30 12345678"
   },
-
   "language_switcher": {
     "aria_label": "Language: {name}. Click to change.",
     "choose_language": "Choose language"
   },
-
   "nav": {
     "shop_all": "Shop all",
     "living_rooms": "Living rooms",
@@ -62,7 +58,6 @@
     "engineered_tagline_line1": "Engineered, certified,",
     "engineered_tagline_line2": "delivered across Europe."
   },
-
   "footer": {
     "stay_in_loop": "Stay in the loop",
     "newsletter_promise": "New arrivals and EU‑only deals.",
@@ -83,7 +78,6 @@
     "copyright": "© {year} G-Berg GmbH",
     "vat_note": "Prices include local VAT, exclude shipping"
   },
-
   "newsletter": {
     "email_label": "Email address",
     "email_placeholder": "you@example.com",
@@ -91,12 +85,10 @@
     "subscribed_thanks": "Thanks!",
     "first_guide_promise": "One email when the first guide ships."
   },
-
   "whatsapp": {
     "aria_label": "Chat with G-Berg on WhatsApp",
     "default_message": "Hi G-Berg — I'd like help picking the right radiator."
   },
-
   "home": {
     "meta_title": "G-Berg Heizung — Premium European radiators",
     "meta_description": "Hundreds of CE-certified radiators with full specs, compatibility notes and engineering support. Designed in Germany, made for Europe.",
@@ -150,7 +142,6 @@
     "why_us_engineering": "Engineering support",
     "why_us_warranty": "10-year warranty"
   },
-
   "pdp": {
     "add_to_cart": "Add to cart",
     "added": "Added",
@@ -220,9 +211,11 @@
     "heat_pump_ready": "Heat‑pump ready",
     "bestseller_badge": "Bestseller",
     "product_no_longer_available": "Product no longer available",
-    "product_no_longer_available_description": "This product is no longer available. Browse the full catalogue for similar radiators."
+    "product_no_longer_available_description": "This product is no longer available. Browse the full catalogue for similar radiators.",
+    "quantity_label": "Quantity",
+    "quantity_decrease": "Decrease quantity",
+    "quantity_increase": "Increase quantity"
   },
-
   "plp": {
     "heading_eyebrow": "Heating",
     "heading_about_category_eyebrow": "About this category",
@@ -274,7 +267,6 @@
     "sort_title": "Title (A → Z)",
     "empty_grid_default": "No products to show yet."
   },
-
   "search": {
     "placeholder": "Search radiators, series, dimensions…",
     "aria_label": "Search",
@@ -295,7 +287,6 @@
     "no_results_for_query": "No products match \"{query}\". Try a series name (Astoria, Elanor, Konrad), a dimension (e.g. 1800x600), or a room (bathroom, living room).",
     "view_all_results": "View all results for \"{query}\""
   },
-
   "cart": {
     "title": "Cart",
     "your_cart": "Your cart",
@@ -335,7 +326,6 @@
     "trust_engineering_title": "Engineering support",
     "trust_engineering_sub": "CE-certified, EU-made"
   },
-
   "blogs": {
     "meta_title": "News",
     "meta_description": "Editorial pieces from G-Berg — sizing notes, product launches and EU heating regulation updates.",
@@ -361,18 +351,15 @@
     "coming_soon_card_aria": "Coming soon — placeholder cards",
     "coming_soon_email_promise": "Sign up below — we'll email when it's live."
   },
-
   "pages": {
     "meta_title_default": "Page",
     "eyebrow": "Information",
     "fallback_notice": "Placeholder copy. A merchant can publish the live version in Shopify Admin → Online Store → Pages."
   },
-
   "policies": {
     "title": "Policies",
     "back_link": "← Back to Policies"
   },
-
   "errors": {
     "404_default": "Page not found",
     "cart_link_expired": "Link may be expired. Try checking the URL.",

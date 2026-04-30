@@ -17,7 +17,6 @@
     "error_generic": "Une erreur est survenue.",
     "unknown_error": "Erreur inconnue"
   },
-
   "header": {
     "home": "Accueil",
     "cart": "Panier",
@@ -37,7 +36,6 @@
     "quick_links": "Liens rapides",
     "contact": "Contact"
   },
-
   "utility_bar": {
     "free_eu_delivery": "Livraison UE gratuite",
     "warranty_10y": "Garantie 10 ans",
@@ -45,12 +43,10 @@
     "secure_checkout": "Paiement sécurisé",
     "need_help_phone": "Besoin d'aide ? +49 (0)30 12345678"
   },
-
   "language_switcher": {
     "aria_label": "Langue : {name}. Cliquez pour changer.",
     "choose_language": "Choisir la langue"
   },
-
   "nav": {
     "shop_all": "Tout afficher",
     "living_rooms": "Pièces de vie",
@@ -62,7 +58,6 @@
     "engineered_tagline_line1": "Conçu, certifié,",
     "engineered_tagline_line2": "livré dans toute l'Europe."
   },
-
   "footer": {
     "stay_in_loop": "Restez informé",
     "newsletter_promise": "Nouveautés et offres exclusives UE.",
@@ -83,7 +78,6 @@
     "copyright": "© {year} G-Berg GmbH",
     "vat_note": "Prix TTC, hors frais de livraison"
   },
-
   "newsletter": {
     "email_label": "Adresse e-mail",
     "email_placeholder": "vous@exemple.fr",
@@ -91,12 +85,10 @@
     "subscribed_thanks": "Merci !",
     "first_guide_promise": "Un e-mail dès que le premier guide est en ligne."
   },
-
   "whatsapp": {
     "aria_label": "Discutez avec G-Berg sur WhatsApp",
     "default_message": "Bonjour G-Berg — j'aimerais être conseillé pour choisir le bon radiateur."
   },
-
   "home": {
     "meta_title": "G-Berg Heizung — Radiateurs européens haut de gamme",
     "meta_description": "Des centaines de radiateurs certifiés CE avec spécifications complètes, notes de compatibilité et support technique. Designed in Germany, fabriqué pour l'Europe.",
@@ -150,7 +142,6 @@
     "why_us_engineering": "Support technique",
     "why_us_warranty": "Garantie 10 ans"
   },
-
   "pdp": {
     "add_to_cart": "Ajouter au panier",
     "added": "Ajouté",
@@ -220,9 +211,11 @@
     "heat_pump_ready": "Compatible PAC",
     "bestseller_badge": "Best-seller",
     "product_no_longer_available": "Produit indisponible",
-    "product_no_longer_available_description": "Ce produit n'est plus disponible. Parcourez le catalogue complet pour trouver des radiateurs similaires."
+    "product_no_longer_available_description": "Ce produit n'est plus disponible. Parcourez le catalogue complet pour trouver des radiateurs similaires.",
+    "quantity_label": "Quantité",
+    "quantity_decrease": "Diminuer la quantité",
+    "quantity_increase": "Augmenter la quantité"
   },
-
   "plp": {
     "heading_eyebrow": "Chauffage",
     "heading_about_category_eyebrow": "À propos de cette catégorie",
@@ -274,7 +267,6 @@
     "sort_title": "Titre (A → Z)",
     "empty_grid_default": "Aucun produit pour le moment."
   },
-
   "search": {
     "placeholder": "Rechercher radiateurs, séries, dimensions…",
     "aria_label": "Rechercher",
@@ -295,7 +287,6 @@
     "no_results_for_query": "Aucun produit ne correspond à « {query} ». Essayez un nom de série (Astoria, Elanor, Konrad), une dimension (par ex. 1800x600) ou une pièce (salle de bain, salon).",
     "view_all_results": "Voir tous les résultats pour « {query} »"
   },
-
   "cart": {
     "title": "Panier",
     "your_cart": "Votre panier",
@@ -335,7 +326,6 @@
     "trust_engineering_title": "Support technique",
     "trust_engineering_sub": "Certifié CE, fabriqué dans l'UE"
   },
-
   "blogs": {
     "meta_title": "Actualités",
     "meta_description": "Articles éditoriaux de G-Berg — notes de dimensionnement, lancements de produits et mises à jour réglementaires UE.",
@@ -361,18 +351,15 @@
     "coming_soon_card_aria": "À venir — fiches d'attente",
     "coming_soon_email_promise": "Inscrivez-vous ci-dessous — nous vous écrirons à la mise en ligne."
   },
-
   "pages": {
     "meta_title_default": "Page",
     "eyebrow": "Information",
     "fallback_notice": "Texte d'attente. Un commerçant peut publier la version définitive dans Shopify Admin → Boutique en ligne → Pages."
   },
-
   "policies": {
     "title": "Mentions légales",
     "back_link": "← Retour aux mentions"
   },
-
   "errors": {
     "404_default": "Page introuvable",
     "cart_link_expired": "Le lien a peut-être expiré. Vérifiez l'URL.",

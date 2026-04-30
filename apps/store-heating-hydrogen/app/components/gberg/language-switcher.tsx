@@ -10,7 +10,7 @@
  * language hint downstream.
  */
 import {Link, useLocation} from 'react-router';
-import {SUPPORTED_LOCALES, LOCALE_LABEL, LOCALE_NAME, type Locale} from '~/lib/gberg/i18n';
+import {SUPPORTED_LOCALES, LOCALE_LABEL, LOCALE_NAME, tFor, type Locale} from '~/lib/gberg/i18n';
 
 interface Props {
   locale: string;
@@ -31,11 +31,12 @@ export default function LanguageSwitcher({locale}: Props) {
   const current: Locale = (SUPPORTED_LOCALES as readonly string[]).includes(locale)
     ? (locale as Locale)
     : 'en';
+  const t = tFor(current);
 
   return (
     <details className="group relative z-[60]">
       <summary
-        aria-label={`Language: ${LOCALE_NAME[current]}. Click to change.`}
+        aria-label={t('language_switcher.aria_label', {name: LOCALE_NAME[current]})}
         className="list-none cursor-pointer select-none inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm text-[11px] uppercase tracking-[0.12em] font-semibold text-white hover:text-white transition-colors [&::-webkit-details-marker]:hidden"
       >
         <span aria-hidden className="opacity-80">▸</span>
@@ -44,7 +45,7 @@ export default function LanguageSwitcher({locale}: Props) {
       </summary>
       <div
         role="menu"
-        aria-label="Choose language"
+        aria-label={t('language_switcher.choose_language')}
         className="absolute right-0 top-full mt-1 min-w-[170px] rounded-sm bg-[var(--color-surface)] shadow-[0_8px_24px_rgba(0,0,0,0.18)] ring-1 ring-[var(--color-border)] py-1 z-[60]"
       >
         {SUPPORTED_LOCALES.map((loc) => {

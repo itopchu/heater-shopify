@@ -17,7 +17,6 @@
     "error_generic": "Etwas ist schiefgelaufen.",
     "unknown_error": "Unbekannter Fehler"
   },
-
   "header": {
     "home": "Startseite",
     "cart": "Warenkorb",
@@ -37,7 +36,6 @@
     "quick_links": "Schnellzugriff",
     "contact": "Kontakt"
   },
-
   "utility_bar": {
     "free_eu_delivery": "Kostenloser EU-Versand",
     "warranty_10y": "10 Jahre Garantie",
@@ -45,12 +43,10 @@
     "secure_checkout": "Sicherer Checkout",
     "need_help_phone": "Brauchen Sie Hilfe? +49 (0)30 12345678"
   },
-
   "language_switcher": {
     "aria_label": "Sprache: {name}. Klicken zum Ändern.",
     "choose_language": "Sprache wählen"
   },
-
   "nav": {
     "shop_all": "Alles anzeigen",
     "living_rooms": "Wohnräume",
@@ -62,7 +58,6 @@
     "engineered_tagline_line1": "Konstruiert, zertifiziert,",
     "engineered_tagline_line2": "europaweit geliefert."
   },
-
   "footer": {
     "stay_in_loop": "Bleiben Sie auf dem Laufenden",
     "newsletter_promise": "Neuheiten und exklusive EU‑Angebote.",
@@ -83,7 +78,6 @@
     "copyright": "© {year} G-Berg GmbH",
     "vat_note": "Preise inkl. lokaler MwSt., zzgl. Versand"
   },
-
   "newsletter": {
     "email_label": "E-Mail-Adresse",
     "email_placeholder": "name@beispiel.de",
@@ -91,12 +85,10 @@
     "subscribed_thanks": "Vielen Dank!",
     "first_guide_promise": "Eine E-Mail, sobald der erste Ratgeber online ist."
   },
-
   "whatsapp": {
     "aria_label": "Mit G-Berg auf WhatsApp chatten",
     "default_message": "Hallo G-Berg — ich hätte gerne Hilfe bei der Auswahl des richtigen Heizkörpers."
   },
-
   "home": {
     "meta_title": "G-Berg Heizung — Premium-Heizkörper aus Europa",
     "meta_description": "Hunderte CE-zertifizierte Heizkörper mit vollständigen Spezifikationen, Kompatibilitätshinweisen und technischer Beratung. Designed in Germany, gefertigt für Europa.",
@@ -150,7 +142,6 @@
     "why_us_engineering": "Technische Beratung",
     "why_us_warranty": "10 Jahre Garantie"
   },
-
   "pdp": {
     "add_to_cart": "In den Warenkorb",
     "added": "Hinzugefügt",
@@ -220,9 +211,11 @@
     "heat_pump_ready": "Wärmepumpen‑tauglich",
     "bestseller_badge": "Bestseller",
     "product_no_longer_available": "Produkt nicht mehr verfügbar",
-    "product_no_longer_available_description": "Dieses Produkt ist nicht mehr verfügbar. Stöbern Sie im vollständigen Katalog nach ähnlichen Heizkörpern."
+    "product_no_longer_available_description": "Dieses Produkt ist nicht mehr verfügbar. Stöbern Sie im vollständigen Katalog nach ähnlichen Heizkörpern.",
+    "quantity_label": "Menge",
+    "quantity_decrease": "Menge verringern",
+    "quantity_increase": "Menge erhöhen"
   },
-
   "plp": {
     "heading_eyebrow": "Heizung",
     "heading_about_category_eyebrow": "Über diese Kategorie",
@@ -274,7 +267,6 @@
     "sort_title": "Titel (A → Z)",
     "empty_grid_default": "Noch keine Produkte vorhanden."
   },
-
   "search": {
     "placeholder": "Heizkörper, Serien, Maße suchen…",
     "aria_label": "Suche",
@@ -295,7 +287,6 @@
     "no_results_for_query": "Keine Produkte entsprechen „{query}“. Versuchen Sie einen Seriennamen (Astoria, Elanor, Konrad), ein Maß (z. B. 1800x600) oder einen Raum (Bad, Wohnzimmer).",
     "view_all_results": "Alle Ergebnisse für „{query}“ anzeigen"
   },
-
   "cart": {
     "title": "Warenkorb",
     "your_cart": "Ihr Warenkorb",
@@ -335,7 +326,6 @@
     "trust_engineering_title": "Technische Beratung",
     "trust_engineering_sub": "CE-zertifiziert, in der EU gefertigt"
   },
-
   "blogs": {
     "meta_title": "News",
     "meta_description": "Redaktionelle Beiträge von G-Berg — Auslegungshinweise, Produktneuheiten und Aktualisierungen zu EU-Heizungsvorschriften.",
@@ -361,18 +351,15 @@
     "coming_soon_card_aria": "Demnächst — Platzhalterkarten",
     "coming_soon_email_promise": "Tragen Sie sich unten ein — wir mailen, sobald es online ist."
   },
-
   "pages": {
     "meta_title_default": "Seite",
     "eyebrow": "Information",
     "fallback_notice": "Platzhaltertext. Eine Händlerin oder ein Händler kann die Live-Version unter Shopify Admin → Online-Shop → Seiten veröffentlichen."
   },
-
   "policies": {
     "title": "Richtlinien",
     "back_link": "← Zurück zu den Richtlinien"
   },
-
   "errors": {
     "404_default": "Seite nicht gefunden",
     "cart_link_expired": "Der Link ist möglicherweise abgelaufen. Bitte überprüfen Sie die URL.",

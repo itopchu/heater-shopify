@@ -17,7 +17,6 @@
     "error_generic": "Qualcosa è andato storto.",
     "unknown_error": "Errore sconosciuto"
   },
-
   "header": {
     "home": "Home",
     "cart": "Carrello",
@@ -37,7 +36,6 @@
     "quick_links": "Link rapidi",
     "contact": "Contatti"
   },
-
   "utility_bar": {
     "free_eu_delivery": "Spedizione UE gratuita",
     "warranty_10y": "10 anni di garanzia",
@@ -45,12 +43,10 @@
     "secure_checkout": "Pagamento sicuro",
     "need_help_phone": "Serve aiuto? +49 (0)30 12345678"
   },
-
   "language_switcher": {
     "aria_label": "Lingua: {name}. Fai clic per cambiare.",
     "choose_language": "Scegli la lingua"
   },
-
   "nav": {
     "shop_all": "Vedi tutto",
     "living_rooms": "Soggiorni",
@@ -62,7 +58,6 @@
     "engineered_tagline_line1": "Progettato, certificato,",
     "engineered_tagline_line2": "consegnato in tutta Europa."
   },
-
   "footer": {
     "stay_in_loop": "Resta aggiornato",
     "newsletter_promise": "Novità e offerte esclusive UE.",
@@ -83,7 +78,6 @@
     "copyright": "© {year} G-Berg GmbH",
     "vat_note": "Prezzi IVA inclusa, spedizione esclusa"
   },
-
   "newsletter": {
     "email_label": "Indirizzo email",
     "email_placeholder": "tu@esempio.it",
@@ -91,12 +85,10 @@
     "subscribed_thanks": "Grazie!",
     "first_guide_promise": "Una email quando uscirà la prima guida."
   },
-
   "whatsapp": {
     "aria_label": "Chatta con G-Berg su WhatsApp",
     "default_message": "Ciao G-Berg — vorrei aiuto per scegliere il radiatore giusto."
   },
-
   "home": {
     "meta_title": "G-Berg Heizung — Radiatori europei premium",
     "meta_description": "Centinaia di radiatori certificati CE con specifiche complete, note di compatibilità e supporto tecnico. Designed in Germany, prodotto per l'Europa.",
@@ -150,7 +142,6 @@
     "why_us_engineering": "Supporto tecnico",
     "why_us_warranty": "10 anni di garanzia"
   },
-
   "pdp": {
     "add_to_cart": "Aggiungi al carrello",
     "added": "Aggiunto",
@@ -220,9 +211,11 @@
     "heat_pump_ready": "Compatibile pompa di calore",
     "bestseller_badge": "Bestseller",
     "product_no_longer_available": "Prodotto non più disponibile",
-    "product_no_longer_available_description": "Questo prodotto non è più disponibile. Sfoglia il catalogo completo per radiatori simili."
+    "product_no_longer_available_description": "Questo prodotto non è più disponibile. Sfoglia il catalogo completo per radiatori simili.",
+    "quantity_label": "Quantità",
+    "quantity_decrease": "Diminuisci quantità",
+    "quantity_increase": "Aumenta quantità"
   },
-
   "plp": {
     "heading_eyebrow": "Riscaldamento",
     "heading_about_category_eyebrow": "Su questa categoria",
@@ -274,7 +267,6 @@
     "sort_title": "Titolo (A → Z)",
     "empty_grid_default": "Nessun prodotto al momento."
   },
-
   "search": {
     "placeholder": "Cerca radiatori, serie, dimensioni…",
     "aria_label": "Cerca",
@@ -295,7 +287,6 @@
     "no_results_for_query": "Nessun prodotto corrisponde a «{query}». Prova un nome di serie (Astoria, Elanor, Konrad), una dimensione (es. 1800x600) o una stanza (bagno, soggiorno).",
     "view_all_results": "Vedi tutti i risultati per «{query}»"
   },
-
   "cart": {
     "title": "Carrello",
     "your_cart": "Il tuo carrello",
@@ -335,7 +326,6 @@
     "trust_engineering_title": "Supporto tecnico",
     "trust_engineering_sub": "Certificato CE, prodotto in UE"
   },
-
   "blogs": {
     "meta_title": "News",
     "meta_description": "Articoli editoriali di G-Berg — note di dimensionamento, lanci di prodotti e aggiornamenti normativi UE per il riscaldamento.",
@@ -361,18 +351,15 @@
     "coming_soon_card_aria": "In arrivo — schede segnaposto",
     "coming_soon_email_promise": "Iscriviti qui sotto — ti scriveremo appena online."
   },
-
   "pages": {
     "meta_title_default": "Pagina",
     "eyebrow": "Informazioni",
     "fallback_notice": "Testo segnaposto. Un commerciante può pubblicare la versione live in Shopify Admin → Negozio online → Pagine."
   },
-
   "policies": {
     "title": "Informative",
     "back_link": "← Torna alle informative"
   },
-
   "errors": {
     "404_default": "Pagina non trovata",
     "cart_link_expired": "Il link potrebbe essere scaduto. Verifica l'URL.",

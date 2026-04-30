@@ -17,7 +17,6 @@
     "error_generic": "Er ging iets mis.",
     "unknown_error": "Onbekende fout"
   },
-
   "header": {
     "home": "Home",
     "cart": "Winkelmand",
@@ -37,7 +36,6 @@
     "quick_links": "Snelkoppelingen",
     "contact": "Contact"
   },
-
   "utility_bar": {
     "free_eu_delivery": "Gratis EU-verzending",
     "warranty_10y": "10 jaar garantie",
@@ -45,12 +43,10 @@
     "secure_checkout": "Veilig afrekenen",
     "need_help_phone": "Hulp nodig? +49 (0)30 12345678"
   },
-
   "language_switcher": {
     "aria_label": "Taal: {name}. Klik om te wijzigen.",
     "choose_language": "Taal kiezen"
   },
-
   "nav": {
     "shop_all": "Alles bekijken",
     "living_rooms": "Woonkamers",
@@ -62,7 +58,6 @@
     "engineered_tagline_line1": "Ontworpen, gecertificeerd,",
     "engineered_tagline_line2": "geleverd door heel Europa."
   },
-
   "footer": {
     "stay_in_loop": "Blijf op de hoogte",
     "newsletter_promise": "Nieuwe collecties en exclusieve EU‑aanbiedingen.",
@@ -83,7 +78,6 @@
     "copyright": "© {year} G-Berg GmbH",
     "vat_note": "Prijzen incl. lokale btw, excl. verzendkosten"
   },
-
   "newsletter": {
     "email_label": "E-mailadres",
     "email_placeholder": "naam@voorbeeld.nl",
@@ -91,12 +85,10 @@
     "subscribed_thanks": "Bedankt!",
     "first_guide_promise": "Eén e-mail zodra de eerste gids verschijnt."
   },
-
   "whatsapp": {
     "aria_label": "Chat met G-Berg op WhatsApp",
     "default_message": "Hallo G-Berg — ik wil graag hulp bij het kiezen van de juiste radiator."
   },
-
   "home": {
     "meta_title": "G-Berg Heizung — Premium Europese radiatoren",
     "meta_description": "Honderden CE-gecertificeerde radiatoren met volledige specificaties, compatibiliteitsnotities en technisch advies. Designed in Germany, gemaakt voor Europa.",
@@ -150,7 +142,6 @@
     "why_us_engineering": "Technisch advies",
     "why_us_warranty": "10 jaar garantie"
   },
-
   "pdp": {
     "add_to_cart": "In winkelmand",
     "added": "Toegevoegd",
@@ -220,9 +211,11 @@
     "heat_pump_ready": "Warmtepomp‑geschikt",
     "bestseller_badge": "Bestseller",
     "product_no_longer_available": "Product niet meer beschikbaar",
-    "product_no_longer_available_description": "Dit product is niet meer beschikbaar. Bekijk de volledige catalogus voor vergelijkbare radiatoren."
+    "product_no_longer_available_description": "Dit product is niet meer beschikbaar. Bekijk de volledige catalogus voor vergelijkbare radiatoren.",
+    "quantity_label": "Aantal",
+    "quantity_decrease": "Aantal verlagen",
+    "quantity_increase": "Aantal verhogen"
   },
-
   "plp": {
     "heading_eyebrow": "Verwarming",
     "heading_about_category_eyebrow": "Over deze categorie",
@@ -274,7 +267,6 @@
     "sort_title": "Titel (A → Z)",
     "empty_grid_default": "Nog geen producten beschikbaar."
   },
-
   "search": {
     "placeholder": "Zoek radiatoren, series, afmetingen…",
     "aria_label": "Zoeken",
@@ -295,7 +287,6 @@
     "no_results_for_query": "Geen producten gevonden voor \"{query}\". Probeer een serienaam (Astoria, Elanor, Konrad), een afmeting (bijv. 1800x600) of een ruimte (badkamer, woonkamer).",
     "view_all_results": "Bekijk alle resultaten voor \"{query}\""
   },
-
   "cart": {
     "title": "Winkelmand",
     "your_cart": "Uw winkelmand",
@@ -335,7 +326,6 @@
     "trust_engineering_title": "Technisch advies",
     "trust_engineering_sub": "CE-gecertificeerd, in de EU gemaakt"
   },
-
   "blogs": {
     "meta_title": "Nieuws",
     "meta_description": "Redactionele bijdragen van G-Berg — dimensioneringstips, productlanceringen en updates over EU-verwarmingsregels.",
@@ -361,18 +351,15 @@
     "coming_soon_card_aria": "Binnenkort — placeholderkaarten",
     "coming_soon_email_promise": "Schrijf u hieronder in — we mailen zodra het live is."
   },
-
   "pages": {
     "meta_title_default": "Pagina",
     "eyebrow": "Informatie",
     "fallback_notice": "Placeholder-tekst. Een handelaar kan de live-versie publiceren via Shopify Admin → Online winkel → Pagina's."
   },
-
   "policies": {
     "title": "Beleid",
     "back_link": "← Terug naar Beleid"
   },
-
   "errors": {
     "404_default": "Pagina niet gevonden",
     "cart_link_expired": "De link is mogelijk verlopen. Controleer de URL.",

@@ -17,7 +17,6 @@
     "error_generic": "Coś poszło nie tak.",
     "unknown_error": "Nieznany błąd"
   },
-
   "header": {
     "home": "Strona główna",
     "cart": "Koszyk",
@@ -37,7 +36,6 @@
     "quick_links": "Szybkie linki",
     "contact": "Kontakt"
   },
-
   "utility_bar": {
     "free_eu_delivery": "Bezpłatna dostawa do UE",
     "warranty_10y": "10 lat gwarancji",
@@ -45,12 +43,10 @@
     "secure_checkout": "Bezpieczna płatność",
     "need_help_phone": "Potrzebujesz pomocy? +49 (0)30 12345678"
   },
-
   "language_switcher": {
     "aria_label": "Język: {name}. Kliknij, aby zmienić.",
     "choose_language": "Wybierz język"
   },
-
   "nav": {
     "shop_all": "Zobacz wszystko",
     "living_rooms": "Pokoje dzienne",
@@ -62,7 +58,6 @@
     "engineered_tagline_line1": "Zaprojektowane, certyfikowane,",
     "engineered_tagline_line2": "dostarczane w całej Europie."
   },
-
   "footer": {
     "stay_in_loop": "Bądź na bieżąco",
     "newsletter_promise": "Nowości i ekskluzywne oferty UE.",
@@ -83,7 +78,6 @@
     "copyright": "© {year} G-Berg GmbH",
     "vat_note": "Ceny zawierają lokalny VAT, koszty wysyłki dodatkowo"
   },
-
   "newsletter": {
     "email_label": "Adres e-mail",
     "email_placeholder": "ty@przyklad.pl",
@@ -91,12 +85,10 @@
     "subscribed_thanks": "Dziękujemy!",
     "first_guide_promise": "Jeden e-mail, gdy ukaże się pierwszy poradnik."
   },
-
   "whatsapp": {
     "aria_label": "Czatuj z G-Berg na WhatsAppie",
     "default_message": "Cześć G-Berg — chciałbym pomocy w wyborze odpowiedniego grzejnika."
   },
-
   "home": {
     "meta_title": "G-Berg Heizung — Premium europejskie grzejniki",
     "meta_description": "Setki grzejników z certyfikatem CE wraz z pełną specyfikacją, informacjami o kompatybilności i wsparciem technicznym. Designed in Germany, produkowane dla Europy.",
@@ -150,7 +142,6 @@
     "why_us_engineering": "Pomoc techniczna",
     "why_us_warranty": "10 lat gwarancji"
   },
-
   "pdp": {
     "add_to_cart": "Dodaj do koszyka",
     "added": "Dodano",
@@ -220,9 +211,11 @@
     "heat_pump_ready": "Pompa ciepła – tak",
     "bestseller_badge": "Bestseller",
     "product_no_longer_available": "Produkt już niedostępny",
-    "product_no_longer_available_description": "Ten produkt nie jest już dostępny. Przeglądaj pełny katalog, aby znaleźć podobne grzejniki."
+    "product_no_longer_available_description": "Ten produkt nie jest już dostępny. Przeglądaj pełny katalog, aby znaleźć podobne grzejniki.",
+    "quantity_label": "Ilość",
+    "quantity_decrease": "Zmniejsz ilość",
+    "quantity_increase": "Zwiększ ilość"
   },
-
   "plp": {
     "heading_eyebrow": "Ogrzewanie",
     "heading_about_category_eyebrow": "O tej kategorii",
@@ -274,7 +267,6 @@
     "sort_title": "Tytuł (A → Z)",
     "empty_grid_default": "Brak produktów."
   },
-
   "search": {
     "placeholder": "Szukaj grzejników, serii, wymiarów…",
     "aria_label": "Szukaj",
@@ -295,7 +287,6 @@
     "no_results_for_query": "Żadne produkty nie pasują do „{query}”. Spróbuj nazwy serii (Astoria, Elanor, Konrad), wymiaru (np. 1800x600) lub pomieszczenia (łazienka, salon).",
     "view_all_results": "Zobacz wszystkie wyniki dla „{query}”"
   },
-
   "cart": {
     "title": "Koszyk",
     "your_cart": "Twój koszyk",
@@ -335,7 +326,6 @@
     "trust_engineering_title": "Pomoc techniczna",
     "trust_engineering_sub": "Certyfikat CE, produkcja UE"
   },
-
   "blogs": {
     "meta_title": "Aktualności",
     "meta_description": "Treści redakcyjne G-Berg — wskazówki dot. doboru, premiery produktów i aktualizacje przepisów grzewczych UE.",
@@ -361,18 +351,15 @@
     "coming_soon_card_aria": "Wkrótce — karty zastępcze",
     "coming_soon_email_promise": "Zapisz się poniżej — napiszemy, gdy treść będzie online."
   },
-
   "pages": {
     "meta_title_default": "Strona",
     "eyebrow": "Informacje",
     "fallback_notice": "Treść zastępcza. Sprzedawca może opublikować wersję na żywo w Shopify Admin → Sklep online → Strony."
   },
-
   "policies": {
     "title": "Polityki",
     "back_link": "← Wróć do polityk"
   },
-
   "errors": {
     "404_default": "Strona nie znaleziona",
     "cart_link_expired": "Link mógł wygasnąć. Sprawdź adres URL.",

@@ -18,8 +18,10 @@ import {
   TrustSecureIcon,
 } from '@gberg/ui';
 import {LanguageSwitcher} from './language-switcher';
+import {tFor, isSupportedLocale, DEFAULT_LOCALE} from '~/lib/gberg/i18n';
 
 export function UtilityBar({locale}: {locale: string}) {
+  const t = tFor(isSupportedLocale(locale) ? locale : DEFAULT_LOCALE);
   /*
    * Compact + progressively responsive utility bar.
    *
@@ -56,10 +58,10 @@ export function UtilityBar({locale}: {locale: string}) {
             lg:[&_li:nth-child(-n+4)]:flex
           "
           items={[
-            {icon: <TrustDeliveryIcon />, label: 'Free EU delivery'},
-            {icon: <TrustWarrantyIcon />, label: '10-year warranty'},
-            {icon: <TrustReturnIcon />, label: '30-day returns'},
-            {icon: <TrustSecureIcon />, label: 'Secure checkout'},
+            {icon: <TrustDeliveryIcon />, label: t('utility_bar.free_eu_delivery')},
+            {icon: <TrustWarrantyIcon />, label: t('utility_bar.warranty_10y')},
+            {icon: <TrustReturnIcon />, label: t('utility_bar.returns_30d')},
+            {icon: <TrustSecureIcon />, label: t('utility_bar.secure_checkout')},
           ]}
         />
         {/*
@@ -69,7 +71,7 @@ export function UtilityBar({locale}: {locale: string}) {
         */}
         <div className="ml-4 flex flex-none items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em]">
           <span className="hidden xl:inline tracking-normal opacity-80 normal-case">
-            Need help? +49 (0)30 12345678
+            {t('utility_bar.need_help_phone')}
           </span>
           <span aria-hidden className="hidden xl:inline text-[var(--color-primary)]">
             /

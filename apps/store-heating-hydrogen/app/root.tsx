@@ -27,7 +27,7 @@ import {Header} from '~/components/gberg/header';
 import {Footer} from '~/components/gberg/footer';
 import {WhatsAppBubble} from '~/components/gberg/whatsapp-bubble';
 import {Aside} from '~/components/Aside';
-import {DEFAULT_LOCALE, htmlLang, normalizeLocale} from '~/lib/gberg/i18n';
+import {DEFAULT_LOCALE, htmlLang, normalizeLocale, tFor} from '~/lib/gberg/i18n';
 import {detectLocaleFromPath} from '~/lib/gberg/seo';
 import type {MenuItem} from '@gberg/shopify-client';
 import {useLocation} from 'react-router';
@@ -172,7 +172,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--color-text)] focus:px-4 focus:py-2 focus:text-[var(--color-surface)] focus:outline focus:outline-2 focus:outline-[var(--color-primary)]"
         >
-          Skip to content
+          {tFor(detected ?? DEFAULT_LOCALE)('common.skip_to_content')}
         </a>
         {children}
         <ScrollRestoration nonce={nonce} />
@@ -217,7 +217,9 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
-  let errorMessage = 'Unknown error';
+  const location = useLocation();
+  const t = tFor(detectLocaleFromPath(location.pathname) ?? DEFAULT_LOCALE);
+  let errorMessage = t('common.unknown_error');
   let errorStatus = 500;
 
   if (isRouteErrorResponse(error)) {
@@ -230,10 +232,10 @@ export function ErrorBoundary() {
   return (
     <div className="container-x py-16">
       <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-primary)]">
-        Error {errorStatus}
+        {t('common.error')} {errorStatus}
       </p>
       <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.5rem)]">
-        Something went wrong.
+        {t('common.error_generic')}
       </h1>
       {errorMessage ? (
         <pre className="mt-6 max-w-3xl whitespace-pre-wrap text-sm text-[var(--color-text-muted)]">

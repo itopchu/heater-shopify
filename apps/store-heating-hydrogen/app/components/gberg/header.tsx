@@ -6,6 +6,7 @@ import {Suspense} from 'react';
 import {Link, Await, useRouteLoaderData} from 'react-router';
 import type {MenuItem} from '@gberg/shopify-client';
 import {localeHref} from '~/lib/gberg/href';
+import {tFor, isSupportedLocale, DEFAULT_LOCALE, type Locale} from '~/lib/gberg/i18n';
 import {
   MegaMenu,
   MEGA_MENU_FALLBACK,
@@ -22,11 +23,12 @@ interface RootLoaderShape {
   cart?: Promise<CartLike | null> | CartLike | null;
 }
 
-function CartCount() {
+function CartCount({locale}: {locale: Locale}) {
+  const t = tFor(locale);
   const data = useRouteLoaderData<RootLoaderShape>('root');
   const cart = data?.cart;
   const render = (n: number | null | undefined) =>
-    `Cart (${typeof n === 'number' ? n : 0})`;
+    t('header.cart_count', {count: typeof n === 'number' ? n : 0});
   if (cart && typeof (cart as Promise<CartLike>).then === 'function') {
     return (
       <Suspense fallback={render(0)}>
@@ -48,6 +50,7 @@ function resolveColumns(menu: MenuItem[] | undefined, locale: string): MegaColum
   // Live Shopify Admin menu intentionally ignored — see MEGA_MENU_FALLBACK
   // in nav/mega-menu.tsx for the canonical catalog-driven nav.
   void menu;
+  const t = tFor(isSupportedLocale(locale) ? locale : DEFAULT_LOCALE);
   const cols: MegaColumn[] = MEGA_MENU_FALLBACK.map((c) => ({
     ...c,
     href: localeHref(locale, c.href),
@@ -57,12 +60,14 @@ function resolveColumns(menu: MenuItem[] | undefined, locale: string): MegaColum
   const shopAllHref = localeHref(locale, '/products');
   const hasShopAll = cols.some((c) => c.href === shopAllHref);
   if (!hasShopAll) {
-    cols.push({label: 'Shop all', href: shopAllHref});
+    cols.push({label: t('common.shop_all'), href: shopAllHref});
   }
   return cols;
 }
 
 export function Header({locale, menu}: HeaderProps) {
+  const safeLocale: Locale = isSupportedLocale(locale) ? locale : DEFAULT_LOCALE;
+  const t = tFor(safeLocale);
   const columns = resolveColumns(menu, locale);
 
   return (
@@ -81,10 +86,10 @@ export function Header({locale, menu}: HeaderProps) {
           <SearchOverlay locale={locale} />
           <Link
             to={localeHref(locale, '/cart')}
-            aria-label="Cart"
+            aria-label={t('header.cart_aria')}
             className="link-accent text-[var(--color-text)]"
           >
-            <CartCount />
+            <CartCount locale={safeLocale} />
           </Link>
           <MobileDrawer locale={locale} columns={columns} />
         </div>

@@ -4,22 +4,24 @@
 import {Link} from 'react-router';
 import {NewsletterForm} from './newsletter-form';
 import {localeHref} from '~/lib/gberg/href';
+import {tFor, isSupportedLocale, DEFAULT_LOCALE} from '~/lib/gberg/i18n';
 
 export function Footer({locale}: {locale: string}) {
+  const t = tFor(isSupportedLocale(locale) ? locale : DEFAULT_LOCALE);
   const cs = [
-    {label: 'Contact', href: localeHref(locale, '/pages/contact')},
-    {label: 'FAQ', href: localeHref(locale, '/pages/faq')},
-    {label: 'Engineering support', href: 'mailto:hello@gberg-heizung.de'},
+    {label: t('footer.contact'), href: localeHref(locale, '/pages/contact')},
+    {label: t('footer.faq'), href: localeHref(locale, '/pages/faq')},
+    {label: t('footer.engineering_support'), href: 'mailto:hello@gberg-heizung.de'},
   ];
   const ship = [
-    {label: 'Shipping & delivery', href: localeHref(locale, '/pages/shipping')},
-    {label: 'Returns', href: localeHref(locale, '/pages/returns')},
-    {label: 'Warranty', href: localeHref(locale, '/pages/warranty')},
+    {label: t('footer.shipping'), href: localeHref(locale, '/pages/shipping')},
+    {label: t('footer.returns'), href: localeHref(locale, '/pages/returns')},
+    {label: t('footer.warranty'), href: localeHref(locale, '/pages/warranty')},
   ];
   const legal = [
-    {label: 'Imprint', href: localeHref(locale, '/pages/imprint')},
-    {label: 'Privacy', href: localeHref(locale, '/pages/privacy')},
-    {label: 'Terms', href: localeHref(locale, '/pages/terms')},
+    {label: t('footer.imprint'), href: localeHref(locale, '/pages/imprint')},
+    {label: t('footer.privacy'), href: localeHref(locale, '/pages/privacy')},
+    {label: t('footer.terms'), href: localeHref(locale, '/pages/terms')},
   ];
 
   return (
@@ -28,10 +30,10 @@ export function Footer({locale}: {locale: string}) {
         <div className="container-x grid gap-6 py-10 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-12">
           <div>
             <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-primary)]">
-              Stay in the loop
+              {t('footer.stay_in_loop')}
             </p>
             <p className="mt-3 font-[var(--font-display)] text-3xl italic leading-[1] md:text-4xl">
-              New arrivals and EU&#8209;only deals.
+              {t('footer.newsletter_promise')}
             </p>
           </div>
           <NewsletterForm dark />
@@ -44,24 +46,23 @@ export function Footer({locale}: {locale: string}) {
             G&#8209;Berg
           </p>
           <p className="mt-5 max-w-[28ch] text-sm text-white/70">
-            Authorized regional reseller of premium European radiators and
-            bathroom heating. Designed in Germany, made for Europe.
+            {t('footer.brand_blurb')}
           </p>
           <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)]">
-            G-Berg GmbH
+            {t('footer.legal_entity')}
           </p>
         </div>
-        <FooterColumn title="Customer service" items={cs} />
-        <FooterColumn title="Shipping & returns" items={ship} />
-        <FooterColumn title="Legal" items={legal} />
+        <FooterColumn title={t('footer.col_customer_service')} items={cs} />
+        <FooterColumn title={t('footer.col_shipping_returns')} items={ship} />
+        <FooterColumn title={t('footer.col_legal')} items={legal} />
       </div>
 
       <div className="rule-accent-strong" aria-hidden />
 
       <div>
         <div className="container-x flex flex-wrap items-center justify-between gap-4 py-5 text-[11px] uppercase tracking-[0.14em] text-white/55">
-          <p>&copy; {new Date().getFullYear()} G-Berg GmbH</p>
-          <p>Prices include local VAT, exclude shipping</p>
+          <p>{t('footer.copyright', {year: new Date().getFullYear()})}</p>
+          <p>{t('footer.vat_note')}</p>
         </div>
       </div>
     </footer>

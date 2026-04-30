@@ -8,6 +8,7 @@ import {useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
 import {Button, cn} from '@gberg/ui';
 import {useAside} from '~/components/Aside';
+import {useT} from '~/lib/gberg/i18n';
 
 export interface AddToCartProps {
   variantId: string | null;
@@ -16,6 +17,7 @@ export interface AddToCartProps {
 }
 
 export function AddToCart({variantId, available, className}: AddToCartProps) {
+  const t = useT();
   const [qty, setQty] = useState(1);
   const {open} = useAside();
   const disabled = !available || !variantId;
@@ -26,11 +28,11 @@ export function AddToCart({variantId, available, className}: AddToCartProps) {
         <div
           className="inline-flex h-12 shrink-0 items-center rounded-[var(--radius-md)] border border-[var(--color-border)]"
           role="group"
-          aria-label="Quantity"
+          aria-label={t('pdp.quantity_label')}
         >
           <button
             type="button"
-            aria-label="Decrease quantity"
+            aria-label={t('pdp.quantity_decrease')}
             onClick={() => setQty((q) => Math.max(1, q - 1))}
             className="px-3 text-lg disabled:opacity-50"
             disabled={qty <= 1}
@@ -42,7 +44,7 @@ export function AddToCart({variantId, available, className}: AddToCartProps) {
           </span>
           <button
             type="button"
-            aria-label="Increase quantity"
+            aria-label={t('pdp.quantity_increase')}
             onClick={() => setQty((q) => q + 1)}
             className="px-3 text-lg"
           >
@@ -77,7 +79,7 @@ export function AddToCart({variantId, available, className}: AddToCartProps) {
                 }}
                 className="w-auto min-w-[12rem] px-8"
               >
-                {!available ? 'Out of stock' : justAdded ? 'Added' : 'Add to cart'}
+                {!available ? t('pdp.out_of_stock') : justAdded ? t('pdp.added') : t('pdp.add_to_cart')}
               </Button>
             );
           }}

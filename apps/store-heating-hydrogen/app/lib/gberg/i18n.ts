@@ -108,3 +108,63 @@ export function localeToInContext(locale: Locale): InContextHint {
     language: LOCALE_TO_LANGUAGE[locale] ?? 'EN',
   };
 }
+
+// ---------------------------------------------------------------------------
+// t() / useT() — translation helpers
+// ---------------------------------------------------------------------------
+//
+// Resolves a dotted key (e.g. `pdp.add_to_cart`) against the active locale's
+// dictionary in `app/locales/<locale>.json`, with EN fallback and
+// `{placeholder}` interpolation.
+//
+// Server contexts (loaders, meta() functions) call `tFor(locale)` directly
+// with the locale extracted from `params.locale`. React components call the
+// `useT()` hook, which derives the active locale from the route params.
+// ---------------------------------------------------------------------------
+
+import {useParams} from 'react-router';
+import {LOCALE_DICT, FALLBACK_DICT} from '~/locales';
+
+function resolveKey(dict: unknown, segments: string[]): string | undefined {
+  let cursor: unknown = dict;
+  for (const seg of segments) {
+    if (cursor && typeof cursor === 'object' && seg in (cursor as object)) {
+      cursor = (cursor as Record<string, unknown>)[seg];
+    } else {
+      return undefined;
+    }
+  }
+  return typeof cursor === 'string' ? cursor : undefined;
+}
+
+export type TFunction = (key: string, vars?: Record<string, string | number>) => string;
+
+export function tFor(locale: Locale): TFunction {
+  const dict = LOCALE_DICT[locale] ?? FALLBACK_DICT;
+  return (key, vars) => {
+    const segments = key.split('.');
+    let resolved = resolveKey(dict, segments);
+    if (resolved === undefined && dict !== FALLBACK_DICT) {
+      resolved = resolveKey(FALLBACK_DICT, segments);
+    }
+    let out = resolved ?? key;
+    if (vars) {
+      for (const [k, v] of Object.entries(vars)) {
+        out = out.split(`{${k}}`).join(String(v));
+      }
+    }
+    return out;
+  };
+}
+
+/**
+ * React hook returning a `t()` bound to the active route locale.
+ * Reads `params.locale` from the deepest matching route. Falls back to
+ * `DEFAULT_LOCALE` if no `($locale)` param is present (e.g. on `/`).
+ */
+export function useT(): TFunction {
+  const params = useParams();
+  const raw = (params as {locale?: string}).locale;
+  const locale: Locale = isSupportedLocale(raw) ? raw : DEFAULT_LOCALE;
+  return tFor(locale);
+}

@@ -17,7 +17,6 @@
     "error_generic": "Noget gik galt.",
     "unknown_error": "Ukendt fejl"
   },
-
   "header": {
     "home": "Forside",
     "cart": "Kurv",
@@ -37,7 +36,6 @@
     "quick_links": "Hurtige links",
     "contact": "Kontakt"
   },
-
   "utility_bar": {
     "free_eu_delivery": "Gratis EU-levering",
     "warranty_10y": "10 års garanti",
@@ -45,12 +43,10 @@
     "secure_checkout": "Sikker betaling",
     "need_help_phone": "Brug for hjælp? +49 (0)30 12345678"
   },
-
   "language_switcher": {
     "aria_label": "Sprog: {name}. Klik for at ændre.",
     "choose_language": "Vælg sprog"
   },
-
   "nav": {
     "shop_all": "Se alle",
     "living_rooms": "Stuer",
@@ -62,7 +58,6 @@
     "engineered_tagline_line1": "Konstrueret, certificeret,",
     "engineered_tagline_line2": "leveret i hele Europa."
   },
-
   "footer": {
     "stay_in_loop": "Hold dig opdateret",
     "newsletter_promise": "Nyheder og eksklusive EU‑tilbud.",
@@ -83,7 +78,6 @@
     "copyright": "© {year} G-Berg GmbH",
     "vat_note": "Priser inkl. lokal moms, ekskl. levering"
   },
-
   "newsletter": {
     "email_label": "E-mailadresse",
     "email_placeholder": "dig@eksempel.dk",
@@ -91,12 +85,10 @@
     "subscribed_thanks": "Tak!",
     "first_guide_promise": "Én e-mail, når den første guide udkommer."
   },
-
   "whatsapp": {
     "aria_label": "Chat med G-Berg på WhatsApp",
     "default_message": "Hej G-Berg — jeg vil gerne have hjælp til at vælge den rette radiator."
   },
-
   "home": {
     "meta_title": "G-Berg Heizung — Premium europæiske radiatorer",
     "meta_description": "Hundredvis af CE-certificerede radiatorer med fulde specifikationer, kompatibilitetsnoter og teknisk rådgivning. Designed in Germany, fremstillet til Europa.",
@@ -150,7 +142,6 @@
     "why_us_engineering": "Teknisk rådgivning",
     "why_us_warranty": "10 års garanti"
   },
-
   "pdp": {
     "add_to_cart": "Læg i kurv",
     "added": "Tilføjet",
@@ -220,9 +211,11 @@
     "heat_pump_ready": "Varmepumpe‑klar",
     "bestseller_badge": "Bestseller",
     "product_no_longer_available": "Produktet er ikke længere tilgængeligt",
-    "product_no_longer_available_description": "Dette produkt er ikke længere tilgængeligt. Gennemse hele kataloget for at finde lignende radiatorer."
+    "product_no_longer_available_description": "Dette produkt er ikke længere tilgængeligt. Gennemse hele kataloget for at finde lignende radiatorer.",
+    "quantity_label": "Antal",
+    "quantity_decrease": "Mindre antal",
+    "quantity_increase": "Større antal"
   },
-
   "plp": {
     "heading_eyebrow": "Varme",
     "heading_about_category_eyebrow": "Om denne kategori",
@@ -274,7 +267,6 @@
     "sort_title": "Titel (A → Z)",
     "empty_grid_default": "Ingen produkter at vise endnu."
   },
-
   "search": {
     "placeholder": "Søg radiatorer, serier, mål…",
     "aria_label": "Søg",
@@ -295,7 +287,6 @@
     "no_results_for_query": "Ingen produkter matcher \"{query}\". Prøv et serienavn (Astoria, Elanor, Konrad), et mål (fx 1800x600) eller et rum (badeværelse, stue).",
     "view_all_results": "Se alle resultater for \"{query}\""
   },
-
   "cart": {
     "title": "Kurv",
     "your_cart": "Din kurv",
@@ -335,7 +326,6 @@
     "trust_engineering_title": "Teknisk rådgivning",
     "trust_engineering_sub": "CE-certificeret, fremstillet i EU"
   },
-
   "blogs": {
     "meta_title": "Nyheder",
     "meta_description": "Redaktionelt indhold fra G-Berg — dimensioneringsnoter, produktlanceringer og opdateringer om EU-varmeregler.",
@@ -361,18 +351,15 @@
     "coming_soon_card_aria": "Kommer snart — pladsholderkort",
     "coming_soon_email_promise": "Tilmeld dig nedenfor — vi skriver, når det er online."
   },
-
   "pages": {
     "meta_title_default": "Side",
     "eyebrow": "Information",
     "fallback_notice": "Pladsholdertekst. En forhandler kan udgive den endelige version i Shopify Admin → Online-butik → Sider."
   },
-
   "policies": {
     "title": "Politikker",
     "back_link": "← Tilbage til politikker"
   },
-
   "errors": {
     "404_default": "Siden blev ikke fundet",
     "cart_link_expired": "Linket kan være udløbet. Tjek URL'en.",
