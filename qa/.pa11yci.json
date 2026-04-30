@@ -1,0 +1,43 @@
+{
+  "_doc": "Pa11y CI accessibility audit config. Runs WCAG2AA against representative URLs across all 8 locales. More thorough than Lighthouse's a11y subset (uses both axe-core and HTMLCS rule sets). Run via: pnpm qa:a11y",
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "timeout": 30000,
+    "wait": 1500,
+    "viewport": { "width": 1280, "height": 800 },
+    "ignore": [
+      "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail"
+    ],
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox"]
+    }
+  },
+  "urls": [
+    "https://www.gberg-heizung.de/",
+    "https://www.gberg-heizung.de/de",
+    "https://www.gberg-heizung.de/nl",
+    "https://www.gberg-heizung.de/fr",
+    "https://www.gberg-heizung.de/es",
+    "https://www.gberg-heizung.de/it",
+    "https://www.gberg-heizung.de/pl",
+    "https://www.gberg-heizung.de/da",
+
+    "https://www.gberg-heizung.de/products/konrad-ventilheizkorper-typ-22",
+    "https://www.gberg-heizung.de/de/products/konrad-ventilheizkorper-typ-22",
+    "https://www.gberg-heizung.de/nl/products/konrad-ventilheizkorper-typ-22",
+
+    "https://www.gberg-heizung.de/cart",
+    "https://www.gberg-heizung.de/de/cart",
+
+    "https://www.gberg-heizung.de/pages/imprint",
+    "https://www.gberg-heizung.de/de/pages/imprint",
+    "https://www.gberg-heizung.de/pages/privacy",
+    "https://www.gberg-heizung.de/pages/terms",
+    "https://www.gberg-heizung.de/pages/faq",
+    "https://www.gberg-heizung.de/pages/shipping",
+    "https://www.gberg-heizung.de/pages/returns",
+    "https://www.gberg-heizung.de/pages/warranty",
+    "https://www.gberg-heizung.de/pages/contact"
+  ]
+}
