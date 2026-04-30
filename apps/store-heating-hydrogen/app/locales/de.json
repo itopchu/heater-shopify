@@ -334,7 +334,9 @@
     "trust_warranty_title": "10 Jahre Garantie",
     "trust_warranty_sub": "Auf alle Heizkörper",
     "trust_engineering_title": "Technische Beratung",
-    "trust_engineering_sub": "CE-zertifiziert, in der EU gefertigt"
+    "trust_engineering_sub": "CE-zertifiziert, in der EU gefertigt",
+    "we_accept": "Wir akzeptieren",
+    "secure_checkout_note": "Sicherer Checkout — SSL-verschlüsselt, abgewickelt durch Shopify."
   },
   "collections": {
     "title": "Kollektionen"

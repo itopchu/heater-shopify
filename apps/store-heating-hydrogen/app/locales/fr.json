@@ -334,7 +334,9 @@
     "trust_warranty_title": "Garantie 10 ans",
     "trust_warranty_sub": "Sur tous les radiateurs",
     "trust_engineering_title": "Support technique",
-    "trust_engineering_sub": "Certifié CE, fabriqué dans l'UE"
+    "trust_engineering_sub": "Certifié CE, fabriqué dans l'UE",
+    "we_accept": "Nous acceptons",
+    "secure_checkout_note": "Paiement sécurisé — chiffré SSL, traité par Shopify."
   },
   "collections": {
     "title": "Collections"

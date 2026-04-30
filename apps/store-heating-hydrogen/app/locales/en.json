@@ -334,7 +334,9 @@
     "trust_warranty_title": "10-year warranty",
     "trust_warranty_sub": "On all radiators",
     "trust_engineering_title": "Engineering support",
-    "trust_engineering_sub": "CE-certified, EU-made"
+    "trust_engineering_sub": "CE-certified, EU-made",
+    "we_accept": "We accept",
+    "secure_checkout_note": "Secure checkout — SSL encrypted, processed by Shopify."
   },
   "collections": {
     "title": "Collections"

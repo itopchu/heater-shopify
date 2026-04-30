@@ -334,7 +334,9 @@
     "trust_warranty_title": "10 lat gwarancji",
     "trust_warranty_sub": "Na wszystkie grzejniki",
     "trust_engineering_title": "Pomoc techniczna",
-    "trust_engineering_sub": "Certyfikat CE, produkcja UE"
+    "trust_engineering_sub": "Certyfikat CE, produkcja UE",
+    "we_accept": "Akceptujemy",
+    "secure_checkout_note": "Bezpieczna płatność — szyfrowanie SSL, obsługiwana przez Shopify."
   },
   "collections": {
     "title": "Kolekcje"

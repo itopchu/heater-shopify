@@ -334,7 +334,9 @@
     "trust_warranty_title": "10 jaar garantie",
     "trust_warranty_sub": "Op alle radiatoren",
     "trust_engineering_title": "Technisch advies",
-    "trust_engineering_sub": "CE-gecertificeerd, in de EU gemaakt"
+    "trust_engineering_sub": "CE-gecertificeerd, in de EU gemaakt",
+    "we_accept": "Wij accepteren",
+    "secure_checkout_note": "Veilige checkout — SSL-versleuteld, verwerkt door Shopify."
   },
   "collections": {
     "title": "Collecties"

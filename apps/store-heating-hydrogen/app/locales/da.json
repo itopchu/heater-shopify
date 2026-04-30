@@ -334,7 +334,9 @@
     "trust_warranty_title": "10 års garanti",
     "trust_warranty_sub": "På alle radiatorer",
     "trust_engineering_title": "Teknisk rådgivning",
-    "trust_engineering_sub": "CE-certificeret, fremstillet i EU"
+    "trust_engineering_sub": "CE-certificeret, fremstillet i EU",
+    "we_accept": "Vi accepterer",
+    "secure_checkout_note": "Sikker betaling — SSL-krypteret, håndteret af Shopify."
   },
   "collections": {
     "title": "Kollektioner"

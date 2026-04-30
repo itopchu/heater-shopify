@@ -4,6 +4,7 @@ import {CartForm, Money, type OptimisticCart} from '@shopify/hydrogen';
 import {useEffect, useId, useRef, useState} from 'react';
 import {useFetcher} from 'react-router';
 import {useT} from '~/lib/gberg/i18n';
+import {PaymentMethodStrip} from '~/components/gberg/payment-method-strip';
 
 type CartSummaryProps = {
   cart: OptimisticCart<CartApiQueryFragment | null>;
@@ -12,27 +13,37 @@ type CartSummaryProps = {
 
 export function CartSummary({cart, layout}: CartSummaryProps) {
   const t = useT();
-  const className =
-    layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';
   const summaryId = useId();
   const discountsHeadingId = useId();
   const discountCodeInputId = useId();
   const giftCardHeadingId = useId();
   const giftCardInputId = useId();
+  const isPage = layout === 'page';
 
   return (
-    <div aria-labelledby={summaryId} className={className}>
-      <h4 id={summaryId}>{t('cart.totals')}</h4>
-      <dl role="group" className="cart-subtotal">
-        <dt>{t('cart.subtotal')}</dt>
-        <dd>
+    <div
+      aria-labelledby={summaryId}
+      className="flex flex-col gap-5"
+    >
+      <h2
+        id={summaryId}
+        className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]"
+      >
+        {t('cart.totals')}
+      </h2>
+
+      {/* Subtotal — large, prominent. Other lines (shipping/taxes) come after checkout. */}
+      <dl role="group" className="flex items-baseline justify-between border-b border-[var(--color-border)] pb-4">
+        <dt className="text-[14px] font-medium text-[var(--color-text)]">{t('cart.subtotal')}</dt>
+        <dd className="font-[var(--font-display)] text-[1.5rem] font-semibold text-[var(--color-text)]">
           {cart?.cost?.subtotalAmount?.amount ? (
             <Money data={cart?.cost?.subtotalAmount} />
           ) : (
-            '-'
+            '—'
           )}
         </dd>
       </dl>
+
       <CartDiscounts
         discountCodes={cart?.discountCodes}
         discountsHeadingId={discountsHeadingId}
@@ -43,7 +54,10 @@ export function CartSummary({cart, layout}: CartSummaryProps) {
         giftCardHeadingId={giftCardHeadingId}
         giftCardInputId={giftCardInputId}
       />
+
       <CartCheckoutActions checkoutUrl={cart?.checkoutUrl} />
+
+      {isPage && <PaymentMethodStrip className="mt-2 border-t border-[var(--color-border)] pt-5" />}
     </div>
   );
 }
@@ -53,12 +67,14 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl?: string}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div>
-      <a href={checkoutUrl} target="_self">
-        <p>{t('cart.continue_to_checkout')}</p>
-      </a>
-      <br />
-    </div>
+    <a
+      href={checkoutUrl}
+      target="_self"
+      className="inline-flex w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-4 text-center text-[14px] uppercase tracking-[0.12em] font-semibold text-white transition-colors hover:bg-[var(--color-primary-strong,#8A0B1F)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)]"
+    >
+      {t('cart.continue_to_checkout')}
+      <span aria-hidden className="ml-2">→</span>
+    </a>
   );
 }
 
