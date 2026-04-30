@@ -36,6 +36,6 @@ jobs:
 
       - name: Build and Publish to Oxygen
         working-directory: apps/store-heating-hydrogen
-        run: shopify hydrogen deploy
+        run: npx shopify hydrogen deploy
         env:
           SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000133120 }}
