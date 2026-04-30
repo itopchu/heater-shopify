@@ -1,0 +1,159 @@
+{
+  "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-weiss",
+  "url": "https://xxl-heizung.de/products/wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-weiss",
+  "canonical_status": "scraper-only",
+  "title_de": "Paneelheizkörper Designheizkörper Horizontal Doppellagig Weiss FLORA",
+  "title_de_curated": "Paneelheizkörper Designheizkörper Horizontal Doppellagig Weiss FLORA",
+  "series": "FLORA",
+  "color": "weiss",
+  "electric": false,
+  "primary_collection": "wohnraumheizkorper",
+  "collections": [
+    "wohnraumheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Bestseller",
+    "Paneelheizkörper Designheizkörper Horizontal Doppellagig Weiss FLORA"
+  ],
+  "description_text": "Wohnraumheizkörper sind essenzielle Bestandteile jedes modernen Haushalts, die weit über ihre grundlegende Aufgabe hinausgehen, einen Raum zu heizen. Diese Geräte sind in der Lage, eine gleichmäßige und effiziente Wärmeverteilung zu gewährleisten, was besonders in den kälteren Monaten entscheidend ist. Dank moderner Materialien und Designinnovationen sind heutige Heizkörper nicht nur funktional effizient, sondern auch langlebig und wartungsarm.",
+  "description_html": "<div data-shopify-editor-section='{\"id\":\"template--18278503121120__custom-content\",\"type\":\"custom-content\",\"disabled\":false}' class=\"shopify-section shopify-section-custom-content\" id=\"shopify-section-template--18278503121120__custom-content\">\n<div data-section-id=\"template--18278503121120__custom-content\" data-section-type=\"custom-content\" class=\"m-section m-custom-content m-gradient m-color-footer sf__index-custom-content sf__prd-custom-content\" id=\"m-custom-template--18278503121120__custom-content\">\n<div class=\"container m-section-my m-section-py\">\n<div class=\"m-custom-content__wrapper m-gradient m-color-footer\">\n<div class=\"m-custom-content__wrapper m:flex m:flex-wrap\">\n<div data-shopify-editor-block='{\"id\":\"html_AHWK8Y\",\"type\":\"html\"}' class=\"m:column m:display-flex m-custom-content__block m-custom-content__block-html lg:m:w-1/2 m:w-full\" id=\"m-custom__block--html_AHWK8Y\">\n<div class=\"m-custom-content__block-inner m:w-full\">\n<p>Wohnraumheizkörper sind essenzielle Bestandteile jedes modernen Haushalts, die weit über ihre grundlegende Aufgabe hinausgehen, einen Raum zu heizen. Diese Geräte sind in der Lage, eine gleichmäßige und effiziente Wärmeverteilung zu gewährleisten, was besonders in den kälteren Monaten entscheidend ist. Dank moderner Materialien und Designinnovationen sind heutige Heizkörper nicht nur funktional effizient, sondern auch langlebig und wartungsarm.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div data-shopify-editor-section='{\"id\":\"template--18278503121120__163212164016351730\",\"type\":\"custom-content\",\"disabled\":false}' class=\"shopify-section shopify-section-custom-content\" id=\"shopify-section-template--18278503121120__163212164016351730\">\n<div data-section-id=\"template--18278503121120__163212164016351730\" data-section-type=\"custom-content\" class=\"m-section m-custom-content m-gradient m-color-default sf__index-custom-content sf__prd-custom-content\" id=\"m-custom-template--18278503121120__163212164016351730\">\n<div class=\"container m-section-my m-section-py\">\n<div class=\"m-custom-content__wrapper m-gradient m-color-default\">\n<div class=\"m-custom-content__wrapper m:flex m:flex-wrap\">\n<div data-shopify-editor-block='{\"id\":\"html_3AQ69x\",\"type\":\"html\"}' class=\"m:column m:display-flex m-custom-content__block m-custom-content__block-html lg:m:w-1/2 m:w-full\" id=\"m-custom__block--html_3AQ69x\"></div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Höhe × Breite in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "60 × 81",
+        "60 × 100",
+        "60 × 122",
+        "60 × 140",
+        "60 × 158 Lieferbar ab KW 21",
+        "60 × 180"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45785912574176,
+      "sku": "XXL-FL-H-001",
+      "barcode": "4251743540889",
+      "title": "60 × 81",
+      "option1": "60 × 81",
+      "option2": null,
+      "option3": null,
+      "price": "399.00",
+      "compare_at_price": "439.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45785912606944,
+      "sku": "XXL-FL-H-002",
+      "barcode": "4251743540872",
+      "title": "60 × 100",
+      "option1": "60 × 100",
+      "option2": null,
+      "option3": null,
+      "price": "429.00",
+      "compare_at_price": "459.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45785912639712,
+      "sku": "XXL-FL-H-003",
+      "barcode": "4251743540865",
+      "title": "60 × 122",
+      "option1": "60 × 122",
+      "option2": null,
+      "option3": null,
+      "price": "469.00",
+      "compare_at_price": "489.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45785912705248,
+      "sku": "XXL-FL-H-004",
+      "barcode": "4251743540858",
+      "title": "60 × 140",
+      "option1": "60 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "519.00",
+      "compare_at_price": "549.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45785912738016,
+      "sku": "XXL-FL-H-005",
+      "barcode": "4251743540841",
+      "title": "60 × 158 Lieferbar ab KW 21",
+      "option1": "60 × 158 Lieferbar ab KW 21",
+      "option2": null,
+      "option3": null,
+      "price": "559.00",
+      "compare_at_price": "589.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45785912770784,
+      "sku": "XXL-FL-H-006",
+      "barcode": "4251743540834",
+      "title": "60 × 180",
+      "option1": "60 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "599.00",
+      "compare_at_price": "689.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 6,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 6
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 399,
+    "price_max": 599,
+    "compare_at_min": 439,
+    "compare_at_max": 689
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/3DB41358-0B9A-4E46-9746-B1562FEB0E55.jpg?v=1775254257",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/11FF492B-6312-4D28-8DF6-A01E5BD3EA46.jpg?v=1775254258",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/2220437A-AFCE-434E-A8A4-17D029BB70EE.jpg?v=1775254259"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/3DB41358-0B9A-4E46-9746-B1562FEB0E55.jpg?v=1775254257",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Flora Horizontal",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "weiß"
+  },
+  "join_notes": null,
+  "source_signature": "db01906180176c88a9492abcdae09e15",
+  "fetched_at": "2026-04-29T19:08:06+00:00"
+}

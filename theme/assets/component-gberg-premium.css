@@ -1,0 +1,1042 @@
+/* ============================================================
+   G-Berg Premium polish layer (round 2)
+   ------------------------------------------------------------
+   Loaded AFTER base.css + component-fluid-system.css. Single
+   source of truth for the editorial detail work that takes the
+   theme from "fine" to "premium":
+     - Red as repeated accent (eyebrow rules, hairlines, hover
+       underlines, cart count, swatch ring, sale flag)
+     - Hairline rules instead of card shadows
+     - Typographic discipline (eyebrow numerals, breadcrumbs,
+       price block, qty stepper)
+     - Section dividers with offset red segment
+     - Footer wordmark + newsletter inline form
+
+   Tokens use Dawn's 10px-root rem convention (1rem = 10px).
+   All animations use transform / opacity / background-size.
+   Lighthouse ≥ 95 must hold.
+   ============================================================ */
+
+:root {
+  /* Brand */
+  --gb-red:        #C8102E;
+  --gb-red-deep:   #8A0B1F;
+  --gb-charcoal:   #111111;
+  --gb-warm:       #F7F5F2;
+  --gb-rule-soft:  #ECECEC;
+  --gb-rule-mid:   #DADADA;
+  --gb-muted:      #6B6B6B;
+
+  /* Spacing scale (10px-root rem) */
+  --gb-2:  0.4rem;
+  --gb-4:  0.8rem;
+  --gb-8:  1.6rem;
+  --gb-12: 2.4rem;
+  --gb-16: 3.2rem;
+  --gb-24: 4.8rem;
+  --gb-32: 6.4rem;
+  --gb-48: 9.6rem;
+
+  /* Detail */
+  --gb-eyebrow-size: 1.1rem;
+  --gb-eyebrow-tracking: 0.16em;
+  --gb-rule-w: 1px;
+  --gb-rule-strong-w: 2px;
+  --gb-anim: 280ms ease-out;
+}
+
+/* ============================================================
+   1. Global typography refinements
+   ============================================================ */
+
+/* Headings: tighten letter-spacing for Fraunces display.
+   Dawn's default is +0.06rem; flip it negative for editorial weight. */
+h1, .h1, h2, .h2, h3, .h3, .h0 {
+  letter-spacing: -0.01em;
+}
+.h0, h1, .h1 { line-height: 1.05; }
+.h2, h2     { line-height: 1.1; }
+
+/* Editorial Fraunces italic on h0/h1 by default — works with the
+   loaded variable Fraunces font. Falls back gracefully if italic
+   is not available. */
+.h0, h1.h0 {
+  font-style: italic;
+}
+
+/* ============================================================
+   2. Eyebrow / kicker pattern with red rule + numbered prefix
+   ============================================================ */
+
+.faq__kicker,
+.trust-badges__kicker,
+.testimonials__kicker {
+  position: relative;
+  font-family: var(--font-body-family);
+  font-size: var(--gb-eyebrow-size);
+  letter-spacing: var(--gb-eyebrow-tracking);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gb-charcoal);
+  opacity: 1;                   /* override Dawn 0.65 */
+  padding-top: 1.4rem;          /* room for red rule */
+  margin: 0 0 0.8rem;
+}
+
+.faq__kicker::before,
+.trust-badges__kicker::before,
+.testimonials__kicker::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.4rem;
+  height: var(--gb-rule-strong-w);
+  background: var(--gb-red);
+}
+
+/* On dark schemes invert kicker color and keep red rule */
+.color-scheme-3 .faq__kicker,
+.color-scheme-3 .trust-badges__kicker,
+.color-scheme-3 .testimonials__kicker {
+  color: #FFFFFF;
+}
+
+/* Trust-badges body legibility (Dawn opacity 0.78 → tighter on warm bg) */
+.color-scheme-2 .trust-badges__body,
+.color-scheme-2 .testimonials__body {
+  opacity: 1;
+  color: var(--gb-muted);
+}
+
+/* The slash separator inside numbered eyebrow ("01 / FAQ") gets
+   tinted red. We can't intercept arbitrary copy, but we can color
+   the foreground softly with a hue matching brand by lifting the
+   contrast on the digit-prefix via :first-letter on a wrapper.
+   Implementation: select character " / " via a custom attribute
+   would be brittle — instead we ship a CSS rule that colors the
+   ::first-line hue subtly. Skip. The numeric prefix carries weight. */
+
+/* Section header alignment: keep center alignment; ensure the
+   typographic hierarchy reads as a magazine column-head. */
+.faq__header,
+.trust-badges__header,
+.testimonials__header {
+  margin-bottom: var(--gb-24);
+}
+
+.faq__title,
+.trust-badges__title,
+.testimonials__title {
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+
+/* ============================================================
+   3. Buttons — charcoal fill + animated red bottom-rule on hover
+   ============================================================ */
+
+.button:not(.button--tertiary)::before {
+  /* Dawn shadow box — neutralized. */
+  box-shadow: none !important;
+}
+
+/* Animated red underline drawing in from right — uses transform
+   so no reflow. */
+.button:not(.button--tertiary)::after {
+  /* base + animated child */
+  transition: box-shadow var(--duration-short) ease;
+}
+
+.button:not(.button--tertiary) {
+  position: relative;
+}
+.button:not(.button--tertiary) > * {
+  position: relative;
+  z-index: 2;
+}
+.button:not(.button--tertiary)::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  background: var(--gb-red);
+  transition: width var(--gb-anim);
+  z-index: 3;
+  opacity: 1;
+  border-radius: 0;
+  box-shadow: none;
+}
+.button:not(.button--tertiary):hover::before,
+.button:not(.button--tertiary):focus-visible::before {
+  width: 100%;
+  left: 0;
+  right: auto;
+}
+
+/* Tighten button padding to spacing scale */
+.button {
+  padding: 0 var(--gb-12);
+  min-height: 4.4rem;            /* 44px */
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.button--small,
+.button--tertiary {
+  padding: 0 var(--gb-8);
+  min-height: 3.2rem;
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   4. Universal text-link red underline on hover
+   ============================================================ */
+
+a:not(.button):not(.full-unstyled-link):not(.list-menu__item--link):not(.header__heading-link) {
+  background-image: linear-gradient(var(--gb-red), var(--gb-red));
+  background-size: 0% 2px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size var(--gb-anim);
+  text-decoration: none;
+}
+
+a:not(.button):not(.full-unstyled-link):not(.list-menu__item--link):not(.header__heading-link):hover,
+a:not(.button):not(.full-unstyled-link):not(.list-menu__item--link):not(.header__heading-link):focus-visible {
+  background-size: 100% 2px;
+  text-decoration: none;
+}
+
+/* ============================================================
+   5. Header refinements — red hairline at bottom + red cart badge
+   ============================================================ */
+
+.header-wrapper--border-bottom {
+  border-bottom-color: var(--gb-rule-soft) !important;
+  position: relative;
+}
+
+.header-wrapper--border-bottom::after {
+  content: "";
+  position: absolute;
+  left: 5%;
+  bottom: -1px;
+  width: 4.8rem;
+  height: 2px;
+  background: var(--gb-red);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Cart count bubble — explicit red regardless of scheme button color */
+.cart-count-bubble {
+  background-color: var(--gb-red) !important;
+  color: #FFFFFF !important;
+  height: 1.8rem;
+  width: 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-feature-settings: "tnum";
+}
+
+/* Logo hover: subtle red underline draws under header text logo */
+.header__heading-link {
+  position: relative;
+}
+.header__heading-link .h2 {
+  background-image: linear-gradient(var(--gb-red), var(--gb-red));
+  background-size: 0% 2px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size var(--gb-anim);
+}
+.header__heading-link:hover .h2 {
+  background-size: 100% 2px;
+  text-decoration: none;
+}
+
+/* Top-level menu items get red 2px bottom-rule on hover */
+.header__inline-menu .list-menu__item--link {
+  position: relative;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.header__inline-menu .list-menu__item--link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.2rem;
+  height: 2px;
+  background: var(--gb-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--gb-anim);
+}
+.header__inline-menu .list-menu__item--link:hover::after,
+.header__inline-menu .list-menu__item--link:focus-visible::after,
+.header__inline-menu .list-menu__item--link[aria-current]::after,
+.header__active-menu-item::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   6. Section heading rhythm — red 2px hairline above kicker on
+   sections that don't yet have a kicker. Hooks via a class.
+   ============================================================ */
+
+.gb-section-eyebrow {
+  display: inline-block;
+  position: relative;
+  font-family: var(--font-body-family);
+  font-size: var(--gb-eyebrow-size);
+  letter-spacing: var(--gb-eyebrow-tracking);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gb-charcoal);
+  padding-top: 1.4rem;
+  margin: 0 0 0.8rem;
+}
+
+.gb-section-eyebrow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.4rem;
+  height: var(--gb-rule-strong-w);
+  background: var(--gb-red);
+}
+
+/* ============================================================
+   7. Section dividers — soft horizontal rule + red 24px segment
+   offset 5% from left. Applied via .gb-section-divider on a
+   wrapping div or as a generic hairline above a section.
+   ============================================================ */
+
+.gb-section-divider {
+  position: relative;
+  border-top: 1px solid var(--gb-rule-soft);
+  margin: 0;
+  height: 0;
+}
+
+.gb-section-divider::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 5%;
+  width: 2.4rem;
+  height: 2px;
+  background: var(--gb-red);
+}
+
+/* ============================================================
+   8. Card detail polish — pure-white surface, hairline image
+   border, top hairline animates to charcoal on hover, eyebrow
+   numerals, sub-spec metadata line.
+   ============================================================ */
+
+.gberg-card .card.card--card,
+.gberg-card .card.card--standard .card__inner,
+.gberg-card--white .card.card--card,
+.gberg-card--white .card.card--standard .card__inner {
+  background: #FFFFFF;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.gberg-card.product-card-wrapper {
+  position: relative;
+  padding-top: 1px;             /* room for hairline */
+}
+
+.gberg-card.product-card-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gb-rule-soft);
+  transition: background-color var(--gb-anim);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@media (hover: hover) {
+  .gberg-card.product-card-wrapper:hover::before {
+    background: var(--gb-charcoal);
+  }
+  /* Disable Dawn's image zoom — premium catalogs hold still */
+  .gberg-card:hover .card__media .media img {
+    transform: none !important;
+  }
+}
+
+/* Hairline frame around card image */
+.gberg-card .card__media {
+  border-radius: 0;
+}
+.gberg-card .card__inner.ratio {
+  border: 1px solid var(--gb-rule-soft);
+  border-radius: 0;
+}
+
+/* Card eyebrow — reuse existing class but flip color rules */
+.gberg-card__eyebrow {
+  font-size: var(--gb-eyebrow-size);
+  letter-spacing: var(--gb-eyebrow-tracking);
+  font-weight: 600;
+  color: var(--gb-red);
+  margin-bottom: 0.6rem;
+}
+
+/* Card heading: Inter Medium 14px, tight clamp */
+.gberg-card__heading,
+.gberg-card .card__heading {
+  font-family: var(--font-body-family) !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 1.4rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.005em;
+  color: var(--gb-charcoal);
+}
+
+/* Sub-spec line under the title (rendered from card-product.liquid) */
+.gberg-card__subspec {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  color: var(--gb-muted);
+  margin: 0.3rem 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card title hover — red underline draws in */
+.gberg-card .card__heading a {
+  background-image: linear-gradient(var(--gb-red), var(--gb-red));
+  background-size: 0% 2px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size var(--gb-anim);
+}
+.gberg-card:hover .card__heading a {
+  background-size: 100% 2px;
+}
+
+/* Price block on cards — Inter Medium 18px */
+.gberg-card .price__regular .price-item--regular,
+.gberg-card .price-item--regular {
+  font-family: var(--font-body-family) !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 1.6rem !important;
+  letter-spacing: 0;
+  color: var(--gb-charcoal);
+}
+
+/* Compare-at price beside (not below) */
+.gberg-card .price__sale {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.gberg-card .price__sale .price-item--sale {
+  color: var(--gb-charcoal);
+  font-weight: 600;
+}
+.gberg-card .price__sale .price-item--regular,
+.gberg-card s.price-item {
+  font-size: 1.3rem !important;
+  color: var(--gb-muted);
+  font-weight: 400 !important;
+  text-decoration: line-through;
+}
+
+/* Sale flag — uppercase tracking, red */
+.gberg-card .price--on-sale .price__badge-sale,
+.gberg-card .badge.color-scheme-5 {
+  background: transparent;
+  color: var(--gb-red) !important;
+  font-size: 1.1rem !important;
+  letter-spacing: var(--gb-eyebrow-tracking);
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0;
+  border: 0;
+}
+
+/* Card swatches — selected state ring (used on PDP later) */
+.gberg-card__swatch {
+  width: 1rem;
+  height: 1rem;
+  position: relative;
+}
+
+/* Wattage badge — flatten, make editorial */
+.gberg-card__wattage {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--gb-rule-soft);
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Hide Dawn underline-on-hover for card text — we draw our own */
+.underline-links-hover.gberg-card:hover a {
+  text-decoration: none !important;
+}
+
+/* Card grid — tighter gap (premium = curated wall) */
+@media screen and (min-width: 750px) {
+  .product-grid,
+  .grid--quarter-max,
+  .collection .product-grid {
+    gap: var(--gb-12) !important;
+  }
+}
+@media screen and (max-width: 749px) {
+  .product-grid,
+  .grid--quarter-max {
+    gap: var(--gb-8) !important;
+  }
+}
+
+/* ============================================================
+   9. Breadcrumbs — used in PDP / PLP via snippets/breadcrumbs.liquid
+   ============================================================ */
+
+.gb-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--gb-12);
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gb-charcoal);
+  font-weight: 500;
+}
+
+.gb-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.gb-breadcrumbs__item a {
+  color: var(--gb-charcoal);
+  text-decoration: none;
+}
+
+.gb-breadcrumbs__sep {
+  color: var(--gb-red);
+  font-weight: 400;
+  display: inline-block;
+}
+
+.gb-breadcrumbs__item[aria-current="page"] {
+  color: var(--gb-muted);
+}
+
+/* ============================================================
+   10. PDP buy-column — typographic discipline + red hairline
+   ============================================================ */
+
+.product__title h1,
+.product__title .h1 {
+  font-style: italic;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+}
+
+/* Red 1px rule between price and variant selectors. Hooked via
+   a markup change in main-product.liquid (block class).
+   We use the existing block separator — main-product wraps
+   blocks in product__column-sticky. */
+.product__info-container .product__info-wrapper > .product-form__input {
+  border-top: 1px solid var(--gb-rule-soft);
+  padding-top: var(--gb-12);
+  margin-top: var(--gb-12);
+}
+
+.product__info-container .product__info-wrapper > .product-form__input:first-of-type {
+  position: relative;
+}
+.product__info-container .product__info-wrapper > .product-form__input:first-of-type::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 2.4rem;
+  height: 2px;
+  background: var(--gb-red);
+}
+
+/* Price block on PDP */
+.product__info-wrapper .price__container {
+  font-family: var(--font-body-family);
+}
+.product__info-wrapper .price__regular .price-item--regular,
+.product__info-wrapper .price-item--regular {
+  font-family: var(--font-body-family);
+  font-weight: 500;
+  font-size: 2.4rem;
+  letter-spacing: -0.005em;
+}
+.product__info-wrapper .price__sale {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.product__info-wrapper .price__sale .price-item--regular,
+.product__info-wrapper s.price-item {
+  font-size: 1.6rem;
+  color: var(--gb-muted);
+  font-weight: 400;
+}
+.product__tax {
+  font-size: 1.1rem !important;
+  color: var(--gb-muted) !important;
+  letter-spacing: 0.02em;
+  margin-top: 0.4rem !important;
+}
+
+/* Variant pills — square corners, charcoal hairline, red ring on selected */
+.product-form__input--pill input[type='radio'] + label {
+  border-radius: 0 !important;
+  border: 1px solid var(--gb-rule-mid) !important;
+  padding: 1rem 1.6rem !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.04em;
+  background: transparent;
+  color: var(--gb-charcoal);
+  transition: border-color var(--gb-anim), background var(--gb-anim);
+}
+
+.product-form__input--pill input[type='radio'] + label:hover {
+  border-color: var(--gb-charcoal) !important;
+}
+
+.product-form__input--pill input[type='radio']:checked + label {
+  border-color: var(--gb-red) !important;
+  border-width: 2px !important;
+  padding: calc(1rem - 1px) calc(1.6rem - 1px) !important;
+  background: rgba(200, 16, 46, 0.06);
+  color: var(--gb-charcoal);
+}
+
+/* Color swatches — perfect circles with red ring on select */
+.swatch-input__input + .swatch-input__label,
+.product-form__input--swatch label {
+  border-radius: 50% !important;
+  width: 3.2rem !important;
+  height: 3.2rem !important;
+  border: 1px solid var(--gb-rule-mid);
+}
+
+.swatch-input__input:checked + .swatch-input__label,
+.product-form__input--swatch input:checked + label {
+  outline: 2px solid var(--gb-red) !important;
+  outline-offset: 4px !important;
+  border-color: var(--gb-charcoal) !important;
+}
+
+/* Quantity stepper — three minimalist cells, no rounded corners */
+.product-form__input quantity-input,
+.product-form__input .quantity {
+  border-radius: 0 !important;
+  border: 1px solid var(--gb-rule-mid);
+  width: auto;
+  display: inline-flex;
+  height: 4.4rem;
+}
+
+.product-form__input .quantity__input,
+.product-form__input quantity-input input {
+  border-radius: 0 !important;
+  border: 0 !important;
+  background: transparent;
+  text-align: center;
+  width: 4.8rem;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--gb-charcoal);
+}
+
+.product-form__input .quantity__button,
+.product-form__input quantity-input button {
+  border: 0 !important;
+  border-radius: 0 !important;
+  width: 4rem;
+  background: transparent;
+  color: var(--gb-charcoal);
+  transition: background var(--gb-anim);
+}
+
+.product-form__input .quantity__button:hover,
+.product-form__input quantity-input button:hover {
+  background: rgba(200, 16, 46, 0.06);
+  color: var(--gb-red);
+}
+
+/* ============================================================
+   11. Spec table — semantic dl with hairline rows
+   ============================================================ */
+
+.gb-spec-table {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(14rem, 28%) 1fr;
+  row-gap: 0;
+  column-gap: var(--gb-12);
+}
+.gb-spec-table dt,
+.gb-spec-table dd {
+  margin: 0;
+  padding: var(--gb-8) 0;
+  border-bottom: 1px solid var(--gb-rule-soft);
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+.gb-spec-table dt {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gb-charcoal);
+}
+.gb-spec-table dd {
+  color: var(--gb-muted);
+}
+
+/* ============================================================
+   12. Documents / datasheet — text-only with red animated underline
+   ============================================================ */
+
+.gb-doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--gb-charcoal);
+  text-decoration: none;
+  background-image: linear-gradient(var(--gb-red), var(--gb-red));
+  background-size: 0% 2px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size var(--gb-anim);
+  padding-bottom: 2px;
+}
+
+.gb-doc-link:hover,
+.gb-doc-link:focus-visible {
+  background-size: 100% 2px;
+}
+
+.gb-doc-link__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* ============================================================
+   13. Footer — wordmark + red hairline + inline newsletter
+   ============================================================ */
+
+.footer.color-scheme-1,
+.footer.color-scheme-2 {
+  background: var(--gb-charcoal);
+  color: #FFFFFF;
+  border-top: 1px solid var(--gb-charcoal);
+}
+.footer.color-scheme-1 *,
+.footer.color-scheme-2 * {
+  color: inherit;
+}
+.footer.color-scheme-1 .footer-block__heading,
+.footer.color-scheme-2 .footer-block__heading {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: var(--gb-eyebrow-tracking);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #FFFFFF;
+  opacity: 0.85;
+  margin-bottom: var(--gb-8);
+}
+
+.footer a {
+  color: #FFFFFF;
+  text-decoration: none;
+  background-image: linear-gradient(var(--gb-red), var(--gb-red));
+  background-size: 0% 2px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size var(--gb-anim);
+  padding-bottom: 1px;
+}
+.footer a:hover {
+  background-size: 100% 2px;
+}
+
+/* Wordmark block (rendered via footer.liquid edit) */
+.gb-footer-wordmark {
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(4.8rem, 4rem + 2.4vw, 7.2rem);
+  line-height: 1;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.gb-footer-rule {
+  display: block;
+  width: 3.2rem;
+  height: 1px;
+  background: var(--gb-red);
+  margin: var(--gb-8) 0 var(--gb-4);
+}
+
+.gb-footer-tagline {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Vertical column rule between brand column and link columns */
+@media (min-width: 990px) {
+  .footer__blocks-wrapper {
+    column-gap: var(--gb-32);
+  }
+  .footer__blocks-wrapper > .footer-block:not(:first-child) {
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: var(--gb-16);
+  }
+  .footer__blocks-wrapper > .footer-block:nth-child(2) {
+    border-left-color: var(--gb-red);
+  }
+}
+
+/* Newsletter inline form (footer) */
+.footer .newsletter-form,
+.footer .newsletter-form__field-wrapper {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  position: relative;
+}
+
+.footer .newsletter-form__field-wrapper {
+  border-bottom: 2px solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  padding: 0 0 var(--gb-2);
+  background: transparent !important;
+}
+
+.footer .newsletter-form input[type='email'],
+.footer .newsletter-form .field__input {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #FFFFFF !important;
+  padding: 0.8rem 0 !important;
+  font-size: 1.4rem;
+  flex: 1;
+}
+
+.footer .newsletter-form input[type='email']::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer .newsletter-form .field__label {
+  display: none;
+}
+
+.footer .newsletter-form button[type='submit'],
+.footer .newsletter-form .newsletter-form__button {
+  background: transparent !important;
+  border: 0;
+  color: #FFFFFF !important;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem !important;
+  letter-spacing: var(--gb-eyebrow-tracking);
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0 0 0 var(--gb-8) !important;
+  cursor: pointer;
+  position: relative;
+}
+
+.footer .newsletter-form button[type='submit']::after,
+.footer .newsletter-form .newsletter-form__button::after {
+  content: "";
+  position: absolute;
+  left: var(--gb-8);
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--gb-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--gb-anim);
+}
+.footer .newsletter-form button[type='submit']:hover::after,
+.footer .newsletter-form button[type='submit']:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Hide Dawn's button SVG arrow icon — text-only */
+.footer .newsletter-form button svg {
+  display: none;
+}
+
+/* Standalone newsletter section on charcoal scheme-3 — match footer treatment */
+.newsletter.color-scheme-3 .newsletter__wrapper,
+.newsletter .color-scheme-3 .newsletter-form,
+.newsletter__wrapper.color-scheme-3 {
+  background: var(--gb-charcoal);
+  color: #FFFFFF;
+}
+.newsletter__wrapper.color-scheme-3 h2,
+.newsletter__wrapper.color-scheme-3 .newsletter__subheading {
+  color: #FFFFFF;
+}
+.newsletter__wrapper.color-scheme-3 .newsletter-form__field-wrapper {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  position: relative;
+}
+.newsletter__wrapper.color-scheme-3 .newsletter-form input[type='email'],
+.newsletter__wrapper.color-scheme-3 .newsletter-form .field__input {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #FFFFFF !important;
+}
+.newsletter__wrapper.color-scheme-3 .newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.newsletter__wrapper.color-scheme-3 .newsletter-form .field__label {
+  display: none;
+}
+.newsletter__wrapper.color-scheme-3 .newsletter-form button[type='submit'] {
+  background: transparent !important;
+  color: #FFFFFF !important;
+  border: 0;
+  position: relative;
+}
+.newsletter__wrapper.color-scheme-3 .newsletter-form button[type='submit']::after {
+  content: "";
+  position: absolute;
+  left: 1.6rem;
+  right: 1.6rem;
+  bottom: 0;
+  height: 2px;
+  background: var(--gb-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--gb-anim);
+}
+.newsletter__wrapper.color-scheme-3 .newsletter-form button[type='submit']:hover::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   14. USP strip — red rule under each label, dark labels
+   (works on scheme-1 white background)
+   ============================================================ */
+
+.usp-strip__label {
+  position: relative;
+  color: var(--gb-charcoal) !important;
+  letter-spacing: var(--gb-eyebrow-tracking);
+  padding-top: 1.2rem;
+  font-size: 1.1rem !important;
+}
+.usp-strip__label::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.4rem;
+  height: 2px;
+  background: var(--gb-red);
+}
+
+@media (max-width: 749px) {
+  .usp-strip__label::before {
+    left: 0;
+    transform: none;
+  }
+}
+
+.usp-strip__body {
+  font-size: 1.2rem !important;
+  color: var(--gb-muted) !important;
+  font-weight: 400;
+}
+
+/* ============================================================
+   15. Cart count, badges — red flag (uppercase, tracking-wide)
+   ============================================================ */
+
+.badge {
+  border-radius: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: var(--gb-eyebrow-tracking);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   16. Section padding tightening — apply spacing scale to all
+   stock Dawn sections via class selector. We don't override
+   user-set values; we floor at 32 mobile / 64 desktop.
+   ============================================================ */
+@media screen and (min-width: 750px) {
+  .shopify-section { /* no rule — sections set their own padding via inline style */ }
+}
+
+/* ============================================================
+   17. Reduced-motion support
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

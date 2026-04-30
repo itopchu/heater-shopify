@@ -1,0 +1,112 @@
+{
+  "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-schwarz",
+  "url": "https://xxl-heizung.de/products/vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-schwarz",
+  "canonical_status": "scraper-only",
+  "title_de": "Design Paneelheizkörper Vertikal Doppellagig Schwarz FLORA",
+  "title_de_curated": "Design Paneelheizkörper Vertikal Doppellagig Schwarz FLORA",
+  "series": "FLORA",
+  "color": "schwarz",
+  "electric": false,
+  "primary_collection": "wohnraumheizkorper",
+  "collections": [
+    "wohnraumheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Wohnraumheizkörper",
+    "Design Paneelheizkörper Vertikal Doppellagig Schwarz FLORA"
+  ],
+  "description_text": "Wohnraumheizkörper sind essenzielle Bestandteile jedes modernen Haushalts, die weit über ihre grundlegende Aufgabe hinausgehen, einen Raum zu heizen. Diese Geräte sind in der Lage, eine gleichmäßige und effiziente Wärmeverteilung zu gewährleisten, was besonders in den kälteren Monaten entscheidend ist. Dank moderner Materialien und Designinnovationen sind heutige Heizkörper nicht nur funktional effizient, sondern auch langlebig und wartungsarm.",
+  "description_html": "<div data-shopify-editor-section='{\"id\":\"template--18278503121120__custom-content\",\"type\":\"custom-content\",\"disabled\":false}' class=\"shopify-section shopify-section-custom-content\" id=\"shopify-section-template--18278503121120__custom-content\">\n<div data-section-id=\"template--18278503121120__custom-content\" data-section-type=\"custom-content\" class=\"m-section m-custom-content m-gradient m-color-footer sf__index-custom-content sf__prd-custom-content\" id=\"m-custom-template--18278503121120__custom-content\">\n<div class=\"container m-section-my m-section-py\">\n<div class=\"m-custom-content__wrapper m-gradient m-color-footer\">\n<div class=\"m-custom-content__wrapper m:flex m:flex-wrap\">\n<div data-shopify-editor-block='{\"id\":\"html_AHWK8Y\",\"type\":\"html\"}' class=\"m:column m:display-flex m-custom-content__block m-custom-content__block-html lg:m:w-1/2 m:w-full\" id=\"m-custom__block--html_AHWK8Y\">\n<div class=\"m-custom-content__block-inner m:w-full\">\n<p>Wohnraumheizkörper sind essenzielle Bestandteile jedes modernen Haushalts, die weit über ihre grundlegende Aufgabe hinausgehen, einen Raum zu heizen. Diese Geräte sind in der Lage, eine gleichmäßige und effiziente Wärmeverteilung zu gewährleisten, was besonders in den kälteren Monaten entscheidend ist. Dank moderner Materialien und Designinnovationen sind heutige Heizkörper nicht nur funktional effizient, sondern auch langlebig und wartungsarm.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div data-shopify-editor-section='{\"id\":\"template--18278503121120__163212164016351730\",\"type\":\"custom-content\",\"disabled\":false}' class=\"shopify-section shopify-section-custom-content\" id=\"shopify-section-template--18278503121120__163212164016351730\">\n<div data-section-id=\"template--18278503121120__163212164016351730\" data-section-type=\"custom-content\" class=\"m-section m-custom-content m-gradient m-color-default sf__index-custom-content sf__prd-custom-content\" id=\"m-custom-template--18278503121120__163212164016351730\">\n<div class=\"container m-section-my m-section-py\">\n<div class=\"m-custom-content__wrapper m-gradient m-color-default\">\n<div class=\"m-custom-content__wrapper m:flex m:flex-wrap\">\n<div data-shopify-editor-block='{\"id\":\"html_3AQ69x\",\"type\":\"html\"}' class=\"m:column m:display-flex m-custom-content__block m-custom-content__block-html lg:m:w-1/2 m:w-full\" id=\"m-custom__block--html_3AQ69x\"></div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite × Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "38 x 180",
+        "50 × 180",
+        "60 × 180"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 55252948451715,
+      "sku": "XXL-FL-V-007",
+      "barcode": "4251743551267",
+      "title": "38 x 180",
+      "option1": "38 x 180",
+      "option2": null,
+      "option3": null,
+      "price": "549.00",
+      "compare_at_price": "699.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45733502451936,
+      "sku": "XXL-FL-V-005",
+      "barcode": "4251743540650",
+      "title": "50 × 180",
+      "option1": "50 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "639.00",
+      "compare_at_price": "699.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45733502484704,
+      "sku": "XXL-FL-V-006",
+      "barcode": "4251743540643",
+      "title": "60 × 180",
+      "option1": "60 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "689.00",
+      "compare_at_price": "799.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 3,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 3
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 549,
+    "price_max": 689,
+    "compare_at_min": 699,
+    "compare_at_max": 799
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/9827651D-A15C-41B7-8424-4B839970EBDB.jpg?v=1775253465",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/B3E036F2-E5CD-461F-9340-508EB45DDF1D.jpg?v=1775253465",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/88CAC9D0-977D-460F-A85F-A87E10EB5BAC.jpg?v=1775253465",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/CDF48C94-C626-4D2A-96FB-2265CDE9A5BF.jpg?v=1775253415"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/9827651D-A15C-41B7-8424-4B839970EBDB.jpg?v=1775253465",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Flora Vertikal",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "schwarz"
+  },
+  "join_notes": null,
+  "source_signature": "1a80889a216a56acfd6284a898157663",
+  "fetched_at": "2026-04-29T19:07:53+00:00"
+}

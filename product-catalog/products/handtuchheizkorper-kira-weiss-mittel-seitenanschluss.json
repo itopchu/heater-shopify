@@ -1,0 +1,111 @@
+{
+  "handle": "handtuchheizkorper-kira-weiss-mittel-seitenanschluss",
+  "url": "https://xxl-heizung.de/products/handtuchheizkorper-kira-weiss-mittel-seitenanschluss",
+  "canonical_status": "scraper-only",
+  "title_de": "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Weiß",
+  "title_de_curated": "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Weiß",
+  "series": "FLORA",
+  "color": "weiss",
+  "electric": false,
+  "primary_collection": "badheizkorper",
+  "collections": [
+    "badheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper",
+    "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Weiß"
+  ],
+  "description_text": "Badheizkörper & Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort & Design in jedem Bad.",
+  "description_html": "<p>Badheizkörper &amp; Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort &amp; Design in jedem Bad.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 140",
+        "60 × 160",
+        "60 × 180"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45686410838240,
+      "sku": "XXL-FL-B-01",
+      "barcode": "4251743540605",
+      "title": "50 × 140",
+      "option1": "50 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "309.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 24000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701547983072,
+      "sku": "XXL-FL-B-02",
+      "barcode": "4251743540636",
+      "title": "60 × 160",
+      "option1": "60 × 160",
+      "option2": null,
+      "option3": null,
+      "price": "369.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701548015840,
+      "sku": "XXL-FL-B-03",
+      "barcode": "4251743540926",
+      "title": "60 × 180",
+      "option1": "60 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "399.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 34000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 3,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 3
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 309,
+    "price_max": 399,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/7_Weiss_matt_Struckturiert_e8d4f6e0-24ee-4826-bc5a-09d293d47a83.jpg?v=1776246538",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/8_Weiss_matt_Struckturiert_bd08510b-0792-43b4-a705-3ba3e96a56a2.jpg?v=1776246538",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/9_Weiss_matt_Struckturiert_97e2cd55-b014-4faf-84d7-20349a4df6c5.jpg?v=1776246538"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/7_Weiss_matt_Struckturiert_e8d4f6e0-24ee-4826-bc5a-09d293d47a83.jpg?v=1776246538",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Flora Badheizkörper",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "weiß"
+  },
+  "join_notes": null,
+  "source_signature": "0555352ec8706506ea2adb241f57930c",
+  "fetched_at": "2026-04-29T19:07:26+00:00"
+}

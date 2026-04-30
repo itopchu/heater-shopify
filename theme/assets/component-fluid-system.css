@@ -214,3 +214,97 @@ body { font-size: var(--fluid-base) !important; line-height: 1.5; }
 @media (prefers-reduced-motion: reduce) {
   .banner { transition: none; }
 }
+
+/* ============================================================
+   G-Berg editorial token layer (Track A — design refresh)
+   ------------------------------------------------------------
+   Additive only. Extends the type / color / component tokens
+   without removing or renaming existing ones. Consumed by
+   component-card.css, component-variant-picker.css and Track B
+   markup (eyebrows, ledes, hairlines, accent rules).
+   ============================================================ */
+
+:root {
+  /* --- Display + eyebrow type scale (Fraunces editorial layer) --- */
+  --fluid-display:  clamp(4rem, 1.6rem + 8vw, 9.6rem);    /* 40 → 96 */
+  --fluid-eyebrow:  1.2rem;                                /* fixed 12px */
+  --fluid-body-lg:  clamp(1.7rem, 1.5rem + 0.6vw, 2rem);   /* 17 → 20 */
+  --fluid-caption:  clamp(1.2rem, 1.1rem + 0.2vw, 1.4rem); /* 12 → 14 */
+
+  /* --- Surface + hairline color tokens --- */
+  --color-surface-tone:       #FAFAFA;
+  --color-card-border:        rgba(17, 17, 17, 0.08);
+  --color-card-border-hover:  rgba(17, 17, 17, 0.18);
+  --color-accent-cool:        #2B3440;
+  --color-foreground-30:      rgba(17, 17, 17, 0.3);
+  --color-foreground-60:      rgba(17, 17, 17, 0.6);
+  --color-eyebrow:            #C8102E; /* alias to brand red */
+
+  /* --- Density tokens --- */
+  --space-section-tight: clamp(2.4rem, 4vw, 4.8rem);
+  --space-grid-row:      clamp(1.6rem, 2.5vw, 3.2rem);
+
+  /* --- Component tokens --- */
+  --card-radius:            1.2rem;
+  --card-border-hairline:   1px solid var(--color-card-border);
+  --button-density-tight:   0.8rem 1.6rem;
+  --button-density-comfort: 1.4rem 2.8rem;
+  --badge-radius:           999px;
+  --scrollbar-thin:         thin;                              /* Firefox */
+  --scrollbar-color:        rgba(17, 17, 17, 0.25) transparent; /* Firefox */
+}
+
+/* ---- Editorial utility classes ----------------------------------------
+   Designed to compose with Dawn's existing markup. Never override existing
+   selectors; merchants opt-in by adding the class via Track B. */
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body-family);
+  font-size: var(--fluid-eyebrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-eyebrow);
+  font-weight: 600;
+  line-height: 1;
+  margin: 0;
+}
+
+.eyebrow::after {
+  content: '';
+  display: block;
+  width: 2.4rem;
+  height: 0.2rem;
+  background: currentColor;
+  margin-top: 0.6rem;
+}
+
+.h-display {
+  font-family: var(--font-heading-family, 'Fraunces', serif);
+  font-weight: var(--font-heading-weight, 400);
+  font-size: var(--fluid-display);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.lede {
+  font-size: var(--fluid-body-lg);
+  line-height: 1.5;
+  max-width: 60ch;
+  color: rgb(var(--color-foreground));
+}
+
+.caption {
+  font-size: var(--fluid-caption);
+  line-height: 1.4;
+  color: var(--color-foreground-60);
+}
+
+.accent-rule {
+  border-left: 3px solid var(--color-eyebrow);
+  padding-left: var(--space-2xs);
+}
+
+.hairline       { border-block-end:   var(--card-border-hairline); }
+.hairline-top   { border-block-start: var(--card-border-hairline); }

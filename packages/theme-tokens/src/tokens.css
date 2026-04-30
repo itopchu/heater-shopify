@@ -1,0 +1,76 @@
+/*
+ * Shared design tokens.
+ * Brand-neutral. Brand skins (e.g. heating.css) override the semantic tokens.
+ * Spec ref: shop/04_design_system_spec.md §2-§4.
+ */
+
+:root {
+  /* Spacing scale */
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-96: 6rem;
+
+  /* Radius scale */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Shadow scale */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 16px 40px -8px rgb(0 0 0 / 0.12), 0 4px 8px -4px rgb(0 0 0 / 0.06);
+
+  /* Border tokens (overridable by brand skins) */
+  --border-subtle: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+  --border-default: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  --border-strong: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+
+  /* Type roles - mobile-first defaults; brand skins can override */
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: ui-serif, Georgia, "Times New Roman", serif;
+
+  --text-display-xl: clamp(2.5rem, 4vw + 1rem, 4rem);
+  --text-display-lg: clamp(2rem, 3vw + 0.75rem, 3.25rem);
+  --text-heading-xl: clamp(1.75rem, 2vw + 0.75rem, 2.5rem);
+  --text-heading-lg: clamp(1.5rem, 1.5vw + 0.75rem, 2rem);
+  --text-heading-md: 1.25rem;
+  --text-heading-sm: 1.125rem;
+  --text-body-lg: 1.0625rem;
+  --text-body-md: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-label-md: 0.875rem;
+  --text-label-sm: 0.75rem;
+  --text-caption: 0.75rem;
+
+  /* Layout */
+  --container-max: 1280px;
+  --container-px: clamp(1rem, 2vw, 2rem);
+
+  /* ----------------------------------------------------------------- */
+  /* Editorial polish helpers — added for Track A design refresh.      */
+  /* Brand-neutral. Brand skins may override per-skin.                 */
+  /* ----------------------------------------------------------------- */
+
+  /* Eyebrow / kicker sizes. The 11px matches the existing <Eyebrow>;  */
+  /* 12px is the slightly heavier variant used inside denser modules. */
+  --text-eyebrow-sm: 0.6875rem;   /* 11px */
+  --text-eyebrow-md: 0.75rem;     /* 12px */
+
+  /* Reading-measure cap for lede paragraphs and editorial copy.       */
+  --lede-max-width: 60ch;
+
+  /* Custom scrollbar tint used by long native <select> lists,         */
+  /* DropdownPanel, and any internal overflow:auto region.             */
+  --scrollbar-thin-color: rgba(17, 17, 17, 0.25);
+
+  /* Hover-only hairline. Painted as inset box-shadow so cards can     */
+  /* swap border-paint -> shadow-paint on hover without layout shift.  */
+  --shadow-hairline-hover: inset 0 0 0 1px var(--color-border-strong, rgba(17, 17, 17, 0.18));
+}

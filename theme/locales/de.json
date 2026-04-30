@@ -1,5 +1,9 @@
 {
   "general": {
+    "breadcrumbs": {
+      "aria_label": "Brotkrumen-Navigation",
+      "root": "Heizung"
+    },
     "password_page": {
       "login_form_heading": "Shop mit Passwort betreten:",
       "login_password_button": "Mit Passwort betreten",

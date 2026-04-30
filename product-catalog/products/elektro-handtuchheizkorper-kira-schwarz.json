@@ -1,0 +1,165 @@
+{
+  "handle": "elektro-handtuchheizkorper-kira-schwarz",
+  "url": "https://xxl-heizung.de/products/elektro-handtuchheizkorper-kira-schwarz",
+  "canonical_status": "scraper-only",
+  "title_de": "Elektrische Badheizkörper & Handtuchheizkörper Schwarz FLORA Bad",
+  "title_de_curated": "Elektrische Badheizkörper & Handtuchheizkörper Schwarz FLORA Bad",
+  "series": "FLORA",
+  "color": "schwarz",
+  "electric": true,
+  "primary_collection": "badheizkorper-elektrisch",
+  "collections": [
+    "badheizkorper-elektrisch"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper elektrisch",
+    "Elektrische Badheizkörper & Handtuchheizkörper Schwarz FLORA Bad"
+  ],
+  "description_text": "Elektrische Badheizkörper, auch als Handtuchheizkörper, Handtuchwärmer oder Handtuchtrockner bekannt, vereinen Funktionalität und Komfort in Ihrem Badezimmer. Diese Heizlösungen bieten nicht nur eine angenehme Raumtemperatur, sondern sorgen gleichzeitig für warme, trockene Handtücher.",
+  "description_html": "<p>Elektrische Badheizkörper, auch als Handtuchheizkörper, Handtuchwärmer oder Handtuchtrockner bekannt, vereinen Funktionalität und Komfort in Ihrem Badezimmer. Diese Heizlösungen bieten nicht nur eine angenehme Raumtemperatur, sondern sorgen gleichzeitig für warme, trockene Handtücher.</p>\n<!---->",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 140",
+        "60 × 160",
+        "60 × 180"
+      ]
+    },
+    {
+      "name": "Auslieferungszustand",
+      "name_normalized": "auslieferungszustand",
+      "position": 2,
+      "values": [
+        "Unbefüllt",
+        "Befüllt"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45734894043360,
+      "sku": "XXL-FL-B-EL-014",
+      "barcode": "4251743599719",
+      "title": "50 × 140 / Unbefüllt",
+      "option1": "50 × 140",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "409.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45686540861664,
+      "sku": "XXL-FL-B-EL-013",
+      "barcode": "4251743599702",
+      "title": "50 × 140 / Befüllt",
+      "option1": "50 × 140",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "509.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734894141664,
+      "sku": "XXL-FL-B-EL-016",
+      "barcode": "4251743599696",
+      "title": "60 × 160 / Unbefüllt",
+      "option1": "60 × 160",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "469.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45686540894432,
+      "sku": "XXL-FL-B-EL-015",
+      "barcode": "4251743599689",
+      "title": "60 × 160 / Befüllt",
+      "option1": "60 × 160",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "569.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734894207200,
+      "sku": "XXL-FL-B-EL-018",
+      "barcode": "4251743599672",
+      "title": "60 × 180 / Unbefüllt",
+      "option1": "60 × 180",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "499.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45726179852512,
+      "sku": "XXL-FL-B-EL-017",
+      "barcode": "4251743599665",
+      "title": "60 × 180 / Befüllt",
+      "option1": "60 × 180",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "599.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 6,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 6
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 409,
+    "price_max": 599,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/7_Schwarz_matt_Struckturiert_eb732551-a78f-487a-b893-f5b2c3f80413.jpg?v=1775302312",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/8_Schwarz_matt_Struckturiert_3ab76395-108d-4f11-8a35-bcfe5df87282.jpg?v=1775302312",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/9_Schwarz_matt_Struckturiert_841dff85-13d9-48f5-b9b9-47d21ad339f9.jpg?v=1775302312"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/7_Schwarz_matt_Struckturiert_eb732551-a78f-487a-b893-f5b2c3f80413.jpg?v=1775302312",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Flora Badheizkörper Elektrisch",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "schwarz"
+  },
+  "join_notes": null,
+  "source_signature": "74d237477dac9121104599e1aba1c775",
+  "fetched_at": "2026-04-29T19:07:14+00:00"
+}

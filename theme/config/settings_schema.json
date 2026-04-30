@@ -540,6 +540,23 @@
         "default": "scheme-2"
       },
       {
+        "type": "select",
+        "id": "card_surface",
+        "options": [
+          {
+            "value": "white",
+            "label": "White (default)"
+          },
+          {
+            "value": "surface-muted",
+            "label": "Muted surface (#F7F7F7)"
+          }
+        ],
+        "default": "white",
+        "label": "Card surface tone",
+        "info": "White lets studio photography sit cleanly. Use the muted surface for grey-on-grey art direction."
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.global.settings.header__border.content"
       },

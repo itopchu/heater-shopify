@@ -39,8 +39,109 @@
     if ratio == 0 or ratio == null
       assign ratio = 1
     endif
+
+    # G-Berg: resolve series eyebrow from product tags. Known series wordmarks.
+    assign series_label = ''
+    assign series_keys = 'astoria,elanor,flora,pullman,twister,konrad,platis,lavinno' | split: ','
+    for tag in card_product.tags
+      assign tag_lower = tag | downcase | strip
+      if series_keys contains tag_lower
+        assign series_label = tag_lower | upcase
+        break
+      endif
+    endfor
+    if series_label == '' and card_product.vendor != blank
+      assign series_label = card_product.vendor | upcase
+    endif
+
+    # G-Berg: resolve wattage from a tag matching `\d+\s*W` (e.g. "1350 W", "800w").
+    assign wattage_label = ''
+    for tag in card_product.tags
+      assign tag_strip = tag | strip | downcase | replace: ' ', ''
+      assign tag_last = tag_strip | slice: -1, 1
+      if tag_last == 'w'
+        assign tag_num = tag_strip | replace: 'w', ''
+        assign tag_test = tag_num | times: 1
+        if tag_test > 0
+          assign wattage_label = tag_num | append: ' W'
+          break
+        endif
+      endif
+    endfor
+
+    # G-Berg: resolve orientation hint from tags ("vertical", "horizontal").
+    assign orientation_label = ''
+    for tag in card_product.tags
+      assign tag_lower = tag | downcase | strip
+      if tag_lower == 'vertical' or tag_lower == 'vertikal'
+        assign orientation_label = 'Vertical'
+        break
+      elsif tag_lower == 'horizontal'
+        assign orientation_label = 'Horizontal'
+        break
+      endif
+    endfor
+
+    # G-Berg: pick a primary finish for the sub-spec line (most distinctive first).
+    assign finish_label = ''
+
+    # G-Berg: resolve color swatches from tags + variant options. Known finishes.
+    assign has_anthrazit = false
+    assign has_schwarz = false
+    assign has_weiss = false
+    for tag in card_product.tags
+      assign t = tag | downcase | strip
+      if t == 'anthrazit'
+        assign has_anthrazit = true
+      elsif t == 'schwarz'
+        assign has_schwarz = true
+      elsif t == 'weiss' or t == 'weiß' or t == 'white'
+        assign has_weiss = true
+      endif
+    endfor
+    for variant in card_product.variants
+      assign opts = variant.title | downcase
+      if opts contains 'anthrazit'
+        assign has_anthrazit = true
+      endif
+      if opts contains 'schwarz' or opts contains 'black'
+        assign has_schwarz = true
+      endif
+      if opts contains 'weiss' or opts contains 'weiß' or opts contains 'white'
+        assign has_weiss = true
+      endif
+    endfor
+
+    # G-Berg: pick the most-relevant single finish label.
+    if has_anthrazit
+      assign finish_label = 'Anthracite'
+    elsif has_schwarz
+      assign finish_label = 'Black'
+    elsif has_weiss
+      assign finish_label = 'White'
+    endif
+
+    # G-Berg: assemble the sub-spec line from up-to-3 facts joined with " · ".
+    assign subspec_line = ''
+    if wattage_label != ''
+      assign subspec_line = wattage_label
+    endif
+    if orientation_label != ''
+      if subspec_line != ''
+        assign subspec_line = subspec_line | append: ' · ' | append: orientation_label
+      else
+        assign subspec_line = orientation_label
+      endif
+    endif
+    if finish_label != ''
+      if subspec_line != ''
+        assign subspec_line = subspec_line | append: ' · ' | append: finish_label
+      else
+        assign subspec_line = finish_label
+      endif
+    endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover">
+  <div class="card-wrapper product-card-wrapper underline-links-hover gberg-card{% if settings.card_surface == 'white' %} gberg-card--white{% else %} gberg-card--muted{% endif %}">
     <div
       class="
         card card--{{ settings.card_style }}
@@ -84,6 +185,9 @@
               >
               {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
 
+              {%- if wattage_label != '' -%}
+                <span class="gberg-card__wattage" aria-label="{{ wattage_label }}">{{ wattage_label }}</span>
+              {%- endif -%}
               {%- if card_product.media[1] != null and show_secondary_image -%}
                 <img
                   srcset="
@@ -152,8 +256,11 @@
       </div>
       <div class="card__content">
         <div class="card__information">
+          {%- if series_label != '' -%}
+            <span class="gberg-card__eyebrow">{{ series_label }}</span>
+          {%- endif -%}
           <h3
-            class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
+            class="card__heading gberg-card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_product.featured_media or settings.card_style == 'card' %}
               id="title-{{ section_id }}-{{ card_product.id }}"
             {% endif %}
@@ -167,6 +274,9 @@
               {{ card_product.title | escape }}
             </a>
           </h3>
+          {%- if subspec_line != '' -%}
+            <p class="gberg-card__subspec">{{ subspec_line }}</p>
+          {%- endif -%}
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
@@ -212,6 +322,19 @@
             {%- endif -%}
 
             {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+            {%- if has_anthrazit or has_schwarz or has_weiss -%}
+              <ul class="gberg-card__swatches" role="list" aria-label="{{ 'products.product.product_variants' | t }}">
+                {%- if has_anthrazit -%}
+                  <li class="gberg-card__swatch gberg-card__swatch--anthrazit" title="Anthrazit" aria-label="Anthrazit"></li>
+                {%- endif -%}
+                {%- if has_schwarz -%}
+                  <li class="gberg-card__swatch gberg-card__swatch--schwarz" title="Schwarz" aria-label="Schwarz"></li>
+                {%- endif -%}
+                {%- if has_weiss -%}
+                  <li class="gberg-card__swatch gberg-card__swatch--weiss" title="Weiß" aria-label="Weiß"></li>
+                {%- endif -%}
+              </ul>
+            {%- endif -%}
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                 {% liquid

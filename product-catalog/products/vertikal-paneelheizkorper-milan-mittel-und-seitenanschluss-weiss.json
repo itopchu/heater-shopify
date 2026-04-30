@@ -1,0 +1,128 @@
+{
+  "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-weiss",
+  "url": "https://xxl-heizung.de/products/vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-weiss",
+  "canonical_status": "scraper-only",
+  "title_de": "Paneelheizkörper Flachheizkörper Vertikal Doppellagig Weiss FLORA",
+  "title_de_curated": "Paneelheizkörper Flachheizkörper Vertikal Doppellagig Weiss FLORA",
+  "series": "FLORA",
+  "color": "weiss",
+  "electric": false,
+  "primary_collection": "wohnraumheizkorper",
+  "collections": [
+    "wohnraumheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Bestseller",
+    "Paneelheizkörper Flachheizkörper Vertikal Doppellagig Weiss FLORA"
+  ],
+  "description_text": "Wohnraumheizkörper Vertikale Flach- und Paneelheizkörper bieten effiziente Wärme bei minimalem Platzbedarf. Moderne Designs mit hohem Strahlungsanteil für gleichmäßige Raumtemperatur und optimalen Wärmekomfort.",
+  "description_html": "<p>Wohnraumheizkörper Vertikale Flach- und Paneelheizkörper bieten effiziente Wärme bei minimalem Platzbedarf. Moderne Designs mit hohem Strahlungsanteil für gleichmäßige Raumtemperatur und optimalen Wärmekomfort.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "38 x 180",
+        "50 x 180",
+        "60 × 180 Lieferbar ab KW 21",
+        "70 x 180 Lieferbar ab KW 21"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 55253018902915,
+      "sku": "XXL-FL-V-008",
+      "barcode": "4251743551250",
+      "title": "38 x 180",
+      "option1": "38 x 180",
+      "option2": null,
+      "option3": null,
+      "price": "549.00",
+      "compare_at_price": "599.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45736357429472,
+      "sku": "XXL-FL-V-002",
+      "barcode": "4251743540698",
+      "title": "50 x 180",
+      "option1": "50 x 180",
+      "option2": null,
+      "option3": null,
+      "price": "639.00",
+      "compare_at_price": "699.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45336516591840,
+      "sku": "XXL-FL-V-001",
+      "barcode": "4251743540681",
+      "title": "60 × 180 Lieferbar ab KW 21",
+      "option1": "60 × 180 Lieferbar ab KW 21",
+      "option2": null,
+      "option3": null,
+      "price": "689.00",
+      "compare_at_price": "799.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55464673902979,
+      "sku": "XXL-FL-V-011",
+      "barcode": "4251743551175",
+      "title": "70 x 180 Lieferbar ab KW 21",
+      "option1": "70 x 180 Lieferbar ab KW 21",
+      "option2": null,
+      "option3": null,
+      "price": "899.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 4,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 4
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 549,
+    "price_max": 899,
+    "compare_at_min": 599,
+    "compare_at_max": 799
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/2ECDD658-ED0D-416B-A276-B19032D6B205.jpg?v=1775252187",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/4DF9BAEA-4D02-403F-AC67-57D6D430B499.jpg?v=1775252187",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/C4691D3C-4A67-4F4A-9F2C-DA8D555C47DE.jpg?v=1775252187",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/D130AB6A-F1D3-4F79-81EF-054A1813811B.jpg?v=1775252187"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/2ECDD658-ED0D-416B-A276-B19032D6B205.jpg?v=1775252187",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Flora Vertikal",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "weiß"
+  },
+  "join_notes": null,
+  "source_signature": "7b79ac79f285d045bfe4d0e9efbafcd6",
+  "fetched_at": "2026-04-29T19:07:55+00:00"
+}

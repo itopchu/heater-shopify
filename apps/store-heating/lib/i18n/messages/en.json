@@ -1,0 +1,96 @@
+{
+  "$source": "en",
+  "$comment": "EN is the fallback locale. Per master brief, EN must never be the primary surface for an EU market — it exists only as a safety net. Keys missing in NL/DE/FR fall back to this file.",
+  "common": {
+    "skip_to_content": "Skip to content",
+    "loading": "Loading…",
+    "close": "Close",
+    "open": "Open",
+    "search": "Search",
+    "menu": "Menu",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "view_all": "View all",
+    "read_more": "Read more",
+    "learn_more": "Learn more"
+  },
+  "header": {
+    "skip_link": "Skip to main content",
+    "search_placeholder": "Search radiators…",
+    "cart": "Cart",
+    "cart_count": "{count} items in cart",
+    "account": "Account",
+    "language_picker_label": "Choose language"
+  },
+  "utility_bar": {
+    "free_shipping": "Free EU delivery over €500",
+    "warranty": "10-year warranty",
+    "expert_advice": "Expert advice — reply within 2 hours",
+    "secure_checkout": "Secure checkout · Klarna · PayPal"
+  },
+  "footer": {
+    "tagline": "Premium European radiators — engineered, certified, delivered.",
+    "copyright": "© {year} G-Berg GmbH. All rights reserved.",
+    "newsletter_heading": "Stay in the loop",
+    "newsletter_description": "Roughly one email a month. Unsubscribe whenever.",
+    "newsletter_label": "Email address",
+    "newsletter_button": "Subscribe",
+    "newsletter_success": "Thanks for subscribing.",
+    "quick_links": "Quick links",
+    "info": "Info",
+    "legal": "Legal",
+    "payment_methods": "Payment methods"
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "buy_now": "Buy now",
+    "out_of_stock": "Out of stock",
+    "in_stock": "In stock",
+    "low_stock": "Low stock",
+    "price_from": "From {price}",
+    "incl_vat": "incl. VAT, excl. shipping",
+    "free_shipping_above": "Free shipping above {threshold}",
+    "select_variant": "Select a variant",
+    "quantity": "Quantity",
+    "specifications": "Specifications",
+    "description": "Description",
+    "shipping_returns": "Shipping & Returns",
+    "datasheet": "Technical datasheet",
+    "datasheet_download": "Download",
+    "you_may_also_like": "You may also like",
+    "compare": "Compare"
+  },
+  "collection": {
+    "filter": "Filter",
+    "sort": "Sort",
+    "sort_relevance": "Relevance",
+    "sort_price_asc": "Price: low to high",
+    "sort_price_desc": "Price: high to low",
+    "sort_newest": "Newest first",
+    "result_count": "{count} results",
+    "no_results": "No products found.",
+    "clear_filters": "Clear filters",
+    "load_more": "Load more"
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shipping_calculated": "Calculated at checkout",
+    "tax_included": "incl. VAT",
+    "checkout": "Checkout",
+    "continue_shopping": "Continue shopping",
+    "remove": "Remove",
+    "update": "Update"
+  },
+  "market": {
+    "shipping_to": "Shipping to",
+    "vat_inclusive_nl": "Prices include 21% VAT",
+    "vat_inclusive_be": "Prices include 21% VAT",
+    "vat_inclusive_lu": "Prices include 17% VAT",
+    "vat_inclusive_de": "Prices include 19% VAT",
+    "vat_inclusive_fr": "Prices include 20% VAT"
+  }
+}

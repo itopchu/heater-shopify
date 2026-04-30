@@ -1,0 +1,87 @@
+{
+  "handle": "multiblock-thermostatkopf-regler-fur-heizkorper-m30x1-5",
+  "url": "https://xxl-heizung.de/products/multiblock-thermostatkopf-regler-fur-heizkorper-m30x1-5",
+  "canonical_status": "scraper-only",
+  "title_de": "Multiblock Thermostatkopf Regler für Heizkörper M30x1,5",
+  "title_de_curated": "Multiblock Thermostatkopf Regler für Heizkörper M30x1,5",
+  "series": "Multiblock",
+  "color": null,
+  "electric": false,
+  "primary_collection": "zubehor",
+  "collections": [
+    "zubehor"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Zubehör",
+    "Multiblock Thermostatkopf Regler für Heizkörper M30x1,5"
+  ],
+  "description_text": "Ersatzheizkörper Badezimmerheizkörper Renovierungsheizkörper Alpha Ersatzheizkörper\n\n \n\nMit diesem Design Thermostatkopf lassen Sie Ihren Heizkörper noch mehr erstrahlen! Hochwertige Verarbeitung und ein ansprechendes Design, zeichnen diesen aus.\n\nLieferumfang:\n\nThermostatkopf in Chrom",
+  "description_html": "<h2 class=\"x_MsoNormal\">Ersatzheizkörper Badezimmerheizkörper Renovierungsheizkörper Alpha Ersatzheizkörper</h2>\n<div class=\"vc_row wpb_row vc_inner vc_row-fluid\">\n<div class=\"wpb_column vc_column_container vc_col-sm-12\">\n<div class=\"vc_column-inner\">\n<div class=\"wpb_wrapper\">\n<div class=\"tbay-addon tbay-addon-text-heading\"> </div>\n<div class=\"wpb_text_column wpb_content_element\">\n<div class=\"wpb_wrapper\">\n<div class=\"elementor-element elementor-element-e3af8f8 elementor-widget elementor-widget-text-editor\" data-id=\"e3af8f8\" data-element_type=\"widget\" data-widget_type=\"text-editor.default\">\n<div class=\"elementor-widget-container\">\n<div class=\"desc\">\n<div class=\"elementor-element elementor-element-e3af8f8 elementor-widget elementor-widget-text-editor\" data-id=\"e3af8f8\" data-element_type=\"widget\" data-widget_type=\"text-editor.default\">\n<div class=\"elementor-widget-container\">\n<p>Mit diesem Design Thermostatkopf lassen Sie Ihren Heizkörper noch mehr erstrahlen! Hochwertige Verarbeitung und ein ansprechendes Design, zeichnen diesen aus.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"vc_row wpb_row vc_inner vc_row-fluid\">\n<div class=\"wpb_column vc_column_container vc_col-sm-12\">\n<div class=\"vc_column-inner\">\n<div class=\"wpb_wrapper\">\n<div class=\"wpb_text_column wpb_content_element\">\n<div class=\"wpb_wrapper\">\n\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"vc_row wpb_row vc_inner vc_row-fluid\">\n<div class=\"wpb_column vc_column_container vc_col-sm-12\">\n<div class=\"vc_column-inner\">\n<div class=\"wpb_wrapper\">\n<div class=\"tbay-addon tbay-addon-text-heading\">\n<h2 class=\"tbay-addon-title\">Lieferumfang:</h2>\n</div>\n<div class=\"wpb_text_column wpb_content_element\">\n<div class=\"wpb_wrapper\">\n<ul>\n<li>Thermostatkopf in Chrom</li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<!---->",
+  "specs": {
+    "Material": "Messing / ABS",
+    "Frostschutzstellung": "ja",
+    "_extras": [
+      "Universaler Thermostatkopf",
+      "passt auf alle genormten Heizkörper und Mittelanschlussarmaturen",
+      "Gewinde M30x1,5",
+      "Thermostatkopf mit Flüssigkeitsfühler",
+      "Skalenanzeige von 0-5, entspricht Temperaturbereich von 7°C – 28°C"
+    ]
+  },
+  "options": [
+    {
+      "name": "Title",
+      "name_normalized": "title",
+      "position": 1,
+      "values": [
+        "Default Title"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45733824463072,
+      "sku": "XXL-TK",
+      "barcode": "4251743595995",
+      "title": "Default Title",
+      "option1": "Default Title",
+      "option2": null,
+      "option3": null,
+      "price": "19.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 1,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 1
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 19.9,
+    "price_max": 19.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/Multiblock_Thermostatkopf_Regler_fuer_Heizkoerper_M30x1_5.jpg?v=1717169512"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/Multiblock_Thermostatkopf_Regler_fuer_Heizkoerper_M30x1_5.jpg?v=1717169512",
+    "licensed_for_this_color": [],
+    "licensed_folder": null,
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": ""
+  },
+  "join_notes": "Thermostat head — different physical product than the Multiblock set; placeholder until owner shoot.",
+  "source_signature": "af7063d40906ac29b5f8686fb1cb9b7d",
+  "fetched_at": "2026-04-29T19:07:44+00:00"
+}

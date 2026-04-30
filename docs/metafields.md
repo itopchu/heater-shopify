@@ -97,3 +97,67 @@ Written by the catalog-sync pipeline (`agent/sync/`). Diagnostic, not for mercha
 - USP strip items → header-group section blocks
 - Footer columns → footer-group section blocks
 - Legal page links → theme settings (linklist)
+
+---
+
+## Design Refresh — April 2026
+
+Adds the PRODUCT metafields required by `docs/design-refresh-plan.md`
+sections 2 (card eyebrow + wattage chip), 4 (PDP structured spec block),
+and 6 (header trust bar — reuses the existing `usp_item` metaobject; no
+new metaobject needed, see Decision below).
+
+**Namespace decision** — the Track B brief proposed namespace `gberg`. The
+project has already migrated PRODUCT metafields out of `gberg.*` into the
+brief-compliant namespace structure (see
+`agent/scripts/migrate-metafield-namespaces.mjs` and
+`for-claude/shop/08_shopify_metafields_metaobjects_definitions.md`).
+Re-introducing `gberg` would re-fragment the namespace surface. Each new
+field below uses the existing brief-compliant namespace it belongs to
+(`custom` for editorial / per-SKU defaults, `specs` for measurable
+attributes).
+
+**Install** — run `npm run install:metafields:design-refresh:dry` to preview,
+then `npm run install:metafields:design-refresh` to apply. The script is
+idempotent; re-runs skip already-installed definitions.
+
+**Pinning** — Shopify caps pinned PRODUCT definitions at 20. The existing
+installer already pins ~18 high-frequency keys; the design-refresh installer
+requests pins for `series`, `wattage_w`, `energy_class`, `warranty_years`
+(in storefront-edit-frequency order). The script auto-degrades to unpinned
+on `PINNED_LIMIT_REACHED` so two of the four may land unpinned. Unpinned
+definitions are still editable in Admin → Custom data and still readable
+from the Storefront API.
+
+### New product metafields (alphabetical)
+
+| Namespace.key | Type | Validations | UI label | Pin | Surfaces on |
+|---|---|---|---|---|---|
+| `custom.series` | `single_line_text_field` | none | Series | yes | Card eyebrow wordmark; PDP eyebrow above title |
+| `custom.warranty_years` | `number_integer` | min 1, max 25 | Warranty (years) | yes | PDP spec block (warranty icon + caption) |
+| `specs.dimensions_w_h_d_mm` | `single_line_text_field` | none | Dimensions W×H×D (mm) | no | PDP spec block (dimensions row) |
+| `specs.energy_class` | `single_line_text_field` | choices: A+++, A++, A+, A, B, C, D, E, F, G | Energy class | yes | PDP spec block (energy badge) |
+| `specs.installation_difficulty` | `single_line_text_field` | choices: easy, standard, professional | Installation difficulty | no | PDP spec block (install icon caption) |
+| `specs.room_coverage_m2` | `number_decimal` | min 1, max 80 | Room coverage (m²) | no | PDP spec block ("Heats rooms up to N m²") |
+| `specs.wattage_w` | `number_integer` | min 50, max 5000 | Wattage (W) | yes | Card top-right chip; PDP spec block (kW chip) |
+
+### Reused product metafields (no schema change)
+
+| Namespace.key | Status | Notes |
+|---|---|---|
+| `specs.connection_type` | already installed (pinned, single_line_text_field, no enum) | The brief proposed enum side\|center\|both. Existing field accepts free text ("Mittelanschluss", "Seitenanschluss"). Tightening to enum is deferred — it requires a normalize-then-update migration; doing it inline would break the catalog-sync writes. |
+| `specs.width_mm` / `specs.height_mm` / `specs.depth_mm` | already installed (number_integer, pinned) | Numeric source of truth. `specs.dimensions_w_h_d_mm` (new) is the display-string mirror used by the PDP spec row — merchant-controlled formatting (× separator, locale spacing). |
+
+### Header trust bar — metaobject decision
+
+**Reuse `usp_item`** (no new metaobject). The existing `usp_item` metaobject
+already has `{ icon, label, body }` — the same field set the slim header
+trust bar needs. A separate `header_trust_mark` type with the same fields
+would just clone semantics for one extra `priority` integer that a Theme
+Editor section setting on `header-trust-bar.liquid` solves cleanly. Track A
+(Liquid) adds three "trust mark" block-pickers on the section that reference
+`usp_item.values` by handle; merchants pick which 3 surface in the header
+without leaving the Theme Editor.
+
+---
+

@@ -1,0 +1,165 @@
+{
+  "handle": "elektrische-badheizkorper-mittelanschluss-anthrazit-mira",
+  "url": "https://xxl-heizung.de/products/elektrische-badheizkorper-mittelanschluss-anthrazit-mira",
+  "canonical_status": "scraper-only",
+  "title_de": "Elektrische Badheizkörper Handtuchheizkörper Anthrazit TWISTER",
+  "title_de_curated": "Elektrische Badheizkörper Handtuchheizkörper Anthrazit TWISTER",
+  "series": "TWISTER",
+  "color": "anthrazit",
+  "electric": true,
+  "primary_collection": "badheizkorper-elektrisch",
+  "collections": [
+    "badheizkorper-elektrisch"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper elektrisch",
+    "Elektrische Badheizkörper Handtuchheizkörper Anthrazit TWISTER"
+  ],
+  "description_text": "Elektrische Badheizkörper, auch als Handtuchheizkörper, Handtuchwärmer oder Handtuchtrockner bekannt, stellen die ideale Badezimmer Heizung für moderne Haushalte dar. Diese speziellen Heizsysteme vereinen Funktionalität und Komfort in Ihrem Badezimmer und bieten eine effiziente Lösung für angenehme Temperaturen.",
+  "description_html": "<p><strong>Elektrische Badheizkörper</strong>, auch als <strong>Handtuchheizkörper</strong>, <strong>Handtuchwärmer </strong>oder <strong>Handtuchtrockner </strong>bekannt, stellen die ideale <strong>Badezimmer Heizung </strong>für moderne Haushalte dar. Diese speziellen Heizsysteme vereinen Funktionalität und Komfort in Ihrem Badezimmer und bieten eine effiziente Lösung für angenehme Temperaturen.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "44 x 121",
+        "50 x 140",
+        "50 × 160"
+      ]
+    },
+    {
+      "name": "Auslieferungszustand",
+      "name_normalized": "auslieferungszustand",
+      "position": 2,
+      "values": [
+        "Unbefüllt",
+        "Befüllt"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 55048463352195,
+      "sku": "XXL-TW- EL-06",
+      "barcode": "4251743599535",
+      "title": "44 x 121 / Unbefüllt",
+      "option1": "44 x 121",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "359.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55048463384963,
+      "sku": "XXL-TW- EL-05",
+      "barcode": "4251743599528",
+      "title": "44 x 121 / Befüllt",
+      "option1": "44 x 121",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "459.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55174045892995,
+      "sku": "XXL-TW- EL-18",
+      "barcode": "4251743599511",
+      "title": "50 x 140 / Unbefüllt",
+      "option1": "50 x 140",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "399.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55174045925763,
+      "sku": "XXL-TW- EL-17",
+      "barcode": "4251743599504",
+      "title": "50 x 140 / Befüllt",
+      "option1": "50 x 140",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "499.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734895517920,
+      "sku": "XXL-TW- EL-08",
+      "barcode": "4251743599498",
+      "title": "50 × 160 / Unbefüllt",
+      "option1": "50 × 160",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "359.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45502533599456,
+      "sku": "XXL-TW- EL-07",
+      "barcode": "4251743599481",
+      "title": "50 × 160 / Befüllt",
+      "option1": "50 × 160",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "459.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 6,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 6
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 359.9,
+    "price_max": 499.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/1_Anthrazi_matt_Struckturiert_caa97807-70d5-43d9-8e66-0f410abb230b.jpg?v=1775303937",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/2_Anthrazi_matt_Struckturiert_86ceb675-1dfd-4888-9e6c-f7d1f1d6d840.jpg?v=1775303937",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/3_Anthrazi_matt_Struckturiert_2d4dc7ca-377b-4236-a8ed-d52ac79405b1.jpg?v=1775303937"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/1_Anthrazi_matt_Struckturiert_caa97807-70d5-43d9-8e66-0f410abb230b.jpg?v=1775303937",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Twister Elektrisch",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "anthrazi"
+  },
+  "join_notes": "image_filter set to \"anthrazi\" (truncated) because the Twister Elektrisch folder filenames misspell the color as \"Anthrazi\" without final \"t\".",
+  "source_signature": "ad33ce3ad8cab1b8db846859b564a3cc",
+  "fetched_at": "2026-04-29T19:07:06+00:00"
+}

@@ -1,0 +1,159 @@
+{
+  "handle": "badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links",
+  "url": "https://xxl-heizung.de/products/badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links",
+  "canonical_status": "scraper-only",
+  "title_de": "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen",
+  "title_de_curated": "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen",
+  "series": "ELANOR",
+  "color": "anthrazit",
+  "electric": false,
+  "primary_collection": "badheizkorper",
+  "collections": [
+    "badheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper",
+    "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen"
+  ],
+  "description_text": "Badheizkörper & Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort & Design in jedem Bad.",
+  "description_html": "<p>Badheizkörper &amp; Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort &amp; Design in jedem Bad.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 115",
+        "50 × 140",
+        "50 × 164",
+        "60 × 115",
+        "60 × 140",
+        "60 × 164"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45452689506528,
+      "sku": "XXL-EL-007",
+      "barcode": "4251743542418",
+      "title": "50 × 115",
+      "option1": "50 × 115",
+      "option2": null,
+      "option3": null,
+      "price": "219.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 18000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701603131616,
+      "sku": "XXL-EL-008",
+      "barcode": "4251743542401",
+      "title": "50 × 140",
+      "option1": "50 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "259.00",
+      "compare_at_price": "359.00",
+      "available": true,
+      "grams": 19000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701603164384,
+      "sku": "XXL-EL-009",
+      "barcode": "4251743542395",
+      "title": "50 × 164",
+      "option1": "50 × 164",
+      "option2": null,
+      "option3": null,
+      "price": "349.00",
+      "compare_at_price": "449.00",
+      "available": true,
+      "grams": 25000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701603197152,
+      "sku": "XXL-EL-010",
+      "barcode": "4251743542388",
+      "title": "60 × 115",
+      "option1": "60 × 115",
+      "option2": null,
+      "option3": null,
+      "price": "239.00",
+      "compare_at_price": "439.00",
+      "available": true,
+      "grams": 20000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701603229920,
+      "sku": "XXL-EL-011",
+      "barcode": "4251743542371",
+      "title": "60 × 140",
+      "option1": "60 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "299.90",
+      "compare_at_price": "399.00",
+      "available": true,
+      "grams": 23000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701603262688,
+      "sku": "XXL-EL-012",
+      "barcode": "4251743542364",
+      "title": "60 × 164",
+      "option1": "60 × 164",
+      "option2": null,
+      "option3": null,
+      "price": "369.00",
+      "compare_at_price": "469.00",
+      "available": true,
+      "grams": 27000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 6,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 6
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 219,
+    "price_max": 369,
+    "compare_at_min": 359,
+    "compare_at_max": 469
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/1_Anthrazit_matt_Struckturiert_62421a3c-f93b-45d5-a381-cb05b00d33e5.jpg?v=1776248220",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/3_Anthrazit_matt_Struckturiert_84064e77-43cc-4e22-8922-c42000e15a83.jpg?v=1776248273",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/2_Anthrazit_matt_Struckturiert_9c3a8c1e-cf3d-4704-8153-c14bf9a9ea60.jpg?v=1776248273"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/1_Anthrazit_matt_Struckturiert_62421a3c-f93b-45d5-a381-cb05b00d33e5.jpg?v=1776248220",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Elanor",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "anthrazit"
+  },
+  "join_notes": null,
+  "source_signature": "72a79a0b6323773239f268708c40a2ab",
+  "fetched_at": "2026-04-29T19:06:39+00:00"
+}

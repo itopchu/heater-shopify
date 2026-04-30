@@ -593,3 +593,228 @@
     clip-path: polygon(var(--shape--blob-5));
   }
 }
+
+/* ============================================================
+   G-Berg card refinements
+   - White surface (default) so studio photography sits cleanly
+   - Series eyebrow above title
+   - Color-finish swatch row under price
+   - Wattage badge top-right of media
+   - Subtle image hover scale (no full card lift)
+   Tokens defined here so this file remains the single source of card styling.
+   ============================================================ */
+:root {
+  --color-eyebrow: #C8102E;
+  --color-rule-strong: #111111;
+  --color-rule-subtle: #E5E5E5;
+}
+
+.gberg-card.product-card-wrapper {
+  position: relative;
+}
+
+.gberg-card--white .card.card--card,
+.gberg-card--white .card.card--standard .card__inner {
+  background: #FFFFFF;
+}
+
+.gberg-card--muted .card.card--card,
+.gberg-card--muted .card.card--standard .card__inner {
+  background: #F7F7F7;
+}
+
+.gberg-card .card__media {
+  overflow: hidden;
+}
+
+.gberg-card .card__media .media img {
+  transition: transform 280ms ease-out;
+}
+
+@media (hover: hover) {
+  .gberg-card:hover .card__media .media img {
+    transform: scale(1.02);
+  }
+}
+
+.gberg-card__eyebrow {
+  display: inline-block;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-eyebrow);
+  font-weight: 600;
+  line-height: 1;
+  margin: 0 0 0.6rem;
+}
+
+.gberg-card__heading {
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gberg-card .price__regular .price-item--regular,
+.gberg-card .price-item--regular {
+  color: var(--color-rule-strong);
+  font-family: var(--font-body-family);
+  font-weight: 600;
+}
+
+.gberg-card__wattage {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  background: #FFFFFF;
+  color: var(--color-rule-strong);
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.08);
+  pointer-events: none;
+}
+
+.gberg-card__swatches {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gberg-card__swatch {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.gberg-card__swatch--anthrazit {
+  background: #3F3F3F;
+}
+
+.gberg-card__swatch--schwarz {
+  background: #1B1B1B;
+}
+
+.gberg-card__swatch--weiss {
+  background: #F4F4F4;
+  box-shadow: inset 0 0 0 1px #DDD;
+}
+
+/* ============================================================
+   G-Berg hairline-only product card override (Track A layer)
+   ------------------------------------------------------------
+   Removes Dawn's bordered + shadowed card frame on PLP / featured
+   grids. Default = invisible (whitespace-only separation). Hover
+   reveals a 1px hairline + 2px lift — never a heavy box.
+
+   Activates only on .product-card-wrapper (added by Track B in
+   card-product.liquid). Falls back to Dawn's frame everywhere
+   else (drawers, search, related, mobile carousels) until the
+   hook is opted in.
+   ============================================================ */
+
+.card-wrapper.product-card-wrapper .card--card,
+.card-wrapper.product-card-wrapper .card--standard .card__inner {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  border-radius: var(--card-radius);
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+
+.card-wrapper.product-card-wrapper .card--card::after,
+.card-wrapper.product-card-wrapper .card--standard .card__inner::after {
+  display: none;
+}
+
+@media (hover: hover) {
+  .card-wrapper.product-card-wrapper:hover .card--card,
+  .card-wrapper.product-card-wrapper:hover .card--standard .card__inner {
+    transform: translateY(-2px);
+    border: var(--card-border-hairline);
+  }
+}
+
+.card-wrapper.product-card-wrapper:focus-within .card--card,
+.card-wrapper.product-card-wrapper:focus-within .card--standard .card__inner {
+  transform: translateY(-2px);
+  border: var(--card-border-hairline);
+}
+
+.card-wrapper.product-card-wrapper .card__media {
+  background: var(--color-surface-tone);
+  border-radius: var(--card-radius);
+}
+
+/* --- Track B markup hooks: reserve fixed-height slots so swatch / eyebrow
+   presence-vs-absence does not cause CLS. */
+
+.card__eyebrow {
+  display: block;
+  font-family: var(--font-body-family);
+  font-size: var(--fluid-eyebrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-eyebrow);
+  font-weight: 600;
+  line-height: 1;
+  min-height: 1.6rem;
+  margin-block-end: 0.4rem;
+}
+
+.card__badge--wattage {
+  position: absolute;
+  inset-block-start: var(--space-2xs);
+  inset-inline-end: var(--space-2xs);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--badge-radius);
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  font-size: var(--fluid-caption);
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  letter-spacing: 0.02em;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.card__swatches {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-block-start: 0.6rem;
+  min-height: 1.6rem; /* CLS guard: reserve space even when product has no swatches */
+}
+
+.card__swatches > .card__swatch {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-card-border);
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.card__swatches > .card__swatch--more {
+  font-size: var(--fluid-caption);
+  color: var(--color-foreground-60);
+  align-self: center;
+  border: 0;
+  width: auto;
+  height: auto;
+}

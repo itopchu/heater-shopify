@@ -103,6 +103,13 @@
                     {%- endif -%}
                   {%- when 'brand_information' -%}
                     <div class="footer-block__brand-info">
+                      {%- if block.settings.show_wordmark -%}
+                        <p class="gb-footer-wordmark">{{ block.settings.wordmark_text }}</p>
+                        <span class="gb-footer-rule" aria-hidden="true"></span>
+                        {%- if block.settings.tagline != blank -%}
+                          <p class="gb-footer-tagline">{{ block.settings.tagline }}</p>
+                        {%- endif -%}
+                      {%- endif -%}
                       {%- if settings.brand_image != blank -%}
                         {%- assign brand_image_height = settings.brand_image_width
                           | divided_by: settings.brand_image.aspect_ratio
@@ -362,6 +369,24 @@
         {
           "type": "paragraph",
           "content": "t:sections.footer.blocks.brand_information.settings.paragraph.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_wordmark",
+          "default": true,
+          "label": "Show editorial wordmark"
+        },
+        {
+          "type": "text",
+          "id": "wordmark_text",
+          "default": "G-Berg",
+          "label": "Wordmark text"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "default": "Designed in Germany",
+          "label": "Wordmark tagline"
         },
         {
           "type": "checkbox",

@@ -1,0 +1,80 @@
+{%- comment -%}
+  G-Berg breadcrumbs.
+
+  Editorial typography: 11px uppercase tracking-wider charcoal,
+  separator is a thin red `›` (tinted via .gb-breadcrumbs__sep).
+
+  Resolves the chain from the current request:
+    - product page  → Heating › <Collection> › Product
+    - collection page → Heating › Collection
+    - blog/article  → Journal › Article
+    - page          → Page
+
+  All visible labels resolved from translation keys so merchants
+  can localize. Root label can be overridden by passing `root`.
+
+  Usage:
+    {% render 'breadcrumbs' %}
+    {% render 'breadcrumbs', root: 'Heating' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign root_label = root | default: 'general.breadcrumbs.root' | t
+-%}
+
+<nav class="gb-breadcrumbs-wrapper" aria-label="{{ 'general.breadcrumbs.aria_label' | t }}">
+  <ol class="gb-breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="gb-breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ routes.root_url }}" itemprop="item"><span itemprop="name">{{ root_label }}</span></a>
+      <meta itemprop="position" content="1">
+    </li>
+
+    {%- if template contains 'product' and product != blank -%}
+      {%- if collection != blank -%}
+        <li class="gb-breadcrumbs__sep" aria-hidden="true">›</li>
+        <li class="gb-breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="{{ collection.url }}" itemprop="item"><span itemprop="name">{{ collection.title | escape }}</span></a>
+          <meta itemprop="position" content="2">
+        </li>
+      {%- endif -%}
+      <li class="gb-breadcrumbs__sep" aria-hidden="true">›</li>
+      <li class="gb-breadcrumbs__item" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ product.title | escape }}</span>
+        <meta itemprop="position" content="{% if collection != blank %}3{% else %}2{% endif %}">
+      </li>
+
+    {%- elsif template contains 'collection' and collection != blank -%}
+      <li class="gb-breadcrumbs__sep" aria-hidden="true">›</li>
+      <li class="gb-breadcrumbs__item" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ collection.title | escape }}</span>
+        <meta itemprop="position" content="2">
+      </li>
+
+    {%- elsif template contains 'article' and article != blank -%}
+      <li class="gb-breadcrumbs__sep" aria-hidden="true">›</li>
+      <li class="gb-breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="{{ blog.url }}" itemprop="item"><span itemprop="name">{{ blog.title | escape }}</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li class="gb-breadcrumbs__sep" aria-hidden="true">›</li>
+      <li class="gb-breadcrumbs__item" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ article.title | escape }}</span>
+        <meta itemprop="position" content="3">
+      </li>
+
+    {%- elsif template contains 'blog' and blog != blank -%}
+      <li class="gb-breadcrumbs__sep" aria-hidden="true">›</li>
+      <li class="gb-breadcrumbs__item" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ blog.title | escape }}</span>
+        <meta itemprop="position" content="2">
+      </li>
+
+    {%- elsif template contains 'page' and page != blank -%}
+      <li class="gb-breadcrumbs__sep" aria-hidden="true">›</li>
+      <li class="gb-breadcrumbs__item" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ page.title | escape }}</span>
+        <meta itemprop="position" content="2">
+      </li>
+    {%- endif -%}
+  </ol>
+</nav>

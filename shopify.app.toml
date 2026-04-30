@@ -1,0 +1,25 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+#
+# gberg-agent is an internal ops app for g-berg-gmbh.myshopify.com.
+# Not distributed publicly. application_url is a placeholder — we never run
+# a hosted backend; the offline access token drives the Admin API from
+# local Node/Python scripts in agent/.
+
+client_id = "8064f934f0a8284c7badb51617246ec8"
+application_url = "https://shopify.dev/apps/default-app-home"
+embedded = false
+name = "gberg-agent"
+
+[access_scopes]
+scopes = "read_products,write_products,read_product_listings,read_files,write_files,read_themes,write_themes,read_content,write_content,read_online_store_pages,write_online_store_pages,read_online_store_navigation,write_online_store_navigation,read_locales,write_locales,read_translations,write_translations,read_metaobjects,write_metaobjects,read_metaobject_definitions,write_metaobject_definitions,read_markets,write_markets,read_publications,write_publications,read_locations,write_locations,read_inventory,write_inventory,read_shipping,write_shipping,read_legal_policies,write_legal_policies,read_discounts,write_discounts,read_price_rules,write_price_rules,read_orders,write_orders,read_customers,read_gift_cards,write_gift_cards"
+optional_scopes = []
+use_legacy_install_flow = false
+
+[auth]
+redirect_urls = [
+  "https://shopify.dev/apps/default-app-home/auth/callback",
+  "http://localhost:3456/auth/callback"
+]
+
+[webhooks]
+api_version = "2026-04"

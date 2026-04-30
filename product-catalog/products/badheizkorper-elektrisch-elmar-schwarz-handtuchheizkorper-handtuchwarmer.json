@@ -1,0 +1,159 @@
+{
+  "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer",
+  "url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer",
+  "canonical_status": "scraper-only",
+  "title_de": "Badheizkörper & Handtuchheizkörper Schwarz ELANOR - seitlich offen",
+  "title_de_curated": "Badheizkörper & Handtuchheizkörper Schwarz ELANOR - seitlich offen",
+  "series": "ELANOR",
+  "color": "schwarz",
+  "electric": false,
+  "primary_collection": "badheizkorper",
+  "collections": [
+    "badheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper",
+    "Badheizkörper & Handtuchheizkörper Schwarz ELANOR - seitlich offen"
+  ],
+  "description_text": "Badheizkörper & Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort & Design in jedem Bad.",
+  "description_html": "<p>Badheizkörper &amp; Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort &amp; Design in jedem Bad.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 115",
+        "50 × 140",
+        "50 × 164",
+        "60 × 115",
+        "60 × 140",
+        "60 × 164"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45452631113952,
+      "sku": "XXL-EL-013",
+      "barcode": "4251743542357",
+      "title": "50 × 115",
+      "option1": "50 × 115",
+      "option2": null,
+      "option3": null,
+      "price": "219.00",
+      "compare_at_price": "309.00",
+      "available": true,
+      "grams": 15000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701608308960,
+      "sku": "XXL-EL-014",
+      "barcode": "4251743542340",
+      "title": "50 × 140",
+      "option1": "50 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "259.00",
+      "compare_at_price": "359.00",
+      "available": true,
+      "grams": 19000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701608341728,
+      "sku": "XXL-EL-015",
+      "barcode": "4251743542333",
+      "title": "50 × 164",
+      "option1": "50 × 164",
+      "option2": null,
+      "option3": null,
+      "price": "349.00",
+      "compare_at_price": "449.00",
+      "available": true,
+      "grams": 25000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701608374496,
+      "sku": "XXL-EL-016",
+      "barcode": "4251743542326",
+      "title": "60 × 115",
+      "option1": "60 × 115",
+      "option2": null,
+      "option3": null,
+      "price": "239.00",
+      "compare_at_price": "339.00",
+      "available": true,
+      "grams": 20000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701608407264,
+      "sku": "XXL-EL-017",
+      "barcode": "4251743542319",
+      "title": "60 × 140",
+      "option1": "60 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "299.00",
+      "compare_at_price": "399.00",
+      "available": true,
+      "grams": 23000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701608440032,
+      "sku": "XXL-EL-018",
+      "barcode": "4251743542302",
+      "title": "60 × 164",
+      "option1": "60 × 164",
+      "option2": null,
+      "option3": null,
+      "price": "369.00",
+      "compare_at_price": "469.00",
+      "available": true,
+      "grams": 27000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 6,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 6
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 219,
+    "price_max": 369,
+    "compare_at_min": 309,
+    "compare_at_max": 469
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/13_Schwarz_matt_Struckturiert_3a307dcb-7f4d-4571-823f-00e5e3df062d.jpg?v=1776248446",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/15_Schwarz_matt_Struckturiert_6c4d33a3-d4ca-4e82-be62-43f7982bb7a2.jpg?v=1776248446",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/14_Schwarz_matt_Struckturiert_7aef3b1f-a60b-4629-9327-b943b8f05ceb.jpg?v=1776248446"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/13_Schwarz_matt_Struckturiert_3a307dcb-7f4d-4571-823f-00e5e3df062d.jpg?v=1776248446",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Elanor",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "schwarz"
+  },
+  "join_notes": "Scraper handle says 'elektrisch' but title is non-electric. Trust title.",
+  "source_signature": "bfd14aa3c6eecdd9cf94812ced413bb4",
+  "fetched_at": "2026-04-29T19:06:26+00:00"
+}

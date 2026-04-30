@@ -2,29 +2,39 @@
 /**
  * enable-extra-locales.mjs
  *
- * Provisions and publishes additional storefront locales on the G-Berg dev
- * store so the storefront language picker (rendered by the theme from the
- * shop's published locale list) shows EN/DE/NL/ES/FR/IT.
+ * Provisions and publishes the canonical 4 storefront locales for the
+ * NL-led launch:
  *
- * Target locales: es, fr, it. The script is idempotent:
+ *   nl  primary launch language (Dutch)
+ *   de  secondary           (German — DE/AT)
+ *   fr  secondary           (French — BE-FR / FR / LU)
+ *   en  fallback             (English)
  *
- *   - if a locale is absent          → shopLocaleCreate (creates published)
- *   - if present but unpublished     → shopLocaleUpdate(published: true)
- *   - if already published           → skip
+ * Idempotent:
+ *   - locale absent          → shopLocaleEnable     (creates published)
+ *   - locale unpublished     → shopLocaleUpdate(published: true)
+ *   - locale already on      → skip
  *
- * The shop's primary locale is left untouched. Translation content is NOT
- * authored here — that is a separate Translate & Adapt step (and the only
- * step that costs money). Locale enablement itself is free.
+ * Primary locale: this script will request a primary-locale change to `nl`
+ * via shopLocaleUpdate({ primary: true }). Shopify's behavior for changing
+ * primary locale is asymmetric — the new primary inherits all source values,
+ * and the previous primary becomes a regular published locale. If the API
+ * call is rejected (some plans/regions block this), we log it and document
+ * the manual click. We never silently leave it on the wrong primary.
+ *
+ * Translation content is NOT authored here — that is a separate Translate &
+ * Adapt step (see translate-theme-content.mjs). Locale enablement is free.
  *
  * Env: SHOPIFY_DEV_STORE + SHOPIFY_DEV_ADMIN_TOKEN from .env.local.
  * Scopes required: write_locales, read_locales.
  *
  * Flags:
- *   --apply        actually mutate the store (default is dry-run)
- *   --store <key>  informational; we always read the dev creds from env
+ *   --apply         actually mutate the store (default is dry-run)
+ *   --store <key>   informational
+ *   --no-set-primary  skip the primary-locale flip (useful for prod)
  *
  * Safety: refuses to run if SHOPIFY_DEV_STORE does not end with
- * `-dev.myshopify.com`. This script is dev-only by design.
+ * `-dev.myshopify.com`.
  */
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
@@ -35,8 +45,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..', '..');
 const ENV_PATH = resolve(REPO_ROOT, '.env.local');
 
-// Locales to ensure are published, in display order.
-const TARGET_LOCALES = ['es', 'fr', 'it'];
+// Canonical launch locales in display order. NL must come first because it
+// is the desired primary; the rest are publish-only.
+const TARGET_LOCALES = ['nl', 'de', 'fr', 'en'];
+const PRIMARY_LOCALE = 'nl';
 
 function loadEnvLocal(path) {
   let raw;
@@ -59,6 +71,7 @@ loadEnvLocal(ENV_PATH);
 // ---------------------------------------------------------------------------
 const ARGV = process.argv.slice(2);
 const APPLY = ARGV.includes('--apply');
+const NO_SET_PRIMARY = ARGV.includes('--no-set-primary');
 const storeFlagIdx = ARGV.indexOf('--store');
 const STORE_FLAG = storeFlagIdx >= 0 ? ARGV[storeFlagIdx + 1] : 'dev';
 
@@ -70,7 +83,6 @@ if (!STORE || !TOKEN) {
   process.exit(1);
 }
 
-// Dev-store safety check — refuse to mutate a non-dev store.
 if (!STORE.endsWith('-dev.myshopify.com')) {
   console.error(`Refusing to run: SHOPIFY_DEV_STORE="${STORE}" does not end with "-dev.myshopify.com".`);
   console.error('This script is dev-only. To target prod, write a separate script with explicit confirmation.');
@@ -80,7 +92,8 @@ if (!STORE.endsWith('-dev.myshopify.com')) {
 const ENDPOINT = `https://${STORE}/admin/api/${API_VERSION}/graphql.json`;
 
 console.log(`→ enable-extra-locales  store=${STORE_FLAG} (${STORE})  mode=${APPLY ? 'APPLY' : 'DRY-RUN'}`);
-console.log(`  target locales: ${TARGET_LOCALES.join(', ')}`);
+console.log(`  target locales : ${TARGET_LOCALES.join(', ')}`);
+console.log(`  primary locale : ${PRIMARY_LOCALE}${NO_SET_PRIMARY ? '  (skip-set)' : ''}`);
 if (!APPLY) {
   console.log('  (dry-run: no mutations will be sent. Re-run with --apply to write.)');
 }
@@ -155,14 +168,9 @@ function printLocalesTable(label, locales) {
 
 /**
  * Ensure a locale exists and is published.
- *   - absent    → shopLocaleEnable(locale)            (creates AND publishes)
- *   - present + unpublished → shopLocaleUpdate({ published: true })
- *   - present + published   → skip
- *
- * Note: the GraphQL mutation `shopLocaleEnable` is the canonical "create"
- * call in API 2026-04 — it provisions a locale and publishes it in one shot.
- * There is no separate `shopLocaleCreate` field in the Admin schema. The
- * companion "publish toggle" for an existing locale is `shopLocaleUpdate`.
+ *   - absent              → shopLocaleEnable
+ *   - present unpublished → shopLocaleUpdate({ published: true })
+ *   - present published   → skip
  */
 async function ensureLocale(localeCode, current) {
   const existing = current.find((l) => l.locale === localeCode);
@@ -187,7 +195,6 @@ async function ensureLocale(localeCode, current) {
     return { action: 'published', locale: localeCode };
   }
 
-  // Absent → create + publish.
   if (!APPLY) {
     console.log(`  · ${localeCode}: would create + publish (locale not provisioned)`);
     return { action: 'would-create', locale: localeCode };
@@ -199,6 +206,54 @@ async function ensureLocale(localeCode, current) {
   return { action: 'created', locale: localeCode };
 }
 
+/**
+ * Set PRIMARY_LOCALE as the shop's primary locale.
+ *
+ * Note: Shopify's primary-locale change is sensitive — it rewires which locale
+ * holds the "source" values. Theme + product content currently authored in EN
+ * will be re-read as if EN is the new "translation" of NL. This is fine for
+ * the EN-fallback model: we keep the EN strings as source-of-truth in code
+ * (theme/locales/en.default.json, lib/i18n/messages/en.json) and let the
+ * Translate & Adapt content layer present them under any locale label.
+ *
+ * If shopify rejects this change (some plans block it via API), we log the
+ * userError and document the manual Admin click.
+ */
+async function setPrimaryLocale(current) {
+  if (NO_SET_PRIMARY) {
+    console.log(`\n→ Skipping primary-locale change (--no-set-primary).`);
+    return { action: 'skipped' };
+  }
+  const cur = current.find((l) => l.primary);
+  if (cur && cur.locale === PRIMARY_LOCALE) {
+    console.log(`\n→ Primary locale already ${PRIMARY_LOCALE} — skipping flip.`);
+    return { action: 'skip' };
+  }
+  console.log(`\n→ Primary-locale change: ${cur?.locale || '(none)'} → ${PRIMARY_LOCALE}`);
+  if (!APPLY) {
+    console.log(`  · would update shopLocale(${PRIMARY_LOCALE}) primary=true`);
+    return { action: 'would-flip' };
+  }
+  try {
+    const res = await gql(SHOP_LOCALE_UPDATE, {
+      locale: PRIMARY_LOCALE,
+      shopLocale: { primary: true, published: true },
+    });
+    const errs = res.shopLocaleUpdate.userErrors;
+    if (errs.length) {
+      console.warn(`  ⚠ shopLocaleUpdate primary=true rejected: ${JSON.stringify(errs)}`);
+      console.warn(`    → Manual fix: Admin → Settings → Languages → Change default to Dutch.`);
+      return { action: 'manual-required', errors: errs };
+    }
+    console.log(`  ✓ primary locale flipped to ${PRIMARY_LOCALE}`);
+    return { action: 'flipped' };
+  } catch (err) {
+    console.warn(`  ⚠ primary-locale change threw: ${err.message}`);
+    console.warn(`    → Manual fix: Admin → Settings → Languages → Change default to Dutch.`);
+    return { action: 'manual-required', errors: [err.message] };
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -207,20 +262,24 @@ async function main() {
   const before = await fetchShopLocales();
   printLocalesTable('BEFORE', before);
 
-  console.log('\n→ Step 2: Reconcile target locales');
+  console.log('\n→ Step 2: Reconcile target locales (nl, de, fr, en)');
   const results = [];
   for (const code of TARGET_LOCALES) {
     results.push(await ensureLocale(code, before));
   }
 
-  console.log('\n→ Step 3: Re-fetch shopLocales');
+  console.log('\n→ Step 3: Set primary locale');
+  // Re-fetch in case we just published nl.
+  const afterPub = await fetchShopLocales();
+  const primaryResult = await setPrimaryLocale(afterPub);
+
+  console.log('\n→ Step 4: Final shopLocales snapshot');
   const after = await fetchShopLocales();
   printLocalesTable('AFTER', after);
 
   console.log('\n— Action summary —');
-  for (const r of results) {
-    console.log(`  ${r.locale}: ${r.action}`);
-  }
+  for (const r of results) console.log(`  ${r.locale}: ${r.action}`);
+  console.log(`  primary: ${primaryResult.action}`);
 
   console.log('\nDone.');
   if (!APPLY) {
@@ -229,10 +288,12 @@ async function main() {
     console.log('\n────────────────────────────────────────────────────────────');
     console.log('NEXT STEP — translation content:');
     console.log('  Locale enablement is free. Storefront strings stay in the');
-    console.log('  source locale until translations are registered (manually');
-    console.log('  via Admin → Apps → Translate & Adapt, or programmatically');
-    console.log('  via translationsRegister). The picker will show all 6');
-    console.log('  locales immediately regardless.');
+    console.log('  source locale until translations are registered. Run:');
+    console.log('    node agent/scripts/translate-theme-content.mjs --locale de --apply');
+    console.log('    node agent/scripts/translate-theme-content.mjs --locale fr --apply');
+    console.log('  (NL becomes the new primary; its values come from the source');
+    console.log('   theme JSON, so no register call is needed once primary flips.');
+    console.log('   Until the primary flips, NL also needs a register pass.)');
     console.log('────────────────────────────────────────────────────────────');
   }
 }

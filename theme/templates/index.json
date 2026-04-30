@@ -32,7 +32,7 @@
       "block_order": ["heading", "text", "button"],
       "settings": {
         "image_overlay_opacity": 30,
-        "image_height": "large",
+        "image_height": "medium",
         "desktop_content_position": "middle-center",
         "show_text_box": true,
         "desktop_content_alignment": "center",
@@ -48,9 +48,9 @@
       "settings": {
         "limit": 4,
         "alignment": "center",
-        "color_scheme": "scheme-4",
-        "padding_top": 40,
-        "padding_bottom": 40
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 32
       }
     },
     "category-grid": {
@@ -72,7 +72,7 @@
         "color_scheme": "scheme-1",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 72,
+        "padding_top": 64,
         "padding_bottom": 48
       }
     },
@@ -100,7 +100,7 @@
         "columns_mobile": "2",
         "swipe_on_mobile": true,
         "padding_top": 48,
-        "padding_bottom": 72
+        "padding_bottom": 64
       }
     },
     "trust-badges": {
@@ -110,9 +110,9 @@
         "title": "Why choose G-Berg.",
         "heading_size": "h2",
         "limit": 4,
-        "color_scheme": "scheme-5",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "color_scheme": "scheme-2",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "value-props": {
@@ -167,8 +167,8 @@
         "image_layout": "alternate-left",
         "container_color_scheme": "scheme-1",
         "section_color_scheme": "scheme-1",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "testimonials": {
@@ -179,8 +179,8 @@
         "heading_size": "h2",
         "limit": 0,
         "color_scheme": "scheme-2",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "faq": {
@@ -192,8 +192,8 @@
         "category_filter": "",
         "limit": 0,
         "color_scheme": "scheme-1",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "newsletter": {
@@ -219,10 +219,10 @@
       },
       "block_order": ["heading", "paragraph", "email_form"],
       "settings": {
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-3",
         "full_width": true,
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },

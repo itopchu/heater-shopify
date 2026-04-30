@@ -1,0 +1,78 @@
+{
+  "handle": "fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m",
+  "url": "https://xxl-heizung.de/products/fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m",
+  "canonical_status": "scraper-only",
+  "title_de": "Fußbodenheizungsrohr 16x2 mm 600 m PE-RT 5-Schicht Rohr",
+  "title_de_curated": "Fußbodenheizungsrohr 16x2 mm 600 m PE-RT 5-Schicht Rohr",
+  "series": "PE-RT",
+  "color": null,
+  "electric": false,
+  "primary_collection": "fussbodenheizungsrohre",
+  "collections": [
+    "fussbodenheizungsrohre"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Fußbodenheizung",
+    "Fußbodenheizungsrohr 16x2 mm 600 m PE-RT 5-Schicht Rohr"
+  ],
+  "description_text": "",
+  "description_html": "",
+  "specs": {},
+  "options": [
+    {
+      "name": "Title",
+      "name_normalized": "title",
+      "position": 1,
+      "values": [
+        "Default Title"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 56828370911619,
+      "sku": "XXL-PE-RT",
+      "barcode": "4251743598613",
+      "title": "Default Title",
+      "option1": "Default Title",
+      "option2": null,
+      "option3": null,
+      "price": "260.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 23000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 1,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 1
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 260.0,
+    "price_max": 260.0,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/2329AB5C-F0D4-4F90-86C0-6D46C10E6956.jpg?v=1773591372",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/FussbodenheizungRohreKonrad.png?v=1773591372"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/2329AB5C-F0D4-4F90-86C0-6D46C10E6956.jpg?v=1773591372",
+    "licensed_for_this_color": [],
+    "licensed_folder": null,
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": ""
+  },
+  "join_notes": "Floor-heating pipe — no catalog folder. Use scraper images (CDN, generic SKU shot) only as last resort, or omit until owner shoot.",
+  "source_signature": "8e00f4e1574b98399d99fcfb36da861a",
+  "fetched_at": "2026-04-29T19:07:18+00:00"
+}

@@ -1,0 +1,77 @@
+{
+  "handle": "mischbetrieb-t-stuck",
+  "url": "https://xxl-heizung.de/products/mischbetrieb-t-stuck",
+  "canonical_status": "scraper-only",
+  "title_de": "Mischbetrieb T-Stück",
+  "title_de_curated": "Mischbetrieb T-Stück",
+  "series": "Mischbetrieb",
+  "color": null,
+  "electric": false,
+  "primary_collection": "zubehor",
+  "collections": [
+    "zubehor"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Zubehör",
+    "Mischbetrieb T-Stück"
+  ],
+  "description_text": "Anwendung\n\nDas T-Stück ist aus vernickeltem Messing gefertigt und mit je zwei gleich großen, konischen Außengewinden und einem zylindrischen Innengewinde versehen.\n\nTechnische Daten\n\nMaterial – Messing vernickelt\n\nAußengewinde – konisch\n\nInnengewinde – zylindrisch\n\nmax. Betriebsdruck – 16 bar",
+  "description_html": "<h2>Anwendung</h2>\n<div data-particle_enable=\"false\" data-particle-mobile-disabled=\"false\" class=\"elementor-element elementor-element-46eefea e-con-full e-flex e-con e-child elementskit-parallax-multi-container\" data-id=\"46eefea\" data-element_type=\"container\" data-settings='{\"ekit_has_onepagescroll_dot\":\"yes\"}'>\n<div class=\"elementor-element elementor-element-2625e48 elementor-widget__width-initial sc_fly_static elementor-widget elementor-widget-text-editor\" data-id=\"2625e48\" data-element_type=\"widget\" data-settings='{\"ekit_we_effect_on\":\"none\"}' data-widget_type=\"text-editor.default\">\n<div class=\"elementor-widget-container\">\n<div class=\"wpb_text_column wpb_content_element\">\n<div class=\"wpb_wrapper\">\n<p>Das T-Stück ist aus vernickeltem Messing gefertigt und mit je zwei gleich großen, konischen Außengewinden und einem zylindrischen Innengewinde versehen.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div data-particle_enable=\"false\" data-particle-mobile-disabled=\"false\" class=\"elementor-element elementor-element-3616a0a e-con-full e-flex e-con e-child elementskit-parallax-multi-container\" data-id=\"3616a0a\" data-element_type=\"container\" data-settings='{\"ekit_has_onepagescroll_dot\":\"yes\"}'>\n<div class=\"elementor-element elementor-element-6cafecf sc_fly_static elementor-widget elementor-widget-text-editor\" data-id=\"6cafecf\" data-element_type=\"widget\" data-settings='{\"ekit_we_effect_on\":\"none\"}' data-widget_type=\"text-editor.default\">\n<div class=\"elementor-widget-container\">\n<h3 class=\"tbay-addon tbay-addon-text-heading\">Technische Daten</h3>\n<div class=\"wpb_text_column wpb_content_element\">\n<div class=\"wpb_wrapper\">\n<ul>\n<li>Material – Messing vernickelt</li>\n<li>Außengewinde – konisch</li>\n<li>Innengewinde – zylindrisch</li>\n<li>max. Betriebsdruck – 16 bar</li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n</div>\n<!---->",
+  "specs": {},
+  "options": [
+    {
+      "name": "Title",
+      "name_normalized": "title",
+      "position": 1,
+      "values": [
+        "Default Title"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45733833736416,
+      "sku": "XXL-TS",
+      "barcode": "4251743540971",
+      "title": "Default Title",
+      "option1": "Default Title",
+      "option2": null,
+      "option3": null,
+      "price": "19.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 1,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 1
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 19.9,
+    "price_max": 19.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/T-Stueck-Chrom.jpg?v=1717169029"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/T-Stueck-Chrom.jpg?v=1717169029",
+    "licensed_for_this_color": [],
+    "licensed_folder": null,
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": ""
+  },
+  "join_notes": "Mixed-mode T-piece accessory; no owner shoot.",
+  "source_signature": "48f407be6eecc431e62bd7506878a31f",
+  "fetched_at": "2026-04-29T19:07:40+00:00"
+}

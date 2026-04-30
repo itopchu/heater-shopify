@@ -1,8 +1,8 @@
 {
-  "name": "heater-shopify-agent",
+  "name": "heater-shopify-monorepo",
   "version": "0.1.0",
   "private": true,
-  "description": "Claude Agent SDK harness for the heater-shopify dev/prod store.",
+  "description": "G-Berg Heizung — Shopify theme + Claude Agent SDK harness + Next.js multi-brand storefront monorepo.",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -14,8 +14,18 @@
     "sync:dry": "tsx agent/sync/index.ts --dry-run",
     "seed:widerruf": "node agent/scripts/seed-widerrufsbelehrung.mjs",
     "enable:extra-locales": "node agent/scripts/enable-extra-locales.mjs",
+    "install:metafields:design-refresh": "node agent/scripts/install-design-refresh-metafields.mjs --store dev",
+    "install:metafields:design-refresh:dry": "node agent/scripts/install-design-refresh-metafields.mjs --store dev --dry-run",
     "translate:faqs": "node agent/scripts/translate-faq-metaobjects.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "pnpm -r --if-present typecheck && tsc --noEmit",
+    "dev:heating": "pnpm --filter store-heating dev",
+    "build:heating": "pnpm --filter store-heating build",
+    "dev:hydrogen": "pnpm --filter store-heating-hydrogen dev",
+    "build:hydrogen": "pnpm --filter store-heating-hydrogen build",
+    "preview:hydrogen": "pnpm --filter store-heating-hydrogen preview",
+    "deploy:hydrogen": "pnpm --filter store-heating-hydrogen deploy",
+    "lint": "pnpm -r --if-present lint",
+    "clean": "pnpm -r --if-present clean"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.0",

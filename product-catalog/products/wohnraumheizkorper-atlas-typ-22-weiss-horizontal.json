@@ -1,0 +1,127 @@
+{
+  "handle": "wohnraumheizkorper-atlas-typ-22-weiss-horizontal",
+  "url": "https://xxl-heizung.de/products/wohnraumheizkorper-atlas-typ-22-weiss-horizontal",
+  "canonical_status": "scraper-only",
+  "title_de": "Wohnraumheizkörper Atlas Typ 22 Weiß Horizontal",
+  "title_de_curated": "Wohnraumheizkörper Atlas Typ 22 Weiß Horizontal",
+  "series": "ATLAS",
+  "color": "weiss",
+  "electric": false,
+  "primary_collection": "wohnraumheizkorper",
+  "collections": [
+    "wohnraumheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Wohnraumheizkörper",
+    "Wohnraumheizkörper Atlas Typ 22 Weiß Horizontal"
+  ],
+  "description_text": "Wohnraumheizkörper sind essenzielle Bestandteile jedes modernen Haushalts, die weit über ihre grundlegende Aufgabe hinausgehen, einen Raum zu heizen. Diese Geräte sind in der Lage, eine gleichmäßige und effiziente Wärmeverteilung zu gewährleisten, was besonders in den kälteren Monaten entscheidend ist. Dank moderner Materialien und Designinnovationen sind heutige Heizkörper nicht nur funktional effizient, sondern auch langlebig und wartungsarm.",
+  "description_html": "<div data-shopify-editor-section='{\"id\":\"template--18278503121120__custom-content\",\"type\":\"custom-content\",\"disabled\":false}' class=\"shopify-section shopify-section-custom-content\" id=\"shopify-section-template--18278503121120__custom-content\">\n<div data-section-id=\"template--18278503121120__custom-content\" data-section-type=\"custom-content\" class=\"m-section m-custom-content m-gradient m-color-footer sf__index-custom-content sf__prd-custom-content\" id=\"m-custom-template--18278503121120__custom-content\">\n<div class=\"container m-section-my m-section-py\">\n<div class=\"m-custom-content__wrapper m-gradient m-color-footer\">\n<div class=\"m-custom-content__wrapper m:flex m:flex-wrap\">\n<div data-shopify-editor-block='{\"id\":\"html_AHWK8Y\",\"type\":\"html\"}' class=\"m:column m:display-flex m-custom-content__block m-custom-content__block-html lg:m:w-1/2 m:w-full\" id=\"m-custom__block--html_AHWK8Y\">\n<div class=\"m-custom-content__block-inner m:w-full\">\n<p>Wohnraumheizkörper sind essenzielle Bestandteile jedes modernen Haushalts, die weit über ihre grundlegende Aufgabe hinausgehen, einen Raum zu heizen. Diese Geräte sind in der Lage, eine gleichmäßige und effiziente Wärmeverteilung zu gewährleisten, was besonders in den kälteren Monaten entscheidend ist. Dank moderner Materialien und Designinnovationen sind heutige Heizkörper nicht nur funktional effizient, sondern auch langlebig und wartungsarm.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div data-shopify-editor-section='{\"id\":\"template--18278503121120__163212164016351730\",\"type\":\"custom-content\",\"disabled\":false}' class=\"shopify-section shopify-section-custom-content\" id=\"shopify-section-template--18278503121120__163212164016351730\">\n<div data-section-id=\"template--18278503121120__163212164016351730\" data-section-type=\"custom-content\" class=\"m-section m-custom-content m-gradient m-color-default sf__index-custom-content sf__prd-custom-content\" id=\"m-custom-template--18278503121120__163212164016351730\">\n<div class=\"container m-section-my m-section-py\">\n<div class=\"m-custom-content__wrapper m-gradient m-color-default\">\n<div class=\"m-custom-content__wrapper m:flex m:flex-wrap\">\n<div data-shopify-editor-block='{\"id\":\"html_3AQ69x\",\"type\":\"html\"}' class=\"m:column m:display-flex m-custom-content__block m-custom-content__block-html lg:m:w-1/2 m:w-full\" id=\"m-custom__block--html_3AQ69x\"></div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite × Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "40 × 90",
+        "60 × 90",
+        "140 × 60",
+        "160 × 60"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45726005788896,
+      "sku": "XXL-Typ-22-007",
+      "barcode": "4251743540360",
+      "title": "40 × 90",
+      "option1": "40 × 90",
+      "option2": null,
+      "option3": null,
+      "price": "299.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45726005821664,
+      "sku": "XXL-Typ-22-008",
+      "barcode": "4251743540353",
+      "title": "60 × 90",
+      "option1": "60 × 90",
+      "option2": null,
+      "option3": null,
+      "price": "339.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45726005985504,
+      "sku": "XXL-Typ-22-005",
+      "barcode": "4251743540384",
+      "title": "140 × 60",
+      "option1": "140 × 60",
+      "option2": null,
+      "option3": null,
+      "price": "379.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45726006018272,
+      "sku": "XXL-Typ-22-006",
+      "barcode": "4251743540377",
+      "title": "160 × 60",
+      "option1": "160 × 60",
+      "option2": null,
+      "option3": null,
+      "price": "429.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 4,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 4
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 299.9,
+    "price_max": 429.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/D60FA0DA-245E-4EAC-927F-C985311F1896.jpg?v=1775255250",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/8A041AFD-73A8-4F08-B20C-7F4A4DB2B667.jpg?v=1775255252",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/B4E3F3C4-5630-4119-8C07-625F5A6F904B.jpg?v=1775255250"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/D60FA0DA-245E-4EAC-927F-C985311F1896.jpg?v=1775255250",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Typ 22",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "platis"
+  },
+  "join_notes": "Owner shoot is in catalog/Typ 22/ (filenames begin 'Platis ...') — Platis is the brand name for this Atlas Typ 22 horizontal model. 3 white photos.",
+  "source_signature": "84f3d3b59292ca5bf654ca2980179b17",
+  "fetched_at": "2026-04-29T19:08:00+00:00"
+}

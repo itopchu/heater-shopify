@@ -1,0 +1,180 @@
+{
+  "handle": "heizstab",
+  "url": "https://xxl-heizung.de/products/heizstab",
+  "canonical_status": "scraper-only",
+  "title_de": "Elektro Heizstab mit Temperaturregelung für Heizkörper 600-1200 Watt",
+  "title_de_curated": "Elektro Heizstab mit Temperaturregelung für Heizkörper 600-1200 Watt",
+  "series": "HEIZSTAB",
+  "color": null,
+  "electric": true,
+  "primary_collection": "zubehor",
+  "collections": [
+    "zubehor"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Zubehör",
+    "Elektro Heizstab mit Temperaturregelung für Heizkörper 600-1200 Watt"
+  ],
+  "description_text": "Elektroheizstab für Badheizkörper - Handtuchheizkörper\n\nErleben Sie angenehme Wärme und zusätzlichen Komfort in Ihrem Badezimmer mit unserem innovativen Elektroheizstab für Badheizkörper. Dieser speziell für Badheizkörper entwickelte Heizstab sorgt für eine effiziente und gleichmäßige Erwärmung von Handtüchern und Raum. Perfekt geeignet für kalte Wintertage oder um das ganze Jahr über ein behagliches Wohlfühlklima in Ihrem Bad zu schaffen. Verwandeln Sie Ihr Badezimmer in eine Wohlfühloase – wann immer Sie möchten.\n\n \n\nHauptmerkmale\n\n \n\nProduktvorteile\n\n \n\nLieferumfang\n\n \n\nElektroheizstab.\n\nBedienungsanleitung",
+  "description_html": "<ul></ul>\n<p class=\"h2\"><span style=\"text-decoration: underline;\"><strong>Elektroheizstab für Badheizkörper - Handtuchheizkörper</strong></span></p>\n<ul></ul>\n<p>Erleben Sie angenehme Wärme und zusätzlichen Komfort in Ihrem Badezimmer mit unserem innovativen Elektroheizstab für Badheizkörper. Dieser speziell für Badheizkörper entwickelte Heizstab sorgt für eine effiziente und gleichmäßige Erwärmung von Handtüchern und Raum. Perfekt geeignet für kalte Wintertage oder um das ganze Jahr über ein behagliches Wohlfühlklima in Ihrem Bad zu schaffen. Verwandeln Sie Ihr Badezimmer in eine Wohlfühloase – wann immer Sie möchten.</p>\n<p> </p>\n<p class=\"h2\"><span style=\"text-decoration: underline;\"><strong>Hauptmerkmale</strong></span></p>\n\n<p> </p>\n<p class=\"h2\"><span style=\"text-decoration: underline;\"><strong>Produktvorteile</strong></span></p>\n\n<p> </p>\n<ul>\n<li><strong><span style=\"text-decoration: underline;\">Lieferumfang</span></strong></li>\n</ul>\n<p> </p>\n<ul>\n<li>Elektroheizstab.</li>\n<li><span style=\"font-size: 0.875rem;\">Bedienungsanleitung</span></li>\n</ul>\n<p> </p>\n<!---->",
+  "specs": {
+    "Leistungsstarker Heizstab": "Mit einer Betriebsspannung von 230V und einer Heizleistung, die schnell auf bis zu 70°C eingestellt werden kann, sorgt unser Heizstab für eine schnelle und effiziente Erwärmung.",
+    "Benutzerfreundliches Bedienfeld": "Einfache Temperatur- und Zeiteinstellungen dank des intuitiven Multi-Funktionsgriffs. Wechseln Sie mühelos zwischen verschiedenen Modi wie Temperatureinstellung, Timing, ECO-Modus und Kindersicherung.",
+    "ECO-Modus": "Sparen Sie Energie mit dem ECO-Modus, der die Arbeitstemperatur auf 50°C fixiert und so den Energieverbrauch reduziert, ohne auf Komfort zu verzichten.",
+    "Frostschutzfunktion": "Automatische Heizung bei Temperaturen unter 7°C, um Ihre Heizkörper vor Frostschäden zu schützen.",
+    "Kindersicherung": "Sorgen Sie für zusätzliche Sicherheit mit der Kindersicherung, die eine unbeabsichtigte Bedienung durch Kinder verhindert.",
+    "Stromausfall-Speicherfunktion": "Behalten Sie Ihre Einstellungen auch bei Stromausfällen bei, dank der intelligenten Speicherfunktion.",
+    "Energieeffizienz": "Reduzieren Sie Ihren Energieverbrauch und sparen Sie Kosten mit den verschiedenen Energiesparmodi.",
+    "Sicherheit": "Der integrierte Überhitzungsschutz und die Kindersicherung sorgen für einen sicheren Betrieb, selbst in Haushalten mit kleinen Kindern.",
+    "Benutzerfreundlichkeit": "Einfach zu installieren und zu bedienen, mit klaren Anweisungen und einem übersichtlichen Bedienfeld.",
+    "Flexibilität": "Vielseitig einsetzbar, ob als Handtuchtrockner oder Raumheizung, passt perfekt zu verschiedenen Badheizkörper-Modellen.",
+    "Langlebigkeit": "Hergestellt aus hochwertigen Materialien für eine lange Lebensdauer und zuverlässige Leistung."
+  },
+  "options": [
+    {
+      "name": "Watt",
+      "name_normalized": "watt",
+      "position": 1,
+      "values": [
+        "600",
+        "1200"
+      ]
+    },
+    {
+      "name": "Farbe",
+      "name_normalized": "farbe",
+      "position": 2,
+      "values": [
+        "Schwarz",
+        "Weiß",
+        "Anthrazit"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45865452110048,
+      "sku": "XXL-HS-011",
+      "barcode": "4251743540001",
+      "title": "600 / Schwarz",
+      "option1": "600",
+      "option2": "Schwarz",
+      "option3": null,
+      "price": "99.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45865452142816,
+      "sku": "XXL-HS-005",
+      "barcode": "4251743540049",
+      "title": "600 / Weiß",
+      "option1": "600",
+      "option2": "Weiß",
+      "option3": null,
+      "price": "99.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45865452175584,
+      "sku": "XXL-HS-008",
+      "barcode": "4251743540025",
+      "title": "600 / Anthrazit",
+      "option1": "600",
+      "option2": "Anthrazit",
+      "option3": null,
+      "price": "99.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45865452208352,
+      "sku": "XXL-HS-012",
+      "barcode": "4251743539999",
+      "title": "1200 / Schwarz",
+      "option1": "1200",
+      "option2": "Schwarz",
+      "option3": null,
+      "price": "119.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45865452241120,
+      "sku": "XXL-HS-006",
+      "barcode": "4251743540032",
+      "title": "1200 / Weiß",
+      "option1": "1200",
+      "option2": "Weiß",
+      "option3": null,
+      "price": "119.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45865452273888,
+      "sku": "XXL-HS-009",
+      "barcode": "4251743540018",
+      "title": "1200 / Anthrazit",
+      "option1": "1200",
+      "option2": "Anthrazit",
+      "option3": null,
+      "price": "119.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 6,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 6
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 99.0,
+    "price_max": 119.0,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/AF13Jl-White.jpg?v=1717597721",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/AF13Jl-Anthracite.jpg?v=1717597722",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/AF13Jl-_Black_1.jpg?v=1717597722",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/AF13Jl-_Black_1_1.jpg?v=1742110411",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/AF13Jl-Anthracite_1_1.jpg?v=1742110286",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/AF13Jl-White_1_1.jpg?v=1742109644"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/AF13Jl-White.jpg?v=1717597721",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Heizstab",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": ""
+  },
+  "join_notes": null,
+  "source_signature": "389be7cef074b13ffa59aba81b936bef",
+  "fetched_at": "2026-04-29T19:07:32+00:00"
+}

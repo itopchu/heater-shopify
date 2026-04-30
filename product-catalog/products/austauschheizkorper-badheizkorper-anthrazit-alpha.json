@@ -1,0 +1,259 @@
+{
+  "handle": "austauschheizkorper-badheizkorper-anthrazit-alpha",
+  "url": "https://xxl-heizung.de/products/austauschheizkorper-badheizkorper-anthrazit-alpha",
+  "canonical_status": "scraper-only",
+  "title_de": "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Anthrazit ASTORIA",
+  "title_de_curated": "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Anthrazit ASTORIA",
+  "series": "ASTORIA",
+  "color": "anthrazit",
+  "electric": false,
+  "primary_collection": "austauschheizkorper",
+  "collections": [
+    "badheizkorper",
+    "austauschheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Austauschheizkörper",
+    "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Anthrazit ASTORIA"
+  ],
+  "description_text": "Austausch Badheizkörper mit Seitenanschluss und Nabenabstand 900 mm oder 500 mm Energieeffiziente Renovierungsheizkörper als Handtuchheizkörper für Ihr Bad.",
+  "description_html": "<p><strong>Austausch Badheizkörper </strong>mit <strong>Seitenanschluss </strong>und Nabenabstand 900 mm oder 500 mm Energieeffiziente <strong>Renovierungsheizkörper </strong>als <strong>Handtuchheizkörper </strong>für Ihr Bad.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite × Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 140",
+        "50 × 160",
+        "50 × 180",
+        "60 × 140",
+        "60 × 160",
+        "60 × 180"
+      ]
+    },
+    {
+      "name": "Nabenabstände in cm",
+      "name_normalized": "nabenabstand_cm",
+      "position": 2,
+      "values": [
+        "50 - 54",
+        "90 - 94"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45490040799456,
+      "sku": "XXL-ABH- 50-54-7",
+      "barcode": "4251743542999",
+      "title": "50 × 140 / 50 - 54",
+      "option1": "50 × 140",
+      "option2": "50 - 54",
+      "option3": null,
+      "price": "169.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 11000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55048438645123,
+      "sku": "XXL-ABH- 90-94-7",
+      "barcode": "4251743542746",
+      "title": "50 × 140 / 90 - 94",
+      "option1": "50 × 140",
+      "option2": "90 - 94",
+      "option3": null,
+      "price": "169.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 11000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45733344280800,
+      "sku": "XXL-ABH- 50-54-8",
+      "barcode": "4251743542982",
+      "title": "50 × 160 / 50 - 54",
+      "option1": "50 × 160",
+      "option2": "50 - 54",
+      "option3": null,
+      "price": "179.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 12000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55048438677891,
+      "sku": "XXL-ABH- 90-94-8",
+      "barcode": "4251743542739",
+      "title": "50 × 160 / 90 - 94",
+      "option1": "50 × 160",
+      "option2": "90 - 94",
+      "option3": null,
+      "price": "169.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45733344313568,
+      "sku": "XXL-ABH- 50-54-9",
+      "barcode": "4251743542975",
+      "title": "50 × 180 / 50 - 54",
+      "option1": "50 × 180",
+      "option2": "50 - 54",
+      "option3": null,
+      "price": "199.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 14000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55048438710659,
+      "sku": "XXL-ABH- 90-94-9",
+      "barcode": "4251743542722",
+      "title": "50 × 180 / 90 - 94",
+      "option1": "50 × 180",
+      "option2": "90 - 94",
+      "option3": null,
+      "price": "169.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 14000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45733344346336,
+      "sku": "XXL-ABH- 50-54-10",
+      "barcode": "4251743542968",
+      "title": "60 × 140 / 50 - 54",
+      "option1": "60 × 140",
+      "option2": "50 - 54",
+      "option3": null,
+      "price": "179.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55048438743427,
+      "sku": "XXL-ABH- 90-94-10",
+      "barcode": "4251743542715",
+      "title": "60 × 140 / 90 - 94",
+      "option1": "60 × 140",
+      "option2": "90 - 94",
+      "option3": null,
+      "price": "169.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45733344379104,
+      "sku": "XXL-ABH- 50-54-11",
+      "barcode": "4251743542951",
+      "title": "60 × 160 / 50 - 54",
+      "option1": "60 × 160",
+      "option2": "50 - 54",
+      "option3": null,
+      "price": "189.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 14000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55048438776195,
+      "sku": "XXL-ABH- 90-94-11",
+      "barcode": "4251743542708",
+      "title": "60 × 160 / 90 - 94",
+      "option1": "60 × 160",
+      "option2": "90 - 94",
+      "option3": null,
+      "price": "169.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 14000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45733344411872,
+      "sku": "XXL-ABH- 50-54-12",
+      "barcode": "4251743542944",
+      "title": "60 × 180 / 50 - 54",
+      "option1": "60 × 180",
+      "option2": "50 - 54",
+      "option3": null,
+      "price": "199.90",
+      "compare_at_price": "279.00",
+      "available": true,
+      "grams": 17000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55048438808963,
+      "sku": "XXL-ABH- 90-94-12",
+      "barcode": "4251743542692",
+      "title": "60 × 180 / 90 - 94",
+      "option1": "60 × 180",
+      "option2": "90 - 94",
+      "option3": null,
+      "price": "169.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 17000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 12,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 12
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 169.9,
+    "price_max": 199.9,
+    "compare_at_min": 279.0,
+    "compare_at_max": 279.0
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/4_Anthrazit_matt_Struckturiert_f9ea8957-08b4-4048-9af0-c17eb563d3ab.jpg?v=1776329258",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/5_Anthrazit_matt_Struckturiert_95a9c03b-1a6b-4edb-b553-533f60aa309e.jpg?v=1776329258",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/6_Anthrazit_matt_Struckturiert_339e9b03-f758-4a6e-81ad-ad2d4deecb3d.jpg?v=1776329258"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/4_Anthrazit_matt_Struckturiert_f9ea8957-08b4-4048-9af0-c17eb563d3ab.jpg?v=1776329258",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Astorian Austausch",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "anthrazit"
+  },
+  "join_notes": null,
+  "source_signature": "c957a6b72e1c46b4f2b624d20f7b26c4",
+  "fetched_at": "2026-04-29T19:06:10+00:00"
+}

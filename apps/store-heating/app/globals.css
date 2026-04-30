@@ -1,0 +1,375 @@
+/*
+ * Global stylesheet for store-heating.
+ * Tailwind v4 uses @import "tailwindcss" plus inline @theme overrides.
+ * Brand tokens are loaded from @gberg/theme-tokens.
+ */
+
+@import "tailwindcss";
+
+/* Shared design tokens (spacing, radius, shadow scale). */
+@import "@gberg/theme-tokens/tokens.css";
+/* Heating brand skin (semantic color tokens, fonts). */
+@import "@gberg/theme-tokens/heating.css";
+
+/* Tailwind v4 lets us alias CSS variables into theme tokens for use as
+   Tailwind classes (e.g. `bg-surface`, `text-primary`). */
+@theme {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-surface-inverse: var(--color-surface-inverse);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-accent: var(--color-accent);
+  --color-cta: var(--color-cta);
+  --color-cta-hover: var(--color-cta-hover);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+/* Display headings use serif by default — sections can override per design. */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Visually-hidden utility (no JS dep). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Default container helper. */
+.container-x {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
+
+/* ------------------------------------------------------------------ */
+/* Brand accent utilities — red rules, hover-underlines, dividers.      */
+/* These keep the "more red as accent everywhere" move out of every     */
+/* component's class list.                                              */
+/* ------------------------------------------------------------------ */
+
+/* Full-bleed 1px red rule for between-section rhythm. */
+.rule-accent {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--color-rule-accent, var(--color-primary));
+  border: 0;
+}
+
+/* 2px red rule (heavier — under section headings). */
+.rule-accent-strong {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-rule-accent, var(--color-primary));
+  border: 0;
+}
+
+/* Hairline (light grey, 1px) — between rows in the footer / spec table. */
+.rule-hairline {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--color-rule, var(--color-border));
+  border: 0;
+}
+
+/*
+ * Editorial link: charcoal text + animated red underline that draws
+ * left-to-right on hover. Use on text links and inline nav.
+ *
+ * Implementation: gradient layer used as an underline whose background-size
+ * animates from 0% to 100%. Pure CSS, no layout shift.
+ */
+.link-accent {
+  background-image: linear-gradient(var(--color-primary), var(--color-primary));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size 300ms ease-out, color 200ms ease;
+  padding-bottom: 2px;
+}
+.link-accent:hover,
+.link-accent:focus-visible {
+  background-size: 100% 2px;
+}
+
+/*
+ * Header-nav link variant: same animation but anchored bottom-left, used
+ * on the uppercase main-nav items.
+ */
+.nav-link {
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 0.25rem 0;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms ease-out;
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/*
+ * Editorial card hover — dense product-card "weight-on-hover" treatment.
+ * No drop shadows. Single 2px charcoal bottom-rule animates in.
+ */
+.card-edit {
+  position: relative;
+  transition: transform 300ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.card-edit::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-border-strong);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 400ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.card-edit:hover::after {
+  transform: scaleX(1);
+}
+
+/*
+ * Section number kicker — the small red "01 /" prefix used in section
+ * eyebrows.
+ */
+.section-number {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+/*
+ * Display heading — Fraunces italic, magazine-cover scale. Use for hero H1
+ * and editorial split-block headlines.
+ */
+.display-heading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+
+/*
+ * Premium-density product grid (Fix 7).
+ *
+ *   - Mobile (<640):  2-up, 8px gutter
+ *   - Tablet (640+):  3-up, 12px gutter
+ *   - Desktop (1024+): 4-up, 16px gutter
+ *   - Wide (1440+):    4-up, 24px gutter
+ *
+ * We never go past 4 columns at any breakpoint — premium catalogues hold
+ * 4-up across desktop / wide so cards stay legible.
+ */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+@media (min-width: 1440px) {
+  .product-grid {
+    gap: 24px;
+  }
+}
+
+/*
+ * Hairline frame for the product-card image area (Fix 7). The card itself
+ * is square-cornered; the frame is a 1px inset on the inner image surface
+ * so the grid reads as a magazine contact-sheet rather than separate cards
+ * with shadows.
+ */
+.card-edit > div:first-child {
+  outline: 1px solid #ececec;
+  outline-offset: -1px;
+}
+
+/*
+ * Mobile/Tablet bottom-sheet + side-drawer (Fix 8 + Fix 9). Pure CSS
+ * transitions; React state flips the [data-open] attribute.
+ */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease-out;
+  z-index: 70;
+}
+.drawer-overlay[data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer-panel {
+  position: fixed;
+  z-index: 80;
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  transition: transform 300ms ease-out;
+  will-change: transform;
+}
+.drawer-panel--right {
+  inset: 0 0 0 auto;
+  width: min(85vw, 420px);
+  transform: translateX(100%);
+}
+.drawer-panel--right[data-open="true"] {
+  transform: translateX(0);
+}
+.drawer-panel--bottom {
+  inset: auto 0 0 0;
+  max-height: 85vh;
+  border-top: 1px solid var(--color-border);
+  transform: translateY(100%);
+}
+.drawer-panel--bottom[data-open="true"] {
+  transform: translateY(0);
+}
+
+/*
+ * Mega-menu reveal — pure CSS hover. The trigger is the `<li>`; the panel
+ * is the absolutely-positioned `<div>` inside. We default-hide and reveal
+ * on `:hover` / `:focus-within` so keyboard navigation also works.
+ *
+ * The panel is full-bleed (left: 0, right: 0) so it spans the viewport
+ * regardless of where the trigger sits in the row.
+ */
+.megamenu-trigger {
+  position: static;
+}
+.megamenu-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 200ms ease-out, transform 200ms ease-out, visibility 0s linear 200ms;
+  z-index: 50;
+}
+.megamenu-trigger:hover > .megamenu-panel,
+.megamenu-trigger:focus-within > .megamenu-panel,
+.megamenu-panel:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 200ms ease-out, transform 200ms ease-out, visibility 0s linear;
+}
+
+/*
+ * Sub-category chip row used on PLPs. Active chips get the red bottom
+ * border + low-opacity red background per Fix 6.
+ */
+.subchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: background-color 200ms ease-out, border-color 200ms ease-out, color 200ms ease-out;
+  cursor: pointer;
+}
+.subchip:hover {
+  border-color: var(--color-border-strong);
+}
+.subchip[aria-pressed="true"] {
+  border-color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+  color: var(--color-text);
+}
+.subchip-count {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}

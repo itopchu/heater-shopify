@@ -1,0 +1,93 @@
+{
+  "handle": "handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom",
+  "url": "https://xxl-heizung.de/products/handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom",
+  "canonical_status": "scraper-only",
+  "title_de": "Handtuchhaken Bademantelhalter für Badheizkörper in Weiß oder Chrom",
+  "title_de_curated": "Handtuchhaken Bademantelhalter für Badheizkörper in Weiß oder Chrom",
+  "series": "ZUBEHOR",
+  "color": "weiß",
+  "electric": false,
+  "primary_collection": "zubehor",
+  "collections": [
+    "zubehor"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Zubehör",
+    "Handtuchhaken Bademantelhalter für Badheizkörper in Weiß oder Chrom"
+  ],
+  "description_text": "Handtuchhaken für Badheizkörper\n\n2 Stück Weiss oder Chrom Handtuchhalter / Bademantelhalter / Handtuchhaken für Badheizkörper (Alpha)\n\nPackungsinhalt: 2 Stück\n\nDurchmesser: ca. 35 mm.\n\nMaterial: aus stabilem Kunststoff,\n\nFarbe: Weiss oder Chrom\n\nLieferumfang\n\n2 Stück Handtuchhaken für Badheizkörper",
+  "description_html": "<div data-widget_type=\"heading.default\" data-element_type=\"widget\" data-id=\"32e4e44\" class=\"elementor-element elementor-element-32e4e44 elementor-widget elementor-widget-heading\">\n<div class=\"elementor-widget-container\">\n<h2 class=\"elementor-heading-title elementor-size-default\"><u>Handtuchhaken für Badheizkörper</u></h2>\n</div>\n</div>\n<div data-widget_type=\"text-editor.default\" data-element_type=\"widget\" data-id=\"e3af8f8\" class=\"elementor-element elementor-element-e3af8f8 elementor-widget elementor-widget-text-editor\">\n<div class=\"elementor-widget-container\">\n<p>2 Stück Weiss oder Chrom Handtuchhalter / Bademantelhalter / Handtuchhaken für Badheizkörper (Alpha)</p>\n<p><strong>Packungsinhalt</strong>: 2 Stück</p>\n<p><strong>Durchmesser</strong>: ca. 35 mm.</p>\n<p><strong>Material</strong>: aus stabilem Kunststoff,</p>\n<p><strong>Farbe</strong>: Weiss oder Chrom</p>\n</div>\n</div>\n<div data-widget_type=\"divider.default\" data-element_type=\"widget\" data-id=\"0885986\" class=\"elementor-element elementor-element-0885986 elementor-widget-divider--view-line elementor-widget elementor-widget-divider\">\n<div class=\"elementor-widget-container\">\n<div class=\"elementor-divider\">\n<span class=\"elementor-divider-separator\"></span><br>\n</div>\n</div>\n</div>\n<div data-widget_type=\"heading.default\" data-element_type=\"widget\" data-id=\"502743f\" class=\"elementor-element elementor-element-502743f elementor-widget elementor-widget-heading\">\n<div class=\"elementor-widget-container\">\n<h2 class=\"elementor-heading-title elementor-size-default\"><u>Lieferumfang</u></h2>\n</div>\n</div>\n<div data-widget_type=\"text-editor.default\" data-element_type=\"widget\" data-id=\"753a45a\" class=\"elementor-element elementor-element-753a45a elementor-widget elementor-widget-text-editor\">\n<div class=\"elementor-widget-container\">\n<ul>\n<li data-mce-fragment=\"1\">\n<span>2 Stück</span> Handtuchhaken für Badheizkörper</li>\n</ul>\n</div>\n</div>\n<!---->",
+  "specs": {},
+  "options": [
+    {
+      "name": "Farbe",
+      "name_normalized": "farbe",
+      "position": 1,
+      "values": [
+        "Weiß",
+        "Chrom"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 46161998151904,
+      "sku": "XXL-HH-001",
+      "barcode": "4251743542838",
+      "title": "Weiß",
+      "option1": "Weiß",
+      "option2": null,
+      "option3": null,
+      "price": "22.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 46161998184672,
+      "sku": "XXL-HH-002",
+      "barcode": "4251743542821",
+      "title": "Chrom",
+      "option1": "Chrom",
+      "option2": null,
+      "option3": null,
+      "price": "22.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 2,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 2
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 22.9,
+    "price_max": 22.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/Handtuchhaken.webp?v=1723241016"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/Handtuchhaken.webp?v=1723241016",
+    "licensed_for_this_color": [],
+    "licensed_folder": null,
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": ""
+  },
+  "join_notes": "Accessory hook — no dedicated catalog folder. Reuse 1 generic shot or omit images.",
+  "source_signature": "dd13004dbde13997cf91c84a6b24e226",
+  "fetched_at": "2026-04-29T19:07:20+00:00"
+}

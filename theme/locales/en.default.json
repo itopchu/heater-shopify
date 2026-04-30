@@ -1,5 +1,9 @@
 {
   "general": {
+    "breadcrumbs": {
+      "aria_label": "Breadcrumbs",
+      "root": "Heating"
+    },
     "password_page": {
       "login_form_heading": "Enter store using password:",
       "login_password_button": "Enter using password",

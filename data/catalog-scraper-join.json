@@ -1,0 +1,562 @@
+{
+  "_doc": "Maps each scraper product (output_shopify_clean/<cat>/<handle>/info.json) to its owner-licensed image source folder under catalog/. Image filter is a case-insensitive substring matched against the filename in the catalog folder. _orphans lists items with no counterpart on the other side.",
+  "_generated": "2026-04-29T11:25:00Z",
+  "_source": {
+    "scraper": "scrapper/output_shopify_clean/",
+    "images": "catalog/"
+  },
+  "products": [
+    {
+      "handle": "konrad-ventilheizkorper-typ-22",
+      "title_de": "KONRAD Ventilheizkörper Typ 22",
+      "series": "KONRAD",
+      "color": "white",
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "KONRAD is a commodity series with no owner shoot — folder catalog/Typ 22/ contains Platis photos (Atlas series), reassigned to atlas-typ-22 product."
+    },
+    {
+      "handle": "konrad-ventilheizkorper-typ-33",
+      "title_de": "KONRAD Ventilheizkörper Typ 33",
+      "series": "KONRAD",
+      "color": "white",
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "No catalog/ folder for Typ 33 — owner only photographed Typ 22. Reuse Typ 22 photos OR omit until shoot."
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-anthrazit",
+      "title_de": "Paneelheizkörper Flachheizkörper Vertikal Doppellagig Anthrazit FLORA",
+      "series": "FLORA",
+      "color": "anthrazit",
+      "electric": false,
+      "catalog_folder": "Flora Vertikal",
+      "image_filter": "anthrazit"
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-schwarz",
+      "title_de": "Design Paneelheizkörper Vertikal Doppellagig Schwarz FLORA",
+      "series": "FLORA",
+      "color": "schwarz",
+      "electric": false,
+      "catalog_folder": "Flora Vertikal",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-weiss",
+      "title_de": "Paneelheizkörper Flachheizkörper Vertikal Doppellagig Weiss FLORA",
+      "series": "FLORA",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Flora Vertikal",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-anthrazit",
+      "title_de": "Paneelheizkörper Designheizkörper Horizontal Doppellagig Anthrazit FLORA",
+      "series": "FLORA",
+      "color": "anthrazit",
+      "electric": false,
+      "catalog_folder": "Flora Horizontal",
+      "image_filter": "anthrazit"
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-schwarz",
+      "title_de": "Paneelheizkörper Designheizkörper Horizontal Doppellagig Schwarz FLORA",
+      "series": "FLORA",
+      "color": "schwarz",
+      "electric": false,
+      "catalog_folder": "Flora Horizontal",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-weiss",
+      "title_de": "Paneelheizkörper Designheizkörper Horizontal Doppellagig Weiss FLORA",
+      "series": "FLORA",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Flora Horizontal",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "vertikal-planheizkorper-wohnraum-heizkorper-atlas-weiss",
+      "title_de": "Vertikal Planheizkörper Wohnraum Heizkörper Doppellagig Weiß Platis",
+      "series": "PLATIS",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Skyline",
+      "image_filter": "beyaz",
+      "notes": "Skyline folder uses Turkish color names; Beyaz=white, Antrasit=anthracite. Filenames use 'Platis' as series."
+    },
+    {
+      "handle": "wohnraumheizkorper-atlas-typ-22-weiss-horizontal",
+      "title_de": "Wohnraumheizkörper Atlas Typ 22 Weiß Horizontal",
+      "series": "ATLAS",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Typ 22",
+      "image_filter": "platis",
+      "notes": "Owner shoot is in catalog/Typ 22/ (filenames begin 'Platis ...') — Platis is the brand name for this Atlas Typ 22 horizontal model. 3 white photos."
+    },
+    {
+      "handle": "handtuchheizkorper-kira-anthrazit-mittel-seitenanschluss",
+      "title_de": "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Anthrazit",
+      "series": "FLORA",
+      "color": "anthrazit",
+      "electric": false,
+      "catalog_folder": "Flora Badheizkörper",
+      "image_filter": "anthrazit"
+    },
+    {
+      "handle": "handtuchheizkorper-kira-schwarz-mittel-seitenanschluss",
+      "title_de": "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Schwarz",
+      "series": "FLORA",
+      "color": "schwarz",
+      "electric": false,
+      "catalog_folder": "Flora Badheizkörper",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "handtuchheizkorper-kira-weiss-mittel-seitenanschluss",
+      "title_de": "Badheizkörper Handtuchwärmer Paneelheizkörper 1350 Watt FLORA Weiß",
+      "series": "FLORA",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Flora Badheizkörper",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-anthrazit",
+      "title_de": "Elektrische Badheizkörper & Handtuchheizkörper Anthrazit FLORA Bad",
+      "series": "FLORA",
+      "color": "anthrazit",
+      "electric": true,
+      "catalog_folder": "Flora Badheizkörper Elektrisch",
+      "image_filter": "anthrazit"
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-schwarz",
+      "title_de": "Elektrische Badheizkörper & Handtuchheizkörper Schwarz FLORA Bad",
+      "series": "FLORA",
+      "color": "schwarz",
+      "electric": true,
+      "catalog_folder": "Flora Badheizkörper Elektrisch",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-weiss",
+      "title_de": "Elektrische Badheizkörper & Handtuchheizkörper Weiß FLORA Bad",
+      "series": "FLORA",
+      "color": "weiss",
+      "electric": true,
+      "catalog_folder": "Flora Badheizkörper Elektrisch",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links",
+      "title_de": "Badheizkörper & Handtuchheizkörper Anthrazit ELANOR - seitlich offen",
+      "series": "ELANOR",
+      "color": "anthrazit",
+      "electric": false,
+      "catalog_folder": "Elanor",
+      "image_filter": "anthrazit"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer",
+      "title_de": "Badheizkörper & Handtuchheizkörper Schwarz ELANOR - seitlich offen",
+      "series": "ELANOR",
+      "color": "schwarz",
+      "electric": false,
+      "catalog_folder": "Elanor",
+      "image_filter": "schwarz",
+      "notes": "Scraper handle says 'elektrisch' but title is non-electric. Trust title."
+    },
+    {
+      "handle": "badheizkorper-elmar-weiss-seitlich-offen-rechts-oder-links",
+      "title_de": "Badheizkörper & Handtuchheizkörper Weiß ELANOR - seitlich offen",
+      "series": "ELANOR",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Elanor",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-anthrazit-handtuchheizkorper-handtuchwarmer",
+      "title_de": "Elektrische Badheizkörper Handtuchheizkörper Anthrazit ELANOR",
+      "series": "ELANOR",
+      "color": "anthrazit",
+      "electric": true,
+      "catalog_folder": "Elanor Elektrisch",
+      "image_filter": "anthrazit"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer-1",
+      "title_de": "Elektrische Badheizkörper Handtuchheizkörper Schwarz ELANOR - seitlich offen -",
+      "series": "ELANOR",
+      "color": "schwarz",
+      "electric": true,
+      "catalog_folder": "Elanor Elektrisch",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-weiss-handtuchheizkorper-handtuchwarmer",
+      "title_de": "Elektrische Badheizkörper Handtuchheizkörper Weiß ELANOR - seitlich offen",
+      "series": "ELANOR",
+      "color": "weiss",
+      "electric": true,
+      "catalog_folder": "Elanor Elektrisch",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen",
+      "title_de": "Austausch Badheizkörper & Renovierungsheizkörper Schwarz ELANOR",
+      "series": "ELANOR",
+      "color": "schwarz",
+      "electric": false,
+      "catalog_folder": "Elanor Austausch",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen-kopie",
+      "title_de": "Austausch Badheizkörper & Renovierungsheizkörper Weiß ELANOR",
+      "series": "ELANOR",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Elanor Austausch",
+      "image_filter": "weiß",
+      "notes": "Scraper handle has '-kopie' suffix but title is the white variant — keep, this is the WEISS Elanor Austausch product."
+    },
+    {
+      "handle": "badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer",
+      "title_de": "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Anthrazit",
+      "series": "ASTORIA",
+      "color": "anthrazit",
+      "electric": false,
+      "catalog_folder": "Astoria Mittelanschluss",
+      "image_filter": "anthrazit"
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-alpha-weiss-handtuchwarmer",
+      "title_de": "Badheizkörper Mittelanschluss Handtuchwärmer ASTORIA Weiß",
+      "series": "ASTORIA",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Astoria Mittelanschluss",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-alpha-schwarz-handtuchwarmer",
+      "title_de": "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Schwarz ASTORIA",
+      "series": "ASTORIA",
+      "color": "schwarz",
+      "electric": false,
+      "catalog_folder": "Astorian Austausch",
+      "image_filter": "schwarz",
+      "notes": "Scraper title says 'Seitenanschluss' but handle says 'Mittelanschluss'. Title wins → maps to Astorian Austausch (replacement series)."
+    },
+    {
+      "handle": "handtuchheizkorper-seitenanschluss-alpha-weiss",
+      "title_de": "Handtuchheizkörper Seitenanschluss ASTORIA Weiß",
+      "series": "ASTORIA",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Astoria Seitenanschluss",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "elektrische-badheizkorper-alpha-weiss-handtuchtrockner",
+      "title_de": "Elektrische Badheizkörper ASTORIA Weiß Handtuchtrockner",
+      "series": "ASTORIA",
+      "color": "weiss",
+      "electric": true,
+      "catalog_folder": "Astoria Seitenanschluss Elektrisch",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "austauschheizkorper-badheizkorper-anthrazit-alpha",
+      "title_de": "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Anthrazit ASTORIA",
+      "series": "ASTORIA",
+      "color": "anthrazit",
+      "electric": false,
+      "catalog_folder": "Astorian Austausch",
+      "image_filter": "anthrazit"
+    },
+    {
+      "handle": "badheizkorper-alpha-weiss-handtuchtrockner",
+      "title_de": "Austausch Badheizkörper Renovierungsheizkörper Seitenanschluss Weiß ASTORIA",
+      "series": "ASTORIA",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Astorian Austausch",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+      "title_de": "Badheizkörper & Handtuchheizkörper Mittelanschluss Anthrazit PULLMAN",
+      "series": "PULLMAN",
+      "color": "anthrazit",
+      "electric": false,
+      "catalog_folder": "Pullman",
+      "image_filter": "anthrazi"
+    },
+    {
+      "handle": "badheizkorper-platon-schwarz-mittel-und-seitenanschluss",
+      "title_de": "Badheizkörper & Handtuchheizkörper Schwarz PULLMAN",
+      "series": "PULLMAN",
+      "color": "schwarz",
+      "electric": false,
+      "catalog_folder": "Pullman",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "badheizkorper-platon-weiss-mittel-und-seitenanschluss-1",
+      "title_de": "Badheizkörper & Handtuchheizkörper Weiß PULLMAN",
+      "series": "PULLMAN",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Pullman",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+      "title_de": "Elektrische Handtuchheizkörper & Badheizkörper Anthrazit PULLMAN",
+      "series": "PULLMAN",
+      "color": "anthrazit",
+      "electric": true,
+      "catalog_folder": "Pullman Elektrisch",
+      "image_filter": "anthrazi"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-platon-schwarz-handtuchheizkorper-handtuchwarmer",
+      "title_de": "Elektrische Badheizkörper & Handtuchheizkörper Schwarz PULLMAN",
+      "series": "PULLMAN",
+      "color": "schwarz",
+      "electric": true,
+      "catalog_folder": "Pullman Elektrisch",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-platon-weiss-handtuchheizkorper-handtuchwarmer",
+      "title_de": "Elektrische Badheizkörper & Handtuchheizkörper Weiß PULLMAN",
+      "series": "PULLMAN",
+      "color": "weiss",
+      "electric": true,
+      "catalog_folder": "Pullman Elektrisch",
+      "image_filter": "glänzend",
+      "notes": "Pullman Elektrisch white-variant filenames omit the color word and use 'glänzend' (glossy) finish instead. Pullman (non-electric) uses 'Weiß glänzend' — color word present — so still matches 'weiß'."
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-anthrazit-mira",
+      "title_de": "Badheizkörper Design Handtuchwärmer Mittelanschluss TWISTER Schwarz",
+      "series": "TWISTER",
+      "color": "schwarz",
+      "electric": false,
+      "catalog_folder": "Twister",
+      "image_filter": "schwarz",
+      "notes": "Scraper handle says 'anthrazit' but title says 'Schwarz'. Title wins."
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-schwarz-mira",
+      "title_de": "Badheizkörper Design Handtuchwärmer Mittelanschluss TWISTER Anthrazit",
+      "series": "TWISTER",
+      "color": "anthrazit",
+      "electric": false,
+      "catalog_folder": "Twister",
+      "image_filter": "anthrazit",
+      "notes": "Scraper handle says 'schwarz' but title says 'Anthrazit'. Title wins."
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-weiss-mira-kopie",
+      "title_de": "Badheizkörper Handtuchwärmer Mittelanschluss TWISTER Weiß",
+      "series": "TWISTER",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Twister",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-anthrazit-mira",
+      "title_de": "Elektrische Badheizkörper Handtuchheizkörper Anthrazit TWISTER",
+      "series": "TWISTER",
+      "color": "anthrazit",
+      "electric": true,
+      "catalog_folder": "Twister Elektrisch",
+      "image_filter": "anthrazi",
+      "notes": "image_filter set to \"anthrazi\" (truncated) because the Twister Elektrisch folder filenames misspell the color as \"Anthrazi\" without final \"t\"."
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-schwarz-mira",
+      "title_de": "Elektrische Badheizkörper Handtuchheizkörper Schwarz TWISTER",
+      "series": "TWISTER",
+      "color": "schwarz",
+      "electric": true,
+      "catalog_folder": "Twister Elektrisch",
+      "image_filter": "schwarz"
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-weiss-mira",
+      "title_de": "Elektrische Badheizkörper Handtuchheizkörper Weiß TWISTER",
+      "series": "TWISTER",
+      "color": "weiss",
+      "electric": true,
+      "catalog_folder": "Twister Elektrisch",
+      "image_filter": "weiß"
+    },
+    {
+      "handle": "lavinno-hange-wc-tornado-rimless-weiss-glanzend",
+      "title_de": "Lavinno Hänge-WC Tornado Rimless weiß glänzend",
+      "series": "LAVINNO",
+      "color": "weiss",
+      "electric": false,
+      "catalog_folder": "Hänge WC",
+      "image_filter": ""
+    },
+    {
+      "handle": "heizstab",
+      "title_de": "Elektro Heizstab mit Temperaturregelung für Heizkörper 600-1200 Watt",
+      "series": "HEIZSTAB",
+      "color": null,
+      "electric": true,
+      "catalog_folder": "Heizstab",
+      "image_filter": ""
+    },
+    {
+      "handle": "handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom",
+      "title_de": "Handtuchhaken Bademantelhalter für Badheizkörper in Weiß oder Chrom",
+      "series": "ZUBEHOR",
+      "color": null,
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Accessory hook — no dedicated catalog folder. Reuse 1 generic shot or omit images."
+    },
+    {
+      "handle": "fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m",
+      "title_de": "Fußbodenheizungsrohr 16x2 mm 600 m PE-RT 5-Schicht Rohr",
+      "series": "PE-RT",
+      "color": null,
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Floor-heating pipe — no catalog folder. Use scraper images (CDN, generic SKU shot) only as last resort, or omit until owner shoot."
+    },
+    {
+      "handle": "befestigungsset-fur-badheizkorper",
+      "title_de": "Befestigungsset für Badheizkörper",
+      "series": "Befestigungsset",
+      "color": null,
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Mounting kit accessory; no owner shoot."
+    },
+    {
+      "handle": "creavit-ac-70s-bidet-chrom-kreuz-unterputzventil",
+      "title_de": "CREAVIT AC 70S Bidet – Chrom – Kreuz Unterputzventil",
+      "series": "Creavit",
+      "color": "chrom",
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Bidet concealed valve accessory; no owner shoot."
+    },
+    {
+      "handle": "mischbetrieb-t-stuck",
+      "title_de": "Mischbetrieb T-Stück",
+      "series": "Mischbetrieb",
+      "color": null,
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Mixed-mode T-piece accessory; no owner shoot."
+    },
+    {
+      "handle": "multiblock-set-fur-badheizkorper-eck-und-durchgangsform",
+      "title_de": "Multiblock Set für Badheizkörper Eck- und Durchgangsform",
+      "series": "Multiblock",
+      "color": null,
+      "electric": false,
+      "catalog_folder": "Multiblock",
+      "image_filter": "",
+      "notes": "Reuses owner Multiblock folder photography; was an orphan folder."
+    },
+    {
+      "handle": "multiblock-thermostatkopf-regler-fur-heizkorper-m30x1-5",
+      "title_de": "Multiblock Thermostatkopf Regler für Heizkörper M30x1,5",
+      "series": "Multiblock",
+      "color": null,
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Thermostat head — different physical product than the Multiblock set; placeholder until owner shoot."
+    },
+    {
+      "handle": "thermoflussigkeit-fur-elektro-badheizkorper",
+      "title_de": "Thermoflüssigkeit für Elektro Badheizkörper",
+      "series": "Thermoflüssigkeit",
+      "color": null,
+      "electric": true,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Heat-transfer fluid for electric radiators; no owner shoot."
+    },
+    {
+      "handle": "thermostatventil-set-heizkorper-eck-1-2-chrom",
+      "title_de": "Thermostatventil Set Heizkörper Eck 1/2 Chrom",
+      "series": "Thermostatventil",
+      "color": "chrom",
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Thermostat valve set; no owner shoot."
+    },
+    {
+      "handle": "zweirohr-hahnblock-fur-ventil-heizkorper-winkelform",
+      "title_de": "Zweirohr-Hahnblock für Ventil-Heizkörper – Winkelform",
+      "series": "Hahnblock",
+      "color": null,
+      "electric": false,
+      "catalog_folder": null,
+      "image_filter": "",
+      "notes": "Two-pipe valve block; no owner shoot."
+    }
+  ],
+  "_orphan_catalog_folders": [
+    {
+      "folder": "Astoria Seitenanschluss",
+      "reason": "Scraper has 'handtuchheizkorper-seitenanschluss-alpha-weiss' (white only). Folder may also have anthrazit/schwarz photos for non-scraped variants."
+    },
+    {
+      "folder": "Premium Elanor",
+      "reason": "No scraper match — owner-exclusive premium variant. Needs manual product entry."
+    },
+    {
+      "folder": "Premium Elanor Elektrisch",
+      "reason": "No scraper match — owner-exclusive premium electric variant. Needs manual product entry."
+    },
+    {
+      "folder": "Typ 20",
+      "reason": "No scraper match — only Typ 22 and Typ 33 in scraper. Owner has Typ 20 photography → either we add a manual KONRAD Typ 20 product or rename folder."
+    },
+    {
+      "folder": "Fotos 11.8.25",
+      "reason": "Lifestyle/in-room shoot. Use as supplementary 'in context' images for the same series (BANYO=bath, SALON=living-room) — not a primary product."
+    }
+  ],
+  "_orphan_scraper_handles": [
+    "konrad-ventilheizkorper-typ-22",
+    "konrad-ventilheizkorper-typ-33",
+    "handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom",
+    "fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m"
+  ],
+  "_summary": {
+    "scraper_products": 55,
+    "matched_to_catalog_folder": 45,
+    "scraper_orphans_no_owner_photos": 10,
+    "catalog_folders": 23,
+    "catalog_orphans_no_scraper_data": 5,
+    "decision_required": "Confirm policy for scraper orphans (omit / reuse generic / scraper CDN with attribution) and catalog orphans (manual product entries needed for Multiblock, Premium Elanor, Premium Elanor Elektrisch, Typ 20). Note: orphan list updated v2 — KONRAD Typ 22 added (no owner shoot, Typ 22 folder reassigned to Atlas), Atlas removed (now matched)."
+  }
+}

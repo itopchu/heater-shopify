@@ -1,0 +1,191 @@
+{
+  "handle": "badheizkorper-platon-weiss-mittel-und-seitenanschluss-1",
+  "url": "https://xxl-heizung.de/products/badheizkorper-platon-weiss-mittel-und-seitenanschluss-1",
+  "canonical_status": "scraper-only",
+  "title_de": "Badheizkörper & Handtuchheizkörper Weiß PULLMAN",
+  "title_de_curated": "Badheizkörper & Handtuchheizkörper Weiß PULLMAN",
+  "series": "PULLMAN",
+  "color": "weiss",
+  "electric": false,
+  "primary_collection": "badheizkorper",
+  "collections": [
+    "badheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper",
+    "Badheizkörper & Handtuchheizkörper Weiß PULLMAN"
+  ],
+  "description_text": "Badheizkörper & Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort & Design in jedem Bad.",
+  "description_html": "<p>Badheizkörper &amp; Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort &amp; Design in jedem Bad.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 120",
+        "50 × 140",
+        "50 × 160",
+        "50 × 180",
+        "60 × 120",
+        "60 × 140",
+        "60 × 160",
+        "60 × 180"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45452493881568,
+      "sku": "XXL-PL-002",
+      "barcode": "4251743542289",
+      "title": "50 × 120",
+      "option1": "50 × 120",
+      "option2": null,
+      "option3": null,
+      "price": "219.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701677449440,
+      "sku": "XXL-PL-003",
+      "barcode": "4251743542272",
+      "title": "50 × 140",
+      "option1": "50 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "249.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 18000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701677482208,
+      "sku": "XXL-PL-004",
+      "barcode": "4251743542265",
+      "title": "50 × 160",
+      "option1": "50 × 160",
+      "option2": null,
+      "option3": null,
+      "price": "309.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701677514976,
+      "sku": "XXL-PL-005",
+      "barcode": "4251743542258",
+      "title": "50 × 180",
+      "option1": "50 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "349.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 24000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701677547744,
+      "sku": "XXL-PL-007",
+      "barcode": "4251743542234",
+      "title": "60 × 120",
+      "option1": "60 × 120",
+      "option2": null,
+      "option3": null,
+      "price": "239.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 18000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701677580512,
+      "sku": "XXL-PL-008",
+      "barcode": "4251743542227",
+      "title": "60 × 140",
+      "option1": "60 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "299.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701677646048,
+      "sku": "XXL-PL-009",
+      "barcode": "4251743542210",
+      "title": "60 × 160",
+      "option1": "60 × 160",
+      "option2": null,
+      "option3": null,
+      "price": "339.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 24000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701677678816,
+      "sku": "XXL-PL-010",
+      "barcode": "4251743542203",
+      "title": "60 × 180",
+      "option1": "60 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "359.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 27000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 8,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 8
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 219.9,
+    "price_max": 359.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/7_Weiss_glaenzend_Struckturiert.jpg?v=1776247944",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/8_Weiss_glaenzend_Struckturiert.jpg?v=1776247944",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/9_Weiss_glaenzend_Struckturiert.jpg?v=1776247944"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/7_Weiss_glaenzend_Struckturiert.jpg?v=1776247944",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Pullman",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "weiß"
+  },
+  "join_notes": null,
+  "source_signature": "6a050871492b16825c459b140a0366dc",
+  "fetched_at": "2026-04-29T19:06:57+00:00"
+}

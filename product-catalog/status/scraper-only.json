@@ -1,0 +1,225 @@
+{
+  "count": 55,
+  "products": [
+    {
+      "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen-kopie",
+      "reason": "Scraper handle has '-kopie' suffix but title is the white variant — keep, this is the WEISS Elanor Austausch product."
+    },
+    {
+      "handle": "austauschheizkorper-badheizkorper-anthrazit-alpha",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-alpha-weiss-handtuchtrockner",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-anthrazit-handtuchheizkorper-handtuchwarmer",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer",
+      "reason": "Scraper handle says 'elektrisch' but title is non-electric. Trust title."
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer-1",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-weiss-handtuchheizkorper-handtuchwarmer",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-platon-schwarz-handtuchheizkorper-handtuchwarmer",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-elektrisch-platon-weiss-handtuchheizkorper-handtuchwarmer",
+      "reason": "Pullman Elektrisch white-variant filenames omit the color word and use 'glänzend' (glossy) finish instead. Pullman (non-electric) uses 'Weiß glänzend' — color word present — so still matches 'weiß'."
+    },
+    {
+      "handle": "badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-elmar-weiss-seitlich-offen-rechts-oder-links",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-alpha-schwarz-handtuchwarmer",
+      "reason": "Scraper title says 'Seitenanschluss' but handle says 'Mittelanschluss'. Title wins → maps to Astorian Austausch (replacement series)."
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-alpha-weiss-handtuchwarmer",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-anthrazit-mira",
+      "reason": "Scraper handle says 'anthrazit' but title says 'Schwarz'. Title wins."
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-schwarz-mira",
+      "reason": "Scraper handle says 'schwarz' but title says 'Anthrazit'. Title wins."
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-weiss-mira-kopie",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-platon-schwarz-mittel-und-seitenanschluss",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "badheizkorper-platon-weiss-mittel-und-seitenanschluss-1",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "befestigungsset-fur-badheizkorper",
+      "reason": "Mounting kit accessory; no owner shoot."
+    },
+    {
+      "handle": "creavit-ac-70s-bidet-chrom-kreuz-unterputzventil",
+      "reason": "Bidet concealed valve accessory; no owner shoot."
+    },
+    {
+      "handle": "elektrische-badheizkorper-alpha-weiss-handtuchtrockner",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-anthrazit-mira",
+      "reason": "image_filter set to \"anthrazi\" (truncated) because the Twister Elektrisch folder filenames misspell the color as \"Anthrazi\" without final \"t\"."
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-schwarz-mira",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-weiss-mira",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-anthrazit",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-schwarz",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-weiss",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m",
+      "reason": "Floor-heating pipe — no catalog folder. Use scraper images (CDN, generic SKU shot) only as last resort, or omit until owner shoot."
+    },
+    {
+      "handle": "handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom",
+      "reason": "Accessory hook — no dedicated catalog folder. Reuse 1 generic shot or omit images."
+    },
+    {
+      "handle": "handtuchheizkorper-kira-anthrazit-mittel-seitenanschluss",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "handtuchheizkorper-kira-schwarz-mittel-seitenanschluss",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "handtuchheizkorper-kira-weiss-mittel-seitenanschluss",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "handtuchheizkorper-seitenanschluss-alpha-weiss",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "heizstab",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "konrad-ventilheizkorper-typ-22",
+      "reason": "KONRAD is a commodity series with no owner shoot — folder catalog/Typ 22/ contains Platis photos (Atlas series), reassigned to atlas-typ-22 product."
+    },
+    {
+      "handle": "konrad-ventilheizkorper-typ-33",
+      "reason": "No catalog/ folder for Typ 33 — owner only photographed Typ 22. Reuse Typ 22 photos OR omit until shoot."
+    },
+    {
+      "handle": "lavinno-hange-wc-tornado-rimless-weiss-glanzend",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "mischbetrieb-t-stuck",
+      "reason": "Mixed-mode T-piece accessory; no owner shoot."
+    },
+    {
+      "handle": "multiblock-set-fur-badheizkorper-eck-und-durchgangsform",
+      "reason": "Reuses owner Multiblock folder photography; was an orphan folder."
+    },
+    {
+      "handle": "multiblock-thermostatkopf-regler-fur-heizkorper-m30x1-5",
+      "reason": "Thermostat head — different physical product than the Multiblock set; placeholder until owner shoot."
+    },
+    {
+      "handle": "thermoflussigkeit-fur-elektro-badheizkorper",
+      "reason": "Heat-transfer fluid for electric radiators; no owner shoot."
+    },
+    {
+      "handle": "thermostatventil-set-heizkorper-eck-1-2-chrom",
+      "reason": "Thermostat valve set; no owner shoot."
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-anthrazit",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-schwarz",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-weiss",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "vertikal-planheizkorper-wohnraum-heizkorper-atlas-weiss",
+      "reason": "Skyline folder uses Turkish color names; Beyaz=white, Antrasit=anthracite. Filenames use 'Platis' as series."
+    },
+    {
+      "handle": "wohnraumheizkorper-atlas-typ-22-weiss-horizontal",
+      "reason": "Owner shoot is in catalog/Typ 22/ (filenames begin 'Platis ...') — Platis is the brand name for this Atlas Typ 22 horizontal model. 3 white photos."
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-anthrazit",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-schwarz",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-weiss",
+      "reason": "no catalog folder per join"
+    },
+    {
+      "handle": "zweirohr-hahnblock-fur-ventil-heizkorper-winkelform",
+      "reason": "Two-pipe valve block; no owner shoot."
+    }
+  ]
+}

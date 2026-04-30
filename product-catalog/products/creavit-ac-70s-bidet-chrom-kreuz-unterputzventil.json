@@ -1,0 +1,88 @@
+{
+  "handle": "creavit-ac-70s-bidet-chrom-kreuz-unterputzventil",
+  "url": "https://xxl-heizung.de/products/creavit-ac-70s-bidet-chrom-kreuz-unterputzventil",
+  "canonical_status": "scraper-only",
+  "title_de": "CREAVIT AC 70S Bidet – Chrom – Kreuz Unterputzventil",
+  "title_de_curated": "CREAVIT AC 70S Bidet – Chrom – Kreuz Unterputzventil",
+  "series": "Creavit",
+  "color": "chrom",
+  "electric": false,
+  "primary_collection": "zubehor",
+  "collections": [
+    "zubehor"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Zubehör",
+    "CREAVIT AC 70S Bidet – Chrom – Kreuz Unterputzventil"
+  ],
+  "description_text": "CREAVIT UNTERPUTZVENTIL / ABSPERRVENTIL FÜR DUSCH-WC\n\nErleben Sie höchste Qualität und stilvolles Design mit dem Creavit Unterputzventil / Absperrventil für Ihr Dusch-WC. Gefertigt aus massivem Messing und veredelt mit poliertem Chrom, fügt sich dieses Ventil nahtlos in jede Badezimmerausstattung ein und setzt zugleich einen glänzenden Akzent.\n\n \n\nProduktmerkmale:\n\n \n\nDas Creavit Unterputzventil überzeugt durch seine langlebige und hochwertige Verarbeitung. Die hochglanzpolierte Chromoberfläche ist nicht nur ein optisches Highlight, sondern auch pflegeleicht und robust. Ideal für alle, die Wert auf Qualität und Ästhetik in ihrem Badezimmer legen.",
+  "description_html": "<h3>\n<meta charset=\"utf-8\"> <strong>CREAVIT UNTERPUTZVENTIL / ABSPERRVENTIL FÜR DUSCH-WC</strong><strong></strong>\n</h3>\n<p>Erleben Sie höchste Qualität und stilvolles Design mit dem Creavit Unterputzventil / Absperrventil für Ihr Dusch-WC. Gefertigt aus massivem Messing und veredelt mit poliertem Chrom, fügt sich dieses Ventil nahtlos in jede Badezimmerausstattung ein und setzt zugleich einen glänzenden Akzent.</p>\n<p> </p>\n<p><strong>Produktmerkmale:</strong></p>\n\n<p> </p>\n<p><meta charset=\"utf-8\">Das Creavit Unterputzventil überzeugt durch seine langlebige und hochwertige Verarbeitung. Die hochglanzpolierte Chromoberfläche ist nicht nur ein optisches Highlight, sondern auch pflegeleicht und robust. Ideal für alle, die Wert auf Qualität und Ästhetik in ihrem Badezimmer legen.</p>\n<!---->",
+  "specs": {
+    "Marke": "Creavit",
+    "Einsatzbereich": "WC / Bad",
+    "Material": "Messing",
+    "Ausführungen": "Erhältlich in zwei Varianten",
+    "Artikelumfang": "Komplettes Unterputzventil-Set inklusive Rosette, Hebel und Verlängerungshals",
+    "Farbe": "Chrom",
+    "Wasserversorgung": "Geeignet für Kaltwasser",
+    "Anschluss": "Passend für 1/2 Zoll Gewindeanschluss IG, Innenanschluss beidseitig verchromt und hochglanzpoliert"
+  },
+  "options": [
+    {
+      "name": "Title",
+      "name_normalized": "title",
+      "position": 1,
+      "values": [
+        "Default Title"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45733769806048,
+      "sku": "XXL-AC-001",
+      "barcode": "4251743542623",
+      "title": "Default Title",
+      "option1": "Default Title",
+      "option2": null,
+      "option3": null,
+      "price": "38.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 1,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 1
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 38.9,
+    "price_max": 38.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/CREAVIT_AC_70S_Bidet_Chrom_Unterputzventil.webp?v=1717168425",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/CREAVIT_AC_70S_Bidet_Chrom_Kreuz_Unterputzventil.webp?v=1717168422",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/CREAVIT_AC_70S_Bidet_Kreuz_Unterputzventil.webp?v=1717168418"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/CREAVIT_AC_70S_Bidet_Chrom_Unterputzventil.webp?v=1717168425",
+    "licensed_for_this_color": [],
+    "licensed_folder": null,
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": ""
+  },
+  "join_notes": "Bidet concealed valve accessory; no owner shoot.",
+  "source_signature": "9cea7f076edbf06b7db12d8a275facf5",
+  "fetched_at": "2026-04-29T19:07:01+00:00"
+}

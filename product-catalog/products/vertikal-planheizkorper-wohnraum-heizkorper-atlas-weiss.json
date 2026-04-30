@@ -1,0 +1,173 @@
+{
+  "handle": "vertikal-planheizkorper-wohnraum-heizkorper-atlas-weiss",
+  "url": "https://xxl-heizung.de/products/vertikal-planheizkorper-wohnraum-heizkorper-atlas-weiss",
+  "canonical_status": "scraper-only",
+  "title_de": "Vertikal Planheizkörper Wohnraum Heizkörper Doppellagig Weiß Platis",
+  "title_de_curated": "Vertikal Planheizkörper Wohnraum Heizkörper Doppellagig Weiß Platis",
+  "series": "PLATIS",
+  "color": "weiss",
+  "electric": false,
+  "primary_collection": "wohnraumheizkorper",
+  "collections": [
+    "wohnraumheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Wohnraumheizkörper",
+    "Vertikal Planheizkörper Wohnraum Heizkörper Doppellagig Weiß Platis"
+  ],
+  "description_text": "Entdecken Sie den Atlas Vertikal Planheizkörper\n\nProduktbeschreibung\n\nDer Atlas Wohnraumheizkörper, ausgeführt in schlichtem Weiß, zeichnet sich durch sein modernes und flaches Design aus. Er ist ideal für jeden Wohnraum geeignet, dank flexibler Anschlussmöglichkeiten wie Mittel- und Seitenanschluss sowie Boden- oder Wandanschluss. Diese Eigenschaften machen ihn zu einem Must-have in modern eingerichteten Wohnräumen.\n\nWas zeichnet den Heizkörper Atlas aus?\n\nDer Atlas besticht durch sein elegantes, rechteckiges Design und fügt sich nahtlos in jeden Wohnraum ein. Er bietet nicht nur wohltuende Wärme, sondern wird auch zum optischen Highlight. Die vielseitige Nutzbarkeit und einfache Installation machen ihn zur idealen Wahl für eine stilvolle und effiziente Heizlösung.\n\nVorteile des Atlas Heizkörpers\n\nTechnische Daten\n\nLieferumfang\n\nAtlas Badheizkörper in Weiß\n\nMontageset inklusive Blind- und Entlüftungsstopfen\n\nMontage- und Installationsanleitung\n\nVerleihen Sie Ihrem Zuhause einen Hauch von Eleganz und Komfort mit dem Atlas Heizkörper, der sowohl durch Design als auch durch Leistung überzeugt.",
+  "description_html": "<h2>Entdecken Sie den Atlas Vertikal Planheizkörper</h2>\n<h3>Produktbeschreibung</h3>\n<p>Der Atlas Wohnraumheizkörper, ausgeführt in schlichtem Weiß, zeichnet sich durch sein modernes und flaches Design aus. Er ist ideal für jeden Wohnraum geeignet, dank flexibler Anschlussmöglichkeiten wie Mittel- und Seitenanschluss sowie Boden- oder Wandanschluss. Diese Eigenschaften machen ihn zu einem Must-have in modern eingerichteten Wohnräumen.</p>\n<h3>Was zeichnet den Heizkörper Atlas aus?</h3>\n<p>Der Atlas besticht durch sein elegantes, rechteckiges Design und fügt sich nahtlos in jeden Wohnraum ein. Er bietet nicht nur wohltuende Wärme, sondern wird auch zum optischen Highlight. Die vielseitige Nutzbarkeit und einfache Installation machen ihn zur idealen Wahl für eine stilvolle und effiziente Heizlösung.</p>\n<h3>Vorteile des Atlas Heizkörpers</h3>\n\n<h3>Technische Daten</h3>\n\n<h3>Lieferumfang</h3>\n<ul>\n<li>Atlas Badheizkörper in Weiß</li>\n<li>Montageset inklusive Blind- und Entlüftungsstopfen</li>\n<li>Montage- und Installationsanleitung</li>\n</ul>\n<p>Verleihen Sie Ihrem Zuhause einen Hauch von Eleganz und Komfort mit dem Atlas Heizkörper, der sowohl durch Design als auch durch Leistung überzeugt.</p>",
+  "specs": {
+    "Elegantes Design": "Modern und zeitlos, ideal für jedes Wohnambiente.",
+    "Hochwertige Verarbeitung": "Robust und kratzfest, bietet langanhaltende Qualität und Korrosionsschutz.",
+    "Flexibel einsetzbar": "Mit Mittel- und Seitenanschluss sowie der Möglichkeit zur Boden- oder Wandmontage.",
+    "Einfache Selbstmontage": "Klare Anleitungen erleichtern die Installation und Wartung.",
+    "Zertifizierte Sicherheit": "TÜV-geprüft und zertifiziert nach EN 442 für Ihre Sicherheit und Zuverlässigkeit.",
+    "Farbe": "Weiß (RAL 9016)",
+    "Oberfläche": "Stahl, glänzend",
+    "Verfügbare Breiten": "50 cm, 60 cm",
+    "Verfügbare Höhen": "160 cm, 180 cm",
+    "Anschlussgewinde": "G 1/2″",
+    "Maximaler Wandabstand": "95 mm",
+    "Wandabstand Mittelanschluss": "65 mm",
+    "Zertifizierungen": "TÜV-geprüft nach DIN EN ISO 9001:2000, geprüfte Wärmeleistung nach DIN EN 442"
+  },
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "40 x 160",
+        "40 x 180",
+        "50 x 160",
+        "50 x 180 nicht Vorrätig",
+        "60 x 160",
+        "60 × 180"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 55273630433667,
+      "sku": "XXL-Typ-22-013",
+      "barcode": "4251743551243",
+      "title": "40 x 160",
+      "option1": "40 x 160",
+      "option2": null,
+      "option3": null,
+      "price": "469.00",
+      "compare_at_price": "719.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55273630466435,
+      "sku": "XXL-Typ-22-014",
+      "barcode": "4251743551236",
+      "title": "40 x 180",
+      "option1": "40 x 180",
+      "option2": null,
+      "option3": null,
+      "price": "499.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55273630499203,
+      "sku": "XXL-Typ-22-015",
+      "barcode": "4251743551229",
+      "title": "50 x 160",
+      "option1": "50 x 160",
+      "option2": null,
+      "option3": null,
+      "price": "539.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55273630531971,
+      "sku": "XXL-Typ-22-016",
+      "barcode": "4251743551212",
+      "title": "50 x 180 nicht Vorrätig",
+      "option1": "50 x 180 nicht Vorrätig",
+      "option2": null,
+      "option3": null,
+      "price": "620.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55273630564739,
+      "sku": "XXL-Typ-22-017",
+      "barcode": "4251743551205",
+      "title": "60 x 160",
+      "option1": "60 x 160",
+      "option2": null,
+      "option3": null,
+      "price": "599.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45336541626592,
+      "sku": "XXL-Typ-20-012",
+      "barcode": "4251743542494",
+      "title": "60 × 180",
+      "option1": "60 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "539.00",
+      "compare_at_price": "799.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 6,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 6
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 469,
+    "price_max": 620,
+    "compare_at_min": 719,
+    "compare_at_max": 799
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/67DD17FF-F24A-4EE3-8575-3FB52EB32BD6.jpg?v=1775254024",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/60233454-0309-4B07-94A5-94DA85271B4F.jpg?v=1775254024",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/DC1003C7-3207-44AA-BDE5-299B75D45058.jpg?v=1775254024"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/67DD17FF-F24A-4EE3-8575-3FB52EB32BD6.jpg?v=1775254024",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Skyline",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "beyaz"
+  },
+  "join_notes": "Skyline folder uses Turkish color names; Beyaz=white, Antrasit=anthracite. Filenames use 'Platis' as series.",
+  "source_signature": "0f2020dc15e7f25159cfc8b6ae304f7a",
+  "fetched_at": "2026-04-29T19:07:58+00:00"
+}

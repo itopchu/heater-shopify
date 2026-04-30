@@ -1,15 +1,35 @@
 #!/usr/bin/env node
 /**
- * Europe multi-country market provisioning for heater-shopify.
+ * Europe multi-country Markets provisioning for heater-shopify.
  *
- * Creates (or extends) a single Shopify Market named "Europe" covering the
- * countries in EUROPE_COUNTRIES. EUR currency, Klarna-friendly, per-country
- * VAT (reported but not written — Shopify 2026-04 does not expose per-region
- * tax overrides via Admin GraphQL; those remain admin-UI only).
+ * Brief 01 / 07 §12 — Netherlands is the primary launch market with planned
+ * expansion to Belgium, Luxembourg, Germany, France. Spain + Austria are
+ * pre-existing tenants of the same market and remain on it (single Europe
+ * market with country-level regions; sub-path locale routing rather than
+ * per-domain).
+ *
+ * Decision: one Shopify Market named "Europe" with multiple country regions
+ * rather than per-country markets. Rationale:
+ *   - All countries share the same currency (EUR) and the same primary domain
+ *     (heater-dev.myshopify.com). A single market with regions is the simplest
+ *     model that satisfies country-level routing + VAT and avoids fan-out.
+ *   - Per-country VAT is set in Settings → Taxes (Admin GraphQL 2026-04 still
+ *     does not expose tax-region overrides). The single market is enough to
+ *     give Shopify the country context it needs to apply the right rate.
+ *   - Per-country shipping carriers are configured via configure-shipping.mjs
+ *     using one zone per country on the default delivery profile.
+ *
+ * NL is documented as the *primary launch market* (first market for which we
+ * surface storefront copy, run hreflang against, and route the root redirect
+ * to). Shopify itself does not have a "primary market" concept distinct from
+ * the shop's primary country; that is a frontend-side designation.
  *
  * Idempotent: re-running adds missing countries, never duplicates the market.
  *
- * Supersedes the configureMarkets() step in configure-phase-6.mjs.
+ * Flags:
+ *   --dry-run     read-only — print plan, send no mutations (default)
+ *   --apply       perform writes
+ *   --store dev   informational; creds always come from .env.local
  */
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
@@ -18,14 +38,17 @@ import { fileURLToPath } from 'node:url';
 const API_VERSION = '2026-04';
 const MARKET_NAME = 'Europe';
 
-// Countries in the Europe market. Add entries here to extend coverage; the
-// script will add any missing regions on the next run.
+// Countries in the Europe market, in priority order. NL first (primary launch),
+// then secondary expansion (BE, LU, DE, FR), then incumbents (ES, AT). The
+// script will only ADD missing entries — it never removes or re-orders.
 const EUROPE_COUNTRIES = [
-  { code: 'DE', name: 'Germany', vat: 0.19, shipping: 'DHL' },
-  { code: 'BE', name: 'Belgium', vat: 0.21, shipping: 'bpost' },
-  { code: 'ES', name: 'Spain', vat: 0.21, shipping: 'Correos' },
-  { code: 'AT', name: 'Austria', vat: 0.20, shipping: 'Post.at' },
-  { code: 'NL', name: 'Netherlands', vat: 0.21, shipping: 'PostNL' },
+  { code: 'NL', name: 'Netherlands',  vat: 0.21, shipping: 'PostNL',     priority: 'primary'   },
+  { code: 'BE', name: 'Belgium',      vat: 0.21, shipping: 'bpost',      priority: 'secondary' },
+  { code: 'LU', name: 'Luxembourg',   vat: 0.17, shipping: 'Post Luxembourg', priority: 'secondary' },
+  { code: 'DE', name: 'Germany',      vat: 0.19, shipping: 'DHL',        priority: 'secondary' },
+  { code: 'FR', name: 'France',       vat: 0.20, shipping: 'La Poste',   priority: 'secondary' },
+  { code: 'ES', name: 'Spain',        vat: 0.21, shipping: 'Correos',    priority: 'incumbent' },
+  { code: 'AT', name: 'Austria',      vat: 0.20, shipping: 'Post.at',    priority: 'incumbent' },
 ];
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -47,13 +70,38 @@ function loadEnvLocal(path) {
 }
 loadEnvLocal(ENV_PATH);
 
+// ---------------------------------------------------------------------------
+// CLI flags
+// ---------------------------------------------------------------------------
+const ARGV = process.argv.slice(2);
+const APPLY = ARGV.includes('--apply');
+const DRY_RUN = !APPLY; // dry-run is the default
+const storeFlagIdx = ARGV.indexOf('--store');
+const STORE_FLAG = storeFlagIdx >= 0 ? ARGV[storeFlagIdx + 1] : 'dev';
+
 const STORE = process.env.SHOPIFY_DEV_STORE;
 const TOKEN = process.env.SHOPIFY_DEV_ADMIN_TOKEN;
 if (!STORE || !TOKEN) {
   console.error('Missing SHOPIFY_DEV_STORE or SHOPIFY_DEV_ADMIN_TOKEN in .env.local.');
   process.exit(1);
 }
+
+// Dev-store safety check.
+if (!STORE.endsWith('-dev.myshopify.com')) {
+  console.error(`Refusing to run: SHOPIFY_DEV_STORE="${STORE}" does not end with "-dev.myshopify.com".`);
+  console.error('configure-markets.mjs is dev-only by design.');
+  process.exit(1);
+}
+
 const ENDPOINT = `https://${STORE}/admin/api/${API_VERSION}/graphql.json`;
+
+console.log(`→ configure-markets  store=${STORE_FLAG} (${STORE})  mode=${DRY_RUN ? 'DRY-RUN' : 'APPLY'}  api=${API_VERSION}`);
+console.log(`  primary launch     : NL (Netherlands)`);
+console.log(`  expansion targets  : BE, LU, DE, FR`);
+console.log(`  incumbent regions  : ES, AT (kept — single-market model)`);
+if (DRY_RUN) {
+  console.log('  (dry-run: no mutations will be sent. Re-run with --apply to write.)');
+}
 
 async function gql(query, variables = {}) {
   const res = await fetch(ENDPOINT, {
@@ -74,6 +122,7 @@ async function findMarket() {
           id
           name
           enabled
+          handle
           currencySettings { baseCurrency { currencyCode } }
           regions(first: 50) {
             edges {
@@ -120,7 +169,15 @@ async function createEuropeMarket() {
 
 async function addMissingRegions(marketId, existingCodes) {
   const toAdd = EUROPE_COUNTRIES.filter((c) => !existingCodes.has(c.code));
-  if (toAdd.length === 0) return;
+  if (toAdd.length === 0) {
+    console.log(`  · all ${EUROPE_COUNTRIES.length} target countries already on market`);
+    return { added: [] };
+  }
+
+  if (DRY_RUN) {
+    for (const c of toAdd) console.log(`  + would add ${c.name} (${c.code})  vat=${(c.vat * 100).toFixed(0)}%`);
+    return { added: toAdd };
+  }
 
   const res = await gql(
     `mutation($marketId: ID!, $regions: [MarketRegionCreateInput!]!) {
@@ -139,26 +196,25 @@ async function addMissingRegions(marketId, existingCodes) {
     console.warn(`  ⚠ marketRegionsCreate partial failure: ${JSON.stringify(errs)}`);
   }
   for (const c of toAdd) {
-    console.log(`  + Added ${c.name} (${c.code})`);
+    console.log(`  + Added ${c.name} (${c.code})  vat=${(c.vat * 100).toFixed(0)}%`);
   }
+  return { added: toAdd };
 }
 
 function reportManualSteps() {
   console.log('\n— Manual follow-ups (Admin API 2026-04 does not expose these) —');
-  console.log(`  1. Currency: set market base currency to EUR if not already.`);
-  console.log(`     Admin → Settings → Markets → Europe → Manage → Currency.`);
-  console.log(`  2. Per-country VAT (tax-inclusive pricing):`);
+  console.log(`  1. Currency: confirm market base currency is EUR`);
+  console.log(`     Admin → Settings → Markets → Europe → Manage → Currency`);
+  console.log(`  2. Per-country VAT (tax-inclusive prices):`);
   for (const c of EUROPE_COUNTRIES) {
-    console.log(`     ${c.code}: ${(c.vat * 100).toFixed(0)}% VAT — verify in Settings → Taxes and duties → ${c.name}`);
+    console.log(`     ${c.code} ${c.name.padEnd(12)} ${(c.vat * 100).toFixed(0)}% — Admin → Settings → Taxes and duties → ${c.name}`);
   }
-  console.log(`  3. shop.taxesIncluded = ON — no GraphQL mutation exists; set via`);
+  console.log(`  3. shop.taxesIncluded = ON — set in:`);
   console.log(`     https://admin.shopify.com/store/${STORE.split('.')[0]}/settings/taxes_and_duties`);
-  console.log(`  4. Shipping zones: create per-country rates in Settings → Shipping and delivery:`);
-  for (const c of EUROPE_COUNTRIES) {
-    console.log(`     ${c.code}: ${c.shipping} (or equivalent carrier)`);
-  }
-  console.log(`  5. Klarna: payment method availability varies per country.`);
-  console.log(`     Verify in Settings → Payments → Shopify Payments → Manage → Country availability.`);
+  console.log(`  4. Shipping zones: see configure-shipping.mjs (one zone per country, free over €300).`);
+  console.log(`  5. Klarna: country-by-country availability — Admin → Settings → Payments → Shopify Payments`);
+  console.log(`  6. Primary-market designation: Shopify has no "primary market" knob — NL-as-primary is`);
+  console.log(`     enforced storefront-side via the locale routing default + the root redirect to /nl/.`);
 }
 
 async function snapshot() {
@@ -168,8 +224,9 @@ async function snapshot() {
         node {
           name
           enabled
+          handle
           currencySettings { baseCurrency { currencyCode } }
-          regions(first: 20) { edges { node { name ... on MarketRegionCountry { code } } } }
+          regions(first: 30) { edges { node { name ... on MarketRegionCountry { code } } } }
         }
       }
     }
@@ -181,17 +238,22 @@ async function snapshot() {
   for (const { node: m } of data.markets.edges) {
     const codes = m.regions.edges.map((e) => e.node.code || e.node.name).join(', ');
     const cur = m.currencySettings?.baseCurrency?.currencyCode || '—';
-    console.log(`  ${m.enabled ? '●' : '○'} ${m.name} [${cur}] → ${codes || '(no regions)'}`);
+    console.log(`  ${m.enabled ? '●' : '○'} ${m.name} [${cur}] handle=${m.handle} → ${codes || '(no regions)'}`);
   }
 }
 
 async function main() {
-  console.log(`→ Europe multi-country market provisioning on ${STORE} (Admin API ${API_VERSION})\n`);
+  console.log(`\n→ Europe multi-country Markets reconciliation`);
 
   const existing = await findMarket();
   if (!existing) {
-    console.log(`→ Market "${MARKET_NAME}" not found. Creating.`);
-    await createEuropeMarket();
+    console.log(`→ Market "${MARKET_NAME}" not found.`);
+    if (DRY_RUN) {
+      console.log(`  · would create market with ${EUROPE_COUNTRIES.length} regions`);
+    } else {
+      console.log(`  Creating with ${EUROPE_COUNTRIES.length} regions…`);
+      await createEuropeMarket();
+    }
   } else {
     console.log(`→ Market "${MARKET_NAME}" exists (${existing.id}).`);
     const codes = new Set(existing.regions.edges.map((e) => e.node.code).filter(Boolean));
@@ -200,7 +262,7 @@ async function main() {
 
   await snapshot();
   reportManualSteps();
-  console.log('\nDone.');
+  console.log(DRY_RUN ? '\n(dry-run only — re-run with --apply to perform writes.)\nDone.' : '\nDone.');
 }
 
 main().catch((err) => { console.error(err); process.exit(1); });

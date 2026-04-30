@@ -1,0 +1,99 @@
+/*
+ * Heating brand skin — G-Berg.
+ *
+ * NOTE: The original brief 04 §4 specified a "cool blue/green" accent for a
+ * generic heating store. G-Berg's brand identity (red/white/charcoal) overrides
+ * that placeholder direction. This file is the single source of truth for the
+ * heating storefront palette and intentionally diverges from the brief on color.
+ *
+ * Brand palette:
+ *   --color-primary       #C8102E  (red — used as ACCENT: eyebrows, kickers,
+ *                                   sale labels, link underlines, hover marks,
+ *                                   1-2px rules between sections. NEVER as the
+ *                                   primary CTA fill.)
+ *   --color-primary-hover #8A0B1F  (deeper red for hover)
+ *   --color-cta           #111111  (charcoal — primary CTA fill)
+ *   --color-cta-hover     #000000  (pure black — CTA hover)
+ *   --color-text          #111111  (near-black body type)
+ *   --color-bg            #FFFFFF  (true white page bg, no off-white grey)
+ *   --color-surface-muted #F7F5F2  (warm off-white for subtle separation)
+ */
+
+:root,
+[data-brand="heating"] {
+  /* Surfaces */
+  --color-bg: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F7F5F2;            /* warm off-white, NOT cool grey */
+  --color-surface-inverse: #111111;          /* charcoal — utility bar, footer */
+
+  /* Text */
+  --color-text: #111111;
+  --color-text-muted: #5A5A5A;
+  --color-text-inverse: #FFFFFF;
+
+  /* Borders */
+  --color-border: #ECECEC;                   /* hairline */
+  --color-border-strong: #111111;            /* bold rule (hover, dividers) */
+
+  /* Brand — red is ACCENT only. CTA fills are charcoal. */
+  --color-primary: #C8102E;
+  --color-primary-hover: #8A0B1F;
+  --color-primary-fg: #FFFFFF;
+
+  /* Primary CTA (charcoal fill / white text). */
+  --color-cta: #111111;
+  --color-cta-hover: #000000;
+  --color-cta-text: #FFFFFF;
+
+  /* Eyebrow + rules — wired to brand red so red bleeds through every section. */
+  --color-eyebrow: #C8102E;
+  --color-rule: #ECECEC;
+  --color-rule-strong: #111111;
+  --color-rule-accent: #C8102E;
+
+  /* Legacy accent alias kept so older components don't break. */
+  --color-accent: #C8102E;
+  --color-accent-hover: #8A0B1F;
+  --color-accent-fg: #FFFFFF;
+
+  /* States */
+  --color-success: #1F7A4A;
+  --color-warning: #B7791F;
+  --color-error: #B3261E;
+  --color-info: #2E5A88;
+
+  /* Focus ring — uses red so brand bleeds into a11y. */
+  --color-focus: color-mix(in srgb, var(--color-primary) 60%, transparent);
+
+  /* Typography */
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* ----------------------------------------------------------------- */
+  /* Track A — editorial-premium tokens for cards, specs, buttons.    */
+  /* ----------------------------------------------------------------- */
+
+  /* Card geometry — hairline-only, no boxes.                           */
+  /* Default: NO line between image and info (the literal "line"       */
+  /* the user complained about). Hover reveals the hairline + the      */
+  /* --shadow-hairline-hover from tokens.css for a tailored frame.    */
+  --card-radius: 0.75rem;
+  --card-bg: var(--color-surface);
+  --card-image-bg: var(--color-surface-muted);   /* warm off-white frame */
+  --card-divider: transparent;                    /* default: no line */
+  --card-divider-hover: var(--color-border);      /* hover: hairline */
+
+  /* Spec block — the structured "data row" treatment used by SpecRow */
+  /* and the icon-prefixed variant of SpecsTable.                      */
+  --spec-icon-size: 1.5rem;        /* 24px stroke icons */
+  --spec-row-gap: 1rem;
+  --spec-value-size: 1.0625rem;    /* 17px */
+  --spec-label-size: 0.6875rem;    /* 11px UPPERCASE */
+
+  /* Density tokens for Button. Tight = inline forms / quick filters.  */
+  /* Comfort = sticky add-to-cart and hero CTAs that need a confident  */
+  /* presence on mobile.                                               */
+  --button-density-tight: 0.5rem 1rem;
+  --button-density-comfort: 1rem 2rem;
+}

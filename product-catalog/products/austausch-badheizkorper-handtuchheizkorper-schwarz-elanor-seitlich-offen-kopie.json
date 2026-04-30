@@ -1,0 +1,196 @@
+{
+  "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen-kopie",
+  "url": "https://xxl-heizung.de/products/austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen-kopie",
+  "canonical_status": "scraper-only",
+  "title_de": "Austausch Badheizkörper &  Renovierungsheizkörper Weiß ELANOR",
+  "title_de_curated": "Austausch Badheizkörper & Renovierungsheizkörper Weiß ELANOR",
+  "series": "ELANOR",
+  "color": "schwarz",
+  "electric": false,
+  "primary_collection": "austauschheizkorper",
+  "collections": [
+    "austauschheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Austauschheizkörper",
+    "Austausch Badheizkörper & Renovierungsheizkörper Weiß ELANOR"
+  ],
+  "description_text": "Austausch Badheizkörper mit Seitenanschluss und Nabenabstand 900 mm - Energieeffiziente Renovierungsheizkörper als Handtuchheizkörper für Ihr Bad.",
+  "description_html": "<p>Austausch Badheizkörper mit Seitenanschluss und Nabenabstand 900 mm - Energieeffiziente Renovierungsheizkörper als Handtuchheizkörper für Ihr Bad.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 140",
+        "50 × 164",
+        "60 × 140",
+        "60 × 164"
+      ]
+    },
+    {
+      "name": "Anschluss wählen",
+      "name_normalized": "anschluss",
+      "position": 2,
+      "values": [
+        "Rechts",
+        "Links"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 55027135545731,
+      "sku": "XXL-ABHELR-13",
+      "barcode": "4251743543699",
+      "title": "50 × 140 / Rechts",
+      "option1": "50 × 140",
+      "option2": "Rechts",
+      "option3": null,
+      "price": "259.00",
+      "compare_at_price": "359.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55027135578499,
+      "sku": "XXL-ABHELL-5",
+      "barcode": "4251743543651",
+      "title": "50 × 140 / Links",
+      "option1": "50 × 140",
+      "option2": "Links",
+      "option3": null,
+      "price": "259.00",
+      "compare_at_price": "359.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55027135611267,
+      "sku": "XXL-ABHELR-14",
+      "barcode": "4251743543705",
+      "title": "50 × 164 / Rechts",
+      "option1": "50 × 164",
+      "option2": "Rechts",
+      "option3": null,
+      "price": "349.00",
+      "compare_at_price": "449.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55027135644035,
+      "sku": "XXL-ABHELL-6",
+      "barcode": "4251743543668",
+      "title": "50 × 164 / Links",
+      "option1": "50 × 164",
+      "option2": "Links",
+      "option3": null,
+      "price": "259.00",
+      "compare_at_price": "359.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55027135676803,
+      "sku": "XXL-ABHELR-15",
+      "barcode": "4251743543712",
+      "title": "60 × 140 / Rechts",
+      "option1": "60 × 140",
+      "option2": "Rechts",
+      "option3": null,
+      "price": "299.00",
+      "compare_at_price": "399.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55027135709571,
+      "sku": "XXL-ABHELL-7",
+      "barcode": "4251743543675",
+      "title": "60 × 140 / Links",
+      "option1": "60 × 140",
+      "option2": "Links",
+      "option3": null,
+      "price": "259.00",
+      "compare_at_price": "399.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55027135742339,
+      "sku": "XXL-ABHELR-16",
+      "barcode": "4251743543729",
+      "title": "60 × 164 / Rechts",
+      "option1": "60 × 164",
+      "option2": "Rechts",
+      "option3": null,
+      "price": "369.00",
+      "compare_at_price": "469.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55027135775107,
+      "sku": "XXL-ABHELL-8",
+      "barcode": "4251743543682",
+      "title": "60 × 164 / Links",
+      "option1": "60 × 164",
+      "option2": "Links",
+      "option3": null,
+      "price": "369.00",
+      "compare_at_price": "469.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 8,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 8
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 259,
+    "price_max": 369,
+    "compare_at_min": 359,
+    "compare_at_max": 469
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/13_Schwarz_matt_Struckturiert.jpg?v=1776245265",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/14_Schwarz_matt_Struckturiert.jpg?v=1776245266",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/15_Schwarz_matt_Struckturiert.jpg?v=1776245265"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/13_Schwarz_matt_Struckturiert.jpg?v=1776245265",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Elanor Austausch",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "schwarz"
+  },
+  "join_notes": "Scraper handle has '-kopie' suffix but title is the white variant — keep, this is the WEISS Elanor Austausch product.",
+  "source_signature": "e14fde8d7b0f0da63d38574aead6a7fd",
+  "fetched_at": "2026-04-29T19:06:08+00:00"
+}

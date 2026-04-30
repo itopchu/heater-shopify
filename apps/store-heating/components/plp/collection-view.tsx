@@ -1,0 +1,742 @@
+"use client";
+
+/**
+ * Client-side faceted filtering + sorting + sticky filter button over the
+ * products already fetched for one PLP page (or the shop-all route).
+ *
+ * IMPORTANT: this is **not** a real search index — it only filters the
+ * already-rendered product set. Real per-facet search comes via the
+ * search-index-engineer agent. We deliberately keep this lightweight so the
+ * server-rendered cards (the SEO-critical content) keep showing up in HTML
+ * before hydration.
+ *
+ * Three responsibilities (the user-visible behaviour shifts in Fix 6, 7, 9):
+ *
+ *   1. Sub-category chip row (Fix 6) — replaces the broken "All / Vertical /
+ *      Panel / Bathroom-ready" hand-coded chip set. We auto-derive chips
+ *      from the active product set (orientation tag, heating medium,
+ *      bathroom-suitable flag, heat-pump flag). Empty filters are HIDDEN.
+ *      Active chips toggle on/off, multiple can be active. URL syncs to
+ *      ?filter=vertical,electric so back-nav restores state.
+ *
+ *   2. Sticky "Filter & sort" button (Fix 9) — at sm/md sizes only. Click
+ *      opens a bottom-sheet drawer with the same filter shell + sort + an
+ *      "Apply (N)" CTA. The desktop sidebar continues to render at lg+.
+ *
+ *   3. The product grid uses the shared <ProductGrid> component (Fix 7) so
+ *      column counts and gutters match across PLP / shop-all / search.
+ *
+ * Filter facets are derived from the products array on first render so the
+ * sidebar always reflects what's actually present.
+ */
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import type { HeatingProduct } from "@gberg/product-schema";
+import { Chip, cn } from "@gberg/ui";
+import { ProductGrid } from "./product-grid";
+import {
+  colorFamilyHex,
+  resolveSeries,
+  seriesLabel,
+  type Series,
+} from "@/lib/heating-derived";
+
+export interface CollectionViewProps {
+  products: HeatingProduct[];
+  locale: string;
+}
+
+type SortKey = "newest" | "price-asc" | "price-desc" | "title";
+
+interface FacetState {
+  productType: Set<string>;
+  colorFamily: Set<string>;
+  series: Set<Series>;
+  heatingMedium: "all" | "hydronic" | "electric";
+  /** "Sub-category" chips — orientation, bathroom, heat-pump, etc. */
+  flags: Set<FlagKey>;
+}
+
+type FlagKey =
+  | "vertical"
+  | "horizontal"
+  | "panel"
+  | "electric"
+  | "hydronic"
+  | "bathroom"
+  | "heat_pump"
+  | "mid_connection";
+
+function emptyFacets(): FacetState {
+  return {
+    productType: new Set(),
+    colorFamily: new Set(),
+    series: new Set(),
+    heatingMedium: "all",
+    flags: new Set(),
+  };
+}
+
+function priceNum(p: HeatingProduct): number {
+  const n = Number(p.priceRange.minVariantPrice.amount);
+  return Number.isFinite(n) ? n : 0;
+}
+
+/** Per-flag predicate. Used both for filtering and for counting chip totals. */
+function flagMatches(p: HeatingProduct, f: FlagKey): boolean {
+  const orient = (p.specs.orientation ?? p.filters.orientation ?? "").toLowerCase();
+  const productType = (p.filters.product_type ?? "").toLowerCase();
+  const tags = (p.tags ?? []).map((t) => t.toLowerCase());
+  const connection = (p.specs.connection_type ?? p.filters.connection_type ?? "").toLowerCase();
+  switch (f) {
+    case "vertical":
+      return orient === "vertical" || tags.includes("vertical");
+    case "horizontal":
+      return orient === "horizontal" || tags.includes("horizontal");
+    case "panel":
+      return productType.includes("panel") || tags.includes("panel");
+    case "electric":
+      return p.specs.heating_medium === "electric";
+    case "hydronic":
+      return p.specs.heating_medium === "hydronic";
+    case "bathroom":
+      return Boolean(p.specs.bathroom_suitable) || tags.includes("bathroom");
+    case "heat_pump":
+      return Boolean(p.specs.heat_pump_compatible);
+    case "mid_connection":
+      return connection.includes("mid") || tags.includes("mid_connection");
+  }
+}
+
+const FLAG_LABELS: Record<FlagKey, string> = {
+  vertical: "Vertical",
+  horizontal: "Horizontal",
+  panel: "Panel",
+  electric: "Electric",
+  hydronic: "Hydronic",
+  bathroom: "Bathroom-ready",
+  heat_pump: "Heat-pump",
+  mid_connection: "Mid-connection",
+};
+
+const FLAG_ORDER: FlagKey[] = [
+  "vertical",
+  "horizontal",
+  "panel",
+  "electric",
+  "hydronic",
+  "bathroom",
+  "heat_pump",
+  "mid_connection",
+];
+
+function applyFilters(products: HeatingProduct[], facets: FacetState): HeatingProduct[] {
+  return products.filter((p) => {
+    if (facets.productType.size > 0) {
+      const t = p.filters.product_type;
+      if (!t || !facets.productType.has(t)) return false;
+    }
+    if (facets.colorFamily.size > 0) {
+      const c = p.filters.color_family ?? p.specs.color;
+      if (!c || !facets.colorFamily.has(c)) return false;
+    }
+    if (facets.series.size > 0) {
+      const s = resolveSeries(p.tags);
+      if (!s || !facets.series.has(s)) return false;
+    }
+    if (facets.heatingMedium !== "all") {
+      const hm = p.specs.heating_medium;
+      if (hm !== facets.heatingMedium) return false;
+    }
+    for (const flag of facets.flags) {
+      if (!flagMatches(p, flag)) return false;
+    }
+    return true;
+  });
+}
+
+function applySort(products: HeatingProduct[], sort: SortKey): HeatingProduct[] {
+  const arr = products.slice();
+  switch (sort) {
+    case "price-asc":
+      arr.sort((a, b) => priceNum(a) - priceNum(b));
+      return arr;
+    case "price-desc":
+      arr.sort((a, b) => priceNum(b) - priceNum(a));
+      return arr;
+    case "title":
+      arr.sort((a, b) => a.title.localeCompare(b.title));
+      return arr;
+    case "newest":
+    default:
+      return arr;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Facet groups                                                        */
+/* ------------------------------------------------------------------ */
+
+interface FacetGroupProps<T extends string> {
+  label: string;
+  values: { value: T; count: number; label?: string }[];
+  selected: Set<T>;
+  onToggle: (v: T) => void;
+}
+
+function FacetGroup<T extends string>({ label, values, selected, onToggle }: FacetGroupProps<T>) {
+  if (values.length === 0) return null;
+  return (
+    <details
+      open
+      className="group border-b border-[var(--color-border)] pb-4 last:border-b-0"
+    >
+      <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold">
+        {label}
+        <span aria-hidden className="text-[var(--color-text-muted)] group-open:rotate-45">+</span>
+      </summary>
+      <ul className="mt-3 space-y-2">
+        {values.map((v) => (
+          <li key={v.value}>
+            <label className="flex items-center justify-between gap-2 text-sm text-[var(--color-text)]">
+              <span className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={selected.has(v.value)}
+                  onChange={() => onToggle(v.value)}
+                />
+                {v.label ?? v.value}
+              </span>
+              <span className="text-xs text-[var(--color-text-muted)]">{v.count}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
+function ColorFacetGroup({
+  values,
+  selected,
+  onToggle,
+}: {
+  values: { value: string; count: number }[];
+  selected: Set<string>;
+  onToggle: (v: string) => void;
+}) {
+  if (values.length === 0) return null;
+  return (
+    <details
+      open
+      className="group border-b border-[var(--color-border)] pb-4 last:border-b-0"
+    >
+      <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold">
+        Color
+        <span aria-hidden className="text-[var(--color-text-muted)] group-open:rotate-45">+</span>
+      </summary>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        {values.map((v) => {
+          const hex = colorFamilyHex(v.value) ?? "#cccccc";
+          const active = selected.has(v.value);
+          return (
+            <li key={v.value}>
+              <button
+                type="button"
+                onClick={() => onToggle(v.value)}
+                aria-pressed={active}
+                title={`${v.value} (${v.count})`}
+                className={cn(
+                  "flex items-center gap-2 rounded-full border px-2.5 py-1 text-xs transition-colors",
+                  active
+                    ? "border-[var(--color-primary)] bg-[var(--color-surface-muted)]"
+                    : "border-[var(--color-border)] bg-[var(--color-surface)]",
+                )}
+              >
+                <span
+                  className="h-3 w-3 rounded-full ring-1 ring-inset ring-black/10"
+                  style={{ backgroundColor: hex }}
+                />
+                <span className="capitalize">{v.value}</span>
+                <span className="text-[var(--color-text-muted)]">({v.count})</span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </details>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Main view                                                           */
+/* ------------------------------------------------------------------ */
+
+const PRODUCT_TYPE_LABELS: Record<string, string> = {
+  radiator: "Radiator",
+  towel_radiator: "Towel radiator",
+  underfloor_heating: "Underfloor heating",
+  bathroom_fixture: "Bathroom fixture",
+  accessory: "Accessory",
+};
+
+export function CollectionView({ products, locale }: CollectionViewProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Initial state hydrates from `?filter=…` (Fix 6 URL-sync requirement).
+  const [facets, setFacets] = useState<FacetState>(() => {
+    const init = emptyFacets();
+    const raw = searchParams?.get("filter");
+    if (raw) {
+      for (const part of raw.split(",")) {
+        const k = part.trim() as FlagKey;
+        if ((FLAG_ORDER as readonly string[]).includes(k)) init.flags.add(k);
+      }
+    }
+    return init;
+  });
+  const [sort, setSort] = useState<SortKey>("newest");
+  const [filterSheetOpen, setFilterSheetOpen] = useState(false);
+
+  // Build per-facet count maps from the *full* product set so users can see
+  // the total for each option, not the post-filter total.
+  const facetOptions = useMemo(() => {
+    const productType = new Map<string, number>();
+    const colorFamily = new Map<string, number>();
+    const series = new Map<Series, number>();
+    let hydronic = 0;
+    let electric = 0;
+    for (const p of products) {
+      if (p.filters.product_type) {
+        productType.set(p.filters.product_type, (productType.get(p.filters.product_type) ?? 0) + 1);
+      }
+      const colorKey = p.filters.color_family ?? p.specs.color;
+      if (colorKey) {
+        colorFamily.set(colorKey, (colorFamily.get(colorKey) ?? 0) + 1);
+      }
+      const s = resolveSeries(p.tags);
+      if (s) series.set(s, (series.get(s) ?? 0) + 1);
+      if (p.specs.heating_medium === "hydronic") hydronic++;
+      else if (p.specs.heating_medium === "electric") electric++;
+    }
+    return {
+      productType: Array.from(productType.entries())
+        .sort((a, b) => b[1] - a[1])
+        .map(([value, count]) => ({
+          value,
+          count,
+          label: PRODUCT_TYPE_LABELS[value] ?? value,
+        })),
+      colorFamily: Array.from(colorFamily.entries())
+        .sort((a, b) => b[1] - a[1])
+        .map(([value, count]) => ({ value, count })),
+      series: Array.from(series.entries())
+        .sort((a, b) => b[1] - a[1])
+        .map(([value, count]) => ({
+          value,
+          count,
+          label: seriesLabel(value),
+        })),
+      hydronic,
+      electric,
+    };
+  }, [products]);
+
+  // Sub-category chip totals — only chips with ≥1 matching product render.
+  const flagCounts = useMemo(() => {
+    const counts = new Map<FlagKey, number>();
+    for (const f of FLAG_ORDER) counts.set(f, 0);
+    for (const p of products) {
+      for (const f of FLAG_ORDER) {
+        if (flagMatches(p, f)) counts.set(f, (counts.get(f) ?? 0) + 1);
+      }
+    }
+    return counts;
+  }, [products]);
+
+  const visibleFlags = useMemo(
+    () => FLAG_ORDER.filter((f) => (flagCounts.get(f) ?? 0) > 0 && (flagCounts.get(f) ?? 0) < products.length),
+    [flagCounts, products.length],
+  );
+
+  const filtered = useMemo(
+    () => applySort(applyFilters(products, facets), sort),
+    [products, facets, sort],
+  );
+
+  // URL sync: write the active flag chips back to ?filter=… so back-nav and
+  // share-links restore the filter state.
+  useEffect(() => {
+    const flags = Array.from(facets.flags).join(",");
+    const params = new URLSearchParams(searchParams?.toString() ?? "");
+    if (flags) params.set("filter", flags);
+    else params.delete("filter");
+    const qs = params.toString();
+    const path = window.location.pathname;
+    const url = qs ? `${path}?${qs}` : path;
+    if (window.location.pathname + window.location.search !== url) {
+      window.history.replaceState(null, "", url);
+    }
+    // We intentionally don't include router in deps — replaceState avoids
+    // a server round-trip and keeps the scroll position.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [facets.flags]);
+
+  function toggle<T extends string>(set: Set<T>, value: T): Set<T> {
+    const next = new Set(set);
+    if (next.has(value)) next.delete(value);
+    else next.add(value);
+    return next;
+  }
+
+  function toggleFlag(f: FlagKey) {
+    setFacets((curr) => ({ ...curr, flags: toggle(curr.flags, f) }));
+  }
+
+  const activeChips: { key: string; label: string; clear: () => void }[] = [];
+  for (const v of facets.productType) {
+    activeChips.push({
+      key: `pt-${v}`,
+      label: PRODUCT_TYPE_LABELS[v] ?? v,
+      clear: () => setFacets((f) => ({ ...f, productType: toggle(f.productType, v) })),
+    });
+  }
+  for (const v of facets.colorFamily) {
+    activeChips.push({
+      key: `c-${v}`,
+      label: v,
+      clear: () => setFacets((f) => ({ ...f, colorFamily: toggle(f.colorFamily, v) })),
+    });
+  }
+  for (const v of facets.series) {
+    activeChips.push({
+      key: `s-${v}`,
+      label: seriesLabel(v),
+      clear: () => setFacets((f) => ({ ...f, series: toggle(f.series, v) })),
+    });
+  }
+  if (facets.heatingMedium !== "all") {
+    activeChips.push({
+      key: `hm-${facets.heatingMedium}`,
+      label: facets.heatingMedium === "hydronic" ? "Hydronic" : "Electric",
+      clear: () => setFacets((f) => ({ ...f, heatingMedium: "all" })),
+    });
+  }
+  for (const f of facets.flags) {
+    activeChips.push({
+      key: `flag-${f}`,
+      label: FLAG_LABELS[f],
+      clear: () => toggleFlag(f),
+    });
+  }
+
+  const clearAll = useCallback(() => {
+    setFacets(emptyFacets());
+  }, []);
+
+  const totalActive =
+    facets.productType.size +
+    facets.colorFamily.size +
+    facets.series.size +
+    (facets.heatingMedium !== "all" ? 1 : 0) +
+    facets.flags.size;
+
+  const FilterShell = (
+    <div className="space-y-6">
+      <FacetGroup<string>
+        label="Type"
+        values={facetOptions.productType}
+        selected={facets.productType}
+        onToggle={(v) =>
+          setFacets((f) => ({ ...f, productType: toggle(f.productType, v) }))
+        }
+      />
+      <ColorFacetGroup
+        values={facetOptions.colorFamily}
+        selected={facets.colorFamily}
+        onToggle={(v) =>
+          setFacets((f) => ({ ...f, colorFamily: toggle(f.colorFamily, v) }))
+        }
+      />
+      <FacetGroup<Series>
+        label="Series"
+        values={facetOptions.series}
+        selected={facets.series}
+        onToggle={(v) => setFacets((f) => ({ ...f, series: toggle(f.series, v) }))}
+      />
+      <details
+        open
+        className="group border-b border-[var(--color-border)] pb-4 last:border-b-0"
+      >
+        <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold">
+          Heating medium
+          <span aria-hidden className="text-[var(--color-text-muted)] group-open:rotate-45">+</span>
+        </summary>
+        <ul className="mt-3 space-y-2">
+          {[
+            { value: "all" as const, label: "All", count: products.length },
+            { value: "hydronic" as const, label: "Hydronic", count: facetOptions.hydronic },
+            { value: "electric" as const, label: "Electric", count: facetOptions.electric },
+          ].map((m) => (
+            <li key={m.value}>
+              <label className="flex items-center justify-between gap-2 text-sm">
+                <span className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="heating-medium"
+                    checked={facets.heatingMedium === m.value}
+                    onChange={() => setFacets((f) => ({ ...f, heatingMedium: m.value }))}
+                  />
+                  {m.label}
+                </span>
+                <span className="text-xs text-[var(--color-text-muted)]">{m.count}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Sub-category chip row (Fix 6) — only renders chips with ≥1 product. */}
+      {visibleFlags.length > 0 ? (
+        <div
+          className="mt-8 flex flex-wrap items-center gap-2"
+          role="toolbar"
+          aria-label="Sub-category filters"
+        >
+          <button
+            type="button"
+            onClick={clearAll}
+            className="subchip"
+            aria-pressed={totalActive === 0}
+          >
+            All
+          </button>
+          {visibleFlags.map((f) => {
+            const active = facets.flags.has(f);
+            const count = flagCounts.get(f) ?? 0;
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => toggleFlag(f)}
+                aria-pressed={active}
+                className="subchip"
+              >
+                <span>{FLAG_LABELS[f]}</span>
+                <span className="subchip-count">{count}</span>
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+
+      {/* Toolbar: result count + sort + sticky mobile filter button */}
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-y border-[var(--color-border)] py-3 text-sm">
+        <p className="text-[var(--color-text-muted)]">
+          {filtered.length} of {products.length} products
+        </p>
+        <div className="flex items-center gap-3">
+          {/* Mobile/tablet — single button that opens the bottom-sheet (Fix 9). */}
+          <button
+            type="button"
+            onClick={() => setFilterSheetOpen(true)}
+            className="lg:hidden inline-flex items-center gap-2 border border-[var(--color-text)] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text)]"
+          >
+            Filter &amp; sort
+            {totalActive > 0 ? (
+              <span className="inline-flex h-4 min-w-4 items-center justify-center bg-[var(--color-primary)] px-1 text-[10px] font-bold text-white">
+                {totalActive}
+              </span>
+            ) : null}
+          </button>
+          <label className="hidden lg:flex items-center gap-2">
+            <span className="text-[var(--color-text-muted)]">Sort:</span>
+            <select
+              className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-sm"
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+            >
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price · Low to high</option>
+              <option value="price-desc">Price · High to low</option>
+              <option value="title">Title (A → Z)</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      {/* Active chips */}
+      {activeChips.length > 0 ? (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {activeChips.map((chip) => (
+            <Chip key={chip.key} removable onRemove={chip.clear}>
+              {chip.label}
+            </Chip>
+          ))}
+          <button
+            type="button"
+            onClick={clearAll}
+            className="text-sm text-[var(--color-primary)] underline-offset-2 hover:underline"
+          >
+            Clear all ({totalActive})
+          </button>
+        </div>
+      ) : null}
+
+      <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[260px_1fr]">
+        {/* Filter sidebar (desktop only) */}
+        <aside aria-label="Filters" className="hidden lg:block">
+          <div className="sticky top-24">{FilterShell}</div>
+        </aside>
+
+        {/* Product grid */}
+        <div>
+          {filtered.length === 0 ? (
+            <div className="rounded-[var(--radius-md)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface-muted)] p-10 text-center text-sm text-[var(--color-text-muted)]">
+              No products match the current filters.
+              {activeChips.length > 0 ? (
+                <>
+                  {" "}
+                  <button
+                    type="button"
+                    onClick={clearAll}
+                    className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+                  >
+                    Clear filters
+                  </button>
+                </>
+              ) : null}
+            </div>
+          ) : (
+            <ProductGrid products={filtered} locale={locale} />
+          )}
+        </div>
+      </div>
+
+      {/* Filter & sort bottom-sheet (mobile / tablet) — Fix 9. */}
+      <FilterSheet
+        open={filterSheetOpen}
+        onClose={() => setFilterSheetOpen(false)}
+        sort={sort}
+        onSortChange={setSort}
+        filteredCount={filtered.length}
+        clearAll={clearAll}
+      >
+        {FilterShell}
+      </FilterSheet>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Filter & sort bottom-sheet (Fix 9)                                  */
+/* ------------------------------------------------------------------ */
+
+interface FilterSheetProps {
+  open: boolean;
+  onClose: () => void;
+  sort: SortKey;
+  onSortChange: (s: SortKey) => void;
+  filteredCount: number;
+  clearAll: () => void;
+  children: React.ReactNode;
+}
+
+function FilterSheet({
+  open,
+  onClose,
+  sort,
+  onSortChange,
+  filteredCount,
+  clearAll,
+  children,
+}: FilterSheetProps) {
+  // ESC close + scroll lock.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [open, onClose]);
+
+  return (
+    <>
+      <div
+        className="drawer-overlay lg:hidden"
+        data-open={open}
+        onClick={onClose}
+        aria-hidden={!open}
+      />
+      <div
+        className="drawer-panel drawer-panel--bottom lg:hidden"
+        data-open={open}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Filter and sort"
+        aria-hidden={!open}
+      >
+        <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4">
+          <p className="font-[var(--font-display)] text-xl font-semibold tracking-tight">
+            Filter &amp; sort
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+          >
+            Close ✕
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-5 py-5">
+          <div className="mb-6 border-b border-[var(--color-border)] pb-4">
+            <label className="block text-sm">
+              <span className="text-[var(--color-text-muted)]">Sort</span>
+              <select
+                className="mt-2 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm"
+                value={sort}
+                onChange={(e) => onSortChange(e.target.value as SortKey)}
+              >
+                <option value="newest">Newest</option>
+                <option value="price-asc">Price · Low to high</option>
+                <option value="price-desc">Price · High to low</option>
+                <option value="title">Title (A → Z)</option>
+              </select>
+            </label>
+          </div>
+          {children}
+        </div>
+
+        <div className="flex items-center justify-between gap-3 border-t border-[var(--color-border)] px-5 py-4">
+          <button
+            type="button"
+            onClick={clearAll}
+            className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-primary)] hover:underline"
+          >
+            Clear all
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 max-w-xs bg-[var(--color-text)] py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:bg-[var(--color-primary)]"
+          >
+            Apply ({filteredCount})
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}

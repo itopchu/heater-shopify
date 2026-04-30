@@ -1,0 +1,165 @@
+{
+  "handle": "elektrische-badheizkorper-mittelanschluss-weiss-mira",
+  "url": "https://xxl-heizung.de/products/elektrische-badheizkorper-mittelanschluss-weiss-mira",
+  "canonical_status": "scraper-only",
+  "title_de": "Elektrische Badheizkörper Handtuchheizkörper Weiß TWISTER",
+  "title_de_curated": "Elektrische Badheizkörper Handtuchheizkörper Weiß TWISTER",
+  "series": "TWISTER",
+  "color": "weiss",
+  "electric": true,
+  "primary_collection": "badheizkorper-elektrisch",
+  "collections": [
+    "badheizkorper-elektrisch"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper elektrisch",
+    "Elektrische Badheizkörper Handtuchheizkörper Weiß TWISTER"
+  ],
+  "description_text": "Elektrische Badheizkörper, auch als Handtuchheizkörper, Handtuchwärmer oder Handtuchtrockner bekannt, stellen die ideale Badezimmer Heizung für moderne Haushalte dar. Diese speziellen Heizsysteme vereinen Funktionalität und Komfort in Ihrem Badezimmer und bieten eine effiziente Lösung für angenehme Temperaturen.",
+  "description_html": "<p><strong>Elektrische Badheizkörper</strong>, auch als <strong>Handtuchheizkörper</strong>, <strong>Handtuchwärmer </strong>oder <strong>Handtuchtrockner </strong>bekannt, stellen die ideale <strong>Badezimmer Heizung </strong>für moderne Haushalte dar. Diese speziellen Heizsysteme vereinen Funktionalität und Komfort in Ihrem Badezimmer und bieten eine effiziente Lösung für angenehme Temperaturen.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "44 x 121",
+        "50 x 140",
+        "50 × 160"
+      ]
+    },
+    {
+      "name": "Auslieferungszustand",
+      "name_normalized": "auslieferungszustand",
+      "position": 2,
+      "values": [
+        "Unbefüllt",
+        "Befüllt"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 55048456208771,
+      "sku": "XXL-TW- EL-02",
+      "barcode": "4251743599658",
+      "title": "44 x 121 / Unbefüllt",
+      "option1": "44 x 121",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "359.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55048456176003,
+      "sku": "XXL-TW- EL-01",
+      "barcode": "4251743599641",
+      "title": "44 x 121 / Befüllt",
+      "option1": "44 x 121",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "459.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55174032687491,
+      "sku": "XXL-TW- EL-16",
+      "barcode": "4251743599634",
+      "title": "50 x 140 / Unbefüllt",
+      "option1": "50 x 140",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "399.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 55174032720259,
+      "sku": "XXL-TW- EL-15",
+      "barcode": "4251743599627",
+      "title": "50 x 140 / Befüllt",
+      "option1": "50 x 140",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "499.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734894993632,
+      "sku": "XXL-TW- EL-04",
+      "barcode": "4251743599610",
+      "title": "50 × 160 / Unbefüllt",
+      "option1": "50 × 160",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "459.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45502534451424,
+      "sku": "XXL-TW- EL-03",
+      "barcode": "4251743599603",
+      "title": "50 × 160 / Befüllt",
+      "option1": "50 × 160",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "559.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 6,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 6
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 359.9,
+    "price_max": 559.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/4_Weiss_matt_Struckturiert_253a5646-5b2e-40c1-9796-f42f7eed78dd.jpg?v=1775303360",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/5_Weiss_matt_Struckturiert_5ec35cdf-9d87-435c-a9fb-c3cf26cc8a6d.jpg?v=1775303360",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/6_Weiss_matt_Struckturiert_1915893a-520a-4bf5-8c5c-9699ef26a95a.jpg?v=1775303360"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/4_Weiss_matt_Struckturiert_253a5646-5b2e-40c1-9796-f42f7eed78dd.jpg?v=1775303360",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Twister Elektrisch",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "weiß"
+  },
+  "join_notes": null,
+  "source_signature": "265c8cf56fc77113726ffb2889d2edf3",
+  "fetched_at": "2026-04-29T19:07:10+00:00"
+}

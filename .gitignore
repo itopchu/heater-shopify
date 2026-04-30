@@ -21,6 +21,19 @@ build/
 *.log
 agent/logs/
 
+# Next.js / Turbo / monorepo build artifacts
+.next/
+.turbo/
+out/
+apps/*/.next
+apps/*/out
+apps/*/.turbo
+apps/*/.env
+apps/*/.env.local
+apps/*/.env.*.local
+*.tsbuildinfo
+.pnpm-store/
+
 # Editor / OS
 .vscode/*
 !.vscode/extensions.json
@@ -41,10 +54,26 @@ data/**/*orders*.csv
 .sync-cache/
 sync-reports/
 
+# Scrape cache (regenerable from agent/scripts/scrape_xxl_heizung.py)
+product-catalog/.cache/
+
+# Local product photos downloaded from xxl-heizung CDN (regenerable, ~60MB)
+# Keep README + manifest tracked so the layout/intent is documented in git.
+catalog/*/
+!catalog/README.md
+!catalog/manifest.json
+
 # Audit / perf artifacts
 lighthouse-reports/
 storefront-root.html
 tmp/
 
+# Image-to-3D experiment (parked 2026-04-30 — see memory/project_3d_pipeline_parked.md).
+# Trellis + Hunyuan3D-2.1 both fail on radiator geometry. Scripts kept on disk as
+# evidence, but not tracked in git since the pipeline is not part of the build.
+agent/scripts/trellis-sample.mjs
+agent/scripts/3d-shootout.mjs
+
 # Claude harness state
 .claude/
+.vercel

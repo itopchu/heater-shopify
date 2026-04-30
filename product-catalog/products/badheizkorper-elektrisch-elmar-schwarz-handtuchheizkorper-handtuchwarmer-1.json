@@ -1,0 +1,258 @@
+{
+  "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer-1",
+  "url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer-1",
+  "canonical_status": "scraper-only",
+  "title_de": "Elektrische Badheizkörper Handtuchheizkörper Schwarz ELANOR - seitlich offen -",
+  "title_de_curated": "Elektrische Badheizkörper Handtuchheizkörper Schwarz ELANOR - seitlich offen -",
+  "series": "ELANOR",
+  "color": "schwarz",
+  "electric": true,
+  "primary_collection": "badheizkorper-elektrisch",
+  "collections": [
+    "badheizkorper-elektrisch"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper elektrisch",
+    "Elektrische Badheizkörper Handtuchheizkörper Schwarz ELANOR - seitlich offen -"
+  ],
+  "description_text": "Elektrische Badheizkörper, auch als Elektro Handtuchheizkörper, Handtuchwärmer oder Handtuchtrockner bekannt, vereinen Funktionalität und Komfort in Ihrem Badezimmer. Diese Heizlösungen bieten nicht nur eine angenehme Raumtemperatur, sondern sorgen gleichzeitig für warme, trockene Handtücher.",
+  "description_html": "<p><strong>Elektrische Badheizkörper</strong>, auch als <strong>Elektro</strong> <strong>Handtuchheizkörper</strong>, <strong>Handtuchwärmer </strong>oder <strong>Handtuchtrockner </strong>bekannt, vereinen Funktionalität und Komfort in Ihrem Badezimmer. Diese Heizlösungen bieten nicht nur eine angenehme Raumtemperatur, sondern sorgen gleichzeitig für warme, trockene Handtücher.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 115",
+        "50 × 140",
+        "50 × 164",
+        "60 × 115",
+        "60 × 140",
+        "60 × 164"
+      ]
+    },
+    {
+      "name": "Auslieferungszustand",
+      "name_normalized": "auslieferungszustand",
+      "position": 2,
+      "values": [
+        "Befüllt",
+        "Unbefüllt"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45501753000160,
+      "sku": "XXL-EL-EL-025",
+      "barcode": "4251743599351",
+      "title": "50 × 115 / Befüllt",
+      "option1": "50 × 115",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "449.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734898958560,
+      "sku": "XXL-EL-EL-026",
+      "barcode": "4251743599344",
+      "title": "50 × 115 / Unbefüllt",
+      "option1": "50 × 115",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "329.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45501753032928,
+      "sku": "XXL-EL-EL-027",
+      "barcode": "4251743599337",
+      "title": "50 × 140 / Befüllt",
+      "option1": "50 × 140",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "499.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734898991328,
+      "sku": "XXL-EL-EL-028",
+      "barcode": "4251743599320",
+      "title": "50 × 140 / Unbefüllt",
+      "option1": "50 × 140",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "379.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45501753065696,
+      "sku": "XXL-EL-EL-029",
+      "barcode": "4251743599313",
+      "title": "50 × 164 / Befüllt",
+      "option1": "50 × 164",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "579.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734899024096,
+      "sku": "XXL-EL-EL-030",
+      "barcode": "4251743599306",
+      "title": "50 × 164 / Unbefüllt",
+      "option1": "50 × 164",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "459.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45501753098464,
+      "sku": "XXL-EL-EL-031",
+      "barcode": "4251743599290",
+      "title": "60 × 115 / Befüllt",
+      "option1": "60 × 115",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "459.00",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734899056864,
+      "sku": "XXL-EL-EL-032",
+      "barcode": "4251743599283",
+      "title": "60 × 115 / Unbefüllt",
+      "option1": "60 × 115",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "339.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45501753131232,
+      "sku": "XXL-EL-EL-033",
+      "barcode": "4251743599276",
+      "title": "60 × 140 / Befüllt",
+      "option1": "60 × 140",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "529.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734899089632,
+      "sku": "XXL-EL-EL-034",
+      "barcode": "4251743599269",
+      "title": "60 × 140 / Unbefüllt",
+      "option1": "60 × 140",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "409.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45501753164000,
+      "sku": "XXL-EL-EL-035",
+      "barcode": "4251743599252",
+      "title": "60 × 164 / Befüllt",
+      "option1": "60 × 164",
+      "option2": "Befüllt",
+      "option3": null,
+      "price": "599.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45734899122400,
+      "sku": "XXL-EL-EL-036",
+      "barcode": "4251743599245",
+      "title": "60 × 164 / Unbefüllt",
+      "option1": "60 × 164",
+      "option2": "Unbefüllt",
+      "option3": null,
+      "price": "479.00",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 12,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 12
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 329,
+    "price_max": 599,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/7_Schwarz_matt_Struckturiert_d103c372-b10f-49ab-baf6-9497e901d4e1.jpg?v=1775300901",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/8_Schwarz_matt_Struckturiert_10d0af38-99a2-40e5-973c-66bd676c2f5f.jpg?v=1775300901",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/9_Schwarz_matt_Struckturiert_27ea9b5e-d56d-499b-b655-f4a6ba7da4ca.jpg?v=1775300901"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/7_Schwarz_matt_Struckturiert_d103c372-b10f-49ab-baf6-9497e901d4e1.jpg?v=1775300901",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Elanor Elektrisch",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "schwarz"
+  },
+  "join_notes": null,
+  "source_signature": "245d3792baa009a4698f72c19ac1bdab",
+  "fetched_at": "2026-04-29T19:06:29+00:00"
+}

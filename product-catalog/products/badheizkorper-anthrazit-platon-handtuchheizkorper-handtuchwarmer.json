@@ -1,0 +1,191 @@
+{
+  "handle": "badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+  "url": "https://xxl-heizung.de/products/badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+  "canonical_status": "scraper-only",
+  "title_de": "Badheizkörper & Handtuchheizkörper Mittelanschluss Anthrazit PULLMAN",
+  "title_de_curated": "Badheizkörper & Handtuchheizkörper Mittelanschluss Anthrazit PULLMAN",
+  "series": "PULLMAN",
+  "color": "anthrazit",
+  "electric": false,
+  "primary_collection": "badheizkorper",
+  "collections": [
+    "badheizkorper"
+  ],
+  "breadcrumb": [
+    "Heim",
+    "Badheizkörper",
+    "Badheizkörper & Handtuchheizkörper Mittelanschluss Anthrazit PULLMAN"
+  ],
+  "description_text": "Badheizkörper & Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort & Design in jedem Bad.",
+  "description_html": "<p>Badheizkörper &amp; Handtuchwärmer Stilvolle Badezimmer-Heizung für warme Handtücher. Energieeffiziente Handtuchtrockner als Handtuchheizkörper vereinen Komfort &amp; Design in jedem Bad.</p>",
+  "specs": {},
+  "options": [
+    {
+      "name": "Breite x Höhe in cm",
+      "name_normalized": "size_breite_x_hoehe_cm",
+      "position": 1,
+      "values": [
+        "50 × 120",
+        "50 × 140",
+        "50 × 160",
+        "50 × 180",
+        "60 × 120",
+        "60 × 140",
+        "60 × 160",
+        "60 × 180"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 45440435683552,
+      "sku": "XXL-PL-012",
+      "barcode": "4251743542197",
+      "title": "50 × 120",
+      "option1": "50 × 120",
+      "option2": null,
+      "option3": null,
+      "price": "220.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 16000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701686460640,
+      "sku": "XXL-PL-013",
+      "barcode": "4251743542180",
+      "title": "50 × 140",
+      "option1": "50 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "249.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 18000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701686493408,
+      "sku": "XXL-PL-014",
+      "barcode": "4251743542173",
+      "title": "50 × 160",
+      "option1": "50 × 160",
+      "option2": null,
+      "option3": null,
+      "price": "309.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701686526176,
+      "sku": "XXL-PL-015",
+      "barcode": "4251743542166",
+      "title": "50 × 180",
+      "option1": "50 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "339.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 24000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701686558944,
+      "sku": "XXL-PL-017",
+      "barcode": "4251743542142",
+      "title": "60 × 120",
+      "option1": "60 × 120",
+      "option2": null,
+      "option3": null,
+      "price": "249.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701686591712,
+      "sku": "XXL-PL-018",
+      "barcode": "4251743542135",
+      "title": "60 × 140",
+      "option1": "60 × 140",
+      "option2": null,
+      "option3": null,
+      "price": "299.90",
+      "compare_at_price": "",
+      "available": true,
+      "grams": 0,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701686624480,
+      "sku": "XXL-PL-019",
+      "barcode": "4251743542128",
+      "title": "60 × 160",
+      "option1": "60 × 160",
+      "option2": null,
+      "option3": null,
+      "price": "339.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 24000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    },
+    {
+      "id": 45701686657248,
+      "sku": "XXL-PL-020",
+      "barcode": "4251743542111",
+      "title": "60 × 180",
+      "option1": "60 × 180",
+      "option2": null,
+      "option3": null,
+      "price": "379.90",
+      "compare_at_price": "0.00",
+      "available": true,
+      "grams": 27000,
+      "featured_image_position": null,
+      "featured_image_src": null
+    }
+  ],
+  "stock_summary": {
+    "available": true,
+    "in_stock_variants": 8,
+    "out_of_stock_variants": 0,
+    "stock_unknown_variants": 0,
+    "variant_count": 8
+  },
+  "price": {
+    "currency": "EUR",
+    "price_min": 220.9,
+    "price_max": 379.9,
+    "compare_at_min": null,
+    "compare_at_max": null
+  },
+  "photos": {
+    "cdn_in_canonical_order": [
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/1_Anthrazi_matt_Struckturiert_9ad1b58f-fd7d-4d11-b379-def999dade21.jpg?v=1776258543",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/2_Anthrazi_matt_Struckturiert_8d6f95fb-7c4f-4a3c-a1f2-d61b021d3dfc.jpg?v=1776258543",
+      "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/3_Anthrazi_matt_Struckturiert_b6b474ec-8301-446a-bc90-95f077e5221c.jpg?v=1776258543"
+    ],
+    "primary_cdn": "https://cdn.shopify.com/s/files/1/0698/4279/6768/files/1_Anthrazi_matt_Struckturiert_9ad1b58f-fd7d-4d11-b379-def999dade21.jpg?v=1776258543",
+    "licensed_for_this_color": [],
+    "licensed_folder": "Pullman",
+    "licensed_folder_all_images": [],
+    "licensed_pdfs": [],
+    "image_filter": "anthrazi"
+  },
+  "join_notes": null,
+  "source_signature": "483697f882dc67b19fe31e70c387cd72",
+  "fetched_at": "2026-04-29T19:06:18+00:00"
+}
