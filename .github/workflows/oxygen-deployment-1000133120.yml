@@ -27,7 +27,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Oxygen's build server runs inside apps/store-heating-hydrogen and
+      # expects a lockfile alongside the Hydrogen package.json. In a pnpm
+      # workspace the real lockfile lives at the repo root, so copy it in
+      # so the deploy bundle ships with one. The copy stays local to CI.
+      - name: Copy lockfile into Hydrogen workspace
+        run: cp pnpm-lock.yaml apps/store-heating-hydrogen/pnpm-lock.yaml
+
       - name: Build and Publish to Oxygen
-        run: pnpm --filter store-heating-hydrogen exec shopify hydrogen deploy
+        working-directory: apps/store-heating-hydrogen
+        run: shopify hydrogen deploy
         env:
           SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000133120 }}
