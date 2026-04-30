@@ -7,6 +7,7 @@ import type {
 import {AddToCartButton} from './AddToCartButton';
 import {useAside} from './Aside';
 import type {ProductFragment} from 'storefrontapi.generated';
+import {useT} from '~/lib/gberg/i18n';
 
 export function ProductForm({
   productOptions,
@@ -17,6 +18,7 @@ export function ProductForm({
 }) {
   const navigate = useNavigate();
   const {open} = useAside();
+  const t = useT();
   return (
     <div className="product-form">
       {productOptions.map((option) => {
@@ -118,7 +120,9 @@ export function ProductForm({
             : []
         }
       >
-        {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+        {selectedVariant?.availableForSale
+          ? t('pdp.add_to_cart')
+          : t('pdp.sold_out')}
       </AddToCartButton>
     </div>
   );

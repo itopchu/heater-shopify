@@ -14,6 +14,7 @@ import {
   SearchFormPredictive,
 } from '~/components/SearchFormPredictive';
 import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
+import {useT} from '~/lib/gberg/i18n';
 
 interface PageLayoutProps {
   cart: Promise<CartApiQueryFragment | null>;
@@ -56,9 +57,10 @@ export function PageLayout({
 }
 
 function CartAside({cart}: {cart: PageLayoutProps['cart']}) {
+  const t = useT();
   return (
-    <Aside type="cart" heading="CART">
-      <Suspense fallback={<p>Loading cart ...</p>}>
+    <Aside type="cart" heading={t('header.cart')}>
+      <Suspense fallback={<p>{t('common.loading')}</p>}>
         <Await resolve={cart}>
           {(cart) => {
             return <CartMain cart={cart} layout="aside" />;
@@ -71,8 +73,9 @@ function CartAside({cart}: {cart: PageLayoutProps['cart']}) {
 
 function SearchAside() {
   const queriesDatalistId = useId();
+  const t = useT();
   return (
-    <Aside type="search" heading="SEARCH">
+    <Aside type="search" heading={t('common.search')}>
       <div className="predictive-search">
         <br />
         <SearchFormPredictive>
@@ -82,13 +85,13 @@ function SearchAside() {
                 name="q"
                 onChange={fetchResults}
                 onFocus={fetchResults}
-                placeholder="Search"
+                placeholder={t('common.search')}
                 ref={inputRef}
                 type="search"
                 list={queriesDatalistId}
               />
               &nbsp;
-              <button onClick={goToSearch}>Search</button>
+              <button onClick={goToSearch}>{t('common.search')}</button>
             </>
           )}
         </SearchFormPredictive>
@@ -98,7 +101,7 @@ function SearchAside() {
             const {articles, collections, pages, products, queries} = items;
 
             if (state === 'loading' && term.current) {
-              return <div>Loading...</div>;
+              return <div>{t('common.loading')}</div>;
             }
 
             if (!total) {
@@ -137,7 +140,7 @@ function SearchAside() {
                     to={`${SEARCH_ENDPOINT}?q=${term.current}`}
                   >
                     <p>
-                      View all results for <q>{term.current}</q>
+                      {t('search.view_all_results', {query: term.current})}
                       &nbsp; →
                     </p>
                   </Link>
@@ -158,10 +161,11 @@ function MobileMenuAside({
   header: PageLayoutProps['header'];
   publicStoreDomain: PageLayoutProps['publicStoreDomain'];
 }) {
+  const t = useT();
   return (
     header.menu &&
     header.shop.primaryDomain?.url && (
-      <Aside type="mobile" heading="MENU">
+      <Aside type="mobile" heading={t('header.menu')}>
         <HeaderMenu
           menu={header.menu}
           viewport="mobile"

@@ -7,6 +7,7 @@ import {
 } from '@shopify/hydrogen';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
+import {useT} from '~/lib/gberg/i18n';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -53,6 +54,7 @@ export function HeaderMenu({
 }) {
   const className = `header-menu-${viewport}`;
   const {close} = useAside();
+  const t = useT();
 
   return (
     <nav className={className} role="navigation">
@@ -64,7 +66,7 @@ export function HeaderMenu({
           style={activeLinkStyle}
           to="/"
         >
-          Home
+          {t('header.home')}
         </NavLink>
       )}
       {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
@@ -99,13 +101,16 @@ function HeaderCtas({
   isLoggedIn,
   cart,
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
+  const t = useT();
   return (
     <nav className="header-ctas" role="navigation">
       <HeaderMenuMobileToggle />
       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
+        <Suspense fallback={t('header.sign_in')}>
+          <Await resolve={isLoggedIn} errorElement={t('header.sign_in')}>
+            {(isLoggedIn) =>
+              isLoggedIn ? t('header.account') : t('header.sign_in')
+            }
           </Await>
         </Suspense>
       </NavLink>
@@ -129,9 +134,10 @@ function HeaderMenuMobileToggle() {
 
 function SearchToggle() {
   const {open} = useAside();
+  const t = useT();
   return (
     <button className="reset" onClick={() => open('search')}>
-      Search
+      {t('common.search')}
     </button>
   );
 }
@@ -139,6 +145,7 @@ function SearchToggle() {
 function CartBadge({count}: {count: number}) {
   const {open} = useAside();
   const {publish, shop, cart, prevCart} = useAnalytics();
+  const t = useT();
 
   return (
     <a
@@ -154,7 +161,7 @@ function CartBadge({count}: {count: number}) {
         } as CartViewPayload);
       }}
     >
-      Cart <span aria-label={`(items: ${count})`}>{count}</span>
+      {t('header.cart')} <span aria-label={t('header.cart_count', {count})}>{count}</span>
     </a>
   );
 }
