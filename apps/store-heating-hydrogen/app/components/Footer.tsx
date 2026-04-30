@@ -1,6 +1,7 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from 'react-router';
 import type {FooterQuery, HeaderQuery} from 'storefrontapi.generated';
+import {useT, type TFunction} from '~/lib/gberg/i18n';
 
 interface FooterProps {
   footer: Promise<FooterQuery | null>;
@@ -41,9 +42,10 @@ function FooterMenu({
   primaryDomainUrl: FooterProps['header']['shop']['primaryDomain']['url'];
   publicStoreDomain: string;
 }) {
+  const t = useT();
   return (
     <nav className="footer-menu" role="navigation">
-      {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
+      {(menu || fallbackFooterMenu(t)).items.map((item) => {
         if (!item.url) return null;
         // if the url is internal, we strip the domain
         const url =
@@ -73,47 +75,49 @@ function FooterMenu({
   );
 }
 
-const FALLBACK_FOOTER_MENU = {
-  id: 'gid://shopify/Menu/199655620664',
-  items: [
-    {
-      id: 'gid://shopify/MenuItem/461633060920',
-      resourceId: 'gid://shopify/ShopPolicy/23358046264',
-      tags: [],
-      title: 'Privacy Policy',
-      type: 'SHOP_POLICY',
-      url: '/policies/privacy-policy',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461633093688',
-      resourceId: 'gid://shopify/ShopPolicy/23358013496',
-      tags: [],
-      title: 'Refund Policy',
-      type: 'SHOP_POLICY',
-      url: '/policies/refund-policy',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461633126456',
-      resourceId: 'gid://shopify/ShopPolicy/23358111800',
-      tags: [],
-      title: 'Shipping Policy',
-      type: 'SHOP_POLICY',
-      url: '/policies/shipping-policy',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461633159224',
-      resourceId: 'gid://shopify/ShopPolicy/23358079032',
-      tags: [],
-      title: 'Terms of Service',
-      type: 'SHOP_POLICY',
-      url: '/policies/terms-of-service',
-      items: [],
-    },
-  ],
-};
+function fallbackFooterMenu(t: TFunction) {
+  return {
+    id: 'gid://shopify/Menu/199655620664',
+    items: [
+      {
+        id: 'gid://shopify/MenuItem/461633060920',
+        resourceId: 'gid://shopify/ShopPolicy/23358046264',
+        tags: [],
+        title: t('scaffold_nav.privacy_policy'),
+        type: 'SHOP_POLICY',
+        url: '/policies/privacy-policy',
+        items: [],
+      },
+      {
+        id: 'gid://shopify/MenuItem/461633093688',
+        resourceId: 'gid://shopify/ShopPolicy/23358013496',
+        tags: [],
+        title: t('scaffold_nav.refund_policy'),
+        type: 'SHOP_POLICY',
+        url: '/policies/refund-policy',
+        items: [],
+      },
+      {
+        id: 'gid://shopify/MenuItem/461633126456',
+        resourceId: 'gid://shopify/ShopPolicy/23358111800',
+        tags: [],
+        title: t('scaffold_nav.shipping_policy'),
+        type: 'SHOP_POLICY',
+        url: '/policies/shipping-policy',
+        items: [],
+      },
+      {
+        id: 'gid://shopify/MenuItem/461633159224',
+        resourceId: 'gid://shopify/ShopPolicy/23358079032',
+        tags: [],
+        title: t('scaffold_nav.terms_of_service'),
+        type: 'SHOP_POLICY',
+        url: '/policies/terms-of-service',
+        items: [],
+      },
+    ],
+  };
+}
 
 function activeLinkStyle({
   isActive,

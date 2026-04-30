@@ -58,6 +58,16 @@
     "engineered_tagline_line1": "Diseñado, certificado,",
     "engineered_tagline_line2": "entregado en toda Europa."
   },
+  "scaffold_nav": {
+    "collections": "Colecciones",
+    "blog": "Blog",
+    "policies": "Políticas",
+    "about": "Acerca de",
+    "privacy_policy": "Política de privacidad",
+    "refund_policy": "Política de reembolso",
+    "shipping_policy": "Política de envío",
+    "terms_of_service": "Términos del servicio"
+  },
   "footer": {
     "stay_in_loop": "Manténgase informado",
     "newsletter_promise": "Novedades y ofertas exclusivas UE.",
@@ -325,6 +335,9 @@
     "trust_warranty_sub": "En todos los radiadores",
     "trust_engineering_title": "Asesoramiento técnico",
     "trust_engineering_sub": "Certificado CE, fabricado en la UE"
+  },
+  "collections": {
+    "title": "Colecciones"
   },
   "blogs": {
     "meta_title": "Noticias",

@@ -58,6 +58,16 @@
     "engineered_tagline_line1": "Konstrueret, certificeret,",
     "engineered_tagline_line2": "leveret i hele Europa."
   },
+  "scaffold_nav": {
+    "collections": "Kollektioner",
+    "blog": "Blog",
+    "policies": "Politikker",
+    "about": "Om os",
+    "privacy_policy": "Privatlivspolitik",
+    "refund_policy": "Returpolitik",
+    "shipping_policy": "Forsendelsespolitik",
+    "terms_of_service": "Servicevilkår"
+  },
   "footer": {
     "stay_in_loop": "Hold dig opdateret",
     "newsletter_promise": "Nyheder og eksklusive EU‑tilbud.",
@@ -325,6 +335,9 @@
     "trust_warranty_sub": "På alle radiatorer",
     "trust_engineering_title": "Teknisk rådgivning",
     "trust_engineering_sub": "CE-certificeret, fremstillet i EU"
+  },
+  "collections": {
+    "title": "Kollektioner"
   },
   "blogs": {
     "meta_title": "Nyheder",

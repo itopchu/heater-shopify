@@ -30,7 +30,7 @@ import {
   fetchRelatedProducts,
 } from '~/lib/gberg/queries';
 import {formatLocaleFromRoute} from '~/lib/gberg/format';
-import {normalizeLocale} from '~/lib/gberg/i18n';
+import {normalizeLocale, tFor, useT, type TFunction} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 import {
   buildBreadcrumb,
@@ -47,21 +47,21 @@ export const meta: Route.MetaFunction = ({
   data,
   location,
 }: {
-  data?: {product?: HeatingProduct} | undefined;
+  data?: {product?: HeatingProduct; locale?: ReturnType<typeof normalizeLocale>} | undefined;
   location: {pathname: string};
 }) => {
+  const t = tFor(data?.locale ?? 'en');
   const product = data?.product;
   if (!product) {
     // 410 case (or genuine miss) — still emit branded title and a
     // canonical so AI crawlers see a structured fallback instead of
     // bare "Product".
-    const fallbackTitle = `Product no longer available — ${BRAND_NAME}`;
+    const fallbackTitle = `${t('pdp.product_no_longer_available')} — ${BRAND_NAME}`;
     return [
       {title: fallbackTitle},
       ...buildSeoMeta({
         title: fallbackTitle,
-        description:
-          'This product is no longer available. Browse the full catalogue for similar radiators.',
+        description: t('pdp.product_no_longer_available_description'),
         pathname: location.pathname,
         type: 'website',
       }),
@@ -132,6 +132,7 @@ export async function loader({context, params}: Route.LoaderArgs) {
 
 export default function ProductPage() {
   const {locale, product, related, siblings} = useLoaderData<typeof loader>();
+  const t = useT();
   const crumbs = buildBreadcrumb(product, locale);
 
   const intl = formatLocaleFromRoute(locale);
@@ -142,17 +143,19 @@ export default function ProductPage() {
     '';
   const dispatch =
     product.common.shipping?.dispatch_note ??
-    'Usually dispatched within 3 business days';
+    t('pdp.dispatch_default');
 
   // Eyebrow prefers `custom.series` metafield, falls back to tag-derived,
   // and finally to product type — never blank.
   const eyebrow =
-    resolveSeriesLabel(product) ?? product.productType ?? 'Radiator';
+    resolveSeriesLabel(product) ??
+    product.productType ??
+    t('pdp.fallback_eyebrow_radiator');
 
   const badges = product.common.merchandising?.badges ?? [];
 
   const images = galleryImages(product);
-  const specRows = buildSpecRows(product);
+  const specRows = buildSpecRows(product, t);
 
   const {sections, source: sectionsSource} = pickSections(product);
   const faqs = buildFaqsFromSections(sections);
@@ -256,9 +259,9 @@ export default function ProductPage() {
           */}
           {specRows.length > 0 ? (
             <section>
-              <Eyebrow>Technical specifications</Eyebrow>
+              <Eyebrow>{t('pdp.section_specs_eyebrow')}</Eyebrow>
               <h2 className="mt-3 font-[var(--font-display)] text-2xl font-semibold">
-                Detailed spec sheet
+                {t('pdp.section_specs_title')}
               </h2>
               <div className="mt-4">
                 <SpecsTable rows={specRows} />
@@ -268,8 +271,10 @@ export default function ProductPage() {
 
           {sections.length > 0 ? (
             <section>
-              <Eyebrow>About this product</Eyebrow>
-              <h2 className="mt-3 text-2xl font-semibold">More detail</h2>
+              <Eyebrow>{t('pdp.section_about_eyebrow')}</Eyebrow>
+              <h2 className="mt-3 text-2xl font-semibold">
+                {t('pdp.section_about_title')}
+              </h2>
               <div className="mt-4">
                 <SectionsAccordion sections={sections} source={sectionsSource} />
               </div>
@@ -280,8 +285,10 @@ export default function ProductPage() {
 
           {faqs.length > 0 ? (
             <section>
-              <Eyebrow>Frequently asked</Eyebrow>
-              <h2 className="mt-3 text-2xl font-semibold">Common questions</h2>
+              <Eyebrow>{t('pdp.section_faq_eyebrow')}</Eyebrow>
+              <h2 className="mt-3 text-2xl font-semibold">
+                {t('pdp.section_faq_title')}
+              </h2>
               <div className="mt-4">
                 <FaqAccordion items={faqs} />
               </div>
@@ -291,15 +298,15 @@ export default function ProductPage() {
 
         <aside className="space-y-6">
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-sm">
-            <p className="font-semibold">Delivery &amp; returns</p>
+            <p className="font-semibold">{t('pdp.delivery_returns_heading')}</p>
             <p className="mt-2 text-[var(--color-text-muted)]">
-              Free EU delivery over &euro;500. 30-day returns on unused items.
+              {t('pdp.delivery_returns_body')}
             </p>
           </div>
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-sm">
-            <p className="font-semibold">Need help?</p>
+            <p className="font-semibold">{t('pdp.need_help_heading')}</p>
             <p className="mt-2 text-[var(--color-text-muted)]">
-              Our heating engineers can answer compatibility questions before you order.
+              {t('pdp.need_help_body')}
             </p>
             <p className="mt-3 text-[var(--color-primary)]">
               <a href="mailto:hello@gberg-heizung.de">hello@gberg-heizung.de</a>
@@ -310,8 +317,10 @@ export default function ProductPage() {
 
       {related.length > 0 ? (
         <section className="mt-20">
-          <Eyebrow>You may also like</Eyebrow>
-          <h2 className="mt-3 text-2xl font-semibold">Related products</h2>
+          <Eyebrow>{t('pdp.related_eyebrow')}</Eyebrow>
+          <h2 className="mt-3 text-2xl font-semibold">
+            {t('pdp.related_title')}
+          </h2>
           <div className="mt-6">
             <ProductGrid products={related} locale={locale} />
           </div>
@@ -321,42 +330,52 @@ export default function ProductPage() {
   );
 }
 
-function buildSpecRows(p: HeatingProduct): SpecRow[] {
+function buildSpecRows(p: HeatingProduct, t: TFunction): SpecRow[] {
   const rows: SpecRow[] = [];
-  if (p.specs.width_mm != null) rows.push({label: 'Width', value: p.specs.width_mm, unit: 'mm'});
-  if (p.specs.height_mm != null) rows.push({label: 'Height', value: p.specs.height_mm, unit: 'mm'});
-  if (p.specs.depth_mm != null) rows.push({label: 'Depth', value: p.specs.depth_mm, unit: 'mm'});
-  if (p.specs.orientation) rows.push({label: 'Orientation', value: p.specs.orientation});
+  const yes = t('common.yes');
+  const no = t('common.no');
+  if (p.specs.width_mm != null)
+    rows.push({label: t('pdp.spec_label_width'), value: p.specs.width_mm, unit: 'mm'});
+  if (p.specs.height_mm != null)
+    rows.push({label: t('pdp.spec_label_height'), value: p.specs.height_mm, unit: 'mm'});
+  if (p.specs.depth_mm != null)
+    rows.push({label: t('pdp.spec_label_depth'), value: p.specs.depth_mm, unit: 'mm'});
+  if (p.specs.orientation)
+    rows.push({label: t('pdp.spec_label_orientation'), value: p.specs.orientation});
   if (p.specs.connection_type)
-    rows.push({label: 'Connection type', value: p.specs.connection_type});
+    rows.push({label: t('pdp.spec_label_connection_type'), value: p.specs.connection_type});
   if (p.specs.pipe_spacing_mm != null)
-    rows.push({label: 'Pipe spacing', value: p.specs.pipe_spacing_mm, unit: 'mm'});
+    rows.push({label: t('pdp.spec_label_pipe_spacing'), value: p.specs.pipe_spacing_mm, unit: 'mm'});
   if (p.specs.heating_medium)
-    rows.push({label: 'Heating medium', value: p.specs.heating_medium});
+    rows.push({label: t('pdp.spec_label_heating_medium'), value: p.specs.heating_medium});
   if (p.specs.heat_output_75_65_20 != null)
-    rows.push({label: 'Heat output (75/65/20)', value: p.specs.heat_output_75_65_20, unit: 'W'});
+    rows.push({label: t('pdp.spec_label_heat_output_75'), value: p.specs.heat_output_75_65_20, unit: 'W'});
   if (p.specs.heat_output_70_55_20 != null)
-    rows.push({label: 'Heat output (70/55/20)', value: p.specs.heat_output_70_55_20, unit: 'W'});
+    rows.push({label: t('pdp.spec_label_heat_output_70'), value: p.specs.heat_output_70_55_20, unit: 'W'});
   if (p.specs.heat_output_55_45_20 != null)
-    rows.push({label: 'Heat output (55/45/20)', value: p.specs.heat_output_55_45_20, unit: 'W'});
-  if (p.specs.color) rows.push({label: 'Color', value: p.specs.color});
-  if (p.specs.finish) rows.push({label: 'Finish', value: p.specs.finish});
-  if (p.specs.material) rows.push({label: 'Material', value: p.specs.material});
-  if (p.specs.voltage) rows.push({label: 'Voltage', value: p.specs.voltage});
+    rows.push({label: t('pdp.spec_label_heat_output_55'), value: p.specs.heat_output_55_45_20, unit: 'W'});
+  if (p.specs.color)
+    rows.push({label: t('pdp.spec_label_color'), value: p.specs.color});
+  if (p.specs.finish)
+    rows.push({label: t('pdp.spec_label_finish'), value: p.specs.finish});
+  if (p.specs.material)
+    rows.push({label: t('pdp.spec_label_material'), value: p.specs.material});
+  if (p.specs.voltage)
+    rows.push({label: t('pdp.spec_label_voltage'), value: p.specs.voltage});
   if (p.specs.heat_pump_compatible != null)
     rows.push({
-      label: 'Heat-pump compatible',
-      value: p.specs.heat_pump_compatible ? 'Yes' : 'No',
+      label: t('pdp.spec_label_heat_pump'),
+      value: p.specs.heat_pump_compatible ? yes : no,
     });
   if (p.specs.bathroom_suitable != null)
     rows.push({
-      label: 'Bathroom suitable',
-      value: p.specs.bathroom_suitable ? 'Yes' : 'No',
+      label: t('pdp.spec_label_bathroom'),
+      value: p.specs.bathroom_suitable ? yes : no,
     });
   if (p.specs.max_pressure_bar != null)
-    rows.push({label: 'Max pressure', value: p.specs.max_pressure_bar, unit: 'bar'});
+    rows.push({label: t('pdp.spec_label_max_pressure'), value: p.specs.max_pressure_bar, unit: 'bar'});
   if (p.specs.max_temp_c != null)
-    rows.push({label: 'Max temperature', value: p.specs.max_temp_c, unit: '°C'});
+    rows.push({label: t('pdp.spec_label_max_temp'), value: p.specs.max_temp_c, unit: '°C'});
   return rows;
 }
 
@@ -395,6 +414,7 @@ function demoteEmbeddedHeadings(html: string): string {
 }
 
 function DescriptionSection({product}: {product: HeatingProduct}) {
+  const t = useT();
   const short = product.common.custom?.short_description?.trim();
   const descRaw = product.descriptionHtml?.trim();
   const desc = descRaw ? demoteEmbeddedHeadings(descRaw) : '';
@@ -410,7 +430,7 @@ function DescriptionSection({product}: {product: HeatingProduct}) {
       */}
       <header>
         <Eyebrow tone="accent" withRule>
-          Overview
+          {t('pdp.section_overview')}
         </Eyebrow>
       </header>
 

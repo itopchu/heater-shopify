@@ -10,17 +10,19 @@ import {createGbergClient} from '~/lib/storefront.server';
 import {fetchBlog} from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
 import {NewsletterForm} from '~/components/gberg/newsletter-form';
-import {normalizeLocale} from '~/lib/gberg/i18n';
+import {normalizeLocale, tFor, useT} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 export const meta: Route.MetaFunction = ({
+  data,
   location,
 }: {
+  data?: {locale?: ReturnType<typeof normalizeLocale>};
   location: {pathname: string};
 }) => {
-  const title = `News — ${BRAND_NAME}`;
-  const description =
-    'Editorial pieces from G-Berg — sizing notes, product launches and EU heating regulation updates.';
+  const t = tFor(data?.locale ?? 'en');
+  const title = `${t('blogs.meta_title')} — ${BRAND_NAME}`;
+  const description = t('blogs.meta_description');
   return [
     {title},
     {name: 'description', content: description},
@@ -33,13 +35,13 @@ export const meta: Route.MetaFunction = ({
   ];
 };
 
-const PLACEHOLDER_CARDS = [
-  {eyebrow: 'Install guide', title: 'How to size a radiator without guesswork'},
-  {eyebrow: 'Heat-pump', title: 'Why low-temperature output ratings matter in 2026'},
-  {eyebrow: 'Series spotlight', title: 'Astoria — 100 years of vertical column radiators'},
-  {eyebrow: 'EU regulation', title: 'What the new ecodesign rules mean for your project'},
-  {eyebrow: 'Bathroom', title: "Towel radiators that don't sacrifice heat output"},
-  {eyebrow: 'Replacement', title: 'Match your existing pipe spacing in 60 seconds'},
+const PLACEHOLDER_CARDS: {eyebrowKey: string; titleKey: string}[] = [
+  {eyebrowKey: 'blogs.placeholder_eyebrow_install', titleKey: 'blogs.placeholder_title_install'},
+  {eyebrowKey: 'blogs.placeholder_eyebrow_heatpump', titleKey: 'blogs.placeholder_title_heatpump'},
+  {eyebrowKey: 'blogs.placeholder_eyebrow_series', titleKey: 'blogs.placeholder_title_series'},
+  {eyebrowKey: 'blogs.placeholder_eyebrow_eu', titleKey: 'blogs.placeholder_title_eu'},
+  {eyebrowKey: 'blogs.placeholder_eyebrow_bathroom', titleKey: 'blogs.placeholder_title_bathroom'},
+  {eyebrowKey: 'blogs.placeholder_eyebrow_replacement', titleKey: 'blogs.placeholder_title_replacement'},
 ];
 
 export async function loader({context, params}: Route.LoaderArgs) {
@@ -51,19 +53,23 @@ export async function loader({context, params}: Route.LoaderArgs) {
 
 export default function NewsIndex() {
   const {locale, blog} = useLoaderData<typeof loader>();
+  const t = useT();
   const articles = blog?.articles ?? [];
 
   return (
     <div className="container-x py-10 lg:py-16">
       <header className="max-w-3xl">
-        <Eyebrow>News</Eyebrow>
+        <Eyebrow>{t('blogs.eyebrow')}</Eyebrow>
         <h1 className="display-heading mt-4 text-[clamp(2.25rem,4vw+0.5rem,4rem)] text-[var(--color-text)]">
           {articles.length > 0 ? (
-            <>Editorial from the engineering room.</>
+            <>{t('blogs.title_active')}</>
           ) : (
             <>
-              Editorial{' '}
-              <em className="italic text-[var(--color-primary)]">coming soon</em>.
+              {t('blogs.title_coming_soon_lead')}{' '}
+              <em className="italic text-[var(--color-primary)]">
+                {t('blogs.title_coming_soon_em')}
+              </em>
+              .
             </>
           )}
         </h1>
@@ -73,8 +79,8 @@ export default function NewsIndex() {
         />
         <p className="mt-5 max-w-[60ch] text-[var(--color-text-muted)]">
           {articles.length > 0
-            ? 'Sizing notes and product launches written by the engineers who specify the catalogue.'
-            : "We're writing sizing notes and EU regulation updates. Sign up for the newsletter and we'll send the first issue when it's ready."}
+            ? t('blogs.lede_active')
+            : t('blogs.lede_coming_soon')}
         </p>
       </header>
 
@@ -115,25 +121,25 @@ export default function NewsIndex() {
       ) : (
         <>
           <ul
-            aria-label="Coming soon — placeholder cards"
+            aria-label={t('blogs.coming_soon_card_aria')}
             className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
           >
             {PLACEHOLDER_CARDS.map((c, i) => (
-              <li key={c.title} className="flex flex-col opacity-90" aria-disabled>
+              <li key={c.titleKey} className="flex flex-col opacity-90" aria-disabled>
                 <div className="relative aspect-[4/5] overflow-hidden bg-[var(--color-surface-muted)]">
                   <div className="grid h-full place-items-center px-8 text-center font-[var(--font-display)] text-2xl italic leading-tight text-[var(--color-text-muted)]">
-                    {c.eyebrow}
+                    {t(c.eyebrowKey)}
                   </div>
                 </div>
                 <div className="mt-5 flex flex-1 flex-col gap-3 border-t border-[var(--color-border)] pt-4">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-                    {String(i + 1).padStart(2, '0')} · Coming soon
+                    {String(i + 1).padStart(2, '0')} · {t('blogs.coming_soon_marker')}
                   </p>
                   <h2 className="font-[var(--font-display)] text-2xl italic leading-tight text-[var(--color-text)]">
-                    {c.title}
+                    {t(c.titleKey)}
                   </h2>
                   <p className="mt-auto text-[11px] uppercase tracking-[0.14em] text-[var(--color-text-muted)]">
-                    Sign up below — we&rsquo;ll email when it&rsquo;s live.
+                    {t('blogs.coming_soon_email_promise')}
                   </p>
                 </div>
               </li>
@@ -142,9 +148,9 @@ export default function NewsIndex() {
 
           <aside className="mt-16 grid grid-cols-1 items-end gap-8 border-t border-[var(--color-border)] pt-10 md:grid-cols-[1.4fr_1fr] md:gap-12">
             <div>
-              <Eyebrow>Stay in the loop</Eyebrow>
+              <Eyebrow>{t('footer.stay_in_loop')}</Eyebrow>
               <p className="display-heading mt-5 text-[clamp(1.5rem,2vw+0.5rem,2.25rem)] text-[var(--color-text)]">
-                One email when the first guide ships.
+                {t('newsletter.first_guide_promise')}
               </p>
             </div>
             <NewsletterForm />

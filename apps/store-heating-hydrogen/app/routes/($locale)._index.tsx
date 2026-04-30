@@ -14,17 +14,19 @@ import {
   fetchMostExpensiveImage,
 } from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
-import {normalizeLocale} from '~/lib/gberg/i18n';
+import {normalizeLocale, tFor, useT} from '~/lib/gberg/i18n';
 import {buildSeoMeta} from '~/lib/gberg/seo';
 
 export const meta: Route.MetaFunction = ({
+  data,
   location,
 }: {
+  data?: {locale?: ReturnType<typeof normalizeLocale>};
   location: {pathname: string};
 }) => {
-  const title = 'G-Berg Heizung — Premium European radiators';
-  const description =
-    'Hundreds of CE-certified radiators with full specs, compatibility notes and engineering support. Designed in Germany, made for Europe.';
+  const t = tFor(data?.locale ?? 'en');
+  const title = t('home.meta_title');
+  const description = t('home.meta_description');
   return [
     {title},
     {name: 'description', content: description},
@@ -37,61 +39,47 @@ export const meta: Route.MetaFunction = ({
   ];
 };
 
-const CATEGORY_HANDLES: {handle: string; label: string}[] = [
-  {handle: 'wohnraumheizkoerper', label: 'Living rooms'},
-  {handle: 'badheizkoerper', label: 'Bathroom'},
-  {handle: 'badheizkoerper-elektrisch', label: 'Electric'},
-  {handle: 'austauschheizkoerper', label: 'Replacement'},
-  {handle: 'fussbodenheizung', label: 'Underfloor'},
-  {handle: 'accessories', label: 'Accessories'},
+const CATEGORY_HANDLES: {handle: string; labelKey: string}[] = [
+  {handle: 'wohnraumheizkoerper', labelKey: 'nav.living_rooms'},
+  {handle: 'badheizkoerper', labelKey: 'nav.bathroom'},
+  {handle: 'badheizkoerper-elektrisch', labelKey: 'nav.electric'},
+  {handle: 'austauschheizkoerper', labelKey: 'nav.replacement'},
+  {handle: 'fussbodenheizung', labelKey: 'nav.underfloor'},
+  {handle: 'accessories', labelKey: 'nav.accessories'},
 ];
 
-const GUIDED_FINDER = [
+const GUIDED_FINDER: {
+  labelKey: string;
+  descKey: string;
+  href: string;
+}[] = [
   {
-    label: 'Replace existing',
-    desc: 'Drop-in replacements sized to fit existing connection centres.',
+    labelKey: 'home.guided_finder_replace_label',
+    descKey: 'home.guided_finder_replace_desc',
     href: '/collections/austauschheizkoerper',
   },
   {
-    label: 'Living room',
-    desc: 'Panel and design radiators for living rooms, bedrooms and hallways.',
+    labelKey: 'home.guided_finder_living_label',
+    descKey: 'home.guided_finder_living_desc',
     href: '/collections/wohnraumheizkoerper',
   },
   {
-    label: 'Bathroom',
-    desc: 'Bathroom radiators and towel warmers, central or electric.',
+    labelKey: 'home.guided_finder_bathroom_label',
+    descKey: 'home.guided_finder_bathroom_desc',
     href: '/collections/badheizkoerper',
   },
   {
-    label: 'Electric',
-    desc: 'Electric towel warmers — no central heating required.',
+    labelKey: 'home.guided_finder_electric_label',
+    descKey: 'home.guided_finder_electric_desc',
     href: '/collections/badheizkoerper-elektrisch',
   },
 ];
 
-const WHY_US = [
-  {label: 'Free EU delivery over €500', icon: '→'},
-  {label: '30-day returns', icon: '↺'},
-  {label: 'Engineering support', icon: '✦'},
-  {label: '10-year warranty', icon: '✓'},
-];
-
-const HOMEPAGE_FAQS: FaqItem[] = [
-  {
-    question: 'Do you ship across Europe?',
-    answer:
-      'Yes — we deliver to Germany, Belgium, Spain, Austria, the Netherlands and other EU countries. Free shipping over €500.',
-  },
-  {
-    question: 'Are your radiators heat-pump compatible?',
-    answer:
-      "Many of them are. Look for the 'Heat-pump ready' badge on product cards or filter by heat-pump compatibility on collection pages.",
-  },
-  {
-    question: "What's your return policy?",
-    answer:
-      "30-day returns on unused, unopened items. Bespoke orders are non-refundable — we'll tell you clearly before checkout.",
-  },
+const WHY_US: {labelKey: string; icon: string}[] = [
+  {labelKey: 'home.why_us_delivery', icon: '→'},
+  {labelKey: 'home.why_us_returns', icon: '↺'},
+  {labelKey: 'home.why_us_engineering', icon: '✦'},
+  {labelKey: 'home.why_us_warranty', icon: '✓'},
 ];
 
 export async function loader({context, params}: Route.LoaderArgs) {
@@ -128,10 +116,17 @@ export default function HomePage() {
     heroImage,
     designEditorialImage,
   } = useLoaderData<typeof loader>();
+  const t = useT();
+
+  const homepageFaqs: FaqItem[] = [
+    {question: t('home.faq_q1'), answer: t('home.faq_a1')},
+    {question: t('home.faq_q2'), answer: t('home.faq_a2')},
+    {question: t('home.faq_q3'), answer: t('home.faq_a3')},
+  ];
 
   const categories = CATEGORY_HANDLES.map((c) => {
     const preview = categoryPreviews.find((p) => p.handle === c.handle);
-    return {...c, preview};
+    return {...c, label: t(c.labelKey), preview};
   }).filter((c) => !c.preview || c.preview.image || c.preview.productCount > 0);
 
   // Hero image: curated electric radiator (loader-fetched). Falls back to
@@ -157,24 +152,23 @@ export default function HomePage() {
               Hero earns the rule (single hero per page).
             */}
             <Eyebrow tone="accent" withRule>
-              European radiators
+              {t('home.hero_eyebrow')}
             </Eyebrow>
             <h1 className="mt-5 font-[var(--font-display)] text-[clamp(3rem,7vw+0.5rem,7.5rem)] tracking-tight leading-[1.02] text-[var(--color-text)]">
-              The right radiator,
+              {t('home.hero_title_line1')}
               <br />
-              <span className="text-[var(--color-primary)]">without the guesswork.</span>
+              <span className="text-[var(--color-primary)]">{t('home.hero_title_line2')}</span>
             </h1>
             <p className="mt-7 max-w-[var(--lede-max-width,52ch)] text-[var(--color-text-muted)] text-base md:text-lg">
-              Hundreds of CE-certified radiators with full specs, compatibility
-              notes and engineering support. Designed in Germany, made for Europe.
+              {t('home.hero_lede')}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link to={localeHref(locale, '/collections/wohnraumheizkoerper')}>
-                <Button size="lg">Shop radiators</Button>
+                <Button size="lg">{t('home.hero_cta_shop')}</Button>
               </Link>
               <Link to={localeHref(locale, '/collections/badheizkoerper')}>
                 <Button size="lg" variant="secondary">
-                  Browse bathroom
+                  {t('home.hero_cta_bathroom')}
                 </Button>
               </Link>
             </div>
@@ -183,7 +177,7 @@ export default function HomePage() {
             {heroBanner ? (
               <Image
                 data={heroBanner}
-                alt={heroBanner.altText ?? 'G-Berg electric radiator'}
+                alt={heroBanner.altText ?? t('home.hero_image_alt')}
                 aspectRatio="3/4"
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 // Home hero is the LCP candidate — prioritise it.
@@ -193,7 +187,7 @@ export default function HomePage() {
               />
             ) : (
               <div className="grid h-full place-items-center text-sm text-[var(--color-text-muted)]">
-                Hero image
+                {t('home.hero_image_fallback')}
               </div>
             )}
             <span aria-hidden className="absolute left-0 top-0 h-[2px] w-12 bg-[var(--color-primary)]" />
@@ -207,15 +201,17 @@ export default function HomePage() {
       {/* SHOP BY CATEGORY */}
       <section className="container-x py-14 md:py-16">
         <SectionHeader
-          eyebrow="Shop by room"
+          eyebrow={t('home.shop_by_room_eyebrow')}
           title={
             <>
-              Find what fits{' '}
-              <em className="font-[var(--font-display)] italic text-[var(--color-primary)]">your</em>{' '}
-              space.
+              {t('home.shop_by_room_title_lead')}{' '}
+              <em className="font-[var(--font-display)] italic text-[var(--color-primary)]">
+                {t('home.shop_by_room_title_em')}
+              </em>{' '}
+              {t('home.shop_by_room_title_tail')}
             </>
           }
-          description="Each category includes filters tuned to how heating engineers actually shop."
+          description={t('home.shop_by_room_description')}
         />
         <ul className="mt-10 grid grid-cols-2 gap-px bg-[var(--color-border)] sm:grid-cols-3 md:grid-cols-3">
           {categories.map((c) => (
@@ -279,28 +275,29 @@ export default function HomePage() {
               />
             ) : (
               <div className="grid h-full place-items-center bg-[var(--color-surface)] text-[var(--color-text-muted)]">
-                Editorial image
+                {t('home.editorial_image_fallback')}
               </div>
             )}
           </div>
           <div className="flex flex-col justify-center p-10 md:col-span-5 md:p-14">
-            <Eyebrow>Designed in Germany</Eyebrow>
+            <Eyebrow>{t('home.designed_in_germany_eyebrow')}</Eyebrow>
             <p className="display-heading mt-5 text-[clamp(2rem,3vw+1rem,3.75rem)] text-[var(--color-text)]">
-              Built like
+              {t('home.designed_in_germany_title_line1')}
               <br />
-              furniture, sized
+              {t('home.designed_in_germany_title_line2')}
               <br />
-              for <span className="text-[var(--color-primary)]">every wall.</span>
+              {t('home.designed_in_germany_title_line3')}{' '}
+              <span className="text-[var(--color-primary)]">
+                {t('home.designed_in_germany_title_em')}
+              </span>
             </p>
             <p className="mt-6 max-w-[42ch] text-[var(--color-text-muted)]">
-              Eight design series — Astoria, Elanor, Flora, Pullman, Twister,
-              Konrad, Platis, Lavinno — across three studio colorways. Sculptural
-              objects first, heaters second.
+              {t('home.designed_in_germany_lede')}
             </p>
             <div className="mt-8">
               <Link to={localeHref(locale, '/collections/wohnraumheizkoerper')}>
                 <Button size="md" variant="secondary">
-                  Browse the catalog
+                  {t('home.browse_catalog_cta')}
                 </Button>
               </Link>
             </div>
@@ -313,14 +310,14 @@ export default function HomePage() {
       {/* BESTSELLERS */}
       <section className="container-x py-14 md:py-16">
         <SectionHeader
-          eyebrow="Bestsellers"
+          eyebrow={t('home.bestsellers_eyebrow')}
           title={
             <>
-              Loved by installers{' '}
+              {t('home.bestsellers_title_lead')}{' '}
               <em className="font-[var(--font-display)] italic text-[var(--color-primary)]">
-                &amp;
+                {t('home.bestsellers_title_amp')}
               </em>{' '}
-              homeowners.
+              {t('home.bestsellers_title_tail')}
             </>
           }
         />
@@ -329,7 +326,7 @@ export default function HomePage() {
             <ProductGrid products={bestsellers.slice(0, 8)} locale={locale} />
           ) : (
             <div className="border border-dashed border-[var(--color-border)] bg-[var(--color-surface-muted)] p-10 text-center text-sm text-[var(--color-text-muted)]">
-              <p>Bestsellers will appear here once products are tagged.</p>
+              <p>{t('home.bestsellers_empty')}</p>
             </div>
           )}
         </div>
@@ -339,20 +336,25 @@ export default function HomePage() {
 
       {/* GUIDED FINDER */}
       <section className="container-x py-14 md:py-16">
-        <SectionHeader eyebrow="Guided finder" title={<>Tell us what you need.</>} />
+        <SectionHeader
+          eyebrow={t('home.guided_finder_eyebrow')}
+          title={<>{t('home.guided_finder_title')}</>}
+        />
         <ul className="mt-10 grid grid-cols-1 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] md:grid-cols-4 md:divide-x md:divide-y-0">
           {GUIDED_FINDER.map((g, i) => (
-            <li key={`${g.label}-${i}`}>
+            <li key={`${g.labelKey}-${i}`}>
               <Link
                 to={localeHref(locale, g.href)}
                 className="group relative block px-6 py-8 transition-colors hover:bg-[var(--color-surface-muted)] md:px-8 md:py-10"
               >
                 <p className="font-[var(--font-display)] text-2xl italic leading-tight">
-                  {g.label}
+                  {t(g.labelKey)}
                 </p>
-                <p className="mt-3 text-sm text-[var(--color-text-muted)]">{g.desc}</p>
+                <p className="mt-3 text-sm text-[var(--color-text-muted)]">
+                  {t(g.descKey)}
+                </p>
                 <p className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text)]">
-                  <span>Start</span>
+                  <span>{t('home.guided_finder_start')}</span>
                   <span aria-hidden className="text-[var(--color-primary)]">
                     →
                   </span>
@@ -369,11 +371,11 @@ export default function HomePage() {
       <section className="bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)]">
         <ul className="container-x grid grid-cols-2 gap-px py-10 md:grid-cols-4">
           {WHY_US.map((w) => (
-            <li key={w.label} className="flex items-center gap-4 px-2 md:px-4">
+            <li key={w.labelKey} className="flex items-center gap-4 px-2 md:px-4">
               <span aria-hidden className="text-2xl text-[var(--color-primary)]">
                 {w.icon}
               </span>
-              <span className="text-sm font-medium tracking-tight">{w.label}</span>
+              <span className="text-sm font-medium tracking-tight">{t(w.labelKey)}</span>
             </li>
           ))}
         </ul>
@@ -381,9 +383,12 @@ export default function HomePage() {
 
       {/* FAQ */}
       <section className="container-x py-14 md:py-16">
-        <SectionHeader eyebrow="FAQ" title={<>Common questions.</>} />
+        <SectionHeader
+          eyebrow={t('home.faq_eyebrow')}
+          title={<>{t('home.faq_title')}</>}
+        />
         <div className="mt-8 max-w-3xl">
-          <FaqAccordion items={HOMEPAGE_FAQS} />
+          <FaqAccordion items={homepageFaqs} />
         </div>
       </section>
 

@@ -58,6 +58,16 @@
     "engineered_tagline_line1": "Ontworpen, gecertificeerd,",
     "engineered_tagline_line2": "geleverd door heel Europa."
   },
+  "scaffold_nav": {
+    "collections": "Collecties",
+    "blog": "Blog",
+    "policies": "Voorwaarden",
+    "about": "Over ons",
+    "privacy_policy": "Privacybeleid",
+    "refund_policy": "Retourbeleid",
+    "shipping_policy": "Verzending",
+    "terms_of_service": "Algemene voorwaarden"
+  },
   "footer": {
     "stay_in_loop": "Blijf op de hoogte",
     "newsletter_promise": "Nieuwe collecties en exclusieve EU‑aanbiedingen.",
@@ -325,6 +335,9 @@
     "trust_warranty_sub": "Op alle radiatoren",
     "trust_engineering_title": "Technisch advies",
     "trust_engineering_sub": "CE-gecertificeerd, in de EU gemaakt"
+  },
+  "collections": {
+    "title": "Collecties"
   },
   "blogs": {
     "meta_title": "Nieuws",

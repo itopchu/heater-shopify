@@ -58,6 +58,16 @@
     "engineered_tagline_line1": "Engineered, certified,",
     "engineered_tagline_line2": "delivered across Europe."
   },
+  "scaffold_nav": {
+    "collections": "Collections",
+    "blog": "Blog",
+    "policies": "Policies",
+    "about": "About",
+    "privacy_policy": "Privacy Policy",
+    "refund_policy": "Refund Policy",
+    "shipping_policy": "Shipping Policy",
+    "terms_of_service": "Terms of Service"
+  },
   "footer": {
     "stay_in_loop": "Stay in the loop",
     "newsletter_promise": "New arrivals and EU‑only deals.",
@@ -325,6 +335,9 @@
     "trust_warranty_sub": "On all radiators",
     "trust_engineering_title": "Engineering support",
     "trust_engineering_sub": "CE-certified, EU-made"
+  },
+  "collections": {
+    "title": "Collections"
   },
   "blogs": {
     "meta_title": "News",

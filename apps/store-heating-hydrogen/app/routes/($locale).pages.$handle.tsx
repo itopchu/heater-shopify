@@ -14,7 +14,7 @@ import {
   type PageFallback,
   type PageFallbackHandle,
 } from '~/lib/gberg/page-fallbacks';
-import {normalizeLocale} from '~/lib/gberg/i18n';
+import {normalizeLocale, useT} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 interface ResolvedPage {
@@ -84,11 +84,12 @@ export async function loader({context, params}: Route.LoaderArgs) {
 
 export default function PageRoute() {
   const {locale, page} = useLoaderData<typeof loader>();
+  const t = useT();
 
   return (
     <article className="container-x py-10 lg:py-16">
       <header className="max-w-3xl border-b border-[var(--color-border)] pb-8">
-        <Eyebrow>Information</Eyebrow>
+        <Eyebrow>{t('pages.eyebrow')}</Eyebrow>
         <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.25rem)] text-[var(--color-text)]">
           {page.title}
         </h1>
@@ -114,8 +115,7 @@ export default function PageRoute() {
             aria-hidden="false"
             className="mt-10 border-l-2 border-[var(--color-primary)] bg-[var(--color-surface-muted)] px-5 py-3 text-xs uppercase tracking-[0.14em] text-[var(--color-text-muted)]"
           >
-            Placeholder copy. A merchant can publish the live version in
-            Shopify Admin → Online Store → Pages.
+            {t('pages.fallback_notice')}
           </aside>
         </div>
       ) : (

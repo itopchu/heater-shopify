@@ -7,7 +7,7 @@ import {
 } from '@shopify/hydrogen';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
-import {useT} from '~/lib/gberg/i18n';
+import {useT, type TFunction} from '~/lib/gberg/i18n';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -69,7 +69,7 @@ export function HeaderMenu({
           {t('header.home')}
         </NavLink>
       )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+      {(menu || fallbackHeaderMenu(t)).items.map((item) => {
         if (!item.url) return null;
 
         // if the url is internal, we strip the domain
@@ -182,47 +182,49 @@ function CartBanner() {
   return <CartBadge count={cart?.totalQuantity ?? 0} />;
 }
 
-const FALLBACK_HEADER_MENU = {
-  id: 'gid://shopify/Menu/199655587896',
-  items: [
-    {
-      id: 'gid://shopify/MenuItem/461609500728',
-      resourceId: null,
-      tags: [],
-      title: 'Collections',
-      type: 'HTTP',
-      url: '/collections',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609533496',
-      resourceId: null,
-      tags: [],
-      title: 'Blog',
-      type: 'HTTP',
-      url: '/blogs/journal',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609566264',
-      resourceId: null,
-      tags: [],
-      title: 'Policies',
-      type: 'HTTP',
-      url: '/policies',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609599032',
-      resourceId: 'gid://shopify/Page/92591030328',
-      tags: [],
-      title: 'About',
-      type: 'PAGE',
-      url: '/pages/about',
-      items: [],
-    },
-  ],
-};
+function fallbackHeaderMenu(t: TFunction) {
+  return {
+    id: 'gid://shopify/Menu/199655587896',
+    items: [
+      {
+        id: 'gid://shopify/MenuItem/461609500728',
+        resourceId: null,
+        tags: [],
+        title: t('scaffold_nav.collections'),
+        type: 'HTTP',
+        url: '/collections',
+        items: [],
+      },
+      {
+        id: 'gid://shopify/MenuItem/461609533496',
+        resourceId: null,
+        tags: [],
+        title: t('scaffold_nav.blog'),
+        type: 'HTTP',
+        url: '/blogs/journal',
+        items: [],
+      },
+      {
+        id: 'gid://shopify/MenuItem/461609566264',
+        resourceId: null,
+        tags: [],
+        title: t('scaffold_nav.policies'),
+        type: 'HTTP',
+        url: '/policies',
+        items: [],
+      },
+      {
+        id: 'gid://shopify/MenuItem/461609599032',
+        resourceId: 'gid://shopify/Page/92591030328',
+        tags: [],
+        title: t('scaffold_nav.about'),
+        type: 'PAGE',
+        url: '/pages/about',
+        items: [],
+      },
+    ],
+  };
+}
 
 function activeLinkStyle({
   isActive,

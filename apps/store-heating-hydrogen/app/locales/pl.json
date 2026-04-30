@@ -58,6 +58,16 @@
     "engineered_tagline_line1": "Zaprojektowane, certyfikowane,",
     "engineered_tagline_line2": "dostarczane w całej Europie."
   },
+  "scaffold_nav": {
+    "collections": "Kolekcje",
+    "blog": "Blog",
+    "policies": "Regulamin",
+    "about": "O nas",
+    "privacy_policy": "Polityka prywatności",
+    "refund_policy": "Polityka zwrotów",
+    "shipping_policy": "Polityka wysyłki",
+    "terms_of_service": "Warunki korzystania"
+  },
   "footer": {
     "stay_in_loop": "Bądź na bieżąco",
     "newsletter_promise": "Nowości i ekskluzywne oferty UE.",
@@ -325,6 +335,9 @@
     "trust_warranty_sub": "Na wszystkie grzejniki",
     "trust_engineering_title": "Pomoc techniczna",
     "trust_engineering_sub": "Certyfikat CE, produkcja UE"
+  },
+  "collections": {
+    "title": "Kolekcje"
   },
   "blogs": {
     "meta_title": "Aktualności",

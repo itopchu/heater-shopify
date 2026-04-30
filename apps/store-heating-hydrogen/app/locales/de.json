@@ -58,6 +58,16 @@
     "engineered_tagline_line1": "Konstruiert, zertifiziert,",
     "engineered_tagline_line2": "europaweit geliefert."
   },
+  "scaffold_nav": {
+    "collections": "Kollektionen",
+    "blog": "Blog",
+    "policies": "Richtlinien",
+    "about": "Über uns",
+    "privacy_policy": "Datenschutzerklärung",
+    "refund_policy": "Rückerstattung",
+    "shipping_policy": "Versand",
+    "terms_of_service": "AGB"
+  },
   "footer": {
     "stay_in_loop": "Bleiben Sie auf dem Laufenden",
     "newsletter_promise": "Neuheiten und exklusive EU‑Angebote.",
@@ -325,6 +335,9 @@
     "trust_warranty_sub": "Auf alle Heizkörper",
     "trust_engineering_title": "Technische Beratung",
     "trust_engineering_sub": "CE-zertifiziert, in der EU gefertigt"
+  },
+  "collections": {
+    "title": "Kollektionen"
   },
   "blogs": {
     "meta_title": "News",
