@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// last redeployed: 2026-04-30T22:52Z (post-credential-rotation)
 // Post-build adapter for Cloudflare Pages.
 //
 // `shopify hydrogen build` produces:
