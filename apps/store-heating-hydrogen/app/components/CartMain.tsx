@@ -85,58 +85,81 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
 
   // POPULATED STATE — page layout uses a two-column grid; aside drawer stays linear.
   if (layout === 'page') {
+    const qty = cart?.totalQuantity ?? 0;
     return (
       <section className={className} aria-label={t('cart.aria_page')}>
-        <header className="mb-10 md:mb-12">
-          <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
-            {t('cart.title')}
-          </p>
-          <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.5rem)]">
-            {t('cart.your_cart')}
-          </h1>
-          <p className="mt-3 text-[var(--color-text-muted)]">
-            {(cart?.totalQuantity ?? 0) === 1
-              ? t('cart.items_ready_singular', {count: cart?.totalQuantity ?? 0})
-              : t('cart.items_ready_plural', {count: cart?.totalQuantity ?? 0})}
-          </p>
+        {/* Branded header — eyebrow + display heading + count chip on the right at md+. */}
+        <header className="mb-8 flex flex-col gap-4 md:mb-12 md:flex-row md:items-end md:justify-between md:gap-8">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
+              {t('cart.title')}
+            </p>
+            <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.5rem)]">
+              {t('cart.your_cart')}
+            </h1>
+            <p className="mt-3 text-[var(--color-text-muted)]">
+              {qty === 1
+                ? t('cart.items_ready_singular', {count: qty})
+                : t('cart.items_ready_plural', {count: qty})}
+            </p>
+          </div>
+          <span className="inline-flex h-9 min-w-[3rem] items-center justify-center self-start rounded-full bg-[var(--color-text)] px-4 text-[12px] uppercase tracking-[0.14em] font-semibold text-white md:self-auto">
+            {qty}
+          </span>
         </header>
 
-        <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-14">
+        <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:gap-14">
           <div>
             <p id="cart-lines" className="sr-only">{t('cart.line_items')}</p>
-            <ul
-              aria-labelledby="cart-lines"
-              className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]"
-            >
-              {(cart?.lines?.nodes ?? []).map((line) => {
-                if ('parentRelationship' in line && line.parentRelationship?.parent) {
-                  return null;
-                }
-                return (
-                  <CartLineItem
-                    key={line.id}
-                    line={line}
-                    layout={layout}
-                    childrenMap={childrenMap}
-                  />
-                );
-              })}
-            </ul>
+            {/* Card container around the line list — proper border, white surface, soft shadow at md+. */}
+            <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] md:shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+              <ul
+                aria-labelledby="cart-lines"
+                className="divide-y divide-[var(--color-border)]"
+              >
+                {(cart?.lines?.nodes ?? []).map((line) => {
+                  if ('parentRelationship' in line && line.parentRelationship?.parent) {
+                    return null;
+                  }
+                  return (
+                    <CartLineItem
+                      key={line.id}
+                      line={line}
+                      layout={layout}
+                      childrenMap={childrenMap}
+                    />
+                  );
+                })}
+              </ul>
+            </div>
           </div>
 
           <aside className="lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-sm bg-[var(--color-surface-muted)] p-6 md:p-8">
-              <CartSummary cart={cart} layout={layout} />
+            {/* Summary card: brand-red top accent rule, hairline border, generous padding, soft shadow. */}
+            <div className="overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
+              <div className="h-[3px] bg-[var(--color-primary)]" aria-hidden />
+              <div className="p-6 md:p-8">
+                <CartSummary cart={cart} layout={layout} />
+              </div>
             </div>
-            <ul className="mt-6 space-y-2 text-[13px] text-[var(--color-text-muted)]">
+
+            {/* Trust grid: 2×2 cards with brand-red accent bar, replaces the prior bullet list. */}
+            <ul className="mt-6 grid grid-cols-2 gap-3">
               {trustBadges.map((b) => (
-                <li key={b.title} className="flex items-baseline gap-2">
-                  <span aria-hidden className="text-[var(--color-primary)]">·</span>
-                  <span>
-                    <strong className="text-[var(--color-text)] font-semibold">{b.title}</strong>
-                    {' — '}
-                    <span>{b.sub}</span>
-                  </span>
+                <li
+                  key={b.title}
+                  className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+                >
+                  <span
+                    aria-hidden
+                    className="block h-1 w-6 rounded-full bg-[var(--color-primary)]"
+                  />
+                  <p className="mt-3 text-[12px] uppercase tracking-[0.12em] font-semibold text-[var(--color-text)]">
+                    {b.title}
+                  </p>
+                  <p className="mt-1 text-[12px] leading-snug text-[var(--color-text-muted)]">
+                    {b.sub}
+                  </p>
                 </li>
               ))}
             </ul>
