@@ -127,21 +127,12 @@ type Pages = {
       "*": string;
     };
   };
-  "/graphiql": {
-    params: {};
-  };
-  "/subrequest-profiler": {
-    params: {};
-  };
-  "/.well-known/appspecific/com.chrome.devtools.json": {
-    params: {};
-  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/api/predictive-search" | "/robots.txt" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/collections/:handle" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/products" | "/:locale?/discount/:code" | "/:locale?/pages/:handle" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*" | "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json";
+    page: "/" | "/api/predictive-search" | "/robots.txt" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/collections/:handle" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/products" | "/:locale?/discount/:code" | "/:locale?/pages/:handle" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
   };
   "routes/api.predictive-search.tsx": {
     id: "routes/api.predictive-search";
@@ -231,26 +222,6 @@ type RouteFiles = {
     id: "routes/($locale).$";
     page: "/:locale?/*";
   };
-  "../../../../../../..//claude/projects/heater-shopify/node_modules/.pnpm/@shopify+hydrogen@2026.4.0__017a8108f855952fac4dbc2d89e1091b/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout.jsx": {
-    id: "/claude/projects/heater-shopify/node_modules/.pnpm/@shopify+hydrogen@2026.4.0__017a8108f855952fac4dbc2d89e1091b/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
-    page: "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json" | "/";
-  };
-  "../../../../../../..//claude/projects/heater-shopify/node_modules/.pnpm/@shopify+hydrogen@2026.4.0__017a8108f855952fac4dbc2d89e1091b/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/graphiql.jsx": {
-    id: "vite/virtual-routes/routes/graphiql";
-    page: "/graphiql";
-  };
-  "../../../../../../..//claude/projects/heater-shopify/node_modules/.pnpm/@shopify+hydrogen@2026.4.0__017a8108f855952fac4dbc2d89e1091b/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/subrequest-profiler.jsx": {
-    id: "vite/virtual-routes/routes/subrequest-profiler";
-    page: "/subrequest-profiler";
-  };
-  "../../../../../../..//claude/projects/heater-shopify/node_modules/.pnpm/@shopify+hydrogen@2026.4.0__017a8108f855952fac4dbc2d89e1091b/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json.jsx": {
-    id: "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json";
-    page: "/.well-known/appspecific/com.chrome.devtools.json";
-  };
-  "../../../../../../..//claude/projects/heater-shopify/node_modules/.pnpm/@shopify+hydrogen@2026.4.0__017a8108f855952fac4dbc2d89e1091b/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/index.jsx": {
-    id: "vite/virtual-routes/routes/index";
-    page: "/";
-  };
 };
 
 type RouteModules = {
@@ -277,9 +248,4 @@ type RouteModules = {
   "routes/($locale).cart": typeof import("./app/routes/($locale).cart.tsx");
   "routes/($locale).cart.$lines": typeof import("./app/routes/($locale).cart.$lines.tsx");
   "routes/($locale).$": typeof import("./app/routes/($locale).$.tsx");
-  "/claude/projects/heater-shopify/node_modules/.pnpm/@shopify+hydrogen@2026.4.0__017a8108f855952fac4dbc2d89e1091b/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout": unknown;
-  "vite/virtual-routes/routes/graphiql": unknown;
-  "vite/virtual-routes/routes/subrequest-profiler": unknown;
-  "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json": unknown;
-  "vite/virtual-routes/routes/index": unknown;
 };

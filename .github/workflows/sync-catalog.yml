@@ -65,16 +65,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          cache: "pnpm"
 
       # Install deps with NO secrets in env and --ignore-scripts (M11).
       # Lifecycle scripts of malicious transitive deps cannot exfiltrate
       # secrets here because none are exposed to this step.
       - name: Install deps
-        run: npm ci --ignore-scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Restore sync cache
         uses: actions/cache@v4
@@ -137,8 +141,8 @@ jobs:
               ARGS+=(--only-collection "$INPUT_ONLY_COLLECTION")
             fi
           fi
-          echo "Running: npm run sync -- ${ARGS[*]}"
-          npm run sync -- "${ARGS[@]}"
+          echo "Running: pnpm sync ${ARGS[*]}"
+          pnpm sync "${ARGS[@]}"
 
       - name: Upload sync report
         if: always()

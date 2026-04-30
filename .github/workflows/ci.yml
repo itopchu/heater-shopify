@@ -20,24 +20,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            node-modules-${{ runner.os }}-node20-
+          cache: "pnpm"
 
       - name: Install deps
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Typecheck
-        run: npm run typecheck
+        run: pnpm typecheck
 
   agent-test:
     name: Agent scope-leak + unit tests
@@ -48,24 +44,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            node-modules-${{ runner.os }}-node20-
+          cache: "pnpm"
 
       - name: Install deps
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run agent tests
-        run: npm run agent:test
+        run: pnpm agent:test
 
   theme-check:
     name: Shopify theme-check
@@ -81,5 +73,7 @@ jobs:
         # known supply-chain vector. Re-pin on intentional version bumps.
         uses: shopify/theme-check-action@58fd69afdfc30110f997ba9e212b302671e00d3b # v2.2.0
         with:
-          theme-root: theme
-          fail-level: error
+          # v2.2 accepts `theme_root` (underscore), not `theme-root`.
+          # `fail-level` was replaced with the generic `flags` passthrough.
+          theme_root: theme
+          flags: --fail-level=error

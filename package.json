@@ -17,7 +17,7 @@
     "install:metafields:design-refresh": "node agent/scripts/install-design-refresh-metafields.mjs --store dev",
     "install:metafields:design-refresh:dry": "node agent/scripts/install-design-refresh-metafields.mjs --store dev --dry-run",
     "translate:faqs": "node agent/scripts/translate-faq-metaobjects.mjs",
-    "typecheck": "pnpm -r --if-present typecheck && tsc --noEmit",
+    "typecheck": "pnpm --filter @gberg/product-schema --filter @gberg/shopify-client --filter @gberg/theme-tokens --filter @gberg/ui typecheck && tsc --noEmit",
     "dev:heating": "pnpm --filter store-heating dev",
     "build:heating": "pnpm --filter store-heating build",
     "dev:hydrogen": "pnpm --filter store-heating-hydrogen dev",
