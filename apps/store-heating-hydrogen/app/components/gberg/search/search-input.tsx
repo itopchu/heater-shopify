@@ -7,6 +7,7 @@ import {Link, useNavigate} from 'react-router';
 import {Image} from '@shopify/hydrogen';
 import {localeHref} from '~/lib/gberg/href';
 import {formatLocaleFromRoute, formatMoney} from '~/lib/gberg/format';
+import {useT} from '~/lib/gberg/i18n';
 
 interface PredictiveProduct {
   id: string;
@@ -43,6 +44,7 @@ export function SearchInput({
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const intl = formatLocaleFromRoute(locale);
+  const t = useT();
 
   useEffect(() => {
     if (autoFocus) inputRef.current?.focus();
@@ -124,32 +126,32 @@ export function SearchInput({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKey}
-          placeholder="Search radiators, series, dimensions…"
-          aria-label="Search"
+          placeholder={t('search.placeholder')}
+          aria-label={t('search.aria_label')}
           className="flex-1 bg-transparent py-3 text-base text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-muted)]"
         />
         {query ? (
           <button
             type="button"
             onClick={() => setQuery('')}
-            aria-label="Clear search"
+            aria-label={t('search.clear')}
             className="text-xs uppercase tracking-[0.14em] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
           >
-            Clear
+            {t('common.clear')}
           </button>
         ) : null}
         <button
           type="submit"
           className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text)] hover:text-[var(--color-primary)]"
         >
-          Go
+          {t('common.go')}
         </button>
       </form>
 
       {variant === 'overlay' ? (
         <div className="mt-6 min-h-[6rem]">
           {pending && !predictive ? (
-            <p className="text-sm text-[var(--color-text-muted)]">Searching…</p>
+            <p className="text-sm text-[var(--color-text-muted)]">{t('search.searching')}</p>
           ) : null}
 
           {showResults && predictive ? (
@@ -157,7 +159,7 @@ export function SearchInput({
               {predictive.queries.length > 0 ? (
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-                    Suggestions
+                    {t('search.suggestions')}
                   </p>
                   <ul className="mt-3 space-y-2">
                     {predictive.queries.slice(0, 6).map((s) => (
@@ -181,7 +183,7 @@ export function SearchInput({
               {predictive.products.length > 0 ? (
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-                    Products
+                    {t('search.products')}
                   </p>
                   <ul className="mt-3 grid grid-cols-2 gap-4">
                     {predictive.products.map((p) => (
@@ -223,7 +225,7 @@ export function SearchInput({
           predictive.products.length === 0 &&
           predictive.queries.length === 0 ? (
             <p className="text-sm text-[var(--color-text-muted)]">
-              No quick matches. Press Enter to search the full catalogue.
+              {t('search.no_quick_matches')}
             </p>
           ) : null}
         </div>
