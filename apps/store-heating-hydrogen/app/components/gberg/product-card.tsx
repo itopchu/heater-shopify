@@ -24,6 +24,7 @@ import type {HeatingProduct} from '@gberg/product-schema';
 import {BadgePill, badgeLabel, badgeTone, Chip, Eyebrow} from '@gberg/ui';
 import {formatLocaleFromRoute, formatMoney} from '~/lib/gberg/format';
 import {localeHref} from '~/lib/gberg/href';
+import {useT} from '~/lib/gberg/i18n';
 import {
   colorFamilyHex,
   galleryImages,
@@ -87,6 +88,7 @@ function ColorSwatchRow({product}: {product: HeatingProduct}) {
 }
 
 export function ProductCard({product, locale}: ProductCardProps) {
+  const t = useT();
   const intl = formatLocaleFromRoute(locale);
   const allImages = galleryImages(product);
   // Canonical-order first image wins over Shopify's `featuredImage`. Some
@@ -144,13 +146,13 @@ export function ProductCard({product, locale}: ProductCardProps) {
           </>
         ) : (
           <div className="flex h-full w-full items-center justify-center text-[var(--color-text-muted)]">
-            No image
+            {t('common.no_image')}
           </div>
         )}
 
         {isBestseller ? (
           <div className="absolute right-3 top-3">
-            <BadgePill tone="bestseller">Bestseller</BadgePill>
+            <BadgePill tone="bestseller">{t('pdp.bestseller_badge')}</BadgePill>
           </div>
         ) : null}
 
@@ -191,7 +193,7 @@ export function ProductCard({product, locale}: ProductCardProps) {
           <PriceLine product={product} intl={intl} />
           {product.specs.heat_pump_compatible ? (
             <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-success)]">
-              Heat&#8209;pump ready
+              {t('pdp.heat_pump_ready')}
             </span>
           ) : null}
         </div>

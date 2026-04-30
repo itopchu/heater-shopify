@@ -4,6 +4,7 @@
 import {Link} from 'react-router';
 import type {MenuItem} from '@gberg/shopify-client';
 import {localeHref} from '~/lib/gberg/href';
+import {useT, type TFunction} from '~/lib/gberg/i18n';
 
 interface MegaColumn {
   label: string;
@@ -20,6 +21,11 @@ interface MegaColumn {
  *
  * "Shop all" sits leftmost as the always-visible escape hatch into the
  * full catalog.
+ *
+ * Labels here are EN source strings. The mega-menu / mobile-drawer
+ * translate them at render time via `navLabel(t, label)` (below). The
+ * raw string acts as a stable key for the lookup map AND the EN fallback
+ * if the i18n key isn't present (e.g. for Shopify-admin-driven entries).
  */
 const MEGA_MENU_FALLBACK: MegaColumn[] = [
   {label: 'Shop all', href: '/products'},
@@ -29,6 +35,28 @@ const MEGA_MENU_FALLBACK: MegaColumn[] = [
   {label: 'Replacement', href: '/collections/austauschheizkoerper'},
   {label: 'Accessories', href: '/collections/accessories'},
 ];
+
+/**
+ * Maps each `MEGA_MENU_FALLBACK` EN label to its i18n key. Keeps the
+ * exported `MEGA_MENU_FALLBACK` shape stable for header.tsx consumers.
+ */
+const NAV_LABEL_KEY: Record<string, string> = {
+  'Shop all': 'nav.shop_all',
+  'Living rooms': 'nav.living_rooms',
+  Bathroom: 'nav.bathroom',
+  Electric: 'nav.electric',
+  Replacement: 'nav.replacement',
+  Accessories: 'nav.accessories',
+};
+
+/**
+ * Translate a nav column label via the lookup map, falling back to the
+ * raw label (for Shopify-admin-driven entries that don't have a key).
+ */
+export function navLabel(t: TFunction, label: string): string {
+  const key = NAV_LABEL_KEY[label];
+  return key ? t(key) : label;
+}
 
 function rewriteUrl(absoluteOrPath: string | null, locale: string): string {
   if (!absoluteOrPath) return localeHref(locale, '/');
@@ -93,6 +121,7 @@ export function MegaMenu({locale, menu}: MegaMenuProps) {
   // Live Shopify Admin menu intentionally ignored. Catalog-driven nav
   // only — see MEGA_MENU_FALLBACK comment block.
   void menu;
+  const t = useT();
   const columns: MegaColumn[] = MEGA_MENU_FALLBACK.map((c) => ({
     ...c,
     href: localeHref(locale, c.href),
@@ -100,24 +129,25 @@ export function MegaMenu({locale, menu}: MegaMenuProps) {
   }));
 
   return (
-    <nav aria-label="Main" className="hidden flex-1 lg:block">
+    <nav aria-label={t('header.main_nav')} className="hidden flex-1 lg:block">
       <ul className="flex items-center justify-center gap-7">
         {columns.map((col) => {
           const hasSub = col.sub && col.sub.length > 0;
+          const label = navLabel(t, col.label);
           return (
             <li
               key={col.label}
               className={hasSub ? 'megamenu-trigger' : undefined}
             >
               <Link to={col.href} className="nav-link">
-                {col.label}
+                {label}
               </Link>
               {hasSub ? (
                 <div className="megamenu-panel" role="menu">
                   <div className="container-x grid grid-cols-2 gap-x-12 gap-y-2 py-8 md:grid-cols-4">
                     <div className="md:col-span-1">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-                        {col.label}
+                        {label}
                       </p>
                       <ul className="mt-4 space-y-2">
                         <li>
@@ -125,7 +155,7 @@ export function MegaMenu({locale, menu}: MegaMenuProps) {
                             to={col.href}
                             className="link-accent text-[15px] text-[var(--color-text)]"
                           >
-                            Browse all
+                            {t('common.browse_all')}
                           </Link>
                         </li>
                         {col.sub!.map((s) => (
@@ -142,9 +172,9 @@ export function MegaMenu({locale, menu}: MegaMenuProps) {
                     </div>
                     <div className="md:col-span-3 self-end justify-self-end text-right">
                       <p className="font-[var(--font-display)] text-2xl italic leading-tight text-[var(--color-text-muted)]">
-                        Engineered, certified,
+                        {t('nav.engineered_tagline_line1')}
                         <br />
-                        delivered across Europe.
+                        {t('nav.engineered_tagline_line2')}
                       </p>
                     </div>
                   </div>

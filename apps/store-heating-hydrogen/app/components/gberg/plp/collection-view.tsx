@@ -32,6 +32,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import type { HeatingProduct } from "@gberg/product-schema";
 import { Chip, cn } from "@gberg/ui";
 import { ProductGrid } from "./product-grid";
+import { useT, type TFunction } from "~/lib/gberg/i18n";
 import {
   colorFamilyHex,
   resolveSeries,
@@ -106,15 +107,15 @@ function flagMatches(p: HeatingProduct, f: FlagKey): boolean {
   }
 }
 
-const FLAG_LABELS: Record<FlagKey, string> = {
-  vertical: "Vertical",
-  horizontal: "Horizontal",
-  panel: "Panel",
-  electric: "Electric",
-  hydronic: "Hydronic",
-  bathroom: "Bathroom-ready",
-  heat_pump: "Heat-pump",
-  mid_connection: "Mid-connection",
+const FLAG_LABEL_KEYS: Record<FlagKey, string> = {
+  vertical: "plp.flag_vertical",
+  horizontal: "plp.flag_horizontal",
+  panel: "plp.flag_panel",
+  electric: "plp.flag_electric",
+  hydronic: "plp.flag_hydronic",
+  bathroom: "plp.flag_bathroom",
+  heat_pump: "plp.flag_heat_pump",
+  mid_connection: "plp.flag_mid_connection",
 };
 
 const FLAG_ORDER: FlagKey[] = [
@@ -127,6 +128,10 @@ const FLAG_ORDER: FlagKey[] = [
   "heat_pump",
   "mid_connection",
 ];
+
+function flagLabel(t: TFunction, flag: FlagKey): string {
+  return t(FLAG_LABEL_KEYS[flag]);
+}
 
 function applyFilters(products: HeatingProduct[], facets: FacetState): HeatingProduct[] {
   return products.filter((p) => {
@@ -215,10 +220,12 @@ function FacetGroup<T extends string>({ label, values, selected, onToggle }: Fac
 }
 
 function ColorFacetGroup({
+  label,
   values,
   selected,
   onToggle,
 }: {
+  label: string;
   values: { value: string; count: number }[];
   selected: Set<string>;
   onToggle: (v: string) => void;
@@ -230,7 +237,7 @@ function ColorFacetGroup({
       className="group border-b border-[var(--color-border)] pb-4 last:border-b-0"
     >
       <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold">
-        Color
+        {label}
         <span aria-hidden className="text-[var(--color-text-muted)] group-open:rotate-45">+</span>
       </summary>
       <ul className="mt-3 flex flex-wrap gap-2">
@@ -270,15 +277,21 @@ function ColorFacetGroup({
 /* Main view                                                           */
 /* ------------------------------------------------------------------ */
 
-const PRODUCT_TYPE_LABELS: Record<string, string> = {
-  radiator: "Radiator",
-  towel_radiator: "Towel radiator",
-  underfloor_heating: "Underfloor heating",
-  bathroom_fixture: "Bathroom fixture",
-  accessory: "Accessory",
+const PRODUCT_TYPE_LABEL_KEYS: Record<string, string> = {
+  radiator: "plp.product_type_radiator",
+  towel_radiator: "plp.product_type_towel_radiator",
+  underfloor_heating: "plp.product_type_underfloor_heating",
+  bathroom_fixture: "plp.product_type_bathroom_fixture",
+  accessory: "plp.product_type_accessory",
 };
 
+function productTypeLabel(t: TFunction, value: string): string {
+  const key = PRODUCT_TYPE_LABEL_KEYS[value];
+  return key ? t(key) : value;
+}
+
 export function CollectionView({ products, locale }: CollectionViewProps) {
+  const t = useT();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -324,7 +337,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         .map(([value, count]) => ({
           value,
           count,
-          label: PRODUCT_TYPE_LABELS[value] ?? value,
+          label: productTypeLabel(t, value),
         })),
       colorFamily: Array.from(colorFamily.entries())
         .sort((a, b) => b[1] - a[1])
@@ -339,7 +352,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
       hydronic,
       electric,
     };
-  }, [products]);
+  }, [products, t]);
 
   // Sub-category chip totals — only chips with ≥1 matching product render.
   const flagCounts = useMemo(() => {
@@ -396,7 +409,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
   for (const v of facets.productType) {
     activeChips.push({
       key: `pt-${v}`,
-      label: PRODUCT_TYPE_LABELS[v] ?? v,
+      label: productTypeLabel(t, v),
       clear: () => setFacets((f) => ({ ...f, productType: toggle(f.productType, v) })),
     });
   }
@@ -417,14 +430,17 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
   if (facets.heatingMedium !== "all") {
     activeChips.push({
       key: `hm-${facets.heatingMedium}`,
-      label: facets.heatingMedium === "hydronic" ? "Hydronic" : "Electric",
+      label:
+        facets.heatingMedium === "hydronic"
+          ? t("plp.heating_medium_hydronic")
+          : t("plp.heating_medium_electric"),
       clear: () => setFacets((f) => ({ ...f, heatingMedium: "all" })),
     });
   }
   for (const f of facets.flags) {
     activeChips.push({
       key: `flag-${f}`,
-      label: FLAG_LABELS[f],
+      label: flagLabel(t, f),
       clear: () => toggleFlag(f),
     });
   }
@@ -443,7 +459,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
   const FilterShell = (
     <div className="space-y-6">
       <FacetGroup<string>
-        label="Type"
+        label={t("plp.facet_type")}
         values={facetOptions.productType}
         selected={facets.productType}
         onToggle={(v) =>
@@ -451,6 +467,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         }
       />
       <ColorFacetGroup
+        label={t("plp.facet_color")}
         values={facetOptions.colorFamily}
         selected={facets.colorFamily}
         onToggle={(v) =>
@@ -458,7 +475,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         }
       />
       <FacetGroup<Series>
-        label="Series"
+        label={t("plp.facet_series")}
         values={facetOptions.series}
         selected={facets.series}
         onToggle={(v) => setFacets((f) => ({ ...f, series: toggle(f.series, v) }))}
@@ -468,14 +485,14 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         className="group border-b border-[var(--color-border)] pb-4 last:border-b-0"
       >
         <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold">
-          Heating medium
+          {t("plp.facet_heating_medium")}
           <span aria-hidden className="text-[var(--color-text-muted)] group-open:rotate-45">+</span>
         </summary>
         <ul className="mt-3 space-y-2">
           {[
-            { value: "all" as const, label: "All", count: products.length },
-            { value: "hydronic" as const, label: "Hydronic", count: facetOptions.hydronic },
-            { value: "electric" as const, label: "Electric", count: facetOptions.electric },
+            { value: "all" as const, label: t("plp.heating_medium_all"), count: products.length },
+            { value: "hydronic" as const, label: t("plp.heating_medium_hydronic"), count: facetOptions.hydronic },
+            { value: "electric" as const, label: t("plp.heating_medium_electric"), count: facetOptions.electric },
           ].map((m) => (
             <li key={m.value}>
               <label className="flex items-center justify-between gap-2 text-sm">
@@ -504,7 +521,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         <div
           className="mt-8 flex flex-wrap items-center gap-2"
           role="toolbar"
-          aria-label="Sub-category filters"
+          aria-label={t("plp.subcategory_filters")}
         >
           <button
             type="button"
@@ -512,7 +529,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
             className="subchip"
             aria-pressed={totalActive === 0}
           >
-            All
+            {t("plp.filter_all")}
           </button>
           {visibleFlags.map((f) => {
             const active = facets.flags.has(f);
@@ -525,7 +542,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
                 aria-pressed={active}
                 className="subchip"
               >
-                <span>{FLAG_LABELS[f]}</span>
+                <span>{flagLabel(t, f)}</span>
                 <span className="subchip-count">{count}</span>
               </button>
             );
@@ -536,7 +553,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
       {/* Toolbar: result count + sort + sticky mobile filter button */}
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-y border-[var(--color-border)] py-3 text-sm">
         <p className="text-[var(--color-text-muted)]">
-          {filtered.length} of {products.length} products
+          {t("plp.results_count", { shown: filtered.length, total: products.length })}
         </p>
         <div className="flex items-center gap-3">
           {/* Mobile/tablet — single button that opens the bottom-sheet (Fix 9). */}
@@ -545,7 +562,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
             onClick={() => setFilterSheetOpen(true)}
             className="lg:hidden inline-flex items-center gap-2 border border-[var(--color-text)] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text)]"
           >
-            Filter &amp; sort
+            {t("plp.filter_sort")}
             {totalActive > 0 ? (
               <span className="inline-flex h-4 min-w-4 items-center justify-center bg-[var(--color-primary)] px-1 text-[10px] font-bold text-white">
                 {totalActive}
@@ -553,16 +570,16 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
             ) : null}
           </button>
           <label className="hidden lg:flex items-center gap-2">
-            <span className="text-[var(--color-text-muted)]">Sort:</span>
+            <span className="text-[var(--color-text-muted)]">{t("plp.sort_label_inline")}</span>
             <select
               className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-sm"
               value={sort}
               onChange={(e) => setSort(e.target.value as SortKey)}
             >
-              <option value="newest">Newest</option>
-              <option value="price-asc">Price · Low to high</option>
-              <option value="price-desc">Price · High to low</option>
-              <option value="title">Title (A → Z)</option>
+              <option value="newest">{t("plp.sort_newest")}</option>
+              <option value="price-asc">{t("plp.sort_price_asc")}</option>
+              <option value="price-desc">{t("plp.sort_price_desc")}</option>
+              <option value="title">{t("plp.sort_title")}</option>
             </select>
           </label>
         </div>
@@ -581,7 +598,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
             onClick={clearAll}
             className="text-sm text-[var(--color-primary)] underline-offset-2 hover:underline"
           >
-            Clear all ({totalActive})
+            {t("plp.filter_clear_all_count", { count: totalActive })}
           </button>
         </div>
       ) : null}
@@ -596,7 +613,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         <div>
           {filtered.length === 0 ? (
             <div className="rounded-[var(--radius-md)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface-muted)] p-10 text-center text-sm text-[var(--color-text-muted)]">
-              No products match the current filters.
+              {t("plp.filter_no_match")}
               {activeChips.length > 0 ? (
                 <>
                   {" "}
@@ -605,7 +622,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
                     onClick={clearAll}
                     className="text-[var(--color-primary)] underline-offset-2 hover:underline"
                   >
-                    Clear filters
+                    {t("plp.filter_clear")}
                   </button>
                 </>
               ) : null}
@@ -624,6 +641,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         onSortChange={setSort}
         filteredCount={filtered.length}
         clearAll={clearAll}
+        t={t}
       >
         {FilterShell}
       </FilterSheet>
@@ -643,6 +661,7 @@ interface FilterSheetProps {
   filteredCount: number;
   clearAll: () => void;
   children: React.ReactNode;
+  t: TFunction;
 }
 
 function FilterSheet({
@@ -653,6 +672,7 @@ function FilterSheet({
   filteredCount,
   clearAll,
   children,
+  t,
 }: FilterSheetProps) {
   // ESC close + scroll lock.
   useEffect(() => {
@@ -682,36 +702,36 @@ function FilterSheet({
         data-open={open}
         role="dialog"
         aria-modal="true"
-        aria-label="Filter and sort"
+        aria-label={t("plp.filter_sort")}
         aria-hidden={!open}
       >
         <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4">
           <p className="font-[var(--font-display)] text-xl font-semibold tracking-tight">
-            Filter &amp; sort
+            {t("plp.filter_sort")}
           </p>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t("common.close")}
             className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
           >
-            Close ✕
+            {t("common.close")} ✕
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-5 py-5">
           <div className="mb-6 border-b border-[var(--color-border)] pb-4">
             <label className="block text-sm">
-              <span className="text-[var(--color-text-muted)]">Sort</span>
+              <span className="text-[var(--color-text-muted)]">{t("plp.sort_label")}</span>
               <select
                 className="mt-2 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm"
                 value={sort}
                 onChange={(e) => onSortChange(e.target.value as SortKey)}
               >
-                <option value="newest">Newest</option>
-                <option value="price-asc">Price · Low to high</option>
-                <option value="price-desc">Price · High to low</option>
-                <option value="title">Title (A → Z)</option>
+                <option value="newest">{t("plp.sort_newest")}</option>
+                <option value="price-asc">{t("plp.sort_price_asc")}</option>
+                <option value="price-desc">{t("plp.sort_price_desc")}</option>
+                <option value="title">{t("plp.sort_title")}</option>
               </select>
             </label>
           </div>
@@ -724,14 +744,14 @@ function FilterSheet({
             onClick={clearAll}
             className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-primary)] hover:underline"
           >
-            Clear all
+            {t("plp.filter_clear_all")}
           </button>
           <button
             type="button"
             onClick={onClose}
             className="flex-1 max-w-xs bg-[var(--color-text)] py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white hover:bg-[var(--color-primary)]"
           >
-            Apply ({filteredCount})
+            {t("plp.filter_apply", { count: filteredCount })}
           </button>
         </div>
       </div>

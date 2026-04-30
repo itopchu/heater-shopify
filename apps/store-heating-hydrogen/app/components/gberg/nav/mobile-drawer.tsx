@@ -4,8 +4,9 @@
 import {useCallback, useEffect, useState} from 'react';
 import {Link} from 'react-router';
 import {localeHref} from '~/lib/gberg/href';
+import {useT} from '~/lib/gberg/i18n';
 import {SearchInput} from '~/components/gberg/search/search-input';
-import type {MegaColumn} from './mega-menu';
+import {navLabel, type MegaColumn} from './mega-menu';
 
 export interface MobileDrawerProps {
   locale: string;
@@ -13,6 +14,7 @@ export interface MobileDrawerProps {
 }
 
 export function MobileDrawer({locale, columns}: MobileDrawerProps) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
 
@@ -34,7 +36,7 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
     <>
       <button
         type="button"
-        aria-label="Open menu"
+        aria-label={t('header.open_menu')}
         aria-expanded={open}
         onClick={() => setOpen(true)}
         className="lg:hidden inline-flex h-10 w-10 items-center justify-center text-[var(--color-text)] hover:text-[var(--color-primary)]"
@@ -58,7 +60,7 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
         data-open={open}
         role="dialog"
         aria-modal="true"
-        aria-label="Navigation"
+        aria-label={t('header.mobile_nav')}
         aria-hidden={!open}
       >
         <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4">
@@ -68,10 +70,10 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
           <button
             type="button"
             onClick={close}
-            aria-label="Close menu"
+            aria-label={t('header.close_menu')}
             className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
           >
-            Close ✕
+            {t('common.close')} ✕
           </button>
         </div>
 
@@ -80,61 +82,64 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
             <SearchInput locale={locale} variant="page" />
           </div>
 
-          <nav aria-label="Mobile navigation" className="px-5 py-2">
+          <nav aria-label={t('header.mobile_nav')} className="px-5 py-2">
             <ul className="divide-y divide-[var(--color-border)]">
-              {columns.map((col) => (
-                <li key={col.label}>
-                  {col.sub && col.sub.length > 0 ? (
-                    <details className="group">
-                      <summary className="flex cursor-pointer items-center justify-between py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text)]">
-                        <span>{col.label}</span>
-                        <span
-                          aria-hidden
-                          className="text-[var(--color-text-muted)] transition-transform group-open:rotate-45"
-                        >
-                          +
-                        </span>
-                      </summary>
-                      <ul className="space-y-3 pb-4 pl-3">
-                        <li>
-                          <Link
-                            to={col.href}
-                            onClick={close}
-                            className="link-accent text-sm text-[var(--color-text)]"
+              {columns.map((col) => {
+                const label = navLabel(t, col.label);
+                return (
+                  <li key={col.label}>
+                    {col.sub && col.sub.length > 0 ? (
+                      <details className="group">
+                        <summary className="flex cursor-pointer items-center justify-between py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text)]">
+                          <span>{label}</span>
+                          <span
+                            aria-hidden
+                            className="text-[var(--color-text-muted)] transition-transform group-open:rotate-45"
                           >
-                            Browse all
-                          </Link>
-                        </li>
-                        {col.sub.map((s) => (
-                          <li key={s.href}>
+                            +
+                          </span>
+                        </summary>
+                        <ul className="space-y-3 pb-4 pl-3">
+                          <li>
                             <Link
-                              to={s.href}
+                              to={col.href}
                               onClick={close}
                               className="link-accent text-sm text-[var(--color-text)]"
                             >
-                              {s.label}
+                              {t('common.browse_all')}
                             </Link>
                           </li>
-                        ))}
-                      </ul>
-                    </details>
-                  ) : (
-                    <Link
-                      to={col.href}
-                      onClick={close}
-                      className="block py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text)] hover:text-[var(--color-primary)]"
-                    >
-                      {col.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
+                          {col.sub.map((s) => (
+                            <li key={s.href}>
+                              <Link
+                                to={s.href}
+                                onClick={close}
+                                className="link-accent text-sm text-[var(--color-text)]"
+                              >
+                                {s.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    ) : (
+                      <Link
+                        to={col.href}
+                        onClick={close}
+                        className="block py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text)] hover:text-[var(--color-primary)]"
+                      >
+                        {label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
           <div className="border-t border-[var(--color-border)] px-5 py-5">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-              Quick links
+              {t('header.quick_links')}
             </p>
             <ul className="mt-3 space-y-3">
               <li>
@@ -143,7 +148,7 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
                   onClick={close}
                   className="link-accent text-sm"
                 >
-                  Cart
+                  {t('header.cart')}
                 </Link>
               </li>
               <li>
@@ -152,7 +157,7 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
                   onClick={close}
                   className="link-accent text-sm"
                 >
-                  Contact
+                  {t('header.contact')}
                 </Link>
               </li>
             </ul>
