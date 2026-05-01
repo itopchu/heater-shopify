@@ -17,7 +17,6 @@ import {
   TrustWarrantyIcon,
   TrustSecureIcon,
 } from '@gberg/ui';
-import {LanguageSwitcher} from './language-switcher';
 import {tFor, isSupportedLocale, DEFAULT_LOCALE} from '~/lib/gberg/i18n';
 
 export function UtilityBar({locale}: {locale: string}) {
@@ -80,10 +79,13 @@ export function UtilityBar({locale}: {locale: string}) {
           >
             {t('utility_bar.need_help_phone')}
           </a>
-          <span aria-hidden className="hidden xl:inline text-[var(--color-primary)]">
-            /
-          </span>
-          <LanguageSwitcher locale={locale} />
+          {/*
+            Language switcher temporarily removed (May 2026). The
+            translation pipeline is a content problem we're solving
+            differently — until then, the storefront is English-only.
+            The locale routes still work for direct URLs but no UI
+            entry point invites users into them.
+          */}
         </div>
       </div>
     </div>
