@@ -41,7 +41,7 @@
     "warranty_10y": "Garantie 10 ans",
     "returns_30d": "Retour sous 30 jours",
     "secure_checkout": "Paiement sécurisé",
-    "need_help_phone": "Besoin d'aide ? +49 172 270 66 73"
+    "need_help_phone": "Besoin d'aide ? +49 172 270 66 48"
   },
   "language_switcher": {
     "aria_label": "Langue : {name}. Cliquez pour changer.",
@@ -379,7 +379,7 @@
     "channel_email_value": "hello@gberg-heizung.de",
     "channel_email_hint": "Idéal pour les demandes détaillées, photos et PDF.",
     "channel_phone_label": "Téléphone",
-    "channel_phone_value": "+49 172 270 66 73",
+    "channel_phone_value": "+49 172 270 66 48",
     "channel_phone_hint": "Lun – Ven, 09h00 – 17h00 CET.",
     "channel_whatsapp_label": "WhatsApp",
     "channel_whatsapp_value": "Discuter avec nous",

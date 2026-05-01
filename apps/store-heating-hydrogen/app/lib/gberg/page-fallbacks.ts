@@ -41,39 +41,41 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
       'Talk to a heating engineer, not a chatbot. Replies within two business hours during EU office hours.',
     body: [
       'Email: hello@gberg-heizung.de',
-      'Phone: +49 172 270 66 73',
+      'Phone: +49 172 270 66 48',
       'Hours: Monday – Friday, 09:00 – 17:00 CET',
       'We provide free dimensioning support: send us your room measurements, current radiator photos and heat loss (if known) and we will recommend the right model.',
     ].join('\n\n'),
   },
   imprint: {
     title: 'Imprint',
-    intro:
-      'Legal information about the operator of this storefront, per § 5 TMG.',
+    intro: 'Information per § 5 TMG.',
     body: [
-      'G-Berg GmbH',
-      'Authorized regional reseller of xxl-heizung.de',
-      "Address, registration number and VAT ID will be inserted by the merchant in Shopify Admin → Online Store → Pages → 'imprint'.",
-      'Liability for content: as a service provider we are responsible for our own content under the general laws (§ 7 (1) TMG). External links are checked at the time of placement.',
+      'G-Berg GmbH\nHagenerstrasse 33\n58642 Iserlohn / Letmathe\nGermany',
+      'Managing director: Gökberk Köylü',
+      'Phone: +49 172 270 66 48\nEmail: info@g-berg-gmbh.de',
+      'VAT ID per § 27a UStG: DE450348934',
+      'Warehouse: Seestrasse 2A, 58089 Hagen',
+      'Liability under § 7 (1) TMG; external links checked at the time of placement.',
     ].join('\n\n'),
   },
   privacy: {
     title: 'Privacy',
-    intro: 'How we handle personal data on this storefront, per the GDPR.',
+    intro: 'How we handle personal data, per the GDPR.',
     body: [
-      'We process the minimum data needed to fulfil orders: contact details, delivery address, payment confirmation from our payment provider, and analytics events scoped to anonymous device IDs.',
-      'We never sell or share customer data with third parties beyond payment, shipping and tax authorities.',
-      "Detailed processor list, retention periods and your rights (access, deletion, portability) will be published by the merchant in Shopify Admin → Online Store → Pages → 'privacy'.",
+      'Controller: G-Berg GmbH, Hagenerstrasse 33, 58642 Iserlohn, info@g-berg-gmbh.de.',
+      'We process the minimum data needed to fulfil orders: contact details, delivery address, payment confirmations, and anonymous analytics. We never sell customer data.',
+      'Recipients: payment providers (Shopify Payments, Klarna, PayPal), shipping carriers, tax authorities — only what each needs to deliver your order.',
+      'Your rights: access, rectification, deletion, portability, withdrawal of consent. Email info@g-berg-gmbh.de.',
     ].join('\n\n'),
   },
   terms: {
     title: 'Terms & Conditions',
-    intro:
-      'The terms governing your use of this storefront and any orders you place.',
+    intro: 'The terms governing orders placed on this storefront.',
     body: [
-      'Prices include local VAT and exclude shipping unless otherwise indicated. Currency: EUR.',
-      'Right of withdrawal: 30 days from delivery for unused, unopened items in original packaging. Bespoke orders and cut-to-length pipes are excluded.',
-      "Warranty: 10 years on the radiator body, 2 years on electronic components, per manufacturer terms. Detailed terms will be published by the merchant in Shopify Admin → Online Store → Pages → 'terms'.",
+      'Prices in EUR, including local VAT, excluding shipping unless stated otherwise.',
+      'Right of withdrawal: 30 days from delivery for unused, unopened items in original packaging. Bespoke and cut-to-length items are excluded.',
+      'Warranty: 10 years on the radiator body, 2 years on electronic components, per manufacturer terms.',
+      'Seller: G-Berg GmbH, Hagenerstrasse 33, 58642 Iserlohn, Germany. info@g-berg-gmbh.de.',
     ].join('\n\n'),
   },
   shipping: {

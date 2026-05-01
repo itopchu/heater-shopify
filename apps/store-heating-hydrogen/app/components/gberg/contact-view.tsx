@@ -10,7 +10,7 @@
 import {Eyebrow} from '@gberg/ui';
 import {useT} from '~/lib/gberg/i18n';
 
-const WHATSAPP_PHONE_E164 = '491722706673';
+const WHATSAPP_PHONE_E164 = '491722706648';
 
 export function ContactView() {
   const t = useT();

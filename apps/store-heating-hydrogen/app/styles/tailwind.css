@@ -6,6 +6,31 @@
 @import 'tailwindcss';
 
 /*
+ * Ampersand glyph override.
+ *
+ * Fraunces' italic and non-italic ampersand are both highly stylised and
+ * read as "ugly" against the rest of the brand type. Use a font-face
+ * with a single-codepoint `unicode-range` (U+0026) so the browser only
+ * falls back to a clean classic-serif glyph when rendering "&" — every
+ * other character continues to use the original family.
+ *
+ * The src list intentionally chains across macOS / Windows / Linux
+ * defaults so the substitution works without shipping a webfont.
+ */
+@font-face {
+  font-family: 'GBergAmpersand';
+  src: local('Iowan Old Style'),
+       local('Hoefler Text'),
+       local('Garamond'),
+       local('Cambria'),
+       local('Times New Roman'),
+       local('serif');
+  unicode-range: U+0026;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/*
  * Tailwind v4 only auto-scans the app's own source by default. Workspace
  * packages (@gberg/ui, etc.) are NOT scanned — their class names never
  * compile into the CSS bundle, so atoms like <Eyebrow> render unstyled

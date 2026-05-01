@@ -315,9 +315,9 @@ export default function HomePage() {
             title={
               <>
                 {t('home.bestsellers_title_lead')}{' '}
-                <em className="font-[var(--font-display)] italic text-[var(--color-primary)]">
+                <span className="font-[var(--font-body)] not-italic font-light text-[var(--color-primary)] mx-1">
                   {t('home.bestsellers_title_amp')}
-                </em>{' '}
+                </span>{' '}
                 {t('home.bestsellers_title_tail')}
               </>
             }

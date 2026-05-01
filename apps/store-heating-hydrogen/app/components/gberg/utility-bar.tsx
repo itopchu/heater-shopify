@@ -74,9 +74,12 @@ export function UtilityBar({locale}: {locale: string}) {
           it's a navigational primitive, not a promo.
         */}
         <div className="ml-4 flex flex-none items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em]">
-          <span className="hidden xl:inline tracking-normal opacity-80 normal-case">
+          <a
+            href="tel:+491722706648"
+            className="hidden xl:inline tracking-normal opacity-80 normal-case hover:opacity-100 hover:text-[var(--color-primary)] transition-colors"
+          >
             {t('utility_bar.need_help_phone')}
-          </span>
+          </a>
           <span aria-hidden className="hidden xl:inline text-[var(--color-primary)]">
             /
           </span>

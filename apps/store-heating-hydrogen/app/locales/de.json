@@ -41,7 +41,7 @@
     "warranty_10y": "10 Jahre Garantie",
     "returns_30d": "30 Tage Rückgaberecht",
     "secure_checkout": "Sicherer Checkout",
-    "need_help_phone": "Brauchen Sie Hilfe? +49 172 270 66 73"
+    "need_help_phone": "Brauchen Sie Hilfe? +49 172 270 66 48"
   },
   "language_switcher": {
     "aria_label": "Sprache: {name}. Klicken zum Ändern.",
@@ -379,7 +379,7 @@
     "channel_email_value": "hello@gberg-heizung.de",
     "channel_email_hint": "Ideal für ausführliche Anfragen, Fotos und PDFs.",
     "channel_phone_label": "Telefon",
-    "channel_phone_value": "+49 172 270 66 73",
+    "channel_phone_value": "+49 172 270 66 48",
     "channel_phone_hint": "Mo – Fr, 09:00 – 17:00 MEZ.",
     "channel_whatsapp_label": "WhatsApp",
     "channel_whatsapp_value": "Mit uns chatten",

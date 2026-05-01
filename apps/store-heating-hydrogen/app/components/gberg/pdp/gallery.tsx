@@ -69,7 +69,13 @@ export function Gallery({images, alt, className}: GalleryProps) {
           data={active}
           alt={active.altText ?? alt}
           aspectRatio="3/4"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 50vw"
+          // Bumped to 100vw across the board so the Shopify CDN serves a
+          // 2× density variant. The rendered hero is at most ~720px wide
+          // at lg+ but the modal lightbox shows the same image at full
+          // 1280px+; before this change the hero used a 60vw/50vw hint
+          // and the CDN resampled to a smaller bitmap that read as
+          // visibly soft compared to the modal.
+          sizes="100vw"
           // PDP hero is the LCP candidate on this route — prioritise it.
           loading="eager"
           fetchPriority="high"
