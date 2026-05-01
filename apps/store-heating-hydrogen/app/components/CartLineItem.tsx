@@ -14,10 +14,10 @@ import type {
 export type CartLine = OptimisticCartLine<CartApiQueryFragment>;
 
 /**
- * A single line item in the cart. It displays the product image, title, price.
- * It also provides controls to update the quantity or remove the line item.
- * If the line is a parent line that has child components (like warranties or gift wrapping), they are
- * rendered nested below the parent line.
+ * A single line item in the cart. Editorial-card layout: thumbnail left,
+ * title + variant tags + price stacked on the right, quantity stepper +
+ * remove link underneath. Works in both the page layout and the aside
+ * drawer; the drawer just stacks tighter via parent CSS.
  */
 export function CartLineItem({
   layout,
@@ -36,54 +36,80 @@ export function CartLineItem({
   const childrenLabelId = `cart-line-children-${id}`;
   const t = useT();
 
-  return (
-    <li key={id} className="cart-line">
-      <div className="cart-line-inner">
-        {image && (
-          <Image
-            alt={title}
-            aspectRatio="1/1"
-            data={image}
-            height={100}
-            loading="lazy"
-            width={100}
-          />
-        )}
+  // Drop default "Default Title" Shopify variant noise.
+  const meaningfulOptions = selectedOptions.filter(
+    (o) => o.value && o.value !== 'Default Title',
+  );
 
-        <div>
+  return (
+    <li key={id} className="px-4 py-5 sm:px-6 md:py-6">
+      <div className="flex gap-4 sm:gap-5 md:gap-6">
+        {image ? (
           <Link
             prefetch="intent"
             to={lineItemUrl}
-            onClick={() => {
-              if (layout === 'aside') {
-                close();
-              }
-            }}
+            onClick={() => layout === 'aside' && close()}
+            className="block shrink-0 overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
           >
-            <p>
-              <strong>{product.title}</strong>
-            </p>
+            <Image
+              alt={title}
+              aspectRatio="1/1"
+              data={image}
+              sizes="(max-width: 640px) 80px, 110px"
+              className="h-20 w-20 object-contain sm:h-24 sm:w-24 md:h-28 md:w-28"
+            />
           </Link>
-          <ProductPrice price={line?.cost?.totalAmount} />
-          <ul>
-            {selectedOptions.map((option) => (
-              <li key={option.name}>
-                <small>
-                  {option.name}: {option.value}
-                </small>
-              </li>
-            ))}
-          </ul>
-          <CartLineQuantity line={line} />
+        ) : (
+          <div className="h-20 w-20 shrink-0 rounded-md bg-[var(--color-surface-muted)] sm:h-24 sm:w-24 md:h-28 md:w-28" />
+        )}
+
+        <div className="flex flex-1 flex-col gap-1.5 min-w-0">
+          <div className="flex items-start justify-between gap-3">
+            <Link
+              prefetch="intent"
+              to={lineItemUrl}
+              onClick={() => layout === 'aside' && close()}
+              className="font-[var(--font-display)] text-[1rem] font-medium leading-snug text-[var(--color-text)] transition-colors hover:text-[var(--color-primary)] md:text-[1.05rem]"
+            >
+              {product.title}
+            </Link>
+            <div className="shrink-0 text-right text-[15px] font-semibold tabular-nums text-[var(--color-text)]">
+              <ProductPrice price={line?.cost?.totalAmount} />
+            </div>
+          </div>
+
+          {meaningfulOptions.length > 0 ? (
+            <ul className="flex flex-wrap gap-x-3 gap-y-1 text-[12px] text-[var(--color-text-muted)]">
+              {meaningfulOptions.map((option) => (
+                <li key={option.name} className="flex items-center gap-1">
+                  <span className="uppercase tracking-[0.08em]">
+                    {option.name}
+                  </span>
+                  <span aria-hidden className="text-[var(--color-text-muted)]/60">
+                    ·
+                  </span>
+                  <span className="text-[var(--color-text)]">{option.value}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+            <CartLineQuantity line={line} />
+            <CartLineRemoveButton
+              lineIds={[id]}
+              disabled={!!line.isOptimistic}
+            />
+          </div>
         </div>
       </div>
 
       {lineItemChildren ? (
-        <div>
+        <div className="mt-4 border-l-2 border-[var(--color-primary)]/40 pl-4">
           <p id={childrenLabelId} className="sr-only">
             {t('cart.line_items_with', {title: product.title})}
           </p>
-          <ul aria-labelledby={childrenLabelId} className="cart-line-children">
+          <ul aria-labelledby={childrenLabelId} className="space-y-3">
             {lineItemChildren.map((childLine) => (
               <CartLineItem
                 childrenMap={childrenMap}
@@ -100,9 +126,9 @@ export function CartLineItem({
 }
 
 /**
- * Provides the controls to update the quantity of a line item in the cart.
- * These controls are disabled when the line item is new, and the server
- * hasn't yet responded that it was successfully added to the cart.
+ * Segmented quantity stepper — single bordered group with a centred
+ * tabular-num count. Replaces the previous tiny "Qty: 1 - +" inline row
+ * that read as legacy Dawn template CSS.
  */
 function CartLineQuantity({line}: {line: CartLine}) {
   const t = useT();
@@ -112,39 +138,46 @@ function CartLineQuantity({line}: {line: CartLine}) {
   const nextQuantity = Number((quantity + 1).toFixed(0));
 
   return (
-    <div className="cart-line-quantity">
-      <small>{t('cart.line_quantity_label', {count: quantity})} &nbsp;&nbsp;</small>
+    <div
+      className="inline-flex items-center rounded-sm border border-[var(--color-border)]"
+      aria-label={t('pdp.quantity')}
+    >
       <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
         <button
           aria-label={t('pdp.decrease_quantity')}
           disabled={quantity <= 1 || !!isOptimistic}
           name="decrease-quantity"
           value={prevQuantity}
+          className="flex h-9 w-9 items-center justify-center text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface-muted)] disabled:cursor-not-allowed disabled:opacity-40"
         >
-          <span>&#8722; </span>
+          <span aria-hidden className="text-lg leading-none">−</span>
         </button>
       </CartLineUpdateButton>
-      &nbsp;
+      <span
+        className="min-w-[2.25rem] px-2 text-center text-[14px] font-semibold tabular-nums text-[var(--color-text)]"
+        aria-live="polite"
+      >
+        {quantity}
+      </span>
       <CartLineUpdateButton lines={[{id: lineId, quantity: nextQuantity}]}>
         <button
           aria-label={t('pdp.increase_quantity')}
           name="increase-quantity"
           value={nextQuantity}
           disabled={!!isOptimistic}
+          className="flex h-9 w-9 items-center justify-center text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface-muted)] disabled:cursor-not-allowed disabled:opacity-40"
         >
-          <span>&#43;</span>
+          <span aria-hidden className="text-lg leading-none">+</span>
         </button>
       </CartLineUpdateButton>
-      &nbsp;
-      <CartLineRemoveButton lineIds={[lineId]} disabled={!!isOptimistic} />
     </div>
   );
 }
 
 /**
- * A button that removes a line item from the cart. It is disabled
- * when the line item is new, and the server hasn't yet responded
- * that it was successfully added to the cart.
+ * Subtle remove link — text-style, not a CTA button, since it's a
+ * destructive secondary action that shouldn't compete with the
+ * checkout button at the bottom of the cart.
  */
 function CartLineRemoveButton({
   lineIds,
@@ -161,7 +194,11 @@ function CartLineRemoveButton({
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{lineIds}}
     >
-      <button disabled={disabled} type="submit">
+      <button
+        disabled={disabled}
+        type="submit"
+        className="text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-primary)] disabled:opacity-40"
+      >
         {t('common.remove')}
       </button>
     </CartForm>
