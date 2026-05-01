@@ -98,7 +98,7 @@ export const meta: Route.MetaFunction = ({
   const breadcrumbLd = buildBreadcrumbJsonLd(crumbs);
   const productLd = buildProductJsonLd(product, location.pathname);
   // FAQ JSON-LD mirrors the visible <FaqAccordion> — same Q/A, same order.
-  const {sections} = pickSections(product);
+  const {sections} = pickSections(product, locale);
   const faqPlain: FaqEntry[] = sections
     .filter(isFaqShapedSection)
     .slice(0, 8)
@@ -182,7 +182,7 @@ export default function ProductPage() {
   const images = galleryImages(product);
   const specRows = buildSpecRows(product, t);
 
-  const {sections, source: sectionsSource} = pickSections(product);
+  const {sections, source: sectionsSource} = pickSections(product, locale);
   const faqs = buildFaqsFromSections(sections);
 
   const aix = product.common.aix ?? {};

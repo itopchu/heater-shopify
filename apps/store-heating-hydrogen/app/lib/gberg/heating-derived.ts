@@ -367,13 +367,21 @@ export function isFaqShapedSection(s: ContentSection): boolean {
   return /^(what|how|why|when|where|can|do|does|is|are|will)\b/i.test(t);
 }
 
-export function pickSections(p: HeatingProduct): {
+export function pickSections(
+  p: HeatingProduct,
+  locale?: string,
+): {
   sections: ContentSection[];
   source: 'en' | 'de' | null;
 } {
   const en = p.common.content?.sections_en ?? [];
-  if (en.length > 0) return {sections: en, source: 'en'};
   const de = p.common.content?.sections_de ?? [];
+  // DE locale should see the original scraped German source — no
+  // back-translation EN→DE is happening anyway. Every other locale
+  // currently falls through to EN; per-locale section translations
+  // (sections_nl, sections_fr…) are a future task.
+  if (locale === 'de' && de.length > 0) return {sections: de, source: 'de'};
+  if (en.length > 0) return {sections: en, source: 'en'};
   if (de.length > 0) return {sections: de, source: 'de'};
   return {sections: [], source: null};
 }
