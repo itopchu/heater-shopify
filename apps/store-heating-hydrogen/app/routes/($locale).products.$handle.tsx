@@ -41,6 +41,12 @@ import {
   pickSections,
   resolveSeriesLabel,
 } from '~/lib/gberg/heating-derived';
+import {
+  buildBreadcrumbJsonLd,
+  buildFaqPageJsonLd,
+  buildProductJsonLd,
+  type FaqEntry,
+} from '~/lib/gberg/jsonld';
 import type {HeatingProduct} from '@gberg/product-schema';
 
 export const meta: Route.MetaFunction = ({
@@ -83,6 +89,22 @@ export const meta: Route.MetaFunction = ({
     '';
   const ogImage =
     galleryImages(product)[0]?.url ?? undefined;
+
+  // Derive the JSON-LD payloads. Each builder reads from the same
+  // product/locale/sections data the React component renders, so the
+  // visible-content parity rule holds.
+  const locale = data?.locale ?? 'en';
+  const crumbs = buildBreadcrumb(product, locale);
+  const breadcrumbLd = buildBreadcrumbJsonLd(crumbs);
+  const productLd = buildProductJsonLd(product, location.pathname);
+  // FAQ JSON-LD mirrors the visible <FaqAccordion> — same Q/A, same order.
+  const {sections} = pickSections(product);
+  const faqPlain: FaqEntry[] = sections
+    .filter(isFaqShapedSection)
+    .slice(0, 8)
+    .map((s) => ({question: s.title, answer: s.text || s.html || ''}));
+  const faqLd = buildFaqPageJsonLd(faqPlain);
+
   return [
     {title},
     {name: 'description', content: description},
@@ -93,6 +115,9 @@ export const meta: Route.MetaFunction = ({
       type: 'product',
       ogImage,
     }),
+    productLd,
+    ...(breadcrumbLd ? [breadcrumbLd] : []),
+    ...(faqLd ? [faqLd] : []),
   ];
 };
 

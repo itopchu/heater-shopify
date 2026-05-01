@@ -3,18 +3,26 @@ import type {Route} from './+types/blogs.$blogHandle.$articleHandle';
 import {Image} from '@shopify/hydrogen';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
+import {
+  buildArticleJsonLd,
+  buildBreadcrumbJsonLd,
+} from '~/lib/gberg/jsonld';
 
 export const meta: Route.MetaFunction = ({
   data,
+  params,
   location,
 }: {
   data?: {
     article?: {
       title?: string;
+      publishedAt?: string;
+      author?: {name?: string} | null;
       seo?: {description?: string | null} | null;
       image?: {url?: string} | null;
     };
   };
+  params: {locale?: string; blogHandle?: string};
   location: {pathname: string};
 }) => {
   const article = data?.article;
@@ -22,6 +30,34 @@ export const meta: Route.MetaFunction = ({
   const title = `${articleTitle} — ${BRAND_NAME}`;
   const description = article?.seo?.description ?? '';
   const ogImage = article?.image?.url ?? undefined;
+
+  // TODO(phase-3): the storefront's blog route currently has no real
+  // articles wired up. When content lands, verify each visible field
+  // (headline, image, byline, publish date, body) matches the JSON-LD
+  // emitted here. Until then the builders run only when an article
+  // payload is actually present.
+  const locale = params.locale ?? 'en';
+  const blogHandle = params.blogHandle;
+  const breadcrumbLd =
+    article?.title && blogHandle
+      ? buildBreadcrumbJsonLd([
+          {label: 'Home', href: `/${locale}`},
+          {label: 'Blog', href: `/${locale}/blogs/${blogHandle}`},
+          {label: article.title},
+        ])
+      : null;
+  const articleLd =
+    article?.title && article.publishedAt
+      ? buildArticleJsonLd({
+          title: article.title,
+          publishedAt: article.publishedAt,
+          authorName: article.author?.name,
+          imageUrl: article.image?.url,
+          description: description || undefined,
+          pathname: location.pathname,
+        })
+      : null;
+
   return [
     {title},
     {name: 'description', content: description},
@@ -32,6 +68,8 @@ export const meta: Route.MetaFunction = ({
       type: 'article',
       ogImage,
     }),
+    ...(articleLd ? [articleLd] : []),
+    ...(breadcrumbLd ? [breadcrumbLd] : []),
   ];
 };
 

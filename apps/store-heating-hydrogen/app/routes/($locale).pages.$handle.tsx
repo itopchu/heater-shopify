@@ -16,6 +16,7 @@ import {
 } from '~/lib/gberg/page-fallbacks';
 import {normalizeLocale, useT} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
+import {buildBreadcrumbJsonLd} from '~/lib/gberg/jsonld';
 
 interface ResolvedPage {
   source: 'shopify' | 'fallback';
@@ -30,15 +31,27 @@ export const meta: Route.MetaFunction = ({
   data,
   location,
 }: {
-  data?: {page?: ResolvedPage};
+  data?: {locale?: string; page?: ResolvedPage};
   location: {pathname: string};
 }) => {
   const page = data?.page;
+  const locale = data?.locale ?? 'en';
   const baseTitle = page?.seo?.title ?? page?.title ?? 'Page';
   const title = baseTitle.includes(BRAND_NAME)
     ? baseTitle
     : `${baseTitle} — ${BRAND_NAME}`;
   const description = page?.seo?.description ?? page?.intro ?? '';
+
+  // BreadcrumbList: Home → <page title>. Mirrors the visible "Home" path
+  // implied by the brand link in the header (which lands at `/{locale}`)
+  // and the page H1 below.
+  const breadcrumbLd = page?.title
+    ? buildBreadcrumbJsonLd([
+        {label: 'Home', href: `/${locale}`},
+        {label: page.title},
+      ])
+    : null;
+
   return [
     {title},
     {name: 'description', content: description},
@@ -48,6 +61,7 @@ export const meta: Route.MetaFunction = ({
       pathname: location.pathname,
       type: 'website',
     }),
+    ...(breadcrumbLd ? [breadcrumbLd] : []),
   ];
 };
 

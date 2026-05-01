@@ -10,6 +10,10 @@ import {fetchCollectionByHandle} from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
 import {normalizeLocale, useT} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
+import {
+  buildBreadcrumbJsonLd,
+  buildItemListJsonLd,
+} from '~/lib/gberg/jsonld';
 
 /**
  * Track B (April 2026): allow-list of single-product collections. When a
@@ -29,21 +33,44 @@ export const meta: Route.MetaFunction = ({
   location,
 }: {
   data?: {
+    locale?: string;
     collection?: {
       title?: string;
       description?: string;
       seo?: {title?: string | null; description?: string | null} | null;
+      products?: ReadonlyArray<{handle: string; title: string}>;
     };
     handle?: string;
   };
   location: {pathname: string};
 }) => {
   const col = data?.collection;
+  const locale = data?.locale ?? 'en';
   const baseTitle = col?.seo?.title ?? col?.title ?? data?.handle ?? 'Collection';
   const title = baseTitle.includes(BRAND_NAME)
     ? baseTitle
     : `${baseTitle} — ${BRAND_NAME}`;
   const description = col?.seo?.description ?? col?.description ?? '';
+
+  // Breadcrumb: Home → Collection title. Mirrors the visible header eyebrow
+  // (which displays the collection title above the H1) — no separate
+  // <Breadcrumb> component renders here, but the trail Home → <title> is
+  // entirely visible via the page H1 + the brand link in the header.
+  const breadcrumbLd = col?.title
+    ? buildBreadcrumbJsonLd([
+        {label: 'Home', href: `/${locale}`},
+        {label: col.title},
+      ])
+    : null;
+
+  // ItemList: only emit when there's a real product grid visible. Each
+  // listed product mirrors a visible <ProductCard> in the grid.
+  const products = col?.products ?? [];
+  const itemListLd = buildItemListJsonLd(
+    products.map((p) => ({handle: p.handle, title: p.title})),
+    locale,
+  );
+
   return [
     {title},
     {name: 'description', content: description},
@@ -53,6 +80,8 @@ export const meta: Route.MetaFunction = ({
       pathname: location.pathname,
       type: 'website',
     }),
+    ...(breadcrumbLd ? [breadcrumbLd] : []),
+    ...(itemListLd ? [itemListLd] : []),
   ];
 };
 

@@ -29,6 +29,10 @@ import {WhatsAppBubble} from '~/components/gberg/whatsapp-bubble';
 import {Aside} from '~/components/Aside';
 import {DEFAULT_LOCALE, htmlLang, normalizeLocale, tFor} from '~/lib/gberg/i18n';
 import {detectLocaleFromPath} from '~/lib/gberg/seo';
+import {
+  buildOrganizationJsonLd,
+  buildWebSiteJsonLd,
+} from '~/lib/gberg/jsonld';
 import type {MenuItem} from '@gberg/shopify-client';
 import {useLocation} from 'react-router';
 
@@ -54,6 +58,23 @@ export function links() {
       href: 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap',
     },
     {rel: 'icon', type: 'image/svg+xml', href: favicon},
+  ];
+}
+
+/**
+ * Site-wide meta. Emits `Organization` + `WebSite` JSON-LD on every page —
+ * AI crawlers (and Google's sitelinks search box) need these on every
+ * indexable URL, not just the homepage. Page-specific JSON-LD blocks
+ * (Product, BreadcrumbList, FAQPage, ItemList, Article) are emitted by
+ * each route's own `meta()`.
+ *
+ * sameAs is empty until merchant social profiles are populated; the
+ * builder drops the field entirely when empty so we don't ship `[]`.
+ */
+export function meta() {
+  return [
+    buildOrganizationJsonLd({sameAs: []}),
+    buildWebSiteJsonLd(),
   ];
 }
 
