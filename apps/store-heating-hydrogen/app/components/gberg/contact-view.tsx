@@ -134,20 +134,32 @@ function ContactCard({label, value, hint, href, external}: ContactCardProps) {
         href={href}
         target={external ? '_blank' : undefined}
         rel={external ? 'noopener noreferrer' : undefined}
-        className="group flex h-full flex-col rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition-[box-shadow,border-color] duration-200 hover:border-[var(--color-text)] hover:[box-shadow:var(--shadow-hairline-hover)]"
+        // Mobile feedback: the bordered card didn't read as tappable.
+        // Now: solid charcoal surface on mobile (looks like a button),
+        // upgrades to a bordered card with chevron CTA on md+. Active
+        // press state shrinks slightly so a tap is clearly registered.
+        className="group flex h-full flex-row items-center gap-4 rounded-md bg-[var(--color-text)] p-5 text-white transition-all duration-200 active:scale-[0.98] active:bg-[var(--color-primary)] md:flex-col md:items-start md:gap-0 md:bg-[var(--color-surface)] md:text-[var(--color-text)] md:border md:border-[var(--color-border)] md:hover:border-[var(--color-text)] md:hover:[box-shadow:var(--shadow-hairline-hover)] md:active:bg-[var(--color-surface)]"
       >
         <span
           aria-hidden
-          className="block h-1 w-6 rounded-full bg-[var(--color-primary)]"
+          className="hidden md:block h-1 w-6 rounded-full bg-[var(--color-primary)]"
         />
-        <span className="mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text-muted)]">
-          {label}
-        </span>
-        <span className="mt-2 break-words text-[17px] font-medium leading-snug text-[var(--color-text)] transition-colors group-hover:text-[var(--color-primary)]">
-          {value}
-        </span>
-        <span className="mt-2 text-[13px] leading-snug text-[var(--color-text-muted)]">
-          {hint}
+        <div className="flex flex-1 flex-col">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 md:mt-3 md:text-[var(--color-text-muted)]">
+            {label}
+          </span>
+          <span className="mt-1 break-words text-[17px] font-semibold leading-snug text-white md:mt-2 md:font-medium md:text-[var(--color-text)] md:transition-colors md:group-hover:text-[var(--color-primary)]">
+            {value}
+          </span>
+          <span className="mt-1 text-[13px] leading-snug text-white/75 md:mt-2 md:text-[var(--color-text-muted)]">
+            {hint}
+          </span>
+        </div>
+        <span
+          aria-hidden
+          className="ml-auto self-center text-2xl text-[var(--color-primary)] transition-transform group-active:translate-x-1 md:hidden"
+        >
+          →
         </span>
       </a>
     </li>
