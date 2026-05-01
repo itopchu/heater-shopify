@@ -1,0 +1,426 @@
+{
+  "_doc": "Datasheet PDF URLs scraped from each product page on xxl-heizung.de. Read by prod-attach-datasheets.mjs to set the media.primary_pdf_url metafield on G-Berg products.",
+  "_generated": "2026-05-01T18:34:28.409Z",
+  "products": [
+    {
+      "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen",
+      "source_url": "https://xxl-heizung.de/products/austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PDF_Elanor_Austausch.pdf?v=14485251321699573418",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PDF_Elanor_Austausch.pdf?v=14485251321699573418"
+      ]
+    },
+    {
+      "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen-kopie",
+      "source_url": "https://xxl-heizung.de/products/austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen-kopie",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PDF_Elanor_Austausch.pdf?v=14485251321699573418",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PDF_Elanor_Austausch.pdf?v=14485251321699573418"
+      ]
+    },
+    {
+      "handle": "austauschheizkorper-badheizkorper-anthrazit-alpha",
+      "source_url": "https://xxl-heizung.de/products/austauschheizkorper-badheizkorper-anthrazit-alpha",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Alpfa_500-540_900-940.pdf?v=6164664684773921619",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Alpfa_500-540_900-940.pdf?v=6164664684773921619"
+      ]
+    },
+    {
+      "handle": "badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer",
+      "source_url": "https://xxl-heizung.de/products/badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Astoria_Mittelanschluss.pdf?v=1872258092197566684",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Astoria_Mittelanschluss.pdf?v=1872258092197566684"
+      ]
+    },
+    {
+      "handle": "badheizkorper-alpha-weiss-handtuchtrockner",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-alpha-weiss-handtuchtrockner",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Alpfa_500-540_900-940.pdf?v=6164664684773921619",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Alpfa_500-540_900-940.pdf?v=6164664684773921619"
+      ]
+    },
+    {
+      "handle": "badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elektrisch-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-anthrazit-handtuchheizkorper-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-elmar-anthrazit-handtuchheizkorper-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Elmar_PDF.pdf?v=1247967926685078224",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Elmar_PDF.pdf?v=1247967926685078224"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer-1",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer-1",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elektrisch-elmar-weiss-handtuchheizkorper-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-elmar-weiss-handtuchheizkorper-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elektrisch-platon-schwarz-handtuchheizkorper-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-platon-schwarz-handtuchheizkorper-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elektrisch-platon-weiss-handtuchheizkorper-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elektrisch-platon-weiss-handtuchheizkorper-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794"
+      ]
+    },
+    {
+      "handle": "badheizkorper-elmar-weiss-seitlich-offen-rechts-oder-links",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-elmar-weiss-seitlich-offen-rechts-oder-links",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Elanor.pdf?v=8317708393799564794"
+      ]
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-alpha-schwarz-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-mittelanschluss-alpha-schwarz-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Alpfa_500-540_900-940.pdf?v=6164664684773921619",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Alpfa_500-540_900-940.pdf?v=6164664684773921619"
+      ]
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-alpha-weiss-handtuchwarmer",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-mittelanschluss-alpha-weiss-handtuchwarmer",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Astoria_Mittelanschluss.pdf?v=1872258092197566684",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Astoria_Mittelanschluss.pdf?v=1872258092197566684"
+      ]
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-anthrazit-mira",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-mittelanschluss-anthrazit-mira",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Mira_PDF.pdf?v=18158559375767408557",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Mira_PDF.pdf?v=18158559375767408557"
+      ]
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-schwarz-mira",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-mittelanschluss-schwarz-mira",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Mira_PDF.pdf?v=18158559375767408557",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Mira_PDF.pdf?v=18158559375767408557"
+      ]
+    },
+    {
+      "handle": "badheizkorper-mittelanschluss-weiss-mira-kopie",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-mittelanschluss-weiss-mira-kopie",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Twister_PDF.pdf?v=14136588111215834790",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Twister_PDF.pdf?v=14136588111215834790"
+      ]
+    },
+    {
+      "handle": "badheizkorper-platon-schwarz-mittel-und-seitenanschluss",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-platon-schwarz-mittel-und-seitenanschluss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865"
+      ]
+    },
+    {
+      "handle": "badheizkorper-platon-weiss-mittel-und-seitenanschluss-1",
+      "source_url": "https://xxl-heizung.de/products/badheizkorper-platon-weiss-mittel-und-seitenanschluss-1",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PULLMAN_PDF.pdf?v=12258320978446130865"
+      ]
+    },
+    {
+      "handle": "befestigungsset-fur-badheizkorper",
+      "source_url": "https://xxl-heizung.de/products/befestigungsset-fur-badheizkorper",
+      "primary_pdf_url": null,
+      "all_pdfs": [],
+      "error": "HTTP 429 after 6 attempts"
+    },
+    {
+      "handle": "creavit-ac-70s-bidet-chrom-kreuz-unterputzventil",
+      "source_url": "https://xxl-heizung.de/products/creavit-ac-70s-bidet-chrom-kreuz-unterputzventil",
+      "primary_pdf_url": null,
+      "all_pdfs": [],
+      "error": "HTTP 429 after 6 attempts"
+    },
+    {
+      "handle": "elektrische-badheizkorper-alpha-weiss-handtuchtrockner",
+      "source_url": "https://xxl-heizung.de/products/elektrische-badheizkorper-alpha-weiss-handtuchtrockner",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Alpfa_unten_Seiten_anschluss.pdf?v=6768220129725900044",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Alpfa_unten_Seiten_anschluss.pdf?v=6768220129725900044"
+      ]
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-anthrazit-mira",
+      "source_url": "https://xxl-heizung.de/products/elektrische-badheizkorper-mittelanschluss-anthrazit-mira",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Twister_PDF.pdf?v=14136588111215834790",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Twister_PDF.pdf?v=14136588111215834790"
+      ]
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-schwarz-mira",
+      "source_url": "https://xxl-heizung.de/products/elektrische-badheizkorper-mittelanschluss-schwarz-mira",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Mira_PDF.pdf?v=18158559375767408557",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Mira_PDF.pdf?v=18158559375767408557"
+      ]
+    },
+    {
+      "handle": "elektrische-badheizkorper-mittelanschluss-weiss-mira",
+      "source_url": "https://xxl-heizung.de/products/elektrische-badheizkorper-mittelanschluss-weiss-mira",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Twister_PDF.pdf?v=14136588111215834790",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Twister_PDF.pdf?v=14136588111215834790"
+      ]
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-anthrazit",
+      "source_url": "https://xxl-heizung.de/products/elektro-handtuchheizkorper-kira-anthrazit",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/KIRA_pdf_82f3935d-a0f1-4b43-99dd-2a1683133064.pdf?v=71174252225747217",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/KIRA_pdf_82f3935d-a0f1-4b43-99dd-2a1683133064.pdf?v=71174252225747217"
+      ]
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-schwarz",
+      "source_url": "https://xxl-heizung.de/products/elektro-handtuchheizkorper-kira-schwarz",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/KIRA_pdf_82f3935d-a0f1-4b43-99dd-2a1683133064.pdf?v=71174252225747217",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/KIRA_pdf_82f3935d-a0f1-4b43-99dd-2a1683133064.pdf?v=71174252225747217"
+      ]
+    },
+    {
+      "handle": "elektro-handtuchheizkorper-kira-weiss",
+      "source_url": "https://xxl-heizung.de/products/elektro-handtuchheizkorper-kira-weiss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/KIRA_pdf_82f3935d-a0f1-4b43-99dd-2a1683133064.pdf?v=71174252225747217",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/KIRA_pdf_82f3935d-a0f1-4b43-99dd-2a1683133064.pdf?v=71174252225747217"
+      ]
+    },
+    {
+      "handle": "fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m",
+      "source_url": "https://xxl-heizung.de/products/fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m",
+      "primary_pdf_url": null,
+      "all_pdfs": [],
+      "error": "HTTP 429 after 6 attempts"
+    },
+    {
+      "handle": "handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom",
+      "source_url": "https://xxl-heizung.de/products/handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom",
+      "primary_pdf_url": null,
+      "all_pdfs": [],
+      "error": "HTTP 429 after 6 attempts"
+    },
+    {
+      "handle": "handtuchheizkorper-kira-anthrazit-mittel-seitenanschluss",
+      "source_url": "https://xxl-heizung.de/products/handtuchheizkorper-kira-anthrazit-mittel-seitenanschluss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Kira_PDF.pdf?v=7260403029896643940",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Kira_PDF.pdf?v=7260403029896643940"
+      ]
+    },
+    {
+      "handle": "handtuchheizkorper-kira-schwarz-mittel-seitenanschluss",
+      "source_url": "https://xxl-heizung.de/products/handtuchheizkorper-kira-schwarz-mittel-seitenanschluss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Kira_PDF.pdf?v=7260403029896643940",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Kira_PDF.pdf?v=7260403029896643940"
+      ]
+    },
+    {
+      "handle": "handtuchheizkorper-kira-weiss-mittel-seitenanschluss",
+      "source_url": "https://xxl-heizung.de/products/handtuchheizkorper-kira-weiss-mittel-seitenanschluss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Kira_PDF.pdf?v=7260403029896643940",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Kira_PDF.pdf?v=7260403029896643940"
+      ]
+    },
+    {
+      "handle": "handtuchheizkorper-seitenanschluss-alpha-weiss",
+      "source_url": "https://xxl-heizung.de/products/handtuchheizkorper-seitenanschluss-alpha-weiss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/ALPFA_UNTEN_PDF.pdf?v=14879823967037228654",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/ALPFA_UNTEN_PDF.pdf?v=14879823967037228654"
+      ]
+    },
+    {
+      "handle": "heizstab",
+      "source_url": "https://xxl-heizung.de/products/heizstab",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/Thermostat_IM-DE_1.pdf?v=1857137411484760648",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/Thermostat_IM-DE_1.pdf?v=1857137411484760648"
+      ]
+    },
+    {
+      "handle": "konrad-ventilheizkorper-typ-22",
+      "source_url": "https://xxl-heizung.de/products/konrad-ventilheizkorper-typ-22",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PDF_Konrad_Typ_22.pdf?v=5931974061694134854",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PDF_Konrad_Typ_22.pdf?v=5931974061694134854"
+      ]
+    },
+    {
+      "handle": "konrad-ventilheizkorper-typ-33",
+      "source_url": "https://xxl-heizung.de/products/konrad-ventilheizkorper-typ-33",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/PDF_konrad_Typ_33.pdf?v=6322342025577773215",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/PDF_konrad_Typ_33.pdf?v=6322342025577773215"
+      ]
+    },
+    {
+      "handle": "lavinno-hange-wc-tornado-rimless-weiss-glanzend",
+      "source_url": "https://xxl-heizung.de/products/lavinno-hange-wc-tornado-rimless-weiss-glanzend",
+      "primary_pdf_url": null,
+      "all_pdfs": []
+    },
+    {
+      "handle": "mischbetrieb-t-stuck",
+      "source_url": "https://xxl-heizung.de/products/mischbetrieb-t-stuck",
+      "primary_pdf_url": null,
+      "all_pdfs": []
+    },
+    {
+      "handle": "multiblock-set-fur-badheizkorper-eck-und-durchgangsform",
+      "source_url": "https://xxl-heizung.de/products/multiblock-set-fur-badheizkorper-eck-und-durchgangsform",
+      "primary_pdf_url": null,
+      "all_pdfs": []
+    },
+    {
+      "handle": "multiblock-thermostatkopf-regler-fur-heizkorper-m30x1-5",
+      "source_url": "https://xxl-heizung.de/products/multiblock-thermostatkopf-regler-fur-heizkorper-m30x1-5",
+      "primary_pdf_url": null,
+      "all_pdfs": []
+    },
+    {
+      "handle": "thermoflussigkeit-fur-elektro-badheizkorper",
+      "source_url": "https://xxl-heizung.de/products/thermoflussigkeit-fur-elektro-badheizkorper",
+      "primary_pdf_url": null,
+      "all_pdfs": []
+    },
+    {
+      "handle": "thermostatventil-set-heizkorper-eck-1-2-chrom",
+      "source_url": "https://xxl-heizung.de/products/thermostatventil-set-heizkorper-eck-1-2-chrom",
+      "primary_pdf_url": null,
+      "all_pdfs": []
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-anthrazit",
+      "source_url": "https://xxl-heizung.de/products/vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-anthrazit",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/FLORA_VERTICAAL_PETEK_pdf.pdf?v=3995861787252605759",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/FLORA_VERTICAAL_PETEK_pdf.pdf?v=3995861787252605759"
+      ]
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-schwarz",
+      "source_url": "https://xxl-heizung.de/products/vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-schwarz",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/FLORA_VERTICAAL_PETEK_pdf.pdf?v=3995861787252605759",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/FLORA_VERTICAAL_PETEK_pdf.pdf?v=3995861787252605759"
+      ]
+    },
+    {
+      "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-weiss",
+      "source_url": "https://xxl-heizung.de/products/vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-weiss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/flora_vertical_pdf.pdf?v=3236344416401065066",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/flora_vertical_pdf.pdf?v=3236344416401065066"
+      ]
+    },
+    {
+      "handle": "vertikal-planheizkorper-wohnraum-heizkorper-atlas-weiss",
+      "source_url": "https://xxl-heizung.de/products/vertikal-planheizkorper-wohnraum-heizkorper-atlas-weiss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/TYP_22.pdf?v=5087218450692342598",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/TYP_22.pdf?v=5087218450692342598"
+      ]
+    },
+    {
+      "handle": "wohnraumheizkorper-atlas-typ-22-weiss-horizontal",
+      "source_url": "https://xxl-heizung.de/products/wohnraumheizkorper-atlas-typ-22-weiss-horizontal",
+      "primary_pdf_url": null,
+      "all_pdfs": []
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-anthrazit",
+      "source_url": "https://xxl-heizung.de/products/wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-anthrazit",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/KIRA_TESCHNISCHE_DATEN.pdf?v=14377966241070907297",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/KIRA_TESCHNISCHE_DATEN.pdf?v=14377966241070907297"
+      ]
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-schwarz",
+      "source_url": "https://xxl-heizung.de/products/wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-schwarz",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/KIRA_TESCHNISCHE_DATEN.pdf?v=14377966241070907297",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/KIRA_TESCHNISCHE_DATEN.pdf?v=14377966241070907297"
+      ]
+    },
+    {
+      "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-weiss",
+      "source_url": "https://xxl-heizung.de/products/wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-weiss",
+      "primary_pdf_url": "https://xxl-heizung.de/cdn/shop/files/KIRA_TESCHNISCHE_DATEN.pdf?v=14377966241070907297",
+      "all_pdfs": [
+        "https://xxl-heizung.de/cdn/shop/files/KIRA_TESCHNISCHE_DATEN.pdf?v=14377966241070907297"
+      ]
+    },
+    {
+      "handle": "zweirohr-hahnblock-fur-ventil-heizkorper-winkelform",
+      "source_url": "https://xxl-heizung.de/products/zweirohr-hahnblock-fur-ventil-heizkorper-winkelform",
+      "primary_pdf_url": null,
+      "all_pdfs": []
+    }
+  ]
+}

@@ -41,7 +41,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
       'Talk to a heating engineer, not a chatbot. Replies within two business hours during EU office hours.',
     body: [
       'Email: hello@gberg-heizung.de',
-      'Phone: +49 (0)30 12 34 56 78',
+      'Phone: +49 172 270 66 73',
       'Hours: Monday – Friday, 09:00 – 17:00 CET',
       'We provide free dimensioning support: send us your room measurements, current radiator photos and heat loss (if known) and we will recommend the right model.',
     ].join('\n\n'),

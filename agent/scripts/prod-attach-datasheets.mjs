@@ -25,26 +25,17 @@ if (!STORE || !TOKEN) throw new Error('Missing SHOPIFY_PROD_STORE / _ADMIN_TOKEN
 
 const APPLY = process.argv.includes('--apply');
 
-// xxl-heizung.de hosts datasheets at /Datenblatt/<Series>.pdf. The series
-// names map roughly 1:1 to product family names; the keys below are
-// substrings we look for (lowercased) in the existing placeholder path
-// or, if no placeholder is set, in the product title.
-const SERIES_TO_PDF = {
-  flora: 'https://xxl-heizung.de/Datenblatt/Flora.pdf',
-  astoria: 'https://xxl-heizung.de/Datenblatt/Astoria.pdf',
-  pullman: 'https://xxl-heizung.de/Datenblatt/Pullman.pdf',
-  twister: 'https://xxl-heizung.de/Datenblatt/Twister.pdf',
-  elanor: 'https://xxl-heizung.de/Datenblatt/Elanor.pdf',
-  konrad: 'https://xxl-heizung.de/Datenblatt/Konrad.pdf',
-  platis: 'https://xxl-heizung.de/Datenblatt/Platis.pdf',
-  lavinno: 'https://xxl-heizung.de/Datenblatt/Lavinno.pdf',
-  // Common product families on xxl-heizung that don't share a name with
-  // the Hydrogen storefront's series taxonomy:
-  atlas: 'https://xxl-heizung.de/Datenblatt/Atlas.pdf',
-  alpha: 'https://xxl-heizung.de/Datenblatt/Alpha.pdf',
-  mira: 'https://xxl-heizung.de/Datenblatt/Mira.pdf',
-  milan: 'https://xxl-heizung.de/Datenblatt/Milan.pdf',
-};
+// Datasheet URLs are read from the scraped registry written by
+// scrape-xxl-datasheets.mjs. Re-run that script to refresh.
+const scrapedPath = resolve(ROOT, 'data/datasheets-from-xxl.json');
+if (!existsSync(scrapedPath)) {
+  console.error('Missing data/datasheets-from-xxl.json — run scrape-xxl-datasheets.mjs first.');
+  process.exit(1);
+}
+const scraped = JSON.parse(readFileSync(scrapedPath, 'utf8'));
+const SCRAPED_BY_HANDLE = new Map(
+  scraped.products.map((p) => [p.handle, p.primary_pdf_url]),
+);
 
 async function gql(query, variables = {}) {
   const r = await fetch(`https://${STORE}/admin/api/2026-04/graphql.json`, {
@@ -82,18 +73,10 @@ async function listProducts() {
   return out;
 }
 
-function pickSeries(p) {
-  const haystacks = [
-    p.existing?.value || '',
-    p.title || '',
-    p.handle || '',
-  ].map((s) => s.toLowerCase());
-  for (const [needle, url] of Object.entries(SERIES_TO_PDF)) {
-    for (const h of haystacks) {
-      if (h.includes(needle)) return { series: needle, url };
-    }
-  }
-  return null;
+function pickFromScraped(p) {
+  const url = SCRAPED_BY_HANDLE.get(p.handle);
+  if (!url) return null;
+  return { url };
 }
 
 const headCache = new Map();
@@ -129,7 +112,7 @@ async function setPrimaryPdf(productId, url) {
           ownerId: productId,
           namespace: 'media',
           key: 'primary_pdf_url',
-          type: 'url',
+          type: 'single_line_text_field',
           value: url,
         },
       ],
@@ -148,16 +131,19 @@ let kept = 0;
 let unmatched = 0;
 
 for (const p of products) {
-  const matched = pickSeries(p);
-  // Skip if existing value is already a live URL — don't clobber.
-  if (p.existing?.value && /^https?:\/\//i.test(p.existing.value)) {
+  const matched = pickFromScraped(p);
+  // The placeholder values like "catalog/Flora Vertikal/PDF.pdf" are NOT
+  // live URLs and need to be replaced — only "keep" when we already have
+  // a real https:// URL AND the scraper has nothing better.
+  const existingIsLive = p.existing?.value && /^https?:\/\//i.test(p.existing.value);
+  if (existingIsLive && (!matched || matched.url === p.existing.value)) {
     kept++;
     console.log(`  [keep ] ${p.handle} -> ${p.existing.value}`);
     continue;
   }
   if (!matched) {
     unmatched++;
-    console.log(`  [skip ] ${p.handle} (no series match in placeholder/title/handle)`);
+    console.log(`  [skip ] ${p.handle} (no datasheet found by scraper)`);
     continue;
   }
   const ok = await headOk(matched.url);
