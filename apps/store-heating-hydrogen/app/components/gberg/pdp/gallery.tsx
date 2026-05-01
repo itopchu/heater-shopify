@@ -36,7 +36,7 @@ export function Gallery({images, alt, className}: GalleryProps) {
     return (
       <div
         className={cn(
-          'mx-auto aspect-[3/4] w-full max-w-md rounded-[var(--radius-lg)] bg-[var(--color-surface-muted)] sm:max-w-lg md:max-w-xl lg:mx-0 lg:max-w-none',
+          'mx-auto aspect-square w-full max-w-md rounded-[var(--radius-lg)] bg-[var(--color-surface-muted)] sm:max-w-lg md:max-w-xl lg:mx-0 lg:max-w-none',
           className,
         )}
       />
@@ -63,18 +63,18 @@ export function Gallery({images, alt, className}: GalleryProps) {
         type="button"
         onClick={() => setModalOpen(true)}
         aria-label={t('pdp.gallery_open')}
-        className="relative mx-auto block w-full max-w-md overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-surface-muted)] aspect-[3/4] sm:max-w-lg md:max-w-xl lg:mx-0 lg:max-w-none"
+        className="relative mx-auto block w-full max-w-md overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-surface-muted)] aspect-square sm:max-w-lg md:max-w-xl lg:mx-0 lg:max-w-none"
       >
         <Image
           data={active}
           alt={active.altText ?? alt}
-          aspectRatio="3/4"
-          // Bumped to 100vw across the board so the Shopify CDN serves a
-          // 2× density variant. The rendered hero is at most ~720px wide
-          // at lg+ but the modal lightbox shows the same image at full
-          // 1280px+; before this change the hero used a 60vw/50vw hint
-          // and the CDN resampled to a smaller bitmap that read as
-          // visibly soft compared to the modal.
+          // Source catalog images are 1024×1024 square. Asking the
+          // Shopify CDN for a 3:4 crop made it strip the sides AND
+          // upscale the height, which is what produced the soft hero
+          // image. Matching the source ratio (1:1) keeps the CDN in a
+          // pure-resize path — same behaviour the modal lightbox uses,
+          // which is why the modal looked crisp by comparison.
+          aspectRatio="1/1"
           sizes="100vw"
           // PDP hero is the LCP candidate on this route — prioritise it.
           loading="eager"
