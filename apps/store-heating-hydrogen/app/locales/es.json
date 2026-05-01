@@ -315,7 +315,7 @@
     "line_quantity_label": "Cantidad: {count}",
     "totals": "Totales",
     "subtotal": "Subtotal",
-    "continue_to_checkout": "Continuar con el pago →",
+    "continue_to_checkout": "Continuar con el pago",
     "discounts": "Descuentos",
     "discount_code": "Código de descuento",
     "discount_code_placeholder": "Código de descuento",

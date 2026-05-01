@@ -315,7 +315,7 @@
     "line_quantity_label": "Menge: {count}",
     "totals": "Gesamtsummen",
     "subtotal": "Zwischensumme",
-    "continue_to_checkout": "Weiter zur Kasse →",
+    "continue_to_checkout": "Weiter zur Kasse",
     "discounts": "Rabatte",
     "discount_code": "Rabattcode",
     "discount_code_placeholder": "Rabattcode",

@@ -67,6 +67,12 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
         // `aria-hidden-focus`. Spread because React 18's typings don't have
         // `inert` yet (added in 19); the runtime accepts the empty-string
         // attribute form on all evergreen browsers.
+        // suppressHydrationWarning: React 18's hydration check normalises
+        // boolean-flavoured attributes differently than the SSR string
+        // serialiser, producing a false-positive #418 mismatch on the
+        // empty-string inert form. The value is in fact identical on
+        // both sides.
+        suppressHydrationWarning
         {...(!open ? {inert: ''} : {})}
       >
         <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4">

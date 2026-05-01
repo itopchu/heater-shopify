@@ -74,6 +74,11 @@ function ColorSwatchRow({product}: {product: HeatingProduct}) {
       // @ts-expect-error — `inert` is a valid HTML5 attribute, React types
       // catch up across versions; suppress without runtime impact.
       inert=""
+      // React 18 hydration check sees `inert=""` as an unknown attribute
+      // and surfaces #418 mismatches even though the SSR/CSR string is
+      // identical. Suppress to silence the false positive — once we move
+      // to React 19 this entire block can use the typed boolean prop.
+      suppressHydrationWarning
       className="flex items-center gap-1.5"
     >
       {swatches.slice(0, 3).map((hex, i) => (
