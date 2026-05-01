@@ -183,6 +183,11 @@ export default function ProductPage() {
   const specRows = buildSpecRows(product, t);
 
   const {sections, source: sectionsSource} = pickSections(product, locale);
+  // Split sections into two disjoint sets so the same Q&A doesn't render
+  // twice — once in the long-form "About" accordion AND once in the
+  // dedicated FAQ block. FAQ-shaped entries (questions, How/Why/What…)
+  // go to FAQ; everything else stays in About.
+  const aboutSections = sections.filter((s) => !isFaqShapedSection(s));
   const faqs = buildFaqsFromSections(sections);
 
   const aix = product.common.aix ?? {};
@@ -295,14 +300,14 @@ export default function ProductPage() {
             </section>
           ) : null}
 
-          {sections.length > 0 ? (
+          {aboutSections.length > 0 ? (
             <section>
               <Eyebrow>{t('pdp.section_about_eyebrow')}</Eyebrow>
               <h2 className="mt-3 text-2xl font-semibold">
                 {t('pdp.section_about_title')}
               </h2>
               <div className="mt-4">
-                <SectionsAccordion sections={sections} source={sectionsSource} />
+                <SectionsAccordion sections={aboutSections} source={sectionsSource} />
               </div>
             </section>
           ) : null}
