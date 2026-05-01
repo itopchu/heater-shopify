@@ -45,7 +45,7 @@ export function Footer({locale}: {locale: string}) {
           <p className="font-[var(--font-display)] text-5xl font-semibold leading-none md:text-6xl">
             G&#8209;Berg
           </p>
-          <p className="mt-5 max-w-[28ch] text-sm text-white/70">
+          <p className="mt-5 max-w-[28ch] text-sm text-white/90">
             {t('footer.brand_blurb')}
           </p>
           <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)]">
@@ -60,7 +60,7 @@ export function Footer({locale}: {locale: string}) {
       <div className="rule-accent-strong" aria-hidden />
 
       <div>
-        <div className="container-x flex flex-wrap items-center justify-between gap-4 py-5 text-[11px] uppercase tracking-[0.14em] text-white/55">
+        <div className="container-x flex flex-wrap items-center justify-between gap-4 py-5 text-[11px] uppercase tracking-[0.14em] text-white/80">
           <p>{t('footer.copyright', {year: new Date().getFullYear()})}</p>
           <p>{t('footer.vat_note')}</p>
         </div>
@@ -86,7 +86,7 @@ function FooterColumn({
           <li key={i.href}>
             <Link
               to={i.href}
-              className="link-accent text-white/85 transition-colors hover:text-white"
+              className="link-accent text-white transition-colors hover:text-[var(--color-primary)]"
             >
               {i.label}
             </Link>
