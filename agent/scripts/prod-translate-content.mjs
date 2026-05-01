@@ -176,6 +176,25 @@ async function maybePromoteToEnglish(kind, id, tr) {
     COLLECTION: ['title', 'body_html'],
     PAGE: ['title', 'body_html'],
     SHOP_POLICY: ['body'],
+    // Metaobject field keys vary by definition. Promote anything that
+    // looks like user-visible long-form text. Keys we DON'T translate
+    // (image refs, slugs, taxonomies) are filtered out per-resource via
+    // the SKIP list further down. The "question" and "answer" entries
+    // cover faq_item; "title" / "body" / "intro" / "summary" / "label"
+    // are common metaobject text fields across the rest of the schema.
+    METAOBJECT: [
+      'question',
+      'answer',
+      'title',
+      'body',
+      'intro',
+      'summary',
+      'label',
+      'heading',
+      'subheading',
+      'description',
+      'text',
+    ],
   };
   const keys = PROMOTE_KEYS[kind] || [];
   const updates = {};
@@ -220,6 +239,21 @@ async function maybePromoteToEnglish(kind, id, tr) {
       // Shop policies use a different mutation; need policy type.
       // Skip auto-promotion for policies — they were authored in EN already
       // by prod-fill-shop-policies.mjs.
+    } else if (kind === 'METAOBJECT') {
+      // Each promoted field becomes a fields[] entry on metaobjectUpdate.
+      // Order doesn't matter; missing fields are left untouched.
+      const fields = [];
+      for (const [k, vs] of Object.entries(updates)) {
+        fields.push({ key: k, value: vs.en });
+      }
+      if (fields.length > 0) {
+        await gql(
+          `mutation($id:ID!, $m:MetaobjectUpdateInput!){
+            metaobjectUpdate(id:$id, metaobject:$m){ userErrors{ message field } }
+          }`,
+          { id, m: { fields } },
+        );
+      }
     }
   }
 
@@ -313,6 +347,48 @@ async function* listPages() {
   }
 }
 
+// Metaobjects need a definition type filter — the API requires a `type:`
+// argument. We grab every type the store has defined and walk each one,
+// translating user-visible text fields. Use --metaobject-type=foo to
+// scope to a single type during testing.
+async function* listMetaobjects() {
+  const typeFilter = (() => {
+    const i = process.argv.findIndex(a => a.startsWith('--metaobject-type'));
+    if (i < 0) return null;
+    const a = process.argv[i];
+    return a.includes('=') ? a.split('=')[1] : process.argv[i + 1];
+  })();
+
+  const defs = await gql(
+    `{ metaobjectDefinitions(first:50){ nodes{ type } } }`,
+  );
+  const types = defs.metaobjectDefinitions.nodes
+    .map(n => n.type)
+    .filter(t => !typeFilter || t === typeFilter);
+
+  let n = 0;
+  for (const type of types) {
+    let cursor = null;
+    while (true) {
+      const d = await gql(
+        `query($t:String!, $c:String){
+          metaobjects(type:$t, first:50, after:$c){
+            pageInfo{ hasNextPage endCursor }
+            nodes{ id handle type }
+          }
+        }`,
+        { t: type, c: cursor },
+      );
+      for (const m of d.metaobjects.nodes) {
+        yield { ...m, handle: m.handle ?? `${m.type}/${m.id.split('/').pop()}` };
+        if (++n >= LIMIT) return;
+      }
+      if (!d.metaobjects.pageInfo.hasNextPage) break;
+      cursor = d.metaobjects.pageInfo.endCursor;
+    }
+  }
+}
+
 // ---------------------------------------------------------------------------
 // main
 // ---------------------------------------------------------------------------
@@ -347,6 +423,9 @@ if (SCOPE === 'collections' || SCOPE === 'all') {
 }
 if (SCOPE === 'pages' || SCOPE === 'all') {
   await runScope('PAGES', listPages(), 'PAGE');
+}
+if (SCOPE === 'metaobjects' || SCOPE === 'all') {
+  await runScope('METAOBJECTS', listMetaobjects(), 'METAOBJECT');
 }
 
 flushCache();
