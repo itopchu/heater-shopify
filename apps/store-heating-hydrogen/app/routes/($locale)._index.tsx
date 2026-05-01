@@ -308,29 +308,25 @@ export default function HomePage() {
       <div className="rule-accent" aria-hidden />
 
       {/* BESTSELLERS */}
-      <section className="container-x py-14 md:py-16">
-        <SectionHeader
-          eyebrow={t('home.bestsellers_eyebrow')}
-          title={
-            <>
-              {t('home.bestsellers_title_lead')}{' '}
-              <em className="font-[var(--font-display)] italic text-[var(--color-primary)]">
-                {t('home.bestsellers_title_amp')}
-              </em>{' '}
-              {t('home.bestsellers_title_tail')}
-            </>
-          }
-        />
-        <div className="mt-10">
-          {bestsellers.length > 0 ? (
+      {bestsellers.length > 0 ? (
+        <section className="container-x py-14 md:py-16">
+          <SectionHeader
+            eyebrow={t('home.bestsellers_eyebrow')}
+            title={
+              <>
+                {t('home.bestsellers_title_lead')}{' '}
+                <em className="font-[var(--font-display)] italic text-[var(--color-primary)]">
+                  {t('home.bestsellers_title_amp')}
+                </em>{' '}
+                {t('home.bestsellers_title_tail')}
+              </>
+            }
+          />
+          <div className="mt-10">
             <ProductGrid products={bestsellers.slice(0, 8)} locale={locale} />
-          ) : (
-            <div className="border border-dashed border-[var(--color-border)] bg-[var(--color-surface-muted)] p-10 text-center text-sm text-[var(--color-text-muted)]">
-              <p>{t('home.bestsellers_empty')}</p>
-            </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      ) : null}
 
       <div className="rule-accent" aria-hidden />
 
