@@ -61,7 +61,13 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
         role="dialog"
         aria-modal="true"
         aria-label={t('header.mobile_nav')}
-        aria-hidden={!open}
+        // When closed, `inert` removes the whole subtree from the tab order
+        // AND the accessibility tree — replaces the WCAG-violating
+        // aria-hidden-on-focusable-content pattern flagged by axe rule
+        // `aria-hidden-focus`. Spread because React 18's typings don't have
+        // `inert` yet (added in 19); the runtime accepts the empty-string
+        // attribute form on all evergreen browsers.
+        {...(!open ? {inert: ''} : {})}
       >
         <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4">
           <p className="font-[var(--font-display)] text-xl font-semibold tracking-tight">
