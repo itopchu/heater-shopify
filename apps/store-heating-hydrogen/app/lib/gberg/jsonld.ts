@@ -580,13 +580,24 @@ export function buildArticleJsonLd(
  * back to legacy `images[]`). We inline a smaller version here to keep
  * jsonld.ts self-contained and free of React types.
  */
+// Mirror the floor used by heating-derived#galleryImages so that the
+// JSON-LD image[] never references a thumbnail that the visible gallery
+// has already filtered out — preserves the structured-data ↔ visible-DOM
+// parity invariant.
+const JSONLD_MIN_LONG_EDGE_PX = 800;
+
+function isCrispEnough(img: ImageType): boolean {
+  if (img.width == null && img.height == null) return true;
+  return Math.max(img.width ?? 0, img.height ?? 0) >= JSONLD_MIN_LONG_EDGE_PX;
+}
+
 function imageUrls(p: HeatingProduct): string[] {
   const out: string[] = [];
   const seen = new Set<string>();
   for (const node of p.media ?? []) {
     if (node.__typename === 'MediaImage') {
       const mi = node as {image?: ImageType | null};
-      if (mi.image?.url && !seen.has(mi.image.url)) {
+      if (mi.image?.url && !seen.has(mi.image.url) && isCrispEnough(mi.image)) {
         out.push(mi.image.url);
         seen.add(mi.image.url);
       }
@@ -594,7 +605,7 @@ function imageUrls(p: HeatingProduct): string[] {
   }
   if (out.length > 0) return out;
   for (const img of p.images ?? []) {
-    if (img.url && !seen.has(img.url)) {
+    if (img.url && !seen.has(img.url) && isCrispEnough(img)) {
       out.push(img.url);
       seen.add(img.url);
     }

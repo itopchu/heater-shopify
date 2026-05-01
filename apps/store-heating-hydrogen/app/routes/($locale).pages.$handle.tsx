@@ -2,7 +2,7 @@
  * Generic Shopify Online Store Page renderer with merchant-aware fallback.
  * Hydrogen port.
  */
-import {useLoaderData} from 'react-router';
+import {useLoaderData, useParams} from 'react-router';
 import type {Route} from './+types/pages.$handle';
 import {Eyebrow} from '@gberg/ui';
 import {createGbergClient} from '~/lib/storefront.server';
@@ -17,6 +17,7 @@ import {
 import {normalizeLocale, useT} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 import {buildBreadcrumbJsonLd} from '~/lib/gberg/jsonld';
+import {ContactView} from '~/components/gberg/contact-view';
 
 interface ResolvedPage {
   source: 'shopify' | 'fallback';
@@ -98,7 +99,14 @@ export async function loader({context, params}: Route.LoaderArgs) {
 
 export default function PageRoute() {
   const {locale, page} = useLoaderData<typeof loader>();
+  const params = useParams();
   const t = useT();
+
+  // The contact page gets a structured layout instead of generic prose —
+  // clearer channel-based grid, brief callout, full locale parity.
+  if ((params as {handle?: string}).handle === 'contact') {
+    return <ContactView />;
+  }
 
   return (
     <article className="container-x py-10 lg:py-16">

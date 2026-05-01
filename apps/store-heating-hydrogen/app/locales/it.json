@@ -97,7 +97,7 @@
   },
   "whatsapp": {
     "aria_label": "Chatta con G-Berg su WhatsApp",
-    "default_message": "Ciao G-Berg — vorrei aiuto per scegliere il radiatore giusto."
+    "default_message": "Ciao team G-Berg! Sto guardando i radiatori su gberg-heizung.de e vorrei una consulenza per scegliere il modello giusto per la mia casa. Potete aiutarmi?"
   },
   "home": {
     "meta_title": "G-Berg Heizung — Radiatori europei premium",
@@ -370,6 +370,29 @@
     "meta_title_default": "Pagina",
     "eyebrow": "Informazioni",
     "fallback_notice": "Testo segnaposto. Un commerciante può pubblicare la versione live in Shopify Admin → Negozio online → Pagine."
+  },
+  "contact": {
+    "eyebrow": "Contattaci",
+    "title": "Parla con un ingegnere termotecnico.",
+    "lede": "Specialisti veri, niente chatbot. Rispondiamo entro due ore lavorative negli orari d'ufficio europei e ti aiutiamo a dimensionare, specificare e ordinare il radiatore giusto al primo colpo.",
+    "channel_email_label": "Email",
+    "channel_email_value": "hello@gberg-heizung.de",
+    "channel_email_hint": "Ideale per richieste dettagliate, foto e PDF.",
+    "channel_phone_label": "Telefono",
+    "channel_phone_value": "+49 (0)30 12 34 56 78",
+    "channel_phone_hint": "Lun – Ven, 09:00 – 17:00 CET.",
+    "channel_whatsapp_label": "WhatsApp",
+    "channel_whatsapp_value": "Chatta con noi",
+    "channel_whatsapp_hint": "Domande veloci, verifica misure, foto.",
+    "help_title": "Come possiamo aiutarti",
+    "help_1": "Dimensionare la potenza giusta per la tua stanza e l'impianto a pompa di calore.",
+    "help_2": "Radiatori di sostituzione compatibili con i tuoi interassi esistenti.",
+    "help_3": "Bagno, elettrico e a pavimento — progettazione e specifica.",
+    "help_4": "Ordini ingrosso e per il settore per installatori e costruttori.",
+    "brief_title": "Inviaci un brief",
+    "brief_lede": "Scrivici via mail o WhatsApp: dimensioni della stanza, foto del radiatore attuale, potenza target (se nota) ed eventuali vincoli. Rispondiamo con una raccomandazione e un preventivo.",
+    "brief_cta_email": "Scrivici",
+    "brief_cta_whatsapp": "Apri WhatsApp"
   },
   "policies": {
     "title": "Informative",

@@ -97,7 +97,7 @@
   },
   "whatsapp": {
     "aria_label": "Discutez avec G-Berg sur WhatsApp",
-    "default_message": "Bonjour G-Berg — j'aimerais être conseillé pour choisir le bon radiateur."
+    "default_message": "Bonjour l'équipe G-Berg ! Je consulte vos radiateurs sur gberg-heizung.de et j'aimerais être conseillé pour choisir le bon modèle pour mon logement. Pouvez-vous m'aider ?"
   },
   "home": {
     "meta_title": "G-Berg Heizung — Radiateurs européens haut de gamme",
@@ -370,6 +370,29 @@
     "meta_title_default": "Page",
     "eyebrow": "Information",
     "fallback_notice": "Texte d'attente. Un commerçant peut publier la version définitive dans Shopify Admin → Boutique en ligne → Pages."
+  },
+  "contact": {
+    "eyebrow": "Nous contacter",
+    "title": "Parlez à un ingénieur chauffagiste.",
+    "lede": "De vrais spécialistes, pas de chatbots. Nous répondons sous deux heures ouvrées aux heures de bureau européennes et vous aidons à dimensionner, spécifier et commander le bon radiateur du premier coup.",
+    "channel_email_label": "E-mail",
+    "channel_email_value": "hello@gberg-heizung.de",
+    "channel_email_hint": "Idéal pour les demandes détaillées, photos et PDF.",
+    "channel_phone_label": "Téléphone",
+    "channel_phone_value": "+49 (0)30 12 34 56 78",
+    "channel_phone_hint": "Lun – Ven, 09h00 – 17h00 CET.",
+    "channel_whatsapp_label": "WhatsApp",
+    "channel_whatsapp_value": "Discuter avec nous",
+    "channel_whatsapp_hint": "Questions rapides, vérifications de dimensions, photos.",
+    "help_title": "Comment nous pouvons aider",
+    "help_1": "Dimensionner la bonne puissance pour votre pièce et votre installation pompe à chaleur.",
+    "help_2": "Radiateurs de remplacement compatibles avec vos entraxes existants.",
+    "help_3": "Salle de bain, électrique et chauffage au sol — conception et spécification.",
+    "help_4": "Commandes en gros et professionnelles pour installateurs et promoteurs.",
+    "brief_title": "Envoyez-nous votre cahier des charges",
+    "brief_lede": "Écrivez-nous par mail ou WhatsApp : dimensions de la pièce, photos du radiateur actuel, puissance cible (si connue) et contraintes éventuelles. Nous répondons avec une recommandation et un devis.",
+    "brief_cta_email": "Écrivez-nous",
+    "brief_cta_whatsapp": "Ouvrir WhatsApp"
   },
   "policies": {
     "title": "Mentions légales",

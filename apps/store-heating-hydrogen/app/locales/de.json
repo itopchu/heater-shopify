@@ -97,7 +97,7 @@
   },
   "whatsapp": {
     "aria_label": "Mit G-Berg auf WhatsApp chatten",
-    "default_message": "Hallo G-Berg — ich hätte gerne Hilfe bei der Auswahl des richtigen Heizkörpers."
+    "default_message": "Hallo G-Berg-Team! Ich schaue mir gerade die Heizkörper auf gberg-heizung.de an und hätte gern Beratung zur Auswahl des richtigen Modells für mein Zuhause. Können Sie mir weiterhelfen?"
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium-Heizkörper aus Europa",
@@ -370,6 +370,29 @@
     "meta_title_default": "Seite",
     "eyebrow": "Information",
     "fallback_notice": "Platzhaltertext. Eine Händlerin oder ein Händler kann die Live-Version unter Shopify Admin → Online-Shop → Seiten veröffentlichen."
+  },
+  "contact": {
+    "eyebrow": "Kontakt aufnehmen",
+    "title": "Sprechen Sie mit einem Heizungsfachmann.",
+    "lede": "Echte Spezialisten, keine Chatbots. Wir antworten innerhalb von zwei Geschäftsstunden zu europäischen Bürozeiten und helfen Ihnen, den richtigen Heizkörper auf Anhieb zu dimensionieren, zu spezifizieren und zu bestellen.",
+    "channel_email_label": "E-Mail",
+    "channel_email_value": "hello@gberg-heizung.de",
+    "channel_email_hint": "Ideal für ausführliche Anfragen, Fotos und PDFs.",
+    "channel_phone_label": "Telefon",
+    "channel_phone_value": "+49 (0)30 12 34 56 78",
+    "channel_phone_hint": "Mo – Fr, 09:00 – 17:00 MEZ.",
+    "channel_whatsapp_label": "WhatsApp",
+    "channel_whatsapp_value": "Mit uns chatten",
+    "channel_whatsapp_hint": "Schnelle Fragen, Größenchecks, Fotos.",
+    "help_title": "Wobei wir Ihnen helfen",
+    "help_1": "Auslegung der richtigen Wattzahl für Ihren Raum und Ihre Wärmepumpe.",
+    "help_2": "Austauschheizkörper passend zu vorhandenen Anschlussabständen.",
+    "help_3": "Bad-, Elektro- und Fußbodensysteme — Design und Spezifikation.",
+    "help_4": "Großmengen- und Fachhandelsbestellungen für Installateure und Bauträger.",
+    "brief_title": "Schicken Sie uns ein Briefing",
+    "brief_lede": "Mailen oder WhatsAppen Sie uns: Raummaße, Fotos des aktuellen Heizkörpers, Zielwärmeleistung (falls bekannt) und etwaige Einschränkungen. Wir antworten mit einer Empfehlung und einem Angebot.",
+    "brief_cta_email": "Schreiben Sie uns",
+    "brief_cta_whatsapp": "WhatsApp öffnen"
   },
   "policies": {
     "title": "Richtlinien",

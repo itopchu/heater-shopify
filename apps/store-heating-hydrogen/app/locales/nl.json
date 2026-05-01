@@ -97,7 +97,7 @@
   },
   "whatsapp": {
     "aria_label": "Chat met G-Berg op WhatsApp",
-    "default_message": "Hallo G-Berg — ik wil graag hulp bij het kiezen van de juiste radiator."
+    "default_message": "Hallo G-Berg-team! Ik bekijk de radiatoren op gberg-heizung.de en zou graag advies willen over het juiste model voor mijn woning. Kunnen jullie helpen?"
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium Europese radiatoren",
@@ -370,6 +370,29 @@
     "meta_title_default": "Pagina",
     "eyebrow": "Informatie",
     "fallback_notice": "Placeholder-tekst. Een handelaar kan de live-versie publiceren via Shopify Admin → Online winkel → Pagina's."
+  },
+  "contact": {
+    "eyebrow": "Neem contact op",
+    "title": "Spreek met een verwarmingsingenieur.",
+    "lede": "Echte specialisten, geen chatbots. We reageren binnen twee werkuren tijdens Europese kantooruren en helpen u de juiste radiator in één keer te dimensioneren, specificeren en bestellen.",
+    "channel_email_label": "E-mail",
+    "channel_email_value": "hello@gberg-heizung.de",
+    "channel_email_hint": "Ideaal voor uitgebreide aanvragen, foto's en PDF's.",
+    "channel_phone_label": "Telefoon",
+    "channel_phone_value": "+49 (0)30 12 34 56 78",
+    "channel_phone_hint": "Ma – Vr, 09:00 – 17:00 CET.",
+    "channel_whatsapp_label": "WhatsApp",
+    "channel_whatsapp_value": "Chat met ons",
+    "channel_whatsapp_hint": "Snelle vragen, maatcontroles, foto's.",
+    "help_title": "Waarmee we kunnen helpen",
+    "help_1": "Het juiste vermogen bepalen voor uw ruimte en warmtepompopstelling.",
+    "help_2": "Vervangingsradiatoren die passen op uw bestaande aansluitafstanden.",
+    "help_3": "Badkamer-, elektrische en vloersystemen — ontwerp en specificatie.",
+    "help_4": "Bulk- en handelsbestellingen voor installateurs en ontwikkelaars.",
+    "brief_title": "Stuur ons een briefing",
+    "brief_lede": "Mail of WhatsApp ons: kamerafmetingen, foto's van de huidige radiator, gewenst warmtevermogen (indien bekend) en eventuele beperkingen. We antwoorden met een aanbeveling en een offerte.",
+    "brief_cta_email": "Schrijf ons",
+    "brief_cta_whatsapp": "WhatsApp openen"
   },
   "policies": {
     "title": "Beleid",

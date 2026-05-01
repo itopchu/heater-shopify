@@ -97,7 +97,7 @@
   },
   "whatsapp": {
     "aria_label": "Chat med G-Berg på WhatsApp",
-    "default_message": "Hej G-Berg — jeg vil gerne have hjælp til at vælge den rette radiator."
+    "default_message": "Hej G-Berg-team! Jeg kigger på radiatorer på gberg-heizung.de og vil gerne have rådgivning om det rigtige model til mit hjem. Kan I hjælpe?"
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium europæiske radiatorer",
@@ -370,6 +370,29 @@
     "meta_title_default": "Side",
     "eyebrow": "Information",
     "fallback_notice": "Pladsholdertekst. En forhandler kan udgive den endelige version i Shopify Admin → Online-butik → Sider."
+  },
+  "contact": {
+    "eyebrow": "Kontakt os",
+    "title": "Tal med en varmeingeniør.",
+    "lede": "Rigtige specialister, ingen chatbots. Vi svarer inden for to arbejdstimer i europæisk kontortid og hjælper dig med at dimensionere, specificere og bestille den rigtige radiator i første forsøg.",
+    "channel_email_label": "E-mail",
+    "channel_email_value": "hello@gberg-heizung.de",
+    "channel_email_hint": "Bedst til detaljerede henvendelser, billeder og PDF'er.",
+    "channel_phone_label": "Telefon",
+    "channel_phone_value": "+49 (0)30 12 34 56 78",
+    "channel_phone_hint": "Man – Fre, 09:00 – 17:00 CET.",
+    "channel_whatsapp_label": "WhatsApp",
+    "channel_whatsapp_value": "Chat med os",
+    "channel_whatsapp_hint": "Hurtige spørgsmål, måltjek, billeder.",
+    "help_title": "Hvad vi kan hjælpe med",
+    "help_1": "Dimensionering af den rette effekt til dit rum og varmepumpe-opsætning.",
+    "help_2": "Udskiftningsradiatorer der passer til dine eksisterende tilslutningsafstande.",
+    "help_3": "Bad, el og gulvvarme — design og specifikation.",
+    "help_4": "Bulk- og fagordrer til installatører og bygherrer.",
+    "brief_title": "Send os en briefing",
+    "brief_lede": "Skriv til os via mail eller WhatsApp: rummål, billeder af den nuværende radiator, ønsket varmeydelse (hvis kendt) og eventuelle begrænsninger. Vi svarer med en anbefaling og et tilbud.",
+    "brief_cta_email": "Skriv til os",
+    "brief_cta_whatsapp": "Åbn WhatsApp"
   },
   "policies": {
     "title": "Politikker",

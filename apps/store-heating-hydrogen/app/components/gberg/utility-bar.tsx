@@ -33,7 +33,9 @@ export function UtilityBar({locale}: {locale: string}) {
    *
    * Progressive reveal — trust marks appear by viewport, ordered by
    * conversion impact (delivery > warranty > returns > secure):
-   *   <sm  (≤639px)  : 0 marks; bar shows just the LanguageSwitcher
+   *   <sm  (≤639px)  : 1 mark (delivery) — keeps a visible trust line
+   *                    next to the language switcher on phones; without
+   *                    it the dark bar looked empty on mobile.
    *   sm   (640px+)  : 2 marks (delivery + warranty)
    *   md   (768px+)  : 3 marks (+ returns)
    *   lg   (1024px+) : 4 marks (+ secure checkout)
@@ -53,9 +55,11 @@ export function UtilityBar({locale}: {locale: string}) {
             [&_svg]:h-4 [&_svg]:w-4
             [&_.leading-none]:whitespace-nowrap
             [&_li]:hidden
+            [&_li:first-child]:flex
             sm:[&_li:nth-child(-n+2)]:flex
             md:[&_li:nth-child(-n+3)]:flex
             lg:[&_li:nth-child(-n+4)]:flex
+            [&_li]:!text-white
           "
           items={[
             {icon: <TrustDeliveryIcon />, label: t('utility_bar.free_eu_delivery')},

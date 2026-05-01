@@ -97,7 +97,7 @@
   },
   "whatsapp": {
     "aria_label": "Chat with G-Berg on WhatsApp",
-    "default_message": "Hi G-Berg — I'd like help picking the right radiator."
+    "default_message": "Hello G-Berg team! I'm browsing your radiators on gberg-heizung.de and would like some advice on choosing the right model for my home. Could you help?"
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium European radiators",
@@ -370,6 +370,29 @@
     "meta_title_default": "Page",
     "eyebrow": "Information",
     "fallback_notice": "Placeholder copy. A merchant can publish the live version in Shopify Admin → Online Store → Pages."
+  },
+  "contact": {
+    "eyebrow": "Get in touch",
+    "title": "Talk to a heating engineer.",
+    "lede": "Real specialists, no chatbots. We answer within two business hours during EU office hours and help you size, specify and order the right radiator the first time.",
+    "channel_email_label": "Email",
+    "channel_email_value": "hello@gberg-heizung.de",
+    "channel_email_hint": "Best for detailed briefs, photos and PDFs.",
+    "channel_phone_label": "Phone",
+    "channel_phone_value": "+49 (0)30 12 34 56 78",
+    "channel_phone_hint": "Mon – Fri, 09:00 – 17:00 CET.",
+    "channel_whatsapp_label": "WhatsApp",
+    "channel_whatsapp_value": "Chat with us",
+    "channel_whatsapp_hint": "Quick questions, sizing checks, photos.",
+    "help_title": "What we can help with",
+    "help_1": "Sizing the right wattage for your room and heat-pump setup.",
+    "help_2": "Replacement radiators that match your existing connection centres.",
+    "help_3": "Bathroom, electric and underfloor systems — design and spec.",
+    "help_4": "Bulk and trade orders for installers and developers.",
+    "brief_title": "Send us a brief",
+    "brief_lede": "Mail or WhatsApp us with: room dimensions, current radiator photos, target heat output (if known) and any constraints. We reply with a recommendation and a quote.",
+    "brief_cta_email": "Write to us",
+    "brief_cta_whatsapp": "Open WhatsApp"
   },
   "policies": {
     "title": "Policies",

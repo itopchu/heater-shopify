@@ -295,7 +295,7 @@ export default function HomePage() {
               {t('home.designed_in_germany_lede')}
             </p>
             <div className="mt-8">
-              <Link to={localeHref(locale, '/collections/wohnraumheizkoerper')}>
+              <Link to={localeHref(locale, '/products')}>
                 <Button size="md" variant="secondary">
                   {t('home.browse_catalog_cta')}
                 </Button>

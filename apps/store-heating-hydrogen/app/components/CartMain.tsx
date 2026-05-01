@@ -4,7 +4,9 @@ import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
 import {CartLineItem, type CartLine} from '~/components/CartLineItem';
 import {CartSummary} from './CartSummary';
-import {useT, type TFunction} from '~/lib/gberg/i18n';
+import {useT, type TFunction, isSupportedLocale, DEFAULT_LOCALE} from '~/lib/gberg/i18n';
+import {useParams} from 'react-router';
+import {localeHref} from '~/lib/gberg/href';
 
 // Categories matching the homepage shortcut grid — a customer who lands on
 // an empty cart shouldn't have to backtrack to the home to start shopping.
@@ -198,6 +200,9 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
 
 function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
   const {close} = useAside();
+  const params = useParams();
+  const localeParam = (params as {locale?: string}).locale;
+  const locale = isSupportedLocale(localeParam) ? localeParam : DEFAULT_LOCALE;
   const t = useT();
   const shortcuts = getEmptyCartShortcuts(t);
   const trustBadges = getTrustBadges(t);
@@ -216,7 +221,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
           {t('cart.empty_aside_blurb')}
         </p>
         <Link
-          to="/collections"
+          to={localeHref(locale, '/products')}
           onClick={close}
           prefetch="viewport"
           className="mt-6 inline-flex items-center gap-2 rounded-sm bg-[var(--color-text)] px-5 py-3 text-[12px] uppercase tracking-[0.14em] font-semibold text-white hover:bg-[var(--color-primary)] transition-colors"
@@ -242,7 +247,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
         <Link
-          to="/collections"
+          to={localeHref(locale, '/products')}
           onClick={close}
           prefetch="viewport"
           className="inline-flex items-center gap-2 rounded-sm bg-[var(--color-text)] px-6 py-3 text-[12px] uppercase tracking-[0.14em] font-semibold text-white hover:bg-[var(--color-primary)] transition-colors"
@@ -250,7 +255,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
           {t('cart.browse_all')} <span aria-hidden>→</span>
         </Link>
         <Link
-          to="/collections/austauschheizkoerper"
+          to={localeHref(locale, '/collections/austauschheizkoerper')}
           onClick={close}
           prefetch="viewport"
           className="inline-flex items-center gap-2 rounded-sm border border-[var(--color-border)] px-6 py-3 text-[12px] uppercase tracking-[0.14em] font-semibold text-[var(--color-text)] hover:border-[var(--color-text)] transition-colors"

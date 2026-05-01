@@ -97,7 +97,7 @@
   },
   "whatsapp": {
     "aria_label": "Hable con G-Berg por WhatsApp",
-    "default_message": "Hola G-Berg — me gustaría que me ayudaran a elegir el radiador adecuado."
+    "default_message": "¡Hola, equipo de G-Berg! Estoy mirando radiadores en gberg-heizung.de y me gustaría que me asesoraran para elegir el modelo adecuado para mi vivienda. ¿Pueden ayudarme?"
   },
   "home": {
     "meta_title": "G-Berg Heizung — Radiadores europeos premium",
@@ -370,6 +370,29 @@
     "meta_title_default": "Página",
     "eyebrow": "Información",
     "fallback_notice": "Texto provisional. Un comerciante puede publicar la versión final en Shopify Admin → Tienda online → Páginas."
+  },
+  "contact": {
+    "eyebrow": "Contáctenos",
+    "title": "Hable con un ingeniero de calefacción.",
+    "lede": "Especialistas reales, sin chatbots. Respondemos en menos de dos horas laborables en horario europeo y le ayudamos a dimensionar, especificar y pedir el radiador adecuado a la primera.",
+    "channel_email_label": "Correo electrónico",
+    "channel_email_value": "hello@gberg-heizung.de",
+    "channel_email_hint": "Ideal para consultas detalladas, fotos y PDFs.",
+    "channel_phone_label": "Teléfono",
+    "channel_phone_value": "+49 (0)30 12 34 56 78",
+    "channel_phone_hint": "Lun – Vie, 09:00 – 17:00 CET.",
+    "channel_whatsapp_label": "WhatsApp",
+    "channel_whatsapp_value": "Chatee con nosotros",
+    "channel_whatsapp_hint": "Preguntas rápidas, comprobaciones de medidas, fotos.",
+    "help_title": "En qué podemos ayudarle",
+    "help_1": "Dimensionar la potencia adecuada para su habitación y bomba de calor.",
+    "help_2": "Radiadores de sustitución compatibles con sus distancias entre conexiones existentes.",
+    "help_3": "Baño, eléctrico y suelo radiante — diseño y especificación.",
+    "help_4": "Pedidos a granel y profesionales para instaladores y promotores.",
+    "brief_title": "Envíenos su consulta",
+    "brief_lede": "Escríbanos por correo o WhatsApp con: dimensiones de la habitación, fotos del radiador actual, potencia objetivo (si la conoce) y cualquier restricción. Responderemos con una recomendación y un presupuesto.",
+    "brief_cta_email": "Escríbanos",
+    "brief_cta_whatsapp": "Abrir WhatsApp"
   },
   "policies": {
     "title": "Políticas",

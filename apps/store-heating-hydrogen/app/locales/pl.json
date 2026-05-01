@@ -97,7 +97,7 @@
   },
   "whatsapp": {
     "aria_label": "Czatuj z G-Berg na WhatsAppie",
-    "default_message": "Cześć G-Berg — chciałbym pomocy w wyborze odpowiedniego grzejnika."
+    "default_message": "Dzień dobry, zespole G-Berg! Przeglądam grzejniki na gberg-heizung.de i chciałbym uzyskać poradę dotyczącą wyboru odpowiedniego modelu do mojego domu. Czy możecie mi pomóc?"
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium europejskie grzejniki",
@@ -370,6 +370,29 @@
     "meta_title_default": "Strona",
     "eyebrow": "Informacje",
     "fallback_notice": "Treść zastępcza. Sprzedawca może opublikować wersję na żywo w Shopify Admin → Sklep online → Strony."
+  },
+  "contact": {
+    "eyebrow": "Skontaktuj się z nami",
+    "title": "Porozmawiaj z inżynierem grzewczym.",
+    "lede": "Prawdziwi specjaliści, żadnych chatbotów. Odpowiadamy w ciągu dwóch godzin roboczych w europejskich godzinach urzędowych i pomagamy dobrać, zdefiniować i zamówić właściwy grzejnik za pierwszym razem.",
+    "channel_email_label": "E-mail",
+    "channel_email_value": "hello@gberg-heizung.de",
+    "channel_email_hint": "Najlepsze dla szczegółowych zapytań, zdjęć i plików PDF.",
+    "channel_phone_label": "Telefon",
+    "channel_phone_value": "+49 (0)30 12 34 56 78",
+    "channel_phone_hint": "Pn – Pt, 09:00 – 17:00 CET.",
+    "channel_whatsapp_label": "WhatsApp",
+    "channel_whatsapp_value": "Czatuj z nami",
+    "channel_whatsapp_hint": "Szybkie pytania, sprawdzenie wymiarów, zdjęcia.",
+    "help_title": "W czym możemy pomóc",
+    "help_1": "Dobór właściwej mocy dla Twojego pomieszczenia i instalacji z pompą ciepła.",
+    "help_2": "Grzejniki zamienne pasujące do istniejących rozstawów przyłączy.",
+    "help_3": "Łazienka, elektryczne i ogrzewanie podłogowe — projekt i specyfikacja.",
+    "help_4": "Zamówienia hurtowe i handlowe dla instalatorów i deweloperów.",
+    "brief_title": "Prześlij nam zapytanie",
+    "brief_lede": "Napisz e-mail lub WhatsApp: wymiary pomieszczenia, zdjęcia obecnego grzejnika, docelowa moc grzewcza (jeśli znana) i wszelkie ograniczenia. Odpowiemy z rekomendacją i wyceną.",
+    "brief_cta_email": "Napisz do nas",
+    "brief_cta_whatsapp": "Otwórz WhatsApp"
   },
   "policies": {
     "title": "Polityki",

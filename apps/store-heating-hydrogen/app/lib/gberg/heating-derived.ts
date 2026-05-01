@@ -382,6 +382,19 @@ export function pickSections(p: HeatingProduct): {
 /* Media → Image[] adapter.                                            */
 /* ------------------------------------------------------------------ */
 
+// Low-resolution previews (legacy thumbnails from the catalog import,
+// undersized variant photos, etc.) read as "disturbing" against the rest
+// of the storefront. Drop anything whose longest dimension is known to be
+// below this floor. Only filter when both width and height are present —
+// missing metadata never causes an image to be hidden.
+const MIN_PREVIEW_LONG_EDGE_PX = 800;
+
+function isHighEnoughRes(img: ImageType): boolean {
+  if (img.width == null && img.height == null) return true;
+  const longest = Math.max(img.width ?? 0, img.height ?? 0);
+  return longest >= MIN_PREVIEW_LONG_EDGE_PX;
+}
+
 export function galleryImages(p: HeatingProduct): ImageType[] {
   const fromMedia: ImageType[] = [];
   for (const node of p.media ?? []) {
@@ -390,8 +403,11 @@ export function galleryImages(p: HeatingProduct): ImageType[] {
       if (mi.image) fromMedia.push(mi.image);
     }
   }
-  if (fromMedia.length > 0) return fromMedia;
-  return p.images ?? [];
+  const all = fromMedia.length > 0 ? fromMedia : p.images ?? [];
+  const filtered = all.filter(isHighEnoughRes);
+  // Never return an empty array purely because every image is small — fall
+  // back to the unfiltered set so PDP/PLP at least show *something*.
+  return filtered.length > 0 ? filtered : all;
 }
 
 /* ------------------------------------------------------------------ */

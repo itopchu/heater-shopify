@@ -64,6 +64,12 @@ html {
 
 body {
   min-height: 100dvh;
+  /* Belt-and-suspenders: html overflow-x:clip handles most cases, but
+     iOS Safari and a couple of legacy Android browsers ignore it on the
+     root and propagate horizontal scroll to body. Pinning body too
+     prevents the "slight horizontal slide" some mobile users reported
+     on launch. */
+  overflow-x: clip;
 }
 
 h1,
@@ -191,10 +197,10 @@ h3 {
 
 .display-heading {
   font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 0.95;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1;
 }
 
 /* Premium-density product grid. */
