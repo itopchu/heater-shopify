@@ -93,20 +93,34 @@ async function geminiTranslate(text, fromLang, toLang) {
     ? `Translate the following HTML from ${fromLang} to ${toLang}. Preserve every HTML tag, attribute, and entity exactly. Translate only visible text nodes. Do not wrap the response in code fences or commentary. Return only the translated HTML.\n\n---\n${text}`
     : `Translate the following ${fromLang} text to ${toLang}. Preserve any placeholders like {count} unchanged. Do not wrap the response in quotes or commentary. Return only the translated text.\n\n---\n${text}`;
 
-  const r = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.2, maxOutputTokens: 4096 },
-      }),
-    },
-  );
-  const j = await r.json();
+  // 503 (overloaded) is common on gemini-2.5-flash; retry with exponential
+  // backoff up to 5 attempts, then fall through to gemini-1.5-flash on the
+  // final attempt as a fallback model.
+  const MODELS = ['gemini-2.5-flash', 'gemini-2.5-flash', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash'];
+  let r, j, lastErr;
+  for (let attempt = 0; attempt < MODELS.length; attempt++) {
+    const model = MODELS[attempt];
+    r = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.2, maxOutputTokens: 4096 },
+        }),
+      },
+    );
+    j = await r.json();
+    if (r.ok && j.candidates?.[0]?.content?.parts?.[0]?.text) break;
+    lastErr = `Gemini ${model} ${r.status}: ${JSON.stringify(j).slice(0, 160)}`;
+    if (attempt < MODELS.length - 1) {
+      const wait = Math.min(30_000, 2_000 * 2 ** attempt);
+      await new Promise((res) => setTimeout(res, wait));
+    }
+  }
   if (!r.ok || !j.candidates?.[0]?.content?.parts?.[0]?.text) {
-    throw new Error(`Gemini error ${r.status}: ${JSON.stringify(j).slice(0, 200)}`);
+    throw new Error(lastErr ?? 'Gemini call failed without a usable response.');
   }
   const out = j.candidates[0].content.parts[0].text.trim();
   cache[k] = out;
