@@ -73,7 +73,20 @@ const PRODUCT_QUERY = /* GraphQL */ `
         value
         reference {
           __typename
-          ... on Metaobject { id type handle }
+          ... on Metaobject {
+            id
+            type
+            handle
+            # Pull all fields of the linked metaobject so callers
+            # (e.g. the AI summary block on PDP) can read structured
+            # values without a second round-trip. Used today by
+            # aix.summary_block → ai_summary_block metaobject.
+            fields {
+              key
+              type
+              value
+            }
+          }
         }
       }
     }

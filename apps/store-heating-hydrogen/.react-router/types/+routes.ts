@@ -20,6 +20,9 @@ type Pages = {
   "/robots.txt": {
     params: {};
   };
+  "/llms.txt": {
+    params: {};
+  };
   "/:locale?": {
     params: {
       "locale"?: string;
@@ -132,7 +135,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/api/predictive-search" | "/robots.txt" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/collections/:handle" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/products" | "/:locale?/discount/:code" | "/:locale?/pages/:handle" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
+    page: "/" | "/api/predictive-search" | "/robots.txt" | "/llms.txt" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/collections/:handle" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/products" | "/:locale?/discount/:code" | "/:locale?/pages/:handle" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
   };
   "routes/api.predictive-search.tsx": {
     id: "routes/api.predictive-search";
@@ -141,6 +144,10 @@ type RouteFiles = {
   "routes/[robots.txt].tsx": {
     id: "routes/[robots.txt]";
     page: "/robots.txt";
+  };
+  "routes/[llms.txt].tsx": {
+    id: "routes/[llms.txt]";
+    page: "/llms.txt";
   };
   "routes/($locale).tsx": {
     id: "routes/($locale)";
@@ -228,6 +235,7 @@ type RouteModules = {
   "root": typeof import("./app/root.tsx");
   "routes/api.predictive-search": typeof import("./app/routes/api.predictive-search.tsx");
   "routes/[robots.txt]": typeof import("./app/routes/[robots.txt].tsx");
+  "routes/[llms.txt]": typeof import("./app/routes/[llms.txt].tsx");
   "routes/($locale)": typeof import("./app/routes/($locale).tsx");
   "routes/($locale).blogs.$blogHandle.$articleHandle": typeof import("./app/routes/($locale).blogs.$blogHandle.$articleHandle.tsx");
   "routes/($locale).sitemap.$type.$page[.xml]": typeof import("./app/routes/($locale).sitemap.$type.$page[.xml].tsx");

@@ -193,6 +193,26 @@ export interface CommonProductMetafields {
     customer_question_summary?: string;
     allowed_claims?: string[];
     restricted_claims?: string[];
+    /**
+     * Optional reference to an `ai_summary_block` metaobject. When the
+     * product's `aix.summary_block` metafield resolves to a metaobject,
+     * we surface its structured fields here for the PDP to render as a
+     * clean factual paragraph. Unset when the product has no link.
+     *
+     * Metaobject definition lives in
+     * `agent/scripts/install-metafield-definitions.mjs` § metaobjects:
+     *   - title:           single_line_text_field (required)
+     *   - summary_text:    multi_line_text_field   ← rendered by AiBlock
+     *   - key_points_json: json
+     *   - audience:        single_line_text_field
+     *   - language_code:   single_line_text_field
+     */
+    summary_block?: {
+      title?: string;
+      summary_text?: string;
+      audience?: string;
+      language_code?: string;
+    };
   };
   media?: {
     primary_asset_id?: string;
@@ -334,6 +354,41 @@ export function readStringList(
 }
 
 /**
+ * Read a metaobject_reference metafield and return a flat `{key: value}`
+ * map of the metaobject's fields. Returns `undefined` when the metafield
+ * is missing, has no resolved reference, or the reference has no usable
+ * fields. The product-by-handle GraphQL query expands `reference.fields`
+ * for every metafield, so the data is already on the wire.
+ *
+ * Pass an explicit `whitelist` of keys you expect — anything outside the
+ * list is dropped. Keeps callers honest and the resulting object compact.
+ */
+function readMetaobjectFields<K extends string>(
+  index: Map<string, MetafieldRaw>,
+  key: string,
+  whitelist: readonly K[],
+): Partial<Record<K, string>> | undefined {
+  const mf = index.get(key);
+  const ref = mf?.reference;
+  if (!ref || ref.__typename !== "Metaobject") return undefined;
+  const fields = (ref as { fields?: unknown }).fields;
+  if (!Array.isArray(fields)) return undefined;
+  const out: Partial<Record<K, string>> = {};
+  let hadAny = false;
+  for (const f of fields) {
+    if (!f || typeof f !== "object") continue;
+    const k = (f as { key?: unknown }).key;
+    const v = (f as { value?: unknown }).value;
+    if (typeof k !== "string" || typeof v !== "string" || !v) continue;
+    if ((whitelist as readonly string[]).includes(k)) {
+      out[k as K] = v;
+      hadAny = true;
+    }
+  }
+  return hadAny ? out : undefined;
+}
+
+/**
  * Coerce arbitrary `aix.key_facts` JSON into our normalised `[{label, value}]`
  * shape. The Claude generator prompt asks for that shape, but historic data may
  * arrive as `{ "Type": "Towel radiator" }` (object map). We accept both.
@@ -433,6 +488,12 @@ export function parseCommonMetafields(
       customer_question_summary: readString(index, "aix.customer_question_summary"),
       allowed_claims: readStringList(index, "aix.allowed_claims"),
       restricted_claims: readStringList(index, "aix.restricted_claims"),
+      summary_block: readMetaobjectFields(index, "aix.summary_block", [
+        "title",
+        "summary_text",
+        "audience",
+        "language_code",
+      ]),
     },
     media: {
       primary_asset_id: readString(index, "media.primary_asset_id"),

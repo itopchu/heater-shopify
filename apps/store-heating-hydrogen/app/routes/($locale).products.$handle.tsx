@@ -267,6 +267,7 @@ export default function ProductPage() {
             keyFacts={keyFacts}
             compatibilitySummary={aix.compatibility_summary}
             customerQuestionSummary={aix.customer_question_summary}
+            summaryBlock={aix.summary_block}
           />
 
           <DescriptionSection product={product} />

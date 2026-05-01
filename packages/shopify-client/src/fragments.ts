@@ -99,6 +99,12 @@ export const HEATING_PRODUCT_METAFIELD_IDENTIFIERS = [
   { namespace: "aix", key: "customer_question_summary" },
   { namespace: "aix", key: "allowed_claims" },
   { namespace: "aix", key: "restricted_claims" },
+  // Optional `metaobject_reference` → `ai_summary_block` metaobject. When
+  // set, the PDP renders the metaobject's `summary_text` inside <AiBlock>
+  // as a clean factual paragraph for AI crawlers. The product-by-handle
+  // query expands the metaobject's `fields` so the parser can extract
+  // `summary_text` server-side.
+  { namespace: "aix", key: "summary_block" },
   { namespace: "media", key: "primary_asset_id" },
   { namespace: "media", key: "gallery_asset_ids" },
   { namespace: "media", key: "primary_pdf_url" },
