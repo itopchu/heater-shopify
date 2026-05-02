@@ -178,6 +178,7 @@
     "fact_heating_medium": "Heating medium",
     "fact_heat_pump": "Heat-pump compatible",
     "fact_mounting_kit": "Mounting kit included",
+    "review_aria": "Rated {rating} out of 5 by {count} customers",
     "section_specs_eyebrow": "Technical specifications",
     "section_specs_title": "Detailed spec sheet",
     "section_about_eyebrow": "About this product",

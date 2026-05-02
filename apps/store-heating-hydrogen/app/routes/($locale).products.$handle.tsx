@@ -22,6 +22,8 @@ import {SectionsAccordion} from '~/components/gberg/pdp/sections-accordion';
 import {AiBlock} from '~/components/gberg/pdp/ai-block';
 import {Documents} from '~/components/gberg/pdp/documents';
 import {CollapsibleSection} from '~/components/gberg/pdp/collapsible-section';
+import {StarBadge} from '~/components/gberg/pdp/star-badge';
+import {fetchJudgemeAggregate} from '~/lib/gberg/judgeme';
 import {SiblingColors} from '~/components/gberg/pdp/sibling-colors';
 import {ProductGrid} from '~/components/gberg/plp/product-grid';
 import {createGbergClient} from '~/lib/storefront.server';
@@ -142,7 +144,7 @@ export async function loader({context, params}: Route.LoaderArgs) {
   // so a single 60-item fetch covers it without pagination. The
   // metafield-backfilled `editorial.series` is the join key; we fall
   // back to the legacy tag-derived series in `findSiblingColors`.
-  const [related, allProducts] = await Promise.all([
+  const [related, allProducts, reviewsAggregate] = await Promise.all([
     fetchRelatedProducts(client, product, locale, 4).catch(
       () => [] as HeatingProduct[],
     ),
@@ -150,14 +152,15 @@ export async function loader({context, params}: Route.LoaderArgs) {
       products: [] as HeatingProduct[],
       pageInfo: {hasNextPage: false, endCursor: null},
     })),
+    fetchJudgemeAggregate(handle, context.env as unknown as Record<string, string | undefined>),
   ]);
   const siblings = findSiblingColors(product, allProducts.products);
 
-  return {locale, product, related, siblings};
+  return {locale, product, related, siblings, reviewsAggregate};
 }
 
 export default function ProductPage() {
-  const {locale, product, related, siblings} = useLoaderData<typeof loader>();
+  const {locale, product, related, siblings, reviewsAggregate} = useLoaderData<typeof loader>();
   const t = useT();
   const crumbs = buildBreadcrumb(product, locale);
 
@@ -237,6 +240,20 @@ export default function ProductPage() {
                     {badgeLabel(b)}
                   </BadgePill>
                 ))}
+              </div>
+            ) : null}
+
+            {/*
+              Star rating badge from Judge.me. Renders nothing until
+              there's at least one published review for this product —
+              follows the same empty-section rule used elsewhere.
+            */}
+            {reviewsAggregate && reviewsAggregate.count > 0 ? (
+              <div className="mt-4">
+                <StarBadge
+                  rating={reviewsAggregate.rating}
+                  count={reviewsAggregate.count}
+                />
               </div>
             ) : null}
           </header>
