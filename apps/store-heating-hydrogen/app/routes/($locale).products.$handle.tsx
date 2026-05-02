@@ -266,23 +266,34 @@ export default function ProductPage() {
       </div>
 
       {/* BELOW THE FOLD */}
-      <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[2fr_1fr]">
-        <div className="space-y-12">
-          <AiBlock
-            entitySummary={aix.entity_summary}
-            keyFacts={keyFacts}
-            compatibilitySummary={aix.compatibility_summary}
-            customerQuestionSummary={aix.customer_question_summary}
-            summaryBlock={aix.summary_block}
-          />
-
+      <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[2fr_1fr]">
+        <div>
+          {/*
+            Single unified Overview — the AiBlock (entity summary, key
+            facts, compatibility, customer-Q summary, AI summary) and
+            the editorial DescriptionSection (short_description +
+            body_html + structured "At a glance" facts) used to stack
+            as TWO sections both labelled "Product overview". Folded
+            into one CollapsibleSection here. The AI block's structured
+            content sits at the top (best for crawlers + at-a-glance
+            scan), the editorial body sits below it.
+          */}
           <CollapsibleSection
             id="overview"
             eyebrow={t('pdp.section_overview_eyebrow')}
             title={t('pdp.section_overview')}
             defaultOpen={false}
           >
-            <DescriptionSection product={product} />
+            <div className="space-y-6">
+              <AiBlock
+                entitySummary={aix.entity_summary}
+                keyFacts={keyFacts}
+                compatibilitySummary={aix.compatibility_summary}
+                customerQuestionSummary={aix.customer_question_summary}
+                summaryBlock={aix.summary_block}
+              />
+              <DescriptionSection product={product} />
+            </div>
           </CollapsibleSection>
 
           {/*
