@@ -234,7 +234,12 @@ export default function HomePage() {
                   </div>
                 )}
                 <div
-                  className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#111111]/60 to-transparent"
+                  // Boosted from 60%/40%h to 85%/55%h. axe can't measure
+                  // contrast against the image pixels under the white
+                  // label — only the overlay layer counts. Stronger
+                  // overlay also looks better on bright product shots
+                  // where the original 60% washed out the type.
+                  className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[#111111]/85 to-transparent"
                   aria-hidden
                 />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-white md:p-6">

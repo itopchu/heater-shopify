@@ -152,19 +152,34 @@ h3 {
   border: 0;
 }
 
+/*
+ * Animated underline accent. Previously implemented with a flat
+ * `background-image: linear-gradient(...)` whose width grew on hover.
+ * That worked visually but tripped axe's `color-contrast` rule on every
+ * link wearing this class — when an element has *any* background-image
+ * axe can't introspect the colors and falls back to "needs further
+ * review" (Pa11y treats those as failures). Switching to a `::after`
+ * pseudo-element with a plain background-color leaves the link itself
+ * with no background image, so axe can confirm contrast freely.
+ */
 .link-accent {
-  background-image: linear-gradient(var(--color-primary), var(--color-primary));
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 2px;
-  transition:
-    background-size 300ms ease-out,
-    color 200ms ease;
+  position: relative;
   padding-bottom: 2px;
+  transition: color 200ms ease;
 }
-.link-accent:hover,
-.link-accent:focus-visible {
-  background-size: 100% 2px;
+.link-accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: var(--color-primary);
+  transition: width 300ms ease-out;
+}
+.link-accent:hover::after,
+.link-accent:focus-visible::after {
+  width: 100%;
 }
 
 .nav-link {
