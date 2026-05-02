@@ -685,7 +685,12 @@ function FilterSheet({
         role="dialog"
         aria-modal="true"
         aria-label={t("plp.filter_sort")}
-        aria-hidden={!open}
+        // `inert` removes the closed drawer's focusables from the tab
+        // order AND the accessibility tree — replaces the WCAG-violating
+        // `aria-hidden` on a container with focusable descendants
+        // (axe rule `aria-hidden-focus`). Mirrors the mobile-drawer fix.
+        suppressHydrationWarning
+        {...(!open ? {inert: ''} : {})}
       >
         <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4">
           <p className="font-[var(--font-display)] text-xl font-semibold tracking-tight">

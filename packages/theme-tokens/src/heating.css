@@ -40,6 +40,13 @@
   --color-primary: #C8102E;
   --color-primary-hover: #8A0B1F;
   --color-primary-fg: #FFFFFF;
+  /*
+   * On-dark variant: brand red #C8102E is 3.2:1 on #111 — fails WCAG AA
+   * for normal text (needs 4.5:1). #F0556E is the same hue lifted in
+   * lightness to clear 5.4:1, used wherever the eyebrow/accent text
+   * sits over --color-surface-inverse (footer, dark CTA strips).
+   */
+  --color-primary-on-dark: #F0556E;
 
   /* Primary CTA (charcoal fill / white text). */
   --color-cta: #111111;

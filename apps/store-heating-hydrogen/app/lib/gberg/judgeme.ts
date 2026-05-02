@@ -99,7 +99,13 @@ export async function fetchJudgemeAggregate(
     // 1. Look up the Judge.me product id by handle.
     const lookup = await fetch(
       `${JUDGE_ME_BASE}/products/-1?api_token=${cfg.privateToken}&shop_domain=${cfg.shopDomain}&handle=${encodeURIComponent(productHandle)}`,
-      { headers: { Accept: 'application/json' } },
+      {
+        headers: { Accept: 'application/json' },
+        // Cloudflare/Oxygen edge cache. Reviews change infrequently;
+        // a 5-min cache absorbs PDP traffic spikes without stale data
+        // hanging around for too long after a moderation action.
+        cf: { cacheTtl: 300, cacheEverything: true } as RequestInit['cf'],
+      },
     );
     if (!lookup.ok) return null;
     const lookupJson = (await lookup.json()) as JudgemeProductResponse;
@@ -113,7 +119,13 @@ export async function fetchJudgemeAggregate(
     //    this is a single round-trip.
     const reviews = await fetch(
       `${JUDGE_ME_BASE}/reviews?api_token=${cfg.privateToken}&shop_domain=${cfg.shopDomain}&product_id=${productId}&per_page=100&published=true`,
-      { headers: { Accept: 'application/json' } },
+      {
+        headers: { Accept: 'application/json' },
+        // Cloudflare/Oxygen edge cache. Reviews change infrequently;
+        // a 5-min cache absorbs PDP traffic spikes without stale data
+        // hanging around for too long after a moderation action.
+        cf: { cacheTtl: 300, cacheEverything: true } as RequestInit['cf'],
+      },
     );
     if (!reviews.ok) return null;
     const reviewsJson = (await reviews.json()) as JudgemeReviewListResponse;
@@ -145,7 +157,13 @@ export async function fetchJudgemeData(
   try {
     const lookup = await fetch(
       `${JUDGE_ME_BASE}/products/-1?api_token=${cfg.privateToken}&shop_domain=${cfg.shopDomain}&handle=${encodeURIComponent(productHandle)}`,
-      { headers: { Accept: 'application/json' } },
+      {
+        headers: { Accept: 'application/json' },
+        // Cloudflare/Oxygen edge cache. Reviews change infrequently;
+        // a 5-min cache absorbs PDP traffic spikes without stale data
+        // hanging around for too long after a moderation action.
+        cf: { cacheTtl: 300, cacheEverything: true } as RequestInit['cf'],
+      },
     );
     if (!lookup.ok) return null;
     const lookupJson = (await lookup.json()) as JudgemeProductResponse;
@@ -153,7 +171,13 @@ export async function fetchJudgemeData(
     if (!productId) return null;
     const reviews = await fetch(
       `${JUDGE_ME_BASE}/reviews?api_token=${cfg.privateToken}&shop_domain=${cfg.shopDomain}&product_id=${productId}&per_page=${perPage}&published=true`,
-      { headers: { Accept: 'application/json' } },
+      {
+        headers: { Accept: 'application/json' },
+        // Cloudflare/Oxygen edge cache. Reviews change infrequently;
+        // a 5-min cache absorbs PDP traffic spikes without stale data
+        // hanging around for too long after a moderation action.
+        cf: { cacheTtl: 300, cacheEverything: true } as RequestInit['cf'],
+      },
     );
     if (!reviews.ok) return null;
     const reviewsJson = (await reviews.json()) as JudgemeReviewListResponse;

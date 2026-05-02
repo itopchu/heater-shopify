@@ -86,9 +86,16 @@ export function Header({locale, menu}: HeaderProps) {
           <SearchOverlay locale={locale} />
           <Link
             to={localeHref(locale, '/cart')}
-            aria-label={t('header.cart_aria')}
             className="link-accent text-[var(--color-text)]"
           >
+            {/*
+              No aria-label here. Visible text is "Cart (N)" via CartCount —
+              that string is the accessible name. A separate aria-label of
+              "Cart" was triggering axe's `label-content-name-mismatch`
+              because the visible label ("Cart (0)") wasn't a substring of
+              the accessible name ("Cart"). The visible string is already
+              clear, so let it serve as the accessible name.
+            */}
             <CartCount locale={safeLocale} />
           </Link>
           <MobileDrawer locale={locale} columns={columns} />

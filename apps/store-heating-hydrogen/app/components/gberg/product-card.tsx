@@ -138,6 +138,7 @@ export function ProductCard({product, locale}: ProductCardProps) {
               alt={primary.altText ?? product.title}
               aspectRatio="3/4"
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
             {secondary ? (
@@ -147,6 +148,7 @@ export function ProductCard({product, locale}: ProductCardProps) {
                 aria-hidden
                 aspectRatio="3/4"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
               />
             ) : null}
@@ -204,11 +206,11 @@ export function ProductCard({product, locale}: ProductCardProps) {
           title box, and prices sit right under the spec instead of
           floating in empty space.
         */}
-        <h3
+        <h2
           className="flex-1 font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)]"
         >
           {product.title}
-        </h3>
+        </h2>
 
         {/*
           Spec slot — also always rendered with a min-height so cards

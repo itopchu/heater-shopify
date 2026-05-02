@@ -29,7 +29,7 @@ export function Footer({locale}: {locale: string}) {
       <div className="border-b border-white/15">
         <div className="container-x grid gap-6 py-10 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-12">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-primary)]">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-primary-on-dark)]">
               {t('footer.stay_in_loop')}
             </p>
             <p className="mt-3 font-[var(--font-display)] text-3xl italic leading-[1] md:text-4xl">
@@ -48,7 +48,7 @@ export function Footer({locale}: {locale: string}) {
           <p className="mt-5 max-w-[28ch] text-sm text-white/90">
             {t('footer.brand_blurb')}
           </p>
-          <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)]">
+          <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary-on-dark)]">
             {t('footer.legal_entity')}
           </p>
         </div>
@@ -78,7 +78,7 @@ function FooterColumn({
 }) {
   return (
     <div className="md:col-span-2 md:relative md:before:absolute md:before:left-[-1rem] md:before:top-0 md:before:bottom-0 md:before:w-px md:before:bg-[var(--color-primary)]/30 lg:col-span-2">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary-on-dark)]">
         {title}
       </p>
       <ul className="mt-5 space-y-3 text-sm">
@@ -86,7 +86,7 @@ function FooterColumn({
           <li key={i.href}>
             <Link
               to={i.href}
-              className="link-accent text-white transition-colors hover:text-[var(--color-primary)]"
+              className="link-accent text-white transition-colors hover:text-[var(--color-primary-on-dark)]"
             >
               {i.label}
             </Link>
