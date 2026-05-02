@@ -229,7 +229,7 @@ export function ProductCard({product, locale}: ProductCardProps) {
           <p className="text-xs text-[var(--color-text-muted)]">{fallbackSpec}</p>
         ) : null}
 
-        <div className="flex items-baseline justify-between pt-2">
+        <div className="mt-2 flex items-baseline justify-between border-t border-[var(--color-border-strong)] pt-3">
           <PriceLine product={product} intl={intl} />
           {product.specs.heat_pump_compatible ? (
             <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-success)]">
