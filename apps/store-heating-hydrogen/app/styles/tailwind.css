@@ -278,44 +278,60 @@ h3 {
 
 /*
  * Red corner-bracket frame around the entire product card (PLP).
+ *
  * Default: two diagonal L-marks (top-left + bottom-right) in brand red,
  * sitting on the outer card link so they wrap image + text + price.
- * Hover/focus-visible: each L extends along its two edges to width/height
- * 100%, meeting at the opposite corners — drawing a complete red border
- * around the whole card. The two pseudo-elements together cover all four
- * sides (::before draws top + left, ::after draws bottom + right).
+ *
+ * Hover/focus-visible: each L extends along its two edges to meet at the
+ * opposite corners — drawing a complete red border around the whole card.
+ *
+ * The animation uses the four inset properties (top/right/bottom/left)
+ * rather than width/height. Browsers reliably interpolate between two
+ * <length-percentage> values, but a width transition from 22px → 100%
+ * (mixed unit types, with 100% computed against a parent that may itself
+ * be in flux during paint) can snap rather than tween. Transitioning
+ * inset values keeps the animation buttery on every modern browser.
+ *
+ * ::before owns top + left edges, ::after owns bottom + right.
  */
 .card-edit::before,
 .card-edit::after {
   content: '';
   position: absolute;
   z-index: 2;
-  width: 22px;
-  height: 22px;
   border: 0 solid var(--color-primary);
   pointer-events: none;
   transition:
-    width 360ms cubic-bezier(0.2, 0.7, 0.3, 1),
-    height 360ms cubic-bezier(0.2, 0.7, 0.3, 1);
+    top 480ms cubic-bezier(0.16, 1, 0.3, 1),
+    right 480ms cubic-bezier(0.16, 1, 0.3, 1),
+    bottom 480ms cubic-bezier(0.16, 1, 0.3, 1),
+    left 480ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-edit::before {
   top: 0;
   left: 0;
+  right: calc(100% - 22px);
+  bottom: calc(100% - 22px);
   border-top-width: 2px;
   border-left-width: 2px;
 }
 .card-edit::after {
-  bottom: 0;
+  top: calc(100% - 22px);
+  left: calc(100% - 22px);
   right: 0;
+  bottom: 0;
   border-bottom-width: 2px;
   border-right-width: 2px;
 }
 .card-edit:hover::before,
-.card-edit:focus-visible::before,
+.card-edit:focus-visible::before {
+  right: 0;
+  bottom: 0;
+}
 .card-edit:hover::after,
 .card-edit:focus-visible::after {
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
 }
 @media (prefers-reduced-motion: reduce) {
   .card-edit::before,
