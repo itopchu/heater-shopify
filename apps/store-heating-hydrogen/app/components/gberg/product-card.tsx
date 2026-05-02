@@ -194,8 +194,18 @@ export function ProductCard({product, locale}: ProductCardProps) {
           the price to the bottom regardless of how many lines the
           title wraps to.
         */}
+        {/*
+          Title block grows to fill remaining card height (`flex-1`),
+          absorbing the slack that previously sat above the price row
+          on short-name cards. With grid rows already at 1fr, this
+          means each card's title area "clamps" to the same height as
+          the longest title in its row — long names render in full,
+          short names leave a small flex slack at the top of the
+          title box, and prices sit right under the spec instead of
+          floating in empty space.
+        */}
         <h3
-          className="font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)]"
+          className="flex-1 font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)]"
         >
           {product.title}
         </h3>
@@ -206,20 +216,18 @@ export function ProductCard({product, locale}: ProductCardProps) {
           Empty slot is invisible but still occupies one chip-row of
           vertical space.
         */}
-        <div className="min-h-[1.5rem]">
-          {hasSpecChip ? (
-            <div className="flex flex-wrap items-center gap-1.5">
-              {wattage != null && wattage > 0 ? (
-                <Chip tone="spec">{wattage}W</Chip>
-              ) : null}
-              {dimensions ? <Chip tone="spec">{dimensions}</Chip> : null}
-            </div>
-          ) : fallbackSpec ? (
-            <p className="text-xs text-[var(--color-text-muted)]">{fallbackSpec}</p>
-          ) : null}
-        </div>
+        {hasSpecChip ? (
+          <div className="flex flex-wrap items-center gap-1.5">
+            {wattage != null && wattage > 0 ? (
+              <Chip tone="spec">{wattage}W</Chip>
+            ) : null}
+            {dimensions ? <Chip tone="spec">{dimensions}</Chip> : null}
+          </div>
+        ) : fallbackSpec ? (
+          <p className="text-xs text-[var(--color-text-muted)]">{fallbackSpec}</p>
+        ) : null}
 
-        <div className="mt-auto flex items-baseline justify-between pt-3">
+        <div className="flex items-baseline justify-between pt-2">
           <PriceLine product={product} intl={intl} />
           {product.specs.heat_pump_compatible ? (
             <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-success)]">
