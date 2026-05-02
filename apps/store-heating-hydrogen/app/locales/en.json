@@ -184,6 +184,8 @@
     "review_count_singular": "{count} review",
     "review_count_plural": "{count} reviews",
     "review_verified_buyer": "Verified buyer",
+    "reviews_show_more": "Show {count} more",
+    "reviews_show_less": "Show less",
     "section_specs_eyebrow": "Technical specifications",
     "section_specs_title": "Detailed spec sheet",
     "section_about_eyebrow": "About this product",

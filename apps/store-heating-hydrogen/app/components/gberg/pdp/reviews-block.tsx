@@ -7,10 +7,20 @@
  * least one published review.
  *
  * Text-only per spec (no photo or video review attachments).
+ *
+ * Pagination: shows the first 5 reviews by default; "Show more"
+ * reveals another 5 each click. Caps at the server-fetched batch
+ * size (loader currently asks Judge.me for up to 30 reviews per
+ * request) — keeps the initial DOM small without back-and-forth
+ * fetches for the typical product.
  */
+import {useState} from 'react';
 import {useT} from '~/lib/gberg/i18n';
 import type {JudgemeData} from '~/lib/gberg/judgeme';
 import {StarBadge} from './star-badge';
+
+const INITIAL_VISIBLE = 5;
+const PAGE_SIZE = 5;
 
 export interface ReviewsBlockProps {
   data: JudgemeData;
@@ -62,9 +72,13 @@ function buildDistribution(reviews: JudgemeData['reviews']): number[] {
 
 export function ReviewsBlock({data}: ReviewsBlockProps) {
   const t = useT();
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   if (!data || data.aggregate.count === 0) return null;
   const distribution = buildDistribution(data.reviews);
   const intl = 'en-GB'; // PDP route already passes locale; keep date format stable here
+  const visible = data.reviews.slice(0, visibleCount);
+  const hasMore = visibleCount < data.reviews.length;
+  const remaining = data.reviews.length - visibleCount;
 
   return (
     <div className="space-y-8">
@@ -112,7 +126,7 @@ export function ReviewsBlock({data}: ReviewsBlockProps) {
 
       {/* Review list */}
       <ul className="divide-y divide-[var(--color-border)]">
-        {data.reviews.map((r) => (
+        {visible.map((r) => (
           <li key={r.id} className="py-5">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <div className="flex items-center gap-3">
@@ -148,6 +162,29 @@ export function ReviewsBlock({data}: ReviewsBlockProps) {
           </li>
         ))}
       </ul>
+
+      {hasMore ? (
+        <div className="flex justify-center pt-2">
+          <button
+            type="button"
+            onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+            className="inline-flex items-center gap-2 rounded-sm border border-[var(--color-border)] px-5 py-2.5 text-[12px] uppercase tracking-[0.12em] font-semibold text-[var(--color-text)] transition-colors hover:border-[var(--color-text)] hover:bg-[var(--color-surface-muted)]"
+          >
+            {t('pdp.reviews_show_more', {count: Math.min(PAGE_SIZE, remaining)})}
+            <span aria-hidden>↓</span>
+          </button>
+        </div>
+      ) : data.reviews.length > INITIAL_VISIBLE ? (
+        <div className="flex justify-center pt-2">
+          <button
+            type="button"
+            onClick={() => setVisibleCount(INITIAL_VISIBLE)}
+            className="text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-primary)]"
+          >
+            {t('pdp.reviews_show_less')}
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }

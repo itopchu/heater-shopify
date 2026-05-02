@@ -153,7 +153,7 @@ export async function loader({context, params}: Route.LoaderArgs) {
       products: [] as HeatingProduct[],
       pageInfo: {hasNextPage: false, endCursor: null},
     })),
-    fetchJudgemeData(handle, context.env as unknown as Record<string, string | undefined>),
+    fetchJudgemeData(handle, context.env as unknown as Record<string, string | undefined>, {perPage: 30}),
   ]);
   const siblings = findSiblingColors(product, allProducts.products);
 
