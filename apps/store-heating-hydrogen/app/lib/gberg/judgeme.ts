@@ -42,7 +42,32 @@ interface JudgemeReviewListResponse {
   reviews: Array<{
     id: number;
     rating: number;
+    title?: string | null;
+    body?: string | null;
+    published?: boolean;
+    curated?: string;
+    created_at?: string;
+    verified?: string | null;
+    reviewer?: {
+      name?: string | null;
+      email?: string | null;
+    };
   }>;
+}
+
+export interface JudgemeReview {
+  id: number;
+  rating: number;
+  title: string;
+  body: string;
+  reviewerName: string;
+  createdAt: string;
+  verifiedBuyer: boolean;
+}
+
+export interface JudgemeData {
+  aggregate: JudgemeAggregate;
+  reviews: JudgemeReview[];
 }
 
 interface ClientConfig {
@@ -98,6 +123,61 @@ export async function fetchJudgemeAggregate(
     return {
       rating: Math.round((sum / list.length) * 10) / 10,
       count: list.length,
+    };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Fetch aggregate + the latest published reviews for a product. Same
+ * round-trip plan as fetchJudgemeAggregate but maps reviews into the
+ * shape the UI consumes. Returns null when integration isn't set up.
+ */
+export async function fetchJudgemeData(
+  productHandle: string,
+  env: Record<string, string | undefined>,
+  opts: { perPage?: number } = {},
+): Promise<JudgemeData | null> {
+  const cfg = readConfig(env);
+  if (!cfg) return null;
+  const perPage = Math.max(1, Math.min(50, opts.perPage ?? 20));
+  try {
+    const lookup = await fetch(
+      `${JUDGE_ME_BASE}/products/-1?api_token=${cfg.privateToken}&shop_domain=${cfg.shopDomain}&handle=${encodeURIComponent(productHandle)}`,
+      { headers: { Accept: 'application/json' } },
+    );
+    if (!lookup.ok) return null;
+    const lookupJson = (await lookup.json()) as JudgemeProductResponse;
+    const productId = lookupJson.product?.id;
+    if (!productId) return null;
+    const reviews = await fetch(
+      `${JUDGE_ME_BASE}/reviews?api_token=${cfg.privateToken}&shop_domain=${cfg.shopDomain}&product_id=${productId}&per_page=${perPage}&published=true`,
+      { headers: { Accept: 'application/json' } },
+    );
+    if (!reviews.ok) return null;
+    const reviewsJson = (await reviews.json()) as JudgemeReviewListResponse;
+    const list = (reviewsJson.reviews ?? []).filter(
+      (r) => r.published !== false && r.curated !== 'spam',
+    );
+    if (list.length === 0) {
+      return { aggregate: { rating: 0, count: 0 }, reviews: [] };
+    }
+    const sum = list.reduce((acc, r) => acc + (Number(r.rating) || 0), 0);
+    return {
+      aggregate: {
+        rating: Math.round((sum / list.length) * 10) / 10,
+        count: list.length,
+      },
+      reviews: list.map((r) => ({
+        id: r.id,
+        rating: Number(r.rating) || 0,
+        title: (r.title ?? '').trim(),
+        body: (r.body ?? '').trim(),
+        reviewerName: r.reviewer?.name?.trim() || 'Anonymous',
+        createdAt: r.created_at ?? '',
+        verifiedBuyer: !!r.verified,
+      })),
     };
   } catch {
     return null;

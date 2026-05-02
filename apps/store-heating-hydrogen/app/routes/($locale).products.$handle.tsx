@@ -23,7 +23,8 @@ import {AiBlock} from '~/components/gberg/pdp/ai-block';
 import {Documents} from '~/components/gberg/pdp/documents';
 import {CollapsibleSection} from '~/components/gberg/pdp/collapsible-section';
 import {StarBadge} from '~/components/gberg/pdp/star-badge';
-import {fetchJudgemeAggregate} from '~/lib/gberg/judgeme';
+import {ReviewsBlock} from '~/components/gberg/pdp/reviews-block';
+import {fetchJudgemeData} from '~/lib/gberg/judgeme';
 import {SiblingColors} from '~/components/gberg/pdp/sibling-colors';
 import {ProductGrid} from '~/components/gberg/plp/product-grid';
 import {createGbergClient} from '~/lib/storefront.server';
@@ -152,15 +153,16 @@ export async function loader({context, params}: Route.LoaderArgs) {
       products: [] as HeatingProduct[],
       pageInfo: {hasNextPage: false, endCursor: null},
     })),
-    fetchJudgemeAggregate(handle, context.env as unknown as Record<string, string | undefined>),
+    fetchJudgemeData(handle, context.env as unknown as Record<string, string | undefined>),
   ]);
   const siblings = findSiblingColors(product, allProducts.products);
 
-  return {locale, product, related, siblings, reviewsAggregate};
+  return {locale, product, related, siblings, reviews: reviewsAggregate};
 }
 
 export default function ProductPage() {
-  const {locale, product, related, siblings, reviewsAggregate} = useLoaderData<typeof loader>();
+  const {locale, product, related, siblings, reviews} = useLoaderData<typeof loader>();
+  const reviewsAggregate = reviews?.aggregate ?? null;
   const t = useT();
   const crumbs = buildBreadcrumb(product, locale);
 
@@ -253,6 +255,7 @@ export default function ProductPage() {
                 <StarBadge
                   rating={reviewsAggregate.rating}
                   count={reviewsAggregate.count}
+                  href="#reviews"
                 />
               </div>
             ) : null}
@@ -360,6 +363,23 @@ export default function ProductPage() {
               defaultOpen={false}
             >
               <FaqAccordion items={faqs} />
+            </CollapsibleSection>
+          ) : null}
+
+          {/*
+            Customer reviews block — pulls from Judge.me on the server,
+            renders via <ReviewsBlock>. Renders nothing when there are
+            zero published reviews. The buy-box StarBadge links to
+            #reviews to scroll here.
+          */}
+          {reviews && reviews.aggregate.count > 0 ? (
+            <CollapsibleSection
+              id="reviews"
+              eyebrow={t('pdp.section_reviews_eyebrow')}
+              title={t('pdp.section_reviews_title')}
+              defaultOpen={true}
+            >
+              <ReviewsBlock data={reviews} />
             </CollapsibleSection>
           ) : null}
         </div>
