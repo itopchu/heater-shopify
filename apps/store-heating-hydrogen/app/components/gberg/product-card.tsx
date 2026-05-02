@@ -187,7 +187,11 @@ export function ProductCard({product, locale}: ProductCardProps) {
           "naming pushes texts around".
         */}
         <h3
-          className="font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)] line-clamp-2 min-h-[2.6em]"
+          // Always reserve 2.75em of vertical space — exactly two lines at
+          // text-[1.05rem] × leading-snug (1.375). Combined with line-clamp-2
+          // this gives every card an identical title block whether the
+          // product name is one word or wraps across two lines.
+          className="font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)] line-clamp-2 min-h-[2.75em]"
           title={product.title}
         >
           {product.title}

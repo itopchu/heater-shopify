@@ -232,10 +232,25 @@ h3 {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Force every row to the height of its tallest cell so adjacent
+     cards always line their price rows up at the same baseline. The
+     default `auto` row sizing lets each row size to the content of
+     the tallest item in that row, but stretching equalises only WITHIN
+     the row — combined with the card's `mt-auto` price line and the
+     line-clamped title (min-h-[2.6em]), prices snap to the same
+     vertical position across each row. */
+  grid-auto-rows: 1fr;
+  align-items: stretch;
   gap: 8px;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.product-grid > li {
+  display: flex;
+}
+.product-grid > li > a {
+  flex: 1;
 }
 @media (min-width: 640px) {
   .product-grid {
