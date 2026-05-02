@@ -42,6 +42,9 @@ export interface ProductCardProps {
  * branch is rare.
  */
 function legacyShortSpec(p: HeatingProduct): string {
+  // specs.color used to be appended here, but the colour already lives
+  // in the product title (e.g. "Twister — Towel Warmer, White") so the
+  // suffix duplicated the same word visually under the title.
   const bits: string[] = [];
   if (p.specs.width_mm && p.specs.height_mm) {
     bits.push(`${p.specs.width_mm} × ${p.specs.height_mm} mm`);
@@ -49,7 +52,6 @@ function legacyShortSpec(p: HeatingProduct): string {
   if (p.specs.heat_output_75_65_20) {
     bits.push(`${p.specs.heat_output_75_65_20} W`);
   }
-  if (p.specs.color) bits.push(p.specs.color);
   return bits.join(' · ');
 }
 
@@ -178,7 +180,16 @@ export function ProductCard({product, locale}: ProductCardProps) {
       */}
       <div className="flex flex-1 flex-col gap-2 px-1 pb-4 pt-4">
         {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-        <h3 className="font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)]">
+        {/*
+          Title clamped to two lines so prices line up across the grid.
+          Variable-height titles previously pushed price rows to different
+          baselines on neighbouring cards, which the user flagged as
+          "naming pushes texts around".
+        */}
+        <h3
+          className="font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)] line-clamp-2 min-h-[2.6em]"
+          title={product.title}
+        >
           {product.title}
         </h3>
 
@@ -193,7 +204,12 @@ export function ProductCard({product, locale}: ProductCardProps) {
           <p className="text-xs text-[var(--color-text-muted)]">{fallbackSpec}</p>
         ) : null}
 
-        <ColorSwatchRow product={product} />
+        {/*
+          Color swatch row removed — user flagged the obsolete colour
+          bubbles. The colour is already in the product title and on
+          the Color filter sidebar; the duplicated visual cue read as
+          dated.
+        */}
         <div className="mt-auto flex items-baseline justify-between pt-3">
           <PriceLine product={product} intl={intl} />
           {product.specs.heat_pump_compatible ? (

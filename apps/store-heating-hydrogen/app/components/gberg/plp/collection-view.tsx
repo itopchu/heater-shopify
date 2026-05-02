@@ -51,7 +51,7 @@ interface FacetState {
   productType: Set<string>;
   colorFamily: Set<string>;
   series: Set<Series>;
-  heatingMedium: "all" | "hydronic" | "electric";
+  heatingMedium: Set<"hydronic" | "electric">;
   /** "Sub-category" chips — orientation, bathroom, heat-pump, etc. */
   flags: Set<FlagKey>;
 }
@@ -71,7 +71,7 @@ function emptyFacets(): FacetState {
     productType: new Set(),
     colorFamily: new Set(),
     series: new Set(),
-    heatingMedium: "all",
+    heatingMedium: new Set(),
     flags: new Set(),
   };
 }
@@ -147,9 +147,9 @@ function applyFilters(products: HeatingProduct[], facets: FacetState): HeatingPr
       const s = resolveSeries(p.tags);
       if (!s || !facets.series.has(s)) return false;
     }
-    if (facets.heatingMedium !== "all") {
+    if (facets.heatingMedium.size > 0) {
       const hm = p.specs.heating_medium;
-      if (hm !== facets.heatingMedium) return false;
+      if (!hm || !facets.heatingMedium.has(hm as "hydronic" | "electric")) return false;
     }
     for (const flag of facets.flags) {
       if (!flagMatches(p, flag)) return false;
@@ -438,14 +438,14 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
       clear: () => setFacets((f) => ({ ...f, series: toggle(f.series, v) })),
     });
   }
-  if (facets.heatingMedium !== "all") {
+  for (const hm of facets.heatingMedium) {
     activeChips.push({
-      key: `hm-${facets.heatingMedium}`,
+      key: `hm-${hm}`,
       label:
-        facets.heatingMedium === "hydronic"
+        hm === "hydronic"
           ? t("plp.heating_medium_hydronic")
           : t("plp.heating_medium_electric"),
-      clear: () => setFacets((f) => ({ ...f, heatingMedium: "all" })),
+      clear: () => setFacets((f) => ({ ...f, heatingMedium: toggle(f.heatingMedium, hm) })),
     });
   }
   for (const f of facets.flags) {
@@ -464,7 +464,7 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
     facets.productType.size +
     facets.colorFamily.size +
     facets.series.size +
-    (facets.heatingMedium !== "all" ? 1 : 0) +
+    facets.heatingMedium.size +
     facets.flags.size;
 
   const FilterShell = (
@@ -491,48 +491,17 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         selected={facets.series}
         onToggle={(v) => setFacets((f) => ({ ...f, series: toggle(f.series, v) }))}
       />
-      <details
-        open
-        className="group border-b border-[var(--color-border)] pb-4 last:border-b-0"
-      >
-        <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold">
-          {t("plp.facet_heating_medium")}
-          <span aria-hidden className="text-[var(--color-text-muted)] group-open:rotate-45">+</span>
-        </summary>
-        <ul className="mt-3 space-y-1">
-          {[
-            { value: "all" as const, label: t("plp.heating_medium_all"), count: products.length },
-            { value: "hydronic" as const, label: t("plp.heating_medium_hydronic"), count: facetOptions.hydronic },
-            { value: "electric" as const, label: t("plp.heating_medium_electric"), count: facetOptions.electric },
-          ].map((m) => {
-            const active = facets.heatingMedium === m.value;
-            return (
-              <li key={m.value}>
-                <label
-                  className={cn(
-                    "flex cursor-pointer items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm transition-colors",
-                    active
-                      ? "bg-[var(--color-surface-muted)] text-[var(--color-text)] font-medium"
-                      : "text-[var(--color-text)] hover:bg-[var(--color-surface-muted)]/60",
-                  )}
-                >
-                  <span className="flex items-center gap-2.5">
-                    <input
-                      type="radio"
-                      name="heating-medium"
-                      checked={active}
-                      onChange={() => setFacets((f) => ({ ...f, heatingMedium: m.value }))}
-                      className="h-4 w-4 cursor-pointer accent-[var(--color-primary)]"
-                    />
-                    {m.label}
-                  </span>
-                  <span className="text-xs text-[var(--color-text-muted)]">{m.count}</span>
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-      </details>
+      <FacetGroup<"hydronic" | "electric">
+        label={t("plp.facet_heating_medium")}
+        values={[
+          { value: "hydronic", count: facetOptions.hydronic, label: t("plp.heating_medium_hydronic") },
+          { value: "electric", count: facetOptions.electric, label: t("plp.heating_medium_electric") },
+        ]}
+        selected={facets.heatingMedium}
+        onToggle={(v) =>
+          setFacets((f) => ({ ...f, heatingMedium: toggle(f.heatingMedium, v) }))
+        }
+      />
     </div>
   );
 
@@ -607,23 +576,14 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         </div>
       </div>
 
-      {/* Active chips */}
-      {activeChips.length > 0 ? (
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          {activeChips.map((chip) => (
-            <Chip key={chip.key} removable onRemove={chip.clear}>
-              {chip.label}
-            </Chip>
-          ))}
-          <button
-            type="button"
-            onClick={clearAll}
-            className="text-sm text-[var(--color-primary)] underline-offset-2 hover:underline"
-          >
-            {t("plp.filter_clear_all_count", { count: totalActive })}
-          </button>
-        </div>
-      ) : null}
+      {/*
+        Active filter chips were here. The user reported the row of chips
+        appearing under the result-count bar caused the page to jump and
+        feel unstable on every click. Sidebar facet checkboxes are the
+        sole control surface now — they already show the active state
+        clearly, so the duplicate chip row added more friction than it
+        removed.
+      */}
 
       <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[260px_1fr]">
         {/* Filter sidebar (desktop only) */}
