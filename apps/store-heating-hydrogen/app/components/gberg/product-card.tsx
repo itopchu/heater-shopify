@@ -128,7 +128,7 @@ export function ProductCard({product, locale}: ProductCardProps) {
   return (
     <Link
       to={localeHref(locale, `/products/${product.handle}`)}
-      className="card-edit group flex flex-col bg-[var(--color-surface)] transition-[box-shadow] duration-200 hover:[box-shadow:var(--shadow-hairline-hover)]"
+      className="card-edit group flex h-full flex-col bg-[var(--color-surface)] transition-[box-shadow] duration-200 hover:[box-shadow:var(--shadow-hairline-hover)]"
     >
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-[var(--color-surface-muted)]">
         {primary ? (
@@ -179,41 +179,46 @@ export function ProductCard({product, locale}: ProductCardProps) {
         hover-revealed hairline shadow on the outer link.
       */}
       <div className="flex flex-1 flex-col gap-2 px-1 pb-4 pt-4">
-        {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
         {/*
-          Title clamped to two lines so prices line up across the grid.
-          Variable-height titles previously pushed price rows to different
-          baselines on neighbouring cards, which the user flagged as
-          "naming pushes texts around".
+          Eyebrow slot is ALWAYS rendered — even on accessory products
+          that have no series. This keeps the title's vertical position
+          identical across cards, so price rows line up. We just print
+          a non-breaking space when there's no series to display.
+        */}
+        <Eyebrow>{eyebrow ?? ' '}</Eyebrow>
+
+        {/*
+          Title is NOT clamped — full product name shows. Cards in the
+          same row stretch to the tallest one (grid-auto-rows: 1fr +
+          h-full on the link), and `mt-auto` on the price row pins
+          the price to the bottom regardless of how many lines the
+          title wraps to.
         */}
         <h3
-          // Always reserve 2.75em of vertical space — exactly two lines at
-          // text-[1.05rem] × leading-snug (1.375). Combined with line-clamp-2
-          // this gives every card an identical title block whether the
-          // product name is one word or wraps across two lines.
-          className="font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)] line-clamp-2 min-h-[2.75em]"
-          title={product.title}
+          className="font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)]"
         >
           {product.title}
         </h3>
 
-        {hasSpecChip ? (
-          <div className="flex flex-wrap items-center gap-1.5">
-            {wattage != null && wattage > 0 ? (
-              <Chip tone="spec">{wattage}W</Chip>
-            ) : null}
-            {dimensions ? <Chip tone="spec">{dimensions}</Chip> : null}
-          </div>
-        ) : fallbackSpec ? (
-          <p className="text-xs text-[var(--color-text-muted)]">{fallbackSpec}</p>
-        ) : null}
-
         {/*
-          Color swatch row removed — user flagged the obsolete colour
-          bubbles. The colour is already in the product title and on
-          the Color filter sidebar; the duplicated visual cue read as
-          dated.
+          Spec slot — also always rendered with a min-height so cards
+          without a chip OR a fallback line don't collapse this band.
+          Empty slot is invisible but still occupies one chip-row of
+          vertical space.
         */}
+        <div className="min-h-[1.5rem]">
+          {hasSpecChip ? (
+            <div className="flex flex-wrap items-center gap-1.5">
+              {wattage != null && wattage > 0 ? (
+                <Chip tone="spec">{wattage}W</Chip>
+              ) : null}
+              {dimensions ? <Chip tone="spec">{dimensions}</Chip> : null}
+            </div>
+          ) : fallbackSpec ? (
+            <p className="text-xs text-[var(--color-text-muted)]">{fallbackSpec}</p>
+          ) : null}
+        </div>
+
         <div className="mt-auto flex items-baseline justify-between pt-3">
           <PriceLine product={product} intl={intl} />
           {product.specs.heat_pump_compatible ? (
