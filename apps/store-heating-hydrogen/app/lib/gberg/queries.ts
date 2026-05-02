@@ -256,16 +256,18 @@ export async function fetchBlog(
  * If that fails too, the homepage renders a text placeholder.
  */
 const CATEGORY_HERO_PRODUCT_HANDLES: Record<string, string> = {
-  living-room-radiators:
+  'living-room-radiators':
     'vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-anthrazit',
-  bathroom-radiators: 'bathroom-radiators-mittelanschluss-alpha-anthrazit-handtuchwaermer',
+  'bathroom-radiators':
+    'badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer',
   'electric-bathroom-radiators':
     'badheizkorper-elektrisch-elmar-anthrazit-handtuchheizkorper-handtuchwarmer',
-  replacement-radiators:
+  'replacement-radiators':
     'austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen',
   fussbodenheizung:
     'fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m',
-  accessories: 'handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom',
+  accessories:
+    'handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom',
 };
 
 /**

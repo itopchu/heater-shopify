@@ -430,12 +430,16 @@ export function galleryImages(p: HeatingProduct): ImageType[] {
 // Source code is English-only. Shopify Translate & Adapt handles any
 // non-English rendering at the platform layer.
 const COLLECTION_LABELS: Record<string, string> = {
-  badheizkorper: 'Bathroom radiators',
+  'bathroom-radiators': 'Bathroom radiators',
   'electric-bathroom-radiators': 'Electric bathroom radiators',
-  living-room-radiators: 'Living-room radiators',
-  replacement-radiators: 'Replacement radiators',
-  zubehor: 'Accessories',
+  'living-room-radiators': 'Living-room radiators',
+  'replacement-radiators': 'Replacement radiators',
+  accessories: 'Accessories',
+  // Legacy German handles — kept for any cached/external links that hit
+  // the storefront before the Shopify-side 301 redirects fire.
+  badheizkorper: 'Bathroom radiators',
   bad: 'Bathroom',
+  zubehor: 'Accessories',
   fussbodenheizungsrohre: 'Underfloor heating',
 };
 
