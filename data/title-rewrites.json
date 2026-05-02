@@ -1,0 +1,675 @@
+[
+  {
+    "handle": "konrad-ventilheizkorper-typ-22",
+    "current": "KONRAD Valve Radiator Type 22",
+    "proposed": "Konrad — Type 22 Valve Radiator, White",
+    "series": "konrad",
+    "color": "White",
+    "productType": "Living-room radiator",
+    "tags": [
+      "konrad",
+      "white"
+    ]
+  },
+  {
+    "handle": "konrad-ventilheizkorper-typ-33",
+    "current": "KONRAD Valve Radiator Type 33",
+    "proposed": "Konrad — Type 33 Valve Radiator, White",
+    "series": "konrad",
+    "color": "White",
+    "productType": "Living-room radiator",
+    "tags": [
+      "konrad",
+      "white"
+    ]
+  },
+  {
+    "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-anthrazit",
+    "current": "Panel Radiator Flat Radiator Vertical Double-layered Anthracite FLORA",
+    "proposed": "Flora — Vertical Double-Panel Radiator, Anthracite",
+    "series": "milan",
+    "color": "Anthracite",
+    "productType": "Living-room radiator",
+    "tags": [
+      "anthrazit",
+      "flora"
+    ]
+  },
+  {
+    "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-schwarz",
+    "current": "Design Panel Radiator Vertical Double Panel Black FLORA",
+    "proposed": "Flora — Vertical Double-Panel Radiator, Black",
+    "series": "milan",
+    "color": "Black",
+    "productType": "Living-room radiator",
+    "tags": [
+      "flora",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-weiss",
+    "current": "Panel Radiator Flat Radiator Vertical Double Panel White FLORA",
+    "proposed": "Flora — Vertical Double-Panel Radiator, White",
+    "series": "milan",
+    "color": "White",
+    "productType": "Living-room radiator",
+    "tags": [
+      "flora",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-anthrazit",
+    "current": "Designer Panel Radiator Horizontal Double Panel Anthracite FLORA",
+    "proposed": "Flora — Horizontal Double-Panel Radiator, Anthracite",
+    "series": "kaska",
+    "color": "Anthracite",
+    "productType": "Living-room radiator",
+    "tags": [
+      "anthrazit",
+      "flora"
+    ]
+  },
+  {
+    "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-schwarz",
+    "current": "Panel Radiator Designer Radiator Horizontal Double-layered Black FLORA",
+    "proposed": "Flora — Horizontal Double-Panel Radiator, Black",
+    "series": "kaska",
+    "color": "Black",
+    "productType": "Living-room radiator",
+    "tags": [
+      "flora",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "wohnraumheizkorper-kaska-horizontal-paneelheizkorper-doppellagig-weiss",
+    "current": "Panel Radiator Designer Radiator Horizontal Double Panel White FLORA",
+    "proposed": "Flora — Horizontal Double-Panel Radiator, White",
+    "series": "kaska",
+    "color": "White",
+    "productType": "Living-room radiator",
+    "tags": [
+      "flora",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "vertikal-planheizkorper-wohnraum-heizkorper-atlas-weiss",
+    "current": "Vertical Flat Panel Radiator Living Room Radiator Double Panel White Platis",
+    "proposed": "Atlas — Vertical Flat Panel Radiator, White",
+    "series": "atlas",
+    "color": "White",
+    "productType": "Living-room radiator",
+    "tags": [
+      "platis",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "wohnraumheizkorper-atlas-typ-22-weiss-horizontal",
+    "current": "Living Room Radiator Atlas Type 22 White Horizontal",
+    "proposed": "Atlas — Type 22 Horizontal Flat Panel Radiator, White",
+    "series": "atlas",
+    "color": "White",
+    "productType": "Living-room radiator",
+    "tags": [
+      "atlas",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "handtuchheizkorper-kira-anthrazit-mittel-seitenanschluss",
+    "current": "Bathroom Radiator Towel Warmer Panel Radiator 1350 Watt FLORA Anthracite",
+    "proposed": "Kira — Towel Warmer, Center & Side Connection, Anthracite",
+    "series": "kira",
+    "color": "Anthracite",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "flora"
+    ]
+  },
+  {
+    "handle": "handtuchheizkorper-kira-schwarz-mittel-seitenanschluss",
+    "current": "Bathroom Radiator Towel Warmer Panel Radiator 1350 Watt FLORA Black",
+    "proposed": "Kira — Towel Warmer, Center & Side Connection, Black",
+    "series": "kira",
+    "color": "Black",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "flora",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "handtuchheizkorper-kira-weiss-mittel-seitenanschluss",
+    "current": "Bathroom Radiator Towel Warmer Panel Radiator 1350 Watt FLORA White",
+    "proposed": "Kira — Towel Warmer, Center & Side Connection, White",
+    "series": "kira",
+    "color": "White",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "flora",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elmar-anthrazit-seitlich-offen-rechts-oder-links",
+    "current": "Bathroom & Towel Radiator Anthracite ELANOR - side-open",
+    "proposed": "Elanor — Towel Warmer, Side Connection, Anthracite",
+    "series": "elmar",
+    "color": "Anthracite",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "elanor"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer",
+    "current": "Bathroom Radiator & Towel Radiator Black ELANOR - side open",
+    "proposed": "Elanor — Electric Towel Warmer, Black",
+    "series": "elmar",
+    "color": "Black",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "elanor",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elmar-weiss-seitlich-offen-rechts-oder-links",
+    "current": "Bathroom Radiator & Towel Radiator White ELANOR - Side Open",
+    "proposed": "Elanor — Towel Warmer, Side Connection, White",
+    "series": "elmar",
+    "color": "White",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "elanor",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "badheizkorper-mittelanschluss-alpha-weiss-handtuchwarmer",
+    "current": "Bathroom Radiator Central Connection Towel Warmer ASTORIA White",
+    "proposed": "Astoria — Towel Warmer, Center Connection, White",
+    "series": "alpha",
+    "color": "White",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "astoria",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "handtuchheizkorper-seitenanschluss-alpha-weiss",
+    "current": "Towel radiator side connection ASTORIA White",
+    "proposed": "Astoria — Towel Warmer, Side Connection, White",
+    "series": "alpha",
+    "color": "White",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "astoria",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "badheizkorper-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+    "current": "Bathroom radiator & Towel radiator Middle connection Anthracite PULLMAN",
+    "proposed": "Pullman — Towel Warmer, Anthracite",
+    "series": "platon",
+    "color": "Anthracite",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "pullman"
+    ]
+  },
+  {
+    "handle": "badheizkorper-platon-schwarz-mittel-und-seitenanschluss",
+    "current": "Bathroom Radiator & Towel Radiator Black PULLMAN",
+    "proposed": "Pullman — Towel Warmer, Center & Side Connection, Black",
+    "series": "platon",
+    "color": "Black",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "pullman",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "badheizkorper-platon-weiss-mittel-und-seitenanschluss-1",
+    "current": "Bathroom Radiators & Towel Radiators White PULLMAN",
+    "proposed": "Pullman — Towel Warmer, Center & Side Connection, White",
+    "series": "platon",
+    "color": "White",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "pullman",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "badheizkorper-mittelanschluss-anthrazit-mira",
+    "current": "Designer Bathroom Radiator Towel Warmer Central Connection TWISTER Black",
+    "proposed": "Twister — Towel Warmer, Center Connection, Anthracite",
+    "series": "mira",
+    "color": "Anthracite",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "schwarz",
+      "twister"
+    ]
+  },
+  {
+    "handle": "badheizkorper-mittelanschluss-schwarz-mira",
+    "current": "Bathroom radiator Design towel warmer Middle connection TWISTER Anthracite",
+    "proposed": "Twister — Towel Warmer, Center Connection, Black",
+    "series": "mira",
+    "color": "Black",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "twister"
+    ]
+  },
+  {
+    "handle": "badheizkorper-mittelanschluss-weiss-mira-kopie",
+    "current": "Bathroom Radiator Towel Warmer, Central Connection, TWISTER White",
+    "proposed": "Twister — Towel Warmer, Center Connection, White",
+    "series": "mira",
+    "color": "White",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "twister",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "lavinno-hange-wc-tornado-rimless-weiss-glanzend",
+    "current": "Lavinno Wall-hung Toilet Tornado Rimless glossy white",
+    "proposed": "Lavinno — Wall-Hung Toilet, Rimless, Glossy White",
+    "series": "lavinno",
+    "color": "Glossy White",
+    "productType": "Bathroom fixture",
+    "tags": [
+      "Bad",
+      "lavinno",
+      "Toiletten",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "handtuchhaken-bademantelhalter-fur-badheizkorper-in-weiss-oder-chrom",
+    "current": "Towel hook bathrobe holder for bathroom radiators in White or Chrome",
+    "proposed": "Towel Hook & Bathrobe Holder, White",
+    "series": null,
+    "color": "White",
+    "productType": "Accessory",
+    "tags": [
+      "zubehor"
+    ]
+  },
+  {
+    "handle": "fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m",
+    "current": "Underfloor heating pipe 16x2 mm 600 m PE-RT 5-layer pipe",
+    "proposed": "Underfloor Heating Pipe (PE-RT 5-Layer)",
+    "series": null,
+    "color": null,
+    "productType": "Underfloor pipe",
+    "tags": [
+      "Fußbodenheizung",
+      "Fußbodenheizungsrohr",
+      "pe-rt",
+      "PR-RT",
+      "Rohr"
+    ]
+  },
+  {
+    "handle": "befestigungsset-fur-badheizkorper",
+    "current": "Mounting kit for bathroom radiators",
+    "proposed": "Mounting Kit for Bathroom Radiators",
+    "series": null,
+    "color": null,
+    "productType": "Accessory",
+    "tags": [
+      "befestigungsset"
+    ]
+  },
+  {
+    "handle": "creavit-ac-70s-bidet-chrom-kreuz-unterputzventil",
+    "current": "CREAVIT AC 70S Bidet – Chrom – Kreuz Unterputzventil",
+    "proposed": "Wall-Hung Bidet, Concealed Valve, Chrome",
+    "series": null,
+    "color": "Chrome",
+    "productType": "Accessory",
+    "tags": [
+      "chrom",
+      "creavit"
+    ]
+  },
+  {
+    "handle": "mischbetrieb-t-stuck",
+    "current": "Mixed operation T-piece",
+    "proposed": "Mixed-Operation T-Piece",
+    "series": null,
+    "color": null,
+    "productType": "Accessory",
+    "tags": [
+      "mischbetrieb"
+    ]
+  },
+  {
+    "handle": "multiblock-thermostatkopf-regler-fur-heizkorper-m30x1-5",
+    "current": "Multiblock Thermostat Head Controller for Radiators M30x1,5",
+    "proposed": "Multiblock Thermostatic Head Controller",
+    "series": null,
+    "color": null,
+    "productType": "Accessory",
+    "tags": [
+      "multiblock"
+    ]
+  },
+  {
+    "handle": "thermoflussigkeit-fur-elektro-badheizkorper",
+    "current": "Thermal fluid for electric bathroom radiators",
+    "proposed": "Thermal Fluid for Electric Bathroom Radiators",
+    "series": null,
+    "color": null,
+    "productType": "Accessory",
+    "tags": [
+      "electric",
+      "thermoflüssigkeit"
+    ]
+  },
+  {
+    "handle": "thermostatventil-set-heizkorper-eck-1-2-chrom",
+    "current": "Thermostatic Radiator Valve Set, Corner 1/2 Chrome",
+    "proposed": "Thermostatic Radiator Valve Set, Corner, Chrome",
+    "series": null,
+    "color": "Chrome",
+    "productType": "Accessory",
+    "tags": [
+      "chrom",
+      "thermostatventil"
+    ]
+  },
+  {
+    "handle": "zweirohr-hahnblock-fur-ventil-heizkorper-winkelform",
+    "current": "Two-pipe manifold for valve radiators – angled design",
+    "proposed": "Two-Pipe Manifold for Valve Radiators, Angled",
+    "series": null,
+    "color": null,
+    "productType": "Accessory",
+    "tags": [
+      "hahnblock"
+    ]
+  },
+  {
+    "handle": "elektro-handtuchheizkorper-kira-anthrazit",
+    "current": "Electric Bathroom Radiators & Towel Radiators Anthracite FLORA Bathroom",
+    "proposed": "Kira — Electric Towel Warmer, Anthracite",
+    "series": "kira",
+    "color": "Anthracite",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "electric",
+      "flora"
+    ]
+  },
+  {
+    "handle": "elektro-handtuchheizkorper-kira-schwarz",
+    "current": "Electrical Bathroom Radiators & Towel Radiators Black FLORA Bathroom",
+    "proposed": "Kira — Electric Towel Warmer, Black",
+    "series": "kira",
+    "color": "Black",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "electric",
+      "flora",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "elektro-handtuchheizkorper-kira-weiss",
+    "current": "Electric Bathroom Radiators & Towel Radiators White FLORA Bathroom",
+    "proposed": "Kira — Electric Towel Warmer, White",
+    "series": "kira",
+    "color": "White",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "electric",
+      "flora",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elektrisch-elmar-anthrazit-handtuchheizkorper-handtuchwarmer",
+    "current": "Electric Bathroom Towel Radiators Anthracite ELANOR",
+    "proposed": "Elanor — Electric Towel Warmer, Anthracite",
+    "series": "elmar",
+    "color": "Anthracite",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "elanor",
+      "electric"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elektrisch-elmar-schwarz-handtuchheizkorper-handtuchwarmer-1",
+    "current": "Electric Bathroom Towel Radiator Black ELANOR - open at the side -",
+    "proposed": "Elanor — Electric Towel Warmer, Black",
+    "series": "elmar",
+    "color": "Black",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "elanor",
+      "electric",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elektrisch-elmar-weiss-handtuchheizkorper-handtuchwarmer",
+    "current": "Electric Bathroom Radiators Towel Radiators White ELANOR - side open",
+    "proposed": "Elanor — Electric Towel Warmer, White",
+    "series": "elmar",
+    "color": "White",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "elanor",
+      "electric",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen",
+    "current": "Replacement Bathroom Radiator & Renovation Radiator Black ELANOR",
+    "proposed": "Elanor — Replacement Towel Warmer, Side Connection, Black",
+    "series": "elanor",
+    "color": "Black",
+    "productType": "Replacement radiator",
+    "tags": [
+      "elanor",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen-kopie",
+    "current": "Replacement Bathroom Radiator & Renovation Radiator White ELANOR",
+    "proposed": "Elanor — Replacement Towel Warmer, Side Connection, Black",
+    "series": "elanor",
+    "color": "Black",
+    "productType": "Replacement radiator",
+    "tags": [
+      "elanor",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer",
+    "current": "Bathroom Radiator Middle Connection Towel Warmer ASTORIA Anthracite",
+    "proposed": "Astoria — Towel Warmer, Center Connection, Anthracite",
+    "series": "alpha",
+    "color": "Anthracite",
+    "productType": "Bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "astoria"
+    ]
+  },
+  {
+    "handle": "badheizkorper-mittelanschluss-alpha-schwarz-handtuchwarmer",
+    "current": "Replacement Bathroom Radiator Renovation Radiator Side Connection Black ASTORIA",
+    "proposed": "Astoria — Towel Warmer, Center Connection, Black",
+    "series": "alpha",
+    "color": "Black",
+    "productType": "Replacement radiator",
+    "tags": [
+      "astoria",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "elektrische-badheizkorper-alpha-weiss-handtuchtrockner",
+    "current": "Electric Bathroom radiators ASTORIA White Towel dryer",
+    "proposed": "Astoria — Electric Towel Warmer, White",
+    "series": "alpha",
+    "color": "White",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "astoria",
+      "electric",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "austauschheizkorper-badheizkorper-anthrazit-alpha",
+    "current": "Replacement Bathroom Radiator Renovation Radiator Side Connection Anthracite ASTORIA",
+    "proposed": "Astoria — Replacement Towel Warmer, Anthracite",
+    "series": "alpha",
+    "color": "Anthracite",
+    "productType": "Replacement radiator",
+    "tags": [
+      "anthrazit",
+      "astoria",
+      "Baubreite"
+    ]
+  },
+  {
+    "handle": "badheizkorper-alpha-weiss-handtuchtrockner",
+    "current": "Replacement Bathroom Radiator Renovation Radiator Side Connection White ASTORIA",
+    "proposed": "Astoria — Towel Warmer, White",
+    "series": "alpha",
+    "color": "White",
+    "productType": "Replacement radiator",
+    "tags": [
+      "astoria",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elektrisch-anthrazit-platon-handtuchheizkorper-handtuchwarmer",
+    "current": "Electric Towel Radiators & Bathroom Radiators Anthracite PULLMAN",
+    "proposed": "Pullman — Electric Towel Warmer, Anthracite",
+    "series": "platon",
+    "color": "Anthracite",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "electric",
+      "pullman"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elektrisch-platon-schwarz-handtuchheizkorper-handtuchwarmer",
+    "current": "Electric Bathroom Radiators & Towel Radiators Black PULLMAN",
+    "proposed": "Pullman — Electric Towel Warmer, Black",
+    "series": "platon",
+    "color": "Black",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "electric",
+      "pullman",
+      "schwarz"
+    ]
+  },
+  {
+    "handle": "badheizkorper-elektrisch-platon-weiss-handtuchheizkorper-handtuchwarmer",
+    "current": "Electrical Bathroom Radiators & Towel Radiators White PULLMAN",
+    "proposed": "Pullman — Electric Towel Warmer, White",
+    "series": "platon",
+    "color": "White",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "electric",
+      "pullman",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "elektrische-badheizkorper-mittelanschluss-anthrazit-mira",
+    "current": "Electric Bathroom Towel Radiators Anthracite TWISTER",
+    "proposed": "Twister — Electric Towel Warmer, Center Connection, Anthracite",
+    "series": "mira",
+    "color": "Anthracite",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "anthrazit",
+      "electric",
+      "twister"
+    ]
+  },
+  {
+    "handle": "elektrische-badheizkorper-mittelanschluss-schwarz-mira",
+    "current": "Electric Bathroom Radiators Towel Radiators Black TWISTER",
+    "proposed": "Twister — Electric Towel Warmer, Center Connection, Black",
+    "series": "mira",
+    "color": "Black",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "electric",
+      "schwarz",
+      "twister"
+    ]
+  },
+  {
+    "handle": "elektrische-badheizkorper-mittelanschluss-weiss-mira",
+    "current": "Electric Bathroom Towel Radiator White TWISTER",
+    "proposed": "Twister — Electric Towel Warmer, Center Connection, White",
+    "series": "mira",
+    "color": "White",
+    "productType": "Electric bathroom radiator",
+    "tags": [
+      "electric",
+      "twister",
+      "weiss"
+    ]
+  },
+  {
+    "handle": "heizstab",
+    "current": "Electric heating element with temperature control for radiators 600-1200 Watt",
+    "proposed": "Electric Heating Element",
+    "series": null,
+    "color": null,
+    "productType": "Accessory",
+    "tags": [
+      "electric",
+      "heizstab"
+    ]
+  },
+  {
+    "handle": "multiblock-set-fur-badheizkorper-eck-und-durchgangsform",
+    "current": "Multiblock Set for bathroom radiators, angle and straight-through versions",
+    "proposed": "Multiblock Set, Angle & Straight",
+    "series": null,
+    "color": null,
+    "productType": "Accessory",
+    "tags": [
+      "multiblock"
+    ]
+  }
+]
