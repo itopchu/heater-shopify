@@ -40,7 +40,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     intro:
       'Talk to a heating engineer, not a chatbot. Replies within two business hours during EU office hours.',
     body: [
-      'Email: hello@gberg-heizung.de',
+      'Email: info@g-berg-gmbh.de',
       'Phone: +49 172 270 66 48',
       'Hours: Monday – Friday, 09:00 – 17:00 CET',
       'We provide free dimensioning support: send us your room measurements, current radiator photos and heat loss (if known) and we will recommend the right model.',
@@ -93,7 +93,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     title: 'Returns',
     intro: '30-day returns on unused, unopened items in original packaging.',
     body: [
-      'To start a return, email hello@gberg-heizung.de with your order number. We will provide a return label and instructions.',
+      'To start a return, email info@g-berg-gmbh.de with your order number. We will provide a return label and instructions.',
       'Refunds are issued to the original payment method within 14 days of receiving the returned item in re-saleable condition.',
       'Bespoke or cut-to-length items are non-refundable. We will tell you clearly before checkout.',
     ].join('\n\n'),
@@ -104,7 +104,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     body: [
       'All G-Berg radiators are CE-certified and tested against EN 442 output ratings.',
       "Warranty applies when the unit is installed by a certified heating engineer per the manufacturer's instructions.",
-      'Submit warranty claims to hello@gberg-heizung.de with your order number, photos of the issue and the installation report.',
+      'Submit warranty claims to info@g-berg-gmbh.de with your order number, photos of the issue and the installation report.',
     ].join('\n\n'),
   },
   faq: {
@@ -114,7 +114,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
       'Do you ship across Europe? Yes — Germany, Belgium, Spain, Austria, the Netherlands and more. Free over €500.',
       "Are your radiators heat-pump compatible? Many are. Look for the 'Heat-pump ready' badge on the product card.",
       'Can I install a radiator myself? Hydronic radiators must be commissioned by a certified heating engineer to keep the warranty. Electric radiators can be installed by a qualified electrician.',
-      'What if the model I want is out of stock? Email hello@gberg-heizung.de — most items return to stock within 4–6 weeks and we hold orders without payment until you confirm.',
+      'What if the model I want is out of stock? Email info@g-berg-gmbh.de — most items return to stock within 4–6 weeks and we hold orders without payment until you confirm.',
     ].join('\n\n'),
   },
 };

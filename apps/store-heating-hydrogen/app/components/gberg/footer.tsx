@@ -11,7 +11,7 @@ export function Footer({locale}: {locale: string}) {
   const cs = [
     {label: t('footer.contact'), href: localeHref(locale, '/pages/contact')},
     {label: t('footer.faq'), href: localeHref(locale, '/pages/faq')},
-    {label: t('footer.engineering_support'), href: 'mailto:hello@gberg-heizung.de'},
+    {label: t('footer.engineering_support'), href: 'mailto:info@g-berg-gmbh.de'},
   ];
   const ship = [
     {label: t('footer.shipping'), href: localeHref(locale, '/pages/shipping')},

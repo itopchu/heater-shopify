@@ -21,6 +21,7 @@ import {QuickFacts} from '~/components/gberg/pdp/quick-facts';
 import {SectionsAccordion} from '~/components/gberg/pdp/sections-accordion';
 import {AiBlock} from '~/components/gberg/pdp/ai-block';
 import {Documents} from '~/components/gberg/pdp/documents';
+import {CollapsibleSection} from '~/components/gberg/pdp/collapsible-section';
 import {SiblingColors} from '~/components/gberg/pdp/sibling-colors';
 import {ProductGrid} from '~/components/gberg/plp/product-grid';
 import {createGbergClient} from '~/lib/storefront.server';
@@ -275,55 +276,63 @@ export default function ProductPage() {
             summaryBlock={aix.summary_block}
           />
 
-          <DescriptionSection product={product} />
+          <CollapsibleSection
+            id="overview"
+            eyebrow={t('pdp.section_overview_eyebrow')}
+            title={t('pdp.section_overview')}
+            defaultOpen={false}
+          >
+            <DescriptionSection product={product} />
+          </CollapsibleSection>
 
           {/*
             Long-form technical detail. The headline editorial spec block
             (kW, energy class, dimensions, install, warranty) lives above
             the fold inside <QuickFacts>; this table holds the deep-dive
             rows merchants only browse on demand.
-
-            Track B (April 2026): 41/55 catalog products today have empty
-            `specs{}`. We OMIT the section entirely when there's nothing
-            to show, instead of rendering "Specifications coming soon —
-            our catalog team is enriching" which reads as broken.
           */}
           {specRows.length > 0 ? (
-            <section>
-              <Eyebrow>{t('pdp.section_specs_eyebrow')}</Eyebrow>
-              <h2 className="mt-3 font-[var(--font-display)] text-2xl font-semibold">
-                {t('pdp.section_specs_title')}
-              </h2>
-              <div className="mt-4">
-                <SpecsTable rows={specRows} />
-              </div>
-            </section>
+            <CollapsibleSection
+              id="specifications"
+              eyebrow={t('pdp.section_specs_eyebrow')}
+              title={t('pdp.section_specs_title')}
+              defaultOpen={false}
+            >
+              <SpecsTable rows={specRows} />
+            </CollapsibleSection>
           ) : null}
 
           {aboutSections.length > 0 ? (
-            <section>
-              <Eyebrow>{t('pdp.section_about_eyebrow')}</Eyebrow>
-              <h2 className="mt-3 text-2xl font-semibold">
-                {t('pdp.section_about_title')}
-              </h2>
-              <div className="mt-4">
-                <SectionsAccordion sections={aboutSections} source={sectionsSource} />
-              </div>
-            </section>
+            <CollapsibleSection
+              id="about"
+              eyebrow={t('pdp.section_about_eyebrow')}
+              title={t('pdp.section_about_title')}
+              defaultOpen={false}
+            >
+              <SectionsAccordion sections={aboutSections} source={sectionsSource} />
+            </CollapsibleSection>
           ) : null}
 
-          <Documents primaryPdfUrl={product.common.media?.primary_pdf_url} />
+          {product.common.media?.primary_pdf_url ? (
+            <CollapsibleSection
+              id="documents"
+              eyebrow={t('pdp.documents_label')}
+              title={t('pdp.documents_title')}
+              defaultOpen={false}
+            >
+              <Documents primaryPdfUrl={product.common.media?.primary_pdf_url} />
+            </CollapsibleSection>
+          ) : null}
 
           {faqs.length > 0 ? (
-            <section>
-              <Eyebrow>{t('pdp.section_faq_eyebrow')}</Eyebrow>
-              <h2 className="mt-3 text-2xl font-semibold">
-                {t('pdp.section_faq_title')}
-              </h2>
-              <div className="mt-4">
-                <FaqAccordion items={faqs} />
-              </div>
-            </section>
+            <CollapsibleSection
+              id="faq"
+              eyebrow={t('pdp.section_faq_eyebrow')}
+              title={t('pdp.section_faq_title')}
+              defaultOpen={false}
+            >
+              <FaqAccordion items={faqs} />
+            </CollapsibleSection>
           ) : null}
         </div>
 
@@ -340,7 +349,7 @@ export default function ProductPage() {
               {t('pdp.need_help_body')}
             </p>
             <p className="mt-3 text-[var(--color-primary)]">
-              <a href="mailto:hello@gberg-heizung.de">hello@gberg-heizung.de</a>
+              <a href="mailto:info@g-berg-gmbh.de">info@g-berg-gmbh.de</a>
             </p>
           </div>
         </aside>
@@ -449,41 +458,74 @@ function DescriptionSection({product}: {product: HeatingProduct}) {
   const short = product.common.custom?.short_description?.trim();
   const descRaw = product.descriptionHtml?.trim();
   const desc = descRaw ? demoteEmbeddedHeadings(descRaw) : '';
-  if (!short && !desc) return null;
-  return (
-    <section className="space-y-7">
-      {/*
-        Editorial header — Eyebrow with rule + the lede sit at the top.
-        The eyebrow earns its red 2px rule here because the description
-        is its own narrative beat (chapter break) rather than yet another
-        section. The lede is the curator's framing of the long-form
-        body that follows.
-      */}
-      <header>
-        <Eyebrow tone="accent" withRule>
-          {t('pdp.section_overview')}
-        </Eyebrow>
-      </header>
 
+  // Build "At a glance" structured fact rows from the metafields we
+  // already populated catalog-wide (series, dimensions, wattage, color,
+  // connection type, heat-pump compatibility, warranty, mounting kit).
+  // This guarantees the Overview section is never empty even when the
+  // body_html source is sparse — every product has at least the
+  // structured facts to fall back on.
+  const series = resolveSeriesLabel(product);
+  const facts: {label: string; value: string}[] = [];
+  if (series) facts.push({label: t('pdp.fact_series'), value: series});
+  const dim = product.specs.dimensions_w_h_d_mm?.trim();
+  if (dim) facts.push({label: t('pdp.fact_dimensions'), value: dim});
+  else if (product.specs.width_mm && product.specs.height_mm) {
+    facts.push({
+      label: t('pdp.fact_dimensions'),
+      value: `${product.specs.width_mm} × ${product.specs.height_mm} mm`,
+    });
+  }
+  if (product.specs.wattage_w) {
+    facts.push({label: t('pdp.fact_heat_output'), value: `${product.specs.wattage_w} W`});
+  } else if (product.specs.heat_output_75_65_20) {
+    facts.push({
+      label: t('pdp.fact_heat_output'),
+      value: `${product.specs.heat_output_75_65_20} W (75/65/20°C)`,
+    });
+  }
+  if (product.specs.color) facts.push({label: t('pdp.fact_color'), value: product.specs.color});
+  if (product.specs.connection_type) {
+    facts.push({label: t('pdp.fact_connection'), value: product.specs.connection_type});
+  }
+  if (product.specs.heating_medium) {
+    facts.push({
+      label: t('pdp.fact_heating_medium'),
+      value:
+        product.specs.heating_medium === 'electric'
+          ? t('plp.heating_medium_electric')
+          : t('plp.heating_medium_hydronic'),
+    });
+  }
+  if (product.specs.heat_pump_compatible) {
+    facts.push({label: t('pdp.fact_heat_pump'), value: t('common.yes')});
+  }
+  if (product.specs.mounting_kit_included) {
+    facts.push({label: t('pdp.fact_mounting_kit'), value: t('common.yes')});
+  }
+
+  if (!short && !desc && facts.length === 0) return null;
+
+  return (
+    <div className="space-y-6">
       {short ? (
-        <p
-          className="max-w-[var(--lede-max-width,60ch)] whitespace-pre-line font-[var(--font-display)] text-[length:var(--text-body-lg,1.0625rem)] leading-[1.55] text-[var(--color-text)]"
-        >
+        <p className="max-w-[var(--lede-max-width,60ch)] whitespace-pre-line font-[var(--font-display)] text-[length:var(--text-body-lg,1.0625rem)] leading-[1.55] text-[var(--color-text)]">
           {short}
         </p>
       ) : null}
 
-      {/*
-        Red accent rule — visual chapter break between the lede and the
-        long-form prose. Keeps the section from reading as one undifferentiated
-        block. Width is intentionally short (3rem) so it reads as an editorial
-        section mark, not a section divider.
-      */}
-      {short && desc ? (
-        <div
-          aria-hidden
-          className="h-[2px] w-12 bg-[var(--color-primary)]"
-        />
+      {/* "At a glance" fact list — derived from structured metafields
+          so the Overview always has substance even when body_html is
+          sparse. Two-column on md+, stacked on mobile. */}
+      {facts.length > 0 ? (
+        <dl className="grid grid-cols-1 gap-x-8 gap-y-2 border-y border-[var(--color-border)] py-4 text-sm sm:grid-cols-2">
+          {facts.map((f) => (
+            <div key={f.label} className="flex items-baseline justify-between gap-3">
+              <dt className="text-[var(--color-text-muted)]">{f.label}</dt>
+              <dd className="font-medium text-[var(--color-text)]">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
       ) : null}
 
       {desc ? (
@@ -492,14 +534,6 @@ function DescriptionSection({product}: {product: HeatingProduct}) {
           dangerouslySetInnerHTML={{__html: desc}}
         />
       ) : null}
-
-      {/*
-        Bottom hairline — a quiet rule that frames the section against
-        whatever comes below (Detailed spec sheet / SectionsAccordion / FAQ).
-        Without it, the long-form prose runs straight into the next eyebrow
-        with no visual breath.
-      */}
-      <div aria-hidden className="mt-2 h-px w-full bg-[var(--color-border)]" />
-    </section>
+    </div>
   );
 }

@@ -69,7 +69,7 @@ const PAGES = {
 
 <h3>Customer support</h3>
 <p>
-  Email: <a href="mailto:hello@gberg-heizung.de">hello@gberg-heizung.de</a><br>
+  Email: <a href="mailto:info@g-berg-gmbh.de">info@g-berg-gmbh.de</a><br>
   Phone: +49 (0)30 12345678<br>
   Hours: Monday – Friday, 09:00 – 17:00 CET
 </p>
@@ -150,7 +150,7 @@ const PAGES = {
 <p>Standard parcels are delivered by DPD, GLS or DHL. Larger radiators ship by pallet courier — the carrier will call you to arrange a delivery slot. Please check the box for visible damage before signing for it; if anything looks wrong, refuse the delivery and contact us within 24 hours.</p>
 
 <h2>If something goes wrong</h2>
-<p>Anything missing, damaged or delayed? Email <a href="mailto:hello@gberg-heizung.de">hello@gberg-heizung.de</a> with your order number and we'll get it sorted.</p>
+<p>Anything missing, damaged or delayed? Email <a href="mailto:info@g-berg-gmbh.de">info@g-berg-gmbh.de</a> with your order number and we'll get it sorted.</p>
 `.trim(),
   },
 
@@ -237,7 +237,7 @@ ${LEGAL_REVIEW_NOTE}
 <h3>Contact</h3>
 <p>
   Phone: +49 (0)30 12345678<br>
-  Email: <a href="mailto:hello@gberg-heizung.de">hello@gberg-heizung.de</a>
+  Email: <a href="mailto:info@g-berg-gmbh.de">info@g-berg-gmbh.de</a>
 </p>
 
 <h3>Register entry</h3>
