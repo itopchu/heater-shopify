@@ -431,9 +431,9 @@ export function galleryImages(p: HeatingProduct): ImageType[] {
 // non-English rendering at the platform layer.
 const COLLECTION_LABELS: Record<string, string> = {
   badheizkorper: 'Bathroom radiators',
-  'badheizkorper-elektrisch': 'Electric bathroom radiators',
-  wohnraumheizkorper: 'Living-room radiators',
-  austauschheizkorper: 'Replacement radiators',
+  'electric-bathroom-radiators': 'Electric bathroom radiators',
+  living-room-radiators: 'Living-room radiators',
+  replacement-radiators: 'Replacement radiators',
   zubehor: 'Accessories',
   bad: 'Bathroom',
   fussbodenheizungsrohre: 'Underfloor heating',

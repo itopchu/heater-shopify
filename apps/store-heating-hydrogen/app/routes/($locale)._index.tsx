@@ -40,10 +40,10 @@ export const meta: Route.MetaFunction = ({
 };
 
 const CATEGORY_HANDLES: {handle: string; labelKey: string}[] = [
-  {handle: 'wohnraumheizkoerper', labelKey: 'nav.living_rooms'},
-  {handle: 'badheizkoerper', labelKey: 'nav.bathroom'},
-  {handle: 'badheizkoerper-elektrisch', labelKey: 'nav.electric'},
-  {handle: 'austauschheizkoerper', labelKey: 'nav.replacement'},
+  {handle: 'living-room-radiators', labelKey: 'nav.living_rooms'},
+  {handle: 'bathroom-radiators', labelKey: 'nav.bathroom'},
+  {handle: 'electric-bathroom-radiators', labelKey: 'nav.electric'},
+  {handle: 'replacement-radiators', labelKey: 'nav.replacement'},
   {handle: 'fussbodenheizung', labelKey: 'nav.underfloor'},
   {handle: 'accessories', labelKey: 'nav.accessories'},
 ];
@@ -56,22 +56,22 @@ const GUIDED_FINDER: {
   {
     labelKey: 'home.guided_finder_replace_label',
     descKey: 'home.guided_finder_replace_desc',
-    href: '/collections/austauschheizkoerper',
+    href: '/collections/replacement-radiators',
   },
   {
     labelKey: 'home.guided_finder_living_label',
     descKey: 'home.guided_finder_living_desc',
-    href: '/collections/wohnraumheizkoerper',
+    href: '/collections/living-room-radiators',
   },
   {
     labelKey: 'home.guided_finder_bathroom_label',
     descKey: 'home.guided_finder_bathroom_desc',
-    href: '/collections/badheizkoerper',
+    href: '/collections/bathroom-radiators',
   },
   {
     labelKey: 'home.guided_finder_electric_label',
     descKey: 'home.guided_finder_electric_desc',
-    href: '/collections/badheizkoerper-elektrisch',
+    href: '/collections/electric-bathroom-radiators',
   },
 ];
 
@@ -93,11 +93,11 @@ export async function loader({context, params}: Route.LoaderArgs) {
       // Hero banner sits under the "European radiators" eyebrow — must be
       // an electric bath radiator. Pick the most expensive in that
       // collection so the hero photograph is the most premium option.
-      fetchMostExpensiveImage(client, 'badheizkorper-elektrisch', locale),
+      fetchMostExpensiveImage(client, 'electric-bathroom-radiators', locale),
       // "Designed in Germany" split features a panel/living-room radiator
       // — smaller silhouette than a tall towel radiator. Most expensive
-      // wohnraumheizkoerper item.
-      fetchMostExpensiveImage(client, 'wohnraumheizkoerper', locale),
+      // living-room-radiators item.
+      fetchMostExpensiveImage(client, 'living-room-radiators', locale),
     ]);
   return {
     locale,
@@ -163,10 +163,10 @@ export default function HomePage() {
               {t('home.hero_lede')}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link to={localeHref(locale, '/collections/wohnraumheizkoerper')}>
+              <Link to={localeHref(locale, '/collections/living-room-radiators')}>
                 <Button size="lg">{t('home.hero_cta_shop')}</Button>
               </Link>
-              <Link to={localeHref(locale, '/collections/badheizkoerper')}>
+              <Link to={localeHref(locale, '/collections/bathroom-radiators')}>
                 <Button size="lg" variant="secondary">
                   {t('home.hero_cta_bathroom')}
                 </Button>

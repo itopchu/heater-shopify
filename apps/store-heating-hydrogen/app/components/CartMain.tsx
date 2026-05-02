@@ -12,10 +12,10 @@ import {localeHref} from '~/lib/gberg/href';
 // an empty cart shouldn't have to backtrack to the home to start shopping.
 function getEmptyCartShortcuts(t: TFunction) {
   return [
-    {handle: 'wohnraumheizkoerper', label: t('nav.living_rooms')},
-    {handle: 'badheizkoerper', label: t('nav.bathroom')},
-    {handle: 'badheizkoerper-elektrisch', label: t('nav.electric')},
-    {handle: 'austauschheizkoerper', label: t('nav.replacement')},
+    {handle: 'living-room-radiators', label: t('nav.living_rooms')},
+    {handle: 'bathroom-radiators', label: t('nav.bathroom')},
+    {handle: 'electric-bathroom-radiators', label: t('nav.electric')},
+    {handle: 'replacement-radiators', label: t('nav.replacement')},
     {handle: 'fussbodenheizung', label: t('nav.underfloor')},
     {handle: 'accessories', label: t('nav.accessories')},
   ];
@@ -255,7 +255,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
           {t('cart.browse_all')} <span aria-hidden>→</span>
         </Link>
         <Link
-          to={localeHref(locale, '/collections/austauschheizkoerper')}
+          to={localeHref(locale, '/collections/replacement-radiators')}
           onClick={close}
           prefetch="viewport"
           className="inline-flex items-center gap-2 rounded-sm border border-[var(--color-border)] px-6 py-3 text-[12px] uppercase tracking-[0.14em] font-semibold text-[var(--color-text)] hover:border-[var(--color-text)] transition-colors"

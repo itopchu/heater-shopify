@@ -198,22 +198,33 @@ function FacetGroup<T extends string>({ label, values, selected, onToggle }: Fac
         {label}
         <span aria-hidden className="text-[var(--color-text-muted)] group-open:rotate-45">+</span>
       </summary>
-      <ul className="mt-3 space-y-2">
-        {values.map((v) => (
-          <li key={v.value}>
-            <label className="flex items-center justify-between gap-2 text-sm text-[var(--color-text)]">
-              <span className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={selected.has(v.value)}
-                  onChange={() => onToggle(v.value)}
-                />
-                {v.label ?? v.value}
-              </span>
-              <span className="text-xs text-[var(--color-text-muted)]">{v.count}</span>
-            </label>
-          </li>
-        ))}
+      <ul className="mt-3 space-y-1">
+        {values.map((v) => {
+          const active = selected.has(v.value);
+          return (
+            <li key={v.value}>
+              <label
+                className={cn(
+                  "flex cursor-pointer items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm transition-colors",
+                  active
+                    ? "bg-[var(--color-surface-muted)] text-[var(--color-text)] font-medium"
+                    : "text-[var(--color-text)] hover:bg-[var(--color-surface-muted)]/60",
+                )}
+              >
+                <span className="flex items-center gap-2.5">
+                  <input
+                    type="checkbox"
+                    checked={active}
+                    onChange={() => onToggle(v.value)}
+                    className="h-4 w-4 cursor-pointer accent-[var(--color-primary)]"
+                  />
+                  {v.label ?? v.value}
+                </span>
+                <span className="text-xs text-[var(--color-text-muted)]">{v.count}</span>
+              </label>
+            </li>
+          );
+        })}
       </ul>
     </details>
   );
@@ -488,27 +499,38 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
           {t("plp.facet_heating_medium")}
           <span aria-hidden className="text-[var(--color-text-muted)] group-open:rotate-45">+</span>
         </summary>
-        <ul className="mt-3 space-y-2">
+        <ul className="mt-3 space-y-1">
           {[
             { value: "all" as const, label: t("plp.heating_medium_all"), count: products.length },
             { value: "hydronic" as const, label: t("plp.heating_medium_hydronic"), count: facetOptions.hydronic },
             { value: "electric" as const, label: t("plp.heating_medium_electric"), count: facetOptions.electric },
-          ].map((m) => (
-            <li key={m.value}>
-              <label className="flex items-center justify-between gap-2 text-sm">
-                <span className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    name="heating-medium"
-                    checked={facets.heatingMedium === m.value}
-                    onChange={() => setFacets((f) => ({ ...f, heatingMedium: m.value }))}
-                  />
-                  {m.label}
-                </span>
-                <span className="text-xs text-[var(--color-text-muted)]">{m.count}</span>
-              </label>
-            </li>
-          ))}
+          ].map((m) => {
+            const active = facets.heatingMedium === m.value;
+            return (
+              <li key={m.value}>
+                <label
+                  className={cn(
+                    "flex cursor-pointer items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm transition-colors",
+                    active
+                      ? "bg-[var(--color-surface-muted)] text-[var(--color-text)] font-medium"
+                      : "text-[var(--color-text)] hover:bg-[var(--color-surface-muted)]/60",
+                  )}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <input
+                      type="radio"
+                      name="heating-medium"
+                      checked={active}
+                      onChange={() => setFacets((f) => ({ ...f, heatingMedium: m.value }))}
+                      className="h-4 w-4 cursor-pointer accent-[var(--color-primary)]"
+                    />
+                    {m.label}
+                  </span>
+                  <span className="text-xs text-[var(--color-text-muted)]">{m.count}</span>
+                </label>
+              </li>
+            );
+          })}
         </ul>
       </details>
     </div>

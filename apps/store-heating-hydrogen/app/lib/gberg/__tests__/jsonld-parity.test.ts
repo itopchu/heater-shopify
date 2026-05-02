@@ -94,7 +94,7 @@ function fixtureProduct(): HeatingProduct {
     filters: {},
     compatibility: {},
     editorial: {series: 'ASTORIA'},
-    collectionHandles: ['wohnraumheizkorper'],
+    collectionHandles: ['living-room-radiators'],
   };
 }
 

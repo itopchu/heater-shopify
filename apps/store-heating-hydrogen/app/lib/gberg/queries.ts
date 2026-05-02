@@ -256,12 +256,12 @@ export async function fetchBlog(
  * If that fails too, the homepage renders a text placeholder.
  */
 const CATEGORY_HERO_PRODUCT_HANDLES: Record<string, string> = {
-  wohnraumheizkoerper:
+  living-room-radiators:
     'vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-anthrazit',
-  badheizkoerper: 'badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer',
-  'badheizkoerper-elektrisch':
+  bathroom-radiators: 'bathroom-radiators-mittelanschluss-alpha-anthrazit-handtuchwaermer',
+  'electric-bathroom-radiators':
     'badheizkorper-elektrisch-elmar-anthrazit-handtuchheizkorper-handtuchwarmer',
-  austauschheizkoerper:
+  replacement-radiators:
     'austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen',
   fussbodenheizung:
     'fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m',

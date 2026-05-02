@@ -29,10 +29,10 @@ interface MegaColumn {
  */
 const MEGA_MENU_FALLBACK: MegaColumn[] = [
   {label: 'Shop all', href: '/products'},
-  {label: 'Living rooms', href: '/collections/wohnraumheizkoerper'},
-  {label: 'Bathroom', href: '/collections/badheizkoerper'},
-  {label: 'Electric', href: '/collections/badheizkoerper-elektrisch'},
-  {label: 'Replacement', href: '/collections/austauschheizkoerper'},
+  {label: 'Living rooms', href: '/collections/living-room-radiators'},
+  {label: 'Bathroom', href: '/collections/bathroom-radiators'},
+  {label: 'Electric', href: '/collections/electric-bathroom-radiators'},
+  {label: 'Replacement', href: '/collections/replacement-radiators'},
   {label: 'Accessories', href: '/collections/accessories'},
 ];
 
