@@ -93,30 +93,40 @@ function CartDiscounts({
       ?.map(({code}) => code) || [];
 
   return (
-    <section aria-label={t('cart.discounts')}>
-      {/* Have existing discount, display it with a remove option */}
-      <dl hidden={!codes.length}>
-        <div>
-          <dt id={discountsHeadingId}>{t('cart.discounts')}</dt>
-          <UpdateDiscountForm>
-            <div
-              className="cart-discount"
-              role="group"
-              aria-labelledby={discountsHeadingId}
-            >
-              <code>{codes?.join(', ')}</code>
-              &nbsp;
-              <button type="submit" aria-label={t('cart.discount_remove_aria')}>
-                {t('common.remove')}
-              </button>
-            </div>
-          </UpdateDiscountForm>
-        </div>
-      </dl>
+    <section aria-label={t('cart.discounts')} className="space-y-3">
+      <p
+        id={discountsHeadingId}
+        className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text-muted)]"
+      >
+        {t('cart.discounts')}
+      </p>
 
-      {/* Show an input to apply a discount */}
+      {/* Applied codes — chips with remove × */}
+      {codes.length > 0 ? (
+        <UpdateDiscountForm>
+          <ul className="flex flex-wrap gap-2" aria-labelledby={discountsHeadingId}>
+            {codes.map((code) => (
+              <li
+                key={code}
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-primary)]/10 px-3 py-1.5 text-[13px] font-medium text-[var(--color-primary)]"
+              >
+                <span className="font-mono">{code}</span>
+                <button
+                  type="submit"
+                  aria-label={t('cart.discount_remove_aria')}
+                  className="-mr-1 flex h-5 w-5 items-center justify-center rounded-full text-[var(--color-primary)] transition-colors hover:bg-[var(--color-primary)] hover:text-white"
+                >
+                  <span aria-hidden className="text-base leading-none">×</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </UpdateDiscountForm>
+      ) : null}
+
+      {/* Input + Apply — single segmented control */}
       <UpdateDiscountForm discountCodes={codes}>
-        <div>
+        <div className="flex h-11 overflow-hidden rounded-sm border border-[var(--color-border)] focus-within:border-[var(--color-text)]">
           <label htmlFor={discountCodeInputId} className="sr-only">
             {t('cart.discount_code')}
           </label>
@@ -125,9 +135,13 @@ function CartDiscounts({
             type="text"
             name="discountCode"
             placeholder={t('cart.discount_code_placeholder')}
+            className="flex-1 min-w-0 bg-transparent px-3 text-[14px] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none"
           />
-          &nbsp;
-          <button type="submit" aria-label={t('cart.discount_apply_aria')}>
+          <button
+            type="submit"
+            aria-label={t('cart.discount_apply_aria')}
+            className="shrink-0 bg-[var(--color-text)] px-5 text-[12px] uppercase tracking-[0.12em] font-semibold text-white transition-colors hover:bg-[var(--color-primary)]"
+          >
             {t('common.apply')}
           </button>
         </div>
@@ -213,12 +227,29 @@ function CartGiftCard({
   };
 
   return (
-    <section aria-label={t('cart.gift_cards')}>
-      {giftCardCodes && giftCardCodes.length > 0 && (
-        <dl>
-          <dt id={giftCardHeadingId}>{t('cart.gift_card_applied')}</dt>
+    <section aria-label={t('cart.gift_cards')} className="space-y-3">
+      <p
+        id={giftCardHeadingId}
+        className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text-muted)]"
+      >
+        {giftCardCodes && giftCardCodes.length > 0
+          ? t('cart.gift_card_applied')
+          : t('cart.gift_cards')}
+      </p>
+
+      {giftCardCodes && giftCardCodes.length > 0 ? (
+        <ul className="space-y-2" aria-labelledby={giftCardHeadingId}>
           {giftCardCodes.map((giftCard) => (
-            <dd key={giftCard.id} className="cart-discount">
+            <li
+              key={giftCard.id}
+              className="flex items-center justify-between gap-3 rounded-sm border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-3 py-2 text-[13px]"
+            >
+              <span className="flex items-center gap-2 font-mono text-[var(--color-text)]">
+                <span aria-hidden>***{giftCard.lastCharacters}</span>
+                <span className="font-sans text-[var(--color-text-muted)]">
+                  · <Money data={giftCard.amountUsed} />
+                </span>
+              </span>
               <RemoveGiftCardForm
                 giftCardId={giftCard.id}
                 lastCharacters={giftCard.lastCharacters}
@@ -230,18 +261,14 @@ function CartGiftCard({
                     removeButtonRefs.current.delete(giftCard.id);
                   }
                 }}
-              >
-                <code>***{giftCard.lastCharacters}</code>
-                &nbsp;
-                <Money data={giftCard.amountUsed} />
-              </RemoveGiftCardForm>
-            </dd>
+              />
+            </li>
           ))}
-        </dl>
-      )}
+        </ul>
+      ) : null}
 
       <AddGiftCardForm fetcherKey="gift-card-add">
-        <div>
+        <div className="flex h-11 overflow-hidden rounded-sm border border-[var(--color-border)] focus-within:border-[var(--color-text)]">
           <label htmlFor={giftCardInputId} className="sr-only">
             {t('cart.gift_card_label')}
           </label>
@@ -251,12 +278,13 @@ function CartGiftCard({
             name="giftCardCode"
             placeholder={t('cart.gift_card_placeholder')}
             ref={giftCardCodeInput}
+            className="flex-1 min-w-0 bg-transparent px-3 text-[14px] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none"
           />
-          &nbsp;
           <button
             type="submit"
             disabled={giftCardAddFetcher.state !== 'idle'}
             aria-label={t('cart.gift_card_apply_aria')}
+            className="shrink-0 bg-[var(--color-text)] px-5 text-[12px] uppercase tracking-[0.12em] font-semibold text-white transition-colors hover:bg-[var(--color-primary)] disabled:opacity-50"
           >
             {t('common.apply')}
           </button>
@@ -287,13 +315,11 @@ function AddGiftCardForm({
 function RemoveGiftCardForm({
   giftCardId,
   lastCharacters,
-  children,
   onRemoveClick,
   buttonRef,
 }: {
   giftCardId: string;
   lastCharacters: string;
-  children: React.ReactNode;
   onRemoveClick?: () => void;
   buttonRef?: (el: HTMLButtonElement | null) => void;
 }) {
@@ -306,13 +332,12 @@ function RemoveGiftCardForm({
         giftCardCodes: [giftCardId],
       }}
     >
-      {children}
-      &nbsp;
       <button
         type="submit"
         aria-label={t('cart.gift_card_remove_aria', {last: lastCharacters})}
         onClick={onRemoveClick}
         ref={buttonRef}
+        className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-primary)]"
       >
         {t('common.remove')}
       </button>
