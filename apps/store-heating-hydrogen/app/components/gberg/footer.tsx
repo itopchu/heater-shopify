@@ -25,14 +25,14 @@ export function Footer({locale}: {locale: string}) {
   ];
 
   return (
-    <footer className="mt-16 bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)]">
+    <footer className="mt-12 bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)] md:mt-16">
       <div className="border-b border-white/15">
-        <div className="container-x grid gap-6 py-10 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-12">
+        <div className="container-x grid gap-5 py-7 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-12 md:py-10">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-primary-on-dark)]">
+            <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-primary-on-dark)] md:text-[11px]">
               {t('footer.stay_in_loop')}
             </p>
-            <p className="mt-3 font-[var(--font-display)] text-3xl italic leading-[1] md:text-4xl">
+            <p className="mt-2 font-[var(--font-display)] text-2xl italic leading-[1.05] md:mt-3 md:text-4xl md:leading-[1]">
               {t('footer.newsletter_promise')}
             </p>
           </div>
@@ -40,15 +40,15 @@ export function Footer({locale}: {locale: string}) {
         </div>
       </div>
 
-      <div className="container-x grid grid-cols-1 gap-10 py-14 md:grid-cols-12 md:gap-8">
+      <div className="container-x grid grid-cols-1 gap-7 py-9 md:grid-cols-12 md:gap-8 md:py-14">
         <div className="md:col-span-4">
-          <p className="font-[var(--font-display)] text-5xl font-semibold leading-none md:text-6xl">
+          <p className="font-[var(--font-display)] text-3xl font-semibold leading-none sm:text-4xl md:text-6xl">
             G&#8209;Berg
           </p>
-          <p className="mt-5 max-w-[28ch] text-sm text-white/90">
+          <p className="mt-3 max-w-[28ch] text-sm text-white/90 md:mt-5">
             {t('footer.brand_blurb')}
           </p>
-          <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary-on-dark)]">
+          <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary-on-dark)] md:mt-6 md:text-[11px]">
             {t('footer.legal_entity')}
           </p>
         </div>
@@ -60,7 +60,7 @@ export function Footer({locale}: {locale: string}) {
       <div className="rule-accent-strong" aria-hidden />
 
       <div>
-        <div className="container-x flex flex-wrap items-center justify-between gap-4 py-5 text-[11px] uppercase tracking-[0.14em] text-white/80">
+        <div className="container-x flex flex-wrap items-center justify-between gap-3 py-4 text-[10px] uppercase tracking-[0.14em] text-white/80 md:gap-4 md:py-5 md:text-[11px]">
           <p>{t('footer.copyright', {year: new Date().getFullYear()})}</p>
           <p>{t('footer.vat_note')}</p>
         </div>

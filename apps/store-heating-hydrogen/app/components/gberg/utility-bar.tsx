@@ -51,13 +51,15 @@ export function UtilityBar({locale}: {locale: string}) {
           inverse
           className="
             flex-1
-            [&_svg]:h-4 [&_svg]:w-4
+            [&_svg]:h-3.5 [&_svg]:w-3.5 sm:[&_svg]:h-4 sm:[&_svg]:w-4
             [&_.leading-none]:whitespace-nowrap
+            [&_.leading-none]:text-[10px] sm:[&_.leading-none]:text-[11px]
+            [&_li]:gap-1.5 sm:[&_li]:gap-2
+            [&_ul]:gap-3 sm:[&_ul]:gap-5
             [&_li]:hidden
-            [&_li:first-child]:flex
-            sm:[&_li:nth-child(-n+2)]:flex
-            md:[&_li:nth-child(-n+3)]:flex
-            lg:[&_li:nth-child(-n+4)]:flex
+            [&_li:nth-child(-n+2)]:flex
+            sm:[&_li:nth-child(-n+3)]:flex
+            md:[&_li:nth-child(-n+4)]:flex
             [&_li]:!text-white
           "
           items={[

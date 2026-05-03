@@ -336,25 +336,25 @@ export default function HomePage() {
       <div className="rule-accent" aria-hidden />
 
       {/* GUIDED FINDER */}
-      <section className="container-x py-14 md:py-16">
+      <section className="container-x py-10 md:py-16">
         <SectionHeader
           eyebrow={t('home.guided_finder_eyebrow')}
           title={<>{t('home.guided_finder_title')}</>}
         />
-        <ul className="mt-10 grid grid-cols-1 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] md:grid-cols-4 md:divide-x md:divide-y-0">
+        <ul className="mt-7 grid grid-cols-1 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] md:mt-10 md:grid-cols-4 md:divide-x md:divide-y-0">
           {GUIDED_FINDER.map((g, i) => (
             <li key={`${g.labelKey}-${i}`}>
               <Link
                 to={localeHref(locale, g.href)}
-                className="group relative block px-6 py-8 transition-colors hover:bg-[var(--color-surface-muted)] md:px-8 md:py-10"
+                className="group relative block px-5 py-5 transition-colors hover:bg-[var(--color-surface-muted)] md:px-8 md:py-10"
               >
-                <p className="font-[var(--font-display)] text-2xl italic leading-tight">
+                <p className="font-[var(--font-display)] text-lg italic leading-tight md:text-2xl">
                   {t(g.labelKey)}
                 </p>
-                <p className="mt-3 text-sm text-[var(--color-text-muted)]">
+                <p className="mt-2 text-[13px] text-[var(--color-text-muted)] md:mt-3 md:text-sm">
                   {t(g.descKey)}
                 </p>
-                <p className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text)]">
+                <p className="mt-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text)] md:mt-6 md:text-xs">
                   <span>{t('home.guided_finder_start')}</span>
                   <span aria-hidden className="text-[var(--color-primary)]">
                     →
@@ -409,7 +409,7 @@ function SectionHeader({
   return (
     <header className="max-w-3xl">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="display-heading mt-4 text-[clamp(2rem,3vw+1rem,3.5rem)] leading-[1] text-[var(--color-text)]">
+      <h2 className="display-heading mt-4 text-[clamp(1.5rem,3vw+1rem,3.5rem)] leading-[1.05] text-[var(--color-text)]">
         {title}
       </h2>
       {description ? (
