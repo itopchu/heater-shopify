@@ -40,8 +40,8 @@ export function Footer({locale}: {locale: string}) {
         </div>
       </div>
 
-      <div className="container-x grid grid-cols-1 gap-7 py-9 md:grid-cols-12 md:gap-8 md:py-14">
-        <div className="md:col-span-4">
+      <div className="container-x grid grid-cols-2 gap-x-6 gap-y-7 py-8 md:grid-cols-12 md:gap-8 md:py-14">
+        <div className="col-span-2 md:col-span-4">
           <p className="font-[var(--font-display)] text-3xl font-semibold leading-none sm:text-4xl md:text-6xl">
             G&#8209;Berg
           </p>
