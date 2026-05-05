@@ -124,6 +124,20 @@ export function VariantSelector({
         const useDropdown = opt.values.length > 5;
         const fieldId = `opt-${opt.id}`;
 
+        // Show per-value prices only when this option actually changes the
+        // price (e.g. Size 600 = €99, Size 1200 = €119). For single-value
+        // options (the Color and Material on color-split products) every
+        // value would resolve to the same price — printing it duplicates
+        // the main price label and reads as ambiguous to the customer
+        // (is the €99 from Size? Color? Material?).
+        const distinctPrices = new Set(
+          opt.values.map((value) => {
+            const v = resolveVariantForValue(variants, selected, opt.name, value);
+            return v ? `${v.price?.amount ?? ''}-${v.price?.currencyCode ?? ''}` : '';
+          }),
+        );
+        const showPricePerValue = distinctPrices.size > 1;
+
         if (useDropdown) {
           const {available, soldOut} = countAvailability(opt, variants, selected);
           // Caption mirrors the brief: "8 sizes available, 1 sold out".
@@ -159,10 +173,11 @@ export function VariantSelector({
                   const isSoldOut = !v || !v.availableForSale;
                   const price = v ? priceLabel(v.price, locale) : '';
                   // Native <option> can't be styled, so we encode state
-                  // textually: " — €87.54" or " — sold out".
+                  // textually: " — €87.54" or " — sold out". Only append
+                  // the price when this option drives price differentiation.
                   const suffix = isSoldOut
                     ? t('pdp.variant_value_sold_out_suffix')
-                    : price
+                    : showPricePerValue && price
                       ? ` — ${price}`
                       : '';
                   return (
@@ -232,7 +247,7 @@ export function VariantSelector({
                     >
                       {value}
                     </span>
-                    {price ? (
+                    {showPricePerValue && price ? (
                       <span
                         className={cn(
                           'mt-0.5 text-[11px] tabular-nums',
@@ -245,6 +260,8 @@ export function VariantSelector({
                       >
                         {isSoldOut ? '—' : price}
                       </span>
+                    ) : isSoldOut ? (
+                      <span className="mt-0.5 text-[11px] text-[var(--color-text-muted)]">—</span>
                     ) : null}
                   </button>
                 );
