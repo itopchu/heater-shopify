@@ -137,19 +137,22 @@ export function ProductCard({product, locale}: ProductCardProps) {
               data={primary}
               alt={primary.altText ?? product.title}
               aspectRatio="3/4"
-              // 3-up at every breakpoint up to lg, then 4-up. The matching
-              // mobile hint is 33vw (not 50vw) — sending 50vw to a phone
-              // at DPR 2-3 makes the browser pick a too-small CDN variant
-              // for the actual device pixels and the result looks soft.
+              // 3-up mobile / 3-up sm-md / 4-up lg / 5-up xl. Cards are
+              // ~125px CSS on a 375px phone, ~280px on a 1280px desktop.
               sizes="(max-width: 1023px) 33vw, (min-width: 1024px) and (max-width: 1439px) 25vw, 22vw"
-              // Force the Shopify CDN to serve at least an 800-wide source.
-              // Cards are ~280px CSS at desktop / ~125px on mobile;
-              // 800w gives DPR 3 phones and 4-up desktop full sharpness
-              // and the browser downscales (which is crisper than
-              // upscaling a 400w source).
-              width={800}
+              // Span 300–1700w in 200px steps. Browser picks the variant
+              // that best matches `sizes × DPR`, so a 33vw mobile @ DPR 3
+              // (≈375 device px) pulls 500w and a 4-up desktop @ DPR 2
+              // (≈640 device px) pulls 700w — instead of fetching one
+              // oversized 800w file for every viewport.
+              srcSetOptions={{
+                intervals: 8,
+                startingWidth: 300,
+                incrementSize: 200,
+                placeholderWidth: 100,
+              }}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className="card-img absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
             {secondary ? (
               <Image
@@ -158,9 +161,14 @@ export function ProductCard({product, locale}: ProductCardProps) {
                 aria-hidden
                 aspectRatio="3/4"
                 sizes="(max-width: 1023px) 33vw, (min-width: 1024px) and (max-width: 1439px) 25vw, 22vw"
-                width={800}
+                srcSetOptions={{
+                  intervals: 8,
+                  startingWidth: 300,
+                  incrementSize: 200,
+                  placeholderWidth: 100,
+                }}
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+                className="card-img absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
               />
             ) : null}
           </>

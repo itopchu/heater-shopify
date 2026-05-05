@@ -229,6 +229,22 @@ h3 {
   line-height: 1;
 }
 
+/* Crisper browser downscaling for our featured imagery. We hand the CDN
+ * a wide srcset and let the browser pick the right variant per viewport
+ * — the picked variant is usually still 1.0–2.0× the rendered CSS
+ * pixels, so the browser still does *some* downscaling. The default
+ * bilinear filter looks soft on small thumbnails; `high-quality` (2025+
+ * Chrome/Edge/Safari) and `-webkit-optimize-contrast` (older Chrome)
+ * use a sharper filter without changing what's fetched.
+ *
+ * Scoped to the classes we own (.card-img, .hero-img) so we don't
+ * affect Shopify-rendered pixel art elsewhere. */
+.card-img,
+.hero-img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+}
+
 /* Premium-density product grid.
  *
  * Mobile = 3-up (per requirements §8 / §9 "3 items per row"). On the

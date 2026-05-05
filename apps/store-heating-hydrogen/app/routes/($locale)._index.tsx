@@ -180,11 +180,21 @@ export default function HomePage() {
                 alt={heroBanner.altText ?? t('home.hero_image_alt')}
                 aspectRatio="3/4"
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                width={1400}
+                // Hero is large at every breakpoint (full-width mobile,
+                // 40vw desktop). Start the srcset at 600w so the smallest
+                // variant we ever serve is still presentable on a small
+                // phone, and span up to 2200w to cover DPR 3 desktop and
+                // 4K. Browser picks correctly per viewport.
+                srcSetOptions={{
+                  intervals: 9,
+                  startingWidth: 600,
+                  incrementSize: 200,
+                  placeholderWidth: 400,
+                }}
                 // Home hero is the LCP candidate — prioritise it.
                 loading="eager"
                 fetchPriority="high"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="hero-img absolute inset-0 h-full w-full object-cover"
               />
             ) : (
               <div className="grid h-full place-items-center text-sm text-[var(--color-text-muted)]">
@@ -226,13 +236,19 @@ export default function HomePage() {
                     data={c.preview.image}
                     alt={c.preview.image.altText ?? c.label}
                     aspectRatio="4/5"
-                    // Grid is 3-up at every breakpoint (per requirements
-                    // §8) — match the hint to the actual rendered width.
+                    // Grid is 3-up at every breakpoint — 33vw of the
+                    // viewport. ≈125px on a phone, ≈427px on a 1280px
+                    // desktop.
                     sizes="(max-width: 1023px) 33vw, 33vw"
-                    // Force a high-resolution variant from Shopify's CDN
-                    // so DPR 2-3 phones get a sharp, non-blurry crop.
-                    width={900}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.05]"
+                    // 300–1700w span. Mobile @ DPR 3 (~375 device px)
+                    // → 500w; desktop @ DPR 2 (~854 device px) → 900w.
+                    srcSetOptions={{
+                      intervals: 8,
+                      startingWidth: 300,
+                      incrementSize: 200,
+                      placeholderWidth: 200,
+                    }}
+                    className="card-img absolute inset-0 h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.05]"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-[var(--color-surface-muted)] font-[var(--font-display)] text-3xl italic text-[var(--color-text-muted)]">
@@ -282,8 +298,18 @@ export default function HomePage() {
                 data={editorialBanner}
                 alt={editorialBanner.altText ?? ''}
                 sizes="(max-width: 768px) 100vw, 60vw"
-                width={1600}
-                className="absolute inset-0 h-full w-full object-cover"
+                // Editorial split is the second-largest image after the
+                // hero — 100vw mobile / 60vw desktop. Same range as hero
+                // so DPR 3 mobile (~1125 device px → 1200w) and DPR 2
+                // 1440px desktop (~1728 device px → 1800w) both land
+                // crisp without forcing one giant fallback.
+                srcSetOptions={{
+                  intervals: 9,
+                  startingWidth: 600,
+                  incrementSize: 200,
+                  placeholderWidth: 400,
+                }}
+                className="hero-img absolute inset-0 h-full w-full object-cover"
               />
             ) : (
               <div className="grid h-full place-items-center bg-[var(--color-surface)] text-[var(--color-text-muted)]">
