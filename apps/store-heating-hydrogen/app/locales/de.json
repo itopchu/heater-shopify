@@ -37,11 +37,11 @@
     "contact": "Kontakt"
   },
   "utility_bar": {
-    "free_eu_delivery": "Kostenloser EU-Versand",
     "warranty_10y": "10 Jahre Garantie",
     "returns_30d": "30 Tage Rückgaberecht",
     "secure_checkout": "Sicherer Checkout",
-    "need_help_phone": "Brauchen Sie Hilfe? +49 172 270 66 48"
+    "need_help_phone": "Brauchen Sie Hilfe? +49 172 608 88 48",
+    "paid_shipping": "Versand 20 €/Stück"
   },
   "language_switcher": {
     "aria_label": "Sprache: {name}. Klicken zum Ändern.",
@@ -70,7 +70,7 @@
   },
   "footer": {
     "stay_in_loop": "Bleiben Sie auf dem Laufenden",
-    "newsletter_promise": "Neuheiten und exklusive EU‑Angebote.",
+    "newsletter_promise": "Neuheiten und Kundenangebote.",
     "brand_blurb": "Autorisierter regionaler Wiederverkäufer hochwertiger europäischer Heizkörper und Badheizungen. Designed in Germany, gefertigt für Europa.",
     "legal_entity": "G-Berg GmbH",
     "col_customer_service": "Kundenservice",
@@ -97,7 +97,8 @@
   },
   "whatsapp": {
     "aria_label": "Mit G-Berg auf WhatsApp chatten",
-    "default_message": "Hallo G-Berg-Team! Ich schaue mir gerade die Heizkörper auf gberg-heizung.de an und hätte gern Beratung zur Auswahl des richtigen Modells für mein Zuhause. Können Sie mir weiterhelfen?"
+    "default_message": "Hallo, ich habe eine Frage zu einem Produkt auf Ihrer Website.",
+    "product_message": "Hallo, ich interessiere mich für dieses Produkt und hätte gerne weitere Informationen."
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium-Heizkörper aus Europa",
@@ -141,13 +142,13 @@
     "guided_finder_start": "Starten",
     "faq_eyebrow": "FAQ",
     "faq_title": "Häufige Fragen.",
-    "faq_q1": "Liefern Sie europaweit?",
-    "faq_a1": "Ja — wir liefern nach Deutschland, Belgien, Spanien, Österreich, in die Niederlande und in weitere EU-Länder. Versandkostenfrei ab 500 €.",
+    "faq_q1": "Wohin liefern Sie?",
+    "faq_a1": "Wir liefern nur nach Spanien, Deutschland und in die Niederlande. Versandkosten 20 € pro Stück — keine kostenfreie Versandschwelle.",
     "faq_q2": "Sind Ihre Heizkörper wärmepumpentauglich?",
     "faq_a2": "Viele unserer Modelle sind es. Achten Sie auf das Etikett 'Wärmepumpen-tauglich' auf den Produktkarten oder filtern Sie auf den Kategorieseiten nach Wärmepumpen-Kompatibilität.",
     "faq_q3": "Wie ist Ihre Rückgaberichtlinie?",
     "faq_a3": "30 Tage Rückgaberecht für ungeöffnete und unbenutzte Artikel. Sonderanfertigungen sind nicht erstattungsfähig — wir weisen Sie vor dem Checkout deutlich darauf hin.",
-    "why_us_delivery": "Kostenloser EU-Versand ab 500 €",
+    "why_us_delivery": "Versand 20 €/Stück · ES · DE · NL",
     "why_us_returns": "30 Tage Rückgaberecht",
     "why_us_engineering": "Technische Beratung",
     "why_us_warranty": "10 Jahre Garantie"
@@ -163,7 +164,7 @@
     "buy_bar_aria": "Kaufleiste",
     "price_vat_note": "Inkl. MwSt., zzgl. Versand",
     "delivery_returns_heading": "Versand & Rückgabe",
-    "delivery_returns_body": "Kostenloser EU-Versand ab 500 €. 30 Tage Rückgaberecht für unbenutzte Artikel.",
+    "delivery_returns_body": "Versand 20 € pro Stück nach Spanien, Deutschland und in die Niederlande. 30 Tage Rückgaberecht für unbenutzte Artikel.",
     "need_help_heading": "Benötigen Sie Hilfe?",
     "need_help_body": "Unsere Heizungstechniker beantworten Ihre Kompatibilitätsfragen vor der Bestellung.",
     "dispatch_default": "In der Regel innerhalb von 3 Werktagen versandt",
@@ -232,7 +233,7 @@
     "about_category_body": "Wir prüfen jeden Heizkörper nach EN 442 und ergänzen jede Produktseite um installateurgerechte Spezifikationen: Rohrabstand, Anschlussart, maximaler Druck und zertifizierte Heizleistung. Nutzen Sie die Filter oben, um nach Maßen oder Kompatibilität einzugrenzen.",
     "empty_collection": "In dieser Kategorie sind noch keine Produkte vorhanden.",
     "empty_storefront": "Die Shopify Storefront-API ist nicht konfiguriert.",
-    "empty_default_lede": "CE-zertifizierte europäische Heizkörper, ausgewählt für Leistung, Langlebigkeit und nahtlose Integration in moderne Heizsysteme.",
+    "empty_default_lede": "CE-zertifizierte Heizkörper, ausgewählt für Leistung, Langlebigkeit und saubere Integration in moderne Heizungssysteme.",
     "shop_all_meta_title": "Alle Heizkörper — G-Berg",
     "shop_all_meta_description": "Alle G-Berg Heizkörper, Handtuchwärmer, Elektroheizungen und Fußbodenheizsysteme an einem Ort.",
     "shop_all_eyebrow": "Katalog",
@@ -302,7 +303,7 @@
     "your_cart": "Ihr Warenkorb",
     "your_cart_empty": "Ihr Warenkorb ist leer",
     "empty_aside_blurb": "Wählen Sie eine Kategorie, um zu starten.",
-    "empty_page_blurb": "Nehmen Sie sich einen ruhigen Moment, um den Raum zu planen. Beginnen Sie mit einer Kategorie unten oder gehen Sie direkt zum vollständigen Katalog — jedes Stück ist CE-zertifiziert, in der EU gefertigt und wird ab 500 € europaweit kostenlos versandt.",
+    "empty_page_blurb": "Nehmen Sie sich einen ruhigen Moment, um den Raum zu planen. Beginnen Sie mit einer Kategorie unten oder gehen Sie direkt zum vollständigen Katalog — jedes Stück ist CE-zertifiziert und wird für 20 € pro Stück nach Spanien, Deutschland und in die Niederlande geliefert.",
     "browse_all": "Alle Produkte ansehen",
     "replacement_radiators": "Austauschheizkörper",
     "shop_by_room": "Nach Raum einkaufen",
@@ -327,8 +328,8 @@
     "gift_card_placeholder": "Geschenkkarten-Code",
     "gift_card_apply_aria": "Geschenkkarten-Code anwenden",
     "gift_card_remove_aria": "Geschenkkarte mit Endung {last} entfernen",
-    "trust_free_eu_title": "Kostenloser EU-Versand",
-    "trust_free_eu_sub": "Bei Bestellungen über 500 €",
+    "trust_free_eu_title": "Versand 20 €/Stück",
+    "trust_free_eu_sub": "Spanien · Deutschland · Niederlande",
     "trust_returns_title": "30 Tage Rückgaberecht",
     "trust_returns_sub": "Ohne Wenn und Aber",
     "trust_warranty_title": "10 Jahre Garantie",
@@ -379,7 +380,7 @@
     "channel_email_value": "info@g-berg-gmbh.de",
     "channel_email_hint": "Ideal für ausführliche Anfragen, Fotos und PDFs.",
     "channel_phone_label": "Telefon",
-    "channel_phone_value": "+49 172 270 66 48",
+    "channel_phone_value": "+49 172 608 88 48",
     "channel_phone_hint": "Mo – Fr, 09:00 – 17:00 MEZ.",
     "channel_whatsapp_label": "WhatsApp",
     "channel_whatsapp_value": "Mit uns chatten",

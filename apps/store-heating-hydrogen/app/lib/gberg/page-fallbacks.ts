@@ -6,6 +6,7 @@
  */
 
 import type {Locale} from './i18n';
+import {PHONE_DISPLAY, SUPPORT_EMAIL, SHIPPING_FLAT_RATE_EUR_PER_QTY} from './contact';
 
 export interface PageFallback {
   title: string;
@@ -38,10 +39,10 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
   contact: {
     title: 'Contact',
     intro:
-      'Talk to a heating engineer, not a chatbot. Replies within two business hours during EU office hours.',
+      'Talk to a heating engineer, not a chatbot. Replies within two business hours during business hours.',
     body: [
-      'Email: info@g-berg-gmbh.de',
-      'Phone: +49 172 270 66 48',
+      `Email: ${SUPPORT_EMAIL}`,
+      `Phone: ${PHONE_DISPLAY}`,
       'Hours: Monday – Friday, 09:00 – 17:00 CET',
       'We provide free dimensioning support: send us your room measurements, current radiator photos and heat loss (if known) and we will recommend the right model.',
     ].join('\n\n'),
@@ -52,7 +53,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     body: [
       'G-Berg GmbH\nHagenerstrasse 33\n58642 Iserlohn / Letmathe\nGermany',
       'Managing director: Gökberk Köylü',
-      'Phone: +49 172 270 66 48\nEmail: info@g-berg-gmbh.de',
+      `Phone: ${PHONE_DISPLAY}\nEmail: ${SUPPORT_EMAIL}`,
       'VAT ID per § 27a UStG: DE450348934',
       'Warehouse: Seestrasse 2A, 58089 Hagen',
       'Liability under § 7 (1) TMG; external links checked at the time of placement.',
@@ -81,12 +82,12 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
   shipping: {
     title: 'Shipping & Delivery',
     intro:
-      'We ship to Germany, Belgium, Spain, Austria, the Netherlands and other EU countries. Free over €500.',
+      'We deliver to Spain, Germany and the Netherlands only. Shipping is paid — a flat rate per item.',
     body: [
-      'Standard delivery: 3–7 business days within the EU after dispatch confirmation.',
-      'Express delivery: available for in-stock items at checkout, 1–3 business days.',
+      `Shipping cost: €${SHIPPING_FLAT_RATE_EUR_PER_QTY} per item, applied to every unit in the order. There is no free shipping threshold.`,
+      'Delivery countries: Spain, Germany, Netherlands. Addresses outside these three countries cannot be checked out at the moment.',
+      'Standard delivery: 3–7 business days after dispatch confirmation.',
       'Curbside delivery only — items above 30 kg or 1.5 m require two-person handling on-site (ask your installer).',
-      "Detailed per-country rates will be published by the merchant in Shopify Admin → Online Store → Pages → 'shipping'.",
     ].join('\n\n'),
   },
   returns: {
@@ -111,10 +112,10 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     title: 'Frequently asked questions',
     intro: 'Quick answers to the questions our engineers hear most often.',
     body: [
-      'Do you ship across Europe? Yes — Germany, Belgium, Spain, Austria, the Netherlands and more. Free over €500.',
+      `Where do you ship? Spain, Germany and the Netherlands only. Shipping is €${SHIPPING_FLAT_RATE_EUR_PER_QTY} per item, no free threshold.`,
       "Are your radiators heat-pump compatible? Many are. Look for the 'Heat-pump ready' badge on the product card.",
       'Can I install a radiator myself? Hydronic radiators must be commissioned by a certified heating engineer to keep the warranty. Electric radiators can be installed by a qualified electrician.',
-      'What if the model I want is out of stock? Email info@g-berg-gmbh.de — most items return to stock within 4–6 weeks and we hold orders without payment until you confirm.',
+      `What if the model I want is out of stock? Email ${SUPPORT_EMAIL} — most items return to stock within 4–6 weeks and we hold orders without payment until you confirm.`,
     ].join('\n\n'),
   },
 };

@@ -75,26 +75,32 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
         suppressHydrationWarning
         {...(!open ? {inert: ''} : {})}
       >
-        <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4">
-          <p className="font-[var(--font-display)] text-xl font-semibold tracking-tight">
+        {/* Header — compact, brand-anchored, single tap row.
+            Two-line accent bar pinned bottom for visual continuity with
+            the rest of the brand surfaces (eyebrow rule motif). */}
+        <div className="relative flex items-center justify-between bg-[var(--color-surface)] px-4 py-3">
+          <p className="font-[var(--font-display)] text-lg font-semibold tracking-tight text-[var(--color-text)]">
             G-Berg
           </p>
           <button
             type="button"
             onClick={close}
             aria-label={t('header.close_menu')}
-            className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+            className="-mr-1 inline-flex h-9 w-9 items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
           >
-            {t('common.close')} ✕
+            <span aria-hidden className="text-2xl leading-none">✕</span>
           </button>
+          <span aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-[var(--color-border)]" />
         </div>
 
-        <div className="flex-1 overflow-y-auto">
-          <div className="border-b border-[var(--color-border)] px-5 py-5">
+        <div className="flex-1 overflow-y-auto bg-[var(--color-surface)]">
+          {/* Search — tighter, inline with bg tint so it visually
+              registers as an input on small screens. */}
+          <div className="bg-[var(--color-surface-muted)] px-4 py-3">
             <SearchInput locale={locale} variant="page" />
           </div>
 
-          <nav aria-label={t('header.mobile_nav')} className="px-5 py-2">
+          <nav aria-label={t('header.mobile_nav')} className="px-3 py-1">
             <ul className="divide-y divide-[var(--color-border)]">
               {columns.map((col) => {
                 const label = navLabel(t, col.label);
@@ -102,21 +108,21 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
                   <li key={col.label}>
                     {col.sub && col.sub.length > 0 ? (
                       <details className="group">
-                        <summary className="flex cursor-pointer items-center justify-between py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text)]">
+                        <summary className="flex cursor-pointer items-center justify-between px-2 py-3 text-[13px] font-semibold uppercase tracking-[0.1em] text-[var(--color-text)]">
                           <span>{label}</span>
                           <span
                             aria-hidden
-                            className="text-[var(--color-text-muted)] transition-transform group-open:rotate-45"
+                            className="text-base text-[var(--color-text-muted)] transition-transform group-open:rotate-45"
                           >
                             +
                           </span>
                         </summary>
-                        <ul className="space-y-3 pb-4 pl-3">
+                        <ul className="space-y-2 pb-3 pl-4">
                           <li>
                             <Link
                               to={col.href}
                               onClick={close}
-                              className="link-accent text-sm text-[var(--color-text)]"
+                              className="block py-1 text-[13px] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
                             >
                               {t('common.browse_all')}
                             </Link>
@@ -126,7 +132,7 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
                               <Link
                                 to={s.href}
                                 onClick={close}
-                                className="link-accent text-sm text-[var(--color-text)]"
+                                className="block py-1 text-[13px] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
                               >
                                 {s.label}
                               </Link>
@@ -138,7 +144,7 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
                       <Link
                         to={col.href}
                         onClick={close}
-                        className="block py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text)] hover:text-[var(--color-primary)]"
+                        className="block px-2 py-3 text-[13px] font-semibold uppercase tracking-[0.1em] text-[var(--color-text)] hover:text-[var(--color-primary)]"
                       >
                         {label}
                       </Link>
@@ -149,16 +155,16 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
             </ul>
           </nav>
 
-          <div className="border-t border-[var(--color-border)] px-5 py-5">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+          <div className="mt-1 border-t border-[var(--color-border)] bg-[var(--color-surface-muted)] px-4 py-3">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-primary)]">
               {t('header.quick_links')}
             </p>
-            <ul className="mt-3 space-y-3">
+            <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1.5">
               <li>
                 <Link
                   to={localeHref(locale, '/cart')}
                   onClick={close}
-                  className="link-accent text-sm"
+                  className="block py-1 text-[13px] font-medium text-[var(--color-text)] hover:text-[var(--color-primary)]"
                 >
                   {t('header.cart')}
                 </Link>
@@ -167,7 +173,7 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
                 <Link
                   to={localeHref(locale, '/pages/contact')}
                   onClick={close}
-                  className="link-accent text-sm"
+                  className="block py-1 text-[13px] font-medium text-[var(--color-text)] hover:text-[var(--color-primary)]"
                 >
                   {t('header.contact')}
                 </Link>

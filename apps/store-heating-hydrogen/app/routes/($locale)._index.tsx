@@ -145,7 +145,7 @@ export default function HomePage() {
     <>
       {/* HERO */}
       <section className="bg-[var(--color-surface)]">
-        <div className="container-x grid grid-cols-1 items-end gap-10 py-14 md:py-16 lg:grid-cols-[1.5fr_1fr] lg:gap-16 lg:py-20">
+        <div className="container-x grid grid-cols-1 items-end gap-6 py-7 sm:gap-8 sm:py-10 md:py-14 lg:grid-cols-[1.5fr_1fr] lg:gap-16 lg:py-20">
           <div>
             {/*
               Design Refresh — Complaint #5: editorial display rhythm.
@@ -154,15 +154,15 @@ export default function HomePage() {
             <Eyebrow tone="accent" withRule>
               {t('home.hero_eyebrow')}
             </Eyebrow>
-            <h1 className="mt-5 font-[var(--font-display)] text-[clamp(3rem,7vw+0.5rem,7.5rem)] tracking-tight leading-[1.02] text-[var(--color-text)]">
+            <h1 className="mt-3 font-[var(--font-display)] text-[clamp(2.25rem,7vw+0.5rem,7.5rem)] tracking-tight leading-[1.02] text-[var(--color-text)] md:mt-5">
               {t('home.hero_title_line1')}
               <br />
               <span className="text-[var(--color-primary)]">{t('home.hero_title_line2')}</span>
             </h1>
-            <p className="mt-7 max-w-[var(--lede-max-width,52ch)] text-[var(--color-text-muted)] text-base md:text-lg">
+            <p className="mt-3 max-w-[var(--lede-max-width,52ch)] text-[var(--color-text-muted)] text-[15px] md:mt-6 md:text-base lg:text-lg">
               {t('home.hero_lede')}
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-2 md:mt-8 md:gap-3">
               <Link to={localeHref(locale, '/collections/living-room-radiators')}>
                 <Button size="lg">{t('home.hero_cta_shop')}</Button>
               </Link>
@@ -180,6 +180,7 @@ export default function HomePage() {
                 alt={heroBanner.altText ?? t('home.hero_image_alt')}
                 aspectRatio="3/4"
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                width={1400}
                 // Home hero is the LCP candidate — prioritise it.
                 loading="eager"
                 fetchPriority="high"
@@ -199,7 +200,7 @@ export default function HomePage() {
       <div className="rule-accent" aria-hidden />
 
       {/* SHOP BY CATEGORY */}
-      <section className="container-x py-14 md:py-16">
+      <section className="container-x py-8 md:py-14">
         <SectionHeader
           eyebrow={t('home.shop_by_room_eyebrow')}
           title={
@@ -213,7 +214,7 @@ export default function HomePage() {
           }
           description={t('home.shop_by_room_description')}
         />
-        <ul className="mt-10 grid grid-cols-2 gap-px bg-[var(--color-border)] sm:grid-cols-3 md:grid-cols-3">
+        <ul className="mt-5 grid grid-cols-3 gap-px bg-[var(--color-border)] md:mt-10">
           {categories.map((c) => (
             <li key={c.handle} className="bg-[var(--color-surface)]">
               <Link
@@ -225,7 +226,12 @@ export default function HomePage() {
                     data={c.preview.image}
                     alt={c.preview.image.altText ?? c.label}
                     aspectRatio="4/5"
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                    // Grid is 3-up at every breakpoint (per requirements
+                    // §8) — match the hint to the actual rendered width.
+                    sizes="(max-width: 1023px) 33vw, 33vw"
+                    // Force a high-resolution variant from Shopify's CDN
+                    // so DPR 2-3 phones get a sharp, non-blurry crop.
+                    width={900}
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.05]"
                   />
                 ) : (
@@ -242,19 +248,19 @@ export default function HomePage() {
                   className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[#111111]/85 to-transparent"
                   aria-hidden
                 />
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-white md:p-6">
-                  <div>
-                    <p className="font-[var(--font-display)] text-2xl italic leading-tight md:text-3xl">
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-2.5 text-white md:p-6">
+                  <div className="min-w-0">
+                    <p className="font-[var(--font-display)] text-[15px] italic leading-tight md:text-3xl">
                       {c.label}
                     </p>
                     <span
                       aria-hidden
-                      className="mt-2 block h-[2px] w-6 bg-[var(--color-primary)]"
+                      className="mt-1 block h-[2px] w-5 bg-[var(--color-primary)] md:mt-2 md:w-6"
                     />
                   </div>
                   <span
                     aria-hidden
-                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center text-2xl text-[var(--color-primary)] transition-transform duration-300 ease-out group-hover:translate-x-[6px]"
+                    className="inline-flex h-6 w-6 shrink-0 items-center justify-center text-base text-[var(--color-primary)] transition-transform duration-300 ease-out group-hover:translate-x-[6px] md:h-9 md:w-9 md:text-2xl"
                   >
                     →
                   </span>
@@ -276,6 +282,7 @@ export default function HomePage() {
                 data={editorialBanner}
                 alt={editorialBanner.altText ?? ''}
                 sizes="(max-width: 768px) 100vw, 60vw"
+                width={1600}
                 className="absolute inset-0 h-full w-full object-cover"
               />
             ) : (
@@ -284,7 +291,7 @@ export default function HomePage() {
               </div>
             )}
           </div>
-          <div className="flex flex-col justify-center p-10 md:col-span-5 md:p-14">
+          <div className="flex flex-col justify-center p-5 md:col-span-5 md:p-14">
             <Eyebrow>{t('home.designed_in_germany_eyebrow')}</Eyebrow>
             <p className="display-heading mt-5 text-[clamp(2rem,3vw+1rem,3.75rem)] text-[var(--color-text)]">
               {t('home.designed_in_germany_title_line1')}
@@ -314,7 +321,7 @@ export default function HomePage() {
 
       {/* BESTSELLERS */}
       {bestsellers.length > 0 ? (
-        <section className="container-x py-14 md:py-16">
+        <section className="container-x py-8 md:py-14">
           <SectionHeader
             eyebrow={t('home.bestsellers_eyebrow')}
             title={
@@ -336,25 +343,25 @@ export default function HomePage() {
       <div className="rule-accent" aria-hidden />
 
       {/* GUIDED FINDER */}
-      <section className="container-x py-10 md:py-16">
+      <section className="container-x py-7 md:py-14">
         <SectionHeader
           eyebrow={t('home.guided_finder_eyebrow')}
           title={<>{t('home.guided_finder_title')}</>}
         />
-        <ul className="mt-7 grid grid-cols-1 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] md:mt-10 md:grid-cols-4 md:divide-x md:divide-y-0">
+        <ul className="mt-4 grid grid-cols-2 divide-x divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] md:mt-10 md:grid-cols-4 md:divide-y-0">
           {GUIDED_FINDER.map((g, i) => (
             <li key={`${g.labelKey}-${i}`}>
               <Link
                 to={localeHref(locale, g.href)}
-                className="group relative block px-5 py-5 transition-colors hover:bg-[var(--color-surface-muted)] md:px-8 md:py-10"
+                className="group relative block px-3 py-3 transition-colors hover:bg-[var(--color-surface-muted)] md:px-8 md:py-10"
               >
-                <p className="font-[var(--font-display)] text-lg italic leading-tight md:text-2xl">
+                <p className="font-[var(--font-display)] text-base italic leading-tight md:text-2xl">
                   {t(g.labelKey)}
                 </p>
-                <p className="mt-2 text-[13px] text-[var(--color-text-muted)] md:mt-3 md:text-sm">
+                <p className="mt-1 text-[12px] leading-snug text-[var(--color-text-muted)] md:mt-3 md:text-sm">
                   {t(g.descKey)}
                 </p>
-                <p className="mt-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text)] md:mt-6 md:text-xs">
+                <p className="mt-2 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text)] md:mt-6 md:text-xs">
                   <span>{t('home.guided_finder_start')}</span>
                   <span aria-hidden className="text-[var(--color-primary)]">
                     →
@@ -370,20 +377,20 @@ export default function HomePage() {
 
       {/* TRUST STRIP */}
       <section className="bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)]">
-        <ul className="container-x grid grid-cols-2 gap-px py-10 md:grid-cols-4">
+        <ul className="container-x grid grid-cols-2 gap-x-2 gap-y-3 py-4 md:grid-cols-4 md:gap-px md:py-10">
           {WHY_US.map((w) => (
-            <li key={w.labelKey} className="flex items-center gap-4 px-2 md:px-4">
-              <span aria-hidden className="text-2xl text-[var(--color-primary)]">
+            <li key={w.labelKey} className="flex items-center gap-2 px-1 md:gap-4 md:px-4">
+              <span aria-hidden className="text-lg text-[var(--color-primary)] md:text-2xl">
                 {w.icon}
               </span>
-              <span className="text-sm font-medium tracking-tight">{t(w.labelKey)}</span>
+              <span className="text-[12px] font-medium leading-snug tracking-tight md:text-sm">{t(w.labelKey)}</span>
             </li>
           ))}
         </ul>
       </section>
 
       {/* FAQ */}
-      <section className="container-x py-14 md:py-16">
+      <section className="container-x py-8 md:py-14">
         <SectionHeader
           eyebrow={t('home.faq_eyebrow')}
           title={<>{t('home.faq_title')}</>}
@@ -409,13 +416,13 @@ function SectionHeader({
   return (
     <header className="max-w-3xl">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="display-heading mt-4 text-[clamp(1.5rem,3vw+1rem,3.5rem)] leading-[1.05] text-[var(--color-text)]">
+      <h2 className="display-heading mt-2 text-[clamp(1.25rem,3vw+1rem,3.5rem)] leading-[1.05] text-[var(--color-text)] md:mt-4">
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 max-w-[55ch] text-[var(--color-text-muted)]">{description}</p>
+        <p className="mt-2 max-w-[55ch] text-sm text-[var(--color-text-muted)] md:mt-4 md:text-base">{description}</p>
       ) : null}
-      <span className="mt-6 inline-block h-[2px] w-12 bg-[var(--color-primary)]" aria-hidden />
+      <span className="mt-3 inline-block h-[2px] w-10 bg-[var(--color-primary)] md:mt-6 md:w-12" aria-hidden />
     </header>
   );
 }

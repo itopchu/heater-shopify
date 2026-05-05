@@ -37,11 +37,11 @@
     "contact": "Contact"
   },
   "utility_bar": {
-    "free_eu_delivery": "Livraison UE gratuite",
     "warranty_10y": "Garantie 10 ans",
     "returns_30d": "Retour sous 30 jours",
     "secure_checkout": "Paiement sécurisé",
-    "need_help_phone": "Besoin d'aide ? +49 172 270 66 48"
+    "need_help_phone": "Besoin d'aide ? +49 172 608 88 48",
+    "paid_shipping": "Livraison 20 €/article"
   },
   "language_switcher": {
     "aria_label": "Langue : {name}. Cliquez pour changer.",
@@ -70,7 +70,7 @@
   },
   "footer": {
     "stay_in_loop": "Restez informé",
-    "newsletter_promise": "Nouveautés et offres exclusives UE.",
+    "newsletter_promise": "Nouveautés et offres clients.",
     "brand_blurb": "Revendeur régional agréé de radiateurs européens haut de gamme et chauffages de salle de bain. Designed in Germany, fabriqué pour l'Europe.",
     "legal_entity": "G-Berg GmbH",
     "col_customer_service": "Service client",
@@ -97,7 +97,8 @@
   },
   "whatsapp": {
     "aria_label": "Discutez avec G-Berg sur WhatsApp",
-    "default_message": "Bonjour l'équipe G-Berg ! Je consulte vos radiateurs sur gberg-heizung.de et j'aimerais être conseillé pour choisir le bon modèle pour mon logement. Pouvez-vous m'aider ?"
+    "default_message": "Hallo, ich habe eine Frage zu einem Produkt auf Ihrer Website.",
+    "product_message": "Hallo, ich interessiere mich für dieses Produkt und hätte gerne weitere Informationen."
   },
   "home": {
     "meta_title": "G-Berg Heizung — Radiateurs européens haut de gamme",
@@ -141,13 +142,13 @@
     "guided_finder_start": "Commencer",
     "faq_eyebrow": "FAQ",
     "faq_title": "Questions fréquentes.",
-    "faq_q1": "Livrez-vous dans toute l'Europe ?",
-    "faq_a1": "Oui — nous livrons en Allemagne, Belgique, Espagne, Autriche, aux Pays-Bas et dans d'autres pays de l'UE. Livraison gratuite à partir de 500 €.",
+    "faq_q1": "Où livrez-vous ?",
+    "faq_a1": "Nous livrons uniquement en Espagne, Allemagne et aux Pays-Bas. Frais de port 20 € par article — pas de seuil de livraison gratuite.",
     "faq_q2": "Vos radiateurs sont-ils compatibles pompe à chaleur ?",
     "faq_a2": "Beaucoup le sont. Repérez le badge « Compatible PAC » sur les fiches produits ou filtrez par compatibilité PAC sur les pages catégorie.",
     "faq_q3": "Quelle est votre politique de retour ?",
     "faq_a3": "Retour sous 30 jours sur les articles non utilisés et non ouverts. Les commandes sur mesure ne sont pas remboursables — nous vous le précisons clairement avant le paiement.",
-    "why_us_delivery": "Livraison UE gratuite à partir de 500 €",
+    "why_us_delivery": "Livraison 20 €/article · ES · DE · NL",
     "why_us_returns": "Retour sous 30 jours",
     "why_us_engineering": "Support technique",
     "why_us_warranty": "Garantie 10 ans"
@@ -163,7 +164,7 @@
     "buy_bar_aria": "Barre d'achat",
     "price_vat_note": "TTC, hors livraison",
     "delivery_returns_heading": "Livraison & retours",
-    "delivery_returns_body": "Livraison UE gratuite à partir de 500 €. Retour sous 30 jours pour les articles non utilisés.",
+    "delivery_returns_body": "Livraison 20 € par article vers l'Espagne, l'Allemagne et les Pays-Bas. Retours sous 30 jours sur articles non utilisés.",
     "need_help_heading": "Besoin d'aide ?",
     "need_help_body": "Nos chauffagistes répondent à vos questions de compatibilité avant la commande.",
     "dispatch_default": "Expédié généralement sous 3 jours ouvrés",
@@ -232,7 +233,7 @@
     "about_category_body": "Nous testons chaque radiateur selon les puissances EN 442 et associons chaque fiche à des spécifications dignes d'un installateur : entraxe, type de raccordement, pression maxi et puissance thermique certifiée. Utilisez les filtres ci-dessus pour affiner par dimension ou compatibilité.",
     "empty_collection": "Pas encore de produits dans cette catégorie.",
     "empty_storefront": "L'API Shopify Storefront n'est pas configurée.",
-    "empty_default_lede": "Radiateurs européens certifiés CE, sélectionnés pour la performance, la durabilité et l'intégration aux systèmes de chauffage modernes.",
+    "empty_default_lede": "Radiateurs certifiés CE sélectionnés pour la performance, la durabilité et une intégration propre aux systèmes de chauffage modernes.",
     "shop_all_meta_title": "Tous les radiateurs — G-Berg",
     "shop_all_meta_description": "Tous les radiateurs, sèche-serviettes, chauffages électriques et planchers chauffants G-Berg réunis.",
     "shop_all_eyebrow": "Catalogue",
@@ -302,7 +303,7 @@
     "your_cart": "Votre panier",
     "your_cart_empty": "Votre panier est vide",
     "empty_aside_blurb": "Choisissez une catégorie pour commencer.",
-    "empty_page_blurb": "Prenez le temps de planifier la pièce. Commencez par une catégorie ci-dessous ou allez directement au catalogue complet — chaque pièce est certifiée CE, fabriquée dans l'UE et livrée gratuitement dans toute l'Europe à partir de 500 €.",
+    "empty_page_blurb": "Prenez un moment pour planifier la pièce. Commencez par une catégorie ci-dessous ou allez directement au catalogue complet — chaque pièce est certifiée CE et livrée en Espagne, Allemagne et aux Pays-Bas pour 20 € par article.",
     "browse_all": "Voir tous les produits",
     "replacement_radiators": "Radiateurs de remplacement",
     "shop_by_room": "Acheter par pièce",
@@ -327,8 +328,8 @@
     "gift_card_placeholder": "Code de carte cadeau",
     "gift_card_apply_aria": "Appliquer la carte cadeau",
     "gift_card_remove_aria": "Retirer la carte cadeau finissant par {last}",
-    "trust_free_eu_title": "Livraison UE gratuite",
-    "trust_free_eu_sub": "Pour les commandes dès 500 €",
+    "trust_free_eu_title": "Livraison 20 €/article",
+    "trust_free_eu_sub": "Espagne · Allemagne · Pays-Bas",
     "trust_returns_title": "Retour sous 30 jours",
     "trust_returns_sub": "Sans condition",
     "trust_warranty_title": "Garantie 10 ans",
@@ -379,7 +380,7 @@
     "channel_email_value": "info@g-berg-gmbh.de",
     "channel_email_hint": "Idéal pour les demandes détaillées, photos et PDF.",
     "channel_phone_label": "Téléphone",
-    "channel_phone_value": "+49 172 270 66 48",
+    "channel_phone_value": "+49 172 608 88 48",
     "channel_phone_hint": "Lun – Ven, 09h00 – 17h00 CET.",
     "channel_whatsapp_label": "WhatsApp",
     "channel_whatsapp_value": "Discuter avec nous",

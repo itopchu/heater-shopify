@@ -23,6 +23,8 @@ import esJson from './es.json';
 import itJson from './it.json';
 import plJson from './pl.json';
 import daJson from './da.json';
+import trJson from './tr.json';
+import huJson from './hu.json';
 
 import type {Locale} from '~/lib/gberg/i18n';
 
@@ -42,6 +44,8 @@ export const LOCALE_DICT: Record<Locale, Dict> = {
   it: itJson as Dict,
   pl: plJson as Dict,
   da: daJson as Dict,
+  tr: trJson as Dict,
+  hu: huJson as Dict,
 };
 
 /**

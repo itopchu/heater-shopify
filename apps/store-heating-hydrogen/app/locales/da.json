@@ -37,11 +37,11 @@
     "contact": "Kontakt"
   },
   "utility_bar": {
-    "free_eu_delivery": "Gratis EU-levering",
     "warranty_10y": "10 års garanti",
     "returns_30d": "30 dages returret",
     "secure_checkout": "Sikker betaling",
-    "need_help_phone": "Brug for hjælp? +49 172 270 66 48"
+    "need_help_phone": "Brug for hjælp? +49 172 608 88 48",
+    "paid_shipping": "Fragt 20 €/stk"
   },
   "language_switcher": {
     "aria_label": "Sprog: {name}. Klik for at ændre.",
@@ -70,7 +70,7 @@
   },
   "footer": {
     "stay_in_loop": "Hold dig opdateret",
-    "newsletter_promise": "Nyheder og eksklusive EU‑tilbud.",
+    "newsletter_promise": "Nyheder og kundetilbud.",
     "brand_blurb": "Autoriseret regional forhandler af premium europæiske radiatorer og badeværelsesvarme. Designed in Germany, fremstillet til Europa.",
     "legal_entity": "G-Berg GmbH",
     "col_customer_service": "Kundeservice",
@@ -97,7 +97,8 @@
   },
   "whatsapp": {
     "aria_label": "Chat med G-Berg på WhatsApp",
-    "default_message": "Hej G-Berg-team! Jeg kigger på radiatorer på gberg-heizung.de og vil gerne have rådgivning om det rigtige model til mit hjem. Kan I hjælpe?"
+    "default_message": "Hallo, ich habe eine Frage zu einem Produkt auf Ihrer Website.",
+    "product_message": "Hallo, ich interessiere mich für dieses Produkt und hätte gerne weitere Informationen."
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium europæiske radiatorer",
@@ -141,13 +142,13 @@
     "guided_finder_start": "Start",
     "faq_eyebrow": "FAQ",
     "faq_title": "Ofte stillede spørgsmål.",
-    "faq_q1": "Leverer I i hele Europa?",
-    "faq_a1": "Ja — vi leverer til Tyskland, Belgien, Spanien, Østrig, Holland og andre EU-lande. Gratis fragt over 500 €.",
+    "faq_q1": "Hvor leverer I?",
+    "faq_a1": "Vi leverer kun til Spanien, Tyskland og Holland. Fragt 20 € pr. stk. — ingen gratis fragt-grænse.",
     "faq_q2": "Er jeres radiatorer kompatible med varmepumper?",
     "faq_a2": "Mange af dem er. Se efter mærket 'Varmepumpe-klar' på produktkort, eller filtrer på varmepumpe-kompatibilitet på kategorisiderne.",
     "faq_q3": "Hvad er jeres returpolitik?",
     "faq_a3": "30 dages returret på ubrugte og uåbnede varer. Specialfremstillede ordrer kan ikke returneres — vi gør tydeligt opmærksom på det inden betaling.",
-    "why_us_delivery": "Gratis EU-levering over 500 €",
+    "why_us_delivery": "Fragt 20 €/stk · ES · DE · NL",
     "why_us_returns": "30 dages returret",
     "why_us_engineering": "Teknisk rådgivning",
     "why_us_warranty": "10 års garanti"
@@ -163,7 +164,7 @@
     "buy_bar_aria": "Købsbjælke",
     "price_vat_note": "Inkl. moms, ekskl. fragt",
     "delivery_returns_heading": "Levering & returnering",
-    "delivery_returns_body": "Gratis EU-levering over 500 €. 30 dages returret på ubrugte varer.",
+    "delivery_returns_body": "Fragt 20 € pr. stk. til Spanien, Tyskland og Holland. 30 dages returret på ubrugte varer.",
     "need_help_heading": "Brug for hjælp?",
     "need_help_body": "Vores varmespecialister besvarer kompatibilitetsspørgsmål inden bestilling.",
     "dispatch_default": "Sendes normalt inden for 3 hverdage",
@@ -232,7 +233,7 @@
     "about_category_body": "Vi tester hver radiator efter EN 442-ydelser og parrer hver vare med installatørspecifikationer: rørafstand, tilslutningstype, maks. tryk og certificeret varmeydelse. Brug filtrene ovenfor til at indsnævre efter mål eller kompatibilitet.",
     "empty_collection": "Endnu ingen produkter i denne kategori.",
     "empty_storefront": "Shopify Storefront-API'en er ikke konfigureret.",
-    "empty_default_lede": "CE-certificerede europæiske radiatorer udvalgt for ydeevne, holdbarhed og ren integration med moderne varmesystemer.",
+    "empty_default_lede": "CE-certificerede radiatorer valgt på baggrund af ydeevne, holdbarhed og ren integration med moderne varmesystemer.",
     "shop_all_meta_title": "Alle radiatorer — G-Berg",
     "shop_all_meta_description": "Alle G-Berg radiatorer, håndklædetørrere, elvarmere og gulvvarmesystemer ét sted.",
     "shop_all_eyebrow": "Katalog",
@@ -302,7 +303,7 @@
     "your_cart": "Din kurv",
     "your_cart_empty": "Din kurv er tom",
     "empty_aside_blurb": "Vælg en kategori for at komme i gang.",
-    "empty_page_blurb": "Tag et roligt øjeblik til at planlægge rummet. Begynd med en kategori nedenfor, eller gå direkte til hele kataloget — hver del er CE-certificeret, fremstillet i EU og leveres gratis i hele Europa over 500 €.",
+    "empty_page_blurb": "Tag et roligt øjeblik til at planlægge rummet. Begynd med en kategori nedenfor, eller gå direkte til hele kataloget — hver del er CE-certificeret og leveres til Spanien, Tyskland og Holland for 20 € pr. stk.",
     "browse_all": "Se alle produkter",
     "replacement_radiators": "Udskiftningsradiatorer",
     "shop_by_room": "Køb efter rum",
@@ -327,8 +328,8 @@
     "gift_card_placeholder": "Gavekortskode",
     "gift_card_apply_aria": "Anvend gavekortskode",
     "gift_card_remove_aria": "Fjern gavekort, der ender på {last}",
-    "trust_free_eu_title": "Gratis EU-levering",
-    "trust_free_eu_sub": "Ved ordrer over 500 €",
+    "trust_free_eu_title": "Fragt 20 €/stk",
+    "trust_free_eu_sub": "Spanien · Tyskland · Holland",
     "trust_returns_title": "30 dages returret",
     "trust_returns_sub": "Uden spørgsmål",
     "trust_warranty_title": "10 års garanti",
@@ -379,7 +380,7 @@
     "channel_email_value": "info@g-berg-gmbh.de",
     "channel_email_hint": "Bedst til detaljerede henvendelser, billeder og PDF'er.",
     "channel_phone_label": "Telefon",
-    "channel_phone_value": "+49 172 270 66 48",
+    "channel_phone_value": "+49 172 608 88 48",
     "channel_phone_hint": "Man – Fre, 09:00 – 17:00 CET.",
     "channel_whatsapp_label": "WhatsApp",
     "channel_whatsapp_value": "Chat med os",

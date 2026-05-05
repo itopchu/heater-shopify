@@ -137,7 +137,17 @@ export function ProductCard({product, locale}: ProductCardProps) {
               data={primary}
               alt={primary.altText ?? product.title}
               aspectRatio="3/4"
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              // 3-up at every breakpoint up to lg, then 4-up. The matching
+              // mobile hint is 33vw (not 50vw) — sending 50vw to a phone
+              // at DPR 2-3 makes the browser pick a too-small CDN variant
+              // for the actual device pixels and the result looks soft.
+              sizes="(max-width: 1023px) 33vw, (min-width: 1024px) and (max-width: 1439px) 25vw, 22vw"
+              // Force the Shopify CDN to serve at least an 800-wide source.
+              // Cards are ~280px CSS at desktop / ~125px on mobile;
+              // 800w gives DPR 3 phones and 4-up desktop full sharpness
+              // and the browser downscales (which is crisper than
+              // upscaling a 400w source).
+              width={800}
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
@@ -147,7 +157,8 @@ export function ProductCard({product, locale}: ProductCardProps) {
                 alt=""
                 aria-hidden
                 aspectRatio="3/4"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                sizes="(max-width: 1023px) 33vw, (min-width: 1024px) and (max-width: 1439px) 25vw, 22vw"
+                width={800}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
               />
@@ -180,7 +191,7 @@ export function ProductCard({product, locale}: ProductCardProps) {
         No top border — Complaint #1 fix. Separation is whitespace + the
         hover-revealed hairline shadow on the outer link.
       */}
-      <div className="flex flex-1 flex-col gap-2 px-1 pb-4 pt-4">
+      <div className="flex flex-1 flex-col gap-1 px-1 pb-2.5 pt-2 sm:gap-1.5 sm:pb-3 sm:pt-3 md:gap-2 md:pb-4 md:pt-4">
         {/*
           Eyebrow slot is ALWAYS rendered — even on accessory products
           that have no series. This keeps the title's vertical position
@@ -207,7 +218,7 @@ export function ProductCard({product, locale}: ProductCardProps) {
           floating in empty space.
         */}
         <h2
-          className="flex-1 font-[var(--font-display)] text-[1.05rem] font-medium leading-snug tracking-tight text-[var(--color-text)]"
+          className="flex-1 font-[var(--font-display)] text-[12px] font-medium leading-[1.2] tracking-tight text-[var(--color-text)] sm:text-[13px] md:text-[1.05rem] md:leading-snug"
         >
           {product.title}
         </h2>
@@ -229,10 +240,10 @@ export function ProductCard({product, locale}: ProductCardProps) {
           <p className="text-xs text-[var(--color-text-muted)]">{fallbackSpec}</p>
         ) : null}
 
-        <div className="mt-2 flex items-baseline justify-between border-t border-[var(--color-border-strong)] pt-3">
+        <div className="mt-2 flex flex-wrap items-end justify-between gap-x-2 gap-y-0.5 border-t border-[var(--color-border-strong)] pt-2 md:pt-3">
           <PriceLine product={product} intl={intl} />
           {product.specs.heat_pump_compatible ? (
-            <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-success)]">
+            <span className="hidden text-[9px] font-semibold uppercase tracking-[0.14em] text-[var(--color-success)] md:inline md:text-[10px]">
               {t('pdp.heat_pump_ready')}
             </span>
           ) : null}
@@ -263,16 +274,36 @@ function PriceLine({product, intl}: {product: HeatingProduct; intl: string}) {
     compareNum > 0 &&
     Number.isFinite(priceNum) &&
     compareNum > priceNum;
+  const pctOff = hasDiscount
+    ? Math.round(((compareNum - priceNum) / compareNum) * 100)
+    : 0;
+
+  // Compact stacked layout: compare-at sits on its own line above the
+  // live price. On a 3-up mobile card (~115px) a single-row flex of
+  // price + strikethrough overflows the card. Stacked + whitespace-nowrap
+  // on each money value keeps every number on a single line within its
+  // row, regardless of card width or locale-formatted currency length.
   return (
-    <span className="flex items-baseline gap-2">
-      <span className="text-base font-semibold tabular-nums text-[var(--color-text)]">
-        {formatMoney(price, intl)}
-      </span>
+    <span className="flex min-w-0 flex-col items-start leading-tight">
       {hasDiscount ? (
-        <span className="text-xs text-[var(--color-text-muted)] line-through tabular-nums">
-          {formatMoney(compareAt, intl)}
+        <span className="flex items-baseline gap-1.5 text-[10px] leading-tight text-[var(--color-text-muted)] sm:text-[11px]">
+          <span className="line-through tabular-nums whitespace-nowrap">
+            {formatMoney(compareAt, intl)}
+          </span>
+          <span className="font-semibold uppercase tracking-[0.06em] text-[var(--color-primary)]">
+            −{pctOff}%
+          </span>
         </span>
       ) : null}
+      <span
+        className={`tabular-nums whitespace-nowrap font-semibold leading-tight ${
+          hasDiscount
+            ? 'text-[13px] text-[var(--color-primary)] sm:text-[14px] md:text-base'
+            : 'text-[13px] text-[var(--color-text)] sm:text-[14px] md:text-base'
+        }`}
+      >
+        {formatMoney(price, intl)}
+      </span>
     </span>
   );
 }

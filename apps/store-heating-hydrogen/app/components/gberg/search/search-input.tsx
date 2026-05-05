@@ -115,9 +115,9 @@ export function SearchInput({
           e.preventDefault();
           navigateToResults(query);
         }}
-        className="flex items-center gap-3 border-b-2 border-[var(--color-text)] focus-within:border-[var(--color-primary)] transition-colors"
+        className="flex min-w-0 items-center gap-2 border-b-2 border-[var(--color-text)] focus-within:border-[var(--color-primary)] transition-colors"
       >
-        <span aria-hidden className="text-xl text-[var(--color-text-muted)]">
+        <span aria-hidden className="shrink-0 text-base text-[var(--color-text-muted)] md:text-xl">
           ⌕
         </span>
         <input
@@ -126,23 +126,23 @@ export function SearchInput({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKey}
-          placeholder={t('search.placeholder')}
+          placeholder={t('common.search')}
           aria-label={t('search.aria_label')}
-          className="flex-1 bg-transparent py-3 text-base text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-muted)]"
+          className="min-w-0 flex-1 bg-transparent py-2 text-[14px] text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-muted)] md:py-3 md:text-base"
         />
         {query ? (
           <button
             type="button"
             onClick={() => setQuery('')}
             aria-label={t('search.clear')}
-            className="text-xs uppercase tracking-[0.14em] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+            className="shrink-0 text-[10px] uppercase tracking-[0.14em] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] md:text-xs"
           >
             {t('common.clear')}
           </button>
         ) : null}
         <button
           type="submit"
-          className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-text)] hover:text-[var(--color-primary)]"
+          className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text)] hover:text-[var(--color-primary)] md:text-xs"
         >
           {t('common.go')}
         </button>

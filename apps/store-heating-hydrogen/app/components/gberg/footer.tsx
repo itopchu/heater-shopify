@@ -25,9 +25,9 @@ export function Footer({locale}: {locale: string}) {
   ];
 
   return (
-    <footer className="mt-12 bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)] md:mt-16">
+    <footer className="mt-8 bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)] md:mt-14">
       <div className="border-b border-white/15">
-        <div className="container-x grid gap-5 py-7 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-12 md:py-10">
+        <div className="container-x grid gap-3 py-5 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-12 md:py-10">
           <div>
             <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-primary-on-dark)] md:text-[11px]">
               {t('footer.stay_in_loop')}
@@ -40,7 +40,7 @@ export function Footer({locale}: {locale: string}) {
         </div>
       </div>
 
-      <div className="container-x grid grid-cols-2 gap-x-6 gap-y-7 py-8 md:grid-cols-12 md:gap-8 md:py-14">
+      <div className="container-x grid grid-cols-2 gap-x-4 gap-y-5 py-5 md:grid-cols-12 md:gap-8 md:py-14">
         <div className="col-span-2 md:col-span-4">
           <p className="font-[var(--font-display)] text-3xl font-semibold leading-none sm:text-4xl md:text-6xl">
             G&#8209;Berg

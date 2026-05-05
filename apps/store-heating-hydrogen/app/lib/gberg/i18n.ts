@@ -8,7 +8,7 @@
  * If/when DE/NL/FR are restored, expose `useTranslations(locale)` again here.
  */
 
-export const SUPPORTED_LOCALES = ['en', 'de', 'nl', 'fr', 'es', 'it', 'pl', 'da'] as const;
+export const SUPPORTED_LOCALES = ['en', 'de', 'nl', 'fr', 'es', 'it', 'pl', 'da', 'tr', 'hu'] as const;
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 // Two-letter code shown on the toggle button.
@@ -21,6 +21,8 @@ export const LOCALE_LABEL: Record<Locale, string> = {
   it: 'IT',
   pl: 'PL',
   da: 'DA',
+  tr: 'TR',
+  hu: 'HU',
 };
 
 // Endonym (the language's own name) shown in the dropdown so users
@@ -34,6 +36,8 @@ export const LOCALE_NAME: Record<Locale, string> = {
   it: 'Italiano',
   pl: 'Polski',
   da: 'Dansk',
+  tr: 'Türkçe',
+  hu: 'Magyar',
 };
 
 export const DEFAULT_LOCALE: Locale = 'en';
@@ -59,8 +63,12 @@ export function htmlLang(locale: Locale): string {
 }
 
 export interface InContextHint {
-  country: 'DE' | 'NL' | 'BE' | 'LU' | 'AT' | 'FR' | 'ES' | 'IT' | 'PL' | 'DK';
-  language: 'EN' | 'DE' | 'NL' | 'FR' | 'ES' | 'IT' | 'PL' | 'DA';
+  // Storefront only ships to ES/DE/NL — other countries are kept here only
+  // because their language locales still exist as content surfaces (not as
+  // shippable destinations). The Shopify Markets configuration is the
+  // authoritative gate on checkout countries.
+  country: 'DE' | 'NL' | 'ES';
+  language: 'EN' | 'DE' | 'NL' | 'FR' | 'ES' | 'IT' | 'PL' | 'DA' | 'TR' | 'HU';
 }
 
 const LOCALE_TO_LANGUAGE: Record<Locale, InContextHint['language']> = {
@@ -72,6 +80,8 @@ const LOCALE_TO_LANGUAGE: Record<Locale, InContextHint['language']> = {
   it: 'IT',
   pl: 'PL',
   da: 'DA',
+  tr: 'TR',
+  hu: 'HU',
 };
 
 /**
@@ -91,15 +101,21 @@ const LOCALE_TO_LANGUAGE: Record<Locale, InContextHint['language']> = {
  * largest single market for that language. A dedicated /be-fr or /be-nl
  * locale can be added later without changing this default.
  */
+// We only ship to DE/NL/ES. For locales whose primary country is outside
+// that set (fr/it/pl/da/tr/hu), pick the closest shippable country so
+// VAT and currency stay sensible — the user is browsing in their language
+// but will check out into one of the three permitted destinations.
 export const LOCALE_TO_COUNTRY: Record<Locale, InContextHint['country']> = {
   en: 'DE',
   de: 'DE',
   nl: 'NL',
-  fr: 'FR',
+  fr: 'DE',
   es: 'ES',
-  it: 'IT',
-  pl: 'PL',
-  da: 'DK',
+  it: 'DE',
+  pl: 'DE',
+  da: 'DE',
+  tr: 'DE',
+  hu: 'DE',
 };
 
 export function localeToInContext(locale: Locale): InContextHint {

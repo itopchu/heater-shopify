@@ -1,0 +1,22 @@
+# Per-quantity shipping function — multiplies the flat shipping rate by
+# total order quantity at checkout. Storefront copy promises "€20 per item";
+# this extension makes Shopify enforce the same arithmetic.
+#
+# See `extensions/per-quantity-shipping/README.md` for activation steps.
+
+api_version = "2026-04"
+uid = "8cc18d6a-d2e9-2457-28c7-8e4226da8c6385689ffe"
+
+[[extensions]]
+name = "per-quantity-shipping"
+handle = "per-quantity-shipping"
+type = "function"
+
+[[extensions.targeting]]
+target = "cart.delivery-options.transform.run"
+input_query = "src/run.graphql"
+export = "run"
+
+[extensions.build]
+command = "npm run build"
+path = "dist/function.wasm"

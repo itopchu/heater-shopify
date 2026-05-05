@@ -18,6 +18,8 @@ import {
   TrustSecureIcon,
 } from '@gberg/ui';
 import {tFor, isSupportedLocale, DEFAULT_LOCALE} from '~/lib/gberg/i18n';
+import {PHONE_TEL_HREF} from '~/lib/gberg/contact';
+import LanguageSwitcher from './language-switcher';
 
 export function UtilityBar({locale}: {locale: string}) {
   const t = tFor(isSupportedLocale(locale) ? locale : DEFAULT_LOCALE);
@@ -46,16 +48,16 @@ export function UtilityBar({locale}: {locale: string}) {
    */
   return (
     <div className="bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)]">
-      <div className="container-x flex items-center justify-between gap-4 py-1.5">
+      <div className="container-x flex items-center justify-between gap-3 py-1">
         <TrustStrip
           inverse
           className="
-            flex-1
-            [&_svg]:h-3.5 [&_svg]:w-3.5 sm:[&_svg]:h-4 sm:[&_svg]:w-4
+            flex-1 min-w-0
+            [&_svg]:h-3 [&_svg]:w-3 sm:[&_svg]:h-3.5 sm:[&_svg]:w-3.5
             [&_.leading-none]:whitespace-nowrap
             [&_.leading-none]:text-[10px] sm:[&_.leading-none]:text-[11px]
-            [&_li]:gap-1.5 sm:[&_li]:gap-2
-            [&_ul]:gap-3 sm:[&_ul]:gap-5
+            [&_li]:gap-1 sm:[&_li]:gap-1.5
+            [&_ul]:gap-2.5 sm:[&_ul]:gap-4
             [&_li]:hidden
             [&_li:nth-child(-n+2)]:flex
             sm:[&_li:nth-child(-n+3)]:flex
@@ -63,31 +65,20 @@ export function UtilityBar({locale}: {locale: string}) {
             [&_li]:!text-white
           "
           items={[
-            {icon: <TrustDeliveryIcon />, label: t('utility_bar.free_eu_delivery')},
+            {icon: <TrustDeliveryIcon />, label: t('utility_bar.paid_shipping')},
             {icon: <TrustWarrantyIcon />, label: t('utility_bar.warranty_10y')},
             {icon: <TrustReturnIcon />, label: t('utility_bar.returns_30d')},
             {icon: <TrustSecureIcon />, label: t('utility_bar.secure_checkout')},
           ]}
         />
-        {/*
-          Right cluster — phone hidden below xl: so it never collides
-          with the trust strip. LanguageSwitcher always visible since
-          it's a navigational primitive, not a promo.
-        */}
-        <div className="ml-4 flex flex-none items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em]">
+        <div className="ml-3 flex flex-none items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em]">
           <a
-            href="tel:+491722706648"
+            href={PHONE_TEL_HREF}
             className="hidden xl:inline tracking-normal opacity-80 normal-case hover:opacity-100 hover:text-[var(--color-primary)] transition-colors"
           >
             {t('utility_bar.need_help_phone')}
           </a>
-          {/*
-            Language switcher temporarily removed (May 2026). The
-            translation pipeline is a content problem we're solving
-            differently — until then, the storefront is English-only.
-            The locale routes still work for direct URLs but no UI
-            entry point invites users into them.
-          */}
+          <LanguageSwitcher locale={isSupportedLocale(locale) ? locale : DEFAULT_LOCALE} />
         </div>
       </div>
     </div>

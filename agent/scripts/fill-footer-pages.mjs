@@ -70,7 +70,7 @@ const PAGES = {
 <h3>Customer support</h3>
 <p>
   Email: <a href="mailto:info@g-berg-gmbh.de">info@g-berg-gmbh.de</a><br>
-  Phone: +49 (0)30 12345678<br>
+  Phone: <a href="tel:+491726088848">+49 172 608 88 48</a><br>
   Hours: Monday – Friday, 09:00 – 17:00 CET
 </p>
 
@@ -88,13 +88,13 @@ const PAGES = {
 <h2>Ordering &amp; delivery</h2>
 
 <h3>Where do you ship?</h3>
-<p>We ship across the European Union, including Germany, Belgium, the Netherlands, Spain, Austria, France, Italy, Luxembourg, Poland and Denmark. If your country isn't listed at checkout, contact us — we may still be able to arrange delivery.</p>
+<p>We deliver only to <strong>Spain, Germany and the Netherlands</strong>. Addresses outside these three countries cannot be checked out at the moment.</p>
 
 <h3>How long does delivery take?</h3>
 <p>Most orders arrive within <strong>3 – 7 business days</strong>. Larger panel radiators and made-to-order configurations may take 10 – 14 days. You'll receive a tracking link as soon as your order ships.</p>
 
-<h3>Is delivery really free?</h3>
-<p>Yes — <strong>free EU delivery on orders over €500</strong>. Below that threshold a flat fee applies, calculated at checkout based on the destination country.</p>
+<h3>How much does shipping cost?</h3>
+<p>Shipping is <strong>€20 per item</strong>, applied to every unit in the order — no free-shipping threshold. Two items ship at €40, three at €60, and so on.</p>
 
 <h2>Payment</h2>
 
@@ -129,7 +129,7 @@ const PAGES = {
     title: 'Shipping &amp; Delivery',
     body: `
 <h2>Where we ship</h2>
-<p>We deliver across the European Union from our European fulfilment centre. Coverage today: Germany, Belgium, the Netherlands, Spain, Austria, France, Italy, Luxembourg, Poland and Denmark. We add countries as our market presence grows — if you don't see yours at checkout, get in touch.</p>
+<p>We deliver only to <strong>Spain, Germany and the Netherlands</strong>. Addresses in other countries cannot be checked out — we will expand the list as we open additional warehouses.</p>
 
 <h2>Delivery times</h2>
 <ul>
@@ -141,9 +141,9 @@ const PAGES = {
 
 <h2>Delivery cost</h2>
 <ul>
-  <li><strong>Free</strong> on orders over <strong>€500</strong> within the EU</li>
-  <li>Below €500, a flat shipping fee is calculated at checkout based on the destination country and the size of the parcel</li>
-  <li>VAT is included in the prices shown — exact rate depends on the delivery country (e.g. DE 19%, BE 21%, ES 21%)</li>
+  <li><strong>€20 per item</strong>, applied to every unit in the order — no free-shipping threshold of any kind.</li>
+  <li>Examples: 1 item = €20 shipping, 2 items = €40, 3 items = €60.</li>
+  <li>VAT is included in the prices shown — DE 19%, ES 21%, NL 21%.</li>
 </ul>
 
 <h2>Receiving your delivery</h2>

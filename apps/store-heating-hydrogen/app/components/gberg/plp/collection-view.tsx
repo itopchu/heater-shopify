@@ -405,6 +405,47 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [facets.flags]);
 
+  /*
+   * Post-filter scroll repair.
+   *
+   * When applying a filter shrinks the result list, the page document
+   * height shrinks too. If the user was scrolled deep into a long PLP,
+   * the browser clamps their scrollY to the new max, which can land
+   * them on the footer with no products visible. Re-anchor them to the
+   * top of the grid whenever the filter set changes AND their current
+   * scroll position would otherwise leave them looking past the grid.
+   *
+   * We deliberately do NOT scroll on initial mount or when facets are
+   * empty — only when the user actively narrowed the result set.
+   */
+  const filterSig = useMemo(() => {
+    return [
+      Array.from(facets.flags).sort().join(','),
+      Array.from(facets.productType).sort().join(','),
+      Array.from(facets.colorFamily).sort().join(','),
+      Array.from(facets.series).sort().join(','),
+      Array.from(facets.heatingMedium).sort().join(','),
+    ].join('|');
+  }, [facets]);
+
+  useEffect(() => {
+    // Skip the very first render — only fire on actual user-driven changes.
+    if (typeof window === 'undefined') return;
+    const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    const rect = grid.getBoundingClientRect();
+    const viewportH = window.innerHeight;
+    // If the grid top is above the viewport and we're scrolled past it,
+    // OR the grid bottom sits above viewport-bottom (user is below all
+    // content), pull the user back to the grid top. Otherwise leave them
+    // alone — they're already looking at the right place.
+    const userIsPastGrid = rect.top < -100 || rect.bottom < viewportH * 0.4;
+    if (userIsPastGrid) {
+      grid.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterSig]);
+
   function toggle<T extends string>(set: Set<T>, value: T): Set<T> {
     const next = new Set(set);
     if (next.has(value)) next.delete(value);
@@ -585,7 +626,24 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
         removed.
       */}
 
-      <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[260px_1fr]">
+      {/*
+        Grid container is given a min-height equal to the viewport so the
+        page total height never collapses dramatically when a filter trims
+        the list. Without this, a user scrolled deep into a 55-product PLP
+        who picks a filter that leaves 3 products would see the browser
+        clamp their scrollY past the new (much shorter) document bottom —
+        landing on the footer. The min-height keeps the document tall
+        enough that the viewport position remains meaningful, and the
+        useEffect below smooth-scrolls the grid into view if the result
+        set actually shrank past the user's scroll position.
+
+        The id="products-grid" anchor is used both by the post-filter
+        scroll effect and by future deep-link / SEO needs.
+      */}
+      <div
+        id="products-grid"
+        className="mt-6 grid min-h-[60vh] scroll-mt-24 grid-cols-1 gap-8 lg:grid-cols-[260px_1fr]"
+      >
         {/* Filter sidebar (desktop only) */}
         <aside aria-label="Filters" className="hidden lg:block">
           <div className="sticky top-24">{FilterShell}</div>

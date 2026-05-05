@@ -1,0 +1,15 @@
+{
+  "name": "per-quantity-shipping",
+  "version": "1.0.0",
+  "description": "Cart delivery transform — multiplies flat shipping rate by total order quantity.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/entry.ts --bundle --format=esm --target=es2022 --platform=neutral --outfile=dist/run.bundle.js && javy compile -d --wit src/function.wit -n function dist/run.bundle.js -o dist/function.wasm"
+  },
+  "devDependencies": {
+    "@shopify/shopify_function": "^2.0.1",
+    "esbuild": "^0.25.0",
+    "javy-cli": "^3.0.1"
+  }
+}

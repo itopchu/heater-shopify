@@ -9,22 +9,24 @@
  */
 import {Eyebrow} from '@gberg/ui';
 import {useT} from '~/lib/gberg/i18n';
-
-const WHATSAPP_PHONE_E164 = '491722706648';
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL_HREF,
+  SUPPORT_EMAIL,
+  whatsappHref as buildWhatsappHref,
+  WHATSAPP_MESSAGE_GENERIC,
+} from '~/lib/gberg/contact';
 
 export function ContactView() {
   const t = useT();
 
-  const email = t('contact.channel_email_value');
-  const phone = t('contact.channel_phone_value');
-  const whatsappHref = `https://wa.me/${WHATSAPP_PHONE_E164}?text=${encodeURIComponent(
-    t('whatsapp.default_message'),
-  )}`;
-  // Strip non-digits but keep leading + for tel: — most dialers accept that.
-  const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
+  const email = SUPPORT_EMAIL;
+  const phone = PHONE_DISPLAY;
+  const whatsappHref = buildWhatsappHref(WHATSAPP_MESSAGE_GENERIC);
+  const phoneHref = PHONE_TEL_HREF;
 
   return (
-    <article className="container-x py-10 lg:py-16">
+    <article className="container-x py-7 md:py-10 lg:py-16">
       <header className="max-w-3xl">
         <Eyebrow>{t('contact.eyebrow')}</Eyebrow>
         <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.25rem)] text-[var(--color-text)]">
@@ -39,7 +41,7 @@ export function ContactView() {
         />
       </header>
 
-      <ul className="mt-10 grid gap-3 md:grid-cols-3 md:gap-4">
+      <ul className="mt-6 grid gap-2 md:mt-10 md:grid-cols-3 md:gap-4">
         <ContactCard
           label={t('contact.channel_email_label')}
           value={email}
@@ -61,7 +63,7 @@ export function ContactView() {
         />
       </ul>
 
-      <div className="mt-14 grid gap-10 md:grid-cols-12 md:gap-12">
+      <div className="mt-8 grid gap-6 md:mt-14 md:grid-cols-12 md:gap-12">
         <section className="md:col-span-7">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">
             {t('contact.help_title')}

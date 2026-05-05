@@ -37,11 +37,11 @@
     "contact": "Contatti"
   },
   "utility_bar": {
-    "free_eu_delivery": "Spedizione UE gratuita",
     "warranty_10y": "10 anni di garanzia",
     "returns_30d": "30 giorni per il reso",
     "secure_checkout": "Pagamento sicuro",
-    "need_help_phone": "Serve aiuto? +49 172 270 66 48"
+    "need_help_phone": "Serve aiuto? +49 172 608 88 48",
+    "paid_shipping": "Spedizione 20 €/pezzo"
   },
   "language_switcher": {
     "aria_label": "Lingua: {name}. Fai clic per cambiare.",
@@ -70,7 +70,7 @@
   },
   "footer": {
     "stay_in_loop": "Resta aggiornato",
-    "newsletter_promise": "Novità e offerte esclusive UE.",
+    "newsletter_promise": "Novità e offerte per i clienti.",
     "brand_blurb": "Rivenditore regionale autorizzato di radiatori europei premium e riscaldamento per il bagno. Designed in Germany, prodotto per l'Europa.",
     "legal_entity": "G-Berg GmbH",
     "col_customer_service": "Assistenza clienti",
@@ -97,7 +97,8 @@
   },
   "whatsapp": {
     "aria_label": "Chatta con G-Berg su WhatsApp",
-    "default_message": "Ciao team G-Berg! Sto guardando i radiatori su gberg-heizung.de e vorrei una consulenza per scegliere il modello giusto per la mia casa. Potete aiutarmi?"
+    "default_message": "Hallo, ich habe eine Frage zu einem Produkt auf Ihrer Website.",
+    "product_message": "Hallo, ich interessiere mich für dieses Produkt und hätte gerne weitere Informationen."
   },
   "home": {
     "meta_title": "G-Berg Heizung — Radiatori europei premium",
@@ -141,13 +142,13 @@
     "guided_finder_start": "Inizia",
     "faq_eyebrow": "FAQ",
     "faq_title": "Domande frequenti.",
-    "faq_q1": "Spedite in tutta Europa?",
-    "faq_a1": "Sì — consegniamo in Germania, Belgio, Spagna, Austria, Paesi Bassi e altri Paesi UE. Spedizione gratuita oltre i 500 €.",
+    "faq_q1": "Dove spedite?",
+    "faq_a1": "Spediamo solo in Spagna, Germania e Paesi Bassi. Spese di spedizione 20 € per pezzo — nessuna soglia di spedizione gratuita.",
     "faq_q2": "I vostri radiatori sono compatibili con le pompe di calore?",
     "faq_a2": "Molti lo sono. Cerca il badge 'Compatibile pompa di calore' sulle schede prodotto o filtra per compatibilità con pompa di calore nelle pagine categoria.",
     "faq_q3": "Qual è la vostra politica di reso?",
     "faq_a3": "Reso entro 30 giorni per articoli inutilizzati e non aperti. Gli ordini su misura non sono rimborsabili — te lo segnaleremo chiaramente prima del pagamento.",
-    "why_us_delivery": "Spedizione UE gratuita oltre 500 €",
+    "why_us_delivery": "Spedizione 20 €/pezzo · ES · DE · NL",
     "why_us_returns": "30 giorni per il reso",
     "why_us_engineering": "Supporto tecnico",
     "why_us_warranty": "10 anni di garanzia"
@@ -163,7 +164,7 @@
     "buy_bar_aria": "Barra di acquisto",
     "price_vat_note": "IVA inclusa, spedizione esclusa",
     "delivery_returns_heading": "Spedizione e resi",
-    "delivery_returns_body": "Spedizione UE gratuita oltre 500 €. 30 giorni di reso per articoli inutilizzati.",
+    "delivery_returns_body": "Spedizione 20 € per pezzo in Spagna, Germania e Paesi Bassi. 30 giorni di reso su articoli non utilizzati.",
     "need_help_heading": "Hai bisogno di aiuto?",
     "need_help_body": "I nostri tecnici termoidraulici rispondono alle tue domande di compatibilità prima dell'ordine.",
     "dispatch_default": "Solitamente spedito entro 3 giorni lavorativi",
@@ -232,7 +233,7 @@
     "about_category_body": "Testiamo ogni radiatore secondo le potenze EN 442 e abbiniamo a ogni scheda specifiche da installatore: interasse, tipo di attacco, pressione max e potenza termica certificata. Usa i filtri sopra per restringere per dimensione o compatibilità.",
     "empty_collection": "Nessun prodotto in questa categoria al momento.",
     "empty_storefront": "L'API Shopify Storefront non è configurata.",
-    "empty_default_lede": "Radiatori europei certificati CE selezionati per prestazioni, durata e integrazione pulita con i moderni impianti di riscaldamento.",
+    "empty_default_lede": "Radiatori certificati CE selezionati per prestazioni, durata e integrazione pulita con i moderni impianti di riscaldamento.",
     "shop_all_meta_title": "Tutti i radiatori — G-Berg",
     "shop_all_meta_description": "Tutti i radiatori, scaldasalviette, scaldabagni elettrici e impianti a pavimento G-Berg in un unico posto.",
     "shop_all_eyebrow": "Catalogo",
@@ -302,7 +303,7 @@
     "your_cart": "Il tuo carrello",
     "your_cart_empty": "Il tuo carrello è vuoto",
     "empty_aside_blurb": "Scegli una categoria per iniziare.",
-    "empty_page_blurb": "Prenditi un momento per pianificare la stanza. Inizia da una categoria qui sotto o vai direttamente al catalogo completo — ogni pezzo è certificato CE, prodotto in UE e spedito gratis in tutta Europa oltre i 500 €.",
+    "empty_page_blurb": "Prenditi un momento per pianificare la stanza. Inizia da una categoria qui sotto o vai direttamente al catalogo completo — ogni pezzo è certificato CE e spedito in Spagna, Germania e Paesi Bassi a 20 € per pezzo.",
     "browse_all": "Vedi tutti i prodotti",
     "replacement_radiators": "Radiatori sostitutivi",
     "shop_by_room": "Acquista per stanza",
@@ -327,8 +328,8 @@
     "gift_card_placeholder": "Codice buono regalo",
     "gift_card_apply_aria": "Applica codice buono regalo",
     "gift_card_remove_aria": "Rimuovi buono regalo che termina con {last}",
-    "trust_free_eu_title": "Spedizione UE gratuita",
-    "trust_free_eu_sub": "Per ordini oltre 500 €",
+    "trust_free_eu_title": "Spedizione 20 €/pezzo",
+    "trust_free_eu_sub": "Spagna · Germania · Paesi Bassi",
     "trust_returns_title": "30 giorni di reso",
     "trust_returns_sub": "Senza domande",
     "trust_warranty_title": "10 anni di garanzia",
@@ -379,7 +380,7 @@
     "channel_email_value": "info@g-berg-gmbh.de",
     "channel_email_hint": "Ideale per richieste dettagliate, foto e PDF.",
     "channel_phone_label": "Telefono",
-    "channel_phone_value": "+49 172 270 66 48",
+    "channel_phone_value": "+49 172 608 88 48",
     "channel_phone_hint": "Lun – Ven, 09:00 – 17:00 CET.",
     "channel_whatsapp_label": "WhatsApp",
     "channel_whatsapp_value": "Chatta con noi",

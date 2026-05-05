@@ -37,11 +37,11 @@
     "contact": "Contact"
   },
   "utility_bar": {
-    "free_eu_delivery": "Gratis EU-verzending",
     "warranty_10y": "10 jaar garantie",
     "returns_30d": "30 dagen retourneren",
     "secure_checkout": "Veilig afrekenen",
-    "need_help_phone": "Hulp nodig? +49 172 270 66 48"
+    "need_help_phone": "Hulp nodig? +49 172 608 88 48",
+    "paid_shipping": "Verzending € 20/stuk"
   },
   "language_switcher": {
     "aria_label": "Taal: {name}. Klik om te wijzigen.",
@@ -70,7 +70,7 @@
   },
   "footer": {
     "stay_in_loop": "Blijf op de hoogte",
-    "newsletter_promise": "Nieuwe collecties en exclusieve EU‑aanbiedingen.",
+    "newsletter_promise": "Nieuwe collecties en klantenacties.",
     "brand_blurb": "Geautoriseerde regionale wederverkoper van premium Europese radiatoren en badkamerverwarming. Designed in Germany, gemaakt voor Europa.",
     "legal_entity": "G-Berg GmbH",
     "col_customer_service": "Klantenservice",
@@ -97,7 +97,8 @@
   },
   "whatsapp": {
     "aria_label": "Chat met G-Berg op WhatsApp",
-    "default_message": "Hallo G-Berg-team! Ik bekijk de radiatoren op gberg-heizung.de en zou graag advies willen over het juiste model voor mijn woning. Kunnen jullie helpen?"
+    "default_message": "Hallo, ich habe eine Frage zu einem Produkt auf Ihrer Website.",
+    "product_message": "Hallo, ich interessiere mich für dieses Produkt und hätte gerne weitere Informationen."
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium Europese radiatoren",
@@ -141,13 +142,13 @@
     "guided_finder_start": "Start",
     "faq_eyebrow": "Veelgestelde vragen",
     "faq_title": "Veelgestelde vragen.",
-    "faq_q1": "Verzendt u door heel Europa?",
-    "faq_a1": "Ja — wij leveren aan Duitsland, België, Spanje, Oostenrijk, Nederland en andere EU-landen. Gratis verzending vanaf € 500.",
+    "faq_q1": "Waar leveren jullie?",
+    "faq_a1": "Wij leveren alleen aan Spanje, Duitsland en Nederland. Verzendkosten € 20 per stuk — er is geen gratis verzenddrempel.",
     "faq_q2": "Zijn uw radiatoren geschikt voor warmtepompen?",
     "faq_a2": "Veel modellen zijn dat. Let op het label 'Warmtepomp-geschikt' op productkaarten of filter op warmtepomp-compatibiliteit op de categoriepagina's.",
     "faq_q3": "Wat is uw retourbeleid?",
     "faq_a3": "30 dagen retourrecht op ongebruikte, ongeopende artikelen. Maatwerkbestellingen zijn niet retourneerbaar — wij melden dit duidelijk vóór het afrekenen.",
-    "why_us_delivery": "Gratis EU-verzending boven € 500",
+    "why_us_delivery": "Verzending € 20/stuk · ES · DE · NL",
     "why_us_returns": "30 dagen retour",
     "why_us_engineering": "Technisch advies",
     "why_us_warranty": "10 jaar garantie"
@@ -163,7 +164,7 @@
     "buy_bar_aria": "Koopbalk",
     "price_vat_note": "Incl. btw, excl. verzending",
     "delivery_returns_heading": "Verzending & retour",
-    "delivery_returns_body": "Gratis EU-verzending boven € 500. 30 dagen retour op ongebruikte artikelen.",
+    "delivery_returns_body": "Verzending € 20 per stuk naar Spanje, Duitsland en Nederland. 30 dagen retour op ongebruikte artikelen.",
     "need_help_heading": "Hulp nodig?",
     "need_help_body": "Onze verwarmingsspecialisten beantwoorden uw compatibiliteitsvragen vóór de bestelling.",
     "dispatch_default": "Doorgaans verzonden binnen 3 werkdagen",
@@ -232,7 +233,7 @@
     "about_category_body": "Wij testen elke radiator volgens de EN 442-vermogenwaarden en koppelen elke vermelding aan installateursgerichte specificaties: pijpafstand, aansluittype, max. druk en gecertificeerde warmteafgifte. Gebruik de filters hierboven om op afmeting of compatibiliteit te verfijnen.",
     "empty_collection": "Nog geen producten in deze categorie.",
     "empty_storefront": "De Shopify Storefront-API is niet geconfigureerd.",
-    "empty_default_lede": "CE-gecertificeerde Europese radiatoren, geselecteerd op prestaties, duurzaamheid en naadloze integratie met moderne verwarmingssystemen.",
+    "empty_default_lede": "CE-gecertificeerde radiatoren, geselecteerd op prestaties, duurzaamheid en naadloze integratie met moderne verwarmingssystemen.",
     "shop_all_meta_title": "Alle radiatoren — G-Berg",
     "shop_all_meta_description": "Elke G-Berg radiator, handdoekradiator, elektrische verwarming en vloerverwarmingssysteem op één plek.",
     "shop_all_eyebrow": "Catalogus",
@@ -302,7 +303,7 @@
     "your_cart": "Uw winkelmand",
     "your_cart_empty": "Uw winkelmand is leeg",
     "empty_aside_blurb": "Kies een categorie om te beginnen.",
-    "empty_page_blurb": "Neem rustig de tijd om de ruimte te plannen. Begin met een categorie hieronder of ga direct naar de volledige catalogus — elk stuk is CE-gecertificeerd, in de EU gemaakt en wordt vanaf € 500 gratis verzonden door heel Europa.",
+    "empty_page_blurb": "Neem rustig de tijd om de ruimte te plannen. Begin met een categorie hieronder of ga direct naar de volledige catalogus — elk stuk is CE-gecertificeerd en wordt geleverd aan Spanje, Duitsland en Nederland voor € 20 per stuk.",
     "browse_all": "Alle producten bekijken",
     "replacement_radiators": "Vervangingsradiatoren",
     "shop_by_room": "Per ruimte",
@@ -327,8 +328,8 @@
     "gift_card_placeholder": "Cadeaubon-code",
     "gift_card_apply_aria": "Cadeaubon-code toepassen",
     "gift_card_remove_aria": "Cadeaubon eindigend op {last} verwijderen",
-    "trust_free_eu_title": "Gratis EU-verzending",
-    "trust_free_eu_sub": "Bij bestellingen vanaf € 500",
+    "trust_free_eu_title": "Verzending € 20/stuk",
+    "trust_free_eu_sub": "Spanje · Duitsland · Nederland",
     "trust_returns_title": "30 dagen retour",
     "trust_returns_sub": "Geen vragen gesteld",
     "trust_warranty_title": "10 jaar garantie",
@@ -379,7 +380,7 @@
     "channel_email_value": "info@g-berg-gmbh.de",
     "channel_email_hint": "Ideaal voor uitgebreide aanvragen, foto's en PDF's.",
     "channel_phone_label": "Telefoon",
-    "channel_phone_value": "+49 172 270 66 48",
+    "channel_phone_value": "+49 172 608 88 48",
     "channel_phone_hint": "Ma – Vr, 09:00 – 17:00 CET.",
     "channel_whatsapp_label": "WhatsApp",
     "channel_whatsapp_value": "Chat met ons",

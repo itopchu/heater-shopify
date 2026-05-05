@@ -37,6 +37,13 @@ import {formatLocaleFromRoute} from '~/lib/gberg/format';
 import {normalizeLocale, tFor, useT, type TFunction} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 import {
+  PHONE_DISPLAY,
+  PHONE_TEL_HREF,
+  SUPPORT_EMAIL,
+  whatsappHref,
+  WHATSAPP_MESSAGE_PRODUCT,
+} from '~/lib/gberg/contact';
+import {
   buildBreadcrumb,
   fallbackKeyFacts,
   findSiblingColors,
@@ -391,20 +398,12 @@ export default function ProductPage() {
               {t('pdp.delivery_returns_body')}
             </p>
           </div>
-          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-sm">
-            <p className="font-semibold">{t('pdp.need_help_heading')}</p>
-            <p className="mt-2 text-[var(--color-text-muted)]">
-              {t('pdp.need_help_body')}
-            </p>
-            <p className="mt-3 text-[var(--color-primary)]">
-              <a href="mailto:info@g-berg-gmbh.de">info@g-berg-gmbh.de</a>
-            </p>
-          </div>
+          <NeedHelpBlock />
         </aside>
       </div>
 
       {related.length > 0 ? (
-        <section className="mt-20">
+        <section className="mt-12 md:mt-20">
           <Eyebrow>{t('pdp.related_eyebrow')}</Eyebrow>
           <h2 className="mt-3 text-2xl font-semibold">
             {t('pdp.related_title')}
@@ -415,6 +414,47 @@ export default function ProductPage() {
         </section>
       ) : null}
     </article>
+  );
+}
+
+function NeedHelpBlock() {
+  const t = useT();
+  const wa = whatsappHref(WHATSAPP_MESSAGE_PRODUCT);
+  return (
+    <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-sm md:p-5">
+      <p className="font-semibold">{t('pdp.need_help_heading')}</p>
+      <p className="mt-1.5 text-[var(--color-text-muted)] md:mt-2">
+        {t('pdp.need_help_body')}
+      </p>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        <li>
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
+            className="inline-flex items-center gap-1.5 rounded-sm bg-[var(--color-text)] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white hover:bg-[var(--color-primary)]"
+          >
+            {SUPPORT_EMAIL}
+          </a>
+        </li>
+        <li>
+          <a
+            href={PHONE_TEL_HREF}
+            className="inline-flex items-center gap-1.5 rounded-sm border border-[var(--color-border)] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text)] hover:border-[var(--color-text)]"
+          >
+            {PHONE_DISPLAY}
+          </a>
+        </li>
+        <li>
+          <a
+            href={wa}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-sm border border-[#25D366] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#1f9e51] hover:bg-[#25D366] hover:text-white"
+          >
+            WhatsApp
+          </a>
+        </li>
+      </ul>
+    </div>
   );
 }
 

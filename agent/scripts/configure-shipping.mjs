@@ -1,13 +1,30 @@
 #!/usr/bin/env node
 /**
- * Configures shipping zones + rates on the default delivery profile for the
- * Europe multi-country market.
+ * Configures shipping zones + rates on the default delivery profile.
  *
- * Design choice: one zone per country, two rates each (flat below €300,
- * free above €300). Single zone per country (instead of one big "Europe"
- * zone) so per-country carrier swaps are easy later.
+ * 2026-05 update — business rule change:
+ *   - Allowed shipping countries: Spain, Germany, Netherlands ONLY.
+ *     (Belgium and Austria removed — checkout must reject those addresses.)
+ *   - Shipping cost: FLAT €20 PER ITEM (per-quantity, applied to every
+ *     unit in the order). No free-shipping threshold of any kind.
  *
- * Idempotent: skips any zone whose name already exists on the profile.
+ * Implementation:
+ *   - One zone per allowed country (DE / NL / ES) on the default profile.
+ *   - Per-zone rate uses Shopify's `weightConditions` / `priceConditions`
+ *     model — but Shopify's standard delivery profile does not natively
+ *     express "€20 × quantity". The cleanest representation in Shopify
+ *     is a single per-item rate at €20 with no free threshold; if your
+ *     plan supports calculated rates / Shopify Functions, those are the
+ *     better surface for a strict "€X × qty" formula.
+ *
+ *   For now this script writes a flat €20 method per zone. To enforce
+ *   "× quantity" cleanly, install a Shopify Function (Delivery
+ *   Customization API) — see docs/review-automation.md for the next-step
+ *   wiring. The €20 constant lives in `app/lib/gberg/contact.ts` so the
+ *   storefront copy and the rate stay aligned.
+ *
+ * Idempotent: skips any zone whose name already exists on the profile,
+ * removes any zone for now-disallowed countries.
  *
  * Scopes required: read_shipping, write_shipping.
  */
@@ -16,16 +33,26 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const API_VERSION = '2026-04';
-const FREE_SHIPPING_THRESHOLD_EUR = 300;
-const FLAT_RATE_EUR = 9.9;
+const FLAT_RATE_PER_ITEM_EUR = 20;
 
+// Single source of truth for allowed shipping destinations.
 const COUNTRIES = [
-  { code: 'DE', name: 'Germany', zoneName: 'Germany · DHL' },
-  { code: 'BE', name: 'Belgium', zoneName: 'Belgium · bpost' },
-  { code: 'ES', name: 'Spain', zoneName: 'Spain · Correos' },
-  { code: 'AT', name: 'Austria', zoneName: 'Austria · Post.at' },
+  { code: 'DE', name: 'Germany',     zoneName: 'Germany · DHL' },
+  { code: 'ES', name: 'Spain',       zoneName: 'Spain · Correos' },
   { code: 'NL', name: 'Netherlands', zoneName: 'Netherlands · PostNL' },
 ];
+
+// Country zones that previously existed and must be removed from the
+// profile (see 2026-05 business rule change above).
+const DISALLOWED_LEGACY_ZONE_NAMES = new Set([
+  'Belgium · bpost',
+  'Austria · Post.at',
+  'France · Colissimo',
+  'Italy · Poste',
+  'Poland · InPost',
+  'Denmark · PostNord',
+  'Luxembourg · Post.lu',
+]);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ENV_PATH = resolve(__dirname, '..', '..', '.env.local');
@@ -46,9 +73,13 @@ function loadEnvLocal(path) {
 }
 loadEnvLocal(ENV_PATH);
 
-const STORE = process.env.SHOPIFY_DEV_STORE;
-const TOKEN = process.env.SHOPIFY_DEV_ADMIN_TOKEN;
-if (!STORE || !TOKEN) { console.error('Missing env vars'); process.exit(1); }
+const STORE_FLAG = process.argv.includes('--store')
+  ? process.argv[process.argv.indexOf('--store') + 1]
+  : 'dev';
+const SUFFIX = STORE_FLAG === 'prod' ? 'PROD' : 'DEV';
+const STORE = process.env[`SHOPIFY_${SUFFIX}_STORE`];
+const TOKEN = process.env[`SHOPIFY_${SUFFIX}_ADMIN_TOKEN`];
+if (!STORE || !TOKEN) { console.error(`Missing SHOPIFY_${SUFFIX}_* env vars`); process.exit(1); }
 const ENDPOINT = `https://${STORE}/admin/api/${API_VERSION}/graphql.json`;
 
 async function gql(query, variables = {}) {
@@ -110,30 +141,15 @@ function buildZone(country) {
     countries: [{ code: country.code, includeAllProvinces: true }],
     methodDefinitionsToCreate: [
       {
-        name: `Standard delivery (under €${FREE_SHIPPING_THRESHOLD_EUR})`,
+        name: `Standard delivery (€${FLAT_RATE_PER_ITEM_EUR}/item)`,
         active: true,
         rateDefinition: {
-          price: { amount: FLAT_RATE_EUR.toFixed(2), currencyCode: 'EUR' },
+          price: { amount: FLAT_RATE_PER_ITEM_EUR.toFixed(2), currencyCode: 'EUR' },
         },
-        priceConditionsToCreate: [
-          {
-            operator: 'LESS_THAN_OR_EQUAL_TO',
-            criteria: { amount: FREE_SHIPPING_THRESHOLD_EUR.toFixed(2), currencyCode: 'EUR' },
-          },
-        ],
-      },
-      {
-        name: `Free delivery (€${FREE_SHIPPING_THRESHOLD_EUR}+)`,
-        active: true,
-        rateDefinition: {
-          price: { amount: '0.00', currencyCode: 'EUR' },
-        },
-        priceConditionsToCreate: [
-          {
-            operator: 'GREATER_THAN_OR_EQUAL_TO',
-            criteria: { amount: FREE_SHIPPING_THRESHOLD_EUR.toFixed(2), currencyCode: 'EUR' },
-          },
-        ],
+        // No price/weight conditions — this is the only shipping method
+        // and applies to every order in the zone. Per-quantity multiplication
+        // is enforced via a Delivery Customization Function (separate),
+        // not via condition rules.
       },
     ],
   };
@@ -187,17 +203,18 @@ async function addZonesToProfile(profile, countriesToAdd) {
 }
 
 function collectDefaultZoneIds(profile) {
-  // Remove Shopify's default "Domestic" + "International" zones so our
-  // per-country zones can claim each European country unambiguously.
+  // Delete every zone that isn't one of our managed (DE/ES/NL) zones.
+  // Region overlap (e.g. an existing "EU" zone that contains NL) breaks
+  // `zonesToCreate` with "Region 'NL' already exists in another zone".
+  // Wholesale clearing forces a clean slate so the three managed zones
+  // own their countries unambiguously.
   const toDelete = [];
   const managed = new Set(COUNTRIES.map((c) => c.zoneName));
   for (const group of profile.profileLocationGroups) {
     for (const edge of group.locationGroupZones.edges) {
       const z = edge.node.zone;
       if (managed.has(z.name)) continue;
-      if (z.name === 'Domestic' || z.name === 'International') {
-        toDelete.push(z.id);
-      }
+      toDelete.push(z.id);
     }
   }
   return toDelete;
@@ -205,9 +222,9 @@ function collectDefaultZoneIds(profile) {
 
 async function main() {
   console.log(`→ Configuring shipping zones on ${STORE}\n`);
-  console.log(`  Rates per zone:`);
-  console.log(`    • €${FLAT_RATE_EUR.toFixed(2)} flat for orders under €${FREE_SHIPPING_THRESHOLD_EUR}`);
-  console.log(`    • Free for orders €${FREE_SHIPPING_THRESHOLD_EUR}+\n`);
+  console.log(`  Rate per zone: €${FLAT_RATE_PER_ITEM_EUR}/item flat (×qty enforced by`);
+  console.log(`  Delivery Customization Function — not by condition rules).`);
+  console.log(`  Allowed destinations: ${COUNTRIES.map((c) => c.code).join(', ')}\n`);
 
   const profile = await getDefaultProfile();
   console.log(`→ Default delivery profile: ${profile.name} (${profile.id})`);
@@ -223,9 +240,9 @@ async function main() {
     console.log(`  skip  ${c.zoneName} (already exists)`);
   }
   if (toDelete.length > 0) {
-    console.log(`  removing default zones (Domestic / International) so per-country zones can claim each EU country`);
+    console.log(`  removing default zones (Domestic / International) and legacy disallowed zones so checkout enforces ES/DE/NL only`);
     await deleteZones(profile.id, toDelete);
-    console.log(`  ✓ deleted ${toDelete.length} default zone(s)`);
+    console.log(`  ✓ deleted ${toDelete.length} zone(s)`);
   }
   if (toAdd.length > 0) {
     await addZonesToProfile(profile, toAdd);

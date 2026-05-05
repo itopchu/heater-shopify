@@ -37,11 +37,11 @@
     "contact": "Kontakt"
   },
   "utility_bar": {
-    "free_eu_delivery": "Bezpłatna dostawa do UE",
     "warranty_10y": "10 lat gwarancji",
     "returns_30d": "30 dni na zwrot",
     "secure_checkout": "Bezpieczna płatność",
-    "need_help_phone": "Potrzebujesz pomocy? +49 172 270 66 48"
+    "need_help_phone": "Potrzebujesz pomocy? +49 172 608 88 48",
+    "paid_shipping": "Wysyłka 20 €/sztuka"
   },
   "language_switcher": {
     "aria_label": "Język: {name}. Kliknij, aby zmienić.",
@@ -70,7 +70,7 @@
   },
   "footer": {
     "stay_in_loop": "Bądź na bieżąco",
-    "newsletter_promise": "Nowości i ekskluzywne oferty UE.",
+    "newsletter_promise": "Nowości i oferty dla klientów.",
     "brand_blurb": "Autoryzowany regionalny sprzedawca premium europejskich grzejników i ogrzewania łazienkowego. Designed in Germany, produkowane dla Europy.",
     "legal_entity": "G-Berg GmbH",
     "col_customer_service": "Obsługa klienta",
@@ -97,7 +97,8 @@
   },
   "whatsapp": {
     "aria_label": "Czatuj z G-Berg na WhatsAppie",
-    "default_message": "Dzień dobry, zespole G-Berg! Przeglądam grzejniki na gberg-heizung.de i chciałbym uzyskać poradę dotyczącą wyboru odpowiedniego modelu do mojego domu. Czy możecie mi pomóc?"
+    "default_message": "Hallo, ich habe eine Frage zu einem Produkt auf Ihrer Website.",
+    "product_message": "Hallo, ich interessiere mich für dieses Produkt und hätte gerne weitere Informationen."
   },
   "home": {
     "meta_title": "G-Berg Heizung — Premium europejskie grzejniki",
@@ -141,13 +142,13 @@
     "guided_finder_start": "Zacznij",
     "faq_eyebrow": "FAQ",
     "faq_title": "Najczęściej zadawane pytania.",
-    "faq_q1": "Czy wysyłacie do całej Europy?",
-    "faq_a1": "Tak — dostarczamy do Niemiec, Belgii, Hiszpanii, Austrii, Holandii i innych krajów UE. Bezpłatna wysyłka od 500 €.",
+    "faq_q1": "Dokąd wysyłacie?",
+    "faq_a1": "Wysyłamy wyłącznie do Hiszpanii, Niemiec i Holandii. Koszt wysyłki 20 € za sztukę — brak progu darmowej wysyłki.",
     "faq_q2": "Czy Wasze grzejniki współpracują z pompami ciepła?",
     "faq_a2": "Wiele z nich tak. Szukaj plakietki 'Pompa ciepła – tak' na kartach produktów lub filtruj według kompatybilności z pompą ciepła na stronach kategorii.",
     "faq_q3": "Jaka jest Wasza polityka zwrotów?",
     "faq_a3": "30 dni na zwrot nieużywanych i nieotwieranych artykułów. Zamówienia na wymiar nie podlegają zwrotowi — poinformujemy o tym wyraźnie przed zakupem.",
-    "why_us_delivery": "Bezpłatna dostawa do UE od 500 €",
+    "why_us_delivery": "Wysyłka 20 €/sztuka · ES · DE · NL",
     "why_us_returns": "30 dni na zwrot",
     "why_us_engineering": "Pomoc techniczna",
     "why_us_warranty": "10 lat gwarancji"
@@ -163,7 +164,7 @@
     "buy_bar_aria": "Pasek zakupu",
     "price_vat_note": "Z VAT, bez kosztów wysyłki",
     "delivery_returns_heading": "Wysyłka i zwroty",
-    "delivery_returns_body": "Bezpłatna dostawa do UE od 500 €. 30 dni na zwrot nieużywanych artykułów.",
+    "delivery_returns_body": "Wysyłka 20 € za sztukę do Hiszpanii, Niemiec i Holandii. 30 dni na zwrot nieużywanych produktów.",
     "need_help_heading": "Potrzebujesz pomocy?",
     "need_help_body": "Nasi inżynierowie grzewczy odpowiedzą na pytania o kompatybilność przed złożeniem zamówienia.",
     "dispatch_default": "Zwykle wysyłane w ciągu 3 dni roboczych",
@@ -232,7 +233,7 @@
     "about_category_body": "Każdy grzejnik testujemy zgodnie z normą EN 442 i każdą pozycję uzupełniamy parametrami instalatorskimi: rozstaw rur, typ przyłącza, ciśnienie maks. i certyfikowana moc cieplna. Użyj filtrów powyżej, aby zawęzić wybór według wymiarów lub kompatybilności.",
     "empty_collection": "W tej kategorii nie ma jeszcze produktów.",
     "empty_storefront": "API Shopify Storefront nie jest skonfigurowane.",
-    "empty_default_lede": "Europejskie grzejniki z certyfikatem CE wybrane ze względu na wydajność, trwałość i czystą integrację z nowoczesnymi instalacjami grzewczymi.",
+    "empty_default_lede": "Grzejniki z certyfikatem CE wybrane pod kątem wydajności, trwałości i czystej integracji z nowoczesnymi instalacjami grzewczymi.",
     "shop_all_meta_title": "Wszystkie grzejniki — G-Berg",
     "shop_all_meta_description": "Każdy grzejnik, suszarka, ogrzewacz elektryczny i system ogrzewania podłogowego G-Berg w jednym miejscu.",
     "shop_all_eyebrow": "Katalog",
@@ -302,7 +303,7 @@
     "your_cart": "Twój koszyk",
     "your_cart_empty": "Twój koszyk jest pusty",
     "empty_aside_blurb": "Wybierz kategorię, aby zacząć.",
-    "empty_page_blurb": "Poświęć chwilę na zaplanowanie pomieszczenia. Zacznij od kategorii poniżej lub przejdź prosto do pełnego katalogu — każdy element ma certyfikat CE, jest produkowany w UE i wysyłany bezpłatnie po Europie powyżej 500 €.",
+    "empty_page_blurb": "Poświęć chwilę na zaplanowanie pomieszczenia. Zacznij od kategorii poniżej lub przejdź bezpośrednio do pełnego katalogu — każdy produkt ma certyfikat CE i jest wysyłany do Hiszpanii, Niemiec i Holandii za 20 € za sztukę.",
     "browse_all": "Zobacz wszystkie produkty",
     "replacement_radiators": "Grzejniki zamienne",
     "shop_by_room": "Kupuj według pomieszczenia",
@@ -327,8 +328,8 @@
     "gift_card_placeholder": "Kod karty podarunkowej",
     "gift_card_apply_aria": "Zastosuj kod karty podarunkowej",
     "gift_card_remove_aria": "Usuń kartę podarunkową kończącą się na {last}",
-    "trust_free_eu_title": "Bezpłatna dostawa UE",
-    "trust_free_eu_sub": "Dla zamówień powyżej 500 €",
+    "trust_free_eu_title": "Wysyłka 20 €/sztuka",
+    "trust_free_eu_sub": "Hiszpania · Niemcy · Holandia",
     "trust_returns_title": "30 dni na zwrot",
     "trust_returns_sub": "Bez pytań",
     "trust_warranty_title": "10 lat gwarancji",
@@ -379,7 +380,7 @@
     "channel_email_value": "info@g-berg-gmbh.de",
     "channel_email_hint": "Najlepsze dla szczegółowych zapytań, zdjęć i plików PDF.",
     "channel_phone_label": "Telefon",
-    "channel_phone_value": "+49 172 270 66 48",
+    "channel_phone_value": "+49 172 608 88 48",
     "channel_phone_hint": "Pn – Pt, 09:00 – 17:00 CET.",
     "channel_whatsapp_label": "WhatsApp",
     "channel_whatsapp_value": "Czatuj z nami",

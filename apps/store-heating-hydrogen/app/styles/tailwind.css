@@ -229,20 +229,18 @@ h3 {
   line-height: 1;
 }
 
-/* Premium-density product grid. */
+/* Premium-density product grid.
+ *
+ * Mobile = 3-up (per requirements §8 / §9 "3 items per row"). On the
+ * narrowest phones this keeps cards tight but readable; combined with
+ * the line-clamped title and tabular price line, three cards fit
+ * comfortably in a 360px viewport. Sm/lg/xl just widen the gaps. */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  /* Force every row to the height of its tallest cell so adjacent
-     cards always line their price rows up at the same baseline. The
-     default `auto` row sizing lets each row size to the content of
-     the tallest item in that row, but stretching equalises only WITHIN
-     the row — combined with the card's `mt-auto` price line and the
-     line-clamped title (min-h-[2.6em]), prices snap to the same
-     vertical position across each row. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: 1fr;
   align-items: stretch;
-  gap: 8px;
+  gap: 6px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -256,18 +254,18 @@ h3 {
 @media (min-width: 640px) {
   .product-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
+    gap: 10px;
   }
 }
 @media (min-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
+    gap: 14px;
   }
 }
 @media (min-width: 1440px) {
   .product-grid {
-    gap: 24px;
+    gap: 20px;
   }
 }
 
@@ -340,15 +338,23 @@ h3 {
   }
 }
 
-/* Drawer/sheet animations. */
+/* Drawer/sheet animations.
+ *
+ * Z-stack baseline (May 2026):
+ *   z-[60]   floating UI (LanguageSwitcher dropdown, WhatsApp bubble)
+ *   z-[90]   drawer overlay (covers the page including any z-60 floats)
+ *   z-[100]  drawer panel itself (sits on top of overlay)
+ *
+ * Anything fixed-position with z>=60 outside this scale will leak through
+ * the drawer — keep this contract centralized in this file. */
 .drawer-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 17, 17, 0.45);
+  background: rgba(17, 17, 17, 0.55);
   opacity: 0;
   pointer-events: none;
   transition: opacity 250ms ease-out;
-  z-index: 70;
+  z-index: 90;
 }
 .drawer-overlay[data-open='true'] {
   opacity: 1;
@@ -357,8 +363,9 @@ h3 {
 
 .drawer-panel {
   position: fixed;
-  z-index: 80;
+  z-index: 100;
   background: var(--color-surface);
+  color: var(--color-text);
   display: flex;
   flex-direction: column;
   transition: transform 300ms ease-out;
@@ -366,11 +373,18 @@ h3 {
 }
 .drawer-panel--right {
   inset: 0 0 0 auto;
-  width: min(85vw, 420px);
+  width: min(88vw, 420px);
   transform: translateX(100%);
 }
 .drawer-panel--right[data-open='true'] {
   transform: translateX(0);
+}
+
+/* When body has scroll-locked from an open drawer, hide WhatsApp bubble
+ * so it doesn't float over the panel. Drawer locks `body.overflow=hidden`
+ * (see mobile-drawer.tsx), so we use that as the hook. */
+body[style*='overflow: hidden'] .whatsapp-bubble {
+  visibility: hidden;
 }
 .drawer-panel--bottom {
   inset: auto 0 0 0;

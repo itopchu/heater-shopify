@@ -1,0 +1,5 @@
+package shopify:function;
+
+world function {
+  export run: func();
+}
