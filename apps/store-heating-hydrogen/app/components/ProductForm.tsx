@@ -1,5 +1,7 @@
-import {Link, useNavigate} from 'react-router';
+import {Link, useNavigate, useParams} from 'react-router';
 import {type MappedProductOptions} from '@shopify/hydrogen';
+import {localeHref} from '~/lib/gberg/href';
+import {DEFAULT_LOCALE, isSupportedLocale} from '~/lib/gberg/i18n';
 import type {
   Maybe,
   ProductOptionValueSwatch,
@@ -19,6 +21,9 @@ export function ProductForm({
   const navigate = useNavigate();
   const {open} = useAside();
   const t = useT();
+  const params = useParams();
+  const rawLocale = (params as {locale?: string}).locale;
+  const locale = isSupportedLocale(rawLocale) ? rawLocale : DEFAULT_LOCALE;
   return (
     <div className="product-form">
       {productOptions.map((option) => {
@@ -53,7 +58,7 @@ export function ProductForm({
                       prefetch="intent"
                       preventScrollReset
                       replace
-                      to={`/products/${handle}?${variantUriQuery}`}
+                      to={`${localeHref(locale, `/products/${handle}`)}?${variantUriQuery}`}
                       style={{
                         border: selected
                           ? '1px solid black'

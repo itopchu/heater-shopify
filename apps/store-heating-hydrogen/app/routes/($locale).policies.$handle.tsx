@@ -1,6 +1,8 @@
-import {Link, useLoaderData} from 'react-router';
+import {Link, useLoaderData, useParams} from 'react-router';
 import type {Route} from './+types/policies.$handle';
 import {type Shop} from '@shopify/hydrogen/storefront-api-types';
+import {DEFAULT_LOCALE, isSupportedLocale} from '~/lib/gberg/i18n';
+import {localeHref} from '~/lib/gberg/href';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 type SelectedPolicies = keyof Pick<
@@ -66,13 +68,16 @@ export async function loader({params, context}: Route.LoaderArgs) {
 
 export default function Policy() {
   const {policy} = useLoaderData<typeof loader>();
+  const params = useParams();
+  const rawLocale = (params as {locale?: string}).locale;
+  const locale = isSupportedLocale(rawLocale) ? rawLocale : DEFAULT_LOCALE;
 
   return (
     <div className="policy">
       <br />
       <br />
       <div>
-        <Link to="/policies">← Back to Policies</Link>
+        <Link to={localeHref(locale, '/policies')}>← Back to Policies</Link>
       </div>
       <br />
       <h1>{policy.title}</h1>

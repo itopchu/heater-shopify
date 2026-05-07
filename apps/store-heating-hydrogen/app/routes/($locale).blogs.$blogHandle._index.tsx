@@ -1,9 +1,11 @@
-import {Link, useLoaderData} from 'react-router';
+import {Link, useLoaderData, useParams} from 'react-router';
 import type {Route} from './+types/blogs.$blogHandle._index';
 import {Image, getPaginationVariables} from '@shopify/hydrogen';
 import type {ArticleItemFragment} from 'storefrontapi.generated';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
+import {DEFAULT_LOCALE, isSupportedLocale} from '~/lib/gberg/i18n';
+import {localeHref} from '~/lib/gberg/href';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 export const meta: Route.MetaFunction = ({
@@ -108,6 +110,9 @@ function ArticleItem({
   article: ArticleItemFragment;
   loading?: HTMLImageElement['loading'];
 }) {
+  const params = useParams();
+  const rawLocale = (params as {locale?: string}).locale;
+  const locale = isSupportedLocale(rawLocale) ? rawLocale : DEFAULT_LOCALE;
   const publishedAt = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
@@ -115,7 +120,7 @@ function ArticleItem({
   }).format(new Date(article.publishedAt!));
   return (
     <div className="blog-article" key={article.id}>
-      <Link to={`/blogs/${article.blog.handle}/${article.handle}`}>
+      <Link to={localeHref(locale, `/blogs/${article.blog.handle}/${article.handle}`)}>
         {article.image && (
           <div className="blog-article-image">
             <Image

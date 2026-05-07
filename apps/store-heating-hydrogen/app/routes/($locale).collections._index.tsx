@@ -1,9 +1,10 @@
-import {useLoaderData, Link} from 'react-router';
+import {useLoaderData, Link, useParams} from 'react-router';
 import type {Route} from './+types/collections._index';
 import {getPaginationVariables, Image} from '@shopify/hydrogen';
 import type {CollectionFragment} from 'storefrontapi.generated';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
-import {useT} from '~/lib/gberg/i18n';
+import {DEFAULT_LOCALE, isSupportedLocale, useT} from '~/lib/gberg/i18n';
+import {localeHref} from '~/lib/gberg/href';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 export const meta: Route.MetaFunction = ({
@@ -94,11 +95,14 @@ function CollectionItem({
   collection: CollectionFragment;
   index: number;
 }) {
+  const params = useParams();
+  const rawLocale = (params as {locale?: string}).locale;
+  const locale = isSupportedLocale(rawLocale) ? rawLocale : DEFAULT_LOCALE;
   return (
     <Link
       className="collection-item"
       key={collection.id}
-      to={`/collections/${collection.handle}`}
+      to={localeHref(locale, `/collections/${collection.handle}`)}
       prefetch="intent"
     >
       {collection?.image && (

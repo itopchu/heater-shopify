@@ -1,7 +1,8 @@
-import {useLoaderData, Link} from 'react-router';
+import {useLoaderData, Link, useParams} from 'react-router';
 import type {Route} from './+types/policies._index';
 import type {PoliciesQuery, PolicyItemFragment} from 'storefrontapi.generated';
-import {useT} from '~/lib/gberg/i18n';
+import {DEFAULT_LOCALE, isSupportedLocale, useT} from '~/lib/gberg/i18n';
+import {localeHref} from '~/lib/gberg/href';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 
 export const meta: Route.MetaFunction = ({
@@ -46,6 +47,9 @@ export async function loader({context}: Route.LoaderArgs) {
 export default function Policies() {
   const {policies} = useLoaderData<typeof loader>();
   const t = useT();
+  const params = useParams();
+  const rawLocale = (params as {locale?: string}).locale;
+  const locale = isSupportedLocale(rawLocale) ? rawLocale : DEFAULT_LOCALE;
 
   return (
     <div className="policies">
@@ -53,7 +57,7 @@ export default function Policies() {
       <div>
         {policies.map((policy) => (
           <fieldset key={policy.id}>
-            <Link to={`/policies/${policy.handle}`}>{policy.title}</Link>
+            <Link to={localeHref(locale, `/policies/${policy.handle}`)}>{policy.title}</Link>
           </fieldset>
         ))}
       </div>

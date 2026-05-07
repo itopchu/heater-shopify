@@ -272,7 +272,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
           {shortcuts.map((c) => (
             <li key={c.handle} className="bg-[var(--color-surface)]">
               <Link
-                to={`/collections/${c.handle}`}
+                to={localeHref(locale, `/collections/${c.handle}`)}
                 onClick={close}
                 prefetch="viewport"
                 className="group flex items-center justify-between gap-4 p-5 hover:bg-[var(--color-surface-muted)] transition-colors"
