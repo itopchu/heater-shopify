@@ -75,13 +75,6 @@ const GUIDED_FINDER: {
   },
 ];
 
-const WHY_US: {labelKey: string; icon: string}[] = [
-  {labelKey: 'home.why_us_delivery', icon: '→'},
-  {labelKey: 'home.why_us_returns', icon: '↺'},
-  {labelKey: 'home.why_us_engineering', icon: '✦'},
-  {labelKey: 'home.why_us_warranty', icon: '✓'},
-];
-
 export async function loader({context, params}: Route.LoaderArgs) {
   const locale = normalizeLocale(params.locale);
   const client = createGbergClient(context.storefront);
@@ -400,20 +393,6 @@ export default function HomePage() {
       </section>
 
       <div className="rule-accent" aria-hidden />
-
-      {/* TRUST STRIP */}
-      <section className="bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)]">
-        <ul className="container-x grid grid-cols-2 gap-x-2 gap-y-3 py-4 md:grid-cols-4 md:gap-px md:py-10">
-          {WHY_US.map((w) => (
-            <li key={w.labelKey} className="flex items-center gap-2 px-1 md:gap-4 md:px-4">
-              <span aria-hidden className="text-lg text-[var(--color-primary)] md:text-2xl">
-                {w.icon}
-              </span>
-              <span className="text-[12px] font-medium leading-snug tracking-tight md:text-sm">{t(w.labelKey)}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       {/* FAQ */}
       <section className="container-x py-8 md:py-14">

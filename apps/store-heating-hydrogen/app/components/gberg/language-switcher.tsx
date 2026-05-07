@@ -37,7 +37,7 @@ export default function LanguageSwitcher({locale}: Props) {
     <details className="group relative z-[60]">
       <summary
         aria-label={t('language_switcher.aria_label', {name: LOCALE_NAME[current]})}
-        className="list-none cursor-pointer select-none inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm text-[11px] uppercase tracking-[0.12em] font-semibold text-white hover:text-white transition-colors [&::-webkit-details-marker]:hidden"
+        className="list-none cursor-pointer select-none inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm text-[12px] uppercase tracking-[0.12em] font-semibold text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors [&::-webkit-details-marker]:hidden"
       >
         <span aria-hidden className="opacity-80">▸</span>
         <span>{LOCALE_LABEL[current]}</span>
