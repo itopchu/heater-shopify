@@ -12,6 +12,18 @@ query RunInput {
     }
     lines {
       quantity
+      merchandise {
+        ... on ProductVariant {
+          product {
+            handle
+            productType
+            paidShippingTag: hasTags(tags: ["shipping:paid"]) {
+              tag
+              hasTag
+            }
+          }
+        }
+      }
     }
   }
 }
