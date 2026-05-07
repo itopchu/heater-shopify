@@ -36,13 +36,6 @@
     "quick_links": "Schnellzugriff",
     "contact": "Kontakt"
   },
-  "utility_bar": {
-    "warranty_10y": "10 Jahre Garantie",
-    "returns_30d": "30 Tage Rückgaberecht",
-    "secure_checkout": "Sicherer Checkout",
-    "need_help_phone": "Brauchen Sie Hilfe? +49 172 608 88 48",
-    "paid_shipping": "Versand 20 €/Stück"
-  },
   "language_switcher": {
     "aria_label": "Sprache: {name}. Klicken zum Ändern.",
     "choose_language": "Sprache wählen"
@@ -170,6 +163,23 @@
     "dispatch_default": "In der Regel innerhalb von 3 Werktagen versandt",
     "fallback_eyebrow_radiator": "Heizkörper",
     "section_overview": "Überblick",
+    "section_overview_eyebrow": "Überblick",
+    "fact_series": "Serie",
+    "fact_dimensions": "Abmessungen",
+    "fact_heat_output": "Wärmeleistung",
+    "fact_color": "Farbe",
+    "fact_connection": "Anschluss",
+    "fact_heating_medium": "Heizmedium",
+    "fact_heat_pump": "Wärmepumpentauglich",
+    "fact_mounting_kit": "Montageset enthalten",
+    "review_aria": "Bewertet mit {rating} von 5 von {count} Kunden",
+    "section_reviews_eyebrow": "Kundenbewertungen",
+    "section_reviews_title": "Was Kunden sagen",
+    "review_count_singular": "{count} Bewertung",
+    "review_count_plural": "{count} Bewertungen",
+    "review_verified_buyer": "Verifizierter Käufer",
+    "reviews_show_more": "{count} weitere anzeigen",
+    "reviews_show_less": "Weniger anzeigen",
     "section_specs_eyebrow": "Technische Daten",
     "section_specs_title": "Detailliertes Datenblatt",
     "section_about_eyebrow": "Über dieses Produkt",

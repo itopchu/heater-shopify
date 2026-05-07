@@ -36,13 +36,6 @@
     "quick_links": "Liens rapides",
     "contact": "Contact"
   },
-  "utility_bar": {
-    "warranty_10y": "Garantie 10 ans",
-    "returns_30d": "Retour sous 30 jours",
-    "secure_checkout": "Paiement sécurisé",
-    "need_help_phone": "Besoin d'aide ? +49 172 608 88 48",
-    "paid_shipping": "Livraison 20 €/article"
-  },
   "language_switcher": {
     "aria_label": "Langue : {name}. Cliquez pour changer.",
     "choose_language": "Choisir la langue"
@@ -170,6 +163,23 @@
     "dispatch_default": "Expédié généralement sous 3 jours ouvrés",
     "fallback_eyebrow_radiator": "Radiateur",
     "section_overview": "Aperçu",
+    "section_overview_eyebrow": "Aperçu",
+    "fact_series": "Série",
+    "fact_dimensions": "Dimensions",
+    "fact_heat_output": "Puissance thermique",
+    "fact_color": "Couleur",
+    "fact_connection": "Raccordement",
+    "fact_heating_medium": "Fluide caloporteur",
+    "fact_heat_pump": "Compatible pompe à chaleur",
+    "fact_mounting_kit": "Kit de montage inclus",
+    "review_aria": "Noté {rating} sur 5 par {count} clients",
+    "section_reviews_eyebrow": "Avis clients",
+    "section_reviews_title": "Ce que disent les clients",
+    "review_count_singular": "{count} avis",
+    "review_count_plural": "{count} avis",
+    "review_verified_buyer": "Acheteur vérifié",
+    "reviews_show_more": "Afficher {count} de plus",
+    "reviews_show_less": "Afficher moins",
     "section_specs_eyebrow": "Spécifications techniques",
     "section_specs_title": "Fiche détaillée",
     "section_about_eyebrow": "À propos de ce produit",

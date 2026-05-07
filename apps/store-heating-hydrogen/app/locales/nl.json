@@ -36,13 +36,6 @@
     "quick_links": "Snelkoppelingen",
     "contact": "Contact"
   },
-  "utility_bar": {
-    "warranty_10y": "10 jaar garantie",
-    "returns_30d": "30 dagen retourneren",
-    "secure_checkout": "Veilig afrekenen",
-    "need_help_phone": "Hulp nodig? +49 172 608 88 48",
-    "paid_shipping": "Verzending € 20/stuk"
-  },
   "language_switcher": {
     "aria_label": "Taal: {name}. Klik om te wijzigen.",
     "choose_language": "Taal kiezen"
@@ -170,6 +163,23 @@
     "dispatch_default": "Doorgaans verzonden binnen 3 werkdagen",
     "fallback_eyebrow_radiator": "Radiator",
     "section_overview": "Overzicht",
+    "section_overview_eyebrow": "Overzicht",
+    "fact_series": "Serie",
+    "fact_dimensions": "Afmetingen",
+    "fact_heat_output": "Warmteafgifte",
+    "fact_color": "Kleur",
+    "fact_connection": "Aansluiting",
+    "fact_heating_medium": "Verwarmingsmedium",
+    "fact_heat_pump": "Geschikt voor warmtepomp",
+    "fact_mounting_kit": "Montageset inbegrepen",
+    "review_aria": "Beoordeeld met {rating} van 5 door {count} klanten",
+    "section_reviews_eyebrow": "Klantbeoordelingen",
+    "section_reviews_title": "Wat klanten zeggen",
+    "review_count_singular": "{count} beoordeling",
+    "review_count_plural": "{count} beoordelingen",
+    "review_verified_buyer": "Geverifieerde koper",
+    "reviews_show_more": "{count} meer tonen",
+    "reviews_show_less": "Minder tonen",
     "section_specs_eyebrow": "Technische specificaties",
     "section_specs_title": "Gedetailleerd specificatieblad",
     "section_about_eyebrow": "Over dit product",
