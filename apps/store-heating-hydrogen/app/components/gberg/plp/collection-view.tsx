@@ -140,7 +140,8 @@ function applyFilters(products: HeatingProduct[], facets: FacetState): HeatingPr
       if (!t || !facets.productType.has(t)) return false;
     }
     if (facets.colorFamily.size > 0) {
-      const c = p.filters.color_family ?? p.specs.color;
+      const raw = p.filters.color_family ?? p.specs.color;
+      const c = raw ? raw.trim().toLowerCase() : null;
       if (!c || !facets.colorFamily.has(c)) return false;
     }
     if (facets.series.size > 0) {
@@ -333,7 +334,12 @@ export function CollectionView({ products, locale }: CollectionViewProps) {
       if (p.filters.product_type) {
         productType.set(p.filters.product_type, (productType.get(p.filters.product_type) ?? 0) + 1);
       }
-      const colorKey = p.filters.color_family ?? p.specs.color;
+      // Normalise to lowercase so legacy products that only carry the
+      // capitalised `specs.color` ("White") collapse into the same
+      // bucket as the canonical `filters.color_family` ("white"). Without
+      // this we'd render two separate "white" filter chips.
+      const colorRaw = p.filters.color_family ?? p.specs.color;
+      const colorKey = colorRaw ? colorRaw.trim().toLowerCase() : null;
       if (colorKey) {
         colorFamily.set(colorKey, (colorFamily.get(colorKey) ?? 0) + 1);
       }
