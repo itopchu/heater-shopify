@@ -203,7 +203,8 @@ export default function HomePage() {
       <div className="rule-accent" aria-hidden />
 
       {/* SHOP BY CATEGORY */}
-      <section className="container-x py-8 md:py-14">
+      <section className="bg-[var(--color-surface-muted)]">
+        <div className="container-x py-8 md:py-14">
         <SectionHeader
           eyebrow={t('home.shop_by_room_eyebrow')}
           title={
@@ -278,12 +279,13 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
+        </div>
       </section>
 
       <div className="rule-accent" aria-hidden />
 
       {/* EDITORIAL SPLIT */}
-      <section className="bg-[var(--color-surface-muted)]">
+      <section className="bg-[var(--color-surface)]">
         <div className="container-x grid grid-cols-1 gap-0 md:grid-cols-12 md:items-stretch">
           <div className="relative aspect-[16/10] sm:aspect-[2/1] md:col-span-7 md:aspect-auto md:min-h-[480px]">
             {editorialBanner ? (
@@ -340,21 +342,23 @@ export default function HomePage() {
 
       {/* BESTSELLERS */}
       {bestsellers.length > 0 ? (
-        <section className="container-x py-8 md:py-14">
-          <SectionHeader
-            eyebrow={t('home.bestsellers_eyebrow')}
-            title={
-              <>
-                {t('home.bestsellers_title_lead')}{' '}
-                <span className="font-[var(--font-body)] not-italic font-light text-[var(--color-primary)] mx-1">
-                  {t('home.bestsellers_title_amp')}
-                </span>{' '}
-                {t('home.bestsellers_title_tail')}
-              </>
-            }
-          />
-          <div className="mt-10">
-            <ProductGrid products={bestsellers.slice(0, 8)} locale={locale} />
+        <section className="bg-[var(--color-surface-muted)]">
+          <div className="container-x py-8 md:py-14">
+            <SectionHeader
+              eyebrow={t('home.bestsellers_eyebrow')}
+              title={
+                <>
+                  {t('home.bestsellers_title_lead')}{' '}
+                  <span className="font-[var(--font-body)] not-italic font-light text-[var(--color-primary)] mx-1">
+                    {t('home.bestsellers_title_amp')}
+                  </span>{' '}
+                  {t('home.bestsellers_title_tail')}
+                </>
+              }
+            />
+            <div className="mt-10">
+              <ProductGrid products={bestsellers.slice(0, 8)} locale={locale} />
+            </div>
           </div>
         </section>
       ) : null}
@@ -362,46 +366,88 @@ export default function HomePage() {
       <div className="rule-accent" aria-hidden />
 
       {/* GUIDED FINDER */}
-      <section className="container-x py-7 md:py-14">
-        <SectionHeader
-          eyebrow={t('home.guided_finder_eyebrow')}
-          title={<>{t('home.guided_finder_title')}</>}
-        />
-        <ul className="mt-4 grid grid-cols-2 divide-x divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] md:mt-10 md:grid-cols-4 md:divide-y-0">
-          {GUIDED_FINDER.map((g, i) => (
-            <li key={`${g.labelKey}-${i}`}>
-              <Link
-                to={localeHref(locale, g.href)}
-                className="group relative block px-3 py-3 transition-colors hover:bg-[var(--color-surface-muted)] md:px-8 md:py-10"
-              >
-                <p className="font-[var(--font-display)] text-base italic leading-tight md:text-2xl">
-                  {t(g.labelKey)}
-                </p>
-                <p className="mt-1 text-[12px] leading-snug text-[var(--color-text-muted)] md:mt-3 md:text-sm">
-                  {t(g.descKey)}
-                </p>
-                <p className="mt-2 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-text)] md:mt-6 md:text-xs">
-                  <span>{t('home.guided_finder_start')}</span>
-                  <span aria-hidden className="text-[var(--color-primary)]">
-                    →
+      <section className="bg-[var(--color-surface)]">
+        <div className="container-x py-10 md:py-16">
+          <SectionHeader
+            eyebrow={t('home.guided_finder_eyebrow')}
+            title={<>{t('home.guided_finder_title')}</>}
+          />
+          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 md:mt-10 md:grid-cols-4 md:gap-5">
+            {GUIDED_FINDER.map((g, i) => (
+              <li key={`${g.labelKey}-${i}`} className="h-full">
+                <Link
+                  to={localeHref(locale, g.href)}
+                  className="
+                    group relative flex h-full flex-col overflow-hidden
+                    bg-[var(--color-surface-muted)]
+                    border-t-[3px] border-[var(--color-primary)]
+                    px-5 py-5 md:px-7 md:py-8
+                    shadow-[0_1px_0_var(--color-border)]
+                    transition-all duration-300 ease-out
+                    hover:bg-[var(--color-text)] hover:-translate-y-[2px]
+                    hover:shadow-[0_10px_24px_rgba(17,17,17,0.18)]
+                    focus-visible:bg-[var(--color-text)] focus-visible:-translate-y-[2px]
+                  "
+                >
+                  <p
+                    className="
+                      font-[var(--font-display)] italic leading-tight
+                      text-lg md:text-2xl
+                      text-[var(--color-text)]
+                      transition-colors duration-300
+                      group-hover:text-white group-focus-visible:text-white
+                    "
+                  >
+                    {t(g.labelKey)}
+                  </p>
+                  <p
+                    className="
+                      mt-2 md:mt-3 text-[13px] md:text-sm leading-snug
+                      text-[var(--color-text-muted)]
+                      transition-colors duration-300
+                      group-hover:text-white/75 group-focus-visible:text-white/75
+                    "
+                  >
+                    {t(g.descKey)}
+                  </p>
+                  <span
+                    className="
+                      mt-5 md:mt-7 inline-flex items-center gap-2 self-start
+                      rounded-sm px-3 py-1.5
+                      text-[10px] md:text-xs font-semibold uppercase tracking-[0.14em]
+                      bg-[var(--color-primary)] text-white
+                      transition-all duration-300
+                      group-hover:bg-white group-hover:text-[var(--color-primary)]
+                      group-focus-visible:bg-white group-focus-visible:text-[var(--color-primary)]
+                    "
+                  >
+                    <span>{t('home.guided_finder_start')}</span>
+                    <span
+                      aria-hidden
+                      className="transition-transform duration-300 group-hover:translate-x-1 group-focus-visible:translate-x-1"
+                    >
+                      →
+                    </span>
                   </span>
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <div className="rule-accent" aria-hidden />
 
       {/* FAQ */}
-      <section className="container-x py-8 md:py-14">
-        <SectionHeader
-          eyebrow={t('home.faq_eyebrow')}
-          title={<>{t('home.faq_title')}</>}
-        />
-        <div className="mt-8 max-w-3xl">
-          <FaqAccordion items={homepageFaqs} />
+      <section className="bg-[var(--color-surface-muted)]">
+        <div className="container-x py-8 md:py-14">
+          <SectionHeader
+            eyebrow={t('home.faq_eyebrow')}
+            title={<>{t('home.faq_title')}</>}
+          />
+          <div className="mt-8 max-w-3xl">
+            <FaqAccordion items={homepageFaqs} />
+          </div>
         </div>
       </section>
 
