@@ -231,6 +231,16 @@ function FacetGroup<T extends string>({ label, values, selected, onToggle }: Fac
   );
 }
 
+function localizeColorChip(value: string, t: ReturnType<typeof useT>): string {
+  const k = value.trim().toLowerCase();
+  if (k === 'white') return t('pdp.color_white');
+  if (k === 'black') return t('pdp.color_black');
+  if (k === 'anthracite' || k === 'anthrazit') return t('pdp.color_anthracite');
+  if (k === 'chrome' || k === 'chrom') return t('pdp.color_chrome');
+  // Fallback: title-cased original (handles novel colour names gracefully).
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
 function ColorFacetGroup({
   label,
   values,
@@ -242,6 +252,7 @@ function ColorFacetGroup({
   selected: Set<string>;
   onToggle: (v: string) => void;
 }) {
+  const t = useT();
   if (values.length === 0) return null;
   return (
     <details
@@ -274,7 +285,7 @@ function ColorFacetGroup({
                   className="h-3 w-3 rounded-full ring-1 ring-inset ring-black/10"
                   style={{ backgroundColor: hex }}
                 />
-                <span className="capitalize">{v.value}</span>
+                <span>{localizeColorChip(v.value, t)}</span>
                 <span className="text-[var(--color-text-muted)]">({v.count})</span>
               </button>
             </li>

@@ -19,8 +19,13 @@
  * `__CTX__` token replacement performed inside each query function — that
  * stays as-is.
  *
- * Cache strategy: we use Hydrogen's `CacheLong()` (1h SWR) by default. The
- * homepage and PLP/PDP routes can override per-call via the `cache` arg.
+ * Cache strategy: we use Hydrogen's `CacheShort()` (1m fresh + 9m SWR) by
+ * default. Long cache used to make registered translations propagate
+ * slowly — a translation registered via translationsRegister wouldn't
+ * appear on the storefront until the previous response's max-age (1h)
+ * expired. Short cache keeps the storefront snappy under load (most
+ * requests hit the SWR window) while letting fresh translations and
+ * product edits land within minutes.
  */
 
 import type {Storefront} from '@shopify/hydrogen';
@@ -48,7 +53,7 @@ export function createGbergClient(storefront: HydrogenStorefront): StorefrontCli
       const cache =
         context.cache === 'no-store'
           ? storefront.CacheNone()
-          : storefront.CacheLong();
+          : storefront.CacheShort();
       const data = (await storefront.query(gql, {
         variables,
         cache,
