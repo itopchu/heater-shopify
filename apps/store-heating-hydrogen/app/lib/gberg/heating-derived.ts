@@ -13,6 +13,49 @@ import type {
   Image as ImageType,
   ProductVariant,
 } from '@gberg/product-schema';
+import type {TFunction} from './i18n';
+
+/**
+ * Localise a categorical spec value via i18n keys when we recognise it,
+ * otherwise pass through the title-cased original. Keeps spec rows in
+ * the active language even though the underlying metafield is English.
+ *
+ * `kind` narrows the lookup namespace so the same source word can map
+ * differently per category if needed (none currently do, but the
+ * structure leaves room).
+ */
+export function localizeSpecValue(
+  kind: string,
+  raw: string | null | undefined,
+  t: TFunction,
+): string {
+  if (!raw) return '';
+  const k = raw.trim().toLowerCase();
+  // Direct lookups for well-known categorical values.
+  if (kind === 'color') {
+    if (k === 'white') return t('pdp.color_white');
+    if (k === 'black') return t('pdp.color_black');
+    if (k === 'anthracite' || k === 'anthrazit') return t('pdp.color_anthracite');
+    if (k === 'chrome' || k === 'chrom') return t('pdp.color_chrome');
+  }
+  if (kind === 'heating') {
+    if (k === 'hydronic') return t('pdp.heating_hydronic');
+    if (k === 'electric') return t('pdp.heating_electric');
+  }
+  if (kind === 'material') {
+    if (k === 'steel') return t('pdp.material_steel');
+    if (k === 'stainless steel') return t('pdp.material_stainless_steel');
+  }
+  if (kind === 'installation') {
+    if (k === 'easy') return t('pdp.install_easy');
+    if (k === 'medium') return t('pdp.install_medium');
+    if (k === 'hard') return t('pdp.install_hard');
+  }
+  if (kind === 'boolean_yes') return t('pdp.value_yes');
+  if (kind === 'boolean_included') return t('pdp.value_included');
+  // Fallback: title-case the source word so display stays clean.
+  return titleCase(raw);
+}
 
 /* ------------------------------------------------------------------ */
 /* Series eyebrow.                                                     */
@@ -160,7 +203,10 @@ const INSTALL_LABEL: Record<string, string> = {
  * connection → warranty → heat-pump compatibility → mounting kit → material
  * → color. Mirrors the `docs/design-refresh-data-model.md` § PDP table.
  */
-export function buildStructuredSpecRows(p: HeatingProduct): StructuredSpecRowInput[] {
+export function buildStructuredSpecRows(
+  p: HeatingProduct,
+  t: TFunction,
+): StructuredSpecRowInput[] {
   const rows: StructuredSpecRowInput[] = [];
 
   // Wattage — prefer canonical specs.wattage_w, fall back to legacy heat_output.
@@ -171,13 +217,12 @@ export function buildStructuredSpecRows(p: HeatingProduct): StructuredSpecRowInp
         ? p.specs.heat_output_75_65_20
         : undefined;
   if (wattage != null) {
-    // Display in kW when ≥ 1000W to keep the chip readable.
     const display =
       wattage >= 1000 ? `${(wattage / 1000).toFixed(1).replace(/\.0$/, '')}` : `${wattage}`;
     const unit = wattage >= 1000 ? 'kW' : 'W';
     rows.push({
       kind: 'wattage',
-      label: 'Heat output',
+      label: t('pdp.fact_heat_output'),
       value: display,
       unit,
     });
@@ -186,7 +231,7 @@ export function buildStructuredSpecRows(p: HeatingProduct): StructuredSpecRowInp
   if (p.specs.energy_class) {
     rows.push({
       kind: 'energy_class',
-      label: 'Energy class',
+      label: t('pdp.fact_energy_class'),
       value: p.specs.energy_class,
     });
   }
@@ -194,73 +239,71 @@ export function buildStructuredSpecRows(p: HeatingProduct): StructuredSpecRowInp
   if (p.specs.room_coverage_m2 != null && p.specs.room_coverage_m2 > 0) {
     rows.push({
       kind: 'room_coverage',
-      label: 'Room coverage',
-      value: `Up to ${p.specs.room_coverage_m2}`,
+      label: t('pdp.fact_room_coverage'),
+      value: `${p.specs.room_coverage_m2}`,
       unit: 'm²',
     });
   }
 
-  // Dimensions — prefer the merchant display string; fall back to numeric.
   const dimDisplay = p.specs.dimensions_w_h_d_mm?.trim();
   if (dimDisplay) {
-    rows.push({kind: 'dimensions', label: 'Dimensions', value: dimDisplay, unit: 'mm'});
+    rows.push({kind: 'dimensions', label: t('pdp.fact_dimensions'), value: dimDisplay, unit: 'mm'});
   } else if (p.specs.width_mm != null && p.specs.height_mm != null) {
     const depth = p.specs.depth_mm != null ? ` × ${p.specs.depth_mm}` : '';
     rows.push({
       kind: 'dimensions',
-      label: 'Dimensions',
+      label: t('pdp.fact_dimensions'),
       value: `${p.specs.width_mm} × ${p.specs.height_mm}${depth}`,
       unit: 'mm',
     });
   }
 
   if (p.specs.installation_difficulty) {
-    const k = p.specs.installation_difficulty.toLowerCase();
     rows.push({
       kind: 'installation',
-      label: 'Installation',
-      value: INSTALL_LABEL[k] ?? titleCase(p.specs.installation_difficulty),
+      label: t('pdp.fact_installation'),
+      value: localizeSpecValue('installation', p.specs.installation_difficulty, t),
     });
   }
 
   if (p.specs.connection_type) {
     rows.push({
       kind: 'connection',
-      label: 'Connection',
+      label: t('pdp.fact_connection'),
       value: titleCase(p.specs.connection_type),
     });
   }
 
-  // Warranty is intentionally NOT pushed here. The buy-box <TrustStrip>
-  // already surfaces "{N}-year warranty" as a prominent icon-driven trust
-  // mark directly above this spec table; adding a "Warranty | 10 years"
-  // row here put the same signal in two formats inches apart on the PDP.
-  // The trust strip is the canonical home for it. If detailed warranty
-  // copy (terms PDF, transferability, etc.) ever needs to live in the
-  // table, surface it as a richer row — not as a redundant N-years line.
-
   if (p.specs.heat_pump_compatible === true) {
     rows.push({
       kind: 'heat_pump',
-      label: 'Heat-pump ready',
-      value: 'Yes',
+      label: t('pdp.fact_heat_pump'),
+      value: t('pdp.value_yes'),
     });
   }
 
   if (p.specs.mounting_kit_included === true) {
     rows.push({
       kind: 'mounting_kit',
-      label: 'Mounting kit',
-      value: 'Included',
+      label: t('pdp.fact_mounting_kit'),
+      value: t('pdp.value_included'),
     });
   }
 
   if (p.specs.material) {
-    rows.push({kind: 'material', label: 'Material', value: titleCase(p.specs.material)});
+    rows.push({
+      kind: 'material',
+      label: t('pdp.fact_material'),
+      value: localizeSpecValue('material', p.specs.material, t),
+    });
   }
 
   if (p.specs.color) {
-    rows.push({kind: 'color', label: 'Colour', value: titleCase(p.specs.color)});
+    rows.push({
+      kind: 'color',
+      label: t('pdp.fact_color'),
+      value: localizeSpecValue('color', p.specs.color, t),
+    });
   }
 
   return rows.filter((r) => r.value !== '' && r.value != null);
@@ -548,21 +591,22 @@ export function findSiblingColors(
 /* AI key facts fallback.                                              */
 /* ------------------------------------------------------------------ */
 
-export function fallbackKeyFacts(p: HeatingProduct): AiKeyFact[] | null {
+export function fallbackKeyFacts(p: HeatingProduct, t: TFunction): AiKeyFact[] | null {
   const out: AiKeyFact[] = [];
   if (p.filters.product_type) {
-    out.push({label: 'Type', value: prettyProductType(p.filters.product_type)});
+    out.push({label: t('pdp.fact_type'), value: prettyProductType(p.filters.product_type)});
   }
   if (p.specs.heating_medium) {
     out.push({
-      label: 'Heating',
-      value: prettyHeatingMedium(p.specs.heating_medium),
+      label: t('pdp.fact_heating_medium'),
+      value: localizeSpecValue('heating', p.specs.heating_medium, t),
     });
   }
   if (p.specs.material)
-    out.push({label: 'Material', value: titleCase(p.specs.material)});
-  if (p.specs.color) out.push({label: 'Colour', value: titleCase(p.specs.color)});
+    out.push({label: t('pdp.fact_material'), value: localizeSpecValue('material', p.specs.material, t)});
+  if (p.specs.color)
+    out.push({label: t('pdp.fact_color'), value: localizeSpecValue('color', p.specs.color, t)});
   if (p.specs.connection_type)
-    out.push({label: 'Connection', value: p.specs.connection_type});
+    out.push({label: t('pdp.fact_connection'), value: titleCase(p.specs.connection_type)});
   return out.length > 0 ? out : null;
 }

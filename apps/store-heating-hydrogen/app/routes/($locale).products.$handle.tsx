@@ -204,7 +204,7 @@ export default function ProductPage() {
   const faqs = buildFaqsFromSections(sections);
 
   const aix = product.common.aix ?? {};
-  const keyFacts = aix.key_facts ?? fallbackKeyFacts(product);
+  const keyFacts = aix.key_facts ?? fallbackKeyFacts(product, t);
 
   return (
     <article className="container-x pb-24 pt-6">

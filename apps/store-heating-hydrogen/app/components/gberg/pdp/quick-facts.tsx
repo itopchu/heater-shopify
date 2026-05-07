@@ -45,7 +45,7 @@ const SPEC_ICONS: Partial<Record<StructuredSpecRowInput['kind'], ReactNode>> = {
 
 export function QuickFacts({product, className}: QuickFactsProps) {
   const t = useT();
-  const rows = withSpecRowIcons(buildStructuredSpecRows(product), SPEC_ICONS);
+  const rows = withSpecRowIcons(buildStructuredSpecRows(product, t), SPEC_ICONS);
   // Track B (April 2026): 41/55 catalog products have empty `specs{}`. The
   // structured deriver currently falls back to a default warranty row so
   // `rows` is rarely empty, but if it ever is — drop the section entirely
