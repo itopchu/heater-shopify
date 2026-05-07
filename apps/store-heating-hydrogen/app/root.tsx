@@ -1,8 +1,8 @@
 /**
  * Root document — G-Berg Hydrogen storefront.
  *
- * Replaces the skeleton's PageLayout with our UtilityBar / Header / Footer
- * shell. Loads Inter + Fraunces from Google Fonts via <link>, imports the
+ * Replaces the skeleton's PageLayout with our Header / Footer shell.
+ * Loads Inter + Fraunces from Google Fonts via <link>, imports the
  * Tailwind v4 stylesheet (which itself imports @gberg/theme-tokens), and
  * sets <html lang="en" data-brand="heating"> per the brand spec.
  */
@@ -22,7 +22,6 @@ import type {Route} from './+types/root';
 import favicon from '~/assets/favicon.svg';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import tailwindCss from './styles/tailwind.css?url';
-import {UtilityBar} from '~/components/gberg/utility-bar';
 import {Header} from '~/components/gberg/header';
 import {Footer} from '~/components/gberg/footer';
 import {WhatsAppBubble} from '~/components/gberg/whatsapp-bubble';
@@ -224,7 +223,6 @@ export default function App() {
       consent={data.consent}
     >
       <Aside.Provider>
-        <UtilityBar locale={locale} />
         <Header locale={locale} menu={headerMenu} />
         <main id="main">
           <Outlet />

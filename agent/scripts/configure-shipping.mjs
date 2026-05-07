@@ -3,13 +3,13 @@
  * Configures shipping zones + rates on the default delivery profile.
  *
  * 2026-05 update — business rule change:
- *   - Allowed shipping countries: Germany, Netherlands ONLY.
+ *   - Allowed shipping countries: Germany, Netherlands, Belgium, Luxembourg ONLY.
  *     (Belgium and Austria removed — checkout must reject those addresses.)
  *   - Shipping cost: FLAT €20 PER ITEM (per-quantity, applied to every
  *     unit in the order). No free-shipping threshold of any kind.
  *
  * Implementation:
- *   - One zone per allowed country (DE / NL) on the default profile.
+ *   - One zone per allowed country (DE / NL / BE / LU) on the default profile.
  *   - Per-zone rate uses Shopify's `weightConditions` / `priceConditions`
  *     model — but Shopify's standard delivery profile does not natively
  *     express "€20 × quantity". The cleanest representation in Shopify
@@ -39,18 +39,18 @@ const FLAT_RATE_PER_ITEM_EUR = 20;
 const COUNTRIES = [
   { code: 'DE', name: 'Germany',     zoneName: 'Germany · DHL' },
   { code: 'NL', name: 'Netherlands', zoneName: 'Netherlands · PostNL' },
+  { code: 'BE', name: 'Belgium',     zoneName: 'Belgium · bpost' },
+  { code: 'LU', name: 'Luxembourg',  zoneName: 'Luxembourg · Post.lu' },
 ];
 
 // Country zones that previously existed and must be removed from the
 // profile (see 2026-05 business rule change above).
 const DISALLOWED_LEGACY_ZONE_NAMES = new Set([
-  'Belgium · bpost',
   'Austria · Post.at',
   'France · Colissimo',
   'Italy · Poste',
   'Poland · InPost',
   'Denmark · PostNord',
-  'Luxembourg · Post.lu',
   'Spain · Correos',
 ]);
 
@@ -203,7 +203,7 @@ async function addZonesToProfile(profile, countriesToAdd) {
 }
 
 function collectDefaultZoneIds(profile) {
-  // Delete every zone that isn't one of our managed (DE/NL) zones.
+  // Delete every zone that isn't one of our managed (DE/NL/BE/LU) zones.
   // Region overlap (e.g. an existing "EU" zone that contains NL) breaks
   // `zonesToCreate` with "Region 'NL' already exists in another zone".
   // Wholesale clearing forces a clean slate so the three managed zones
@@ -240,7 +240,7 @@ async function main() {
     console.log(`  skip  ${c.zoneName} (already exists)`);
   }
   if (toDelete.length > 0) {
-    console.log(`  removing default zones (Domestic / International) and legacy disallowed zones so checkout enforces DE/NL only`);
+    console.log(`  removing default zones (Domestic / International) and legacy disallowed zones so checkout enforces DE/NL/BE/LU only`);
     await deleteZones(profile.id, toDelete);
     console.log(`  ✓ deleted ${toDelete.length} zone(s)`);
   }

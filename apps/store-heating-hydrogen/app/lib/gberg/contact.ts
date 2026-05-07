@@ -36,4 +36,4 @@ export function whatsappHref(message: string = WHATSAPP_MESSAGE_GENERIC): string
 // via configure-shipping.mjs — keep these aligned).
 // Policy 2026-05: shipping is included in the listed price for most products;
 // only valve radiators (Ventilheizkörper) ship at standard DHL rates.
-export const SHIPPING_COUNTRIES_ISO = ['DE', 'NL'] as const;
+export const SHIPPING_COUNTRIES_ISO = ['DE', 'NL', 'BE', 'LU'] as const;

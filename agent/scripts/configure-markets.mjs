@@ -2,12 +2,11 @@
 /**
  * Europe multi-country Markets provisioning for heater-shopify.
  *
- * Brief 01 / 07 §12 — Netherlands is the primary launch market with planned
- * expansion to Belgium, Luxembourg, Germany, France. Austria is a
- * pre-existing tenant of the same market and remains on it (single Europe
- * market with country-level regions; sub-path locale routing rather than
- * per-domain). Spain was removed in 2026-05 — no longer a shipping
- * destination.
+ * Brief 01 / 07 §12 — Netherlands is the primary launch market, with
+ * Belgium, Luxembourg and Germany as the other shipping destinations.
+ * Single Europe market with country-level regions; sub-path locale
+ * routing rather than per-domain. Spain, France and Austria were
+ * removed in 2026-05 — no longer shipping destinations.
  *
  * Decision: one Shopify Market named "Europe" with multiple country regions
  * rather than per-country markets. Rationale:
@@ -39,16 +38,15 @@ import { fileURLToPath } from 'node:url';
 const API_VERSION = '2026-04';
 const MARKET_NAME = 'Europe';
 
-// Countries in the Europe market, in priority order. NL first (primary launch),
-// then secondary expansion (BE, LU, DE, FR), then incumbent (AT). The
-// script will only ADD missing entries — it never removes or re-orders.
+// Countries in the Europe market, in priority order. Policy 2026-05:
+// shipping is restricted to DE / NL / BE / LU — those are the only
+// regions on the market. The script will only ADD missing entries — it
+// never removes or re-orders.
 const EUROPE_COUNTRIES = [
   { code: 'NL', name: 'Netherlands',  vat: 0.21, shipping: 'PostNL',     priority: 'primary'   },
   { code: 'BE', name: 'Belgium',      vat: 0.21, shipping: 'bpost',      priority: 'secondary' },
   { code: 'LU', name: 'Luxembourg',   vat: 0.17, shipping: 'Post Luxembourg', priority: 'secondary' },
   { code: 'DE', name: 'Germany',      vat: 0.19, shipping: 'DHL',        priority: 'secondary' },
-  { code: 'FR', name: 'France',       vat: 0.20, shipping: 'La Poste',   priority: 'secondary' },
-  { code: 'AT', name: 'Austria',      vat: 0.20, shipping: 'Post.at',    priority: 'incumbent' },
 ];
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -98,7 +96,7 @@ const ENDPOINT = `https://${STORE}/admin/api/${API_VERSION}/graphql.json`;
 console.log(`→ configure-markets  store=${STORE_FLAG} (${STORE})  mode=${DRY_RUN ? 'DRY-RUN' : 'APPLY'}  api=${API_VERSION}`);
 console.log(`  primary launch     : NL (Netherlands)`);
 console.log(`  expansion targets  : BE, LU, DE, FR`);
-console.log(`  incumbent regions  : AT (kept — single-market model)`);
+console.log(`  shipping markets   : NL · BE · LU · DE`);
 if (DRY_RUN) {
   console.log('  (dry-run: no mutations will be sent. Re-run with --apply to write.)');
 }

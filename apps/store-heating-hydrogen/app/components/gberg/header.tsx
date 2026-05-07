@@ -15,6 +15,7 @@ import {
 } from './nav/mega-menu';
 import {MobileDrawer} from './nav/mobile-drawer';
 import {SearchOverlay} from './search/search-overlay';
+import LanguageSwitcher from './language-switcher';
 
 interface CartLike {
   totalQuantity?: number | null;
@@ -84,6 +85,7 @@ export function Header({locale, menu}: HeaderProps) {
 
         <div className="ml-auto flex items-center gap-5 text-[12px] uppercase tracking-[0.12em] font-semibold">
           <SearchOverlay locale={locale} />
+          <LanguageSwitcher locale={safeLocale} />
           <Link
             to={localeHref(locale, '/cart')}
             className="link-accent text-[var(--color-text)]"

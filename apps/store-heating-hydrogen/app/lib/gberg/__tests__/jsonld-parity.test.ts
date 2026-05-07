@@ -213,7 +213,7 @@ test('buildProductJsonLd: skipped metafields do not appear in additionalProperty
 
 test('buildProductJsonLd: Offer.priceCurrency is EUR (single Europe Market)', () => {
   // The single Shopify Market quotes in EUR for every locale we ship.
-  const localesToCheck = ['en', 'de', 'nl', 'fr', 'es', 'it', 'pl', 'da'];
+  const localesToCheck = ['en', 'de', 'nl', 'fr'];
   for (const locale of localesToCheck) {
     const p = fixtureProduct();
     // priceRange already comes back in EUR from the Storefront @inContext

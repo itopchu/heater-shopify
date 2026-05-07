@@ -20,11 +20,14 @@ import {
  * collection in this set has exactly 1 product, the loader 301-redirects
  * straight to that product's PDP. Hard-coded so a future temporary-OOS
  * state (a normally-multi-product collection drops to 1) doesn't quietly
- * redirect — only these two collections in our 55-product catalog are
- * intentionally single-product.
+ * redirect — only the collections listed below are intentionally
+ * single-product. `fussbodenheizung` is the homepage tile target and
+ * `fussbodenheizungsrohre` its child; both currently surface the same
+ * single PE-RT pipe SKU.
  */
 const SINGLE_PRODUCT_COLLECTIONS = new Set([
   'bad',
+  'fussbodenheizung',
   'fussbodenheizungsrohre',
 ]);
 
