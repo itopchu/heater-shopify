@@ -59,7 +59,10 @@ const LIMIT = (() => {
 })();
 const GEMINI_CAP = parseInt(process.env.GEMINI_CAP || '2000', 10);
 
-const TARGET_LOCALES = ['de', 'nl', 'fr', 'es', 'it', 'pl', 'da'];
+// Storefront supports en (primary) + de/nl/fr (2026-05 policy). Older
+// locales (es, it, pl, da) were retired with the DE/NL/BE/LU market
+// reduction; no need to spend Gemini quota translating into them.
+const TARGET_LOCALES = ['de', 'nl', 'fr'];
 
 // ---------------------------------------------------------------------------
 // cache
@@ -242,13 +245,19 @@ async function maybePromoteToEnglish(kind, id, tr) {
         { p: inp },
       );
     } else if (kind === 'PAGE') {
-      const inp = { id };
+      // PageUpdateInput does not accept an `id` field in 2026-04 (id is a
+      // separate top-level mutation argument). Build the input without it.
+      const inp = {};
       if (updates.title) inp.title = updates.title.en;
       if (updates.body_html) inp.body = updates.body_html.en;
-      await gql(
-        `mutation($p:PageUpdateInput!, $id:ID!){ pageUpdate(id:$id, page:$p){ userErrors{message} } }`,
-        { p: inp, id },
-      );
+      if (Object.keys(inp).length === 0) {
+        // Nothing to promote.
+      } else {
+        await gql(
+          `mutation($p:PageUpdateInput!, $id:ID!){ pageUpdate(id:$id, page:$p){ userErrors{message} } }`,
+          { p: inp, id },
+        );
+      }
     } else if (kind === 'SHOP_POLICY') {
       // Shop policies use a different mutation; need policy type.
       // Skip auto-promotion for policies — they were authored in EN already
