@@ -188,6 +188,7 @@
     "heating_electric": "Électrique",
     "material_steel": "Acier",
     "material_stainless_steel": "Acier inoxydable",
+    "material_plastic": "Plastique",
     "install_easy": "Facile",
     "install_medium": "Moyen",
     "install_hard": "Difficile",

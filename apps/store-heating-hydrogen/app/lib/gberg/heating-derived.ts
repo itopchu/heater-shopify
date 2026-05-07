@@ -45,6 +45,7 @@ export function localizeSpecValue(
   if (kind === 'material') {
     if (k === 'steel') return t('pdp.material_steel');
     if (k === 'stainless steel') return t('pdp.material_stainless_steel');
+    if (k === 'plastic' || k === 'kunststoff') return t('pdp.material_plastic');
   }
   if (kind === 'installation') {
     if (k === 'easy') return t('pdp.install_easy');

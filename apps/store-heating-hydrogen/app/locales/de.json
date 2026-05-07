@@ -188,6 +188,7 @@
     "heating_electric": "Elektrisch",
     "material_steel": "Stahl",
     "material_stainless_steel": "Edelstahl",
+    "material_plastic": "Kunststoff",
     "install_easy": "Einfach",
     "install_medium": "Mittel",
     "install_hard": "Schwer",
