@@ -6,7 +6,7 @@
  */
 
 import type {Locale} from './i18n';
-import {PHONE_DISPLAY, SUPPORT_EMAIL, SHIPPING_FLAT_RATE_EUR_PER_QTY} from './contact';
+import {PHONE_DISPLAY, SUPPORT_EMAIL} from './contact';
 
 export interface PageFallback {
   title: string;
@@ -82,10 +82,11 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
   shipping: {
     title: 'Shipping & Delivery',
     intro:
-      'We deliver to Spain, Germany and the Netherlands only. Shipping is paid — a flat rate per item.',
+      'We deliver to Germany and the Netherlands only. Shipping is included in the listed price for most products.',
     body: [
-      `Shipping cost: €${SHIPPING_FLAT_RATE_EUR_PER_QTY} per item, applied to every unit in the order. There is no free shipping threshold.`,
-      'Delivery countries: Spain, Germany, Netherlands. Addresses outside these three countries cannot be checked out at the moment.',
+      'For most products, shipping is included in the listed price — no additional charge at checkout.',
+      "Valve radiators (Ventilheizkörper) ship at standard DHL rates, calculated by weight and destination at checkout.",
+      'Delivery countries: Germany, Netherlands. Addresses outside these two countries cannot be checked out at the moment.',
       'Standard delivery: 3–7 business days after dispatch confirmation.',
       'Curbside delivery only — items above 30 kg or 1.5 m require two-person handling on-site (ask your installer).',
     ].join('\n\n'),
@@ -112,7 +113,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     title: 'Frequently asked questions',
     intro: 'Quick answers to the questions our engineers hear most often.',
     body: [
-      `Where do you ship? Spain, Germany and the Netherlands only. Shipping is €${SHIPPING_FLAT_RATE_EUR_PER_QTY} per item, no free threshold.`,
+      'Where do you ship? Germany and the Netherlands only. Shipping is included in the price for most products. Valve radiators (Ventilheizkörper) ship at standard DHL rates.',
       "Are your radiators heat-pump compatible? Many are. Look for the 'Heat-pump ready' badge on the product card.",
       'Can I install a radiator myself? Hydronic radiators must be commissioned by a certified heating engineer to keep the warranty. Electric radiators can be installed by a qualified electrician.',
       `What if the model I want is out of stock? Email ${SUPPORT_EMAIL} — most items return to stock within 4–6 weeks and we hold orders without payment until you confirm.`,

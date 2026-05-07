@@ -96,12 +96,27 @@ interface ScraperVariant {
   title: string;
   sku: string | null;
   price: string;
+  /** xxl-heizung's original price when a sale is running. Used to recover the
+   *  pre-discount value — G-Berg has no discounts, so we list the original. */
+  compare_at_price: string | null;
   option1: string | null;
   option2: string | null;
   option3: string | null;
   weight: number | null;
   weight_unit: string | null;
   available: boolean | null;
+}
+
+/**
+ * Pick the regular (non-discounted) price from an xxl variant.
+ * If xxl is running a promotion, `compare_at_price` holds the original
+ * higher value — return that. Otherwise fall back to `price`.
+ */
+function pickRegularPrice(price: string, compareAt: string | null | undefined): string {
+  const p = Number(price);
+  const c = compareAt != null ? Number(compareAt) : NaN;
+  if (Number.isFinite(c) && c > p) return compareAt as string;
+  return price;
 }
 
 interface ScraperSection {
@@ -388,7 +403,10 @@ function buildVariants(info: ScraperInfo): { variants: NormVariant[]; options: N
   const variants: NormVariant[] = rows.map((v) => {
     const out: NormVariant = {
       sku: v.sku && v.sku.trim() ? `GB-${v.sku.trim()}` : `GB-${info.id}-${v.id}`,
-      price: (v.price ?? '0').toString(),
+      // Policy 2026-05: G-Berg has no discount. When xxl-heizung is running a
+      // promotion, `price` is the sale price and `compare_at_price` is the
+      // original — we want the original higher value.
+      price: pickRegularPrice((v.price ?? '0').toString(), v.compare_at_price),
       available: true, // scraper data is always null; default to available
     };
     if (v.option1 != null) out.option1 = v.option1;
@@ -703,6 +721,7 @@ function normalizeScraperInfo(parsed: unknown, handle: string): ScraperInfo {
       title: typeof v.title === 'string' ? (v.title as string) : '',
       sku: typeof v.sku === 'string' ? (v.sku as string) : null,
       price: typeof v.price === 'string' ? (v.price as string) : '0',
+      compare_at_price: typeof v.compare_at_price === 'string' ? (v.compare_at_price as string) : null,
       option1: (v.option1 as string | null) ?? null,
       option2: (v.option2 as string | null) ?? null,
       option3: (v.option3 as string | null) ?? null,

@@ -3,13 +3,13 @@
  * Configures shipping zones + rates on the default delivery profile.
  *
  * 2026-05 update — business rule change:
- *   - Allowed shipping countries: Spain, Germany, Netherlands ONLY.
+ *   - Allowed shipping countries: Germany, Netherlands ONLY.
  *     (Belgium and Austria removed — checkout must reject those addresses.)
  *   - Shipping cost: FLAT €20 PER ITEM (per-quantity, applied to every
  *     unit in the order). No free-shipping threshold of any kind.
  *
  * Implementation:
- *   - One zone per allowed country (DE / NL / ES) on the default profile.
+ *   - One zone per allowed country (DE / NL) on the default profile.
  *   - Per-zone rate uses Shopify's `weightConditions` / `priceConditions`
  *     model — but Shopify's standard delivery profile does not natively
  *     express "€20 × quantity". The cleanest representation in Shopify
@@ -38,7 +38,6 @@ const FLAT_RATE_PER_ITEM_EUR = 20;
 // Single source of truth for allowed shipping destinations.
 const COUNTRIES = [
   { code: 'DE', name: 'Germany',     zoneName: 'Germany · DHL' },
-  { code: 'ES', name: 'Spain',       zoneName: 'Spain · Correos' },
   { code: 'NL', name: 'Netherlands', zoneName: 'Netherlands · PostNL' },
 ];
 
@@ -52,6 +51,7 @@ const DISALLOWED_LEGACY_ZONE_NAMES = new Set([
   'Poland · InPost',
   'Denmark · PostNord',
   'Luxembourg · Post.lu',
+  'Spain · Correos',
 ]);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -203,7 +203,7 @@ async function addZonesToProfile(profile, countriesToAdd) {
 }
 
 function collectDefaultZoneIds(profile) {
-  // Delete every zone that isn't one of our managed (DE/ES/NL) zones.
+  // Delete every zone that isn't one of our managed (DE/NL) zones.
   // Region overlap (e.g. an existing "EU" zone that contains NL) breaks
   // `zonesToCreate` with "Region 'NL' already exists in another zone".
   // Wholesale clearing forces a clean slate so the three managed zones
@@ -240,7 +240,7 @@ async function main() {
     console.log(`  skip  ${c.zoneName} (already exists)`);
   }
   if (toDelete.length > 0) {
-    console.log(`  removing default zones (Domestic / International) and legacy disallowed zones so checkout enforces ES/DE/NL only`);
+    console.log(`  removing default zones (Domestic / International) and legacy disallowed zones so checkout enforces DE/NL only`);
     await deleteZones(profile.id, toDelete);
     console.log(`  ✓ deleted ${toDelete.length} zone(s)`);
   }

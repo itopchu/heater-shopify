@@ -39,6 +39,18 @@ function deriveSku(xxl: XxlProduct, variantId: number, upstreamSku: string | nul
   return `GB-${xxl.id}-${variantId}`;
 }
 
+/**
+ * Pick the regular (non-discounted) price from an xxl variant.
+ * If xxl is running a promotion, `compare_at_price` holds the original
+ * higher value — return that. Otherwise fall back to `price`.
+ */
+function pickRegularPrice(price: string, compareAt: string | null | undefined): string {
+  const p = Number(price);
+  const c = compareAt ? Number(compareAt) : NaN;
+  if (Number.isFinite(c) && c > p) return compareAt as string;
+  return price;
+}
+
 export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedProduct {
   const handle = deriveHandle(xxl.handle, opts.existingHandles);
   const tags = Array.from(new Set([...(xxl.tags || []), 'synced:xxl']));
@@ -46,7 +58,11 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
   const variants = (xxl.variants || []).map((v) => {
     const out: NormalizedProduct['variants'][number] = {
       sku: deriveSku(xxl, v.id, v.sku),
-      price: v.price,
+      // Policy 2026-05: G-Berg has no discount. When xxl-heizung is running a
+      // promotion, `price` is the sale price and `compare_at_price` is the
+      // original — we want the original. Pick whichever is higher; fall back
+      // to `price` when no compare-at is set.
+      price: pickRegularPrice(v.price, v.compare_at_price),
       available: v.available !== false,
     };
     if (v.option1 != null) out.option1 = v.option1;

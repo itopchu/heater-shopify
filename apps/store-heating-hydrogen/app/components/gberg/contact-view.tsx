@@ -51,7 +51,6 @@ export function ContactView() {
         <ContactCard
           label={t('contact.channel_phone_label')}
           value={phone}
-          hint={t('contact.channel_phone_hint')}
           href={phoneHref}
         />
         <ContactCard
@@ -124,7 +123,7 @@ export function ContactView() {
 interface ContactCardProps {
   label: string;
   value: string;
-  hint: string;
+  hint?: string;
   href: string;
   external?: boolean;
 }
@@ -153,9 +152,11 @@ function ContactCard({label, value, hint, href, external}: ContactCardProps) {
           <span className="mt-1 break-words text-[17px] font-semibold leading-snug text-white md:mt-2 md:font-medium md:text-[var(--color-text)] md:transition-colors md:group-hover:text-[var(--color-primary)]">
             {value}
           </span>
-          <span className="mt-1 text-[13px] leading-snug text-white/75 md:mt-2 md:text-[var(--color-text-muted)]">
-            {hint}
-          </span>
+          {hint ? (
+            <span className="mt-1 text-[13px] leading-snug text-white/75 md:mt-2 md:text-[var(--color-text-muted)]">
+              {hint}
+            </span>
+          ) : null}
         </div>
         <span
           aria-hidden

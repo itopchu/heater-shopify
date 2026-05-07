@@ -5,10 +5,9 @@
  * contact page, WhatsApp bubble, structured data, page fallbacks, legal
  * page templates, prod scripts) picks up the new value.
  *
- * SHIPPING_FLAT_RATE_EUR_PER_QTY is the single source of truth for the
- * paid-shipping rate displayed in storefront copy. Real Shopify checkout
- * cost is configured server-side via `agent/scripts/configure-shipping.mjs`
- * — keep the two in sync.
+ * SHIPPING_COUNTRIES_ISO lists the destinations where checkout is enabled.
+ * Real Shopify checkout cost is configured server-side via
+ * `agent/scripts/configure-shipping.mjs` — keep the two in sync.
  */
 
 export const PHONE_DISPLAY = '+49 172 608 88 48';
@@ -35,5 +34,6 @@ export function whatsappHref(message: string = WHATSAPP_MESSAGE_GENERIC): string
 
 // Shipping rule (storefront copy only; checkout cost is set in Shopify Admin
 // via configure-shipping.mjs — keep these aligned).
-export const SHIPPING_FLAT_RATE_EUR_PER_QTY = 20;
-export const SHIPPING_COUNTRIES_ISO = ['ES', 'DE', 'NL'] as const;
+// Policy 2026-05: shipping is included in the listed price for most products;
+// only valve radiators (Ventilheizkörper) ship at standard DHL rates.
+export const SHIPPING_COUNTRIES_ISO = ['DE', 'NL'] as const;
