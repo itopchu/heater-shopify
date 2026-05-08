@@ -163,8 +163,8 @@ function getMf(product, namespace, key) {
 // Stage A: specs.connection_type backfill
 // ────────────────────────────────────────────────────────────────────
 
-function parseConnectionType(title, handle) {
-  const t = `${title} ${handle}`.toLowerCase();
+function parseConnectionType(...sources) {
+  const t = sources.filter(Boolean).join(' ').toLowerCase();
   if (
     /mittel-?\s?und-?\s?seitenanschluss/.test(t) ||
     /mittel-?\s?oder-?\s?seitenanschluss/.test(t) ||
@@ -181,12 +181,16 @@ function parseConnectionType(title, handle) {
   return null;
 }
 
-async function stageA(products, report) {
+async function stageA(products, catalog, report) {
   console.log('━━ Stage A: specs.connection_type ━━');
   const writes = [];
   for (const p of products) {
     const current = getMf(p, 'specs', 'connection_type');
-    const parsed = parseConnectionType(p.title, p.handle);
+    const cat = catalog.get(p.handle);
+    // Pull every text source we have so e.g. catalog titleDe ("Astoria
+    // Seitenanschluss …") still resolves even when the prod title was
+    // already rewritten to a colour-only English form.
+    const parsed = parseConnectionType(p.title, p.handle, cat?.titleDe, cat?.titleEn);
     const card = report.get(p.handle);
     if (parsed == null) {
       card.connection = current ? `${current} ✓` : '— (no signal)';
@@ -765,7 +769,7 @@ console.log('');
 const report = new Map();
 for (const p of products) report.set(p.handle, {});
 
-if (STAGES.has('A')) await stageA(products, report);
+if (STAGES.has('A')) await stageA(products, catalog, report);
 if (STAGES.has('B')) await stageB(products, report);
 if (STAGES.has('C')) await stageC(products, report);
 if (STAGES.has('D')) await stageD(products, catalog, report);
