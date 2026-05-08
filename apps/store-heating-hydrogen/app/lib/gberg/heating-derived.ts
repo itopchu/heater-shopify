@@ -33,8 +33,8 @@ export function localizeSpecValue(
   const k = raw.trim().toLowerCase();
   // Direct lookups for well-known categorical values.
   if (kind === 'color') {
-    if (k === 'white') return t('pdp.color_white');
-    if (k === 'black') return t('pdp.color_black');
+    if (k === 'white' || k === 'weiss' || k === 'weiß') return t('pdp.color_white');
+    if (k === 'black' || k === 'schwarz') return t('pdp.color_black');
     if (k === 'anthracite' || k === 'anthrazit') return t('pdp.color_anthracite');
     if (k === 'chrome' || k === 'chrom') return t('pdp.color_chrome');
   }

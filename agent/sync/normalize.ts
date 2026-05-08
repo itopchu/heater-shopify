@@ -134,7 +134,11 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
   const ralColor = sanitizeShortText(parsedSpecs?.color);
   const connType = sanitizeShortText(parsedSpecs?.connection_options);
   if (ralColor) customMetafields.push({ namespace: 'custom', key: 'ral_color', type: 'single_line_text_field', value: ralColor });
-  if (connType) customMetafields.push({ namespace: 'custom', key: 'connection_type', type: 'single_line_text_field', value: connType });
+  // Storefront reads `specs.connection_type` (heating-derived.ts /
+  // buildStructuredSpecRows). Earlier syncs wrote to `custom.connection_type`,
+  // which the PDP never renders — that's why the spec-table connection row
+  // was 100% empty before the 2026-05-08 catalog-wide sweep. Use `specs`.
+  if (connType) customMetafields.push({ namespace: 'specs', key: 'connection_type', type: 'single_line_text_field', value: connType });
   // First parsed dimension's width/height/wattage become the filterable scalars.
   const firstDim = dimensions[0];
   // Sprint 3 width fallback: when the structured variant parser found no width

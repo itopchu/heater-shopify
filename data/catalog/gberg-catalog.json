@@ -8395,13 +8395,13 @@
           "namespace": "custom",
           "key": "subtitle",
           "type": "single_line_text_field",
-          "value": "Design Handtuchheizkörper Badheizkörper Mittelanschluss in Schwarz Entdecken"
+          "value": "Design Handtuchheizkörper Badheizkörper Mittelanschluss in Anthrazit Entdecken"
         },
         {
           "namespace": "custom",
           "key": "short_description",
           "type": "multi_line_text_field",
-          "value": "Design Handtuchheizkörper Badheizkörper Mittelanschluss in Schwarz Entdecken Sie Twister, den stilvollen Badheizkörper mit Mittelanschluss, der Ihr Badezimmer in eine Oase der Wärme und des Designs verwandelt. Twister besticht durch sein…"
+          "value": "Design Handtuchheizkörper Badheizkörper Mittelanschluss in Anthrazit Entdecken Sie Twister, den stilvollen Badheizkörper mit Mittelanschluss, der Ihr Badezimmer in eine Oase der Wärme und des Designs verwandelt. Twister besticht durch sein…"
         },
         {
           "namespace": "seo",
@@ -8419,7 +8419,7 @@
           "namespace": "specs",
           "key": "color",
           "type": "single_line_text_field",
-          "value": "schwarz"
+          "value": "anthrazit"
         },
         {
           "namespace": "specs",
@@ -8431,7 +8431,7 @@
           "namespace": "filters",
           "key": "color_family",
           "type": "single_line_text_field",
-          "value": "black"
+          "value": "anthracite"
         },
         {
           "namespace": "filters",
@@ -8562,13 +8562,13 @@
           "namespace": "custom",
           "key": "subtitle",
           "type": "single_line_text_field",
-          "value": "Design Handtuchheizkörper Badheizkörper Mittelanschluss in Anthrazit Entdecken"
+          "value": "Design Handtuchheizkörper Badheizkörper Mittelanschluss in Schwarz Entdecken"
         },
         {
           "namespace": "custom",
           "key": "short_description",
           "type": "multi_line_text_field",
-          "value": "Design Handtuchheizkörper Badheizkörper Mittelanschluss in Anthrazit Entdecken Sie Twister, den stilvollen Badheizkörper mit Mittelanschluss, der Ihr Badezimmer in eine Oase der Wärme und des Designs verwandelt. Twister besticht durch sein…"
+          "value": "Design Handtuchheizkörper Badheizkörper Mittelanschluss in Schwarz Entdecken Sie Twister, den stilvollen Badheizkörper mit Mittelanschluss, der Ihr Badezimmer in eine Oase der Wärme und des Designs verwandelt. Twister besticht durch sein…"
         },
         {
           "namespace": "seo",
@@ -8586,7 +8586,7 @@
           "namespace": "specs",
           "key": "color",
           "type": "single_line_text_field",
-          "value": "anthrazit"
+          "value": "schwarz"
         },
         {
           "namespace": "specs",
@@ -8598,7 +8598,7 @@
           "namespace": "filters",
           "key": "color_family",
           "type": "single_line_text_field",
-          "value": "anthracite"
+          "value": "black"
         },
         {
           "namespace": "filters",
