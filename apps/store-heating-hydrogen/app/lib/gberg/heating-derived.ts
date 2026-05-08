@@ -54,7 +54,7 @@ export function localizeSpecValue(
   }
   if (kind === 'connection') {
     // Both German and English source tokens land in this field; normalise
-    // to one of three buckets and let the locale dictionary handle display.
+    // to one of four buckets and let the locale dictionary handle display.
     if (k === 'mid_or_side' || k.includes('mittel-und-seiten') || k.includes('mittel und seiten') || k.includes('mittel oder seiten')) {
       return t('pdp.connection_either');
     }
@@ -63,6 +63,9 @@ export function localizeSpecValue(
     }
     if (k === 'side' || k.includes('seiten') || k.includes('seitlich') || k.includes('rechts oder links')) {
       return t('pdp.connection_side');
+    }
+    if (k === 'plug_in' || k === 'plug-in' || k === 'plugin' || k.includes('steckdose')) {
+      return t('pdp.connection_plug_in');
     }
   }
   if (kind === 'boolean_yes') return t('pdp.value_yes');

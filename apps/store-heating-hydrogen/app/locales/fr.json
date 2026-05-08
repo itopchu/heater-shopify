@@ -195,6 +195,7 @@
     "connection_center": "Raccordement central",
     "connection_side": "Raccordement latéral",
     "connection_either": "Central ou latéral",
+    "connection_plug_in": "Plug-In",
     "review_aria": "Noté {rating} sur 5 par {count} clients",
     "section_reviews_eyebrow": "Avis clients",
     "section_reviews_title": "Ce que disent les clients",

@@ -56,6 +56,9 @@ const CONNECTION_PHRASE = {
   mid:         {en: 'Center Connection', de: 'Mittelanschluss', nl: 'Middenaansluiting', fr: 'Raccordement central'},
   side:        {en: 'Side Connection',   de: 'Seitenanschluss', nl: 'Zijaansluiting',    fr: 'Raccordement latéral'},
   mid_or_side: {en: 'Center & Side Connection', de: 'Mittel- & Seitenanschluss', nl: 'Midden- & Zijaansluiting', fr: 'Raccordement central & latéral'},
+  // Standalone electric models with no pipe connection — "Plug-In" is the
+  // industry loanword used identically in all four target locales.
+  plug_in:     {en: 'Plug-In', de: 'Plug-In', nl: 'Plug-In', fr: 'Plug-In'},
 };
 
 // Colour tokens used to find the comma-position where the connection
@@ -68,7 +71,7 @@ const COLOUR_RE = {
 };
 
 // Detect whether a title already contains a connection phrase for any locale.
-const ALREADY_HAS = /center connection|side connection|center & side connection|mittelanschluss|seitenanschluss|mittel-? ?(?:und|oder|&) ?seiten|middenaansluiting|zijaansluiting|midden-? ?(?:of|en|&) ?zij|raccordement central|raccordement lat[ée]ral/i;
+const ALREADY_HAS = /center connection|side connection|center & side connection|plug-in|mittelanschluss|seitenanschluss|mittel-? ?(?:und|oder|&) ?seiten|middenaansluiting|zijaansluiting|midden-? ?(?:of|en|&) ?zij|raccordement central|raccordement lat[ée]ral/i;
 
 function injectIntoTitle(title, locale, phrase) {
   if (!title) return null;
