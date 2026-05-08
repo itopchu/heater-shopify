@@ -52,6 +52,19 @@ export function localizeSpecValue(
     if (k === 'medium') return t('pdp.install_medium');
     if (k === 'hard') return t('pdp.install_hard');
   }
+  if (kind === 'connection') {
+    // Both German and English source tokens land in this field; normalise
+    // to one of three buckets and let the locale dictionary handle display.
+    if (k === 'mid_or_side' || k.includes('mittel-und-seiten') || k.includes('mittel und seiten') || k.includes('mittel oder seiten')) {
+      return t('pdp.connection_either');
+    }
+    if (k === 'mid' || k === 'center' || k === 'centre' || k.includes('mittel')) {
+      return t('pdp.connection_center');
+    }
+    if (k === 'side' || k.includes('seiten') || k.includes('seitlich') || k.includes('rechts oder links')) {
+      return t('pdp.connection_side');
+    }
+  }
   if (kind === 'boolean_yes') return t('pdp.value_yes');
   if (kind === 'boolean_included') return t('pdp.value_included');
   // Fallback: title-case the source word so display stays clean.
@@ -64,6 +77,7 @@ export function localizeSpecValue(
 
 const KNOWN_SERIES = [
   'ASTORIA',
+  'ATLAS',
   'ELANOR',
   'FLORA',
   'PULLMAN',
@@ -271,7 +285,7 @@ export function buildStructuredSpecRows(
     rows.push({
       kind: 'connection',
       label: t('pdp.fact_connection'),
-      value: titleCase(p.specs.connection_type),
+      value: localizeSpecValue('connection', p.specs.connection_type, t),
     });
   }
 
@@ -608,6 +622,6 @@ export function fallbackKeyFacts(p: HeatingProduct, t: TFunction): AiKeyFact[] |
   if (p.specs.color)
     out.push({label: t('pdp.fact_color'), value: localizeSpecValue('color', p.specs.color, t)});
   if (p.specs.connection_type)
-    out.push({label: t('pdp.fact_connection'), value: titleCase(p.specs.connection_type)});
+    out.push({label: t('pdp.fact_connection'), value: localizeSpecValue('connection', p.specs.connection_type, t)});
   return out.length > 0 ? out : null;
 }
