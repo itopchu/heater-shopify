@@ -49,6 +49,7 @@ import {
   findSiblingColors,
   galleryImages,
   isFaqShapedSection,
+  localizeSpecValue,
   pickSections,
   resolveSeriesLabel,
 } from '~/lib/gberg/heating-derived';
@@ -471,11 +472,11 @@ function buildSpecRows(p: HeatingProduct, t: TFunction): SpecRow[] {
   if (p.specs.orientation)
     rows.push({label: t('pdp.spec_label_orientation'), value: p.specs.orientation});
   if (p.specs.connection_type)
-    rows.push({label: t('pdp.spec_label_connection_type'), value: p.specs.connection_type});
+    rows.push({label: t('pdp.spec_label_connection_type'), value: localizeSpecValue('connection', p.specs.connection_type, t)});
   if (p.specs.pipe_spacing_mm != null)
     rows.push({label: t('pdp.spec_label_pipe_spacing'), value: p.specs.pipe_spacing_mm, unit: 'mm'});
   if (p.specs.heating_medium)
-    rows.push({label: t('pdp.spec_label_heating_medium'), value: p.specs.heating_medium});
+    rows.push({label: t('pdp.spec_label_heating_medium'), value: localizeSpecValue('heating', p.specs.heating_medium, t)});
   if (p.specs.heat_output_75_65_20 != null)
     rows.push({label: t('pdp.spec_label_heat_output_75'), value: p.specs.heat_output_75_65_20, unit: 'W'});
   if (p.specs.heat_output_70_55_20 != null)
@@ -483,11 +484,11 @@ function buildSpecRows(p: HeatingProduct, t: TFunction): SpecRow[] {
   if (p.specs.heat_output_55_45_20 != null)
     rows.push({label: t('pdp.spec_label_heat_output_55'), value: p.specs.heat_output_55_45_20, unit: 'W'});
   if (p.specs.color)
-    rows.push({label: t('pdp.spec_label_color'), value: p.specs.color});
+    rows.push({label: t('pdp.spec_label_color'), value: localizeSpecValue('color', p.specs.color, t)});
   if (p.specs.finish)
     rows.push({label: t('pdp.spec_label_finish'), value: p.specs.finish});
   if (p.specs.material)
-    rows.push({label: t('pdp.spec_label_material'), value: p.specs.material});
+    rows.push({label: t('pdp.spec_label_material'), value: localizeSpecValue('material', p.specs.material, t)});
   if (p.specs.voltage)
     rows.push({label: t('pdp.spec_label_voltage'), value: p.specs.voltage});
   if (p.specs.heat_pump_compatible != null)

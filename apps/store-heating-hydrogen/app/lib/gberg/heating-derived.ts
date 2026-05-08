@@ -382,7 +382,14 @@ export function buildQuickFacts(
   return out.slice(0, 6);
 }
 
-function prettyProductType(value: string): string {
+function prettyProductType(value: string, t?: TFunction): string {
+  // When a t() function is provided, return the localised label from the
+  // shared `plp.product_type_*` keys. Without t (legacy callers), fall
+  // back to the English source so we never break older render paths.
+  if (t) {
+    const localised = t(`plp.product_type_${value}`);
+    if (localised && !localised.startsWith('plp.product_type_')) return localised;
+  }
   switch (value) {
     case 'radiator':
       return 'Radiator';
@@ -399,7 +406,8 @@ function prettyProductType(value: string): string {
   }
 }
 
-function prettyHeatingMedium(value: string): string {
+function prettyHeatingMedium(value: string, t?: TFunction): string {
+  if (t) return localizeSpecValue('heating', value, t);
   switch (value) {
     case 'hydronic':
       return 'Hydronic';
@@ -612,7 +620,7 @@ export function findSiblingColors(
 export function fallbackKeyFacts(p: HeatingProduct, t: TFunction): AiKeyFact[] | null {
   const out: AiKeyFact[] = [];
   if (p.filters.product_type) {
-    out.push({label: t('pdp.fact_type'), value: prettyProductType(p.filters.product_type)});
+    out.push({label: t('pdp.fact_type'), value: prettyProductType(p.filters.product_type, t)});
   }
   if (p.specs.heating_medium) {
     out.push({
