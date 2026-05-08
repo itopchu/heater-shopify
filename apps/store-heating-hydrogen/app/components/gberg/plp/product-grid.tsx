@@ -22,9 +22,12 @@ export function ProductGrid({products, locale, emptyMessage}: ProductGridProps) 
   }
   return (
     <ul className="product-grid">
-      {products.map((p) => (
+      {products.map((p, i) => (
         <li key={p.id}>
-          <ProductCard product={p} locale={locale} />
+          {/* First 2 cards are above-the-fold on mobile (≤2 per row).
+              Mark them priority so the LCP image isn't deprioritised by
+              the default lazy-loading on the rest of the grid. */}
+          <ProductCard product={p} locale={locale} priority={i < 2} />
         </li>
       ))}
     </ul>

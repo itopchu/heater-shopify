@@ -133,7 +133,10 @@ export function Gallery({images, alt, className}: GalleryProps) {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   {showOverflowChip ? (
-                    <span className="absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-semibold text-white">
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-semibold text-white"
+                    >
                       {t('pdp.gallery_view_more_label', {count: overflowCount})}
                     </span>
                   ) : null}

@@ -449,7 +449,7 @@ function NeedHelpBlock() {
             href={wa}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-sm border border-[#25D366] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#1f9e51] hover:bg-[#25D366] hover:text-white"
+            className="inline-flex items-center gap-1.5 rounded-sm border border-[#0F7A34] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0F7A34] hover:bg-[#0F7A34] hover:text-white"
           >
             WhatsApp
           </a>

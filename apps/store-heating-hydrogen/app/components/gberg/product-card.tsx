@@ -34,6 +34,12 @@ import {
 export interface ProductCardProps {
   product: HeatingProduct;
   locale: string;
+  /**
+   * When true, the primary image is fetched eagerly with high priority.
+   * Set on the first 2 cards in a PLP grid so the LCP image isn't
+   * deprioritised by the default `loading="lazy"`.
+   */
+  priority?: boolean;
 }
 
 /**
@@ -94,7 +100,7 @@ function ColorSwatchRow({product}: {product: HeatingProduct}) {
   );
 }
 
-export function ProductCard({product, locale}: ProductCardProps) {
+export function ProductCard({product, locale, priority = false}: ProductCardProps) {
   const t = useT();
   const intl = formatLocaleFromRoute(locale);
   const allImages = galleryImages(product);
@@ -151,7 +157,8 @@ export function ProductCard({product, locale}: ProductCardProps) {
                 incrementSize: 200,
                 placeholderWidth: 100,
               }}
-              loading="lazy"
+              loading={priority ? 'eager' : 'lazy'}
+              fetchPriority={priority ? 'high' : 'auto'}
               className="card-img absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
             {secondary ? (
