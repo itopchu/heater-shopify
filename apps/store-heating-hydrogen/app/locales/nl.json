@@ -17,6 +17,13 @@
     "error_generic": "Er ging iets mis.",
     "unknown_error": "Onbekende fout"
   },
+  "badge": {
+    "bestseller": "Bestseller",
+    "electric": "Elektrisch",
+    "new": "Nieuw",
+    "sale": "Sale",
+    "eco": "Eco"
+  },
   "header": {
     "home": "Home",
     "cart": "Winkelmand",

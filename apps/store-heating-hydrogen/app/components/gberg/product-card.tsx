@@ -195,7 +195,7 @@ export function ProductCard({product, locale, priority = false}: ProductCardProp
           <div className="absolute left-3 top-3 flex flex-wrap gap-1">
             {otherBadges.slice(0, 2).map((b) => (
               <BadgePill key={b} tone={badgeTone(b)}>
-                {badgeLabel(b)}
+                {badgeLabel(b, t)}
               </BadgePill>
             ))}
           </div>

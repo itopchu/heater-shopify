@@ -106,7 +106,7 @@ export const meta: Route.MetaFunction = ({
   // product/locale/sections data the React component renders, so the
   // visible-content parity rule holds.
   const locale = data?.locale ?? 'en';
-  const crumbs = buildBreadcrumb(product, locale);
+  const crumbs = buildBreadcrumb(product, locale, tFor(locale));
   const breadcrumbLd = buildBreadcrumbJsonLd(crumbs);
   const productLd = buildProductJsonLd(product, location.pathname);
   // FAQ JSON-LD mirrors the visible <FaqAccordion> — same Q/A, same order.
@@ -172,7 +172,7 @@ export default function ProductPage() {
   const {locale, product, related, siblings, reviews} = useLoaderData<typeof loader>();
   const reviewsAggregate = reviews?.aggregate ?? null;
   const t = useT();
-  const crumbs = buildBreadcrumb(product, locale);
+  const crumbs = buildBreadcrumb(product, locale, t);
 
   const intl = formatLocaleFromRoute(locale);
   const initialVariant = product.variants[0] ?? null;
@@ -247,7 +247,7 @@ export default function ProductPage() {
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {badges.map((b) => (
                   <BadgePill key={b} tone={badgeTone(b)}>
-                    {badgeLabel(b)}
+                    {badgeLabel(b, t)}
                   </BadgePill>
                 ))}
               </div>
@@ -573,17 +573,19 @@ function DescriptionSection({product}: {product: HeatingProduct}) {
       value: `${product.specs.heat_output_75_65_20} W (75/65/20°C)`,
     });
   }
-  if (product.specs.color) facts.push({label: t('pdp.fact_color'), value: product.specs.color});
+  if (product.specs.color) {
+    facts.push({label: t('pdp.fact_color'), value: localizeSpecValue('color', product.specs.color, t)});
+  }
   if (product.specs.connection_type) {
-    facts.push({label: t('pdp.fact_connection'), value: product.specs.connection_type});
+    facts.push({
+      label: t('pdp.fact_connection'),
+      value: localizeSpecValue('connection', product.specs.connection_type, t),
+    });
   }
   if (product.specs.heating_medium) {
     facts.push({
       label: t('pdp.fact_heating_medium'),
-      value:
-        product.specs.heating_medium === 'electric'
-          ? t('plp.heating_medium_electric')
-          : t('plp.heating_medium_hydronic'),
+      value: localizeSpecValue('heating', product.specs.heating_medium, t),
     });
   }
   if (product.specs.heat_pump_compatible) {

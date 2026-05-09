@@ -17,6 +17,13 @@
     "error_generic": "Etwas ist schiefgelaufen.",
     "unknown_error": "Unbekannter Fehler"
   },
+  "badge": {
+    "bestseller": "Bestseller",
+    "electric": "Elektrisch",
+    "new": "Neu",
+    "sale": "Sale",
+    "eco": "Öko"
+  },
   "header": {
     "home": "Startseite",
     "cart": "Warenkorb",

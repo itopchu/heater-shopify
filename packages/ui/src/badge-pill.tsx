@@ -39,9 +39,20 @@ export function badgeTone(label: string): BadgeTone {
   return "neutral";
 }
 
-/** Pretty label for built-in badges. Unknown labels pass through unchanged. */
-export function badgeLabel(label: string): string {
+/**
+ * Pretty label for built-in badges. When a `t()` function is provided,
+ * the label is resolved via `badge.<key>` in the locale dictionary so
+ * the pill stays in the active language. Without `t`, we fall back to
+ * the English source so legacy callers don't break — but every PDP /
+ * PLP call site should pass `t` to get localized output.
+ */
+export function badgeLabel(label: string, t?: (key: string) => string): string {
   const k = label.trim().toLowerCase();
+  if (t && KNOWN_TONES.has(k)) {
+    const localized = t(`badge.${k}`);
+    // tFor returns the key itself when missing — fall back to EN in that case.
+    if (localized && localized !== `badge.${k}`) return localized;
+  }
   switch (k) {
     case "bestseller":
       return "Bestseller";

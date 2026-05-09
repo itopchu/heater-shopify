@@ -17,6 +17,13 @@
     "error_generic": "Something went wrong.",
     "unknown_error": "Unknown error"
   },
+  "badge": {
+    "bestseller": "Bestseller",
+    "electric": "Electric",
+    "new": "New",
+    "sale": "Sale",
+    "eco": "Eco"
+  },
   "header": {
     "home": "Home",
     "cart": "Cart",

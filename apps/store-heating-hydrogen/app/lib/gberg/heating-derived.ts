@@ -496,22 +496,6 @@ export function galleryImages(p: HeatingProduct): ImageType[] {
  * `product-catalog/products/*.json#breadcrumb[]`. The keys are the
  * Shopify collection handles we ship.
  */
-// Source code is English-only. Shopify Translate & Adapt handles any
-// non-English rendering at the platform layer.
-const COLLECTION_LABELS: Record<string, string> = {
-  'bathroom-radiators': 'Bathroom radiators',
-  'electric-bathroom-radiators': 'Electric bathroom radiators',
-  'living-room-radiators': 'Living-room radiators',
-  'replacement-radiators': 'Replacement radiators',
-  accessories: 'Accessories',
-  // Legacy German handles — kept for any cached/external links that hit
-  // the storefront before the Shopify-side 301 redirects fire.
-  badheizkorper: 'Bathroom radiators',
-  bad: 'Bathroom',
-  zubehor: 'Accessories',
-  fussbodenheizungsrohre: 'Underfloor heating',
-};
-
 export interface BreadcrumbCrumb {
   label: string;
   href?: string;
@@ -536,10 +520,8 @@ export interface BreadcrumbCrumb {
 export function buildBreadcrumb(
   product: HeatingProduct,
   locale: string,
+  t: TFunction,
 ): BreadcrumbCrumb[] {
-  const labels = COLLECTION_LABELS;
-  const home = 'Home';
-
   const override = product.common.seo?.breadcrumb_override;
   if (override && override.length > 0) {
     // Merchant override is plain strings; only the last is the page label,
@@ -550,17 +532,17 @@ export function buildBreadcrumb(
     }));
   }
 
-  const collectionHandle = product.collectionHandles?.[0];
-  const crumbs: BreadcrumbCrumb[] = [{label: home, href: `/${locale}`}];
-  if (collectionHandle && labels[collectionHandle]) {
+  const crumbs: BreadcrumbCrumb[] = [
+    {label: t('header.home'), href: `/${locale}`},
+  ];
+  // Use the locale-resolved collection title from the Storefront API
+  // (@inContext returns it translated). The earlier hard-coded
+  // COLLECTION_LABELS map served only English regardless of locale.
+  const collection = product.collections?.[0];
+  if (collection) {
     crumbs.push({
-      label: labels[collectionHandle]!,
-      href: `/${locale}/collections/${collectionHandle}`,
-    });
-  } else if (collectionHandle) {
-    crumbs.push({
-      label: collectionHandle.replace(/-/g, ' '),
-      href: `/${locale}/collections/${collectionHandle}`,
+      label: collection.title,
+      href: `/${locale}/collections/${collection.handle}`,
     });
   }
   crumbs.push({label: product.title});

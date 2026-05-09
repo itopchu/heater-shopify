@@ -204,6 +204,8 @@ export function parseHeatingProduct(raw: ShopifyProductRaw): HeatingProduct {
     editorial: parseHeatingEditorial(idx),
     warranty: parseHeatingWarranty(idx),
     collectionHandles: raw.collections?.nodes.map((c) => c.handle) ?? [],
+    collections:
+      raw.collections?.nodes.map((c) => ({handle: c.handle, title: c.title})) ?? [],
   };
 }
 

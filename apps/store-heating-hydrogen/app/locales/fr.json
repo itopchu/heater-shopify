@@ -17,6 +17,13 @@
     "error_generic": "Une erreur est survenue.",
     "unknown_error": "Erreur inconnue"
   },
+  "badge": {
+    "bestseller": "Meilleure vente",
+    "electric": "Électrique",
+    "new": "Nouveau",
+    "sale": "Soldes",
+    "eco": "Éco"
+  },
   "header": {
     "home": "Accueil",
     "cart": "Panier",

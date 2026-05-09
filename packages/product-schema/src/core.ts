@@ -278,6 +278,13 @@ export interface ProductBase {
   common: CommonProductMetafields;
   /** Collection memberships, used for "related products" rails on PDP. */
   collectionHandles: string[];
+  /**
+   * Same memberships as `collectionHandles` but with the locale-resolved
+   * collection title preserved (Storefront API returns the translated
+   * title under @inContext). The breadcrumb and any "back to category"
+   * surface should read from here so they stay in the active locale.
+   */
+  collections: Array<{handle: string; title: string}>;
 }
 
 /* ------------------------------------------------------------------ */
