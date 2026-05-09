@@ -49,6 +49,7 @@ desktop.ini
 # Customer data (never commit)
 data/**/*customers*.csv
 data/**/*orders*.csv
+data/translations/
 
 # Catalog sync pipeline artifacts
 .sync-cache/
@@ -77,3 +78,16 @@ agent/scripts/3d-shootout.mjs
 # Claude harness state
 .claude/
 .vercel
+
+# Internal planning / audit / scratch — private dev info, not for repo
+docs/
+.notes/
+*.local.md
+*-private.md
+
+# Translation cache (regenerable from agent/scripts/prod-translate-content.mjs)
+.translation-cache/
+
+# Unlighthouse / Pa11y output
+.unlighthouse-reports/
+pa11y-results.json
