@@ -307,6 +307,12 @@ const METAFIELD_SKIP_KEYS = new Set([
   'copy_status',
   'primary_pdf_url',
   'badge',
+  // `badges` is a list of stable English enum tags (electric, bestseller,
+  // sale, …) that the storefront localizes via the `badge.*` keys in the
+  // locale dictionary. Translating it server-side breaks badgeTone() /
+  // badgeLabel() because the localized value (`elektrisch`) doesn't match
+  // KNOWN_TONES, falling back to the neutral chip tone.
+  'badges',
   'widget',
   'review_widget_data',
   'sections_de',

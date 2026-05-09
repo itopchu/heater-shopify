@@ -105,6 +105,9 @@ const SKIP_KEYS = new Set([
   'copy_status',
   'primary_pdf_url',
   'badge',
+  // `badges` (list-of-string enum) is intentionally NOT translated server-side;
+  // the storefront localizes it via badge.* keys in the locale dict.
+  'badges',
   'widget',
   'review_widget_data',
   'sections_de',
