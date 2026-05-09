@@ -187,6 +187,14 @@ const looksGerman = (s) => typeof s === 'string' && GERMAN_HINT.test(s);
  * translatable resource.
  */
 async function maybePromoteToEnglish(kind, id, tr) {
+  // PRODUCT_OPTION_VALUE / METAFIELD / MEDIA_IMAGE: no promote step. These
+  // types don't typically carry German source values that need to be
+  // overwritten in place — the catalog is already EN-canonical for them
+  // (option values were normalized by fix-source-locale-mismatches; metafield
+  // sources were authored in EN; alt-text is EN). Skip silently.
+  if (kind === 'PRODUCT_OPTION_VALUE' || kind === 'METAFIELD' || kind === 'MEDIA_IMAGE') {
+    return tr;
+  }
   // Promote only specific keys per resource type.
   const PROMOTE_KEYS = {
     PRODUCT: ['title', 'body_html'],
@@ -291,9 +299,67 @@ async function maybePromoteToEnglish(kind, id, tr) {
   return fresh;
 }
 
+// Mirrors audit-catalog-translations.mjs SKIP_KEYS. These are metafield
+// keys whose values are status flags, IDs, language tag lists, raw HTML
+// widget code, or other non-translatable payloads.
+const METAFIELD_SKIP_KEYS = new Set([
+  'image_status',
+  'copy_status',
+  'primary_pdf_url',
+  'badge',
+  'widget',
+  'review_widget_data',
+  'sections_de',
+  'sections_nl',
+  'sections_fr',
+  'sections_en',
+  'market_visibility',
+  'compatibility_guide_id',
+  'installation_guide_id',
+]);
+
+// Pure numeric option values — sizes, wattages, dimensions — are language
+// neutral and identical across DE/NL/FR. Skip to avoid wasted Gemini calls.
+const NUMERIC_OPTION_VALUE = /^\d+(\.\d+)?$/;
+
+// Heuristic: a metafield value that looks like a URL, JSON blob, HTML widget,
+// or comma-separated language tag list is not user-visible prose and should
+// not be translated. Mirrors the audit script's pre-filter.
+function isUntranslatableMetafieldValue(value) {
+  if (!value) return true;
+  const s = value.trim();
+  if (!s) return true;
+  if (s.startsWith('http://') || s.startsWith('https://')) return true;
+  if (s.startsWith('[') || s.startsWith('{')) return true;
+  if (s.startsWith('<')) return true;
+  // Comma-separated language tags like "en, de, nl" or "en-US, de-DE".
+  if (/^([a-z]{2}(-[A-Z]{2})?)(\s*,\s*[a-z]{2}(-[A-Z]{2})?)*$/.test(s)) return true;
+  return false;
+}
+
 async function translateResource(kind, resourceId) {
   const tr0 = await fetchTranslatable(resourceId);
   if (!tr0) return { ok: 0, skipped: 1 };
+
+  // For METAFIELD, the translatableContent[].key is always "value", so we
+  // can't apply METAFIELD_SKIP_KEYS by looking at translatable content alone.
+  // Resolve the metafield's own key via the node lookup, then short-circuit
+  // before doing any work if it's in the skip set.
+  let metafieldKey = null;
+  if (kind === 'METAFIELD') {
+    try {
+      const d = await gql(
+        `query($id:ID!){ node(id:$id){ ... on Metafield { key namespace } } }`,
+        { id: resourceId },
+      );
+      metafieldKey = d.node?.key ?? null;
+      if (metafieldKey && METAFIELD_SKIP_KEYS.has(metafieldKey)) {
+        return { ok: 0, skipped: 1 };
+      }
+    } catch {
+      // If lookup fails, fall through and let value-shape filters handle it.
+    }
+  }
 
   // Step 1+2: promote German to English.
   const tr = await maybePromoteToEnglish(kind, resourceId, tr0);
@@ -307,6 +373,15 @@ async function translateResource(kind, resourceId) {
       // Only translate user-visible fields. Skip handles/SKUs/raw_source/etc.
       const skip = ['handle', 'sku', 'raw_source', 'meta_image'];
       if (skip.some(s => c.key.includes(s))) continue;
+
+      // Per-kind filters for the new resource types.
+      if (kind === 'PRODUCT_OPTION_VALUE') {
+        if (NUMERIC_OPTION_VALUE.test(c.value.trim())) continue;
+      } else if (kind === 'METAFIELD') {
+        if (isUntranslatableMetafieldValue(c.value)) continue;
+      } else if (kind === 'MEDIA_IMAGE') {
+        if (c.key !== 'alt') continue;
+      }
 
       let value;
       if (locale === 'de' && c._registerDe) {
@@ -412,6 +487,34 @@ async function* listMetaobjects() {
   }
 }
 
+// PRODUCT_OPTION_VALUE / METAFIELD / MEDIA_IMAGE: walk the
+// `translatableResources(resourceType:...)` connection directly. These
+// resource types don't have first-class list queries the way Product /
+// Collection / Page do, but Shopify exposes them through the translation
+// resource enum.
+async function* listTranslatableByType(resourceType) {
+  let cursor = null;
+  let n = 0;
+  while (true) {
+    const d = await gql(
+      `query($t:TranslatableResourceType!, $c:String){
+        translatableResources(resourceType:$t, first:50, after:$c){
+          pageInfo{ hasNextPage endCursor }
+          nodes{ resourceId }
+        }
+      }`,
+      { t: resourceType, c: cursor },
+    );
+    for (const r of d.translatableResources.nodes) {
+      // Match the shape produced by listProducts/listCollections/etc.
+      yield { id: r.resourceId, handle: r.resourceId.split('/').pop() };
+      if (++n >= LIMIT) return;
+    }
+    if (!d.translatableResources.pageInfo.hasNextPage) return;
+    cursor = d.translatableResources.pageInfo.endCursor;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // main
 // ---------------------------------------------------------------------------
@@ -449,6 +552,27 @@ if (SCOPE === 'pages' || SCOPE === 'all') {
 }
 if (SCOPE === 'metaobjects' || SCOPE === 'all') {
   await runScope('METAOBJECTS', listMetaobjects(), 'METAOBJECT');
+}
+if (SCOPE === 'option-values' || SCOPE === 'all') {
+  await runScope(
+    'PRODUCT_OPTION_VALUES',
+    listTranslatableByType('PRODUCT_OPTION_VALUE'),
+    'PRODUCT_OPTION_VALUE',
+  );
+}
+if (SCOPE === 'metafields' || SCOPE === 'all') {
+  await runScope(
+    'METAFIELDS',
+    listTranslatableByType('METAFIELD'),
+    'METAFIELD',
+  );
+}
+if (SCOPE === 'media-images' || SCOPE === 'all') {
+  await runScope(
+    'MEDIA_IMAGES',
+    listTranslatableByType('MEDIA_IMAGE'),
+    'MEDIA_IMAGE',
+  );
 }
 
 flushCache();
