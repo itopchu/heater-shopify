@@ -441,15 +441,18 @@ export function pickSections(
   locale?: string,
 ): {
   sections: ContentSection[];
-  source: 'en' | 'de' | null;
+  source: 'en' | 'de' | 'nl' | 'fr' | null;
 } {
   const en = p.common.content?.sections_en ?? [];
   const de = p.common.content?.sections_de ?? [];
-  // DE locale should see the original scraped German source — no
-  // back-translation EN→DE is happening anyway. Every other locale
-  // currently falls through to EN; per-locale section translations
-  // (sections_nl, sections_fr…) are a future task.
+  const nl = p.common.content?.sections_nl ?? [];
+  const fr = p.common.content?.sections_fr ?? [];
+  // Prefer the locale-matched metafield. NL/FR were back-filled by
+  // generate-section-translations.mjs from sections_en. EN/DE are the
+  // original dual pattern; DE was the scraped source language.
   if (locale === 'de' && de.length > 0) return {sections: de, source: 'de'};
+  if (locale === 'nl' && nl.length > 0) return {sections: nl, source: 'nl'};
+  if (locale === 'fr' && fr.length > 0) return {sections: fr, source: 'fr'};
   if (en.length > 0) return {sections: en, source: 'en'};
   if (de.length > 0) return {sections: de, source: 'de'};
   return {sections: [], source: null};

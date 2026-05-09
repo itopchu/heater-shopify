@@ -236,6 +236,8 @@ export interface CommonProductMetafields {
   content?: {
     sections_en?: ContentSection[];
     sections_de?: ContentSection[];
+    sections_nl?: ContentSection[];
+    sections_fr?: ContentSection[];
   };
   localization?: {
     market_visibility?: string[];
@@ -513,6 +515,8 @@ export function parseCommonMetafields(
     content: {
       sections_en: parseSectionsJson(readJSON(index, "content.sections_en")),
       sections_de: parseSectionsJson(readJSON(index, "content.sections_de")),
+      sections_nl: parseSectionsJson(readJSON(index, "content.sections_nl")),
+      sections_fr: parseSectionsJson(readJSON(index, "content.sections_fr")),
     },
     localization: {
       market_visibility: readStringList(index, "localization.market_visibility"),
