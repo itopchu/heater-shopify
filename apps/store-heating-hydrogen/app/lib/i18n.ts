@@ -1,22 +1,31 @@
 import type {I18nBase} from '@shopify/hydrogen';
+import {localeToInContext, normalizeLocale} from './gberg/i18n';
 
 export interface I18nLocale extends I18nBase {
   pathPrefix: string;
 }
 
+/**
+ * Map the first URL path segment (`/de/...`, `/nl/...`, `/fr/...`, or
+ * unprefixed `/`) to the i18n context Hydrogen feeds into every Storefront
+ * API call's `@inContext` directive.
+ *
+ * Was previously matching only `EN-DE`-style prefixes and falling back to
+ * `EN-US` for everything else — silently breaking translations for `/de`,
+ * `/nl`, `/fr` (Shopify returned the EN/US copy regardless of toggle) and
+ * misrouting Markets pricing. Routing through `localeToInContext` keeps
+ * the auto-injected header/footer/cart queries aligned with the explicit
+ * `localeToContext` map used by PDP/PLP loaders.
+ */
 export function getLocaleFromRequest(request: Request): I18nLocale {
   const url = new URL(request.url);
-  const firstPathPart = url.pathname.split('/')[1]?.toUpperCase() ?? '';
-
-  type I18nFromUrl = [I18nLocale['language'], I18nLocale['country']];
-
-  let pathPrefix = '';
-  let [language, country]: I18nFromUrl = ['EN', 'US'];
-
-  if (/^[A-Z]{2}-[A-Z]{2}$/i.test(firstPathPart)) {
-    pathPrefix = '/' + firstPathPart;
-    [language, country] = firstPathPart.split('-') as I18nFromUrl;
-  }
-
-  return {language, country, pathPrefix};
+  const firstPart = url.pathname.split('/')[1] ?? '';
+  const locale = normalizeLocale(firstPart);
+  const hint = localeToInContext(locale);
+  const pathPrefix = locale === 'en' ? '' : `/${locale}`;
+  return {
+    language: hint.language as I18nLocale['language'],
+    country: hint.country as I18nLocale['country'],
+    pathPrefix,
+  };
 }
