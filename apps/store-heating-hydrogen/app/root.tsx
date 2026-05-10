@@ -223,7 +223,7 @@ export default function App() {
       consent={data.consent}
     >
       <Aside.Provider>
-        <Header locale={locale} menu={headerMenu} />
+        <Header locale={locale} menu={headerMenu} isLoggedIn={data.isLoggedIn} />
         <main id="main">
           <Outlet />
         </main>

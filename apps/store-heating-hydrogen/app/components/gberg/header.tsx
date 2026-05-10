@@ -45,6 +45,7 @@ function CartCount({locale}: {locale: Locale}) {
 export interface HeaderProps {
   locale: string;
   menu?: MenuItem[];
+  isLoggedIn?: Promise<boolean> | boolean;
 }
 
 function resolveColumns(menu: MenuItem[] | undefined, locale: string): MegaColumn[] {
@@ -66,7 +67,7 @@ function resolveColumns(menu: MenuItem[] | undefined, locale: string): MegaColum
   return cols;
 }
 
-export function Header({locale, menu}: HeaderProps) {
+export function Header({locale, menu, isLoggedIn}: HeaderProps) {
   const safeLocale: Locale = isSupportedLocale(locale) ? locale : DEFAULT_LOCALE;
   const t = tFor(safeLocale);
   const columns = resolveColumns(menu, locale);
@@ -86,6 +87,7 @@ export function Header({locale, menu}: HeaderProps) {
         <div className="ml-auto flex items-center gap-5 text-[12px] uppercase tracking-[0.12em] font-semibold">
           <SearchOverlay locale={locale} />
           <LanguageSwitcher locale={safeLocale} />
+          <AccountLink locale={locale} isLoggedIn={isLoggedIn} />
           <Link
             to={localeHref(locale, '/cart')}
             className="link-accent text-[var(--color-text)]"
@@ -105,5 +107,30 @@ export function Header({locale, menu}: HeaderProps) {
       </div>
       <div className="rule-accent" aria-hidden />
     </header>
+  );
+}
+
+/**
+ * Header account/sign-in link. Resolves the auth promise client-side via
+ * Suspense so SSR doesn't block on it. Logged-in users see "Account",
+ * everyone else sees "Sign in" — both link to /account, which the
+ * Customer Account API redirects to /account/login when not authed.
+ */
+function AccountLink({locale, isLoggedIn}: {locale: string; isLoggedIn?: Promise<boolean> | boolean}) {
+  const safeLocale: Locale = isSupportedLocale(locale) ? locale : DEFAULT_LOCALE;
+  const t = tFor(safeLocale);
+  return (
+    <Link
+      to={localeHref(locale, '/account')}
+      prefetch="intent"
+      className="link-accent text-[var(--color-text)]"
+      aria-label={t('header.account')}
+    >
+      <Suspense fallback={t('header.sign_in')}>
+        <Await resolve={Promise.resolve(isLoggedIn ?? false)} errorElement={t('header.sign_in')}>
+          {(loggedIn) => (loggedIn ? t('header.account') : t('header.sign_in'))}
+        </Await>
+      </Suspense>
+    </Link>
   );
 }
