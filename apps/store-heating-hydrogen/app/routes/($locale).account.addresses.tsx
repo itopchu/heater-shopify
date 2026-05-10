@@ -35,8 +35,12 @@ export async function action({request, context}: Route.ActionArgs): Promise<Acti
   });
 
   if (intent === 'create') {
-    const {data, errors} = await context.customerAccount.query(CREATE_ADDRESS_MUTATION, {
-      variables: {address: buildAddress(), defaultAddress: fd.get('default') === 'on'},
+    const {data, errors} = await context.customerAccount.mutate(CREATE_ADDRESS_MUTATION, {
+      variables: {
+        address: buildAddress(),
+        defaultAddress: fd.get('default') === 'on',
+        language: context.customerAccount.i18n?.language,
+      },
     });
     const ue = data?.customerAddressCreate?.userErrors ?? [];
     if (errors?.length || ue.length) return {error: ue[0]?.message ?? errors?.[0]?.message};
@@ -46,8 +50,13 @@ export async function action({request, context}: Route.ActionArgs): Promise<Acti
   if (intent === 'update') {
     const addressId = String(fd.get('addressId') || '');
     if (!addressId) return {error: 'Missing address id'};
-    const {data, errors} = await context.customerAccount.query(UPDATE_ADDRESS_MUTATION, {
-      variables: {address: buildAddress(), addressId, defaultAddress: fd.get('default') === 'on'},
+    const {data, errors} = await context.customerAccount.mutate(UPDATE_ADDRESS_MUTATION, {
+      variables: {
+        address: buildAddress(),
+        addressId,
+        defaultAddress: fd.get('default') === 'on',
+        language: context.customerAccount.i18n?.language,
+      },
     });
     const ue = data?.customerAddressUpdate?.userErrors ?? [];
     if (errors?.length || ue.length) return {error: ue[0]?.message ?? errors?.[0]?.message};
@@ -57,7 +66,7 @@ export async function action({request, context}: Route.ActionArgs): Promise<Acti
   if (intent === 'delete') {
     const addressId = String(fd.get('addressId') || '');
     if (!addressId) return {error: 'Missing address id'};
-    const {data, errors} = await context.customerAccount.query(DELETE_ADDRESS_MUTATION, {
+    const {data, errors} = await context.customerAccount.mutate(DELETE_ADDRESS_MUTATION, {
       variables: {addressId},
     });
     const ue = data?.customerAddressDelete?.userErrors ?? [];

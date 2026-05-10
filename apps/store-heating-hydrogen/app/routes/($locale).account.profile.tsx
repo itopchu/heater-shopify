@@ -17,8 +17,8 @@ export async function action({request, context}: Route.ActionArgs): Promise<Acti
     firstName: (fd.get('firstName') as string)?.trim() || undefined,
     lastName: (fd.get('lastName') as string)?.trim() || undefined,
   };
-  const {data, errors} = await context.customerAccount.query(CUSTOMER_UPDATE_MUTATION, {
-    variables: {customer},
+  const {data, errors} = await context.customerAccount.mutate(CUSTOMER_UPDATE_MUTATION, {
+    variables: {customer, language: context.customerAccount.i18n?.language},
   });
   const userErrors = data?.customerUpdate?.userErrors ?? [];
   if (errors?.length || userErrors.length) {
