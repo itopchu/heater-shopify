@@ -122,7 +122,7 @@ function AccountLink({locale, isLoggedIn}: {locale: string; isLoggedIn?: Promise
   return (
     <Link
       to={localeHref(locale, '/account')}
-      prefetch="intent"
+      reloadDocument
       className="link-accent text-[var(--color-text)]"
       aria-label={t('header.account')}
     >
