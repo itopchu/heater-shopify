@@ -83,6 +83,7 @@ const KNOWN_SERIES = [
   'ATLAS',
   'ELANOR',
   'FLORA',
+  'KIRA',
   'PULLMAN',
   'TWISTER',
   'KONRAD',
