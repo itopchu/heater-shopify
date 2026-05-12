@@ -234,6 +234,7 @@
     "section_overview_eyebrow": "Overzicht",
     "fact_series": "Serie",
     "fact_dimensions": "Afmetingen",
+    "fact_max_radiator_size": "Max. radiatorformaat",
     "fact_heat_output": "Warmteafgifte",
     "fact_color": "Kleur",
     "fact_connection": "Aansluiting",
@@ -300,6 +301,10 @@
     "gallery_view_more": "{count} extra afbeeldingen bekijken",
     "gallery_view_more_label": "+{count} meer",
     "gallery_show_image": "Afbeelding {index} tonen",
+    "gallery_prev": "Vorige afbeelding",
+    "gallery_next": "Volgende afbeelding",
+    "gallery_counter": "{current} / {total}",
+    "gallery_zoom": "Volledige grootte bekijken",
     "variant_available_only": "{available} beschikbaar",
     "variant_available_with_sold_out": "{available} beschikbaar, {soldOut} uitverkocht",
     "variant_value_sold_out_suffix": " — uitverkocht",
@@ -327,7 +332,11 @@
     "product_no_longer_available_description": "Dit product is niet meer beschikbaar. Bekijk de volledige catalogus voor vergelijkbare radiatoren.",
     "quantity_label": "Aantal",
     "quantity_decrease": "Aantal verlagen",
-    "quantity_increase": "Aantal verhogen"
+    "quantity_increase": "Aantal verhogen",
+    "who_its_for": "Voor wie is dit?",
+    "who_its_for_room_and_area": "Geschikt voor {room} tot {m2} m².",
+    "who_its_for_room_only": "Ontworpen voor montage in {room}.",
+    "who_its_for_area_only": "Verwarmt ruimtes tot {m2} m²."
   },
   "plp": {
     "heading_eyebrow": "Verwarming",

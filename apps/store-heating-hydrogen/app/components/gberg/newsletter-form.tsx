@@ -15,8 +15,14 @@ export function NewsletterForm({dark = false}: NewsletterFormProps) {
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
 
+  // Stack vertically on phones, side-by-side from `sm` up. The old
+  // always-row layout (input `flex-1` + a wide uppercase "Subscribe"
+  // button) overflowed ~360px viewports — the button got clipped by the
+  // body's `overflow-x: clip`. `flex-col` on mobile makes both controls
+  // full-width block elements, so it can't overflow regardless of locale
+  // string length.
   const inputBase =
-    'flex-1 bg-transparent px-0 py-3 text-base outline-none transition-colors placeholder:text-current/60';
+    'w-full min-w-0 bg-transparent px-0 py-3 text-base outline-none transition-colors placeholder:text-current/60 sm:flex-1';
   const inputColors = dark
     ? 'text-white border-b-2 border-white/30 focus:border-[var(--color-primary)]'
     : 'text-[var(--color-text)] border-b-2 border-[var(--color-text)] focus:border-[var(--color-primary)]';
@@ -27,7 +33,7 @@ export function NewsletterForm({dark = false}: NewsletterFormProps) {
 
   return (
     <form
-      className="flex items-end gap-4"
+      className="flex flex-col gap-3 sm:flex-row sm:items-end sm:gap-4"
       onSubmit={(e) => {
         e.preventDefault();
         setDone(true);
@@ -49,7 +55,7 @@ export function NewsletterForm({dark = false}: NewsletterFormProps) {
       <button
         type="submit"
         className={cn(
-          'shrink-0 rounded-[2px] px-6 pt-[15px] pb-[13px] text-sm font-semibold uppercase leading-none tracking-[0.06em] transition-colors',
+          'w-full shrink-0 rounded-[2px] px-6 pt-[15px] pb-[13px] text-sm font-semibold uppercase leading-none tracking-[0.06em] transition-colors sm:w-auto',
           buttonColors,
         )}
       >

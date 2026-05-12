@@ -234,6 +234,7 @@
     "section_overview_eyebrow": "Aperçu",
     "fact_series": "Série",
     "fact_dimensions": "Dimensions",
+    "fact_max_radiator_size": "Taille max. du radiateur",
     "fact_heat_output": "Puissance thermique",
     "fact_color": "Couleur",
     "fact_connection": "Raccordement",
@@ -300,6 +301,10 @@
     "gallery_view_more": "Voir {count} images supplémentaires",
     "gallery_view_more_label": "+{count} de plus",
     "gallery_show_image": "Afficher l'image {index}",
+    "gallery_prev": "Image précédente",
+    "gallery_next": "Image suivante",
+    "gallery_counter": "{current} / {total}",
+    "gallery_zoom": "Voir en grand",
     "variant_available_only": "{available} disponibles",
     "variant_available_with_sold_out": "{available} disponibles, {soldOut} épuisés",
     "variant_value_sold_out_suffix": " — épuisé",
@@ -327,7 +332,11 @@
     "product_no_longer_available_description": "Ce produit n'est plus disponible. Parcourez le catalogue complet pour trouver des radiateurs similaires.",
     "quantity_label": "Quantité",
     "quantity_decrease": "Diminuer la quantité",
-    "quantity_increase": "Augmenter la quantité"
+    "quantity_increase": "Augmenter la quantité",
+    "who_its_for": "Pour qui ?",
+    "who_its_for_room_and_area": "Dimensionné pour les {room} jusqu’à {m2} m².",
+    "who_its_for_room_only": "Conçu pour une installation dans les {room}.",
+    "who_its_for_area_only": "Chauffe des pièces jusqu’à {m2} m²."
   },
   "plp": {
     "heading_eyebrow": "Chauffage",

@@ -27,12 +27,12 @@ export function Footer({locale}: {locale: string}) {
   return (
     <footer className="mt-8 bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)] md:mt-14">
       <div className="border-b border-white/15">
-        <div className="container-x grid gap-3 py-5 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-12 md:py-10">
-          <div>
+        <div className="container-x grid gap-4 py-5 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-12 md:py-10">
+          <div className="min-w-0">
             <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-primary-on-dark)] md:text-[11px]">
               {t('footer.stay_in_loop')}
             </p>
-            <p className="mt-2 font-[var(--font-display)] text-2xl italic leading-[1.05] md:mt-3 md:text-4xl md:leading-[1]">
+            <p className="mt-2 text-balance break-words font-[var(--font-display)] text-xl italic leading-[1.1] sm:text-2xl md:mt-3 md:text-4xl md:leading-[1]">
               {t('footer.newsletter_promise')}
             </p>
           </div>

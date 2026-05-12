@@ -178,6 +178,39 @@ export function parseWattage(text: string | null | undefined): number | null {
   return null;
 }
 
+/* ------------------------------------------------------------------ */
+/* Dimension-string classification.                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * True when `raw` is a *plain* product dimension — bare numbers joined by
+ * "×" (or ASCII "x"), e.g. "600 × 800" or "600 × 800 × 22" (decimals
+ * allowed). The mounting kit overloads `specs.dimensions_w_h_d_mm` with a
+ * *compatibility range* — "≤ 2000 × 750" means "fits radiators up to that
+ * size", which is NOT the accessory's own dimensions. Callers use this to
+ * decide whether to render the value as the "Dimensions" spec / a bare
+ * size chip, or to relabel it ("Max. radiator size") with context.
+ */
+export function isPlainDimensionString(raw: string | null | undefined): boolean {
+  if (!raw) return false;
+  return /^\s*\d+(?:[.,]\d+)?(?:\s*[x×]\s*\d+(?:[.,]\d+)?){1,2}\s*$/i.test(raw);
+}
+
+/**
+ * Normalise a dimension-ish value for display: ASCII "x" → "×",
+ * "<="/">=" → "≤"/"≥", and collapse whitespace around the separators.
+ * Keeps the catalog's mixed ASCII/Unicode forms rendering identically.
+ */
+export function normalizeDimensionDisplay(raw: string): string {
+  return raw
+    .trim()
+    .replace(/<=/g, '≤')
+    .replace(/>=/g, '≥')
+    .replace(/\s*[x×]\s*/gi, ' × ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 /**
  * Editorial structured-spec row consumed by the PDP `<SpecsTable>` block.
  * Each row maps 1:1 onto a `SpecsTableRow` shape (`{icon, label, value, unit}`)
@@ -264,9 +297,20 @@ export function buildStructuredSpecRows(
     });
   }
 
-  const dimDisplay = p.specs.dimensions_w_h_d_mm?.trim();
-  if (dimDisplay) {
-    rows.push({kind: 'dimensions', label: t('pdp.fact_dimensions'), value: dimDisplay, unit: 'mm'});
+  const dimRaw = p.specs.dimensions_w_h_d_mm?.trim();
+  if (dimRaw) {
+    // A bare "W × H[ × D]" is the product's own size → "Dimensions".
+    // Anything else (the mounting kit's "≤ 2000 × 750" = the largest
+    // radiator it fits) is relabelled so it doesn't read as the
+    // accessory's own dimensions.
+    rows.push({
+      kind: 'dimensions',
+      label: isPlainDimensionString(dimRaw)
+        ? t('pdp.fact_dimensions')
+        : t('pdp.fact_max_radiator_size'),
+      value: normalizeDimensionDisplay(dimRaw),
+      unit: 'mm',
+    });
   } else if (p.specs.width_mm != null && p.specs.height_mm != null) {
     const depth = p.specs.depth_mm != null ? ` × ${p.specs.depth_mm}` : '';
     rows.push({

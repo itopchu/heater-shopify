@@ -234,6 +234,7 @@
     "section_overview_eyebrow": "Overview",
     "fact_series": "Series",
     "fact_dimensions": "Dimensions",
+    "fact_max_radiator_size": "Max. radiator size",
     "fact_heat_output": "Heat output",
     "fact_color": "Colour",
     "fact_connection": "Connection",
@@ -300,6 +301,10 @@
     "gallery_view_more": "View {count} more images",
     "gallery_view_more_label": "+{count} more",
     "gallery_show_image": "Show image {index}",
+    "gallery_prev": "Previous image",
+    "gallery_next": "Next image",
+    "gallery_counter": "{current} / {total}",
+    "gallery_zoom": "View full size",
     "variant_available_only": "{available} available",
     "variant_available_with_sold_out": "{available} available, {soldOut} sold out",
     "variant_value_sold_out_suffix": " — sold out",
@@ -327,7 +332,11 @@
     "product_no_longer_available_description": "This product is no longer available. Browse the full catalogue for similar radiators.",
     "quantity_label": "Quantity",
     "quantity_decrease": "Decrease quantity",
-    "quantity_increase": "Increase quantity"
+    "quantity_increase": "Increase quantity",
+    "who_its_for": "Who is this for?",
+    "who_its_for_room_and_area": "Sized for {room} spaces of up to {m2} m².",
+    "who_its_for_room_only": "Designed for {room} installations.",
+    "who_its_for_area_only": "Heats rooms of up to {m2} m²."
   },
   "plp": {
     "heading_eyebrow": "Heating",

@@ -28,6 +28,8 @@ import {useT} from '~/lib/gberg/i18n';
 import {
   colorFamilyHex,
   galleryImages,
+  isPlainDimensionString,
+  normalizeDimensionDisplay,
   resolveSeriesLabel,
 } from '~/lib/gberg/heating-derived';
 
@@ -127,7 +129,12 @@ export function ProductCard({product, locale, priority = false}: ProductCardProp
   // is gated on a populated metafield — fall back to the legacy text only
   // when neither chip can render.
   const wattage = product.specs.wattage_w;
-  const dimensions = product.specs.dimensions_w_h_d_mm?.trim();
+  // Only a plain numeric "W × H[ × D]" reads correctly as a bare PLP chip.
+  // Non-dimension values (the mounting kit's "≤ 2000 × 750" compatibility
+  // range) are dropped here and surfaced — relabelled — on the PDP.
+  const dimRaw = product.specs.dimensions_w_h_d_mm?.trim();
+  const dimensions =
+    dimRaw && isPlainDimensionString(dimRaw) ? normalizeDimensionDisplay(dimRaw) : '';
   const hasSpecChip = (wattage != null && wattage > 0) || Boolean(dimensions);
   const fallbackSpec = hasSpecChip ? '' : legacyShortSpec(product);
 
@@ -216,33 +223,24 @@ export function ProductCard({product, locale, priority = false}: ProductCardProp
         <Eyebrow>{eyebrow ?? ' '}</Eyebrow>
 
         {/*
-          Title is NOT clamped — full product name shows. Cards in the
-          same row stretch to the tallest one (grid-auto-rows: 1fr +
-          h-full on the link), and `mt-auto` on the price row pins
-          the price to the bottom regardless of how many lines the
-          title wraps to.
+          Title — full product name, not clamped. The eyebrow / title /
+          spec / price stack tightly from the top of the card. Any
+          leftover card height (when a taller sibling card in the same
+          row sets the row height) is absorbed by the flex-1 spacer at
+          the BOTTOM of this column — so the price sits directly under
+          the spec on every card, never in a gap below the title.
         */}
-        {/*
-          Title block grows to fill remaining card height (`flex-1`),
-          absorbing the slack that previously sat above the price row
-          on short-name cards. With grid rows already at 1fr, this
-          means each card's title area "clamps" to the same height as
-          the longest title in its row — long names render in full,
-          short names leave a small flex slack at the top of the
-          title box, and prices sit right under the spec instead of
-          floating in empty space.
-        */}
-        <h2
-          className="flex-1 font-[var(--font-display)] text-[12px] font-medium leading-[1.2] tracking-tight text-[var(--color-text)] sm:text-[13px] md:text-[1.05rem] md:leading-snug"
-        >
+        <h2 className="font-[var(--font-display)] text-[12px] font-medium leading-[1.2] tracking-tight text-[var(--color-text)] sm:text-[13px] md:text-[1.05rem] md:leading-snug">
           {product.title}
         </h2>
 
         {/*
-          Spec slot — also always rendered with a min-height so cards
-          without a chip OR a fallback line don't collapse this band.
-          Empty slot is invisible but still occupies one chip-row of
-          vertical space.
+          Spec slot — a plain product-size chip ("600 × 800 mm") and/or a
+          wattage chip. `dimensions` is already filtered to numeric
+          "W × H[ × D]" strings upstream; non-dimension values like the
+          mounting kit's "≤ 2000 × 750" (a *compatible-radiator* range,
+          not the kit's own size) are dropped here and relabelled on the
+          PDP rather than shown as a bare, contextless chip.
         */}
         {hasSpecChip ? (
           <div className="flex flex-wrap items-center gap-1.5">
@@ -263,6 +261,10 @@ export function ProductCard({product, locale, priority = false}: ProductCardProp
             </span>
           ) : null}
         </div>
+
+        {/* Absorbs leftover card height below the price (when a sibling
+            card in the same row is taller) so the price hugs the spec. */}
+        <div aria-hidden className="flex-1" />
       </div>
     </Link>
   );

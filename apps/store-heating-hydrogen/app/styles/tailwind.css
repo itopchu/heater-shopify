@@ -250,11 +250,18 @@ h3 {
  * Mobile = 3-up (per requirements §8 / §9 "3 items per row"). On the
  * narrowest phones this keeps cards tight but readable; combined with
  * the line-clamped title and tabular price line, three cards fit
- * comfortably in a 360px viewport. Sm/lg/xl just widen the gaps. */
+ * comfortably in a 360px viewport. Sm/lg/xl just widen the gaps.
+ *
+ * Row height is per-row, not per-grid: rows are `auto`-sized (we used to
+ * set `grid-auto-rows: 1fr`, which forced *every* row to the height of
+ * the single tallest row in the whole listing — so one long product name
+ * anywhere on the page padded out every other row). `align-items:
+ * stretch` still equalises card height *within* each row, and the card
+ * absorbs any leftover height *below* the price (see product-card.tsx)
+ * so the price stays directly under the spec line — no mid-card gap. */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
   align-items: stretch;
   gap: 6px;
   list-style: none;

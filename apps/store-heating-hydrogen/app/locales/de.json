@@ -234,6 +234,7 @@
     "section_overview_eyebrow": "Überblick",
     "fact_series": "Serie",
     "fact_dimensions": "Abmessungen",
+    "fact_max_radiator_size": "Max. Heizkörpergröße",
     "fact_heat_output": "Wärmeleistung",
     "fact_color": "Farbe",
     "fact_connection": "Anschluss",
@@ -300,6 +301,10 @@
     "gallery_view_more": "{count} weitere Bilder anzeigen",
     "gallery_view_more_label": "+{count} weitere",
     "gallery_show_image": "Bild {index} anzeigen",
+    "gallery_prev": "Vorheriges Bild",
+    "gallery_next": "Nächstes Bild",
+    "gallery_counter": "{current} / {total}",
+    "gallery_zoom": "In voller Größe ansehen",
     "variant_available_only": "{available} verfügbar",
     "variant_available_with_sold_out": "{available} verfügbar, {soldOut} ausverkauft",
     "variant_value_sold_out_suffix": " — ausverkauft",
@@ -327,7 +332,11 @@
     "product_no_longer_available_description": "Dieses Produkt ist nicht mehr verfügbar. Stöbern Sie im vollständigen Katalog nach ähnlichen Heizkörpern.",
     "quantity_label": "Menge",
     "quantity_decrease": "Menge verringern",
-    "quantity_increase": "Menge erhöhen"
+    "quantity_increase": "Menge erhöhen",
+    "who_its_for": "Für wen ist das geeignet?",
+    "who_its_for_room_and_area": "Ausgelegt für {room} bis zu {m2} m².",
+    "who_its_for_room_only": "Konzipiert für die Montage in {room}.",
+    "who_its_for_area_only": "Beheizt Räume bis zu {m2} m²."
   },
   "plp": {
     "heading_eyebrow": "Heizung",
