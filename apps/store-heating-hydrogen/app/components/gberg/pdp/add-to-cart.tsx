@@ -4,11 +4,12 @@
  * runs cart.addLines() on the server. The local quantity input is held in
  * a hidden field that updates in sync with the stepper.
  */
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
-import {Button, cn} from '@gberg/ui';
+import {cn} from '@gberg/ui';
 import {useAside} from '~/components/Aside';
 import {useT} from '~/lib/gberg/i18n';
+import {CartAddButton} from './cart-add-button';
 
 export interface AddToCartProps {
   variantId: string | null;
@@ -21,6 +22,7 @@ export function AddToCart({variantId, available, className}: AddToCartProps) {
   const [qty, setQty] = useState(1);
   const {open} = useAside();
   const disabled = !available || !variantId;
+  const openCart = useCallback(() => open('cart'), [open]);
 
   return (
     <div className={cn('flex flex-col gap-3', className)}>
@@ -61,28 +63,17 @@ export function AddToCart({variantId, available, className}: AddToCartProps) {
               : [],
           }}
         >
-          {(fetcher) => {
-            const adding = fetcher.state !== 'idle';
-            const justAdded =
-              fetcher.state === 'idle' && (fetcher.data as {cart?: unknown})?.cart != null;
-            return (
-              <Button
-                type="submit"
-                size="lg"
-                variant="primary"
-                loading={adding}
-                disabled={disabled}
-                onClick={() => {
-                  // Open the cart drawer when the user fires the action so
-                  // they see the result without leaving the page.
-                  if (!disabled) open('cart');
-                }}
-                className="w-auto min-w-[12rem] px-8"
-              >
-                {!available ? t('pdp.out_of_stock') : justAdded ? t('pdp.added') : t('pdp.add_to_cart')}
-              </Button>
-            );
-          }}
+          {(fetcher) => (
+            <CartAddButton
+              fetcher={fetcher}
+              available={available}
+              disabled={disabled}
+              size="lg"
+              unavailableLabel={t('pdp.out_of_stock')}
+              className="w-auto min-w-[12rem] px-8"
+              onAdded={openCart}
+            />
+          )}
         </CartForm>
       </div>
     </div>

@@ -17,13 +17,14 @@
  * warranty terms), surface it as a single inline note next to the
  * warranty/return policy link, not as a 4-icon strip.
  */
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
 import type {HeatingProduct, ProductVariant, Money} from '@gberg/product-schema';
-import {Button} from '@gberg/ui';
 import {VariantSelector} from './variant-selector';
 import {AddToCart} from './add-to-cart';
+import {CartAddButton} from './cart-add-button';
 import {PriceBlock} from './price-block';
+import {useAside} from '~/components/Aside';
 import {formatMoney} from '~/lib/gberg/format';
 import {useT} from '~/lib/gberg/i18n';
 
@@ -97,6 +98,8 @@ function StickyMobileBuy({
   variantId,
 }: StickyMobileBuyProps) {
   const t = useT();
+  const {open} = useAside();
+  const openCart = useCallback(() => open('cart'), [open]);
   return (
     <div
       className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_-4px_16px_rgba(0,0,0,0.08)] lg:hidden pb-[env(safe-area-inset-bottom)]"
@@ -121,22 +124,16 @@ function StickyMobileBuy({
               : [],
           }}
         >
-          {(fetcher) => {
-            const adding = fetcher.state !== 'idle';
-            const justAdded =
-              fetcher.state === 'idle' && (fetcher.data as {cart?: unknown})?.cart != null;
-            return (
-              <Button
-                type="submit"
-                size="xl"
-                variant="primary"
-                loading={adding}
-                disabled={!available || !variantId}
-              >
-                {!available ? t('pdp.sold_out') : justAdded ? t('pdp.added') : t('pdp.add_to_cart')}
-              </Button>
-            );
-          }}
+          {(fetcher) => (
+            <CartAddButton
+              fetcher={fetcher}
+              available={available}
+              disabled={!available || !variantId}
+              size="xl"
+              unavailableLabel={t('pdp.sold_out')}
+              onAdded={openCart}
+            />
+          )}
         </CartForm>
       </div>
     </div>
