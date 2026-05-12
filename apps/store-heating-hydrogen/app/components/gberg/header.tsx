@@ -163,9 +163,11 @@ export function Header({locale, menu, isLoggedIn}: HeaderProps) {
         <Link
           to={localeHref(locale, '/')}
           aria-label={t('common.home')}
-          // -my-2/py-2 stretches the tap target to the header's full
-          // height on touch screens without changing the visual layout.
-          className="-my-2 inline-flex shrink-0 items-center py-2 font-[var(--font-display)] text-xl font-semibold tracking-tight text-[var(--color-text)] sm:text-2xl"
+          // -my-2/py-2 stretches the tap target to the header's full height
+          // on touch screens without changing the visual layout. The
+          // hover/active states give it real button feedback: red on hover
+          // (desktop) and a quick press-down (dim + slight shrink) on tap.
+          className="-my-2 inline-flex shrink-0 items-center py-2 font-[var(--font-display)] text-xl font-semibold tracking-tight text-[var(--color-text)] transition hover:text-[var(--color-primary)] active:scale-[0.97] active:opacity-70 sm:text-2xl"
         >
           G-Berg
         </Link>
