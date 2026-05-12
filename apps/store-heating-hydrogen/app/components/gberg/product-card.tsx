@@ -224,11 +224,11 @@ export function ProductCard({product, locale, priority = false}: ProductCardProp
 
         {/*
           Title — full product name, not clamped. The eyebrow / title /
-          spec / price stack tightly from the top of the card. Any
-          leftover card height (when a taller sibling card in the same
-          row sets the row height) is absorbed by the flex-1 spacer at
-          the BOTTOM of this column — so the price sits directly under
-          the spec on every card, never in a gap below the title.
+          spec stack tightly from the top of the card; any leftover card
+          height (when a taller sibling card in the same row sets the row
+          height) is absorbed ABOVE the price row via `mt-auto`, so the
+          price + its separator hug the BOTTOM of every card and line up
+          across the whole row.
         */}
         <h2 className="font-[var(--font-display)] text-[12px] font-medium leading-[1.2] tracking-tight text-[var(--color-text)] sm:text-[13px] md:text-[1.05rem] md:leading-snug">
           {product.title}
@@ -253,7 +253,7 @@ export function ProductCard({product, locale, priority = false}: ProductCardProp
           <p className="text-xs text-[var(--color-text-muted)]">{fallbackSpec}</p>
         ) : null}
 
-        <div className="mt-2 flex flex-wrap items-end justify-between gap-x-2 gap-y-0.5 border-t border-[var(--color-border-strong)] pt-2 md:pt-3">
+        <div className="mt-auto flex flex-wrap items-end justify-between gap-x-2 gap-y-0.5 border-t border-[var(--color-border-strong)] pt-2 md:pt-3">
           <PriceLine product={product} intl={intl} />
           {product.specs.heat_pump_compatible ? (
             <span className="hidden text-[9px] font-semibold uppercase tracking-[0.14em] text-[var(--color-success)] md:inline md:text-[10px]">
@@ -261,10 +261,6 @@ export function ProductCard({product, locale, priority = false}: ProductCardProp
             </span>
           ) : null}
         </div>
-
-        {/* Absorbs leftover card height below the price (when a sibling
-            card in the same row is taller) so the price hugs the spec. */}
-        <div aria-hidden className="flex-1" />
       </div>
     </Link>
   );
