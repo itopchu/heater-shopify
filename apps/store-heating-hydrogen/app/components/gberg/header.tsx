@@ -159,7 +159,10 @@ export function Header({locale, menu, isLoggedIn}: HeaderProps) {
       <div className="container-x flex items-center gap-3 py-4 sm:gap-5 sm:py-5 lg:gap-6">
         <Link
           to={localeHref(locale, '/')}
-          className="shrink-0 font-[var(--font-display)] text-xl font-semibold tracking-tight text-[var(--color-text)] sm:text-2xl"
+          aria-label={t('common.home')}
+          // -my-2/py-2 stretches the tap target to the header's full
+          // height on touch screens without changing the visual layout.
+          className="-my-2 inline-flex shrink-0 items-center py-2 font-[var(--font-display)] text-xl font-semibold tracking-tight text-[var(--color-text)] sm:text-2xl"
         >
           G-Berg
         </Link>
