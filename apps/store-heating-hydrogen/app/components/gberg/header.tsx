@@ -99,7 +99,10 @@ function CartLink({locale, safeLocale}: {locale: string; safeLocale: Locale}) {
   return (
     <Link
       to={localeHref(locale, '/cart')}
-      className="link-accent inline-flex shrink-0 items-center text-[var(--color-text)]"
+      // Mobile (icon-only): pad the link so the tap target is ~30px wide and
+      // the header's full height tall. Negative margin keeps the visual layout
+      // unchanged. Reset on sm+ where the link has a text label of its own.
+      className="link-accent -m-1.5 inline-flex shrink-0 items-center p-1.5 text-[var(--color-text)] sm:m-0 sm:p-0"
     >
       <span className="sr-only">
         <CartCount locale={safeLocale} mode="label" />
@@ -169,7 +172,7 @@ export function Header({locale, menu, isLoggedIn}: HeaderProps) {
 
         <MegaMenu locale={locale} menu={menu} />
 
-        <div className="ml-auto flex items-center gap-2 text-[12px] uppercase tracking-[0.12em] font-semibold sm:gap-3.5 lg:gap-5">
+        <div className="ml-auto flex items-center gap-3 text-[12px] uppercase tracking-[0.12em] font-semibold sm:gap-3.5 lg:gap-5">
           <SearchOverlay locale={locale} />
           <LanguageSwitcher locale={safeLocale} />
           <AccountLink locale={locale} isLoggedIn={isLoggedIn} />
@@ -218,7 +221,10 @@ function AccountLink({locale, isLoggedIn}: {locale: string; isLoggedIn?: Promise
     <Link
       to={localeHref(locale, '/account')}
       reloadDocument
-      className="link-accent inline-flex shrink-0 items-center text-[var(--color-text)]"
+      // Mobile (icon-only): pad the link so the tap target is ~30px wide and
+      // the header's full height tall. Negative margin keeps the visual layout
+      // unchanged. Reset on sm+ where the link has a text label of its own.
+      className="link-accent -m-1.5 inline-flex shrink-0 items-center p-1.5 text-[var(--color-text)] sm:m-0 sm:p-0"
     >
       <span className="sr-only">
         <AccountLabel isLoggedIn={isLoggedIn} t={t} />
