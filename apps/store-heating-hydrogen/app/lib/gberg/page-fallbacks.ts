@@ -73,7 +73,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     title: 'Terms & Conditions',
     intro: 'The terms governing orders placed on this storefront.',
     body: [
-      'Prices in EUR, including local VAT, excluding shipping unless stated otherwise.',
+      'Prices in EUR, including local VAT. Free shipping to Germany, the Netherlands, Belgium and Luxembourg — the delivery cost is included in the listed price.',
       'Right of withdrawal: 30 days from delivery for unused, unopened items in original packaging. Bespoke and cut-to-length items are excluded.',
       'Warranty: 10 years on the radiator body, 2 years on electronic components, per manufacturer terms.',
       'Seller: G-Berg GmbH, Hagenerstrasse 33, 58642 Iserlohn, Germany. info@g-berg-gmbh.de.',
@@ -82,10 +82,9 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
   shipping: {
     title: 'Shipping & Delivery',
     intro:
-      'We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Shipping is included in the listed price for most products.',
+      'We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Shipping is free — the delivery cost is included in the listed price for every product.',
     body: [
-      'For most products, shipping is included in the listed price — no additional charge at checkout.',
-      "Valve radiators (Ventilheizkörper) ship at standard DHL rates, calculated by weight and destination at checkout.",
+      'Shipping is included in the listed price — no additional charge at checkout, on every product.',
       'Delivery countries: Germany, Netherlands, Belgium, Luxembourg. Addresses outside these four countries cannot be checked out at the moment.',
       'Standard delivery: 3–7 business days after dispatch confirmation.',
       'Curbside delivery only — items above 30 kg or 1.5 m require two-person handling on-site (ask your installer).',
@@ -113,7 +112,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     title: 'Frequently asked questions',
     intro: 'Quick answers to the questions our engineers hear most often.',
     body: [
-      'Where do you ship? Germany, the Netherlands, Belgium and Luxembourg. Shipping is included in the price for most products. Valve radiators (Ventilheizkörper) ship at standard DHL rates.',
+      'Where do you ship? Germany, the Netherlands, Belgium and Luxembourg. Shipping is free — the delivery cost is included in the listed price for every product.',
       "Are your radiators heat-pump compatible? Many are. Look for the 'Heat-pump ready' badge on the product card.",
       'Can I install a radiator myself? Hydronic radiators must be commissioned by a certified heating engineer to keep the warranty. Electric radiators can be installed by a qualified electrician.',
       `What if the model I want is out of stock? Email ${SUPPORT_EMAIL} — most items return to stock within 4–6 weeks and we hold orders without payment until you confirm.`,

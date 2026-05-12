@@ -32,8 +32,11 @@ export function whatsappHref(message: string = WHATSAPP_MESSAGE_GENERIC): string
   return `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(message)}`;
 }
 
-// Shipping rule (storefront copy only; checkout cost is set in Shopify Admin
-// via configure-shipping.mjs — keep these aligned).
-// Policy 2026-05: shipping is included in the listed price for most products;
-// only valve radiators (Ventilheizkörper) ship at standard DHL rates.
+// Shipping rule (storefront copy only; the Shopify delivery profile is plain
+// free shipping for all four countries).
+// Policy 2026-05 (revised): shipping is free everywhere — the delivery cost is
+// included in the listed price for every product. (Valve radiators carry a flat
+// €20/unit surcharge baked into their price via the `shipping-in-price` tag;
+// see agent/scripts/prod-bake-valve-shipping-into-price.mjs — Basic plan can't
+// bill €X/item at checkout without a carrier service.)
 export const SHIPPING_COUNTRIES_ISO = ['DE', 'NL', 'BE', 'LU'] as const;

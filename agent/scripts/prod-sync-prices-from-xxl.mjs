@@ -127,6 +127,14 @@ function regularPriceOf(xxlVariant) {
   return Math.max(p, c).toFixed(2);
 }
 
+// Products tagged `shipping-in-price` carry a flat shipping surcharge baked
+// into their listed price (Basic-plan workaround — Shopify can't bill €X/item
+// at checkout without a higher plan + a carrier service). The store ships those
+// free; the surcharge lives in the price. So when we re-sync the xxl base price
+// we must re-add the surcharge, or the sync would silently strip it back out.
+const SHIPPING_IN_PRICE_TAG = 'shipping-in-price';
+const SHIPPING_IN_PRICE_SURCHARGE_EUR = 20;
+
 // Walk every prod product
 console.log('Fetching prod products …');
 const products = [];
@@ -137,7 +145,7 @@ while (true) {
       products(first:50, after:$c){
         pageInfo{hasNextPage endCursor}
         nodes{
-          id handle title
+          id handle title tags
           metafields(first:30){nodes{namespace key value}}
           variants(first:50){nodes{id sku title price compareAtPrice}}
         }
@@ -180,6 +188,9 @@ for (const p of products) {
     if (!SKIP_NO_SOURCE) console.log(`  ✗ ${p.handle}  xxl(${xxlHandle}) returned no variants / 404`);
     continue;
   }
+  const surcharge = (p.tags ?? []).includes(SHIPPING_IN_PRICE_TAG)
+    ? SHIPPING_IN_PRICE_SURCHARGE_EUR
+    : 0;
   const updates = [];
   for (const v of p.variants.nodes) {
     stats.variantsScanned++;
@@ -189,7 +200,7 @@ for (const p of products) {
       stats.variantsNoMatch++;
       continue;
     }
-    const regular = regularPriceOf(xxlV);
+    const regular = (Number(regularPriceOf(xxlV)) + surcharge).toFixed(2);
     const ourPrice = Number(v.price).toFixed(2);
     const ourCa = v.compareAtPrice;
     const samePrice = ourPrice === regular;
