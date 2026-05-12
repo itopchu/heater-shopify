@@ -56,7 +56,7 @@ function AccountIcon() {
     <svg
       aria-hidden
       viewBox="0 0 24 24"
-      className="h-[18px] w-[18px]"
+      className="h-[22px] w-[22px]"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -75,7 +75,7 @@ function BagIcon() {
     <svg
       aria-hidden
       viewBox="0 0 24 24"
-      className="h-[18px] w-[18px]"
+      className="h-[22px] w-[22px]"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -99,10 +99,10 @@ function CartLink({locale, safeLocale}: {locale: string; safeLocale: Locale}) {
   return (
     <Link
       to={localeHref(locale, '/cart')}
-      // Mobile (icon-only): pad the link so the tap target is ~30px wide and
-      // the header's full height tall. Negative margin keeps the visual layout
-      // unchanged. Reset on sm+ where the link has a text label of its own.
-      className="link-accent -m-1.5 inline-flex shrink-0 items-center p-1.5 text-[var(--color-text)] sm:m-0 sm:p-0"
+      // Mobile: a 40×40 centred icon button, matching the hamburger so the
+      // action row reads as a row of equal-weight controls. sm+: revert to an
+      // inline text link ("Cart (N)").
+      className="link-accent inline-flex h-10 w-10 shrink-0 items-center justify-center text-[var(--color-text)] sm:h-auto sm:w-auto sm:justify-start"
     >
       <span className="sr-only">
         <CartCount locale={safeLocale} mode="label" />
@@ -172,7 +172,10 @@ export function Header({locale, menu, isLoggedIn}: HeaderProps) {
 
         <MegaMenu locale={locale} menu={menu} />
 
-        <div className="ml-auto flex items-center gap-3 text-[12px] uppercase tracking-[0.12em] font-semibold sm:gap-3.5 lg:gap-5">
+        {/* Mobile: tight gap — the Account/Cart/hamburger controls are 40×40
+            with their own internal padding, so they self-space. sm+: roomier
+            gaps once the Account/Cart links carry text labels. */}
+        <div className="ml-auto flex items-center gap-1 text-[12px] uppercase tracking-[0.12em] font-semibold sm:gap-3.5 lg:gap-5">
           <SearchOverlay locale={locale} />
           <LanguageSwitcher locale={safeLocale} />
           <AccountLink locale={locale} isLoggedIn={isLoggedIn} />
@@ -221,10 +224,10 @@ function AccountLink({locale, isLoggedIn}: {locale: string; isLoggedIn?: Promise
     <Link
       to={localeHref(locale, '/account')}
       reloadDocument
-      // Mobile (icon-only): pad the link so the tap target is ~30px wide and
-      // the header's full height tall. Negative margin keeps the visual layout
-      // unchanged. Reset on sm+ where the link has a text label of its own.
-      className="link-accent -m-1.5 inline-flex shrink-0 items-center p-1.5 text-[var(--color-text)] sm:m-0 sm:p-0"
+      // Mobile: a 40×40 centred icon button, matching the hamburger so the
+      // action row reads as a row of equal-weight controls. sm+: revert to an
+      // inline text link ("Sign in" / "Account").
+      className="link-accent inline-flex h-10 w-10 shrink-0 items-center justify-center text-[var(--color-text)] sm:h-auto sm:w-auto sm:justify-start"
     >
       <span className="sr-only">
         <AccountLabel isLoggedIn={isLoggedIn} t={t} />
