@@ -13,7 +13,7 @@ name = "gberg-agent"
 [access_scopes]
 scopes = "read_products,write_products,read_product_listings,read_files,write_files,read_themes,write_themes,read_content,write_content,read_online_store_pages,write_online_store_pages,read_online_store_navigation,write_online_store_navigation,read_locales,write_locales,read_translations,write_translations,read_metaobjects,write_metaobjects,read_metaobject_definitions,write_metaobject_definitions,read_markets,write_markets,read_publications,write_publications,read_locations,write_locations,read_inventory,write_inventory,read_shipping,write_shipping,read_legal_policies,write_legal_policies,read_discounts,write_discounts,read_price_rules,write_price_rules,read_orders,write_orders,read_customers,read_gift_cards,write_gift_cards,read_delivery_customizations,write_delivery_customizations"
 optional_scopes = []
-use_legacy_install_flow = false
+use_legacy_install_flow = true
 
 [auth]
 redirect_urls = [
