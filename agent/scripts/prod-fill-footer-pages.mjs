@@ -3,8 +3,9 @@
  * with content that reflects the current 2026-05 policies:
  *
  *   - Delivery to Germany, the Netherlands, Belgium and Luxembourg only.
- *   - Shipping included in the listed price for most products. Valve
- *     radiators (Ventilheizkörper) ship at standard DHL rates.
+ *   - Shipping is free — included in the listed price for every product.
+ *     (Valve radiators carry a flat €20/unit surcharge baked into the
+ *     price; the customer never sees a separate shipping line.)
  *   - Storefront supports four languages: English, Deutsch, Nederlands,
  *     Français. Older Spanish / Italian / Polish / Danish / Turkish /
  *     Hungarian copy is removed wherever it leaked into page bodies.
@@ -93,7 +94,7 @@ const FAQ = `
 <p>Germany, the Netherlands, Belgium and Luxembourg. Addresses outside these four countries cannot check out at the moment.</p>
 
 <h3>How much does shipping cost?</h3>
-<p>Shipping is included in the listed price for the great majority of products. Valve radiators (Ventilheizkörper) are the only exception — those ship at standard DHL rates, calculated by weight and destination at checkout.</p>
+<p>Nothing extra — shipping is free. The delivery cost is already included in the price you see on the product page, on every product. There is no separate shipping charge at checkout.</p>
 
 <h3>Are your radiators heat-pump compatible?</h3>
 <p>Many are. Look for the “Heat-pump ready” badge on the product card and in the spec sheet. The Konrad Type 22 and Type 33 models are designed for low-temperature heat-pump operation.</p>
@@ -113,13 +114,10 @@ const FAQ = `
 
 const SHIPPING = `
 <h2>Shipping &amp; Delivery</h2>
-<p>We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Shipping is included in the listed price for the majority of products.</p>
+<p>We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Shipping is free — the delivery cost is included in the price you see on every product page.</p>
 
-<h3>Standard shipping — included</h3>
-<p>For most products, shipping is included in the price you see on the product page. No surcharge at checkout.</p>
-
-<h3>Valve radiators (Ventilheizkörper) — DHL standard rates</h3>
-<p>Valve radiators ship at standard DHL rates, calculated by weight and destination at checkout. Currently this applies to the Konrad Type 22 and Type 33 series.</p>
+<h3>Free shipping — included in the price</h3>
+<p>There is no separate shipping charge at checkout, on any product. The price on the product page is the price you pay (plus local VAT, which is also already included).</p>
 
 <h3>Delivery countries</h3>
 <p>Germany, Netherlands, Belgium, Luxembourg. Other addresses cannot be checked out.</p>
@@ -212,7 +210,7 @@ const TERMS = `
 <p>The terms governing orders placed on this storefront.</p>
 
 <h3>Prices and currency</h3>
-<p>Prices in EUR, inclusive of local VAT. Shipping is included in the listed price for most products; valve radiators ship at standard DHL rates added at checkout.</p>
+<p>Prices in EUR, inclusive of local VAT and of shipping — delivery to Germany, the Netherlands, Belgium and Luxembourg is free, with no separate shipping charge at checkout.</p>
 
 <h3>Right of withdrawal</h3>
 <p>30 days from delivery for unused, unopened items in original packaging. Bespoke and cut-to-length items are excluded.</p>
