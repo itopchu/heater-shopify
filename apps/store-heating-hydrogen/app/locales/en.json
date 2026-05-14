@@ -183,7 +183,7 @@
     "designed_in_germany_title_line2": "furniture, sized",
     "designed_in_germany_title_line3": "for",
     "designed_in_germany_title_em": "every wall.",
-    "designed_in_germany_lede": "Eight design series — Astoria, Elanor, Flora, Pullman, Twister, Konrad, Platis, Lavinno — across three studio colorways. Sculptural objects first, heaters second.",
+    "designed_in_germany_lede": "Nine design series — Berlin, Dresden, Hamburg, Potsdam, Mainz, Köln, Essen, Aachen, Baden — across three studio colorways. Sculptural objects first, heaters second.",
     "browse_catalog_cta": "Browse the catalog",
     "bestsellers_eyebrow": "Bestsellers",
     "bestsellers_title_lead": "Loved by installers",
@@ -406,7 +406,7 @@
     "match_plural": "{count} matches",
     "empty": "No results, try a different search.",
     "empty_query": "No results found for \"{query}\"",
-    "no_results_for_query": "No products match \"{query}\". Try a series name (Astoria, Elanor, Konrad), a dimension (e.g. 1800x600), or a room (bathroom, living room).",
+    "no_results_for_query": "No products match \"{query}\". Try a series name (Berlin, Köln, Aachen), a dimension (e.g. 1800x600), or a room (bathroom, living room).",
     "view_all_results": "View all results for \"{query}\""
   },
   "cart": {
@@ -467,7 +467,7 @@
     "placeholder_eyebrow_heatpump": "Heat-pump",
     "placeholder_title_heatpump": "Why low-temperature output ratings matter in 2026",
     "placeholder_eyebrow_series": "Series spotlight",
-    "placeholder_title_series": "Astoria — 100 years of vertical column radiators",
+    "placeholder_title_series": "Köln — vertical panel radiators reimagined for modern walls",
     "placeholder_eyebrow_eu": "EU regulation",
     "placeholder_title_eu": "What the new ecodesign rules mean for your project",
     "placeholder_eyebrow_bathroom": "Bathroom",

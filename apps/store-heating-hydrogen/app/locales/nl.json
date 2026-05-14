@@ -183,7 +183,7 @@
     "designed_in_germany_title_line2": "ontworpen, op maat",
     "designed_in_germany_title_line3": "voor",
     "designed_in_germany_title_em": "elke wand.",
-    "designed_in_germany_lede": "Acht designseries — Astoria, Elanor, Flora, Pullman, Twister, Konrad, Platis, Lavinno — in drie studio-kleurpaletten. Sculpturale objecten eerst, radiatoren tweede.",
+    "designed_in_germany_lede": "Negen designseries — Berlin, Dresden, Hamburg, Potsdam, Mainz, Köln, Essen, Aachen, Baden — in drie studio-kleurpaletten. Sculpturale objecten eerst, radiatoren tweede.",
     "browse_catalog_cta": "Bekijk de catalogus",
     "bestsellers_eyebrow": "Bestsellers",
     "bestsellers_title_lead": "Geliefd bij installateurs",
@@ -406,7 +406,7 @@
     "match_plural": "{count} resultaten",
     "empty": "Geen resultaten, probeer een andere zoekopdracht.",
     "empty_query": "Geen resultaten voor \"{query}\"",
-    "no_results_for_query": "Geen producten gevonden voor \"{query}\". Probeer een serienaam (Astoria, Elanor, Konrad), een afmeting (bijv. 1800x600) of een ruimte (badkamer, woonkamer).",
+    "no_results_for_query": "Geen producten gevonden voor \"{query}\". Probeer een serienaam (Berlin, Köln, Aachen), een afmeting (bijv. 1800x600) of een ruimte (badkamer, woonkamer).",
     "view_all_results": "Bekijk alle resultaten voor \"{query}\""
   },
   "cart": {
@@ -467,7 +467,7 @@
     "placeholder_eyebrow_heatpump": "Warmtepomp",
     "placeholder_title_heatpump": "Waarom lagetemperatuur-vermogenwaarden er in 2026 toe doen",
     "placeholder_eyebrow_series": "Serie-uitgelicht",
-    "placeholder_title_series": "Astoria — 100 jaar verticale kolomradiatoren",
+    "placeholder_title_series": "Köln — verticale paneelradiatoren, opnieuw gedacht voor moderne wanden",
     "placeholder_eyebrow_eu": "EU-regelgeving",
     "placeholder_title_eu": "Wat de nieuwe ecodesign-regels voor uw project betekenen",
     "placeholder_eyebrow_bathroom": "Badkamer",

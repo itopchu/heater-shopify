@@ -183,7 +183,7 @@
     "designed_in_germany_title_line2": "konstruiert, für",
     "designed_in_germany_title_line3": "jede",
     "designed_in_germany_title_em": "Wand bemessen.",
-    "designed_in_germany_lede": "Acht Designserien — Astoria, Elanor, Flora, Pullman, Twister, Konrad, Platis, Lavinno — in drei Studio-Farbwelten. Skulpturale Objekte zuerst, Heizkörper zweitens.",
+    "designed_in_germany_lede": "Neun Designserien — Berlin, Dresden, Hamburg, Potsdam, Mainz, Köln, Essen, Aachen, Baden — in drei Studio-Farbwelten. Skulpturale Objekte zuerst, Heizkörper zweitens.",
     "browse_catalog_cta": "Katalog ansehen",
     "bestsellers_eyebrow": "Bestseller",
     "bestsellers_title_lead": "Geliebt von Installateuren",
@@ -406,7 +406,7 @@
     "match_plural": "{count} Treffer",
     "empty": "Keine Ergebnisse, versuchen Sie einen anderen Suchbegriff.",
     "empty_query": "Keine Ergebnisse für „{query}“",
-    "no_results_for_query": "Keine Produkte entsprechen „{query}“. Versuchen Sie einen Seriennamen (Astoria, Elanor, Konrad), ein Maß (z. B. 1800x600) oder einen Raum (Bad, Wohnzimmer).",
+    "no_results_for_query": "Keine Produkte entsprechen „{query}“. Versuchen Sie einen Seriennamen (Berlin, Köln, Aachen), ein Maß (z. B. 1800x600) oder einen Raum (Bad, Wohnzimmer).",
     "view_all_results": "Alle Ergebnisse für „{query}“ anzeigen"
   },
   "cart": {
@@ -467,7 +467,7 @@
     "placeholder_eyebrow_heatpump": "Wärmepumpe",
     "placeholder_title_heatpump": "Warum Niedertemperatur-Leistungswerte 2026 entscheidend sind",
     "placeholder_eyebrow_series": "Serien-Spotlight",
-    "placeholder_title_series": "Astoria — 100 Jahre vertikale Säulenheizkörper",
+    "placeholder_title_series": "Köln — vertikale Plattenheizkörper, neu gedacht für moderne Wände",
     "placeholder_eyebrow_eu": "EU-Regulierung",
     "placeholder_title_eu": "Was die neuen Ökodesign-Regeln für Ihr Projekt bedeuten",
     "placeholder_eyebrow_bathroom": "Badezimmer",

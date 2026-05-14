@@ -75,8 +75,8 @@ export default function SearchResultsPage() {
       <div className="mt-10">
         {q && results.products.length === 0 ? (
           <div className="rounded-[var(--radius-md)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface-muted)] p-10 text-center text-sm text-[var(--color-text-muted)]">
-            No products match &ldquo;{q}&rdquo;. Try a series name (Astoria,
-            Elanor, Konrad), a dimension (e.g. <code>1800x600</code>), or a
+            No products match &ldquo;{q}&rdquo;. Try a series name (Berlin,
+            Köln, Aachen), a dimension (e.g. <code>1800x600</code>), or a
             room (bathroom, living room).
           </div>
         ) : null}

@@ -183,7 +183,7 @@
     "designed_in_germany_title_line2": "un meuble, dimensionné",
     "designed_in_germany_title_line3": "pour",
     "designed_in_germany_title_em": "chaque mur.",
-    "designed_in_germany_lede": "Huit séries de design — Astoria, Elanor, Flora, Pullman, Twister, Konrad, Platis, Lavinno — déclinées en trois palettes studio. Objets sculpturaux d'abord, radiateurs ensuite.",
+    "designed_in_germany_lede": "Neuf séries de design — Berlin, Dresden, Hamburg, Potsdam, Mainz, Köln, Essen, Aachen, Baden — déclinées en trois palettes studio. Objets sculpturaux d'abord, radiateurs ensuite.",
     "browse_catalog_cta": "Voir le catalogue",
     "bestsellers_eyebrow": "Meilleures ventes",
     "bestsellers_title_lead": "Plébiscités par les installateurs",
@@ -406,7 +406,7 @@
     "match_plural": "{count} résultats",
     "empty": "Aucun résultat, essayez une autre recherche.",
     "empty_query": "Aucun résultat pour « {query} »",
-    "no_results_for_query": "Aucun produit ne correspond à « {query} ». Essayez un nom de série (Astoria, Elanor, Konrad), une dimension (par ex. 1800x600) ou une pièce (salle de bain, salon).",
+    "no_results_for_query": "Aucun produit ne correspond à « {query} ». Essayez un nom de série (Berlin, Köln, Aachen), une dimension (par ex. 1800x600) ou une pièce (salle de bain, salon).",
     "view_all_results": "Voir tous les résultats pour « {query} »"
   },
   "cart": {
@@ -467,7 +467,7 @@
     "placeholder_eyebrow_heatpump": "Pompe à chaleur",
     "placeholder_title_heatpump": "Pourquoi les puissances basse température comptent en 2026",
     "placeholder_eyebrow_series": "Focus série",
-    "placeholder_title_series": "Astoria — 100 ans de radiateurs à colonnes verticales",
+    "placeholder_title_series": "Köln — radiateurs à panneaux verticaux repensés pour les murs modernes",
     "placeholder_eyebrow_eu": "Réglementation UE",
     "placeholder_title_eu": "Ce que les nouvelles règles d'écoconception signifient pour votre projet",
     "placeholder_eyebrow_bathroom": "Salle de bain",
