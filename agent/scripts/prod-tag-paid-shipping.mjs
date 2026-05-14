@@ -36,8 +36,9 @@ const TAG = 'shipping:paid';
 // Default product set — the two existing Ventilheizkörper SKUs in the
 // catalog. Extend this list (or pass --handle) when new SKUs land.
 const DEFAULT_HANDLES = [
-  'konrad-ventilheizkorper-typ-22',
-  'konrad-ventilheizkorper-typ-33',
+  // Renamed 2026-05-14 (Konrad → Aachen rebrand).
+  'aachen-ventilheizkorper-typ-22',
+  'aachen-ventilheizkorper-typ-33',
 ];
 
 const cliHandles = [];

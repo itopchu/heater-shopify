@@ -35,6 +35,7 @@ import {
 } from '~/lib/gberg/queries';
 import {formatLocaleFromRoute} from '~/lib/gberg/format';
 import {normalizeLocale, tFor, useT, type TFunction} from '~/lib/gberg/i18n';
+import {maybeShopifyRedirect} from '~/lib/redirect';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 import {
   PHONE_DISPLAY,
@@ -133,7 +134,7 @@ export const meta: Route.MetaFunction = ({
   ];
 };
 
-export async function loader({context, params}: Route.LoaderArgs) {
+export async function loader({request, context, params}: Route.LoaderArgs) {
   const locale = normalizeLocale(params.locale);
   const handle = params.handle;
   if (!handle) throw new Response('Missing handle', {status: 404});
@@ -141,10 +142,11 @@ export async function loader({context, params}: Route.LoaderArgs) {
   const client = createGbergClient(context.storefront);
   const product = await fetchProductByHandle(client, handle, locale);
   if (!product) {
-    // 410 Gone — explicitly tell crawlers this URL was a real product
-    // that no longer exists, so they de-index it. Plain 404 leaves the
-    // URL eligible for re-crawl indefinitely. The error boundary still
-    // renders a polite "no longer available — browse similar" UI.
+    // First, see if Shopify's URL Redirects table has a 301 for this path
+    // (e.g. the product was renamed by `prod-rename-series-to-german-cities`).
+    // `maybeShopifyRedirect` throws a 301 Response if found — otherwise falls
+    // through to the 410 Gone below so crawlers de-index the dead URL.
+    await maybeShopifyRedirect(request, context.storefront);
     throw new Response('Product no longer available', {status: 410});
   }
 
