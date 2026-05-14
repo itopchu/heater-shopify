@@ -147,7 +147,7 @@
     "privacy": "Confidentialité",
     "terms": "CGV",
     "copyright": "© {year} G-Berg GmbH",
-    "vat_note": "Prix TTC, livraison offerte incluse"
+    "vat_note": "Prix TTC. Livraison offerte sur la plupart des produits — les radiateurs à vanne Aachen sont facturés au tarif transporteur, affiché au paiement."
   },
   "newsletter": {
     "email_label": "Adresse e-mail",
@@ -223,7 +223,7 @@
     "decrease_quantity": "Diminuer la quantité",
     "increase_quantity": "Augmenter la quantité",
     "buy_bar_aria": "Barre d'achat",
-    "price_vat_note": "TTC · livraison offerte",
+    "price_vat_note": "TTC · livraison au paiement",
     "delivery_returns_heading": "Livraison & retours",
     "delivery_returns_body": "Livraison gratuite vers l'Allemagne, la Belgique, les Pays-Bas et le Luxembourg. Les frais de port sont inclus dans le prix affiché. Retours sous 30 jours sur articles non utilisés.",
     "need_help_heading": "Besoin d'aide ?",

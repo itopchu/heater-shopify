@@ -147,7 +147,7 @@
     "privacy": "Datenschutz",
     "terms": "AGB",
     "copyright": "© {year} G-Berg GmbH",
-    "vat_note": "Preise inkl. lokaler MwSt. und kostenloser Lieferung"
+    "vat_note": "Preise inkl. lokaler MwSt. Kostenlose Lieferung für die meisten Produkte — Aachen Ventilheizkörper werden zum Spediteur-Tarif berechnet, angezeigt an der Kasse."
   },
   "newsletter": {
     "email_label": "E-Mail-Adresse",
@@ -204,7 +204,7 @@
     "faq_eyebrow": "FAQ",
     "faq_title": "Häufige Fragen.",
     "faq_q1": "Wohin liefern Sie?",
-    "faq_a1": "Wir liefern nach Deutschland, Belgien, in die Niederlande und nach Luxemburg. Der Versand ist kostenlos — bereits im angegebenen Preis enthalten.",
+    "faq_a1": "Wir liefern nach Deutschland, Belgien, in die Niederlande und nach Luxemburg. Versand ist für fast den gesamten Katalog kostenlos — nur die Aachen Typ 22 und Typ 33 Ventilheizkörper haben eine separate Speditionsgebühr (€100 für bis zu 8 Stück, in 8er-Schritten gestaffelt), angezeigt an der Kasse.",
     "faq_q2": "Sind Ihre Heizkörper wärmepumpentauglich?",
     "faq_a2": "Viele unserer Modelle sind es. Achten Sie auf das Etikett 'Wärmepumpen-tauglich' auf den Produktkarten oder filtern Sie auf den Kategorieseiten nach Wärmepumpen-Kompatibilität.",
     "faq_q3": "Wie ist Ihre Rückgaberichtlinie?",
@@ -223,7 +223,7 @@
     "decrease_quantity": "Menge verringern",
     "increase_quantity": "Menge erhöhen",
     "buy_bar_aria": "Kaufleiste",
-    "price_vat_note": "Inkl. MwSt. · kostenlose Lieferung",
+    "price_vat_note": "Inkl. MwSt. · Lieferung an der Kasse",
     "delivery_returns_heading": "Versand & Rückgabe",
     "delivery_returns_body": "Kostenlose Lieferung nach Deutschland, Belgien, in die Niederlande und nach Luxemburg. Der Versand ist im angegebenen Preis enthalten. 30 Tage Rückgaberecht für unbenutzte Artikel.",
     "need_help_heading": "Benötigen Sie Hilfe?",

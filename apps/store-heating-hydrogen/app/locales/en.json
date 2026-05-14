@@ -147,7 +147,7 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "copyright": "© {year} G-Berg GmbH",
-    "vat_note": "Prices include local VAT and free delivery"
+    "vat_note": "Prices include local VAT. Free delivery on most products — Aachen valve radiators ship at carrier rate, shown at checkout."
   },
   "newsletter": {
     "email_label": "Email address",
@@ -204,7 +204,7 @@
     "faq_eyebrow": "FAQ",
     "faq_title": "Common questions.",
     "faq_q1": "Where do you ship?",
-    "faq_a1": "We deliver to Germany, Belgium, the Netherlands and Luxembourg. Shipping is free — included in the listed price for every product.",
+    "faq_a1": "We deliver to Germany, Belgium, the Netherlands and Luxembourg. Free shipping on almost the entire catalog — only the Aachen Typ 22 and Typ 33 valve radiators carry a separate carrier fee (€100 per up to 8 units, scaling in 8-unit blocks), shown at checkout.",
     "faq_q2": "Are your radiators heat-pump compatible?",
     "faq_a2": "Many of them are. Look for the 'Heat-pump ready' badge on product cards or filter by heat-pump compatibility on collection pages.",
     "faq_q3": "What's your return policy?",
@@ -223,7 +223,7 @@
     "decrease_quantity": "Decrease quantity",
     "increase_quantity": "Increase quantity",
     "buy_bar_aria": "Buy bar",
-    "price_vat_note": "Incl. VAT · free delivery",
+    "price_vat_note": "Incl. VAT · delivery shown at checkout",
     "delivery_returns_heading": "Delivery & returns",
     "delivery_returns_body": "Free delivery to Germany, Belgium, the Netherlands and Luxembourg. Shipping is included in the listed price. 30-day returns on unused items.",
     "need_help_heading": "Need help?",

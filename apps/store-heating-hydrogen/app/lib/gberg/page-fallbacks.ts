@@ -73,7 +73,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     title: 'Terms & Conditions',
     intro: 'The terms governing orders placed on this storefront.',
     body: [
-      'Prices in EUR, including local VAT. Free shipping to Germany, the Netherlands, Belgium and Luxembourg — the delivery cost is included in the listed price.',
+      'Prices in EUR, including local VAT. Free shipping to Germany, the Netherlands, Belgium and Luxembourg on almost the entire catalog — only the Aachen Typ 22 and Typ 33 valve radiators carry a separate carrier fee, calculated at checkout.',
       'Right of withdrawal: 30 days from delivery for unused, unopened items in original packaging. Bespoke and cut-to-length items are excluded.',
       'Warranty: 10 years on the radiator body, 2 years on electronic components, per manufacturer terms.',
       'Seller: G-Berg GmbH, Hagenerstrasse 33, 58642 Iserlohn, Germany. info@g-berg-gmbh.de.',
@@ -82,9 +82,10 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
   shipping: {
     title: 'Shipping & Delivery',
     intro:
-      'We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Shipping is free — the delivery cost is included in the listed price for every product.',
+      'We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Shipping is free for almost the entire catalog — only the Aachen Typ 22 and Typ 33 valve radiators carry a separate delivery fee, calculated at checkout.',
     body: [
-      'Shipping is included in the listed price — no additional charge at checkout, on every product.',
+      'For every product except the two Aachen valve radiators, shipping is included in the listed price — no additional charge at checkout.',
+      'The Aachen Typ 22 and Typ 33 valve radiators ship via our heavy carrier at €100 per order of up to 8 units, then €200 for 9–16 units, €300 for 17–24, and so on. The exact fee is shown in the cart and at checkout.',
       'Delivery countries: Germany, Netherlands, Belgium, Luxembourg. Addresses outside these four countries cannot be checked out at the moment.',
       'Standard delivery: 3–7 business days after dispatch confirmation.',
       'Curbside delivery only — items above 30 kg or 1.5 m require two-person handling on-site (ask your installer).',
@@ -112,7 +113,7 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
     title: 'Frequently asked questions',
     intro: 'Quick answers to the questions our engineers hear most often.',
     body: [
-      'Where do you ship? Germany, the Netherlands, Belgium and Luxembourg. Shipping is free — the delivery cost is included in the listed price for every product.',
+      'Where do you ship? Germany, the Netherlands, Belgium and Luxembourg. Shipping is free for almost the entire catalog — only the Aachen Typ 22 and Typ 33 valve radiators carry a separate carrier fee (€100 per up to 8 units, scaling in 8-unit blocks), shown at checkout.',
       "Are your radiators heat-pump compatible? Many are. Look for the 'Heat-pump ready' badge on the product card.",
       'Can I install a radiator myself? Hydronic radiators must be commissioned by a certified heating engineer to keep the warranty. Electric radiators can be installed by a qualified electrician.',
       `What if the model I want is out of stock? Email ${SUPPORT_EMAIL} — most items return to stock within 4–6 weeks and we hold orders without payment until you confirm.`,

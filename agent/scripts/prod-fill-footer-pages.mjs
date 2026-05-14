@@ -94,10 +94,10 @@ const FAQ = `
 <p>Germany, the Netherlands, Belgium and Luxembourg. Addresses outside these four countries cannot check out at the moment.</p>
 
 <h3>How much does shipping cost?</h3>
-<p>Nothing extra — shipping is free. The delivery cost is already included in the price you see on the product page, on every product. There is no separate shipping charge at checkout.</p>
+<p>Free for almost the entire catalog — the delivery cost is already included in the listed price, with no separate shipping charge at checkout. The two Aachen valve radiators (Typ 22 and Typ 33) are the only exception: they ship via our heavy carrier at €100 per order of up to 8 units, then €200 for 9–16 units, €300 for 17–24, and so on.</p>
 
 <h3>Are your radiators heat-pump compatible?</h3>
-<p>Many are. Look for the “Heat-pump ready” badge on the product card and in the spec sheet. The Konrad Type 22 and Type 33 models are designed for low-temperature heat-pump operation.</p>
+<p>Many are. Look for the “Heat-pump ready” badge on the product card and in the spec sheet. The Aachen Typ 22 and Typ 33 models are designed for low-temperature heat-pump operation.</p>
 
 <h3>Can I install a radiator myself?</h3>
 <p>Hydronic radiators must be commissioned by a certified heating engineer to keep the warranty. Electric radiators can be installed by a qualified electrician. Plug-in heating elements ship with installer-grade instructions.</p>
@@ -114,10 +114,13 @@ const FAQ = `
 
 const SHIPPING = `
 <h2>Shipping &amp; Delivery</h2>
-<p>We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Shipping is free — the delivery cost is included in the price you see on every product page.</p>
+<p>We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Shipping is free for almost the entire catalog — only the two Aachen valve radiators (Typ 22 and Typ 33) carry a separate delivery fee, calculated at checkout.</p>
 
 <h3>Free shipping — included in the price</h3>
-<p>There is no separate shipping charge at checkout, on any product. The price on the product page is the price you pay (plus local VAT, which is also already included).</p>
+<p>For every product except the two Aachen valve radiators, there is no separate shipping charge at checkout. The price on the product page is the price you pay (plus local VAT, also already included).</p>
+
+<h3>Aachen valve radiators — heavy carrier delivery</h3>
+<p>The Aachen Typ 22 and Typ 33 valve radiators ship via our specialist carrier and are billed at €100 per order of up to 8 units, scaling in 8-unit blocks (9–16 units = €200, 17–24 = €300, and so on). The exact delivery fee is shown in the cart and at checkout.</p>
 
 <h3>Delivery countries</h3>
 <p>Germany, Netherlands, Belgium, Luxembourg. Other addresses cannot be checked out.</p>
@@ -210,7 +213,7 @@ const TERMS = `
 <p>The terms governing orders placed on this storefront.</p>
 
 <h3>Prices and currency</h3>
-<p>Prices in EUR, inclusive of local VAT and of shipping — delivery to Germany, the Netherlands, Belgium and Luxembourg is free, with no separate shipping charge at checkout.</p>
+<p>Prices in EUR, inclusive of local VAT. Delivery to Germany, the Netherlands, Belgium and Luxembourg is free for almost the entire catalog; only the Aachen Typ 22 and Typ 33 valve radiators carry a separate carrier fee, calculated at checkout.</p>
 
 <h3>Right of withdrawal</h3>
 <p>30 days from delivery for unused, unopened items in original packaging. Bespoke and cut-to-length items are excluded.</p>

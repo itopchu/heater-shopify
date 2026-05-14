@@ -32,11 +32,12 @@ export function whatsappHref(message: string = WHATSAPP_MESSAGE_GENERIC): string
   return `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(message)}`;
 }
 
-// Shipping rule (storefront copy only; the Shopify delivery profile is plain
-// free shipping for all four countries).
-// Policy 2026-05 (revised): shipping is free everywhere — the delivery cost is
-// included in the listed price for every product. (Valve radiators carry a flat
-// €20/unit surcharge baked into their price via the `shipping-in-price` tag;
-// see agent/scripts/prod-bake-valve-shipping-into-price.mjs — Basic plan can't
-// bill €X/item at checkout without a carrier service.)
+// Shipping policy (2026-05-14 revised). Two delivery profiles in Shopify:
+//  · Default (free): every product except the two Aachen valve radiators —
+//    delivery cost is built into the listed price.
+//  · "Aachen carrier delivery (€100 / 500 kg)": the Typ 22 + Typ 33 Aachen
+//    valve radiators ship via our specialist carrier. Each variant carries a
+//    uniform 62.5 kg internal weight, so the cart's weight rolls up to whole
+//    500 kg brackets at €100 each: 1–8 units = €100, 9–16 = €200, etc.
+//    See agent/scripts/prod-aachen-carrier-delivery.mjs.
 export const SHIPPING_COUNTRIES_ISO = ['DE', 'NL', 'BE', 'LU'] as const;

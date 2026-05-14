@@ -147,7 +147,7 @@
     "privacy": "Privacy",
     "terms": "Algemene voorwaarden",
     "copyright": "© {year} G-Berg GmbH",
-    "vat_note": "Prijzen incl. lokale btw en gratis bezorging"
+    "vat_note": "Prijzen incl. lokale btw. Gratis bezorging voor de meeste producten — Aachen ventielradiatoren worden tegen vrachttarief berekend, getoond bij het afrekenen."
   },
   "newsletter": {
     "email_label": "E-mailadres",
@@ -223,7 +223,7 @@
     "decrease_quantity": "Aantal verlagen",
     "increase_quantity": "Aantal verhogen",
     "buy_bar_aria": "Koopbalk",
-    "price_vat_note": "Incl. btw · gratis verzending",
+    "price_vat_note": "Incl. btw · verzending bij afrekenen",
     "delivery_returns_heading": "Verzending & retour",
     "delivery_returns_body": "Gratis bezorging naar Duitsland, België, Nederland en Luxemburg. Verzending is inbegrepen in de vermelde prijs. 30 dagen retour op ongebruikte artikelen.",
     "need_help_heading": "Hulp nodig?",
