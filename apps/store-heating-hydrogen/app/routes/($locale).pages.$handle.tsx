@@ -4,7 +4,6 @@
  */
 import {useLoaderData, useParams} from 'react-router';
 import type {Route} from './+types/pages.$handle';
-import {Eyebrow} from '@gberg/ui';
 import {createGbergClient} from '~/lib/storefront.server';
 import {fetchPageByHandle} from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
@@ -17,6 +16,7 @@ import {
 import {normalizeLocale, useT} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 import {buildBreadcrumbJsonLd} from '~/lib/gberg/jsonld';
+import {JsonLd} from '~/components/gberg/json-ld';
 import {ContactView} from '~/components/gberg/contact-view';
 
 interface ResolvedPage {
@@ -63,7 +63,6 @@ export const meta: Route.MetaFunction = ({
   location: {pathname: string};
 }) => {
   const page = data?.page;
-  const locale = data?.locale ?? 'en';
   const baseTitle = page?.seo?.title ?? page?.title ?? 'Page';
   const title = baseTitle.includes(BRAND_NAME)
     ? baseTitle
@@ -85,16 +84,8 @@ export const meta: Route.MetaFunction = ({
     PAGE_DESCRIPTION_FLOOR[handleSlug] ||
     PAGE_DESCRIPTION_FLOOR.default;
 
-  // BreadcrumbList: Home → <page title>. Mirrors the visible "Home" path
-  // implied by the brand link in the header (which lands at `/{locale}`)
-  // and the page H1 below.
-  const breadcrumbLd = page?.title
-    ? buildBreadcrumbJsonLd([
-        {label: 'Home', href: `/${locale}`},
-        {label: page.title},
-      ])
-    : null;
-
+  // BreadcrumbList JSON-LD is emitted from the component via <JsonLd>
+  // (React Router drops `tagName:'script'` meta descriptors).
   return [
     {title},
     {name: 'description', content: description},
@@ -104,7 +95,6 @@ export const meta: Route.MetaFunction = ({
       pathname: location.pathname,
       type: 'website',
     }),
-    ...(breadcrumbLd ? [breadcrumbLd] : []),
   ];
 };
 
@@ -144,17 +134,31 @@ export default function PageRoute() {
   const params = useParams();
   const t = useT();
 
+  // BreadcrumbList — Home → <visible page H1>. Rendered on both the
+  // generic-page and the contact layouts.
+  const jsonLd = [
+    buildBreadcrumbJsonLd([
+      {label: 'Home', href: `/${locale}`},
+      {label: page.title},
+    ]),
+  ];
+
   // The contact page gets a structured layout instead of generic prose —
   // clearer channel-based grid, brief callout, full locale parity.
   if ((params as {handle?: string}).handle === 'contact') {
-    return <ContactView />;
+    return (
+      <>
+        <JsonLd items={jsonLd} />
+        <ContactView />
+      </>
+    );
   }
 
   return (
     <article className="container-x py-10 lg:py-16">
+      <JsonLd items={jsonLd} />
       <header className="max-w-3xl border-b border-[var(--color-border)] pb-8">
-        <Eyebrow>{t('pages.eyebrow')}</Eyebrow>
-        <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.25rem)] text-[var(--color-text)]">
+        <h1 className="display-heading text-[clamp(2rem,3vw+1rem,3.25rem)] text-[var(--color-text)]">
           {page.title}
         </h1>
         {page.intro ? (

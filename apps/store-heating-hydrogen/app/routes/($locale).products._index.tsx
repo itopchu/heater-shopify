@@ -4,7 +4,6 @@
  */
 import {useLoaderData} from 'react-router';
 import type {Route} from './+types/products._index';
-import {Eyebrow} from '@gberg/ui';
 import {CollectionView} from '~/components/gberg/plp/collection-view';
 import {createGbergClient} from '~/lib/storefront.server';
 import {fetchAllProducts} from '~/lib/gberg/queries';
@@ -51,8 +50,7 @@ export default function ShopAllPage() {
   return (
     <div className="container-x py-8 lg:py-12">
       <header className="max-w-3xl">
-        <Eyebrow>{t('plp.shop_all_eyebrow')}</Eyebrow>
-        <h1 className="display-heading mt-4 text-[clamp(2.25rem,4vw+0.5rem,4rem)] text-[var(--color-text)]">
+        <h1 className="display-heading text-[clamp(2.25rem,4vw+0.5rem,4rem)] text-[var(--color-text)]">
           {t('plp.shop_all_title_lead')}{' '}
           <em className="italic text-[var(--color-primary)]">
             {t('plp.shop_all_title_em')}

@@ -2,7 +2,8 @@
  * Heating PDP. Hydrogen port of
  * apps/store-heating/app/(storefront)/[locale]/products/[handle]/page.tsx.
  */
-import {useLoaderData} from 'react-router';
+import {useLoaderData, useLocation} from 'react-router';
+import {JsonLd} from '~/components/gberg/json-ld';
 import type {Route} from './+types/products.$handle';
 import {
   BadgePill,
@@ -20,6 +21,7 @@ import {BuyBox} from '~/components/gberg/pdp/buy-box';
 import {QuickFacts} from '~/components/gberg/pdp/quick-facts';
 import {SectionsAccordion} from '~/components/gberg/pdp/sections-accordion';
 import {AiBlock} from '~/components/gberg/pdp/ai-block';
+import {WhoItsFor} from '~/components/gberg/pdp/who-its-for';
 import {Documents} from '~/components/gberg/pdp/documents';
 import {CollapsibleSection} from '~/components/gberg/pdp/collapsible-section';
 import {StarBadge} from '~/components/gberg/pdp/star-badge';
@@ -36,7 +38,7 @@ import {
 import {formatLocaleFromRoute} from '~/lib/gberg/format';
 import {normalizeLocale, tFor, useT, type TFunction} from '~/lib/gberg/i18n';
 import {maybeShopifyRedirect} from '~/lib/redirect';
-import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
+import {BRAND_NAME, buildSeoMeta, synthesizeDescription} from '~/lib/gberg/seo';
 import {
   PHONE_DISPLAY,
   PHONE_TEL_HREF,
@@ -50,7 +52,9 @@ import {
   findSiblingColors,
   galleryImages,
   isFaqShapedSection,
+  isPlainDimensionString,
   localizeSpecValue,
+  normalizeDimensionDisplay,
   pickSections,
   resolveSeriesLabel,
 } from '~/lib/gberg/heating-derived';
@@ -94,30 +98,36 @@ export const meta: Route.MetaFunction = ({
   const title = baseTitle.includes(BRAND_NAME)
     ? baseTitle
     : `${baseTitle} — ${BRAND_NAME}`;
+  // `||` not `??` here: a blank Shopify "Search engine listing" field
+  // comes back as `''`, which `??` would (wrongly) accept — we want the
+  // first *non-empty* value, then the synthesised floor.
   const description =
-    seo?.override_description ??
-    product.seo.description ??
-    product.common.custom?.short_description ??
-    product.common.custom?.subtitle ??
-    '';
+    seo?.override_description ||
+    product.seo.description ||
+    product.common.custom?.short_description ||
+    product.common.custom?.subtitle ||
+    synthesizeDescription(baseTitle, [
+      product.specs.wattage_w ? `${product.specs.wattage_w} W output` : null,
+      product.specs.width_mm && product.specs.height_mm
+        ? `${product.specs.width_mm}×${product.specs.height_mm}${
+            product.specs.depth_mm ? `×${product.specs.depth_mm}` : ''
+          } mm`
+        : null,
+      product.specs.energy_class
+        ? `energy class ${product.specs.energy_class}`
+        : null,
+      product.specs.room_coverage_m2
+        ? `heats rooms up to ${product.specs.room_coverage_m2} m²`
+        : null,
+      product.specs.heat_pump_compatible ? 'heat-pump compatible' : null,
+      product.specs.bathroom_suitable ? 'bathroom-rated' : null,
+    ]);
   const ogImage =
     galleryImages(product)[0]?.url ?? undefined;
 
-  // Derive the JSON-LD payloads. Each builder reads from the same
-  // product/locale/sections data the React component renders, so the
-  // visible-content parity rule holds.
-  const locale = data?.locale ?? 'en';
-  const crumbs = buildBreadcrumb(product, locale, tFor(locale));
-  const breadcrumbLd = buildBreadcrumbJsonLd(crumbs);
-  const productLd = buildProductJsonLd(product, location.pathname);
-  // FAQ JSON-LD mirrors the visible <FaqAccordion> — same Q/A, same order.
-  const {sections} = pickSections(product, locale);
-  const faqPlain: FaqEntry[] = sections
-    .filter(isFaqShapedSection)
-    .slice(0, 8)
-    .map((s) => ({question: s.title, answer: s.text || s.html || ''}));
-  const faqLd = buildFaqPageJsonLd(faqPlain);
-
+  // JSON-LD (Product / BreadcrumbList / FAQPage) is emitted from the
+  // component via <JsonLd>, not here — React Router silently drops
+  // `tagName:'script'` meta descriptors. See components/gberg/json-ld.tsx.
   return [
     {title},
     {name: 'description', content: description},
@@ -128,9 +138,6 @@ export const meta: Route.MetaFunction = ({
       type: 'product',
       ogImage,
     }),
-    productLd,
-    ...(breadcrumbLd ? [breadcrumbLd] : []),
-    ...(faqLd ? [faqLd] : []),
   ];
 };
 
@@ -145,7 +152,7 @@ export async function loader({request, context, params}: Route.LoaderArgs) {
     // First, see if Shopify's URL Redirects table has a 301 for this path
     // (e.g. the product was renamed by `prod-rename-series-to-german-cities`).
     // `maybeShopifyRedirect` throws a 301 Response if found — otherwise falls
-    // through to the 410 Gone below so crawlers de-index the dead URL.
+    // through and we emit 410 Gone so crawlers de-index the dead URL.
     await maybeShopifyRedirect(request, context.storefront);
     throw new Response('Product no longer available', {status: 410});
   }
@@ -186,13 +193,6 @@ export default function ProductPage() {
     product.common.shipping?.dispatch_note ??
     t('pdp.dispatch_default');
 
-  // Eyebrow prefers `custom.series` metafield, falls back to tag-derived,
-  // and finally to product type — never blank.
-  const eyebrow =
-    resolveSeriesLabel(product) ??
-    product.productType ??
-    t('pdp.fallback_eyebrow_radiator');
-
   const badges = product.common.merchandising?.badges ?? [];
 
   const images = galleryImages(product);
@@ -209,8 +209,24 @@ export default function ProductPage() {
   const aix = product.common.aix ?? {};
   const keyFacts = aix.key_facts ?? fallbackKeyFacts(product, t);
 
+  // Structured data. Each builder reads the same loader-derived data the
+  // visible markup renders (crumbs, specs, FAQ entries) so the parity rule
+  // in jsonld.ts holds. The <FaqAccordion> below renders `faqs`; the
+  // FAQPage JSON-LD mirrors the same Q/A source (plain-text answers).
+  const {pathname} = useLocation();
+  const faqPlain: FaqEntry[] = sections
+    .filter(isFaqShapedSection)
+    .slice(0, 8)
+    .map((s) => ({question: s.title, answer: s.text || s.html || ''}));
+  const jsonLd = [
+    buildProductJsonLd(product, pathname),
+    buildBreadcrumbJsonLd(crumbs),
+    buildFaqPageJsonLd(faqPlain),
+  ];
+
   return (
     <article className="container-x pb-24 pt-6">
+      <JsonLd items={jsonLd} />
       {/*
         Breadcrumb above the gallery, separated from the hero by a hairline
         rule. Track B (April 2026): pulls from `seo.breadcrumb_override`
@@ -229,14 +245,9 @@ export default function ProductPage() {
         <div className="lg:sticky lg:top-24 self-start space-y-6">
           <header>
             {/*
-              Hero-scale eyebrow with rule — Complaint #5 fix. Single
-              hero context, so the rule earns its place; PLP cards keep
-              their plain Eyebrow.
+              The product title is the hero — no eyebrow above it.
             */}
-            <Eyebrow tone="accent" withRule>
-              {eyebrow}
-            </Eyebrow>
-            <h1 className="mt-4 font-[var(--font-display)] text-[length:var(--text-display-lg)] tracking-tight leading-[1.05] text-[var(--color-text)]">
+            <h1 className="font-[var(--font-display)] text-[length:var(--text-display-lg)] tracking-tight leading-[1.05] text-[var(--color-text)]">
               {product.title}
             </h1>
             {subtitle ? (
@@ -322,6 +333,7 @@ export default function ProductPage() {
                 customerQuestionSummary={aix.customer_question_summary}
                 summaryBlock={aix.summary_block}
               />
+              <WhoItsFor product={product} />
               <DescriptionSection product={product} />
             </div>
           </CollapsibleSection>
@@ -407,8 +419,7 @@ export default function ProductPage() {
 
       {related.length > 0 ? (
         <section className="mt-12 md:mt-20">
-          <Eyebrow>{t('pdp.related_eyebrow')}</Eyebrow>
-          <h2 className="mt-3 text-2xl font-semibold">
+          <h2 className="text-2xl font-semibold">
             {t('pdp.related_title')}
           </h2>
           <div className="mt-6">
@@ -560,8 +571,16 @@ function DescriptionSection({product}: {product: HeatingProduct}) {
   const facts: {label: string; value: string}[] = [];
   if (series) facts.push({label: t('pdp.fact_series'), value: series});
   const dim = product.specs.dimensions_w_h_d_mm?.trim();
-  if (dim) facts.push({label: t('pdp.fact_dimensions'), value: dim});
-  else if (product.specs.width_mm && product.specs.height_mm) {
+  if (dim) {
+    // Bare "W × H[ × D]" → the product's own size; anything else (the
+    // mounting kit's "≤ 2000 × 750" compatibility range) gets relabelled.
+    facts.push({
+      label: isPlainDimensionString(dim)
+        ? t('pdp.fact_dimensions')
+        : t('pdp.fact_max_radiator_size'),
+      value: `${normalizeDimensionDisplay(dim)} mm`,
+    });
+  } else if (product.specs.width_mm && product.specs.height_mm) {
     facts.push({
       label: t('pdp.fact_dimensions'),
       value: `${product.specs.width_mm} × ${product.specs.height_mm} mm`,

@@ -5,7 +5,6 @@
 import {useLoaderData} from 'react-router';
 import type {Route} from './+types/blogs._index';
 import {Image} from '@shopify/hydrogen';
-import {Eyebrow} from '@gberg/ui';
 import {createGbergClient} from '~/lib/storefront.server';
 import {fetchBlog} from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
@@ -59,8 +58,7 @@ export default function NewsIndex() {
   return (
     <div className="container-x py-10 lg:py-16">
       <header className="max-w-3xl">
-        <Eyebrow>{t('blogs.eyebrow')}</Eyebrow>
-        <h1 className="display-heading mt-4 text-[clamp(2.25rem,4vw+0.5rem,4rem)] text-[var(--color-text)]">
+        <h1 className="display-heading text-[clamp(2.25rem,4vw+0.5rem,4rem)] text-[var(--color-text)]">
           {articles.length > 0 ? (
             <>{t('blogs.title_active')}</>
           ) : (
@@ -148,8 +146,7 @@ export default function NewsIndex() {
 
           <aside className="mt-16 grid grid-cols-1 items-end gap-8 border-t border-[var(--color-border)] pt-10 md:grid-cols-[1.4fr_1fr] md:gap-12">
             <div>
-              <Eyebrow>{t('footer.stay_in_loop')}</Eyebrow>
-              <p className="display-heading mt-5 text-[clamp(1.5rem,2vw+0.5rem,2.25rem)] text-[var(--color-text)]">
+              <p className="display-heading text-[clamp(1.5rem,2vw+0.5rem,2.25rem)] text-[var(--color-text)]">
                 {t('newsletter.first_guide_promise')}
               </p>
             </div>

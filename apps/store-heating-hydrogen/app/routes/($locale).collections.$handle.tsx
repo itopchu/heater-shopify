@@ -3,17 +3,17 @@
  */
 import {redirect, useLoaderData} from 'react-router';
 import type {Route} from './+types/collections.$handle';
-import {Eyebrow} from '@gberg/ui';
 import {CollectionView} from '~/components/gberg/plp/collection-view';
 import {createGbergClient} from '~/lib/storefront.server';
 import {fetchCollectionByHandle} from '~/lib/gberg/queries';
 import {localeHref} from '~/lib/gberg/href';
 import {normalizeLocale, useT} from '~/lib/gberg/i18n';
-import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
+import {BRAND_NAME, buildSeoMeta, synthesizeDescription} from '~/lib/gberg/seo';
 import {
   buildBreadcrumbJsonLd,
   buildItemListJsonLd,
 } from '~/lib/gberg/jsonld';
+import {JsonLd} from '~/components/gberg/json-ld';
 
 /**
  * Track B (April 2026): allow-list of single-product collections. When a
@@ -48,32 +48,23 @@ export const meta: Route.MetaFunction = ({
   location: {pathname: string};
 }) => {
   const col = data?.collection;
-  const locale = data?.locale ?? 'en';
   const baseTitle = col?.seo?.title ?? col?.title ?? data?.handle ?? 'Collection';
   const title = baseTitle.includes(BRAND_NAME)
     ? baseTitle
     : `${baseTitle} — ${BRAND_NAME}`;
-  const description = col?.seo?.description ?? col?.description ?? '';
+  const productCount = col?.products?.length ?? 0;
+  // `||` not `??`: Storefront returns `''` (not null) for an empty
+  // collection description / blank SEO field — we want first non-empty.
+  const description =
+    col?.seo?.description ||
+    col?.description ||
+    synthesizeDescription(baseTitle, [
+      productCount > 0 ? `${productCount} products from G-Berg Heizung` : null,
+      'EN 442 heat-output data, dimensions and energy class on every product',
+    ]);
 
-  // Breadcrumb: Home → Collection title. Mirrors the visible header eyebrow
-  // (which displays the collection title above the H1) — no separate
-  // <Breadcrumb> component renders here, but the trail Home → <title> is
-  // entirely visible via the page H1 + the brand link in the header.
-  const breadcrumbLd = col?.title
-    ? buildBreadcrumbJsonLd([
-        {label: 'Home', href: `/${locale}`},
-        {label: col.title},
-      ])
-    : null;
-
-  // ItemList: only emit when there's a real product grid visible. Each
-  // listed product mirrors a visible <ProductCard> in the grid.
-  const products = col?.products ?? [];
-  const itemListLd = buildItemListJsonLd(
-    products.map((p) => ({handle: p.handle, title: p.title})),
-    locale,
-  );
-
+  // BreadcrumbList + ItemList JSON-LD are emitted from the component via
+  // <JsonLd> (React Router drops `tagName:'script'` meta descriptors).
   return [
     {title},
     {name: 'description', content: description},
@@ -83,8 +74,6 @@ export const meta: Route.MetaFunction = ({
       pathname: location.pathname,
       type: 'website',
     }),
-    ...(breadcrumbLd ? [breadcrumbLd] : []),
-    ...(itemListLd ? [itemListLd] : []),
   ];
 };
 
@@ -125,17 +114,22 @@ export default function CollectionPage() {
   const description = collection?.description ?? '';
   const products = collection?.products ?? [];
 
+  // Structured data — mirrors the visible H1 (breadcrumb leaf) and the
+  // visible product grid (ItemList). buildItemListJsonLd returns null when
+  // the grid is empty, so no empty list ships.
+  const jsonLd = [
+    buildBreadcrumbJsonLd([{label: 'Home', href: `/${locale}`}, {label: title}]),
+    buildItemListJsonLd(
+      products.map((p) => ({handle: p.handle, title: p.title})),
+      locale,
+    ),
+  ];
+
   return (
     <div className="container-x py-8 lg:py-12">
+      <JsonLd items={jsonLd} />
       <header className="max-w-3xl">
-        {/*
-          Design Refresh — Complaint #5: editorial display rhythm. PLP gets
-          `withRule` because the page has one hero, not a grid of cards.
-        */}
-        <Eyebrow tone="accent" withRule>
-          {t('plp.heading_eyebrow')}
-        </Eyebrow>
-        <h1 className="mt-4 font-[var(--font-display)] text-[length:var(--text-display-xl)] tracking-tight leading-[1.05] text-[var(--color-text)]">
+        <h1 className="font-[var(--font-display)] text-[length:var(--text-display-xl)] tracking-tight leading-[1.05] text-[var(--color-text)]">
           {title}
         </h1>
         {description ? (
@@ -163,8 +157,7 @@ export default function CollectionPage() {
       )}
 
       <section className="mt-16 max-w-3xl">
-        <Eyebrow>{t('plp.heading_about_category_eyebrow')}</Eyebrow>
-        <p className="mt-3 text-[var(--color-text-muted)]">
+        <p className="text-[var(--color-text-muted)]">
           {t('plp.about_category_body')}
         </p>
       </section>

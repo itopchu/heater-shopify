@@ -3,7 +3,6 @@
  */
 import {useLoaderData} from 'react-router';
 import type {Route} from './+types/search';
-import {Eyebrow} from '@gberg/ui';
 import {ProductGrid} from '~/components/gberg/plp/product-grid';
 import {SearchInput} from '~/components/gberg/search/search-input';
 import {createGbergClient} from '~/lib/storefront.server';
@@ -44,8 +43,7 @@ export default function SearchResultsPage() {
   return (
     <div className="container-x py-8 lg:py-12">
       <header className="max-w-3xl">
-        <Eyebrow>Search</Eyebrow>
-        <h1 className="display-heading mt-4 text-[clamp(2rem,3vw+0.75rem,3.5rem)] text-[var(--color-text)]">
+        <h1 className="display-heading text-[clamp(2rem,3vw+0.75rem,3.5rem)] text-[var(--color-text)]">
           {q ? (
             <>
               Results for{' '}
