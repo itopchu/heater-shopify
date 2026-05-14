@@ -78,17 +78,20 @@ export function localizeSpecValue(
 /* Series eyebrow.                                                     */
 /* ------------------------------------------------------------------ */
 
+// 2026-05-14: series renamed from internal codenames to German cities. The
+// stored tags are the ASCII-folded lowercase slugs (e.g. `berlin`, `koeln`),
+// so the uppercase entries here have to be the ASCII-folded form too —
+// KOELN, not KÖLN. The display form ("Köln") is mapped via SERIES_LABEL_OVERRIDES.
 const KNOWN_SERIES = [
-  'ASTORIA',
-  'ATLAS',
-  'ELANOR',
-  'FLORA',
-  'KIRA',
-  'PULLMAN',
-  'TWISTER',
-  'KONRAD',
-  'PLATIS',
-  'LAVINNO',
+  'BERLIN',  // was Twister
+  'DRESDEN', // was Pullman
+  'HAMBURG', // was Elanor
+  'POTSDAM', // was Astoria
+  'MAINZ',   // was Kira
+  'KOELN',   // was Flora (display: Köln)
+  'ESSEN',   // was Atlas
+  'AACHEN',  // was Konrad
+  'BADEN',   // was Lavinno
 ] as const;
 
 export type Series = (typeof KNOWN_SERIES)[number];
@@ -101,8 +104,16 @@ export function resolveSeries(tags: readonly string[]): Series | null {
   return null;
 }
 
+// Series whose display form needs umlauts that the ASCII slug can't carry.
+const SERIES_LABEL_OVERRIDES: Partial<Record<Series, string>> = {
+  KOELN: 'Köln',
+};
+
 export function seriesLabel(series: Series): string {
-  return series.charAt(0) + series.slice(1).toLowerCase();
+  return (
+    SERIES_LABEL_OVERRIDES[series] ??
+    series.charAt(0) + series.slice(1).toLowerCase()
+  );
 }
 
 /**

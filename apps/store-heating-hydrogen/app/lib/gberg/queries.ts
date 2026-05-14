@@ -255,15 +255,19 @@ export async function fetchBlog(
  * back to the most-expensive imaged product in the linked collection.
  * If that fails too, the homepage renders a text placeholder.
  */
+// Handles updated 2026-05-14 for the Twister/Pullman/Elanor/Astoria/Flora →
+// Berlin/Dresden/Hamburg/Potsdam/Köln rebrand. Old handles still 301 at the
+// HTTP layer, but `fetchProductByHandle` queries the Storefront API directly —
+// it would return null for the old handles, hiding the hero image entirely.
 const CATEGORY_HERO_PRODUCT_HANDLES: Record<string, string> = {
   'living-room-radiators':
-    'vertikal-paneelheizkorper-milan-mittel-und-seitenanschluss-anthrazit',
+    'vertikal-paneelheizkorper-koeln-mittel-und-seitenanschluss-anthrazit',
   'bathroom-radiators':
-    'badheizkoerper-mittelanschluss-alpha-anthrazit-handtuchwaermer',
+    'badheizkoerper-mittelanschluss-potsdam-anthrazit-handtuchwaermer',
   'electric-bathroom-radiators':
-    'badheizkorper-elektrisch-elmar-anthrazit-handtuchheizkorper-handtuchwarmer',
+    'badheizkorper-elektrisch-hamburg-anthrazit-handtuchheizkorper-handtuchwarmer',
   'replacement-radiators':
-    'austausch-badheizkorper-handtuchheizkorper-schwarz-elanor-seitlich-offen',
+    'austausch-badheizkorper-handtuchheizkorper-schwarz-hamburg-seitlich-offen',
   fussbodenheizung:
     'fussbodenheizungsrohr-16x2-mm-pe-rt-5-schicht-rohr-240-m',
   accessories:
