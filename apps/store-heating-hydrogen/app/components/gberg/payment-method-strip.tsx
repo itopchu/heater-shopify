@@ -1,31 +1,25 @@
 /**
- * "We accept" payment method strip — flat SVG marks shown under the cart
+ * "We accept" payment method strip — flat marks shown under the cart
  * checkout CTA to build trust before the customer leaves the cart for
  * Shopify-hosted checkout.
  *
- * The marks are deliberately compact + monochrome-on-white (with a few
- * official brand colours for recognition). They are:
- *   - Wordmarks for Visa, MC, AmEx, PayPal, Klarna, Apple/Google/Shop Pay
- *   - The two EU-specific wallets we plan to accept once Shopify Payments is
- *     active: Wero (replacing SOFORT in 2026) and iDeal (NL standard).
- *
- * Once the merchant activates Shopify Payments + Klarna + PayPal in admin,
- * the corresponding methods become real at checkout. Until then, this is
- * aspirational signalling — the standard EU e-commerce convention.
+ * Source of truth: the methods configured in Shopify Payments + the
+ * PayPal and Klarna apps for this store. Keep this list in lockstep
+ * with what the checkout actually offers — see screenshots in the
+ * pyzype-xf admin → Settings → Payments. Last reconciled 2026-05-14.
  */
 import {useT} from '~/lib/gberg/i18n';
 
 const ICONS = [
   {key: 'visa', label: 'Visa', bg: '#1A1F71', fg: '#FFFFFF'},
   {key: 'mc', label: 'MC', bg: '#FFFFFF', fg: '#000000', special: 'mastercard' as const},
+  {key: 'maestro', label: 'Maestro', bg: '#FFFFFF', fg: '#000000', special: 'maestro' as const},
   {key: 'amex', label: 'AMEX', bg: '#016FD0', fg: '#FFFFFF'},
+  {key: 'unionpay', label: 'UnionPay', bg: '#FFFFFF', fg: '#E21836'},
   {key: 'paypal', label: 'PayPal', bg: '#FFFFFF', fg: '#003087'},
   {key: 'klarna', label: 'Klarna', bg: '#FFA8CD', fg: '#17120F'},
-  {key: 'applepay', label: ' Pay', bg: '#000000', fg: '#FFFFFF'},
-  {key: 'gpay', label: 'G Pay', bg: '#FFFFFF', fg: '#5F6368'},
   {key: 'shoppay', label: 'Shop Pay', bg: '#5A31F4', fg: '#FFFFFF'},
-  {key: 'ideal', label: 'iDEAL', bg: '#FFFFFF', fg: '#CC0066'},
-  {key: 'wero', label: 'Wero', bg: '#FFFFFF', fg: '#FF6B00'},
+  {key: 'gpay', label: 'G Pay', bg: '#FFFFFF', fg: '#5F6368'},
 ];
 
 function MastercardMark() {
@@ -34,6 +28,16 @@ function MastercardMark() {
     <span className="relative inline-flex items-center" aria-hidden>
       <span className="block h-3.5 w-3.5 rounded-full bg-[#EB001B]" />
       <span className="-ml-1.5 block h-3.5 w-3.5 rounded-full bg-[#F79E1B]" />
+    </span>
+  );
+}
+
+function MaestroMark() {
+  // Same two-circle primitive as Mastercard but with Maestro's blue + red.
+  return (
+    <span className="relative inline-flex items-center" aria-hidden>
+      <span className="block h-3.5 w-3.5 rounded-full bg-[#0099DF]" />
+      <span className="-ml-1.5 block h-3.5 w-3.5 rounded-full bg-[#ED0006]" />
     </span>
   );
 }
@@ -55,6 +59,8 @@ export function PaymentMethodStrip({className = ''}: {className?: string}) {
           >
             {i.special === 'mastercard' ? (
               <MastercardMark />
+            ) : i.special === 'maestro' ? (
+              <MaestroMark />
             ) : (
               <span className="text-[9px] font-bold uppercase tracking-[0.04em]">{i.label}</span>
             )}
