@@ -225,7 +225,7 @@ const TERMS = `
 <p>We deliver to Germany, the Netherlands, Belgium and Luxembourg only. Orders to other addresses cannot be processed.</p>
 
 <h3>Payment methods</h3>
-<p>Klarna (availability varies per country), PayPal, Card, Apple Pay, Google Pay — handled by Shopify Payments. SEPA Direct Debit is not offered.</p>
+<p>Cards (Visa, Mastercard, Maestro, American Express, UnionPay), PayPal, Klarna, Shop Pay and Google Pay — handled by Shopify Payments. SEPA Direct Debit is not offered.</p>
 
 <h3>Seller</h3>
 <p>${C.name}, ${C.street}, ${C.city}, ${C.countryEN}. <a href="mailto:${C.email}">${C.email}</a>.</p>

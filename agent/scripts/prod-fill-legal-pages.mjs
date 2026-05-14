@@ -137,7 +137,7 @@ const TERMS_HTML = `
 </p>
 <h3>Payment</h3>
 <p>
-  We accept Visa, Mastercard, American Express, PayPal, Klarna, Apple Pay, Google Pay, Shop Pay, iDEAL and Wero.
+  We accept Visa, Mastercard, Maestro, American Express, UnionPay, PayPal, Klarna, Shop Pay and Google Pay.
   Payment is processed securely by our payment partners.
 </p>
 <h3>Right of withdrawal</h3>
