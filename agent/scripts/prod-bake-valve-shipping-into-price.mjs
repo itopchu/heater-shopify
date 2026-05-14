@@ -29,7 +29,10 @@ import {fileURLToPath} from 'node:url';
 const API = '2026-04';
 const SURCHARGE_EUR = 20;
 const PAID_PROFILE_NAME = 'Valve radiators (paid shipping)';
-const HANDLES = ['konrad-ventilheizkorper-typ-22', 'konrad-ventilheizkorper-typ-33'];
+// Renamed from `konrad-…` → `aachen-…` on 2026-05-14 (Konrad series → Aachen).
+// Old handles still resolve via Shopify URL redirects, but this script looks
+// products up by their CURRENT handle.
+const HANDLES = ['aachen-ventilheizkorper-typ-22', 'aachen-ventilheizkorper-typ-33'];
 const APPLIED_TAG = 'shipping-in-price';
 const OBSOLETE_TAG = 'shipping:paid';
 

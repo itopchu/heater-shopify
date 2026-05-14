@@ -37,11 +37,14 @@ export default {
         );
       }
 
-      if (response.status === 404) {
+      if (response.status === 404 || response.status === 410) {
         /**
-         * Check for redirects only when there's a 404 from the app.
-         * If the redirect doesn't exist, then `storefrontRedirect`
-         * will pass through the 404 response.
+         * Check Shopify-managed urlRedirects on any "this URL is dead" response
+         * — both 404 (route catch-all) and 410 (product route's intentional
+         * "Gone" for missing products, used for SEO de-indexing). For renamed
+         * products the redirect overrides the 410 with a 301 to the new URL;
+         * if no redirect exists, storefrontRedirect passes through the
+         * original response untouched, preserving the 410.
          */
         return storefrontRedirect({
           request,
