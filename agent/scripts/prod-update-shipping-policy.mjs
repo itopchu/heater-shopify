@@ -49,8 +49,8 @@ const NEW_BODY = `<h2>Where we ship</h2>
 
 <h2>Delivery cost</h2>
 <ul>
-  <li><strong>Shipping is free</strong> — already included in the listed price for every product.</li>
-  <li>No surcharge at checkout, no delivery threshold to clear.</li>
+  <li><strong>Free for almost the entire catalog</strong> — the delivery cost is already included in the listed price, with no surcharge at checkout and no minimum to clear.</li>
+  <li><strong>Aachen Typ 22 and Typ 33 valve radiators</strong> — the only exception. They ship via our specialist heavy carrier at <strong>€100 per order of up to 8 units</strong>, then €200 for 9–16 units, €300 for 17–24, and so on. The exact delivery fee is shown in the cart and at checkout.</li>
   <li>VAT is included in the prices shown — DE 19%, BE 21%, NL 21%, LU 17%.</li>
 </ul>
 
