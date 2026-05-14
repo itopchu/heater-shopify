@@ -3,7 +3,9 @@ import type {Route} from './+types/policies.$handle';
 import {type Shop} from '@shopify/hydrogen/storefront-api-types';
 import {DEFAULT_LOCALE, isSupportedLocale} from '~/lib/gberg/i18n';
 import {localeHref} from '~/lib/gberg/href';
-import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
+import {BRAND_NAME, buildSeoMeta, synthesizeDescription} from '~/lib/gberg/seo';
+import {buildBreadcrumbJsonLd} from '~/lib/gberg/jsonld';
+import {JsonLd} from '~/components/gberg/json-ld';
 
 type SelectedPolicies = keyof Pick<
   Shop,
@@ -19,11 +21,13 @@ export const meta: Route.MetaFunction = ({
 }) => {
   const policyTitle = data?.policy?.title ?? 'Policy';
   const title = `${policyTitle} — ${BRAND_NAME}`;
-  // Legal pages have no merchant-supplied SEO description; we leave it
-  // empty rather than invent generic copy that risks duplication across
-  // policies. Phase 2 will surface a per-policy summary if Shopify
-  // exposes one.
-  const description = '';
+  // Shopify's legal-policy objects expose no SEO description, but an empty
+  // <meta description> is a Lighthouse-SEO miss. Synthesise a short,
+  // per-policy line off the (distinct) policy title so the four pages
+  // don't all read identically.
+  const description = synthesizeDescription(`${policyTitle} — G-Berg GmbH`, [
+    'official policy for orders shipped within DE · BE · NL · LU',
+  ]);
   return [
     {title},
     {name: 'description', content: description},
@@ -74,6 +78,15 @@ export default function Policy() {
 
   return (
     <div className="policy">
+      <JsonLd
+        items={[
+          buildBreadcrumbJsonLd([
+            {label: 'Home', href: `/${locale}`},
+            {label: 'Policies', href: localeHref(locale, '/policies')},
+            {label: policy.title},
+          ]),
+        ]}
+      />
       <br />
       <br />
       <div>

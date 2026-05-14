@@ -108,6 +108,47 @@ type Pages = {
       "locale"?: string;
     };
   };
+  "/:locale?/account": {
+    params: {
+      "locale"?: string;
+    };
+  };
+  "/:locale?/account/orders": {
+    params: {
+      "locale"?: string;
+    };
+  };
+  "/:locale?/account/orders/:id": {
+    params: {
+      "locale"?: string;
+      "id": string;
+    };
+  };
+  "/:locale?/account/addresses": {
+    params: {
+      "locale"?: string;
+    };
+  };
+  "/:locale?/account/authorize": {
+    params: {
+      "locale"?: string;
+    };
+  };
+  "/:locale?/account/profile": {
+    params: {
+      "locale"?: string;
+    };
+  };
+  "/:locale?/account/logout": {
+    params: {
+      "locale"?: string;
+    };
+  };
+  "/:locale?/account/login": {
+    params: {
+      "locale"?: string;
+    };
+  };
   "/:locale?/search": {
     params: {
       "locale"?: string;
@@ -116,6 +157,12 @@ type Pages = {
   "/:locale?/cart": {
     params: {
       "locale"?: string;
+    };
+  };
+  "/:locale?/cart/c/:token": {
+    params: {
+      "locale"?: string;
+      "token": string;
     };
   };
   "/:locale?/cart/:lines": {
@@ -135,7 +182,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/api/predictive-search" | "/robots.txt" | "/llms.txt" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/collections/:handle" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/products" | "/:locale?/discount/:code" | "/:locale?/pages/:handle" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
+    page: "/" | "/api/predictive-search" | "/robots.txt" | "/llms.txt" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/collections/:handle" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/products" | "/:locale?/discount/:code" | "/:locale?/pages/:handle" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/authorize" | "/:locale?/account/profile" | "/:locale?/account/logout" | "/:locale?/account/login" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/c/:token" | "/:locale?/cart/:lines" | "/:locale?/*";
   };
   "routes/api.predictive-search.tsx": {
     id: "routes/api.predictive-search";
@@ -151,7 +198,7 @@ type RouteFiles = {
   };
   "routes/($locale).tsx": {
     id: "routes/($locale)";
-    page: "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/collections/:handle" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/products" | "/:locale?/discount/:code" | "/:locale?/pages/:handle" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
+    page: "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/collections/:handle" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/products" | "/:locale?/discount/:code" | "/:locale?/pages/:handle" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/authorize" | "/:locale?/account/profile" | "/:locale?/account/logout" | "/:locale?/account/login" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/c/:token" | "/:locale?/cart/:lines" | "/:locale?/*";
   };
   "routes/($locale).blogs.$blogHandle.$articleHandle.tsx": {
     id: "routes/($locale).blogs.$blogHandle.$articleHandle";
@@ -209,6 +256,42 @@ type RouteFiles = {
     id: "routes/($locale).blogs._index";
     page: "/:locale?/blogs";
   };
+  "routes/($locale).account.tsx": {
+    id: "routes/($locale).account";
+    page: "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/authorize" | "/:locale?/account/profile" | "/:locale?/account/logout" | "/:locale?/account/login";
+  };
+  "routes/($locale).account.orders._index.tsx": {
+    id: "routes/($locale).account.orders._index";
+    page: "/:locale?/account/orders";
+  };
+  "routes/($locale).account.orders.$id.tsx": {
+    id: "routes/($locale).account.orders.$id";
+    page: "/:locale?/account/orders/:id";
+  };
+  "routes/($locale).account.addresses.tsx": {
+    id: "routes/($locale).account.addresses";
+    page: "/:locale?/account/addresses";
+  };
+  "routes/($locale).account.authorize.tsx": {
+    id: "routes/($locale).account.authorize";
+    page: "/:locale?/account/authorize";
+  };
+  "routes/($locale).account.profile.tsx": {
+    id: "routes/($locale).account.profile";
+    page: "/:locale?/account/profile";
+  };
+  "routes/($locale).account.logout.tsx": {
+    id: "routes/($locale).account.logout";
+    page: "/:locale?/account/logout";
+  };
+  "routes/($locale).account._index.tsx": {
+    id: "routes/($locale).account._index";
+    page: "/:locale?/account";
+  };
+  "routes/($locale).account.login.tsx": {
+    id: "routes/($locale).account.login";
+    page: "/:locale?/account/login";
+  };
   "routes/($locale).search.tsx": {
     id: "routes/($locale).search";
     page: "/:locale?/search";
@@ -219,7 +302,11 @@ type RouteFiles = {
   };
   "routes/($locale).cart.tsx": {
     id: "routes/($locale).cart";
-    page: "/:locale?/cart" | "/:locale?/cart/:lines";
+    page: "/:locale?/cart" | "/:locale?/cart/c/:token" | "/:locale?/cart/:lines";
+  };
+  "routes/($locale).cart.c.$token.tsx": {
+    id: "routes/($locale).cart.c.$token";
+    page: "/:locale?/cart/c/:token";
   };
   "routes/($locale).cart.$lines.tsx": {
     id: "routes/($locale).cart.$lines";
@@ -251,9 +338,19 @@ type RouteModules = {
   "routes/($locale).pages.$handle": typeof import("./app/routes/($locale).pages.$handle.tsx");
   "routes/($locale).[sitemap.xml]": typeof import("./app/routes/($locale).[sitemap.xml].tsx");
   "routes/($locale).blogs._index": typeof import("./app/routes/($locale).blogs._index.tsx");
+  "routes/($locale).account": typeof import("./app/routes/($locale).account.tsx");
+  "routes/($locale).account.orders._index": typeof import("./app/routes/($locale).account.orders._index.tsx");
+  "routes/($locale).account.orders.$id": typeof import("./app/routes/($locale).account.orders.$id.tsx");
+  "routes/($locale).account.addresses": typeof import("./app/routes/($locale).account.addresses.tsx");
+  "routes/($locale).account.authorize": typeof import("./app/routes/($locale).account.authorize.tsx");
+  "routes/($locale).account.profile": typeof import("./app/routes/($locale).account.profile.tsx");
+  "routes/($locale).account.logout": typeof import("./app/routes/($locale).account.logout.tsx");
+  "routes/($locale).account._index": typeof import("./app/routes/($locale).account._index.tsx");
+  "routes/($locale).account.login": typeof import("./app/routes/($locale).account.login.tsx");
   "routes/($locale).search": typeof import("./app/routes/($locale).search.tsx");
   "routes/($locale)._index": typeof import("./app/routes/($locale)._index.tsx");
   "routes/($locale).cart": typeof import("./app/routes/($locale).cart.tsx");
+  "routes/($locale).cart.c.$token": typeof import("./app/routes/($locale).cart.c.$token.tsx");
   "routes/($locale).cart.$lines": typeof import("./app/routes/($locale).cart.$lines.tsx");
   "routes/($locale).$": typeof import("./app/routes/($locale).$.tsx");
 };

@@ -1,4 +1,4 @@
-import {useLoaderData} from 'react-router';
+import {useLoaderData, useLocation, useParams} from 'react-router';
 import type {Route} from './+types/blogs.$blogHandle.$articleHandle';
 import {Image} from '@shopify/hydrogen';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
@@ -7,10 +7,10 @@ import {
   buildArticleJsonLd,
   buildBreadcrumbJsonLd,
 } from '~/lib/gberg/jsonld';
+import {JsonLd} from '~/components/gberg/json-ld';
 
 export const meta: Route.MetaFunction = ({
   data,
-  params,
   location,
 }: {
   data?: {
@@ -22,7 +22,6 @@ export const meta: Route.MetaFunction = ({
       image?: {url?: string} | null;
     };
   };
-  params: {locale?: string; blogHandle?: string};
   location: {pathname: string};
 }) => {
   const article = data?.article;
@@ -31,33 +30,8 @@ export const meta: Route.MetaFunction = ({
   const description = article?.seo?.description ?? '';
   const ogImage = article?.image?.url ?? undefined;
 
-  // TODO(phase-3): the storefront's blog route currently has no real
-  // articles wired up. When content lands, verify each visible field
-  // (headline, image, byline, publish date, body) matches the JSON-LD
-  // emitted here. Until then the builders run only when an article
-  // payload is actually present.
-  const locale = params.locale ?? 'en';
-  const blogHandle = params.blogHandle;
-  const breadcrumbLd =
-    article?.title && blogHandle
-      ? buildBreadcrumbJsonLd([
-          {label: 'Home', href: `/${locale}`},
-          {label: 'Blog', href: `/${locale}/blogs/${blogHandle}`},
-          {label: article.title},
-        ])
-      : null;
-  const articleLd =
-    article?.title && article.publishedAt
-      ? buildArticleJsonLd({
-          title: article.title,
-          publishedAt: article.publishedAt,
-          authorName: article.author?.name,
-          imageUrl: article.image?.url,
-          description: description || undefined,
-          pathname: location.pathname,
-        })
-      : null;
-
+  // Article + BreadcrumbList JSON-LD are emitted from the component via
+  // <JsonLd> (React Router drops `tagName:'script'` meta descriptors).
   return [
     {title},
     {name: 'description', content: description},
@@ -68,8 +42,6 @@ export const meta: Route.MetaFunction = ({
       type: 'article',
       ogImage,
     }),
-    ...(articleLd ? [articleLd] : []),
-    ...(breadcrumbLd ? [breadcrumbLd] : []),
   ];
 };
 
@@ -134,6 +106,9 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 export default function Article() {
   const {article} = useLoaderData<typeof loader>();
   const {title, image, contentHtml, author} = article;
+  const params = useParams() as {locale?: string; blogHandle?: string};
+  const {pathname} = useLocation();
+  const locale = params.locale ?? 'en';
 
   const publishedDate = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
@@ -141,8 +116,28 @@ export default function Article() {
     day: 'numeric',
   }).format(new Date(article.publishedAt));
 
+  // Structured data — mirrors the visible <h1>, byline, date and image.
+  const jsonLd = [
+    buildArticleJsonLd({
+      title,
+      publishedAt: article.publishedAt,
+      authorName: author?.name ?? undefined,
+      imageUrl: image?.url ?? undefined,
+      description: article.seo?.description ?? undefined,
+      pathname,
+    }),
+    params.blogHandle
+      ? buildBreadcrumbJsonLd([
+          {label: 'Home', href: `/${locale}`},
+          {label: 'Blog', href: `/${locale}/blogs/${params.blogHandle}`},
+          {label: title},
+        ])
+      : null,
+  ];
+
   return (
     <div className="article">
+      <JsonLd items={jsonLd} />
       <h1>
         {title}
         <div>

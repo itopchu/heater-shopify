@@ -1,5 +1,15 @@
 #!/usr/bin/env node
 /**
+ * ⚠️  SUPERSEDED 2026-05-10. Use `prod-fix-shipping-free-default.mjs`.
+ *
+ * Policy 2026-05 (revised, current): default shipping is FREE for
+ * DE/NL/BE/LU. Valve radiators (Ventilheizkörper Typ 22/33) ship at
+ * €20/item via a separate "Valve radiators (paid shipping)" delivery
+ * profile. Re-running THIS script would put €20/item back on the
+ * default profile and undo the policy. Kept for history; do not run.
+ *
+ * --- Original (2026-05-early) policy below; no longer authoritative ---
+ *
  * Configures shipping zones + rates on the default delivery profile.
  *
  * 2026-05 update — business rule change:

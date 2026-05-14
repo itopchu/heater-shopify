@@ -10,6 +10,12 @@
   "scripts": {
     "agent": "tsx agent/src/index.ts",
     "agent:test": "tsx agent/src/test/scope-leak.ts",
+    "test": "pnpm --filter store-heating-hydrogen test && pnpm agent:test",
+    "test:hydrogen": "pnpm --filter store-heating-hydrogen test",
+    "seo:submit-sitemaps": "node agent/scripts/submit-sitemaps.mjs",
+    "seo:install-redirects": "node agent/scripts/install-product-redirects.mjs --store prod",
+    "seo:install-ga4": "node agent/scripts/install-ga4-web-pixel.mjs --store prod",
+    "seo:build-og-image": "node agent/scripts/build-og-default-image.mjs",
     "sync": "tsx agent/sync/index.ts",
     "sync:dry": "tsx agent/sync/index.ts --dry-run",
     "qa:lighthouse": "pnpm dlx unlighthouse --config-file qa/unlighthouse.config.ts",
@@ -36,6 +42,7 @@
     "adm-zip": "^0.5.17",
     "dotenv": "^16.4.5",
     "sanitize-html": "^2.17.3",
+    "sharp": "^0.34.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -1,0 +1,6 @@
+# Shopify-native 301 redirects for retired products that have a successor.
+# Consumed by agent/scripts/install-product-redirects.mjs.
+# Format: old_handle,new_handle  (bare product handles, no /products/ prefix).
+# A retired product with NO successor should NOT be listed here — the
+# storefront returns 410 Gone for it, which de-indexes faster than a 301.
+old_handle,new_handle

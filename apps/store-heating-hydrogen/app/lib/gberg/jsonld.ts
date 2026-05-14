@@ -306,6 +306,11 @@ function deriveAdditionalProperties(
       unitText: 'm²',
     });
   }
+  // Mirrors the <WhoItsFor> "suitable for {room}" line — only when that
+  // component actually renders it (filters.room_type set), per parity rule.
+  if (p.filters?.room_type) {
+    rows.push({key: 'room_type', name: 'Suitable for', value: p.filters.room_type});
+  }
   if (s.color) {
     rows.push({key: 'color', name: 'Colour', value: s.color});
   }

@@ -22,7 +22,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import type {HeatingProduct} from '@gberg/product-schema';
-import {buildProductJsonLd} from '../jsonld';
+import {
+  buildProductJsonLd,
+  buildOrganizationJsonLd,
+  buildWebSiteJsonLd,
+  buildBreadcrumbJsonLd,
+  buildFaqPageJsonLd,
+  buildItemListJsonLd,
+  buildArticleJsonLd,
+  type JsonLdScriptDescriptor,
+} from '../jsonld';
 
 // ---------------------------------------------------------------------------
 // Fixture: a minimally populated HeatingProduct with a representative spread
@@ -95,6 +104,7 @@ function fixtureProduct(): HeatingProduct {
     compatibility: {},
     editorial: {series: 'ASTORIA'},
     collectionHandles: ['living-room-radiators'],
+    collections: [{handle: 'living-room-radiators', title: 'Living-room radiators'}],
   };
 }
 
@@ -240,4 +250,84 @@ test('buildProductJsonLd: payload includes @context and core fields', () => {
   assert.ok(typeof payload.url === 'string' && (payload.url as string).startsWith('https://'));
   assert.ok(payload.brand, 'brand block missing');
   assert.ok(payload.offers, 'offers block missing');
+});
+
+test('buildProductJsonLd: filters.room_type surfaces as "Suitable for" only when set', () => {
+  // Default fixture has no room_type → no "Suitable for" property.
+  const bare = parseProductPayload(fixtureProduct());
+  const bareNames = ((bare.additionalProperty as Array<{name: string}>) ?? []).map((x) => x.name);
+  assert.ok(!bareNames.includes('Suitable for'), 'Suitable for emitted without a room_type');
+
+  // With room_type set, the <WhoItsFor> component renders it, so JSON-LD mirrors it.
+  const p = fixtureProduct();
+  p.filters = {room_type: 'living-room'};
+  const payload = parseProductPayload(p);
+  const props = (payload.additionalProperty as Array<{name: string; value: string}>) ?? [];
+  const suitable = props.find((x) => x.name === 'Suitable for');
+  assert.ok(suitable, '"Suitable for" property missing when filters.room_type is set');
+  assert.strictEqual(suitable!.value, 'living-room');
+});
+
+// ---------------------------------------------------------------------------
+// Schema-regression smoke test: every JSON-LD builder must emit a `<script>`
+// descriptor whose `children` is valid JSON carrying `@context` + `@type`.
+// Catches accidental breakage (undefined interpolation, malformed payload)
+// before it reaches a deployed page.
+// ---------------------------------------------------------------------------
+
+function assertValidLd(
+  d: JsonLdScriptDescriptor | null,
+  expectedType: string,
+  label: string,
+) {
+  assert.ok(d, `${label}: builder returned null unexpectedly`);
+  assert.strictEqual(d!.tagName, 'script');
+  assert.strictEqual(d!.type, 'application/ld+json');
+  assert.doesNotThrow(() => {
+    JSON.parse(d!.children);
+  }, `${label}: children is not valid JSON`);
+  const parsed = JSON.parse(d!.children) as Record<string, unknown>;
+  assert.strictEqual(parsed['@context'], 'https://schema.org', `${label}: missing @context`);
+  assert.strictEqual(parsed['@type'], expectedType, `${label}: wrong @type`);
+  // No literal "undefined" should ever leak into the serialised JSON.
+  assert.ok(!d!.children.includes(':"undefined"'), `${label}: "undefined" leaked into payload`);
+}
+
+test('schema regression: all JSON-LD builders emit valid, typed payloads', () => {
+  assertValidLd(buildOrganizationJsonLd({sameAs: []}), 'Organization', 'Organization');
+  assertValidLd(buildWebSiteJsonLd(), 'WebSite', 'WebSite');
+  assertValidLd(
+    buildBreadcrumbJsonLd([
+      {label: 'Home', href: '/en'},
+      {label: 'Living-room radiators', href: '/en/collections/living-room'},
+      {label: 'Astoria Radiator 600×1800'},
+    ]),
+    'BreadcrumbList',
+    'BreadcrumbList',
+  );
+  assertValidLd(buildProductJsonLd(fixtureProduct(), '/en/products/astoria-radiator-600x1800'), 'Product', 'Product');
+  assertValidLd(
+    buildFaqPageJsonLd([{question: 'Is it heat-pump compatible?', answer: 'Yes.'}]),
+    'FAQPage',
+    'FAQPage',
+  );
+  assertValidLd(
+    buildItemListJsonLd([{handle: 'astoria-radiator-600x1800', title: 'Astoria Radiator 600×1800'}], 'en'),
+    'ItemList',
+    'ItemList',
+  );
+  assertValidLd(
+    buildArticleJsonLd({
+      title: 'How to size a radiator',
+      publishedAt: '2026-05-01T00:00:00Z',
+      pathname: '/en/blogs/guides/how-to-size-a-radiator',
+    }),
+    'Article',
+    'Article',
+  );
+
+  // Empty-input builders correctly return null (no empty FAQ / ItemList blocks).
+  assert.strictEqual(buildFaqPageJsonLd([]), null, 'empty FAQ should yield null');
+  assert.strictEqual(buildItemListJsonLd([], 'en'), null, 'empty ItemList should yield null');
+  assert.strictEqual(buildBreadcrumbJsonLd([]), null, 'empty breadcrumb should yield null');
 });

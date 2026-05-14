@@ -32,6 +32,7 @@ import {
   buildOrganizationJsonLd,
   buildWebSiteJsonLd,
 } from '~/lib/gberg/jsonld';
+import {JsonLd} from '~/components/gberg/json-ld';
 import type {MenuItem} from '@gberg/shopify-client';
 import {useLocation} from 'react-router';
 
@@ -61,19 +62,24 @@ export function links() {
 }
 
 /**
- * Site-wide meta. Emits `Organization` + `WebSite` JSON-LD on every page —
- * AI crawlers (and Google's sitelinks search box) need these on every
- * indexable URL, not just the homepage. Page-specific JSON-LD blocks
- * (Product, BreadcrumbList, FAQPage, ItemList, Article) are emitted by
- * each route's own `meta()`.
+ * Site-wide `<meta>`. Emits the Search Console / Bing Webmaster ownership-
+ * verification tags when the corresponding env vars are set (preferred
+ * over DNS-TXT only because it survives a registrar move; either works) —
+ * set `PUBLIC_GOOGLE_SITE_VERIFICATION` / `PUBLIC_BING_SITE_VERIFICATION`
+ * in the Oxygen environment.
  *
- * sameAs is empty until merchant social profiles are populated; the
- * builder drops the field entirely when empty so we don't ship `[]`.
+ * Note: `Organization` + `WebSite` JSON-LD is rendered via the <JsonLd>
+ * component in App() below, NOT here — React Router's <Meta> drops any
+ * `tagName: 'script'` descriptor (see app/components/gberg/json-ld.tsx).
+ * Likewise every route emits its page-specific JSON-LD from its component.
  */
-export function meta() {
+export function meta({data}: Route.MetaArgs) {
+  const v = data?.seoVerification;
   return [
-    buildOrganizationJsonLd({sameAs: []}),
-    buildWebSiteJsonLd(),
+    ...(v?.google
+      ? [{name: 'google-site-verification', content: v.google}]
+      : []),
+    ...(v?.bing ? [{name: 'msvalidate.01', content: v.bing}] : []),
   ];
 }
 
@@ -86,6 +92,17 @@ export async function loader(args: Route.LoaderArgs) {
     ...deferredData,
     ...criticalData,
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
+    // Search-engine ownership verification tokens, surfaced to root meta().
+    // Optional — only emitted when configured in the Oxygen environment.
+    // Cast: these aren't in the generated Hydrogen `Env` interface (same
+    // pattern as the judgeme env access in the PDP loader).
+    seoVerification: (() => {
+      const e = env as unknown as Record<string, string | undefined>;
+      return {
+        google: e.PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+        bing: e.PUBLIC_BING_SITE_VERIFICATION || undefined,
+      };
+    })(),
     shop: getShopAnalytics({
       storefront,
       publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
@@ -223,6 +240,8 @@ export default function App() {
       consent={data.consent}
     >
       <Aside.Provider>
+        {/* Site-wide structured data — present on every indexable URL. */}
+        <JsonLd items={[buildOrganizationJsonLd({sameAs: []}), buildWebSiteJsonLd()]} />
         <Header locale={locale} menu={headerMenu} isLoggedIn={data.isLoggedIn} />
         <main id="main">
           <Outlet />

@@ -10,17 +10,15 @@ import {getSitemap} from '@shopify/hydrogen';
  * `language-country` form here is only used to populate the
  * `<xhtml:link rel="alternate" hreflang>` entries inside the sitemap so
  * Google can correlate locale pairs.
+ *
+ * Only the locales with real Translate & Adapt content ship here — see
+ * SUPPORTED_LOCALES in lib/gberg/i18n.ts (EN/DE/NL/FR). Advertising an
+ * hreflang alternate that resolves to an untranslated (or 404) page is a
+ * Search Console error, so this list must stay in lockstep with the
+ * locales the storefront actually serves. Country pairs follow
+ * LOCALE_TO_COUNTRY: en→DE, de→DE, nl→NL, fr→BE.
  */
-const SITEMAP_LOCALES = [
-  'EN-DE',
-  'DE-DE',
-  'NL-NL',
-  'FR-FR',
-  'ES-ES',
-  'IT-IT',
-  'PL-PL',
-  'DA-DK',
-];
+const SITEMAP_LOCALES = ['EN-DE', 'DE-DE', 'NL-NL', 'FR-BE'];
 
 export async function loader({
   request,

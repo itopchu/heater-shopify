@@ -11,6 +11,7 @@
     "preview": "shopify hydrogen preview --build",
     "lint": "eslint --no-error-on-unmatched-pattern .",
     "typecheck": "react-router typegen && tsc --noEmit",
+    "test": "tsx --test \"app/**/__tests__/*.test.ts\"",
     "codegen": "shopify hydrogen codegen && react-router typegen"
   },
   "prettier": "@shopify/prettier-config",
