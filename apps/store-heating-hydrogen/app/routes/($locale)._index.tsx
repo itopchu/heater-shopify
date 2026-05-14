@@ -5,7 +5,7 @@
 import {useLoaderData, Link} from 'react-router';
 import type {Route} from './+types/_index';
 import {Image} from '@shopify/hydrogen';
-import {Button, Eyebrow, FaqAccordion, type FaqItem} from '@gberg/ui';
+import {Button, FaqAccordion, type FaqItem} from '@gberg/ui';
 import {ProductGrid} from '~/components/gberg/plp/product-grid';
 import {createGbergClient} from '~/lib/storefront.server';
 import {
@@ -16,6 +16,8 @@ import {
 import {localeHref} from '~/lib/gberg/href';
 import {normalizeLocale, tFor, useT} from '~/lib/gberg/i18n';
 import {buildSeoMeta} from '~/lib/gberg/seo';
+import {buildFaqPageJsonLd} from '~/lib/gberg/jsonld';
+import {JsonLd} from '~/components/gberg/json-ld';
 
 export const meta: Route.MetaFunction = ({
   data,
@@ -83,13 +85,11 @@ export async function loader({context, params}: Route.LoaderArgs) {
     await Promise.all([
       fetchBestsellers(client, locale, 8),
       fetchCategoryPreviews(client, handles, locale),
-      // Hero banner sits under the "European radiators" eyebrow — must be
-      // an electric bath radiator. Pick the most expensive in that
-      // collection so the hero photograph is the most premium option.
+      // Hero banner — pick the most expensive electric bath radiator so the
+      // photograph at the top of the page is always the most premium piece.
       fetchMostExpensiveImage(client, 'electric-bathroom-radiators', locale),
-      // "Designed in Germany" split features a panel/living-room radiator
-      // — smaller silhouette than a tall towel radiator. Most expensive
-      // living-room-radiators item.
+      // Editorial split features a panel/living-room radiator — smaller
+      // silhouette than a tall towel radiator. Most expensive in collection.
       fetchMostExpensiveImage(client, 'living-room-radiators', locale),
     ]);
   return {
@@ -116,6 +116,17 @@ export default function HomePage() {
     {question: t('home.faq_q2'), answer: t('home.faq_a2')},
     {question: t('home.faq_q3'), answer: t('home.faq_a3')},
   ];
+  // FAQPage JSON-LD — mirrors the visible <FaqAccordion> below 1:1. The
+  // homepage Q/A here are plain strings (from i18n), so they serialise
+  // directly. (Migrating these to a `faq_group` metaobject is tracked in
+  // docs/seo-ai-readiness-plan.md as a follow-up — the JSON-LD source
+  // moves with it when it lands.)
+  const homepageFaqLd = buildFaqPageJsonLd(
+    homepageFaqs.map((f) => ({
+      question: f.question,
+      answer: typeof f.answer === 'string' ? f.answer : '',
+    })),
+  );
 
   const categories = CATEGORY_HANDLES.map((c) => {
     const preview = categoryPreviews.find((p) => p.handle === c.handle);
@@ -136,18 +147,12 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd items={[homepageFaqLd]} />
       {/* HERO */}
       <section className="bg-[var(--color-surface)]">
         <div className="container-x grid grid-cols-1 items-end gap-6 py-7 sm:gap-8 sm:py-10 md:py-14 lg:grid-cols-[1.5fr_1fr] lg:gap-16 lg:py-20">
           <div>
-            {/*
-              Design Refresh — Complaint #5: editorial display rhythm.
-              Hero earns the rule (single hero per page).
-            */}
-            <Eyebrow tone="accent" withRule>
-              {t('home.hero_eyebrow')}
-            </Eyebrow>
-            <h1 className="mt-3 font-[var(--font-display)] text-[clamp(2.25rem,7vw+0.5rem,7.5rem)] tracking-tight leading-[1.02] text-[var(--color-text)] md:mt-5">
+            <h1 className="font-[var(--font-display)] text-[clamp(2.25rem,7vw+0.5rem,7.5rem)] tracking-tight leading-[1.02] text-[var(--color-text)]">
               {t('home.hero_title_line1')}
               <br />
               <span className="text-[var(--color-primary)]">{t('home.hero_title_line2')}</span>
@@ -206,7 +211,6 @@ export default function HomePage() {
       <section className="bg-[var(--color-surface-muted)]">
         <div className="container-x py-8 md:py-14">
         <SectionHeader
-          eyebrow={t('home.shop_by_room_eyebrow')}
           title={
             <>
               {t('home.shop_by_room_title_lead')}{' '}
@@ -313,8 +317,7 @@ export default function HomePage() {
             )}
           </div>
           <div className="flex flex-col justify-center p-5 md:col-span-5 md:p-14">
-            <Eyebrow>{t('home.designed_in_germany_eyebrow')}</Eyebrow>
-            <p className="display-heading mt-5 text-[clamp(2rem,3vw+1rem,3.75rem)] text-[var(--color-text)]">
+            <p className="display-heading text-[clamp(2rem,3vw+1rem,3.75rem)] text-[var(--color-text)]">
               {t('home.designed_in_germany_title_line1')}
               <br />
               {t('home.designed_in_germany_title_line2')}
@@ -345,7 +348,6 @@ export default function HomePage() {
         <section className="bg-[var(--color-surface-muted)]">
           <div className="container-x py-8 md:py-14">
             <SectionHeader
-              eyebrow={t('home.bestsellers_eyebrow')}
               title={
                 <>
                   {t('home.bestsellers_title_lead')}{' '}
@@ -369,7 +371,6 @@ export default function HomePage() {
       <section className="bg-[var(--color-surface)]">
         <div className="container-x py-10 md:py-16">
           <SectionHeader
-            eyebrow={t('home.guided_finder_eyebrow')}
             title={<>{t('home.guided_finder_title')}</>}
           />
           <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 md:mt-10 md:grid-cols-4 md:gap-5">
@@ -442,7 +443,6 @@ export default function HomePage() {
       <section className="bg-[var(--color-surface-muted)]">
         <div className="container-x py-8 md:py-14">
           <SectionHeader
-            eyebrow={t('home.faq_eyebrow')}
             title={<>{t('home.faq_title')}</>}
           />
           <div className="mt-8 max-w-3xl">
@@ -456,18 +456,15 @@ export default function HomePage() {
 }
 
 function SectionHeader({
-  eyebrow,
   title,
   description,
 }: {
-  eyebrow: string;
   title: React.ReactNode;
   description?: string;
 }) {
   return (
     <header className="max-w-3xl">
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="display-heading mt-2 text-[clamp(1.25rem,3vw+1rem,3.5rem)] leading-[1.05] text-[var(--color-text)] md:mt-4">
+      <h2 className="display-heading text-[clamp(1.25rem,3vw+1rem,3.5rem)] leading-[1.05] text-[var(--color-text)]">
         {title}
       </h2>
       {description ? (
