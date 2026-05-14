@@ -48,12 +48,15 @@ const PRIMARY_HOST = 'https://www.gberg-heizung.de';
 export const BRAND_NAME = 'G-Berg Heizung';
 
 /**
- * Default OG image. Phase 1 uses the favicon as a placeholder so unfurls
- * have *something* to render; Phase 4 will swap in a 1200×628 PNG
- * generated per-locale.
+ * Default OG image: a 1200×630 branded card under `public/og/default.png`
+ * (regenerate with `agent/scripts/build-og-default-image.mjs`). Used as
+ * the unfurl fallback on the homepage, pages, and policy pages — PDP and
+ * PLP routes pass their own product image instead. Social platforms
+ * largely ignore SVG, hence a real raster PNG at the OG-recommended size.
  */
-// TODO(phase-4): replace with /og/default.png (1200×628 branded image).
-const DEFAULT_OG_IMAGE = `${PRIMARY_HOST}/favicon.svg`;
+const DEFAULT_OG_IMAGE = `${PRIMARY_HOST}/og/default.png`;
+const DEFAULT_OG_IMAGE_WIDTH = 1200;
+const DEFAULT_OG_IMAGE_HEIGHT = 630;
 
 /**
  * Strip the `/{locale}` prefix from a pathname and return the canonical
@@ -156,6 +159,38 @@ export function buildCanonicalTag(
   };
 }
 
+/**
+ * Last-resort `<meta name="description">` builder. Used when a route has
+ * no merchant SEO override and no editorial short-description/subtitle —
+ * Shopify's "Search engine listing" field being blank is common on
+ * freshly-synced products. An empty description is worse for SERP CTR
+ * than a synthesised one, so we stitch the page's already-visible facts
+ * into a single ~155-char sentence.
+ *
+ * @param lead - The page subject (product/collection title) — never truncated.
+ * @param facts - Visible fact fragments (e.g. "1500 W output", "1800×500×80 mm",
+ *                "energy class A"). Null/empty entries are dropped. Order is
+ *                preserved; facts are appended until the 160-char budget runs out.
+ */
+export function synthesizeDescription(
+  lead: string,
+  facts: ReadonlyArray<string | number | null | undefined>,
+): string {
+  const MAX = 160;
+  const clean = facts
+    .map((f) => (f == null ? '' : String(f).trim()))
+    .filter((f) => f.length > 0);
+  let out = lead.trim();
+  if (!out) return clean.join(', ').slice(0, MAX);
+  if (!out.endsWith('.')) out += '.';
+  for (const fact of clean) {
+    const next = `${out} ${fact}.`;
+    if (next.length > MAX) break;
+    out = next;
+  }
+  return out.length > MAX ? `${out.slice(0, MAX - 1).trimEnd()}…` : out;
+}
+
 export interface SocialMetaInput {
   title: string;
   description?: string;
@@ -180,6 +215,7 @@ export function buildSocialMeta(
     type = 'website',
   } = input;
   const url = buildCanonical(pathname);
+  const usingDefaultImage = ogImage === DEFAULT_OG_IMAGE;
   return [
     // Open Graph
     {property: 'og:site_name', content: BRAND_NAME},
@@ -188,6 +224,16 @@ export function buildSocialMeta(
     {property: 'og:description', content: description},
     {property: 'og:url', content: url},
     {property: 'og:image', content: ogImage},
+    // Only the default card has known dimensions; product images vary.
+    ...(usingDefaultImage
+      ? [
+          {property: 'og:image:width', content: String(DEFAULT_OG_IMAGE_WIDTH)},
+          {
+            property: 'og:image:height',
+            content: String(DEFAULT_OG_IMAGE_HEIGHT),
+          },
+        ]
+      : []),
     // Twitter Card
     {name: 'twitter:card', content: 'summary_large_image'},
     {name: 'twitter:title', content: title},
