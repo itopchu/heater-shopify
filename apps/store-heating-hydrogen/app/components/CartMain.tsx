@@ -93,10 +93,7 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
         {/* Branded header — eyebrow + display heading + count chip on the right at md+. */}
         <header className="mb-8 flex flex-col gap-4 md:mb-12 md:flex-row md:items-end md:justify-between md:gap-8">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
-              {t('cart.title')}
-            </p>
-            <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.5rem)]">
+            <h1 className="display-heading text-[clamp(2rem,3vw+1rem,3.5rem)]">
               {t('cart.your_cart')}
             </h1>
             <p className="mt-3 text-[var(--color-text-muted)]">
@@ -211,10 +208,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
   if (layout === 'aside') {
     return (
       <div className="px-6 py-10 text-center">
-        <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
-          {t('cart.title')}
-        </p>
-        <h3 className="mt-3 font-[var(--font-display)] text-2xl italic">
+        <h3 className="font-[var(--font-display)] text-2xl italic">
           {t('cart.your_cart_empty')}
         </h3>
         <p className="mt-2 text-[14px] text-[var(--color-text-muted)]">
@@ -235,10 +229,7 @@ function CartEmpty({layout}: {layout?: CartMainProps['layout']}) {
   // Page variant — proper hero with category shortcuts and trust strip.
   return (
     <div className="py-4 md:py-6">
-      <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
-        {t('cart.title')}
-      </p>
-      <h1 className="display-heading mt-3 text-[clamp(2rem,3vw+1rem,3.5rem)]">
+      <h1 className="display-heading text-[clamp(2rem,3vw+1rem,3.5rem)]">
         {t('cart.your_cart_empty')}
       </h1>
       <p className="mt-4 max-w-xl text-[var(--color-text-muted)]">

@@ -33,10 +33,7 @@ export default function AccountLayout() {
   return (
     <div className="container-x py-12">
       <header className="mb-8">
-        <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-primary)]">
-          {t('account.eyebrow')}
-        </span>
-        <h1 className="display-heading mt-2 text-[clamp(1.75rem,2vw+1rem,2.5rem)]">
+        <h1 className="display-heading text-[clamp(1.75rem,2vw+1rem,2.5rem)]">
           {heading}
         </h1>
       </header>
