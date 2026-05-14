@@ -1,7 +1,7 @@
 /**
  * Desktop mega-menu. Hydrogen port.
  */
-import {Link} from 'react-router';
+import {Link, NavLink} from 'react-router';
 import type {MenuItem} from '@gberg/shopify-client';
 import {localeHref} from '~/lib/gberg/href';
 import {useT, type TFunction} from '~/lib/gberg/i18n';
@@ -139,9 +139,13 @@ export function MegaMenu({locale, menu}: MegaMenuProps) {
               key={col.label}
               className={hasSub ? 'megamenu-trigger' : undefined}
             >
-              <Link to={col.href} className="nav-link">
+              {/* NavLink + `end` so each column highlights only when its
+                  exact path is active. The .nav-link CSS already styles
+                  the [aria-current='page'] state with a persistent red
+                  underline (see styles/tailwind.css). */}
+              <NavLink to={col.href} end className="nav-link">
                 {label}
-              </Link>
+              </NavLink>
               {hasSub ? (
                 <div className="megamenu-panel" role="menu">
                   <div className="container-x grid grid-cols-2 gap-x-12 gap-y-2 py-8 md:grid-cols-4">
@@ -151,21 +155,35 @@ export function MegaMenu({locale, menu}: MegaMenuProps) {
                       </p>
                       <ul className="mt-4 space-y-2">
                         <li>
-                          <Link
+                          <NavLink
                             to={col.href}
-                            className="link-accent text-[15px] text-[var(--color-text)]"
+                            end
+                            className={({isActive}) =>
+                              `link-accent text-[15px] ${
+                                isActive
+                                  ? 'font-semibold text-[var(--color-primary)]'
+                                  : 'text-[var(--color-text)]'
+                              }`
+                            }
                           >
                             {t('common.browse_all')}
-                          </Link>
+                          </NavLink>
                         </li>
                         {col.sub!.map((s) => (
                           <li key={s.href}>
-                            <Link
+                            <NavLink
                               to={s.href}
-                              className="link-accent text-[15px] text-[var(--color-text)]"
+                              end
+                              className={({isActive}) =>
+                                `link-accent text-[15px] ${
+                                  isActive
+                                    ? 'font-semibold text-[var(--color-primary)]'
+                                    : 'text-[var(--color-text)]'
+                                }`
+                              }
                             >
                               {s.label}
-                            </Link>
+                            </NavLink>
                           </li>
                         ))}
                       </ul>

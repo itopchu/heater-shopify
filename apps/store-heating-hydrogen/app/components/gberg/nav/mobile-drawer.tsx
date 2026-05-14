@@ -2,7 +2,7 @@
  * Mobile / tablet (<lg) navigation drawer. Hydrogen port.
  */
 import {useCallback, useEffect, useState} from 'react';
-import {Link} from 'react-router';
+import {Link, NavLink} from 'react-router';
 import {localeHref} from '~/lib/gberg/href';
 import {useT} from '~/lib/gberg/i18n';
 import {SearchInput} from '~/components/gberg/search/search-input';
@@ -119,35 +119,56 @@ export function MobileDrawer({locale, columns}: MobileDrawerProps) {
                         </summary>
                         <ul className="space-y-2 pb-3 pl-4">
                           <li>
-                            <Link
+                            <NavLink
                               to={col.href}
+                              end
                               onClick={close}
-                              className="block py-1 text-[13px] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+                              className={({isActive}) =>
+                                `block py-1 text-[13px] hover:text-[var(--color-primary)] ${
+                                  isActive
+                                    ? 'font-semibold text-[var(--color-primary)]'
+                                    : 'text-[var(--color-text-muted)]'
+                                }`
+                              }
                             >
                               {t('common.browse_all')}
-                            </Link>
+                            </NavLink>
                           </li>
                           {col.sub.map((s) => (
                             <li key={s.href}>
-                              <Link
+                              <NavLink
                                 to={s.href}
+                                end
                                 onClick={close}
-                                className="block py-1 text-[13px] text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+                                className={({isActive}) =>
+                                  `block py-1 text-[13px] hover:text-[var(--color-primary)] ${
+                                    isActive
+                                      ? 'font-semibold text-[var(--color-primary)]'
+                                      : 'text-[var(--color-text-muted)]'
+                                  }`
+                                }
                               >
                                 {s.label}
-                              </Link>
+                              </NavLink>
                             </li>
                           ))}
                         </ul>
                       </details>
                     ) : (
-                      <Link
+                      <NavLink
                         to={col.href}
+                        end
                         onClick={close}
-                        className="block px-2 py-3 text-[13px] font-semibold uppercase tracking-[0.1em] text-[var(--color-text)] hover:text-[var(--color-primary)]"
+                        className={({isActive}) =>
+                          `block px-2 py-3 text-[13px] font-semibold uppercase tracking-[0.1em] hover:text-[var(--color-primary)] ${
+                            isActive
+                              ? 'text-[var(--color-primary)]'
+                              : 'text-[var(--color-text)]'
+                          }`
+                        }
                       >
                         {label}
-                      </Link>
+                      </NavLink>
                     )}
                   </li>
                 );
