@@ -5,7 +5,7 @@ import {useVariantUrl} from '~/lib/variants';
 import {Link} from 'react-router';
 import {ProductPrice} from './ProductPrice';
 import {useAside} from './Aside';
-import {useT} from '~/lib/gberg/i18n';
+import {useCartActionRoute, useT} from '~/lib/gberg/i18n';
 import type {
   CartApiQueryFragment,
   CartLineFragment,
@@ -187,10 +187,11 @@ function CartLineRemoveButton({
   disabled: boolean;
 }) {
   const t = useT();
+  const cartRoute = useCartActionRoute();
   return (
     <CartForm
       fetcherKey={getUpdateKey(lineIds)}
-      route="/cart"
+      route={cartRoute}
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{lineIds}}
     >
@@ -213,11 +214,12 @@ function CartLineUpdateButton({
   lines: CartLineUpdateInput[];
 }) {
   const lineIds = lines.map((line) => line.id);
+  const cartRoute = useCartActionRoute();
 
   return (
     <CartForm
       fetcherKey={getUpdateKey(lineIds)}
-      route="/cart"
+      route={cartRoute}
       action={CartForm.ACTIONS.LinesUpdate}
       inputs={{lines}}
     >

@@ -161,3 +161,25 @@ export function useT(): TFunction {
   const locale: Locale = isSupportedLocale(raw) ? raw : DEFAULT_LOCALE;
   return tFor(locale);
 }
+
+/**
+ * Locale-aware target for `<CartForm route={…}>`.
+ *
+ * Hydrogen's `CartForm` POSTs to the `route` URL and the cart action runs
+ * under that URL's i18n context (via `getLocaleFromRequest`). The default
+ * `route="/cart"` strips the locale prefix — so a customer on
+ * `/de/products/...` would have their `cartCreate` fire at `/cart` under
+ * `@inContext(language: EN)`, stamping the cart EN for life and producing
+ * an English hosted-checkout regardless of the browsing locale.
+ *
+ * Routing the form to `/{locale}/cart` (e.g. `/de/cart`) keeps the cart's
+ * stored language synchronised with the customer's chosen locale at
+ * creation time, which Shopify reads when it stamps the
+ * `/checkouts/cn/<token>/<lang>-<country>` path segment.
+ */
+export function useCartActionRoute(): string {
+  const params = useParams();
+  const raw = (params as {locale?: string}).locale;
+  const locale: Locale = isSupportedLocale(raw) ? raw : DEFAULT_LOCALE;
+  return locale === DEFAULT_LOCALE ? '/cart' : `/${locale}/cart`;
+}

@@ -8,7 +8,7 @@ import {useCallback, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
 import {cn} from '@gberg/ui';
 import {useAside} from '~/components/Aside';
-import {useT} from '~/lib/gberg/i18n';
+import {useCartActionRoute, useT} from '~/lib/gberg/i18n';
 import {CartAddButton} from './cart-add-button';
 
 export interface AddToCartProps {
@@ -19,6 +19,7 @@ export interface AddToCartProps {
 
 export function AddToCart({variantId, available, className}: AddToCartProps) {
   const t = useT();
+  const cartRoute = useCartActionRoute();
   const [qty, setQty] = useState(1);
   const {open} = useAside();
   const disabled = !available || !variantId;
@@ -55,7 +56,7 @@ export function AddToCart({variantId, available, className}: AddToCartProps) {
         </div>
 
         <CartForm
-          route="/cart"
+          route={cartRoute}
           action={CartForm.ACTIONS.LinesAdd}
           inputs={{
             lines: variantId

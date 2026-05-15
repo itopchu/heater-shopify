@@ -26,7 +26,7 @@ import {CartAddButton} from './cart-add-button';
 import {PriceBlock} from './price-block';
 import {useAside} from '~/components/Aside';
 import {formatMoney} from '~/lib/gberg/format';
-import {useT} from '~/lib/gberg/i18n';
+import {useCartActionRoute, useT} from '~/lib/gberg/i18n';
 
 export interface BuyBoxProps {
   product: HeatingProduct;
@@ -98,6 +98,7 @@ function StickyMobileBuy({
   variantId,
 }: StickyMobileBuyProps) {
   const t = useT();
+  const cartRoute = useCartActionRoute();
   const {open} = useAside();
   const openCart = useCallback(() => open('cart'), [open]);
   return (
@@ -116,7 +117,7 @@ function StickyMobileBuy({
           </p>
         </div>
         <CartForm
-          route="/cart"
+          route={cartRoute}
           action={CartForm.ACTIONS.LinesAdd}
           inputs={{
             lines: variantId
