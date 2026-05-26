@@ -24,9 +24,10 @@
 name: sync-catalog
 
 on:
-  # Weekly Monday 03:00 UTC.
-  schedule:
-    - cron: "0 3 * * 1"
+  # Weekly schedule disabled 2026-05-26 — user paused the automated catalog
+  # mirror. Manual trigger via workflow_dispatch is still available.
+  # schedule:
+  #   - cron: "0 3 * * 1"
   # Manual trigger with tunable knobs.
   workflow_dispatch:
     inputs:
