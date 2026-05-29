@@ -12,7 +12,7 @@
  */
 import {useEffect, useRef, useState} from 'react';
 import {Link, useLocation} from 'react-router';
-import {SUPPORTED_LOCALES, LOCALE_LABEL, LOCALE_NAME, tFor, type Locale} from '~/lib/gberg/i18n';
+import {SUPPORTED_LOCALES, LOCALE_LABEL, LOCALE_NAME, DEFAULT_LOCALE, tFor, type Locale} from '~/lib/gberg/i18n';
 
 interface Props {
   locale: string;
@@ -32,7 +32,7 @@ export default function LanguageSwitcher({locale}: Props) {
   const {pathname, search, hash} = useLocation();
   const current: Locale = (SUPPORTED_LOCALES as readonly string[]).includes(locale)
     ? (locale as Locale)
-    : 'en';
+    : DEFAULT_LOCALE;
   const t = tFor(current);
 
   const [open, setOpen] = useState(false);

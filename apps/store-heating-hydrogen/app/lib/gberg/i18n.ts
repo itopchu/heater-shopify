@@ -32,7 +32,15 @@ export const LOCALE_NAME: Record<Locale, string> = {
   fr: 'Français',
 };
 
-export const DEFAULT_LOCALE: Locale = 'en';
+// Storefront default browsing language. The unprefixed root (`/`,
+// `/products/…`) renders in this locale; every other locale is path-prefixed
+// (`/en`, `/nl`, `/fr`). Flipped EN→DE 2026-05-29: Germany is the company's
+// home market and the largest EU heating market, so German is the language a
+// first-time visitor sees by default. English is still reachable at `/en`.
+export const DEFAULT_LOCALE: Locale = 'de';
+// Ultimate content fallback for missing translations. Stays EN because English
+// remains the Shopify *source* language — catalog-sync writes EN, and DE/NL/FR
+// are Translate & Adapt layers on top (see memory `project_translation_strategy`).
 export const FALLBACK_LOCALE: Locale = 'en';
 
 export function isSupportedLocale(

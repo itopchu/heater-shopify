@@ -1,16 +1,16 @@
 /**
  * Locale-aware href helper. Mirrors apps/store-heating/lib/href.ts.
  *
- * The default locale (EN) is served unprefixed — the homepage is `/`, not
- * `/en/`. Other locales are prefixed: `/de`, `/nl/cart`, … . This helper
- * centralises that so individual links don't have to special-case it.
+ * The default locale (DEFAULT_LOCALE = German) is served unprefixed — the
+ * homepage is `/`, not `/de/`. Other locales are prefixed: `/en`, `/nl/cart`,
+ * … . This helper centralises that so individual links don't special-case it.
  *
- *   localeHref('en', '/')        → '/'
- *   localeHref('en', '/cart')    → '/cart'
- *   localeHref('de', '/')        → '/de'        (no trailing slash)
- *   localeHref('de', '/cart')    → '/de/cart'
- *   localeHref('de', '/de/cart') → '/de/cart'   (not double-prefixed)
- *   localeHref('de', 'https://…')→ 'https://…'  (passthrough)
+ *   localeHref('de', '/')        → '/'
+ *   localeHref('de', '/cart')    → '/cart'
+ *   localeHref('en', '/')        → '/en'        (no trailing slash)
+ *   localeHref('en', '/cart')    → '/en/cart'
+ *   localeHref('en', '/en/cart') → '/en/cart'   (not double-prefixed)
+ *   localeHref('en', 'https://…')→ 'https://…'  (passthrough)
  */
 import {DEFAULT_LOCALE} from '~/lib/gberg/i18n';
 

@@ -2,6 +2,7 @@ import {useLoaderData, useLocation, useParams} from 'react-router';
 import type {Route} from './+types/blogs.$blogHandle.$articleHandle';
 import {Image} from '@shopify/hydrogen';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
+import {normalizeLocale} from '~/lib/gberg/i18n';
 import {BRAND_NAME, buildSeoMeta} from '~/lib/gberg/seo';
 import {
   buildArticleJsonLd,
@@ -108,7 +109,7 @@ export default function Article() {
   const {title, image, contentHtml, author} = article;
   const params = useParams() as {locale?: string; blogHandle?: string};
   const {pathname} = useLocation();
-  const locale = params.locale ?? 'en';
+  const locale = normalizeLocale(params.locale);
 
   const publishedDate = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',

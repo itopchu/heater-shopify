@@ -1,6 +1,6 @@
 import {redirect} from 'react-router';
 import type {Route} from './+types/($locale).cart.c.$token';
-import {isSupportedLocale} from '~/lib/gberg/i18n';
+import {DEFAULT_LOCALE, isSupportedLocale} from '~/lib/gberg/i18n';
 
 /**
  * Cart-permalink passthrough.
@@ -30,11 +30,17 @@ export async function loader({request, context, params}: Route.LoaderArgs) {
   // German. Verified empirically:
   //   - Path-prefix `/de/cart/c/<token>` on myshopify → 404
   //   - `?locale=de` query param → checkout in German (`htmlLang="de"`)
-  // Without this hint, Shopify falls back to the market's default
-  // language regardless of which locale the cart was created under.
-  if (params.locale && isSupportedLocale(params.locale) && params.locale !== 'en') {
-    passthrough.set('locale', params.locale);
-  }
+  //
+  // We always stamp an explicit locale (rather than letting the Shopify
+  // market default decide) so the hosted checkout matches the browsing
+  // language even on the unprefixed default route. The unprefixed `/cart/c/…`
+  // carries no `params.locale`, so it resolves to DEFAULT_LOCALE (German) —
+  // exactly the language the customer was shopping in at the root.
+  const checkoutLocale =
+    params.locale && isSupportedLocale(params.locale)
+      ? params.locale
+      : DEFAULT_LOCALE;
+  passthrough.set('locale', checkoutLocale);
   const target = `https://${context.env.PUBLIC_STORE_DOMAIN}/cart/c/${token}?${passthrough.toString()}`;
   return redirect(target, 302);
 }

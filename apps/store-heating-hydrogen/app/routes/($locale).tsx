@@ -6,10 +6,10 @@ import {isSupportedLocale} from '~/lib/gberg/i18n';
  *
  * The skeleton's default rejects any locale that doesn't match
  * `${language}-${country}` (e.g. `EN-US`). G-Berg uses simple 2-letter
- * locale prefixes (`/en`) for hreflang continuity with the prior Next.js
- * storefront, so we accept either:
- *   - undefined (no prefix → /), or
- *   - a value in SUPPORTED_LOCALES (currently just "en")
+ * locale prefixes (`/en`, `/nl`, `/fr`) for hreflang continuity with the
+ * prior Next.js storefront, so we accept either:
+ *   - undefined (no prefix → /, which serves DEFAULT_LOCALE = German), or
+ *   - a value in SUPPORTED_LOCALES (en, de, nl, fr)
  *
  * Anything else 404s.
  */
