@@ -123,7 +123,7 @@ export function buildOrganizationJsonLd(
         '@type': 'ContactPoint',
         contactType: 'customer support',
         email: 'online@g-berg-gmbh.de',
-        availableLanguage: ['en', 'de'],
+        availableLanguage: ['de', 'en', 'nl', 'fr'],
       },
     ],
     // sameAs is required by schema.org Organization for social linking;

@@ -73,7 +73,7 @@ export const meta: Route.MetaFunction = ({
   data?: {product?: HeatingProduct; locale?: ReturnType<typeof normalizeLocale>} | undefined;
   location: {pathname: string};
 }) => {
-  const t = tFor(data?.locale ?? 'en');
+  const t = tFor(normalizeLocale(data?.locale));
   const product = data?.product;
   if (!product) {
     // 410 case (or genuine miss) — still emit branded title and a

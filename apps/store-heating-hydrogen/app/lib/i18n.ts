@@ -1,5 +1,5 @@
 import type {I18nBase} from '@shopify/hydrogen';
-import {localeToInContext, normalizeLocale} from './gberg/i18n';
+import {DEFAULT_LOCALE, localeToInContext, normalizeLocale} from './gberg/i18n';
 
 export interface I18nLocale extends I18nBase {
   pathPrefix: string;
@@ -22,7 +22,7 @@ export function getLocaleFromRequest(request: Request): I18nLocale {
   const firstPart = url.pathname.split('/')[1] ?? '';
   const locale = normalizeLocale(firstPart);
   const hint = localeToInContext(locale);
-  const pathPrefix = locale === 'en' ? '' : `/${locale}`;
+  const pathPrefix = locale === DEFAULT_LOCALE ? '' : `/${locale}`;
   return {
     language: hint.language as I18nLocale['language'],
     country: hint.country as I18nLocale['country'],

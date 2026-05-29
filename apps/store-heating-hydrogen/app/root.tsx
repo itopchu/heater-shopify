@@ -4,7 +4,8 @@
  * Replaces the skeleton's PageLayout with our Header / Footer shell.
  * Loads Inter + Fraunces from Google Fonts via <link>, imports the
  * Tailwind v4 stylesheet (which itself imports @gberg/theme-tokens), and
- * sets <html lang="en" data-brand="heating"> per the brand spec.
+ * sets <html lang="…" data-brand="heating">, where the lang reflects the
+ * active route locale (DEFAULT_LOCALE = German on the unprefixed root).
  */
 import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
 import {

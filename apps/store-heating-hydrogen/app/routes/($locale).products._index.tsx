@@ -18,7 +18,7 @@ export const meta: Route.MetaFunction = ({
   data?: {locale?: ReturnType<typeof normalizeLocale>};
   location: {pathname: string};
 }) => {
-  const t = tFor(data?.locale ?? 'en');
+  const t = tFor(normalizeLocale(data?.locale));
   const title = t('plp.shop_all_meta_title');
   const description = t('plp.shop_all_meta_description');
   return [

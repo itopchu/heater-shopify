@@ -9,8 +9,8 @@
  *   - `<link rel="canonical">` — the primary URL for the current page in
  *     the current locale, always rooted at the production domain.
  *   - `<link rel="alternate" hreflang="...">` for every supported locale
- *     plus an `x-default` pointing at the EN version, which is also the
- *     fallback for unknown locales.
+ *     plus an `x-default` pointing at the default-locale (DE) version, which
+ *     is also the fallback for unknown locales.
  *   - Standard OG + Twitter Card meta so SERP, social, Slack/WhatsApp
  *     unfurls and AI summary cards render with branded titles + images.
  *
@@ -18,7 +18,7 @@
  * so they can be spread into the array returned by a route's `meta()`.
  */
 
-import {SUPPORTED_LOCALES, type Locale} from './i18n';
+import {DEFAULT_LOCALE, SUPPORTED_LOCALES, type Locale} from './i18n';
 
 /**
  * Minimal subset of React Router's `MetaArgs` we use across route
@@ -135,8 +135,12 @@ export function buildHreflangTags(
       href: `${PRIMARY_HOST}${localePath}`,
     });
   }
-  // x-default → English version (our default).
-  const defaultPath = basePath === '/' ? '/en' : `/en${basePath}`;
+  // x-default → the storefront default locale (German). This is the version
+  // served to users whose language/region matches no specific hreflang target.
+  const defaultPath =
+    basePath === '/'
+      ? `/${DEFAULT_LOCALE}`
+      : `/${DEFAULT_LOCALE}${basePath}`;
   tags.push({
     tagName: 'link',
     rel: 'alternate',

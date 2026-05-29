@@ -1,6 +1,6 @@
 # heater-shopify — Project Instructions
 
-English-default Shopify storefront for **G-Berg GmbH** (`gberg-heizung`) — authorized regional reseller of xxl-heizung.de, selling heaters/radiators across a European multi-country market (Germany, Belgium, Spain, Austria, Netherlands, + others). Bilingual UI (EN default, DE secondary via Translate & Adapt); more EU languages added over time. Plus a local Claude Agent SDK dev agent + an external automated catalog-sync pipeline that mirrors xxl-heizung's Shopify-native product data into our store with AI-regenerated imagery.
+German-default Shopify storefront for **G-Berg GmbH** (`gberg-heizung`) — authorized regional reseller of xxl-heizung.de, selling heaters/radiators across a European multi-country market (Germany, Belgium, Spain, Austria, Netherlands, + others). Multilingual UI (DE default; EN, NL, FR via Translate & Adapt); more EU languages added over time. German is the default browsing language (served at the unprefixed root `/`); EN/NL/FR are path-prefixed (`/en`, `/nl`, `/fr`). English remains the Shopify *source* language. Plus a local Claude Agent SDK dev agent + an external automated catalog-sync pipeline that mirrors xxl-heizung's Shopify-native product data into our store with AI-regenerated imagery.
 
 **Approved plans (read before architectural decisions):**
 - `C:\Users\mribr\.claude\plans\i-want-to-replicate-mossy-wadler.md` — foundational build (Phases 1–10)
@@ -24,7 +24,7 @@ English-default Shopify storefront for **G-Berg GmbH** (`gberg-heizung`) — aut
 ## Technology
 
 - **Theme:** Custom OS 2.0, forked from Shopify Dawn. Liquid + JSON templates + metafields/metaobjects.
-- **Languages:** EN (default), DE (secondary) via Translate & Adapt + `locales/*.json`. Additional EU languages added as new markets open. Language switcher in header via `{% form 'localization' %}`.
+- **Languages:** DE (default browsing locale, served at unprefixed `/`); EN/NL/FR path-prefixed via Translate & Adapt + `locales/*.json`. English stays the Shopify source language (catalog-sync writes EN; DE/NL/FR are translation layers). The storefront default is set by `DEFAULT_LOCALE` in `apps/store-heating-hydrogen/app/lib/gberg/i18n.ts`. Additional EU languages added as new markets open. Language switcher in header (Hydrogen `LanguageSwitcher` component).
 - **Market:** single "Europe" Shopify Market covering Germany, Belgium, Spain, Austria, Netherlands, and other EU countries (extensible list). Currency EUR. Per-country VAT: DE 19%, BE 21%, ES 21%, etc. Prices inclusive of local VAT; show `incl. VAT, excl. shipping` in EN and localized equivalents per locale.
 - **Payments (via Shopify Payments):** Klarna (availability varies per country), PayPal, Card, Apple/Google Pay. Sofort is deprecated — do not add. No SEPA Direct Debit.
 - **Agent stack:** Claude Agent SDK (Node.js + TypeScript). Runs locally on Windows. Default store = dev. **Authenticates via the Claude Code CLI runtime, which uses the user's Claude Max subscription — no ANTHROPIC_API_KEY required.** Never suggest switching to API-key billing without being asked.

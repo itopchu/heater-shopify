@@ -12,8 +12,7 @@ import {normalizeLocale} from '~/lib/gberg/i18n';
 export async function loader({context, request}: Route.LoaderArgs) {
   const url = new URL(request.url);
   const q = url.searchParams.get('q') ?? '';
-  const localeParam = url.searchParams.get('locale') ?? 'en';
-  const locale = normalizeLocale(localeParam);
+  const locale = normalizeLocale(url.searchParams.get('locale'));
 
   const client = createGbergClient(context.storefront);
   const data = await fetchPredictiveSearch(client, q, locale, 6);
