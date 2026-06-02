@@ -38,6 +38,7 @@ import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { mapXxlCollectionHandle } from './collection-map.js';
+import { normalizeOptionValue } from './normalize-option-value.js';
 import type { NormalizedProduct, ProductMetafield } from './types.js';
 
 // ---------------------------------------------------------------------------
@@ -112,10 +113,9 @@ interface ScraperVariant {
  * If xxl is running a promotion, `compare_at_price` holds the original
  * higher value — return that. Otherwise fall back to `price`.
  */
-function pickRegularPrice(price: string, compareAt: string | null | undefined): string {
-  const p = Number(price);
-  const c = compareAt != null ? Number(compareAt) : NaN;
-  if (Number.isFinite(c) && c > p) return compareAt as string;
+// Use xxl's current selling price; the inflated compare_at is ignored.
+// See agent/sync/normalize.ts pickSellingPrice for the rationale.
+function pickSellingPrice(price: string): string {
   return price;
 }
 
@@ -403,15 +403,18 @@ function buildVariants(info: ScraperInfo): { variants: NormVariant[]; options: N
   const variants: NormVariant[] = rows.map((v) => {
     const out: NormVariant = {
       sku: v.sku && v.sku.trim() ? `GB-${v.sku.trim()}` : `GB-${info.id}-${v.id}`,
-      // Policy 2026-05: G-Berg has no discount. When xxl-heizung is running a
-      // promotion, `price` is the sale price and `compare_at_price` is the
-      // original — we want the original higher value.
-      price: pickRegularPrice((v.price ?? '0').toString(), v.compare_at_price),
+      // Policy 2026-06: list xxl's current selling price; the inflated
+      // compare_at (fake-discount) is ignored.
+      price: pickSellingPrice((v.price ?? '0').toString()),
       available: true, // scraper data is always null; default to available
     };
-    if (v.option1 != null) out.option1 = v.option1;
-    if (v.option2 != null) out.option2 = v.option2;
-    if (v.option3 != null) out.option3 = v.option3;
+    // Strip baked-in availability text and canonicalize the dimension
+    // separator so "50 x 180 nicht Vorrätig" → "50 × 180" before it becomes a
+    // Shopify option value. The unique() axis derivation below then collapses
+    // any x/× duplicates correctly.
+    if (v.option1 != null) out.option1 = normalizeOptionValue(v.option1);
+    if (v.option2 != null) out.option2 = normalizeOptionValue(v.option2);
+    if (v.option3 != null) out.option3 = normalizeOptionValue(v.option3);
     if (typeof v.weight === 'number' && v.weight > 0 && v.weight_unit === 'kg') {
       out.grams = Math.round(v.weight * 1000);
     }
@@ -456,7 +459,8 @@ function unique(xs: string[]): string[] {
  */
 function guessAxisName(values: string[], fallback: string): string {
   const lc = values.map((v) => v.toLowerCase()).join(' ');
-  if (/\d+\s*x\s*\d+|\bmm\b|\bcm\b/.test(lc)) return 'Size';
+  // Values are normalized to the "×" separator before this runs, so match both.
+  if (/\d+\s*[x×]\s*\d+|\bmm\b|\bcm\b/.test(lc)) return 'Size';
   if (/anthrazit|wei[sß]+|schwarz|chrom|silber/.test(lc)) return 'Color';
   if (/anschluss|mittel|seite/.test(lc)) return 'Connection';
   return fallback;

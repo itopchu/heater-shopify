@@ -2082,7 +2082,7 @@
         "60 × 122",
         "60 × 140",
         "60 × 158",
-        "60 × 158 Lieferbar ab KW 21",
+        "60 × 158",
         "60 × 180"
       ],
       "options": [
@@ -2102,7 +2102,7 @@
             "60 × 122",
             "60 × 140",
             "60 × 158",
-            "60 × 158 Lieferbar ab KW 21",
+            "60 × 158",
             "60 × 180"
           ]
         }
@@ -2254,7 +2254,7 @@
         },
         {
           "color": "Weiß",
-          "size": "60 × 158 Lieferbar ab KW 21",
+          "size": "60 × 158",
           "sku": "XXL-FL-H-005",
           "price": "559.00",
           "compareAtPrice": "589.00",
@@ -2344,8 +2344,8 @@
         "38 × 180",
         "50 × 180",
         "60 × 180",
-        "60 × 180 Lieferbar ab KW 21",
-        "70 × 180 Lieferbar ab KW 21"
+        "60 × 180",
+        "70 × 180"
       ],
       "options": [
         {
@@ -2362,8 +2362,8 @@
             "38 × 180",
             "50 × 180",
             "60 × 180",
-            "60 × 180 Lieferbar ab KW 21",
-            "70 × 180 Lieferbar ab KW 21"
+            "60 × 180",
+            "70 × 180"
           ]
         }
       ],
@@ -2388,7 +2388,7 @@
         },
         {
           "color": "Anthrazit",
-          "size": "60 × 180 Lieferbar ab KW 21",
+          "size": "60 × 180",
           "sku": "XXL-FL-V-004",
           "price": "689.00",
           "compareAtPrice": "799.00",
@@ -2442,7 +2442,7 @@
         },
         {
           "color": "Weiß",
-          "size": "60 × 180 Lieferbar ab KW 21",
+          "size": "60 × 180",
           "sku": "XXL-FL-V-001",
           "price": "689.00",
           "compareAtPrice": "799.00",
@@ -2451,7 +2451,7 @@
         },
         {
           "color": "Weiß",
-          "size": "70 × 180 Lieferbar ab KW 21",
+          "size": "70 × 180",
           "sku": "XXL-FL-V-011",
           "price": "899.00",
           "compareAtPrice": null,
@@ -3653,7 +3653,7 @@
         "40 × 160",
         "40 × 180",
         "50 × 160",
-        "50 × 180 nicht Vorrätig",
+        "50 × 180",
         "60 × 160",
         "60 × 180"
       ],
@@ -3671,7 +3671,7 @@
             "40 × 160",
             "40 × 180",
             "50 × 160",
-            "50 × 180 nicht Vorrätig",
+            "50 × 180",
             "60 × 160",
             "60 × 180"
           ]
@@ -3707,7 +3707,7 @@
         },
         {
           "color": "Weiß",
-          "size": "50 × 180 nicht Vorrätig",
+          "size": "50 × 180",
           "sku": "XXL-Typ-22-016",
           "price": "620.00",
           "compareAtPrice": null,

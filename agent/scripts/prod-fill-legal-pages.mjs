@@ -29,6 +29,15 @@ const STORE = process.env.SHOPIFY_PROD_STORE;
 const TOKEN = process.env.SHOPIFY_PROD_ADMIN_TOKEN;
 if (!STORE || !TOKEN) throw new Error('Missing SHOPIFY_PROD_*');
 const APPLY = process.argv.includes('--apply');
+// Restrict the run to a comma-separated subset of handles (imprint,privacy,terms).
+// Lets a surgical fix touch only one page without rewriting the others.
+const ONLY = (() => {
+  const i = process.argv.findIndex((a) => a.startsWith('--only'));
+  if (i < 0) return null;
+  const a = process.argv[i];
+  const v = a.includes('=') ? a.split('=')[1] : process.argv[i + 1];
+  return new Set((v ?? '').split(',').map((s) => s.trim()).filter(Boolean));
+})();
 
 const COMPANY = {
   name: 'G-Berg GmbH',
@@ -40,7 +49,6 @@ const COMPANY = {
   phoneTel: '+491726088848',
   email: 'info@g-berg-gmbh.de',
   vat: 'DE450348934',
-  warehouse: 'Seestrasse 2A, 58089 Hagen, Germany',
 };
 
 const IMPRINT_HTML = `
@@ -60,8 +68,6 @@ const IMPRINT_HTML = `
 </p>
 <h3>VAT Identification Number</h3>
 <p>VAT ID per § 27a UStG: <strong>${COMPANY.vat}</strong></p>
-<h3>Warehouse / Fulfilment</h3>
-<p>${COMPANY.warehouse}</p>
 <h3>Online Dispute Resolution</h3>
 <p>
   The European Commission provides a platform for online dispute resolution (ODR), available at
@@ -209,6 +215,10 @@ const updates = [
 ];
 
 for (const u of updates) {
+  if (ONLY && !ONLY.has(u.handle)) {
+    console.log(`  [skip ] ${u.handle} (excluded by --only)`);
+    continue;
+  }
   const p = await findPageByHandle(u.handle);
   if (!p) {
     console.log(`  [skip ] ${u.handle} (no page record found)`);

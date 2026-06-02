@@ -27,8 +27,8 @@
       "values": [
         "38 x 180",
         "50 x 180",
-        "60 × 180 Lieferbar ab KW 21",
-        "70 x 180 Lieferbar ab KW 21"
+        "60 × 180",
+        "70 × 180"
       ]
     }
   ],
@@ -67,8 +67,8 @@
       "id": 45336516591840,
       "sku": "XXL-FL-V-001",
       "barcode": "4251743540681",
-      "title": "60 × 180 Lieferbar ab KW 21",
-      "option1": "60 × 180 Lieferbar ab KW 21",
+      "title": "60 × 180",
+      "option1": "60 × 180",
       "option2": null,
       "option3": null,
       "price": "689.00",
@@ -82,8 +82,8 @@
       "id": 55464673902979,
       "sku": "XXL-FL-V-011",
       "barcode": "4251743551175",
-      "title": "70 x 180 Lieferbar ab KW 21",
-      "option1": "70 x 180 Lieferbar ab KW 21",
+      "title": "70 × 180",
+      "option1": "70 × 180",
       "option2": null,
       "option3": null,
       "price": "899.00",

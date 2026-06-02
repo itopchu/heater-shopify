@@ -66,6 +66,13 @@ function natSort(a, b) {
 function normalizeSize(s) {
   if (!s) return s;
   return String(s)
+    // Strip baked-in availability text (e.g. "50 × 180 nicht Vorrätig") — stock
+    // state is carried by availableForSale, not the value label. Mirrors
+    // agent/sync/normalize-option-value.ts; keep the two in sync.
+    .replace(
+      /\s*[-–—,(/]*\s*(?:nicht\s*vorr(?:ä|ae)tig|nicht\s*verf(?:ü|ue)gbar|nicht\s*lieferbar|ausverkauft|vergriffen|auf\s*anfrage|lieferzeit[^,;)]*|out\s*of\s*stock|sold\s*out|not\s*in\s*stock)\s*\)?\s*$/i,
+      '',
+    )
     .replace(/\s*[xX×]\s*/g, ' × ')
     .replace(/\s+/g, ' ')
     .replace(/\bMM\b/g, 'mm')
