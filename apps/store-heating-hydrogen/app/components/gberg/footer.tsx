@@ -22,6 +22,10 @@ export function Footer({locale}: {locale: string}) {
     {label: t('footer.imprint'), href: localeHref(locale, '/pages/imprint')},
     {label: t('footer.privacy'), href: localeHref(locale, '/pages/privacy')},
     {label: t('footer.terms'), href: localeHref(locale, '/pages/terms')},
+    {
+      label: t('footer.withdrawal'),
+      href: localeHref(locale, '/pages/widerrufsrecht'),
+    },
   ];
 
   return (
