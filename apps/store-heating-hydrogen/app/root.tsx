@@ -63,26 +63,21 @@ export function links() {
 }
 
 /**
- * Site-wide `<meta>`. Emits the Search Console / Bing Webmaster ownership-
- * verification tags when the corresponding env vars are set (preferred
- * over DNS-TXT only because it survives a registrar move; either works) —
- * set `PUBLIC_GOOGLE_SITE_VERIFICATION` / `PUBLIC_BING_SITE_VERIFICATION`
- * in the Oxygen environment.
+ * Search Console / Bing Webmaster ownership-verification tags are emitted in
+ * `Layout` (directly in <head>), NOT via a route `meta()` export. React
+ * Router v7 does not merge ancestor route meta into a child route's meta:
+ * every page route here exports its own `meta()`, which would shadow a
+ * root-level `meta()` and drop the verification tag on exactly the pages a
+ * crawler fetches (home, PDP, PLP). Rendering it in Layout guarantees it is
+ * present site-wide and survives a registrar move. Set
+ * `PUBLIC_GOOGLE_SITE_VERIFICATION` / `PUBLIC_BING_SITE_VERIFICATION` in the
+ * Oxygen environment.
  *
  * Note: `Organization` + `WebSite` JSON-LD is rendered via the <JsonLd>
- * component in App() below, NOT here — React Router's <Meta> drops any
+ * component in App() below, NOT via meta — React Router's <Meta> drops any
  * `tagName: 'script'` descriptor (see app/components/gberg/json-ld.tsx).
  * Likewise every route emits its page-specific JSON-LD from its component.
  */
-export function meta({data}: Route.MetaArgs) {
-  const v = data?.seoVerification;
-  return [
-    ...(v?.google
-      ? [{name: 'google-site-verification', content: v.google}]
-      : []),
-    ...(v?.bing ? [{name: 'msvalidate.01', content: v.bing}] : []),
-  ];
-}
 
 export async function loader(args: Route.LoaderArgs) {
   const deferredData = loadDeferredData(args);
@@ -190,6 +185,10 @@ export function Layout({children}: {children?: React.ReactNode}) {
   const location = useLocation();
   const detected = detectLocaleFromPath(location.pathname);
   const lang = htmlLang(detected ?? DEFAULT_LOCALE);
+  // Search-engine ownership-verification tags, emitted here (not via a route
+  // meta() export) so they survive per-route meta overrides — see the note
+  // above loadCriticalData(). Sourced from the root loader.
+  const seoVerification = useRouteLoaderData<RootLoader>('root')?.seoVerification;
 
   return (
     <html lang={lang} data-brand="heating">
@@ -197,6 +196,15 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="stylesheet" href={tailwindCss}></link>
+        {seoVerification?.google ? (
+          <meta
+            name="google-site-verification"
+            content={seoVerification.google}
+          />
+        ) : null}
+        {seoVerification?.bing ? (
+          <meta name="msvalidate.01" content={seoVerification.bing} />
+        ) : null}
         <Meta />
         <Links />
       </head>
