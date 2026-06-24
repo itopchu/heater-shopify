@@ -218,16 +218,20 @@ function buildBulkVariantInputs(
       const val = optionVals[i];
       if (val != null) opts.push({ optionName: p.options[i]!.name, name: val });
     }
-    const input: Record<string, unknown> = {
+    // For an EXISTING variant we only reconcile option values. Price and
+    // inventory are merchant-controlled after the first seed and must never be
+    // auto-overwritten by a catalog re-sync (the dedicated price-sync was
+    // removed for the same reason — manual / curated prices must persist).
+    // New or unmatched variants still get the full seed input.
+    if (mode === 'update' && existingBySku) {
+      const existingId = existingBySku.get(v.sku);
+      if (existingId) return { id: existingId, optionValues: opts };
+    }
+    return {
       price: v.price,
       optionValues: opts,
       inventoryItem: { requiresShipping: true, tracked: false, sku: v.sku },
     };
-    if (mode === 'update' && existingBySku) {
-      const existingId = existingBySku.get(v.sku);
-      if (existingId) input.id = existingId;
-    }
-    return input;
   });
 }
 

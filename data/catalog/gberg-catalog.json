@@ -757,7 +757,7 @@
           "values": [
             "38 x 180",
             "50 × 180",
-            "60 × 180 Lieferbar ab KW 21"
+            "60 × 180"
           ]
         }
       ],
@@ -778,7 +778,7 @@
           "sku": "GB-XXL-FL-V-004",
           "price": "689.00",
           "available": true,
-          "option1": "60 × 180 Lieferbar ab KW 21"
+          "option1": "60 × 180"
         }
       ],
       "sourceImageUrls": [],
@@ -1097,8 +1097,8 @@
           "values": [
             "38 x 180",
             "50 x 180",
-            "60 × 180 Lieferbar ab KW 21",
-            "70 x 180 Lieferbar ab KW 21"
+            "60 × 180",
+            "70 × 180"
           ]
         }
       ],
@@ -1119,13 +1119,13 @@
           "sku": "GB-XXL-FL-V-001",
           "price": "689.00",
           "available": true,
-          "option1": "60 × 180 Lieferbar ab KW 21"
+          "option1": "60 × 180"
         },
         {
           "sku": "GB-XXL-FL-V-011",
           "price": "899.00",
           "available": true,
-          "option1": "70 x 180 Lieferbar ab KW 21"
+          "option1": "70 × 180"
         }
       ],
       "sourceImageUrls": [],
@@ -1658,7 +1658,7 @@
             "60 × 100",
             "60 × 122",
             "60 × 140",
-            "60 × 158 Lieferbar ab KW 21",
+            "60 × 158",
             "60 × 180"
           ]
         }
@@ -1692,7 +1692,7 @@
           "sku": "GB-XXL-FL-H-005",
           "price": "559.00",
           "available": true,
-          "option1": "60 × 158 Lieferbar ab KW 21"
+          "option1": "60 × 158"
         },
         {
           "sku": "GB-XXL-FL-H-006",
@@ -1848,7 +1848,7 @@
             "40 x 160",
             "40 x 180",
             "50 x 160",
-            "50 x 180 nicht Vorrätig",
+            "50 x 180",
             "60 x 160",
             "60 × 180"
           ]
@@ -1877,7 +1877,7 @@
           "sku": "GB-XXL-Typ-22-016",
           "price": "620.00",
           "available": true,
-          "option1": "50 x 180 nicht Vorrätig"
+          "option1": "50 x 180"
         },
         {
           "sku": "GB-XXL-Typ-22-017",

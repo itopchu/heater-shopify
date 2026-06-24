@@ -21,6 +21,7 @@ import {
 } from './parse-body.js';
 import { specDefaultsFor, deriveWidthCmFallback, type SpecRow } from './spec-defaults.js';
 import { sanitizeBodyHtml, sanitizeShortText } from './sanitize-body.js';
+import { normalizeOptionValue } from './normalize-option-value.js';
 
 export interface NormalizeOptions {
   /** Existing handles in our store — used to detect collisions. */
@@ -40,14 +41,14 @@ function deriveSku(xxl: XxlProduct, variantId: number, upstreamSku: string | nul
 }
 
 /**
- * Pick the regular (non-discounted) price from an xxl variant.
- * If xxl is running a promotion, `compare_at_price` holds the original
- * higher value — return that. Otherwise fall back to `price`.
+ * Price for a NEW product = xxl's current SELLING price. xxl inflates
+ * `compare_at_price` to fake a discount, so it is deliberately ignored (the
+ * former "pick the higher value" policy made the store look overpriced vs the
+ * source). Prices on EXISTING products are never auto-overwritten on re-sync
+ * (see write.ts — update mode reconciles option values only), so this value
+ * only seeds a brand-new product.
  */
-function pickRegularPrice(price: string, compareAt: string | null | undefined): string {
-  const p = Number(price);
-  const c = compareAt ? Number(compareAt) : NaN;
-  if (Number.isFinite(c) && c > p) return compareAt as string;
+function pickSellingPrice(price: string): string {
   return price;
 }
 
@@ -58,16 +59,18 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
   const variants = (xxl.variants || []).map((v) => {
     const out: NormalizedProduct['variants'][number] = {
       sku: deriveSku(xxl, v.id, v.sku),
-      // Policy 2026-05: G-Berg has no discount. When xxl-heizung is running a
-      // promotion, `price` is the sale price and `compare_at_price` is the
-      // original — we want the original. Pick whichever is higher; fall back
-      // to `price` when no compare-at is set.
-      price: pickRegularPrice(v.price, v.compare_at_price),
+      // Policy 2026-06: list xxl's current selling price; its inflated
+      // compare_at (fake-discount) is ignored. Only seeds new products —
+      // existing prices are merchant-controlled (see write.ts / pickSellingPrice).
+      price: pickSellingPrice(v.price),
       available: v.available !== false,
     };
-    if (v.option1 != null) out.option1 = v.option1;
-    if (v.option2 != null) out.option2 = v.option2;
-    if (v.option3 != null) out.option3 = v.option3;
+    // Sanitize each axis value: strip baked-in availability text (e.g. "nicht
+    // Vorrätig") and canonicalize the dimension separator. Variant values and
+    // option values below run through the same function so they stay in sync.
+    if (v.option1 != null) out.option1 = normalizeOptionValue(v.option1);
+    if (v.option2 != null) out.option2 = normalizeOptionValue(v.option2);
+    if (v.option3 != null) out.option3 = normalizeOptionValue(v.option3);
     if (typeof v.grams === 'number') out.grams = v.grams;
     return out;
   });
@@ -77,7 +80,7 @@ export function normalize(xxl: XxlProduct, opts: NormalizeOptions): NormalizedPr
   // parseDeliveryContents, parseFaqs, etc.). The sanitized form is what we ship
   // to Shopify as descriptionHtml — see `bodyHtmlDe` assignment below.
   const body = xxl.body_html || '';
-  const options = (xxl.options || []).map((o) => ({ name: o.name, position: o.position, values: o.values }));
+  const options = (xxl.options || []).map((o) => ({ name: o.name, position: o.position, values: o.values.map(normalizeOptionValue) }));
   const customMetafields: ProductMetafield[] = [];
 
   // Sprint 5.1: every product gets a canonical localised spec table.

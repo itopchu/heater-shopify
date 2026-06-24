@@ -682,8 +682,11 @@ function looksGermanOption(text) {
   if (!text) return false;
   const t = String(text).trim();
   if (!t) return false;
-  // Pure dimensions like "60 × 120" or "60x120 cm" are language-neutral
-  if (/^\d+\s*[x×]\s*\d+/i.test(t)) return false;
+  // PURE dimensions like "60 × 120" or "60x120 cm" are language-neutral.
+  // Anchored at both ends so a value that merely STARTS with a dimension but
+  // carries trailing German free-text (e.g. "50 x 180 nicht Vorrätig") is NOT
+  // mistaken for a neutral dimension and skipped.
+  if (/^\d+(?:[.,]\d+)?\s*[x×]\s*\d+(?:[.,]\d+)?(?:\s*(?:mm|cm))?$/i.test(t)) return false;
   if (/^\d+[\s.]/.test(t) && t.length < 12) return false;  // "60 cm"
   // German-name dictionary hit
   if (KNOWN_OPTION_NAME_MAP[t] || KNOWN_OPTION_VALUE_MAP[t]) return true;

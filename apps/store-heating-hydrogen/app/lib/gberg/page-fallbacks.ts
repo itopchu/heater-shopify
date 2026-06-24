@@ -55,7 +55,6 @@ const EN: Record<PageFallbackHandle, PageFallback> = {
       'Managing director: Gökberk Köylü',
       `Phone: ${PHONE_DISPLAY}\nEmail: ${SUPPORT_EMAIL}`,
       'VAT ID per § 27a UStG: DE450348934',
-      'Warehouse: Seestrasse 2A, 58089 Hagen',
       'Liability under § 7 (1) TMG; external links checked at the time of placement.',
     ].join('\n\n'),
   },

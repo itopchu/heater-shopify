@@ -42,7 +42,7 @@
         "40 x 160",
         "40 x 180",
         "50 x 160",
-        "50 x 180 nicht Vorrätig",
+        "50 x 180",
         "60 x 160",
         "60 × 180"
       ]
@@ -98,8 +98,8 @@
       "id": 55273630531971,
       "sku": "XXL-Typ-22-016",
       "barcode": "4251743551212",
-      "title": "50 x 180 nicht Vorrätig",
-      "option1": "50 x 180 nicht Vorrätig",
+      "title": "50 x 180",
+      "option1": "50 x 180",
       "option2": null,
       "option3": null,
       "price": "620.00",
