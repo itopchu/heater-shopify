@@ -62,7 +62,7 @@ jobs:
       LHCI_PRESET: desktop
       STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: pnpm/action-setup@v4
         with:
