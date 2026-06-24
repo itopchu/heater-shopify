@@ -82,7 +82,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Restore sync cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .sync-cache
           key: sync-cache-${{ github.run_id }}
@@ -156,7 +156,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Save sync cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         if: always()
         with:
           path: .sync-cache
