@@ -84,6 +84,8 @@ docs/
 .notes/
 *.local.md
 *-private.md
+# Personal AI-assistant instructions — keep local, never publish (.claude/ already ignored above)
+CLAUDE.md
 
 # Translation cache (regenerable from agent/scripts/prod-translate-content.mjs)
 .translation-cache/
